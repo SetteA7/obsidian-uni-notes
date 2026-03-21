@@ -277,15 +277,45 @@ Algorithm:
 ![[Pasted image 20260313110534.png|Example|250]]
 This code has avg length $L^*=2.3$ and entropy $H(X)=2.246$
 
+As a brief recap consider this:
+$$\boxed{\begin{gather}
+l_i=\ceil{\log_2p_i}\qquad H(X)=-\sum_ip_i\log_2p_i\\
+H(X)\leq L^*=\sum_ip_il_i<H(X)+1
+\end{gather}}$$
 #### Block Coding
-Instead of mapping one symbol into one codeword, we can map many subsequent symbols into a single codeword.
+Instead of mapping one symbol into one codeword, we can map many subsequent symbols into a single codeword. 
+This gives a better performance as:
+Let $X^K=(X_1,X_2,...X_K)$ a block of K symbols. Then 
+$$H(X^K)=H(X_1,X_2,...,X_K)\leq\sum_{i=1}^KH(X_i)$$
+Then there are 2 scenarios ($L_s$ is the avg symbol length):
+- Symbols not independent:
+$$\frac{H(X^K)}K<H(X_i)\rightarrow L<H(X^K)+1\iff L_s<\frac{H(X^K)}K+\frac1K$$
+- Symbols identically distributed (but not necessarily independent):
+$$L_s<\frac{H(X^K)}K+\frac1K\leq H(X_i)+\frac 1K$$
+These blocks are encoded via Huffman.
+
 
 >[!example] BW image with iid pixels
 >Let a BW image have probability $p$ of having a black pixel. Then we group pixels into blocks of 2, the probabilities are:
 >$$P(BB)=p^2\quad P(BW)=P(WB)=p(1-p)\approx p\quad P(WW)=(1-p)^2\approx 1-2p$$
 >from here
 >$$H(X_1,X_2)=2H(X)\ll 2$$
->Apply the huffman code to the blocks and
+>Apply the huffman code to the blocks and by an appropriate code we have
+>$$L\approx 1\text{ but } L_s\approx \frac 12$$
+
+Now define the Entropic Rate:
+>[!def] Entropic Rate
+>When the rate is converging, then
+>$$\mathcal H(X)=\lim_{K\rightarrow\infty}\frac{H(^K)}{K}=\lim_{K\rightarrow\infty} L^*_s\leq H(X)$$
+
+Recall the avg length of the optimal code:
+$$\begin{gather}
+H(X^K)\leq L^*<H(X^K)+1\\
+\frac{H(X^K)}{K}\leq L_s^*<\frac{H(X^K)}{K}+\frac{1}{K}\\
+\downarrow K\rightarrow\infty\\
+L^*_s\rightarrow
+\end{gather}$$
+
 
 # 3) Proofs
 **Kraft Inequality:**
