@@ -1,4 +1,4 @@
-# 1) Quantization Test
+# 1) Quantization
 The quantization is the processo of mapping a function $Q$ from $\mathbb R$ to a discrete set called *Dictionary.*
 $$Q:x\in\mathbb R\rightarrow y\in C=\curly{\hat x_1,\hat x_2,...}\subset\mathbb R$$
 where
