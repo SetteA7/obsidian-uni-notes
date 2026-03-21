@@ -1,4 +1,4 @@
-# 1) Recap Tettine
+# 1) Recap
 
 # 2) Feed Forward Neural Networks (FFNN)
 ## 2.1) Recap On Perceptron
