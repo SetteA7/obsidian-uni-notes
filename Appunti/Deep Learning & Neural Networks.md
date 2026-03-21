@@ -1,4 +1,4 @@
-# 1) Recap Tette
+# 1) Recap Tettine
 
 # 2) Feed Forward Neural Networks (FFNN)
 ## 2.1) Recap On Perceptron
