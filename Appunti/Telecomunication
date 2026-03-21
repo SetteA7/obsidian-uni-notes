@@ -1,0 +1,740 @@
+# 1) Intro And Recap
+This is the [book](https://vabbebeddiamo.ddns.net/admin/media/files/Drive/Principles%20of%20Communications%20Networks%20and%20Systems%20by%20Nevio%20Benvenuto%2C%20Michele%20Zorzi.pdf)
+>[!todo]
+## 1.1) Probability
+>[!col]
+>>[!def|*] Continuous RV
+>>$F(x) = \int f_x(w)dw$
+>>>[!theorem|*] Properties
+>>>- $\int f_x(x)dx = 1$
+>>>- $P(a<x\leq b) = \int_a^b f_x(x)dx$
+>
+>>[!def|*] Expected Value
+>>Discrete case:
+>$$E(x)=\sum x_ip(x_i)$$
+>>Continuous case:
+>$$E(x)= \int xf_x(x)dx$$
+
+>[!def|*] Variance
+>Discrete case:
+>$$\text{var}(x)=\sum [p_x(x_n)(x_n - E(x))^2]=E[(x-E(x))^2]=E[x^2]-E[x]^2$$
+>Continuous case:
+>$$\text{var}(x)= \int f_x(x)(x-E(x))^2dx=E[(x-E(x))^2]=E[x^2]-E[x]^2$$
+
+>[!theorem|*] Fundamental Theorem for Expectation
+>Given the description of a r.v. $x$, we can calculate the expectation of any r.v. $y=g(x)$ as:
+>$$E[g(x)]=
+>\begin{cases}
+>\displaystyle\sum_{e\in \mathcal A_x} g(a)p_x(a), && \text{ discrete case} \\
+>\displaystyle\int_{-\infty}^{\infty}g(a)p_x(a)\ da, && \text{ continuous case}
+>\end{cases}$$
+
+^ec4160
+
+>[!theorem|*] Jensen's Inequality
+>Let $z$ be a not absolutely surely constant r.v. taking values in an interval $\mathcal I$, then, if $z$ is **strictly concave** in $\mathcal I$
+>$$E[h(z)]<h(E[z])$$
+>and > if $z$ is **strictly convex**
+
+## 1.2) Distributions
+>[!def] Erlang
+>Let $\{x_i\}$ be $n$ iid exponential rvs with parameter $\beta$, then $y=\sum_1^n x_i$ has the following distribution:
+>$$p_y(a)=
+\begin{cases}
+\displaystyle\frac{\beta^na^{n-a}}{(n-1)!}e^{-\beta a}, \ &a\geq0 \\
+0, \ &a<0
+\end{cases}$$
+>With mean $m_y=n/\beta$
+
+
+## 1.3) Random Process
+This chapter adds new knowledge to the previous chapter. This will be done mostly trough definitions and small theorems.
+
+
+>[!def|*] Random Process
+>A random process is a function $x(t,\omega)$ of two variables
+>$$x:\mathbb{A}\times\Omega\rightarrow\mathbb{R}$$
+>Where $\Omega$ is the sample space of a probability space, while $\mathbb{A}$ is either $\mathbb{Z},\ \mathbb{R},\ \mathbb{C}$ and it determines if it is discrete/continuous and complex/real.
+>
+>The first-order statistical description is given by the Probability Distribution Function (PDF)
+>$$p_x(a;t)=p_{x(t)}(a),\ t,a\in \mathbb{R}$$
+>
+>From here we describe the mean and the power
+>$$\begin{align}
+>&&m_x:\ &&\mathbb{R}\rightarrow\mathbb{C},\ &&m_x(t)=E[x(t)] \\
+>&&M_x:\ &&\mathbb{R}\rightarrow\mathbb{R},\ &&M_x(t)=E[x(t)^2]
+>\end{align}$$
+>
+>the autocorrelation is described given the time $t$ and a delay (lag) $\tau$
+>$$r_x(t,\tau)=E[x(t)\overline{x(t-\tau)}]$$
+
+>[!col]
+>>[!def|*] Point Process
+A special type of continuous rp are point processes that are a sequence of dirac impulses
+$$x'(t)=\sum\delta(t-t_n)$$
+and is used to describe a distribution of finite events in time
+>$$ $$
+>>From here we define:
+>>- **arrival times** $t_n$ and they are **ordered** if $t_n\leq t_{n=1}$
+>>- **interarrival times** are defined as: $\tau_n=t_n-t_{n-1}$
+>
+>>[!def|*] Counting Process
+>>The integral of a point process is the counting process
+>>$$x(t)=\int_{u_0^+}^{t^+} x'(u)du$$
+>>And is strictly nondecreasing
+>$$ $$
+>![[Pasted image 20241007142250.png|Pointing Process(top) and Counting Process(down)|250]]
+
+>[!def|*] Arrival Rate
+>By derivating the mean of a counting process we get the **arrival rate**
+>$$\lambda(t)=\frac{d}{dt}m_x(t)=\lim_{\Delta t\rightarrow 0}\frac{E[N_x(t,t+\Delta t]}{\Delta t}$$
+>>[!theorem|*]
+>>This is also the mean of a point process
+>>`\begin{proof}`
+>>$$E[x'(t)]=\frac{d}{dt}E[x(t)]=\frac{d}{dt}m_x(t)=\lambda(t)$$
+>>`\end{proof}`
+>
+>If $\lambda(t)=\lambda$ then the point and counting process are **homogeneous**
+
+### 1.3.1) Poisson Point Process
+
+>[!def] Poisson Point Process
+>An important case of rp's is the **poisson process**. A rp is poisson if it holds the following conditions:
+>- The number of arrivals in n disjointed intervals are independent rv's
+>- The number of intervals in $(u_1,\ u_2]$ has a Poisson distribution
+>$$P[N_x(u_1, u_2)=k]=e^{-\Lambda}\frac{\Lambda^k}{k!}\text{ with } \Lambda = \int_{u_1}^{u_2}\lambda(u)du$$
+>
+
+>[!theorem] Superposition Property
+>If $x(t), y(t)$ are independent poisson processes with $\lambda_x(t),\lambda_y(t)$ their sum is a poisson process with arrival rate $\lambda(t)=\lambda_x(t)+\lambda_y(t)$
+
+>[!theorem] Interarrival Times
+>The **interarrival times** of an *homogeneous* poisson process $x(t)$ **are iid rvs** with exponential distribution function
+>$$p_\tau(a)=\lambda e^{-\lambda a}u(t)$$
+>Thus they are also **memoryless** and have $E[\tau_n]=1/\lambda$
+
+^4cf2cb
+
+### 1.3.2) Stationary and Ergodic
+
+>[!def] Stationary
+>A rp is stationary with respect to a statistical description if that description is time invariant
+>
+>If a rp is static in mean and autocorrelation it is called **Wide Sense Stationary (WSS)** 
+
+>[!def] Mean Ergodic
+>A mean stationary rp is ergodic in it's mean if the time average converges to it's mean
+>>[!todo]
+## 1.4) Signal And Systems
+>[!def|*] Sampling Rate and Nominal Bitrate
+>A signal can be sampled with period $T_s$, which we call **sampling rate**.
+>By selecting a number of bits $b$ that encodes the data we can define the **nominal bitrate** as $\frac{b}{T_s}=bF_s$, with $F_s=\frac{1}{T_s}$ called **symbol rate**
+
+>[!theorem|*] Uncertainty Principle
+>A continuous time signal can not have limited support and a limited band
+
+
+>[!theorem|*] Sampling Theorem
+>Suppose a system with a real valued continuous signal $x(t)$ als input, then if:
+>- $x(t)$ has limited bandwidth $\mathbb{B}_x\subset[0,B]$
+>- the sampling rate is $F_s \geq 2B$
+>- the interpolate filter has frequency response
+>$$G(f) =
+>\begin{cases}
+>T_s &|f|<B \\
+>\text{arbitrary} &B\leq|f|\leq F_s-B \\
+>0 & |f|>F_s-B
+>\end{cases}$$
+>the signal is perfectly reconstructed at the output
+>![[Pasted image 20241004145115.png|Sampler-interpolator system|300]]
+
+^74f625
+
+# 2) Information Theory
+
+Information theory was introduced and formalised by Shannon. It aims to give a measure that indicates how much an event in a given probability space is informative through a quantity $i(A), \ A\in\mathcal{F}$. This means to define a function $i:\mathcal{F}\rightarrow\mathbb{R}, \ i(a)=g(P[A])$ with a map $g:[0,1]\rightarrow\mathbb R$
+
+This table represents the axioms defined by Shannon and their influence to define $g$
+
+| AXIOM                                                              | CONSEQUENCE                                     |
+| ------------------------------------------------------------------ | ----------------------------------------------- |
+| $i(A)\geq0,\ \forall A$                                            | $g(\alpha)\geq 0, \ \forall\alpha\in[0,1]$      |
+| $i(\Omega)=0$                                                      | $g(1)=0$                                        |
+| $P[A]\leq P[B] \iff i(A)\geq i(B)$                                 | $g$ is monotonically non increasing             |
+| $A\perp B \implies P[A\cup B]=P[A]+P[B]\iff i(A\cap B )=i(A)+i(B)$ | A log is capable of transforming sum in product |
+By choosing the base as 2 so that a bit 0/1 can be represented
+$$i(A)=\log_2(\frac{1}{P[A]})$$
+Given a discrete r.v. with alphabet $\mathcal{A}_x=\{a_1,...,a_M\}$ it is possible to describe a **information function** 
+$$i_x:\mathcal{A}_x\rightarrow\mathbb{R}, \ i_x(a)=i(x=a)=\log_2\frac{1}{p_x(a)}$$
+
+>[!def] Entropy
+>The Entropy is defined as 
+>$$H(x)=E[i_x(x)]$$
+>It represents how much an information function is unpredictable
+>By [[#^ec4160]] we have:
+>$$H(x)=\sum p_x(a)i_x(a)=\sum p_x(a)log_2(\frac{1}{p_x(a)})$$
+
+Here are some properties of the entropy:
+
+>[!theorem] Entropy Properties
+>Let $x$ be a discrete rv:
+>- If $x$ is a.s. constant, then $H(x)=0$
+>- Otherwise $H(x)>0$
+>
+>Let $x$ also have finite alphabet $A_x$:
+>- If they are equiprobable: $H(x)=\log_2M$
+>- otherwise $H(x)<\log_2M$
+>
+>The associated information to $x$ is $i_x$ and the entropy is defined as:$$\begin{gather}
+>i_x: \ A_x\rightarrow\mathbb R, \ i_x(a)=i(x=a)=\log_2\frac{1}{p_x(a)} \\
+>H(x)=E[i_x(x)]
+>\end{gather}$$
+>Let $x,y$ be two discrete rvs:
+>- if $y$ is a function of $x$ (that is $p_{xy}(a,b)=p_x(a)$) then $H(x,y)=H(x)$
+>- otherwise $H(x,y)>H(x)$
+>- if $x,y$ are independent $H(x,y)=H(x)+H(y)$
+>- otherwise $H(x,y)<H(x)+H(y)$
+>
+>Conditional entropy is defined as$$\begin{gather}
+>i_{x|y}: \ A_x\rightarrow\mathbb R, \ i_{x|y}(a|b)=\log_2\frac{1}{p_{x|y}(a|b)} \\
+>H(x|y)=E[i_{x|y}(x|y)]
+>\end{gather}$$
+>given a discrete random vector $x=[x,y]$ we have $$\begin{align}
+i_{x|y}(a|b)=i_x(a,b)-i_y(b) \\
+H(x|y)= H(x,y)-H(y)
+\end{align}$$
+
+>[!todo]
+>Proofs
+
+>[!def] Efficiency
+>Let $x$ be a rv with finite alphabet of size $M$, we call $\log_2 M$ the **nominal information**, then we can define the efficiency as:
+>$$\eta_x=\frac{H(x)}{\log_2M}$$
+>Notice that if we talk about bits $M=2\implies\log_2M=1$
+
+
+
+
+
+# 3) Quantisation
+
+This chapter is the recap of the first part of chapter 3 of the book
+
+The aim of this course is to learn how to transmit data. Data is usually found in **analog** form (ex. voice) and it is possible to transmit such data using analog modulation. The term analog means "analogo", similar. This means that an analog modulation changes the signal according to a specific criteria
+
+On the other hand **digital** signals are sequence of digits, hence the name. This chapter will explain how to **convert analog to digital**.
+
+One of the main components of the Analog-to-Digital Converter (ADC) is the quantiser, as shown in the figure
+![[Pasted image 20241004143649.png|ADC|450]]
+The first step of an ADC is the **sampling step**. This step is fairly easy by following [[#^74f625]] and most importantly can be **reconstructed**. This steps **discretises the time** thus $x(t) \rightarrow x[nT_s]$.
+
+The second step is the **quantiser**, this step **discretises the values of the signal**, thus $Q:\mathbb{R} = \{\mathbb{Q}_0,...,\mathbb{Q}_{L-a}\}$
+A quantiser can be defined using two representations:
+![[Pasted image 20241004145453.png|Two equivalent representations of a quantiser|350]]
+>[!col]
+>The first representation shows how a quantiser is essentially a "map". For commodity we set the number of levels as a power of 2 $L=2^b$ because a bitmap will be used (Signed Magnitude).
+>$$ $$
+>The second representation is more effective as showing the error as a kind of noise
+>
+>![[Pasted image 20241004150820.png|Uniform Quantiser|350]]
+
+>[!def] Uniform Quantiser
+>The **quantisation threshold** are the values $v_i$ with $i \in 0,...,L$ where each step of the quantiser takes place
+>If they are equally spaced the quantiser has a **uniform quantisation step size** as $\Delta = v_i-v_{i-1} \\ \forall i = 2,...,L-1$
+
+>[!def] Mid-Riser Representation
+>The representation in the picture is called **mid-riser** as 0 doesn't exist and get's rounded to decimal 1 as there are $L/2$ positive and negative values.
+
+By looking at the second representation it is clear that the error is given as:
+$$a(nT_s)+e_q(nT_s)=a_q(nT_s)\implies e_q(nT_s) = a_q(nT_s) - a(nT_s)$$
+
+>[!def] Saturation Error and Granular Noise Error
+>The area between the values $v_1$ until $v_L$ is called **granular noise region** as the quantiser approximates the values with a maximum error of  $-\Delta/2\leq e_q \leq\Delta/2$.
+>
+>Outside of this area there are the **saturation** values, which get rounded with an error bigger than $\Delta/2$
+>
+>More formally we define the (upper) **saturation value** as $v_{sat}=v_{L-1}+\Delta$
+>![[Pasted image 20241004153545.png|Graphical representation with L=8|350]]
+
+^47e80f
+
+A quick recap of these values and their relationships is:
+$$\begin{gather}
+L=2^b \\
+L\Delta=2v_{sat} \\
+\text{that is} \\
+2^{b-1}\Delta=v_{sat}
+\end{gather}$$
+## 3.1) Quantisation Error Analysis
+This analysis will be done as a probabilistic analysis as the additive error $e_q(nT_s)$ will be considered as a random variable. It could seem strange as the error is perfectly defined 
+ from $e_q(nT_s) = a_q(nT_s) - a(nT_s)$. But since it is a really complex value to obtain it can be approximated as [randomness doesn't exist](https://en.wikipedia.org/wiki/Randomness). The main result of this chapter will be the following definition/theorem.
+
+>[!theorem] Signal-to-Noise Rattio (SNR)
+>We define the **SNR** as: 
+>$$\Lambda_q=\frac{M_a}{M_{e_q}}=\frac{E[a^2(nT_s)]}{E[e_q^2(nT_s)]}$$
+>Since it is a fraction of powers we can express it in dB:
+>$$\text{SNR}\ [dB]=10\log_{10}\Lambda_q \ [dB]$$
+>If $P_{sat}<<1$ we can use the following formula
+>$$\boxed{\text{SNR}=10\log_{10} 3+10\log_{10} L^2 +10\log_{10}k_f^2=4.77+6,02b+20\log_{10}\frac{\sigma_a}{v_\text{sat}} \ [dB]}$$
+>Otherwise it can be obtained via the computation of statistical powers directly
+
+We start by assuming the following properties of the signal $e_q(nT_s)$:
+1) $e_q(nT_s)$ is a rv
+2) $e_q(nT_s)$ is uncorrelated with $a(nT_s)$: $E[a(nT_s)e_q(nT_s)]=0$
+3) $e_q(nT_s)$ is uncorrelated with itself (it is a white noise): $E[e_q(nT_s)e_q(nT_s)]=0$
+4) $e_q(nT_s)$ is uniformly distributed in $[-\Delta/2,\Delta/2]$:
+$$\boxed{p_{sat}=\frac{1}{\Delta}\text{rect}(\frac{a}{\Delta})}$$
+Recall what $P_{sat}$ is:
+$$\boxed{P_{sat}(a)=P[\mid a(nT_s)\mid>v_{sat}]}$$
+Our **working assumption** is that $P_{sat}<<1$ so that $e_{sat}\simeq0$
+
+Moreover $a(nT_s)$ and $e_q(nT_s)$ have the seam mean (usually = 0) and thus we can't compare them. We can use the **statistical power** ($E[x^2]$, that is the variance with $E[x]=0$ )to find some useful data.
+
+
+
+From 4) we can find An approximation of $M_{e_{q}}$:
+$$M_{e_q}=\int_{-\infty}^{\infty}a^2p_{e_q}(a)da=\frac{1}{\Delta}\int_{-\Delta/2}^{\Delta/2}a^2da=\frac{\Delta^2}{12}$$
+<span style="color:rgb(125, 125, 125)">(By recalling that $var(x)=\int x^2f_x(x)dx - E(x)^2$)</span> 
+
+Then we have:
+$$\Lambda_q=\frac{\sigma_a^2}{\Delta^2/12}$$
+By recalling that $\Delta=v_{sat}/2^{b-1}$
+$$\Lambda_q=\frac{12\sigma^2_a\cdot2^{2(b-1)}}{v^s_{sat}}=3k_f^2L^2$$
+By defining the **loading factor** $k_f=\frac{\sigma_a}{v_\text{sat}}$ an recalling $L=2^b$
+In dB this is:
+$$\boxed{\text{SNR}=10\log_{10} 3+10\log_{10} L^2 +10\log_{10}k_f^2=4.77+6,02b+20\log_{10}\frac{\sigma_a}{v_{\text{sat}}} \ [dB]}$$
+>[!rmk|*] Pre-processing of a signal
+>Given our assumption a signal needs to have the seam mean as the central value $v_{sat}/s$ of the quantiser. Moreover the signal needs to be normalised in amplitude.
+>Fortunately it is really easy to do so:
+>Let $a(t)$ be the signal to send to the quantiser. By defining a signal of type 
+>$$b(t)=\frac1Aa(t)+c$$
+>there is no loss of generality and the quantiser hold for this signal
+
+>[!rmk|*]  $M_{e_q}=(1-P_{sat})M_{e_{gr}}+P_{sat}M_{e_{sat}}$
+>If the working assumption doesn't hold we must use this property. Recall that:
+>$$p_{e_{gr}}=\frac{1}{\Delta}\text{rect}(\frac{a}{\Delta})\implies M_{e_{gr}}=\int_{-v_{sat}}^{v_{sat}}[Q(u)-u]^2p_a(u)du=\boxed{\frac{\Delta^2}{12}}$$
+>$$M_{e_{sat}}=\int_{-\infty}^{-v_{sat}}[Q_0-u]^2p_a(u)du+\int_{v_{sat}}^{\infty}[Q_{L-1}-u]^2p_a(u)du$$
+>Usually $Q_{L-1}-u=v_{sat}-\frac{\Delta}{2}-t$
+>
+
+It is important to notice that **adding one bit reduces the noise to 1/4**.
+Add 1 to b $\implies$ L doubles $\implies$ $\Lambda_q$ quadruples $\implies$ 4x is roughly +6 dB
+
+>[!rmk|*]
+>If the signal is uniformly distributed and the quantizer has correct $v_{sat}$, then $4,77=-20\log{k_f}$
+
+# 4) Characterisation Of Transmission Media And Devices
+
+>[!col]
+>The easiest way to transmit information is through a **two port network**. The easiest one is represented in the picture. In the frequency domain we have:$$\begin{gather}
+V_L(f)=V_i(f)G(f), \ G(f)=\frac{Z_L(f)}{Z_S(f)+Z_L(f)} \\
+\mathcal P_{v_L}(f)=\mathcal P_{v_i}(f)|G(f)|^2
+\end{gather}$$
+>
+>
+>![[Pasted image 20241030095259.png|Two Terminal Network|250]]
+#### Electrical Power
+The **average power transferred to $Z_L$due to $v_i$** is:
+$$P_v=\lim_{u\rightarrow+\infty}\frac1{2u}\int_{-u}^{+u}v_L(t)i_L(t)dt$$
+The term in the integral is the instantaneous power.
+
+It can also be a **statistical measure**, if $v_L$ and $i_L$ are disjointly wss and ergodic rps
+$$P_v=E[v_L(i)i_L(i)]$$
+By exploiting the cross correlation and cross spectral power
+$$P_v=r_{v_L}i_L(0)=\int\mathcal P_{v_Li_L}(f)df$$
+Since they are both real signals the Ftf is Hermitian and thus the odd imaginary part doesn't contribute
+$$P_v=\int\Re[\mathcal P_{v_Li_L}(f)]df$$
+and the expression in the integral is the **power density**
+
+
+From Ohm's law and the obtained results we can derive that:
+$$\begin{align}
+&p_v(f)=P_{v_i}(f)\frac{R_L(f)}{|Z_S(f)+Z_L(f)|^2}\\
+&p_v(f)=P_{v_L}(f)\frac{R_L(f)}{|Z_L(f)|^2}\\
+\end{align}$$
+
+#### Load Matching and Available Power
+In a system with given $\mathcal P_{v_i}, Z_S$ what is the right $Z_L$ to choose in order to minimise power loss?
+
+>[!thm] Load Matching
+>The maximum transfer of electrical power is given under the condition
+>$$Z_L(f)=\overline{Z_S(f)}$$
+
+>[!rmk|*] Narrowband Power
+>If $Z_S$ is constant in the band of $v_i$ we have that
+>$$P_v=M_{v_L}\frac{R_L}{|Z_L|^2}$$
+
+
+#### 4.2) Thermal Noise
+>[!col]
+>In any conductor the electrons move due to thermal agitation. This movement is usually negligible, but with an accurate enough voltmeter it is possible to measure some currents. This is called **thermal noise** and adds additively to the regular currents due to superimposition. 
+>The noise can be seen as a rv with zero mean but we usually consider a small value of the current/voltage over time and in this timeframe the mean isn't guaranteed to be 0.
+>
+>![[Pasted image 20241030102946.png|Noisy Circuit and Eqivalent Noise Source|250]]
+
+The **power spectral density** of the noise in a resistor is modeled as a WSS rp with PSD:
+$$P_{w_i}(f)=2kTR\gamma(f)$$
+So at room temperature $T=T_0=290[K]$ and with $f<<10^{11}$ we have that $\gamma(f)=1$
+So at the same temperature and under *load matching* the power density is
+$$p_w(f)=\frac12kT\gamma(f)$$
+
+>[!def] Noise Temperature
+>In a noisy circuit with $w_i$ the noise voltage and power density $p_w(f)$ at the load due to $w_i$, we define the **noise temperature** of the device as
+>$$T(f)=\frac{p_w(f)}{k/2}$$
+
+
+## 4.2) Two-Port Model
+
+>[!col]
+>In a real world scenario a two port model isn't ideal anymore and thus we must consider a different power going in the network and coming out from it. The **transfer function on the output** is $G_2(f)=\frac{V_2}{V_1}$ and $G_{ch}(f)=\frac{V_L}{V_1}=G_2G_L$
+>
+>
+>![[Pasted image 20241030105016.png|Two-Port Model|350]]
+
+>[!def] Network Power Gain
+>With powers densities it is possible to evaluate average powers, thus we define a real valued, non-negative function that relates the densities at the input and output of the network:
+>$$g(f)=\frac{p_{v,out}(f)}{p_{v,in}(f)}$$
+>It is usually expressed in [dB]
+>Moreover if $g(f)<1$ we speak of attenuation $a(f)=1/g(f)$
+
+In a matched condition $Z_1=\overline{Z_S}, \ Z_L=\overline{Z_2}$ we have
+$$\begin{gather}
+&&p_{v,in}=\mathcal P_{v_1}\frac{R_1}{|Z_1|^2} \\
+&&p_{v,out}=\mathcal P_{v_L}\frac{R_L}{|Z_L|^2} \\
+&&\mathcal P{v_L}=\mathcal P_{v_1}|G_{ch}|^2 \\
+\end{gather}$$
+from here, if $Z_1=Z_2$ we have that $g(f)=|G_{ch}|^2$
+
+#### Noisy 2-Port Network
+
+Since the two power sources (noise, regular) are uncorrelated we have that
+$$\begin{gather}
+p_{w,out}^S(f)=p_{w,in}^S(f)g(f)=\frac12kT_s(f)g(f) \\
+p_{w,out}=p_{w,out}^S+p_{w,out}^A
+\end{gather}$$
+then the **noise temperature of a matched two-port network** is
+$$T_A(f)=\frac{p_{w,out}^A(f)}{\frac12k\cdot g(f)}=\frac{p_{w,in}^A(f)}{\frac12k}$$
+And the effective temperature is $T_{eff,in}=T_S+T_A$
+
+And thus $p_{w,out}^{tot}=\frac12k(T_A+T_S)\geq\frac12k\cdot T_0g_a(f)$. With $T_A\geq T_0=290[K]$ as a normal room temperature 
+
+>[!rmk|*]
+A 2-Port Network working under load matching and narrowband has $$SNR_{in}=SNR_{out}=\frac{P_v}{P_w}$$
+>With the ratio of any 2 powers of the same kind (statistical, density, PSD, electrical)
+
+>[!def] Noise Figure
+>$$F(f)=\frac{p_{w,in}^{tot}}{p_{w,in}^S}=1+\frac{p_{w,in}^A}{p_{w,in}^S}$$
+
+#### Cascade of Two-Port Network
+>[!col]
+>In a cascade of N two-port networks (in figure N=2) we can easily find the values of an equivalent single two-port network with the following formulas.
+>
+>![[Pasted image 20241030112126.png|Cascade of 2 Two-Port Network|350]]
+
+$$\begin{align}
+&g(f)=\prod_{i=1}^N g_i(f) \\
+&T_A(f)=T_1(f)+\sum_{i=2}^N\frac{T_i(f)}{\prod_{j=1}^{N-1}g_j(f)}=T_1(f)+...+\frac{T_N(f)}{g_1(f)\cdot...\cdot g_{N-1}(f)} \\
+&F(f)=F_1(f)+\sum_{i=2}^N\frac{F_i(f)-1}{\prod_{j=1}^{N-1}g_j(f)}=F_1(f)+...+\frac{F_N(f)-1}{g_1(f)\cdot...\cdot g_{N-1}(f)}
+\end{align}$$
+## 4.3) Transmission System Model
+
+>[!col]
+>If you have a concatenation it is useful to divide everything in 2 blocks: channel and receiver.
+>For the **channel we only consider the gain** and for the **receiver only the noise figure**
+>The noise in the channel is not ignored, but it is added at the end
+>
+>![[Pasted image 20241031162506.png|Channel Receiver Model|350]]
+# 5) Digital Modulation Systems
+
+# 6) Channel Coding and Capacity
+
+# 7) Markov Chains Theory
+# 8) Queueing Theory
+>[!col]
+ >Every time a service is claimed by many customers a queue is formed. A service might not be able to satisfy all customers at once and **queueing theory** aims to analyse via mathematical models these behaviours
+>
+>![[Pasted image 20241007134250.png|A generic Queueing System (QS)|350]]
+
+Here is a quick recap of the used parameters:
+![[Pasted image 20241012144719.png|Parameters|650]]
+These will be better introduced at the start of each chapter
+
+## 8.1) Processes
+#### 4.1.1.1) Arrival Process
+This section studies the arrival of customers via a random process.
+>[!def] Customer, Arrival Time and Interarrival Time
+>The **customers** that reach the QS are denoted by $\{C_n\}$ with $n\geq1$ the order of arrival
+>
+>The **arrival time** is denoted by $t_n$, an is the instant where $C_n$ enters the QS
+>
+>The **interarrival time between two customers** is defined as $\tau_n=t_n-t_{n-1}$
+
+The interarrival times are considered as **iid rvs**:
+$$\begin{align}
+&P_\tau(a)=P[\tau_n\leq a], \ &&a\geq0 \\
+&p_\tau(a)=\frac{dP_\tau(a)}{da}, &&\ a\geq0
+\end{align}$$
+That can be associated to a counting process $\{A(t), \ a \geq 0\}$
+$$A(t)=\int_0^t\sum_{n=1}^{\infty}\delta(u-t_n)du$$
+>[!def] Arrival rate
+>Consider the case where $\{\tau_n\}$ are iid and with finite mean $E[\tau]=m_\tau$ then by [[#^4cf2cb]] the **arrival rate** is $\lambda=1/m_\tau$
+
+We limit our attention to **homogeneous poisson processes** in this case the interarrival times will have the following pdf and cdf:
+$$\boxed{p_\tau(a)=\lambda e^{-\lambda a}, \ P_\tau(a)=1-e^{-\lambda a}}$$
+
+There are also a few more notable cases, the **deterministic** process, which has a constant $\tau$, and the **erlang process**, where $\tau$ is a sum of exponentials
+
+#### 4.1.1.2) Service Process
+This process encapsulates the servers stat provide the (statistically undistinguishable) services
+
+>[!def] Departure Time, Queueing Time, System Time and Interdeparture time
+>The **departure time** is the time at which a client entering at $t_n$ exits the system and is defined as:
+>$$d_n = t_n+w_n+y_n=w+s$$
+>Due to the **homogeneity** $n$ can be omitted:
+>The **queueing time** $w_n$ can be written as $w$ and depend son the policy
+>The **system time** $s=w+y$ is the total time spent in the system
+>
+>Similarly to the interarrival time, the **interdeparture time** is defined as $r_n=d_n-d_{n-1}$
+>The **mean interdeparture time** is $m_r=E[r_n]$
+
+^3069f1
+
+>[!def] Service Time, Service Rate
+>The **service time** is the time $y_i$  that $C_i$ spent in the server
+>By assumption $\{y_n\}$ are iid and independent from the arrival process
+>
+>The **service rate** is the avg. number of customers that can be serves per time unit: $\mu=1/m_y$
+>
+
+These are the most common service times:
+- **Exponential**: $y_i=1/\mu$
+$$\begin{align}
+&p_y(a)= \delta(a-1/\mu)\\
+&P_y(a)= u(a-1/\mu)
+\end{align}$$
+- **Exponential**:
+$$\begin{align}
+&p_y(a)= \mu e^{-\mu a}\\
+&P_y(a)=1-e^{-\mu a}
+\end{align}$$
+- **Erlang** index $r$ and parameter $r\mu$
+$$\begin{align}
+&p_y(a)= \frac{(r\mu)^ra^{r-1}}{(r-1)!}e^{-r\mu a}\\
+&P_y(a)=1-\sum\frac{(r\mu a)^n}{n!}e^{-r\mu a}
+\end{align}$$
+## 8.2) Kendall Notation
+A convenient way to specify a QS is with a **string of 6 characters** called Kendall Notation:
+$$\text{A/B/C/K/N-S}$$
+where:
+- $A$: specifies the statistical model of the interarrival time
+- $B$: specifies the statistical model of the service process
+- $C$: # of servers = $m$
+- $K$: system storage capacity (default:$\infty$)
+- $N$: size of customer population (default:$\infty$)
+- $S$: service discipline (default: FCFS)
+
+Moreover $A,B$  can assume the following values:
+- $M$: Memoryless/Markovian, is exponentially distributed
+- $D$: Deterministic, constant value
+- $E_r$: Erlang distribution with index r
+- $G$: Generic distribution
+
+## 8.3) Stability
+Before talking of stability we must introduce some **occupancy metrics:**
+>[!def] Occupancy metrics
+>$$\begin{gather}
+x(t)= z(t)+q(t) \\
+\text{with: }
+\end{gather}$$
+>$$\begin{align}
+&x(t) = \text{\# of clients in system} \\
+&z(t) = \text{\# of clients in service} \\
+&q(t) = \text{\# of clients in queue}
+\end{align}$$
+>Keep in mind that $q(t)=0 \iff z(t)=m$ and $q(t)=0 \iff z(t) < m$
+
+>[!def] Stability of a QS
+>A QS is stabile if:
+>$$\lim_{t\rightarrow\infty}P[x(t)=k]=\pi_k\not=0$$
+>and:
+>- $\pi_k$ doesn't depend on $x(0)$
+>- $\sum \pi_k = 1$
+
+This means that a stable system **can serve all the clients** it receives and doesn't "explode"
+
+Given m identical and independent servers with service rate $\mu$ we can define the **global service rate** as $m\mu$. Moreover if the service is **memoryless** we can say that every server offers **exponentially distributed service time**
+
+- **Blocking System**: They are alway stable because the number of customers is upper bounded by K
+- **Nonblocking systems**: They have a simple stability condition:
+$$\boxed{\lambda<m\mu}$$
+	that is: it is stable if the customers come, on average, at a lower number than what can be served
+	
+>[!rmk|*]
+>If $\lambda=m\mu$ we have a widely unpredictable system
+
+Given such a system, it is only natural to search a way to measure efficiency and throughput, here are the useful parameters we define:
+
+>[!def] Offered Traffic, Departure Rate, Load Factor
+>The **offered traffic** is the mean number of arrivals in the mean service time, i.e. $G$ is the arrival rate normalized to the service rate:
+>$$G=\lambda m_y=\frac{\lambda}{\mu}$$
+>
+>The **departure rate/troughput** is defined as the mean number of customers leaving:
+>$$\eta=\frac{1}{m_r}$$
+>with $m_r$ the *[mean interdeparture time](#^3069f1)*
+>
+>The **useful traffic** is the mean number of departures in the mean service time, i.e. it is $\eta$ normalized to $\mu$
+>$$S=\frac\eta\mu=\eta m_y$$
+>
+>The **load factor** is the utilization factor:
+>$$\rho=\frac{\lambda m_y}{m}=\frac{\lambda}{m\mu}=\frac{G}{m}$$
+>for single server systems it can also be rewritten as:
+>$$\rho = \frac{m_y}{m_\tau}$$
+
+That said, we can easily find some values of the throughput if we know the stability of the system:
+$$\eta =
+\begin{cases}
+\lambda \ &\text{if QS is stable} \\
+m\mu \ &\text{if QS is unstable}
+\end{cases}
+\ \iff \ 
+S =
+\begin{cases}
+G \ &\text{if QS is stable} \\
+m \ &\text{if QS is unstable}
+\end{cases}$$
+therefore the symbol  $\eta$  is not necessary
+
+
+>[!rmk|*]
+A very useful practical rule is: if QS is stable $\implies$ whatever gets inside must get out sooner or later, that is:
+$$\mid S\mid<\infty\implies\text{QS is stable}$$
+
+## 8.4) Little's Law
+>[!theorem] Little's Law
+>Let the means of the number of clients, arrival rate and staying time be finite, then
+>$$\overline X=\overline\Lambda\cdot\overline S$$
+>Independently of all the assumptions on the statistical model
+
+`\begin{proof}`
+We have that the number of clients is defined by $x(t)=A(t)-D(t)$, then we can define the averages as:
+>[!col]
+>$$\begin{gather}
+>\\
+\Lambda(t)=\frac{A(t)}{t} \\
+X(t)=\frac{\int_0^tx(\tau)d\tau}{t} \\
+S(t)=\frac{\int_0^tx(\tau)d\tau}{A(t)}
+\end{gather}$$
+>
+>![[Pasted image 20241014155659.png|Illustration|350]]
+
+These hold since they can be read as possible cases/all cases
+By looking at $t\rightarrow\infty$ and by doing some algebraic manipulation we can prove little's law
+$$\overline{X(t)}=\frac{\int_0^tx(\tau)d\tau}{t}\cdot\frac{A(t)}{A(t)}=\frac{\int_0^tx(\tau)d\tau}{A(t)}\cdot\frac{A(t)}{t}=\overline{S(t)}\cdot\overline{\Lambda(t)}$$`\end{proof}`
+
+>[!rmk|*]
+>If the process is ergodic we have that: $E[X(t)]=E[\Lambda(t)]\cdot E[S(t)]$
+
+
+This law can take different meanings based on the structure we consider:
+- **Entire system**: $m_x =\lambda m_S$
+- **Only waiting queue**: $m_q=\lambda m_w$
+- **Only server facility**: $m_z=\lambda m_y$
+
+A particular case is a G/G/1 stable system. In that case $m_z=\lambda m_y=\lambda/\mu=\rho$ and allows for the interpretation of $\rho$ as the **probability of the server being busy**, since $m=1$ and z can take only two values ($z=0,z=1$) (not busy/busy)
+$m_z=E[z]=P[z=0]\cdot0+P[z=1]\cdot1=P[\text{busy}]$
+
+## 8.5) Markov Systems (M/M/...)
+Markovian systems are a particular type of QS since they exhibit the following properties:
+>[!theorem] Markovian QS properties
+>- The state of the QS can be summarized entirely by x(t)
+>- x(t) is a birth-death process, i.e. it may increase/decrease by a sigle unit, there are **no simultaneous arrivals**
+
+`\begin{proof}`
+To prove the second part of the theorem we must find a way to describe the number of arrivals in an infinitesimal amount of time $[t,t+h]$ with $h\rightarrow0$. Being memoryless, it is equivalent to search in $[0,h]$.
+The arrivals in $[0,h]$ can be expressed as:$$A(t)=\int_0^ha(t)dt$$
+Now let's study the probability of an arrival in such a time frame:
+$$P[\text{at least one arrival in }[0,h]]=P[A(h)\geq1]=P[\tau\leq h]=1-P[A(h)=0]$$
+Since it is Markovian and by recalling the taylor expansion:
+$$P[A(h)\geq1]=1-e^{-\lambda h}\cdot\frac{(\lambda h)^0}{0!}=1-e^{-\lambda h}=1-1+\lambda h+o(h)=\lambda h + o(h)$$
+And clearly:
+$$P[A(h)=0]=1-P[A(h)\geq1]=1-\lambda h + o(h)$$
+
+We must compare the probability of $P[A(t)=1]$ and $P[A(t)\geq2]$ in order to find which one is more common
+Since we can write  $P[A(h)=1]=P[A(h)\geq 1]-P[A(h)\geq2]$
+it is reasonable to search for $P[A(h)\geq2]$ $$\begin{align}
+P[A(h)\geq2] &= P[\tau_1+\tau_2\leq h] \\
+&\leq P[\tau_1\leq h,\tau_2\leq h] \\
+&\stackrel{\perp}{=}P[\tau_1\leq h]P[\tau_2\leq h] \\
+&\stackrel{iid}{=}P[\tau\leq h]^2 =(\lambda h+o(h))^2=o(h)
+\end{align}$$
+
+So we have: $$P[A(h)=1]=\lambda h+o(h)-o(h)=\lambda h + o(h)$$
+This table is a recap of the obtained results:
+
+| Event       | $A(h)=0$           | $A(h)=1$         | $A(h)=2$ |
+| ----------- | ------------------ | ---------------- | -------- |
+| Probability | $1-\lambda h+o(h)$ | $\lambda h+o(h)$ | $o(h)$   |
+Since  $o(h)<<\lambda h$ it is more probable to have $A(h)=0, A(h)=1$ than $A(h)\geq2$
+`\end{proof}`
+
+>[!corollary]
+>If a QS has simultaneous arrivals $\implies$ it is not a markovian QS
+
+#### M/M/1 System
+An M/M/1 system allows us to consider noticeably less events for any small interval $[0,h]$ 
+
+>[!thm] Interval Generalisation
+>Since the arrival and departure processes are stationary the events in $[0,h]$ are iid for any event in $[t,t+h]$
+>Thus the evolution of the system only depends on $x(t)$, it is a **sufficient statistics**
+
+The events to consider are 3 if $x(0)>0$
+1. 1 arrival with probability $\lambda h + o(h)$
+2. 1 departure with probability $\mu h+o(h)$
+3. No arrival/departure with probability $1-\lambda h - \mu h +o(h)$
+
+While if $x(0)=0$ there are only 2 possible events, since departures can't happen:
+1. 1 arrival with probability $\lambda h + o(h)$
+2. 0 arrivals with probability $1-\lambda h + o(h)$
+
+This can be represented by a **markov chain**:
+![[Pasted image 20241028111336.png|Markov Chain|600]]
+It is a **birth and death process**, that means that in any given time frame each circle represents the system state and the QS can only remain the same or change by $\pm 1$. The arrows with $\lambda$ and $\mu$ show that it takes the probability $\lambda h$ or $\mu h$ to change state. 
+
+To evaluate $P[x(t+h)=k]$, that is the probability to go tho state k, we use the total probability law ($P[A]=\sum_{\text{all }B}P[A,B]\sum P[B]P[A|B]$)
+
+By considering $P[A]$ the probability to arrive at a set state, $P[B]$ the probability of being in a said state (the probability exists only at distance $\{-1,0,1\}$) from the desired one and $P[A|B]$ the probability of arriving at the desired state knowing the QS is already in a set state.
+
+If $k>0$ we have that
+$$\begin{align}
+P[A]=P[x(t+h)=k]&=P[x(t)=k-1]P[A|x(t)=k-1] \\
+&+P[x(t)=k]P[A|x(t)=k] \\
+&+P[x(t)=k+1]P[A|x(t)=k+1] \\
+\\
+P[A]&=P[x(t)=k-1]\lambda h \\
+&+P[x(t)=k](1-\lambda h-\mu h) \\
+&+P[x(t)=k+1]\mu h \\
+\end{align}$$
+moreover if $k=0$
+$$P[A]=P[x(t)=0](1-\lambda h)+P[x(t)=1]\mu h$$
+
+With the following result we can study what happens at **stability:**
+We know that at the stability condition $\lim_{t\rightarrow\infty}P[x(t)=k]=\lim_{t\rightarrow\infty}P[x(t+h)=k]=\pi_k$, then:
+$k\geq1$ $$\pi_k=\lambda h\pi_{k-1}+(1-\lambda h-\mu h)\pi_{k}+\mu h\pi_{k+1}\implies \lambda(\pi_{k-1}-\pi_k)=\mu(\pi_k-\pi_{k+1})$$
+$k=0$$$\pi_0=\mu h\pi_1+(1-\lambda h)\pi_0\implies \pi_1=\frac{\lambda}{\mu}=\rho\pi_0$$
+$k=1$$$\pi_2=\rho\pi_1$$By induction we see that:
+$$\pi_{k+1}=\rho\pi_k\implies\pi_k=\rho^k\pi_0$$
+We also know that $\sum\pi_k=1$, that implies $\pi_k<1$ and thus $\pi_0=1-\rho$
+$$\pi_k=(1-\rho)\rho^k$$
+
+![[Pasted image 20241028115806.png]]
+>[!rmk|*]
+>The moments of the occupancy metric depend only on $\rho$
+>This is not true for time metrics 
+
+A client enters and finds $k$ clients in queue: $s_{k+1}=y_1'+\sum_2^ky_i+y_{k+1}$
+where $y_1'$ is the remaining service time and $y_2,...y_{k+1}$ are exponential with parameter $\mu$ and thus $s$ is sum of $k+1$ exponentials $\implies$ $s$ is erlang
+$$p_{s|k}(a)=\frac{\mu(\mu a )^k}{k!}e^{-\mu a}u(a)$$
+
+# 9) Data Link Layer
+
+# 10) Network Layers
