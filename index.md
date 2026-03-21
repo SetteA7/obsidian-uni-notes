@@ -3,7 +3,7 @@ title: "🎓 Sette+ for Students"
 description: "Archivio digitale degli appunti universitari: Ingegneria dell'Informazione e ICT"
 ---
 
-# 🎓 I miei Appunti Universitari
+# I miei Appunti Universitari
 > Benvenuto nel mio archivio digitale. Qui trovi la raccolta sincronizzata dei miei studi, organizzata per una consultazione rapida.
 
 ---
@@ -13,7 +13,7 @@ description: "Archivio digitale degli appunti universitari: Ingegneria dell'Info
 | 📂 Risorsa | 📝 Descrizione | 🔗 Link |
 | :--- | :--- | :--- |
 | **Documenti PDF** | Dispense e slide in formato originale. | [[PDF/index\|Apri Archivio]] |
-| **Note Obsidian** | Appunti testuali in formato Markdown. | [[Appunti/index\|Leggi Note]] |
+| **Note Obsidian** | Appunti testuali in formato Markdown. (_WIP_) | [[Appunti/index\|Leggi Note]] |
 
 ---
 
