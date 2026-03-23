@@ -306,15 +306,28 @@ These blocks are encoded via Huffman.
 Now define the Entropic Rate:
 >[!def] Entropic Rate
 >When the rate is converging, then
->$$\mathcal H(X)=\lim_{K\rightarrow\infty}\frac{H(^K)}{K}=\lim_{K\rightarrow\infty} L^*_s\leq H(X)$$
+>$$\mathcal H(X)=\lim_{K\rightarrow\infty}\frac{H(K)}{K}=\lim_{K\rightarrow\infty} L^*_s\leq H(X)$$
 
 Recall the avg length of the optimal code:
 $$\begin{gather}
 H(X^K)\leq L^*<H(X^K)+1\\
 \frac{H(X^K)}{K}\leq L_s^*<\frac{H(X^K)}{K}+\frac{1}{K}\\
 \downarrow K\rightarrow\infty\\
-L^*_s\rightarrow
+L^*_s\rightarrow\mathcal H(X)\leq H(X)
 \end{gather}$$
+where the last steps inequality uses the joint entropy property.
+
+
+Therefore huffman code is optimal with larger and larger block sizes. This is practically unobtainable as complexity is exponential with K and probability estimation is hard with bigger blocks.
+
+#### Arithmetic Coding
+Arithmetic coding solves the exponential complexity with $K$ increasing. This coding is suboptimal but asymptotically optimal.
+$$L\leq H(X^K)+2\rightarrow L_s=\frac LK\stackrel{K\rightarrow\infty}\longrightarrow\mathcal H(X)$$
+This is done achieved by **encoding a sequence as the center interval** with arbitrary precision $q\in[0,1]$ a fractional number. The arithmetic code can encode blocks of any size, even the entirety of the message.
+
+This requires **2 multiplications and 2 sums per symbol**
+
+![[Pasted image 20260323135724.png|Example|350]]
 
 
 # 3) Proofs
