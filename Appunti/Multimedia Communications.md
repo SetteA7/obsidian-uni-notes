@@ -338,6 +338,13 @@ L=\E[\overline L(n)]&<\frac{-\sum_{i=0}^n\E[\log_2p(x_i)]+2}n\\
 &<H(X)+\frac 2n\stackrel{n\rightarrow\infty}\longrightarrow H(X)
 \end{aligned}
 \end{gather}$$
+For non iid symbols we have
+$$L(n)<-\log_2p(x^n)+2\rightarrow L=\frac{\E[L(n)]}n<\frac{H(X^n)+2}{n}\rightarrow\mathcal H(X)$$
+
+However $p(x^n)$ is hard to estimate for non iid symbols (if iid $p(x^n)=\prod_i^n p(x_i)$)
+
+#### Context Based Coding
+
 
 # 3) Proofs
 **Kraft Inequality:**
