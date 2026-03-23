@@ -328,7 +328,15 @@ This is done achieved by **encoding a sequence as the center interval** with arb
 This requires **2 multiplications and 2 sums per symbol**
 
 ![[Pasted image 20260323135724.png|Example|350]]
-
+The avg length can be calculated as:
+$$\begin{gather}
+L(n)=-\ceil{\sum_{i=1}^n\log_2p(x_i)}+1<-{\sum_{i=1}^n\log_2p(x_i)}+2\\
+\overline L(n)<\frac{-{\sum_{i=1}^n\log_2p(x_i)}+2}n\\
+\begin{aligned}
+L=\E[\overline L(n)]&<\frac{-\sum_{i=0}^n\E[\log_2p(x_i)]+2}n\\
+&<
+\end{aligned}
+\end{gather}$$
 
 # 3) Proofs
 **Kraft Inequality:**
