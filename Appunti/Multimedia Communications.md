@@ -344,7 +344,9 @@ $$L(n)<-\log_2p(x^n)+2\rightarrow L=\frac{\E[L(n)]}n<\frac{H(X^n)+2}{n}\rightarr
 However $p(x^n)$ is hard to estimate for non iid symbols (if iid $p(x^n)=\prod_i^n p(x_i)$)
 
 #### Context Based Coding
+This approach consists in looking at  $N_s$ previous symbols to recognize the context (max $N_c=M^{N_s}$ with $M$ the alphabet) and changes the encoder based on the context. This conditioning reduces the entropy of the source.
 
+## 2.3) Other Coding Techniques
 
 # 3) Proofs
 **Kraft Inequality:**
