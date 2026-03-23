@@ -11,7 +11,7 @@
 
 **Laboratory analysis Operational amplifiers**
 
-**Purpose of the lab:** to study and evaluate through laboratory measurements the non-idealities of operational amplifiers. Through appropriate experiments, the effects of output voltage limitation, output current limitation, slew rate, and bias current will be evaluated. Finally, the frequency response of a low-pass filter will be measured.
+**Purpose of the lab:** to study and evaluate through laboratory measurements the non-idealities of operational amplifiers. Through appropriate experiments, the effects of output voltage limitation, output current limitation, slew rate, and bias current will be evaluated. Finally, the frequency response of a low-pass filter will be measured .
 
 **Instrumentation needed:**
 - Arbitrary waveform generator
