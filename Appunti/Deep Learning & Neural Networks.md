@@ -205,6 +205,7 @@ $$\delta_j\iter l=f'(a_j\iter l)\sum_k\delta_k\iter{l+1}w_{k,j}\iter{l+1}$$
 A pletora of functions can be used as activation functions.
 
 #### Sigmoid Activation Function
+$$ $$
 $$\begin{gather}f(a_j\iter a)=\sigma(a_j\iter l)=\frac{1}{1+\exp{-a_j\iter l}}\\
 f'(a_j\iter l)=\sigma(a_j\iter l)\cdot\par{1-\sigma(a_j\iter l)}
 \end{gather}$$
@@ -218,6 +219,7 @@ f'(a_j\iter l)=\sigma(a_j\iter l)\cdot\par{1-\sigma(a_j\iter l)}
 >![[Pasted image 20260324104849.png|Sigmoid Function|350]]
 
 #### Hyperbolic Tangent (tanh) Activation Function
+$$ $$
 $$\begin{gather}f(a_j\iter a)=\tanh(a_j\iter l)=\frac{e^{a_j\iter a}-e^{-a_j\iter a}}{e^{a_j\iter a}+e^{-a_j\iter a}}\\
 f'(a_j\iter l)=1-\tanh^2(a_j\iter a)
 \end{gather}$$
@@ -232,6 +234,7 @@ A composition of linear functions is linear and can be expressed as a matrix pro
  $a_j$ is a linear function and therefore also $f(a_j$) is.
 
 ##### Rectified Linear Unit (ReLU) Activation Function
+$$ $$
 $$\begin{align}
 ReLU(a_j\iter l)=\max(0,a_j\iter l)\\
 ReLU(a_j\iter l)=\begin{cases}0,&z<0\\1,&z>0\end{cases}
@@ -246,6 +249,7 @@ $$\begin{align}a_j\iter l=\sum...\underbrace{-10^{10}}_b<0\rightarrow f'(a_j\ite
 Moreover the output is not zero centered.
 
 ##### Leaky ReLU (LReLU) Activation Function
+$$ $$
 $$\begin{gather}
 LReLU(z)=\begin{cases}\alpha z,&z<0\\ z,&z\geq0\end{cases}\\
 LReLU'(z)=\begin{cases}\alpha,&z<0\\ 1,&z>0\end{cases}
@@ -256,6 +260,7 @@ LReLU'(z)=\begin{cases}\alpha,&z<0\\ 1,&z>0\end{cases}
 >![[Pasted image 20260324112651.png|LReLU|350]]
 
 ##### Exponential Linear Unit (ELU) Activation Function
+$$ $$
 $$\begin{gather}
 ELU(z)=\begin{cases}\alpha (\exp z-1),&z<0\\ z,&z\geq0\end{cases}\\
 ELU'(z)=\begin{cases}\alpha\exp z,&z<0\\ 1,&z>0\end{cases}
@@ -351,6 +356,13 @@ The **size of receptive field increases with its depth** $\rightarrow$ neurons c
 
 #### Weight Sharing
 Since weights are shared in the filter, the number of parameters is drastically reduced
+
+>[!example|*]
+>Recall the $256\times256\times3$ RGB image.
+>- CNN with $3\times 3$ filter has 9 weights per depth $27$ total weights per output feature map, we want 3 output maps so $81$ weights
+>- FFNN in one layer would have $(256\times256\times3)\times(256\times256\times3)=38 M$ weights
+
+
 
 # 4) Optimization Methods for Neural Networks
 #### Momentum
