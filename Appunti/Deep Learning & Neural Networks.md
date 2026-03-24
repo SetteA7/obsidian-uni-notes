@@ -232,9 +232,27 @@ A composition of linear functions is linear and can be expressed as a matrix pro
  $a_j$ is a linear function and therefore also $f(a_j$) is.
 
 ##### Rectified Linear Unit (ReLU) Activation Function
-$$ReLU(a_j\iter l)=\max(0,a_j\iter l)$$
+$$\begin{align}
+ReLU(a_j\iter l)=\max(0,a_j\iter l)\\
+ReLU(a_j\iter l)=\begin{cases}0,&z<0\\1,&z>0\end{cases}
+\end{align}$$
 >[!col]
->Simplicity of linear function but non-linear. This speeds up the learning process and si efficient for sparse outputs. 
+>Simplicity of linear function but non-linear. This speeds up the learning process and returns a sparse output
+>For $z>0$ the derivative is $1$, but ReLU can die out if the bias of a layer becomes too negative:
+>
+>![[Pasted image 20260324111615.png|ReLU|350]]
+
+$$\begin{align}a_j\iter l=\sum...\underbrace{-10^{10}}_b<0\rightarrow f'(a_j\iter l)=0\end{align}$$
+Moreover the output is not zero centered.
+
+##### Leaky ReLU (LReLU) Activation Function
+$$\begin{gather}
+LReLU(z)=\begin{cases}\alpha z,&z<0\\ z,&z\geq0\end{cases}\\
+LReLU'(z)=\begin{cases}\alpha,&z<0\\ 1,&z>0\end{cases}
+\end{gather}$$
+>[!col]
+>This mitigates the dying ReLU problem but gives less sparse output
+
 
 # 3) Optimization Methods for Neural Networks
 #### Momentum
