@@ -227,7 +227,8 @@ f'(a_j\iter l)=1-\tanh^2(a_j\iter a)
 >
 >![[Pasted image 20260324105444.png|Tanh Function|350]]
 
-#### Linear Activation Function
+#### Linear Activation Functions
+a
 
 
 # 3) Optimization Methods for Neural Networks
