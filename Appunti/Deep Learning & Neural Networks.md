@@ -251,7 +251,24 @@ LReLU(z)=\begin{cases}\alpha z,&z<0\\ z,&z\geq0\end{cases}\\
 LReLU'(z)=\begin{cases}\alpha,&z<0\\ 1,&z>0\end{cases}
 \end{gather}$$
 >[!col]
->This mitigates the dying ReLU problem but gives less sparse output
+>This mitigates the dying ReLU problem but gives less sparse output. Moreover the magnitude increases for large negative values and could amplify the noise.
+>
+>![[Pasted image 20260324112651.png|LReLU|350]]
+
+##### Exponential Linear Unit (ELU) Activation Function
+$$\begin{gather}
+ELU(z)=\begin{cases}\alpha (\exp z-1),&z<0\\ z,&z\geq0\end{cases}\\
+ELU'(z)=\begin{cases}\alpha\exp z,&z<0\\ 1,&z>0\end{cases}
+\end{gather}$$
+
+
+>[!col]
+>This saturates for large negative values and is more robust to noise, however it is more complex to compute and can result in a slower learning process.
+>
+>![[Pasted image 20260324113258.png|ELU|350]]
+
+## 2.7) Parameters
+#### Initialization
 
 
 # 3) Optimization Methods for Neural Networks
