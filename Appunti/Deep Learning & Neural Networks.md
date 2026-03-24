@@ -271,7 +271,20 @@ ELU'(z)=\begin{cases}\alpha\exp z,&z<0\\ 1,&z>0\end{cases}
 #### Initialization
 A bad initialization can result in a slow learning process, but an analytical solution is not available: therefore **initialization strategies are random and heuristic**
 
-##### Common Sense Rules
+These are the common sense rules:
+- Weight should be initialized randomly to ensure **diversity**
+- No large values to avoid **instability and numerical issues**
+- Common choice is zero mean gaussian distribution with small variance
+- Another common choice is the uniform distribution on the layer input size
+
+##### Glorot Initialization
+Default initialization for most DL frameworks:
+$$w_{j,i}\iter 0\sim u\par{-\sqrt{\frac{6}{d+n}},\sqrt{\frac{6}{d+n}}}$$
+Where $d,n$ are the input and output dimensions of the netwrok
+
+Biases are initialized to zero.
+
+#### Hyperparameters
 
 
 # 3) Optimization Methods for Neural Networks
