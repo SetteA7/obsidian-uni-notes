@@ -335,7 +335,22 @@ An easy way to see the cross-correlation computation:
 ![[Pasted image 20260324190806.png|Cross-Correlation|350]]
 ## 3.2) Strengths
 #### Local Connectivity
+Since the size of the filter is much smaller than the input we have some advantages:
+- Each neuron depends on a small subset of inputs of previous layers (filter size) (FFNN uses all neurons for next layer single neuron)
+- Patterns are learned in a hierarchical way, each layer learns patterns of the previous layer, stacking them creates global patterns
 
+This can be seen by analyzing the **receptive field:** Number of elements in the input that influence a given neuron at a given layer.
+
+![[Pasted image 20260324191619.png|Receptive Field Example|250]]
+The receptive field can be increased by **dilating** the convolution. Instead os using subsequent features, at eahc layer the filter is dilated so that the receptive field is maximized.
+
+![[Pasted image 20260324192054.png|Non Dilated In Red|350]]
+The **size of receptive field increases with its depth** $\rightarrow$ neurons closer to input depend on local features, deeper neuron son global ones (generalization of local features)
+
+**This shows that CNNs work well on structured data**
+
+#### Weight Sharing
+Since weights are shared in the filter, the number of parameters is drastically reduced
 
 # 4) Optimization Methods for Neural Networks
 #### Momentum
