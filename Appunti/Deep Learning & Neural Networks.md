@@ -269,7 +269,10 @@ ELU'(z)=\begin{cases}\alpha\exp z,&z<0\\ 1,&z>0\end{cases}
 
 ## 2.7) Parameters
 #### Initialization
-so to focus on predicting the mean we can find the following loss function:
+A bad initialization can result in a slow learning process, but an analytical solution is not available: therefore **initialization strategies are random and heuristic**
+
+##### Common Sense Rules
+
 
 # 3) Optimization Methods for Neural Networks
 #### Momentum
