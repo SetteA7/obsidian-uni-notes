@@ -304,6 +304,7 @@ Since each layer is 1D we have:
 
 
 # 3) Convolutional Neural Network (CNN)
+## 3.1) Intro to CNNs
 CNNs support input of up to 3 dimensions $i,j,q$  (length, height, depth).
 
 They replace Matrix Multiplication with Convolutional (cross-correlation) Operations:
@@ -321,7 +322,19 @@ Notice that usually the convolution is defined as:
 $$(X*D)(i,j)=\sum_m\sum_nX(i-m,j-n)K(m,n)$$
 but CNNs use a different definition, that is the **cross-correlation** which corresponds to a $180^\circ$ rotation of the filter and practically results changing the sign:
 $$\boxed{(X*D)(i,j)=\sum_m\sum_nX(i\mathbf +m,j\mathbf +n)K(m,n)}$$
-The rotation will be learned by the network, so we don't need to rotate it manually.
+The rotation will be learned by the network, so we don't need to rotate it manually. Moreover cross-correlation is efficient to implement and is a **similarity** indicator
+
+#### Definitions
+- **Feature Map:** result of convolving one filter of the layer with the whole input and applying the activation function (element-wise)
+- **Stride:** number of steps by which the filter is shifted
+- **(Zero) Padding:** add zeros to the input so that the filter fits an integer number of times (symmetrically on all sides)
+
+Now call Stride $S$, Padding $P$, Filter size $F$ and input dimension $d$, then the output dimension is (one for each $D_{out}$):
+$$O=\frac{d-F+2P}S+1$$
+An easy way to see the cross-correlation computation:
+![[Pasted image 20260324190806.png|Cross-Correlation|350]]
+## 3.2) Strengths
+#### Local Connectivity
 
 
 # 4) Optimization Methods for Neural Networks
