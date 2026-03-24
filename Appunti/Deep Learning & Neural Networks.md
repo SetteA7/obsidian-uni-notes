@@ -161,7 +161,7 @@ In multi-class, the **output should be a discrete probability distribution overt
 The most common choice is the **softmax function**
 $$y_{n,q}=\frac{\exp{a_q^{(L)}}}{\sum_{i\in Q}\exp{a_i^{(L)}}}$$
 
-## 2.5) FFNN Training
+## 2.5) FFNN Training (GD & BP)
 The weight are updated via the **gradient descent** rule
 $$(w_{j,i}\iter l)\iter {n+1}=(w_{i,j}\iter{l})\iter{n}-\eta\nabla_{w_{i,j}\iter l}L(W,x)$$
 This is calculated via the **backpropagation algorithm:**
@@ -201,6 +201,11 @@ $$\frac{\partial a_k\iter{l+1}}{\partial a_j\iter l}=\frac{\partial a_k\iter{l+1
 
 Then finally:
 $$\delta_j\iter l=f'(a_j\iter l)\sum_k\delta_k\iter{l+1}w_{k,j}\iter{l+1}$$
+## 2.6) Activation Functions
+A pletora of functions can be used as activation functions.
+
+#### Sigmoid Activation Function
+$$\sigma(a_j\iter l)=\frac{1}{1+\exp{-a_j\iter l}}$$
 
 # 3) Optimization Methods for Neural Networks
 #### Momentum
