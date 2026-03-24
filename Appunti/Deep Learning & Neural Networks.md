@@ -285,7 +285,9 @@ Where $d,n$ are the input and output dimensions of the network
 Biases are initialized to zero.
 
 #### Hyperparameters
-test
+We call hyper-parameters of a NN all the additional parameters that are **not learned**
+
+##### Learning Rate
 
 
 # 3) Optimization Methods for Neural Networks
