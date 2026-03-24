@@ -280,11 +280,12 @@ These are the common sense rules:
 ##### Glorot Initialization
 Default initialization for most DL frameworks:
 $$w_{j,i}\iter 0\sim u\par{-\sqrt{\frac{6}{d+n}},\sqrt{\frac{6}{d+n}}}$$
-Where $d,n$ are the input and output dimensions of the netwrok
+Where $d,n$ are the input and output dimensions of the network
 
 Biases are initialized to zero.
 
 #### Hyperparameters
+test
 
 
 # 3) Optimization Methods for Neural Networks
