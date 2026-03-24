@@ -30,7 +30,8 @@ description: "Archivio digitale degli appunti universitari: Ingegneria dell'Info
 ### 🛠️ Stato del Progetto
 - [x] Sincronizzazione automatica Mac-Server
 - [x] Indicizzazione PDF automatica
-- [/] Ottimizzazione rendering LaTeX (*In corso*)
+- [x] Ottimizzazione rendering LaTeX
+- [/] Implementazione dei Plugin e CSS di Obsidian (_WIP_)
 
 <br>
 

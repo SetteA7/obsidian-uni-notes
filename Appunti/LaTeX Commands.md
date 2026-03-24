@@ -34,7 +34,8 @@ $$\instance$$
 $\newcommand{\R}{\mathbb{R}}$
 $$\R$$
  $\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}$
- $$\floor{input}$$$\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}$
+ $$\floor{input}$$
+ $\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}$
  $$\ceil{input}$$
   $\newcommand{\complexgauss}{\mathcal N_{\mathbb{C}}}$
   $$\complexgauss$$
