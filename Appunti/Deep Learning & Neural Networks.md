@@ -294,9 +294,21 @@ We call an **epoch** one entire run of the training phase.
 TODO
 
 ## 2.8) Limitations
+Since each layer is 1D we have:
+- **large number of parameters** to learn.
+- **loss of structural information**
+
+>[!example|*] Size
+>A 256px square RGB image has size $256\times256\times3\rightarrow196608\times 1$ vector
+>Let each layer be made of 50 neurons, one single layer brings to $196608\times 50=9.8 M$ parameters and occupies roughly $9.8M\times 32 bits=315 Mb$
 
 
 # 3) Convolutional Neural Network (CNN)
+CNNs support input of up to 3 dimensions $i,j,q$  (length, height, depth).
+
+They replace Matrix Multiplication with Convolutional (Autocorrelation) Operations:
+$$o_{1,i,j}=f\par{\sum_{q=1}^{D_{in}}(K_{1,q}*X_q)(1,i,j)+b}$$
+
 
 
 # 4) Optimization Methods for Neural Networks
