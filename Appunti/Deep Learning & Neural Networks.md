@@ -306,9 +306,22 @@ Since each layer is 1D we have:
 # 3) Convolutional Neural Network (CNN)
 CNNs support input of up to 3 dimensions $i,j,q$  (length, height, depth).
 
-They replace Matrix Multiplication with Convolutional (Autocorrelation) Operations:
-$$o_{1,i,j}=f\par{\sum_{q=1}^{D_{in}}(K_{1,q}*X_q)(1,i,j)+b}$$
+They replace Matrix Multiplication with Convolutional (cross-correlation) Operations:
+$$o_{l,i,j}=\overbrace{f\par{\underbracket{\sum_{q=1}^{D_{in}}(K_{l,q}*X_q)(l,i,j)+b}_{\text{activation map}}}}^{\text{feature map}}\quad l=1,...,D_{out}$$
+![[Pasted image 20260324184227.png|Representation|350]]
+1. $\sum$: sum over the input depth
+2. $(*)()$: convolve filter with input at depth $q$
+3. $b$: adds bias, $f$: activation function
 
+In general at every layer we have $D_{out}$ filters (hyperparameter) that is slid over the whole input to generate a new activation map. The collection of $D_{out}$ feature maps is sent to the next layer.
+
+Notice that each filter is a collection of weights that will be randomly initialized and learned during the training phase.
+
+Notice that usually the convolution is defined as:
+$$(X*D)(i,j)=\sum_m\sum_nX(i-m,j-n)K(m,n)$$
+but CNNs use a different definition, that is the **cross-correlation** which corresponds to a $180^\circ$ rotation of the filter and practically results changing the sign:
+$$\boxed{(X*D)(i,j)=\sum_m\sum_nX(i\mathbf +m,j\mathbf +n)K(m,n)}$$
+The rotation will be learned by the network, so we don't need to rotate it manually.
 
 
 # 4) Optimization Methods for Neural Networks
