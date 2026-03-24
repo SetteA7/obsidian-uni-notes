@@ -288,9 +288,18 @@ Biases are initialized to zero.
 We call hyper-parameters of a NN all the additional parameters that are **not learned**
 
 ##### Learning Rate
+We call an **epoch** one entire run of the training phase. 
 
 
-# 3) Optimization Methods for Neural Networks
+TODO
+
+## 2.8) Limitations
+
+
+# 3) Convolutional Neural Network (CNN)
+
+
+# 4) Optimization Methods for Neural Networks
 #### Momentum
 >[!col]
 >Imagine the loss function as a landscape. Imagine a ball rolling on the landscape. The slope makes it descent but constant slope in the same direction gives it momentum. More momentum means more force necessary to divert the ball $\rightarrow$ This region gives robustness to to momentary changes in the update direction.
