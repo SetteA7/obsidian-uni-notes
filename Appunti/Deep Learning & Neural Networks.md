@@ -194,7 +194,13 @@ $$\delta_j\iter l\def\frac{\partial L}{\partial a_j\iter l}$$
 which only depends on layers $>l$.
 
 This can be recursively computed as:
-$$\delta_j\iter l=\sum_{k}\underbrace{\frac{\partial L}{\partial a_k\iter{l+1}}}_{\delta_k\iter}\frac{\partial a_k\iter{l+1}}{\partial a_j\iter l}$$
+$$\delta_j\iter l=\sum_{k}\underbrace{\frac{\partial L}{\partial a_k\iter{l+1}}}_{\delta_k\iter{l+1}}\frac{\partial a_k\iter{l+1}}{\partial a_j\iter l}$$
+Then the first term is the error message of the $l+1$ layer while the second term can be computed as
+$$\frac{\partial a_k\iter{l+1}}{\partial a_j\iter l}=\frac{\partial a_k\iter{l+1}}{\partial o_j\iter l}\frac{\partial o_j\iter l}{\partial a_j\iter l}=w_{k,j}\iter{l+1}f'(a_j\iter l)$$
+(since $o_j=f(a_j)$ and $a_k\iter{l+1}=\sum_m w_{k,m}\iter{l+1}o_m\iter l+b_k\iter{l+1}$ )
+
+Then finally:
+$$\delta_j\iter l=f'(a_j\iter l)\sum_k\delta_k\iter{l+1}w_{k,j}\iter{l+1}$$
 
 # 3) Optimization Methods for Neural Networks
 #### Momentum
