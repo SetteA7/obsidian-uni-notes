@@ -228,8 +228,13 @@ f'(a_j\iter l)=1-\tanh^2(a_j\iter a)
 >![[Pasted image 20260324105444.png|Tanh Function|350]]
 
 #### Linear Activation Functions
-a
+A composition of linear functions is linear and can be expressed as a matrix product.
+ $a_j$ is a linear function and therefore also $f(a_j$) is.
 
+##### Rectified Linear Unit (ReLU) Activation Function
+$$ReLU(a_j\iter l)=\max(0,a_j\iter l)$$
+>[!col]
+>Simplicity of linear function but non-linear. This speeds up the learning process and si efficient for sparse outputs. 
 
 # 3) Optimization Methods for Neural Networks
 #### Momentum
