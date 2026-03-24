@@ -205,7 +205,30 @@ $$\delta_j\iter l=f'(a_j\iter l)\sum_k\delta_k\iter{l+1}w_{k,j}\iter{l+1}$$
 A pletora of functions can be used as activation functions.
 
 #### Sigmoid Activation Function
-$$\sigma(a_j\iter l)=\frac{1}{1+\exp{-a_j\iter l}}$$
+$$\begin{gather}f(a_j\iter a)=\sigma(a_j\iter l)=\frac{1}{1+\exp{-a_j\iter l}}\\
+f'(a_j\iter l)=\sigma(a_j\iter l)\cdot\par{1-\sigma(a_j\iter l)}
+\end{gather}$$
+>[!col]
+>This is a **soft and differentiable function** that maps $\mathbb R\rightarrow[0,1]$.
+>However the the **derivative is contractive**, that is it gets smaller when the input gets bigger in magnitude. This makes the gradient vanish! The sigmoid works for shallow FFNN ($L<8$).
+>Another drawback is the **bias drift** since the  output is not zero centered, that is, there is an additive bias:
+>$$\E[a]=0\rightarrow\E[\sigma]\not=0$$
+>This slows down the learning process.
+>
+>![[Pasted image 20260324104849.png|Sigmoid Function|350]]
+
+#### Hyperbolic Tangent (tanh) Activation Function
+$$\begin{gather}f(a_j\iter a)=\tanh(a_j\iter l)=\frac{e^{a_j\iter a}-e^{-a_j\iter a}}{e^{a_j\iter a}+e^{-a_j\iter a}}\\
+f'(a_j\iter l)=1-\tanh^2(a_j\iter a)
+\end{gather}$$
+>[!col]
+>This is a scaled version of the sigmoid function. 
+>This maps $\R\rightarrow[0,1]$ and is differentiable. The **derivative is still contractive** but it **solves the bias drift problem** 
+>
+>![[Pasted image 20260324105444.png|Tanh Function|350]]
+
+#### Linear Activation Function
+
 
 # 3) Optimization Methods for Neural Networks
 #### Momentum
