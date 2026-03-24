@@ -269,7 +269,7 @@ ELU'(z)=\begin{cases}\alpha\exp z,&z<0\\ 1,&z>0\end{cases}
 
 ## 2.7) Parameters
 #### Initialization
-
+so to focus on predicting the mean we can find the following loss function:
 
 # 3) Optimization Methods for Neural Networks
 #### Momentum
