@@ -164,7 +164,7 @@ $$y_{n,q}=\frac{\exp{a_q^{(L)}}}{\sum_{i\in Q}\exp{a_i^{(L)}}}$$
 ## 2.5) FFNN Training
 The weight are updated via the **gradient descent** rule
 $$(w_{j,i}\iter l)\iter {n+1}=(w_{i,j}\iter{l})\iter{n}-\eta\nabla_{w_{i,j}\iter l}L(W,x)$$
-This is calculated via the back propagation algorithm:
+This is calculated via the **backpropagation algorithm:**
 1. Execute a forward pass to obtain and store the activations and outputs at each layer
 2. For the specific loss and output function, compute
 $$\delta_m\iter L=\frac{\partial L}{\partial y_m}g'(a_m\iter L)$$
@@ -192,6 +192,9 @@ $$\begin{align}
 From here define the **error message as**
 $$\delta_j\iter l\def\frac{\partial L}{\partial a_j\iter l}$$
 which only depends on layers $>l$.
+
+This can be recursively computed as:
+$$\delta_j\iter l=\sum_{k}\underbrace{\frac{\partial L}{\partial a_k\iter{l+1}}}_{\delta_k\iter}\frac{\partial a_k\iter{l+1}}{\partial a_j\iter l}$$
 
 # 3) Optimization Methods for Neural Networks
 #### Momentum
