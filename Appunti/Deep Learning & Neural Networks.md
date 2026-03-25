@@ -490,7 +490,7 @@ $\endproof$
 Used in some selected layers
 $$L(D,W)+\lambda\sum_{w_i\in W}|w_i|$$
 And by the same logic as before it will yield the SGD update:
-$$w_j\iter{n+1}=w_j\iter n-\lambda \eta sign(w_j\iter n)$$
+$$w_j\iter{n+1}=w_j\iter n-\lambda \eta \text{sign}(w_j\iter n)-\frac\eta K\sum_k\nabla L(x_k,t_k)$$
 $$$$
 # 5) Optimization Methods for Neural Networks
 #### 5) Momentum
