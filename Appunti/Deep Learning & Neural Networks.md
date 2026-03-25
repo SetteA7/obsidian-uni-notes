@@ -387,10 +387,35 @@ $\endproof$
 >Equivariant to translations doesn't mean equivariant to rotations!
 
 #### Pooling Layers
+It can be useful to reduce the dimension of the tensors between layers.
 
+This can be achieved by:
+- Using $S>1$
+- Pooling layers
+
+![[Pasted image 20260325102212.png|Pooling|350]]
+This adds **invariance** to small translations. Useful for classification (object present, not where it is present)
+
+Usually the pooling function is a mean or max function
+
+## 3.3) Back propagation
+Recall some notation:
+- Layers: $l=1,...,L$
+- Input feature map: Size $H\times W$ indices $i,j$
+- Filter: Size $M\times N$ indices $m,n$
+- Weight between layers $l-1,l$: $w_{m,n}^l$, bias $b$
+- Activation (conv of prev. output and filter)
+$$a_{i,j}^l=\sum_{m=0}^{M-1}\sum_{n=0}^{N-1}o_{i+m,j+n}^{l-1}w_{m,n}^l+b^l$$
+
+In CNNs the last layer is usually a FFNN (easier to have 1D for regression and classification). CNN learns features, FFNN classifies/regress based on features.
+
+Back propagation analysis with $S=1,P=0,D_{in}=D_{out}=1$ but can be generalized
+
+The aim is to compute the gradient of the loss function wrt the weights:
+$$\frac{\partial L(W,X)}{\partial w_{m,n}^l}\stackrel{\text{}}=\sum_{i=0}^{H-M}\sum_{j=0}^{W-N}\frac{\partial L(W,X)}{\partial a_{i,j}^l}\frac{\partial a_{i,j}^l}{\partial w_{m,n}^l}$$
 
 # 4) Optimization Methods for Neural Networks
-#### 4) Momentum
+#### Momentum
 >[!col]
 >Imagine the loss function as a landscape. Imagine a ball rolling on the landscape. The slope makes it descent but constant slope in the same direction gives it momentum. More momentum means more force necessary to divert the ball $\rightarrow$ This region gives robustness to to momentary changes in the update direction.
 >$$ $$
