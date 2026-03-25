@@ -454,7 +454,7 @@ todo update bias.
 
 
 # 5) Optimization Methods for Neural Networks
-#### 4) Momentum
+#### Momentum
 >[!col]
 >Imagine the loss function as a landscape. Imagine a ball rolling on the landscape. The slope makes it descent but constant slope in the same direction gives it momentum. More momentum means more force necessary to divert the ball $\rightarrow$ This region gives robustness to to momentary changes in the update direction.
 >$$ $$
