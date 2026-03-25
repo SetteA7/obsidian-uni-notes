@@ -451,10 +451,28 @@ $$\delta_{i,j}^l=\sum_m\sum_n\delta_{i-m,j-n}^{l+1}w_{m,n}^{l+1}f'(a_{i,j}^l)\lo
 todo update bias.
 
 # 4) Overfitting and Regularization in Neural Networks
+NN can easily have > 100M parameters and therefore overfitting is a common problem.
 
+## 4.1) Overfitting Avoidance
+Consider the validation vs training error:
+![[Pasted image 20260325145713.png|Graph|350]]
+The **train-validation** curves are essential in understanding the status of the model. When the training and validation error start to diverge, the model is overfitting
+
+#### Early Stopping
+**Early stopping** is a common technique to prevent overfitting by stopping training when the validation error starts to diverge from the training error.
+
+#### Data Augmentation
+Another way to prevent overfitting is to train on more data! It is possible to generate artificial data from the original dataset via simple transformations. This removes the iid assumption in the original dataset. Active development is happening.
+#### Inductive Bias
+ML asks to compute the distribution $p(x|t)$ given some samples $x_i|t_i$. This is ill posed as there are infinitely many distributions. **Inductive bias** consist in expressing a preference for a certain class of distributions. (a priori knowledge).
+
+>[!thm] No Free Lunch Theorem
+>Every algorithm is as good as any other when averaged over all possible problems. If one is better than average for some problem, it must be worse than average for others.
+
+This shows
 
 # 5) Optimization Methods for Neural Networks
-#### Momentum
+#### 5) Momentum
 >[!col]
 >Imagine the loss function as a landscape. Imagine a ball rolling on the landscape. The slope makes it descent but constant slope in the same direction gives it momentum. More momentum means more force necessary to divert the ball $\rightarrow$ This region gives robustness to to momentary changes in the update direction.
 >$$ $$
