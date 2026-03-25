@@ -398,7 +398,11 @@ This adds **invariance** to small translations. Useful for classification (objec
 
 Usually the pooling function is a mean or max function
 
-## 3.3) Back propagation
+In BP (see later) the pooling affects the error message in two possible ways:
+- Max pooling: error message is assigned to the max value of the patch
+- Avg pooling: all inputs receive error message but ut is divided by the surface of the pooling patch
+
+## 3.3) Training (SGD & BP) 
 Recall some notation:
 - Layers: $l=1,...,L$
 - Input feature map: Size $H\times W$ indices $i,j$
@@ -413,11 +417,14 @@ In CNNs the last layer is usually a FFNN (easier to have 1D for regression and c
 The following steps are used:
 1. Apply forward pass to compute all outputs and activations $a_{i,j}^l,o_{i,j}^l$
 2. Last layer is FFNN, so compute error message
+$$\mathbf \delta ^L=\nabla_yL\odot f'(\mathbf a^L)=\begin{bmatrix}\delta_1^L\\\vdots\\\delta_M^L\end{bmatrix}, \ 
+\delta_i^l=\frac{\partial L}{\partial y_i}f'(a_i^L)$$
 3. Recursively compute error signal matrices
 $$\mathbf \delta^l=f'(a_{i,j}^l)\mathbf \delta^{l+1}*rot(180^\circ)(K^{l+1})$$
 4. Compute gradient using error signal matrices
 $$\frac{\partial L(W,X)}{\partial w_{m,n}^l}=(\mathbf {\delta}^l*\mathbf o^{l-1})(m,n)\qquad \frac{\partial L(W,X)}{\partial b^l}=\sum_{i=0}^{H-M}\sum_{j=0}^{W-N}\delta_{i,j}^l$$
-
+The learning rule is the SGD:
+$$w_{m,n}\iter{l+1}=w_{m,n}\iter l-\eta\frac{\partial L(W,X)}{\partial w_{m,n}\iter l}\qquad b\iter{l+1}=b\iter l-\eta\frac{\partial L(W,X)}{\partial b\iter l}$$
 
 ##### Mathematical Derivation
 Back propagation analysis with $S=1,P=0,D_{in}=D_{out}=1$ but can be generalized
@@ -439,7 +446,7 @@ $$\begin{align}
 which brings to the calculation of 
 $$\frac{\partial a_{i-n,j-m}^{l+1}}{\partial a_{i,j}^l}=\frac{\partial}{\partial a_{i,j}^l}\par{\sum_{m'}\sum_{n'}w_{m',n'}^{l+1}f(a_{i-m+m',j-n+n'}^l)+b^{l+1}}\stackrel{m'=m,n'=n}=w_{m,n}^{l+1}f'(a_{i,j}^l)$$
 so the error message is
-$$\delta_{i,j}^l=\sum_m\sum_n\delta_{i-m,j-n}^{l+1}w_{m,n}^{l+1}f'(a_{i,j}^l)=f'(a_{i,j}^l)\mathbf\delta^{l+1}*rot(180^\circ)(K^{l+1})$$
+$$\delta_{i,j}^l=\sum_m\sum_n\delta_{i-m,j-n}^{l+1}w_{m,n}^{l+1}f'(a_{i,j}^l)\longrightarrow\mathbf \delta^l=f'(a_{i,j}^l)\mathbf\delta^{l+1}*rot(180^\circ)(K^{l+1})$$
 
 todo update bias.
 # 4) Optimization Methods for Neural Networks
