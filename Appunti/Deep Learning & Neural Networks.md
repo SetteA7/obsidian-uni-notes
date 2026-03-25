@@ -449,6 +449,8 @@ so the error message is
 $$\delta_{i,j}^l=\sum_m\sum_n\delta_{i-m,j-n}^{l+1}w_{m,n}^{l+1}f'(a_{i,j}^l)\longrightarrow\mathbf \delta^l=f'(a_{i,j}^l)\mathbf\delta^{l+1}*rot(180^\circ)(K^{l+1})$$
 
 todo update bias.
+
+# Overfitting and Regularization i
 # 4) Optimization Methods for Neural Networks
 #### 4) Momentum
 >[!col]
