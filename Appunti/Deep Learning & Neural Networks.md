@@ -362,10 +362,35 @@ Since weights are shared in the filter, the number of parameters is drastically 
 >- CNN with $3\times 3$ filter has 9 weights per depth $27$ total weights per output feature map, we want 3 output maps so $81$ weights
 >- FFNN in one layer would have $(256\times256\times3)\times(256\times256\times3)=38 M$ weights
 
+this also brings:
+- higher efficiency in encoding information (spatial structure)
+- less overfitting
+- more layers, deeper features
+
+#### Translation Equivariance
+First define equivariance:
+
+>[!def] Equivariance
+>Given two functions $\phi, \xi$ and an input x, they are equivariant if:
+>$$\phi(\xi(x))=\xi(\phi(x))$$
+>Let the functions be a convolution and a translation, then the equivariance holds. In neural networks terms:
+><div style="text-align: center;">If a pattern in the input is shifted, the learned features are shifted but unchanged</div>
+>
+
+Quick proof:
+Translate the convolution
+$$(f*g)(x)\stackrel{\text{translate}}\rightarrow(f*g)(x-z)=\int f(\tau)g(x-z-\tau)d\tau$$
+Now translate $f$ and then convolve
+$$f(x-z)*g(x)=\int f(\tau-z)g(x-\tau)d\tau\stackrel{u=\tau-z}=\int f(u)g(x-z-u)du=(f*g)(x-z)$$
+$\endproof$
+>[!rmk|*]
+>Equivariant to translations doesn't mean equivariant to rotations!
+
+#### Pooling Layers
 
 
 # 4) Optimization Methods for Neural Networks
-#### Momentum
+#### 4) Momentum
 >[!col]
 >Imagine the loss function as a landscape. Imagine a ball rolling on the landscape. The slope makes it descent but constant slope in the same direction gives it momentum. More momentum means more force necessary to divert the ball $\rightarrow$ This region gives robustness to to momentary changes in the update direction.
 >$$ $$
