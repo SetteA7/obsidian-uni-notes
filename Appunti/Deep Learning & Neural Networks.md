@@ -450,8 +450,10 @@ $$\delta_{i,j}^l=\sum_m\sum_n\delta_{i-m,j-n}^{l+1}w_{m,n}^{l+1}f'(a_{i,j}^l)\lo
 
 todo update bias.
 
-# Overfitting and Regularization i
-# 4) Optimization Methods for Neural Networks
+# 4) Overfitting and Regularization in Neural Networks
+
+
+# 5) Optimization Methods for Neural Networks
 #### 4) Momentum
 >[!col]
 >Imagine the loss function as a landscape. Imagine a ball rolling on the landscape. The slope makes it descent but constant slope in the same direction gives it momentum. More momentum means more force necessary to divert the ball $\rightarrow$ This region gives robustness to to momentary changes in the update direction.
