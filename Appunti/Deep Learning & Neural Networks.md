@@ -409,11 +409,16 @@ $$a_{i,j}^l=\sum_{m=0}^{M-1}\sum_{n=0}^{N-1}o_{i+m,j+n}^{l-1}w_{m,n}^l+b^l$$
 
 In CNNs the last layer is usually a FFNN (easier to have 1D for regression and classification). CNN learns features, FFNN classifies/regress based on features.
 
+##### Mathematical Derivation
 Back propagation analysis with $S=1,P=0,D_{in}=D_{out}=1$ but can be generalized
 
 The aim is to compute the gradient of the loss function wrt the weights:
-$$\frac{\partial L(W,X)}{\partial w_{m,n}^l}\stackrel{\text{}}=\sum_{i=0}^{H-M}\sum_{j=0}^{W-N}\frac{\partial L(W,X)}{\partial a_{i,j}^l}\frac{\partial a_{i,j}^l}{\partial w_{m,n}^l}$$
+$$\frac{\partial L(W,X)}{\partial w_{m,n}^l}\stackrel{\text{chain rule}}=\sum_{i=0}^{H-M}\sum_{j=0}^{W-N}\underbrace{\frac{\partial L(W,X)}{\partial a_{i,j}^l}}_{\delta_{i,j}^l}\underbrace{\frac{\partial a_{i,j}^l}{\partial w_{m,n}^l}}_{o_{i+m,j+n}^l}=(\delta^l*o^{l-1})(m,n)$$
+where $\delta_{i,j}^l$ is the error signal and $o_{i+m,j+n}^l$ is obtained like in FFNN where teh derivative is 0 besides for $i,j=m,n$ (in the activation this results in the output at $i+m,j+n$).
 
+**The gradient is therefore just the convolution of the error signal and the output.**
+
+How does the loss function behave wrt the activations? They are not fully connected, so how is the error signal computed?
 # 4) Optimization Methods for Neural Networks
 #### Momentum
 >[!col]
