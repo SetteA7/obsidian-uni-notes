@@ -409,7 +409,16 @@ $$a_{i,j}^l=\sum_{m=0}^{M-1}\sum_{n=0}^{N-1}o_{i+m,j+n}^{l-1}w_{m,n}^l+b^l$$
 
 In CNNs the last layer is usually a FFNN (easier to have 1D for regression and classification). CNN learns features, FFNN classifies/regress based on features.
 
-The gradient is computed as the convolution of the error signal and the output
+
+The following steps are used:
+1. Apply forward pass to compute all outputs and activations $a_{i,j}^l,o_{i,j}^l$
+2. Last layer is FFNN, so compute error message
+3. Recursively compute error signal matrices
+$$\mathbf \delta^l=f'(a_{i,j}^l)\mathbf \delta^{l+1}*rot(180^\circ)(K^{l+1})$$
+4. Compute gradient using error signal matrices
+$$\frac{\partial L(W,X)}{\partial w_{m,n}^l}=(\mathbf {\delta}^l*\mathbf o^{l-1})(m,n)\qquad \frac{\partial L(W,X)}{\partial b^l}=\sum_{i=0}^{H-M}\sum_{j=0}^{W-N}\delta_{i,j}^l$$
+
+
 ##### Mathematical Derivation
 Back propagation analysis with $S=1,P=0,D_{in}=D_{out}=1$ but can be generalized
 
@@ -429,7 +438,10 @@ $$\begin{align}
 \end{align}$$
 which brings to the calculation of 
 $$\frac{\partial a_{i-n,j-m}^{l+1}}{\partial a_{i,j}^l}=\frac{\partial}{\partial a_{i,j}^l}\par{\sum_{m'}\sum_{n'}w_{m',n'}^{l+1}f(a_{i-m+m',j-n+n'}^l)+b^{l+1}}\stackrel{m'=m,n'=n}=w_{m,n}^{l+1}f'(a_{i,j}^l)$$
+so the error message is
+$$\delta_{i,j}^l=\sum_m\sum_n\delta_{i-m,j-n}^{l+1}w_{m,n}^{l+1}f'(a_{i,j}^l)=f'(a_{i,j}^l)\mathbf\delta^{l+1}*rot(180^\circ)(K^{l+1})$$
 
+todo update bias.
 # 4) Optimization Methods for Neural Networks
 #### 4) Momentum
 >[!col]
