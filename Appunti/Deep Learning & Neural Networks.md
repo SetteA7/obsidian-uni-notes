@@ -469,8 +469,29 @@ ML asks to compute the distribution $p(x|t)$ given some samples $x_i|t_i$. This 
 >[!thm] No Free Lunch Theorem
 >Every algorithm is as good as any other when averaged over all possible problems. If one is better than average for some problem, it must be worse than average for others.
 
-This shows
+This shows that **it is not possible to purely learn from data in absence of bias**
 
+## 4.2) Regularization
+Regularization is a form of inductive bias.
+
+#### L2 Regularization
+Works by adding the sum of the square of the weights to the loss function:
+$$L(D,W)+\lambda\sum_{w_i\in W}w_i^2$$
+It is like calculating the L2 norm (energy) of the weight vectors.
+
+In a SGD context, this applies a **weight decay** to the coefficients at every step.  If the gradient of the loss wrt a weight is small, this weight will progressively decay to about 0 during the training. This has the effect of reducing the unimportant weights.
+
+$$\begin{align}w_j\iter{n+1}&=w_j\iter n-\frac\eta K\sum_k\nabla\sq{L(x_k,t_k)+\lambda \sum_iw_i^2}\\
+&=w_j\iter n-\frac\eta K\sum_k\nabla L(x_k,t_k)-\frac\eta K\lambda\cdot K\nabla\sum_iw_i^2\\
+&=(1-2\eta\lambda)w_j\iter n-\frac\eta K\sum_k\nabla L(x_k,t_k)\\
+\end{align}$$
+$\endproof$
+#### L1 Regularization
+Used in some selected layers
+$$L(D,W)+\lambda\sum_{w_i\in W}|w_i|$$
+And by the same logic as before it will yield the SGD update:
+$$w_j\iter{n+1}=w_j\iter n-\lambda \eta sign(w_j\iter n)$$
+$$$$
 # 5) Optimization Methods for Neural Networks
 #### 5) Momentum
 >[!col]
