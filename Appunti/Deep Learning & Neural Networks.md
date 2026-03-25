@@ -409,6 +409,7 @@ $$a_{i,j}^l=\sum_{m=0}^{M-1}\sum_{n=0}^{N-1}o_{i+m,j+n}^{l-1}w_{m,n}^l+b^l$$
 
 In CNNs the last layer is usually a FFNN (easier to have 1D for regression and classification). CNN learns features, FFNN classifies/regress based on features.
 
+The gradient is computed as the convolution of the error signal and the output
 ##### Mathematical Derivation
 Back propagation analysis with $S=1,P=0,D_{in}=D_{out}=1$ but can be generalized
 
@@ -419,8 +420,18 @@ where $\delta_{i,j}^l$ is the error signal and $o_{i+m,j+n}^l$ is obtained like 
 **The gradient is therefore just the convolution of the error signal and the output.**
 
 How does the loss function behave wrt the activations? They are not fully connected, so how is the error signal computed?
+
+In general he output $o_{i,j}^l$ is used in the calculation of the activations $a_{i-n,j-m}^{l+1}$ where $n,m\in\curly{0,1}$ and the indices $i-n\in\curly{0,...,H-N+1}$, $j-m\in\curly{0,...,W-M+1}$.
+
+Knowing this the error signal can be computed as
+$$\begin{align}
+\delta_{i,j}^l&=\frac{\partial L(W,X)}{\partial a_{i,j}^l}=\sum_m\sum_n\underbrace{\frac{\partial L(W,X)}{\partial a_{i-n,j-m}^{l+1}}}_{\delta_{i-m,j-n}^{l+1}}\frac{\partial a_{i-n,j-m}^{l+1}}{\partial a_{i,j}^l}
+\end{align}$$
+which brings to the calculation of 
+$$\frac{\partial a_{i-n,j-m}^{l+1}}{\partial a_{i,j}^l}=\frac{\partial}{\partial a_{i,j}^l}\par{\sum_{m'}\sum_{n'}w_{m',n'}^{l+1}f(a_{i-m+m',j-n+n'}^l)+b^{l+1}}\stackrel{m'=m,n'=n}=w_{m,n}^{l+1}f'(a_{i,j}^l)$$
+
 # 4) Optimization Methods for Neural Networks
-#### Momentum
+#### 4) Momentum
 >[!col]
 >Imagine the loss function as a landscape. Imagine a ball rolling on the landscape. The slope makes it descent but constant slope in the same direction gives it momentum. More momentum means more force necessary to divert the ball $\rightarrow$ This region gives robustness to to momentary changes in the update direction.
 >$$ $$
