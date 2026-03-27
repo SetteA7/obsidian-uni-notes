@@ -491,7 +491,19 @@ Used in some selected layers
 $$L(D,W)+\lambda\sum_{w_i\in W}|w_i|$$
 And by the same logic as before it will yield the SGD update:
 $$w_j\iter{n+1}=w_j\iter n-\lambda \eta \text{sign}(w_j\iter n)-\frac\eta K\sum_k\nabla L(x_k,t_k)$$
-$$$$
+#### $L^q$ Regularization
+In general the regularization can consist in adding the power of $L^q$ signal:
+$$\Omega(w)\propto\sum_{w_i\in W}|w_m|^q$$
+Which creates a plethora of different contours:
+![[Pasted image 20260327104833.png|Regularization|250]]
+## 4.3) Dropout
+The idea of dropout is called **model ensembling**: Combine multiple models and average their predictions (reduces overfitting)
+
+However, this requires a lot of computation. Suppose infinite time, 1 model for each weight in $W$. They can be combined with:
+$$y=\int F(x,W)p(W|D)dW$$
+**Dropout allows to achieve similar results by only training one model**
+
+Overfitting consists in the NN learning the noise in the training data and correct based on it. 
 # 5) Optimization Methods for Neural Networks
 #### 5) Momentum
 >[!col]
