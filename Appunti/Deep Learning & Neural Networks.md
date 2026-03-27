@@ -511,6 +511,10 @@ This is done by dropping a neuron with probability $1-p$ _at training time_. Thi
 
 This approximates the Bayesian ensembling considering $2^{|W|}$ networks. Where a scaling by $p$ is used to keep the expected value of the output
 
+Without dropout: **co-adaptation**, neurons depend on eachother to learn $\rightarrow$ lack of robustness, instability, overfitting
+
+With dropout: each neuron is self sufficient independently from other neurons $\rightarrow$ more stable, less overfitting and **more interpretable features**
+
 ##### Formalization
 Introduce the dropout vector
 $$r\in\curly{0,1}^{N^{l-1}}\quad r_i\sim\text{Bernoulli}(p)$$
@@ -533,6 +537,10 @@ Consider the expected value in order to minimize wrt weights:
 $$\begin{align}
 \E[||(X\odot R)w-t||^2]&=\E[((X\odot R)w-t)^T((X\odot R)w-t)]\\
 &=\E[\underbrace{w^T(X\odot R)^T(X\odot R)w}_1-\underbrace{2w^T(X\odot R)^Tt}_2+\underbrace{t^Tt}_3]\\
+&=w^T(P\odot(X^TX))w-2pw^TX^Tt+t^Tt\\
+&=w^T(P\odot(X^TX))w-2pw^TX^Tt+t^Tt+p^2w^TX^TXw-p^2w^TX^TXw\\
+&=\|pXw-t\|^2+w^T(P\odot(X^TX))w-p^2w^TX^TXw\\
+&=\|pXw-t\|^2+p(1-p)\|\text{diag}(X^tX)^{1/2}\|^2
 \end{align}$$
 Analyze the terms:
 1: To do so we need to better understand the element wise product:
@@ -543,9 +551,10 @@ In matrix form, by defining $P$ that has $p$ on diagonal elements and $p^2$ else
 $$\E[w^T(X\odot R)^T(X\odot R)w]=w^T\E[(X\odot R)^T(X\odot R)]w=w^T(P\odot(W^TW))w$$
 2:
 $$\E[2w^T(X\odot R)^Tt]=2w^T\E[(X\odot R)^T]t=2w^TpX^Tt$$
+3: $$\E[t^Tt]=t^Tt$$
 
 
-
+**This is similar to Tikhonov Regularization**
 # 5) Optimization Methods for Neural Networks
 #### 5) Momentum
 >[!col]
