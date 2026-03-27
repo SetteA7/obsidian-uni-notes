@@ -536,7 +536,14 @@ $$\begin{align}
 \end{align}$$
 Analyze the terms:
 1: To do so we need to better understand the element wise product:
-$$A=X\odot R\rightarrow (A^TA)_{i,j}=\sum_{k=1}^N(A^T)_{ik}(A)_{kj}=\sum_{k=1}^NA_{ki}A_$$
+$$A=X\odot R\rightarrow (A^TA)_{i,j}=\sum_{k=1}^N(A^T)_{ik}(A)_{kj}=\sum_{k=1}^NA_{ki}A_{kj}$$
+And now see the expectation:
+$$\E[(A^TA)_{i,j}]=\E[\sum_{k=1}^NX_{ki}R_{ki}X_{kj}R_{kj}]=\sum_{k=1}^NX_{ki}X_{kj}\E[R_{ki}R_{kj}]=\begin{cases}p^2(X^TX)_{ij}&i\not =j\\p(X^TX)_{ii}&i=j\end{cases}$$
+In matrix form, by defining $P$ that has $p$ on diagonal elements and $p^2$ elsewhere we get
+$$\E[w^T(X\odot R)^T(X\odot R)w]=w^T\E[(X\odot R)^T(X\odot R)]w=w^T(P\odot(W^TW))w$$
+2:
+$$\E[2w^T(X\odot R)^Tt]=2w^T\E[(X\odot R)^T]t=2w^TpX^Tt$$
+
 
 
 # 5) Optimization Methods for Neural Networks
