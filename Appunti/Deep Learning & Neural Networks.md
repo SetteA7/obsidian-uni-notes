@@ -524,16 +524,19 @@ $$||(X\odot R)w-t||^2$$
 where $X=vec(D)$ and $R\in\curly{0,1}^{N\times d}$ is a matrix of bernoulli entries.
 This matrix has the following properties:
 $$\begin{align}
-\E[R_{i,j}]=p\cdot 1+(1-p)\cdot 0=p\\
-\E[R_{i,j}R_{k,h}]=E[]E[]=p^2
-\E[]
+&\E[R_{i,j}]=p\cdot 1+(1-p)\cdot 0=p\\
+&\E[R_{i,j}R_{k,h}]=E[]E[]=p^2\\
+&\E[R_{i,j}^2]=p\cdot 1^2+(1-p)\cdot 0^2=p
 \end{align}$$
 
 Consider the expected value in order to minimize wrt weights:
 $$\begin{align}
 \E[||(X\odot R)w-t||^2]&=\E[((X\odot R)w-t)^T((X\odot R)w-t)]\\
-&=\E[w^T(X\odot R)^T(X\odot R)w-2w^T(X\odot R)^Tt+t^Tt]\\
+&=\E[\underbrace{w^T(X\odot R)^T(X\odot R)w}_1-\underbrace{2w^T(X\odot R)^Tt}_2+\underbrace{t^Tt}_3]\\
 \end{align}$$
+Analyze the terms:
+1: To do so we need to better understand the element wise product:
+$$A=X\odot R\rightarrow (A^TA)_{i,j}=\sum_{k=1}^N(A^T)_{ik}(A)_{kj}=\sum_{k=1}^NA_{ki}A_$$
 
 
 # 5) Optimization Methods for Neural Networks
