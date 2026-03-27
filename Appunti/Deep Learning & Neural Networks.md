@@ -496,10 +496,10 @@ In general the regularization can consist in adding the power of $L^q$ signal:
 $$\Omega(w)\propto\sum_{w_i\in W}|w_m|^q$$
 Which creates a plethora of different contours:
 ![[Pasted image 20260327104833.png|Regularization|250]]
-## 4.3) Dropout
+#### Dropout
 The idea of dropout is called **model ensembling**: Combine multiple models and average their predictions (reduces overfitting)
 
-However, this requires a lot of computation. Suppose infinite time, 1 model for each weight in $W$. They can be combined with:
+However, this requires a lot of computation. Suppose infinite time, 1 model for each weight in $W$. They can be combined with the bayesian ensembling:
 $$y=\int F(x,W)p(W|D)dW$$
 **Dropout allows to achieve similar results by only training one model**
 
@@ -507,6 +507,21 @@ Overfitting consists in the NN learning the noise in the training data and corre
 
 <div style="text-align: center;"> While training the NN, randomly remove (drop) some of the neurons at every epoch. Removing means temporarily excluding it from the network along with all its incoming and outgoing connections</div>
 
+This is done by dropping a neuron with probability $1-p$ _at training time_. This prevents the neuron to fix the mistakes of the other neurons. The layers become more unreliable BUT the model learns more general features.
+
+This approximates the Bayesian ensembling considering $2^{|W|}$ networks. Where a scaling by $p$ is used to keep the expected value of the output
+
+##### Formalization
+Introduce the dropout vector
+$$r\in\curly{0,1}^{N^{l-1}}\quad r_i\sim\text{Bernoulli}(p)$$
+By using the element wise product ($\odot$) The output at layer $l$ is written as
+$$o^l=f(W^l(o^{l-1}\odot r)+b^l)$$
+How does this introduce regularization?
+Suppose linear regression (only analytical solution) (consider $w$ with bias added)
+$$y_n=w^T(x_n\odot r)$$
+The error function over the training is:
+$$||(X\odot R)w-t||^2$$
+where $X=vec(D)$ and $R\in\curly{0,1}^{N\times d}$ is a matrix of bernoully entries
 
 # 5) Optimization Methods for Neural Networks
 #### 5) Momentum
