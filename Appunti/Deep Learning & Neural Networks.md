@@ -556,6 +556,16 @@ $$\E[2w^T(X\odot R)^Tt]=2w^T\E[(X\odot R)^T]t=2w^TpX^Tt$$
 
 **This is similar to Tikhonov Regularization**
 # 5) Optimization Methods for Neural Networks
+
+The standard update rule is the gradient descent rule. However it is possible to optimize this rule by enhancing the **speed of convergence and robustness**.
+
+First let' see how the algorithm knows when to stop:
+- Either the max training time is reached
+- Or the magnitude is below a certain threshold, that is:
+$$|L(D;w\iter {i+1})-L(D;w\iter i)|<\epsilon$$
+or if 
+
+
 #### 5) Momentum
 >[!col]
 >Imagine the loss function as a landscape. Imagine a ball rolling on the landscape. The slope makes it descent but constant slope in the same direction gives it momentum. More momentum means more force necessary to divert the ball $\rightarrow$ This region gives robustness to to momentary changes in the update direction.
