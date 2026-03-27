@@ -521,7 +521,20 @@ Suppose linear regression (only analytical solution) (consider $w$ with bias add
 $$y_n=w^T(x_n\odot r)$$
 The error function over the training is:
 $$||(X\odot R)w-t||^2$$
-where $X=vec(D)$ and $R\in\curly{0,1}^{N\times d}$ is a matrix of bernoully entries
+where $X=vec(D)$ and $R\in\curly{0,1}^{N\times d}$ is a matrix of bernoulli entries.
+This matrix has the following properties:
+$$\begin{align}
+\E[R_{i,j}]=p\cdot 1+(1-p)\cdot 0=p\\
+\E[R_{i,j}R_{k,h}]=E[]E[]=p^2
+\E[]
+\end{align}$$
+
+Consider the expected value in order to minimize wrt weights:
+$$\begin{align}
+\E[||(X\odot R)w-t||^2]&=\E[((X\odot R)w-t)^T((X\odot R)w-t)]\\
+&=\E[w^T(X\odot R)^T(X\odot R)w-2w^T(X\odot R)^Tt+t^Tt]\\
+\end{align}$$
+
 
 # 5) Optimization Methods for Neural Networks
 #### 5) Momentum
