@@ -504,6 +504,10 @@ $$y=\int F(x,W)p(W|D)dW$$
 **Dropout allows to achieve similar results by only training one model**
 
 Overfitting consists in the NN learning the noise in the training data and correct based on it. 
+
+<div style="text-align: center;"> While training the NN, randomly remove (drop) some of the neurons at every epoch. Removing means temporarily excluding it from the network along with all its incoming and outgoing connections</div>
+
+
 # 5) Optimization Methods for Neural Networks
 #### 5) Momentum
 >[!col]
