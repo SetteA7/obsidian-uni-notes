@@ -319,6 +319,8 @@ $$o_{l,i,j}=\overbrace{f\par{\underbracket{\sum_{q=1}^{D_{in}}(K_{l,q}*X_q)(l,i,
 2. $(*)()$: convolve filter with input at depth $q$
 3. $b$: adds bias, $f$: activation function
 
+The activation function can be called $a_{i,j}$ which means activation function on neuron $j$ with sample $i$.
+
 In general at every layer we have $D_{out}$ filters (hyperparameter) that is slid over the whole input to generate a new activation map. The collection of $D_{out}$ feature maps is sent to the next layer.
 
 Notice that each filter is a collection of weights that will be randomly initialized and learned during the training phase.
@@ -697,11 +699,13 @@ ADAM combines momentum and weight specific LR and is therefore the preferred opt
 
 There are two types of covariate shifts:
 - **Input covariate shift:** The input distribution changes and the weights are not optimized for it (example: only black cars in dataset, then cars of all colours)
-- **Internal covariate shift:** 
+- **Internal covariate shift:** Each hidden layer changes its output distribution as it gets trained, the next layers will therefore have to compensate for the shift AND learn. This reduces learning performance. The deeper the layer, the worse the covariate shift as neurons depend on more of the previous outputs.
 
+Batch normalization is implemented via a **layer** (trained via BP) placed between any two NN layers **before** the non-linear activation. It has 2 learnable parameters per neuron.
+$$\text{activation map: }a\rightarrow a'=BN(a)\rightarrow o=f(a')$$
 
-During the learning process, the output distribution changes as the weights get modified: each layer has to lear and compensate for the change in distribution $\rightarrow$ slower convergence
+This allows the receive inputs with more controlled distribution: each layer learns almost independently and there is no need to compensate for covariate shift. Faster Learning!
 
-As the layers get deeper the covariate shift gets worse as the neurons rely on more previous inputs (receptive field). 
-
-Batch Normalization aims at controlling covariate shift, first standardizing the input distribution, then rescaling it with tunable parameters.
+Let a mini batch have size $m$, then we call the k-th mini batch of activations:
+$$B_k=\curly{a_1,...,a_m}$$
+notice that since BN acts independently on each component (neuron), the activation is $a_{i,j}$ but the notation can be simplified to $a_{i}$.
