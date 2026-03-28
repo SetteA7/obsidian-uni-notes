@@ -1,30 +1,34 @@
 # 1) Recap
 
-# 2) Notations
+# 2) Notation
 **Dataset:** $\mathcal D=\curly{(x_1,t_1),...,(x_N,t_N)}$ labeled training data: (input, correct output)
 **Mini-Batch of Dataset:** mini-batch $\subset\mathcal D$
 
 
-**Weights**:  $w_{i,j}^{(l)}$: weight that connects neuron $i$ of layer $l-1$ with neuron $j$ of layer $l$. Recall: $w_{\mathbf {j,i}}$ means direction $i\rightarrow j$.
-**Biases:** $b\iter l$: bias of layer $l$
+**Weights**:  $w_{i,j}^{(l)}$: weight that connects neuron $i$ of layer $l-1$ with neuron $j$ of layer $l$. Recall: $w_{\mathbf {i,j}}$ means direction $i\rightarrow j$.
+**Biases:** $b_{i,j}\iter l$: bias of layer $l$ at neuron 
 
-**Activation map:** $a_{i,j}\iter l$: is the activation function of neuron $j$ at l
+**Activation** $a_{i,j}\iter l$: is the activation of neuron $j$ at layer $l$ with training sample $i$
+**Activation map:** $a_i\iter l$: is the collection of activations of all neurons at layer $l$ given input $i$
+**Feature:** $o_{i,j}\iter l=f(a_{i,j}\iter l)$: the (non) linear activation function of the activation map
+**Feature map:** $o\iter l=f(a\iter l)$: the collection of features of all neurons at layer $l$ given input $i$
 
-**Layer:** collection of neurons working in parallel:
+**Layer:** collection of neurons working in parallel. We call $W\iter l, b\iter l$ the set of parameters at layer $l$. The set of all parameters (all layers) is $\mathcal W$:
 - **Input Layer:** receives the input (we can see it just as a passive feature map: $o=x$)
 - **Hidden Layers:** neurons with weights, biases, activation maps and feature maps 
 - **Output Layer:** produces the output $o=y$
 
+**Loss Function:** $\mathcal L(\mathcal W; x)$
 
-Start with some notation:
-- $w_{i,j}^{(l)}$: weights that connects neuron $i$ of layer $l-1$ with neuron $j$ of layer $l$
-- $W^{(l)},b^{(l)}$: parameters of layer $l$
-- $a_j^{(l)},o_j^{(l)}$: activation and output of neuron $j$ of layer $l$
-- $\mathcal W$: set of FFNN parameters (weights and biases)
-- $\mathcal L(\mathcal W,x)$: loss function of FFNN on input sample x
-- $\mathcal D=\curly{(x_1,t_1),...,(x_N,t_N)}$: labeled training data
-![[Pasted image 20260310110408.png|Repreentation|350]]
-recall: $w_{\mathbf {j,i}}$ means direction $i\rightarrow j$.
+More in general we have:
+#### Perceptron
+**Activation map**
+$$a_i\iter l=[a_{i,1}\iter l,...,a_{i,m}]^T\qquad a_{i,j}^{(l)} = \sum_{k} w_{j,k}^{(l)} o_{i,k}^{(l-1)} + b_j^{(l)}$$
+#### FFNN
+**Activation map**
+
+**Feature:** 
+
 
 # 3) Feed Forward Neural Networks (FFNN)
 ## 3.1) Recap On Perceptron
