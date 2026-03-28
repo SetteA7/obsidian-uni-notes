@@ -461,7 +461,7 @@ $$\mathbf \delta ^L=\nabla_yL\odot f'(\mathbf a^L)=\begin{bmatrix}\delta_1^L\\\v
 3. Recursively compute error signal matrices
 $$\mathbf \delta^l=f'(a_{i,j}^l)\mathbf \delta^{l+1}*rot(180^\circ)(K^{l+1})$$
 4. Compute gradient using error signal matrices
-$$\frac{\partial L(W,X)}{\partial w_{m,n}^l}=(\mathbf {\delta}^l*\mathbf o^{l-1})(m,n)\qquad \frac{\partial L(W,X)}{\partial b^l}=\sum_{i=0}^{H-M}\sum_{j=0}^{W-N}\delta_{i,j}^l$$
+$$\frac{\partial L(W,X)}{\partial w_{m,n}^l}=(\mathbf {\delta}^l* O^{l-1})(m,n)\qquad \frac{\partial L(W,X)}{\partial b^l}=\sum_{i=0}^{H-M}\sum_{j=0}^{W-N}\delta_{i,j}^l$$
 The learning rule is the GD:
 $$w_{m,n}\iter{l}\leftarrow w_{m,n}\iter l-\eta\frac{\partial L(W,X)}{\partial w_{m,n}\iter l}\qquad b\iter{l}\leftarrow b\iter l-\eta\frac{\partial L(W,X)}{\partial b\iter l}$$
 
