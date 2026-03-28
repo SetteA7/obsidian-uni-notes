@@ -652,12 +652,14 @@ $$w_m\iter{i+1}=w_m\iter i+\eta_m\iter i g_m\iter i$$
 This speeds up convergence and allows to explore rarely updated dimensions, that is, if a weight is rarely update its LR is high.
 However the sum only grows so the learning rate decreases and might prematurely stop. 
 
-###### RMSprop
+##### RMSprop
 Use exponentially decaying moving average (RMSprop):
 $$r_m\iter i=\beta r_m\iter{i-1}+(1-\beta)(g_m\iter i)^2=\sum_{k=1}^i\beta^{i-k}(1-\beta)(g_m\iter k)^2$$
 
 this is an IIR filter
 The exponents (from i to 1) decay exponentially fast: finite memory approximation by neglecting the terms that $\beta^j<T\rightarrow j>\log T/\log \beta$ are after the j-th iteration in the past
+
+This avoid monotonicity problems.
 
 ##### Adaptive Moment Estimation (Adam)
 Also keep track of the second moment:
@@ -669,6 +671,9 @@ But this **is not biased** since we set $g_m\iter 0=0$.
 
 The bias correction just resorts to
 $$\hat \xi_m\iter i=\frac{\xi_m\iter i}{1-\beta_1^i}\qquad\hat\psi_m\iter i=\frac{\psi_m\iter i}{1-\beta_2^i}$$
+Then the weight update rule is:
+$$w_m\iter i=w_m\iter{i-1}-\eta\frac{\hat \xi_m\iter i}{\sqrt{\hat\psi_m\iter i+\epsilon}}$$
+
 Proof:
 An estimator is biased if its expected value is not equal to the true value. 
 First notice how the 2nd Moment can be written as a recursive sum:
@@ -684,3 +689,19 @@ $$\begin{align}
 Where $g\iter k$ was "extracted" from the summation since it is **stationary** and $\E[(g\iter i)^2]=\E[(g\iter j)^2]$.
 $\endproof$
 
+ADAM combines momentum and weight specific LR and is therefore the preferred optimizer.
+
+# 6) Batch Normalization and Residual Networks
+## 6.1) Batch Normalization
+**Batch normalization** is the technique used for controlling **covariate shift** by standardizing the input distribution and then rescaling it with tunable parameters.
+
+There are two types of covariate shifts:
+- **Input covariate shift:** The input distribution changes and the weights are not optimized for it (example: only black cars in dataset, then cars of all colours)
+- **Internal covariate shift:** 
+
+
+During the learning process, the output distribution changes as the weights get modified: each layer has to lear and compensate for the change in distribution $\rightarrow$ slower convergence
+
+As the layers get deeper the covariate shift gets worse as the neurons rely on more previous inputs (receptive field). 
+
+Batch Normalization aims at controlling covariate shift, first standardizing the input distribution, then rescaling it with tunable parameters.
