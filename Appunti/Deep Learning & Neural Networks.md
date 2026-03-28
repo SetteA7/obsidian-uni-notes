@@ -671,8 +671,16 @@ The bias correction just resorts to
 $$\hat \xi_m\iter i=\frac{\xi_m\iter i}{1-\beta_1^i}\qquad\hat\psi_m\iter i=\frac{\psi_m\iter i}{1-\beta_2^i}$$
 Proof:
 An estimator is biased if its expected value is not equal to the true value. 
-$$\begin{align}
-\E[\psi_m\iter i]=\E[\sum_{k=1}^K\beta_2^{i-k}(1-\beta_2)(g_m\iter k)^2]
+First notice how the 2nd Moment can be written as a recursive sum:
+$$\begin{align}\psi\iter i&=(1-\beta)(g\iter i)^2+\beta(1-\beta)(g\iter{i-1})^2+\beta^2(1-\beta)(g\iter{i-2})^2+...+\beta^{i-1}(1-\beta)(g\iter1)^2\\
+&=\sum_{k=1}^K\beta_2^{i-k}(1-\beta_2)(g_m\iter k)^2
 \end{align}$$
-todo
+$$\begin{align}
+\E[\psi_m\iter i]&=\E[\sum_{k=1}^K\beta_2^{i-k}(1-\beta_2)(g_m\iter k)^2]\\
+&=\E[(g_m\iter i)^2]\sum_{k=1}^K\beta_2^{i-k} (1-\beta_2)\\
+&=\E[(g_m\iter i)^2]\beta_2^o(1-\beta_2)\sum_{k=1}^K\frac1{\beta_2^k}\\
+&=\E[(g_m\iter i)^2]\underbrace{(1-\beta_2^i)}_{\text{bias}}
+\end{align}$$
+Where $g\iter k$ was "extracted" from the summation since it is **stationary** and $\E[(g\iter i)^2]=\E[(g\iter j)^2]$.
 $\endproof$
+
