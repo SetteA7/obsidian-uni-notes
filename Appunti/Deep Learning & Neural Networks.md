@@ -34,11 +34,8 @@ $${a}_i^{(l)} = W^{(l)} {o}_i^{(l-1)} + {b}^{(l)}$$
 
 #### CNN
 **Activation**
-$$a_{i,j}^l=\sum_{q=1}^{D_{in}}\par{\sum_{m=0}^{M-1}\sum_{n=0}^{N-1}o_{i+m,j+n}^{l-1}w_{m,n}^l+b^l}=\sum(o\iter {l-1}*w\iter l)(i,j)+b\iter l$$
-
-**Activation map**
-$$a_i\iter l=\sum_{q=1}^{D_{in}}(W_{l,q}*O_q)(l,i,j)+b$$
-where $W_{l,q}$ is the filter (kernel) at layer $l$ and depth $q$ and $D_{in}$ is the dimension of input.
+$$a_{i,j}^l=\sum_{q=1}^{D_{in}}\par{\sum_{m=0}^{M-1}\sum_{n=0}^{N-1}o_{i+m,j+n}^{l-1}w_{m,n}^l}+b^l=\sum_{q=1}^{D_{in}}\par{(o_q\iter {l-1}*w_{q}\iter l)(i,j)}+b\iter l$$
+where $w_{q}$ is the filter (kernel) at depth $q$ and $D_{in}$ is the dimension of input.
 
 # 3) Feed Forward Neural Networks (FFNN)
 ## 3.1) Recap On Perceptron
@@ -466,7 +463,7 @@ $$\mathbf \delta^l=f'(a_{i,j}^l)\mathbf \delta^{l+1}*rot(180^\circ)(K^{l+1})$$
 4. Compute gradient using error signal matrices
 $$\frac{\partial L(W,X)}{\partial w_{m,n}^l}=(\mathbf {\delta}^l*\mathbf o^{l-1})(m,n)\qquad \frac{\partial L(W,X)}{\partial b^l}=\sum_{i=0}^{H-M}\sum_{j=0}^{W-N}\delta_{i,j}^l$$
 The learning rule is the GD:
-$$w_{m,n}\iter{l+1}=w_{m,n}\iter l-\eta\frac{\partial L(W,X)}{\partial w_{m,n}\iter l}\qquad b\iter{l+1}=b\iter l-\eta\frac{\partial L(W,X)}{\partial b\iter l}$$
+$$w_{m,n}\iter{l}\leftarrow w_{m,n}\iter l-\eta\frac{\partial L(W,X)}{\partial w_{m,n}\iter l}\qquad b\iter{l}\leftarrow b\iter l-\eta\frac{\partial L(W,X)}{\partial b\iter l}$$
 
 ##### Mathematical Derivation
 Back propagation analysis with $S=1,P=0,D_{in}=D_{out}=1$ but can be generalized
@@ -489,7 +486,6 @@ which brings to the calculation of
 $$\frac{\partial a_{i-n,j-m}^{l+1}}{\partial a_{i,j}^l}=\frac{\partial}{\partial a_{i,j}^l}\par{\sum_{m'}\sum_{n'}w_{m',n'}^{l+1}f(a_{i-m+m',j-n+n'}^l)+b^{l+1}}\stackrel{m'=m,n'=n}=w_{m,n}^{l+1}f'(a_{i,j}^l)$$
 so the error message is
 $$\delta_{i,j}^l=\sum_m\sum_n\delta_{i-m,j-n}^{l+1}w_{m,n}^{l+1}f'(a_{i,j}^l)\longrightarrow\mathbf \delta^l=f'(a_{i,j}^l)\mathbf\delta^{l+1}*rot(180^\circ)(K^{l+1})$$
-
 todo update bias.
 
 # 5) Overfitting and Regularization in Neural Networks
@@ -748,4 +744,4 @@ This allows the receive inputs with more controlled distribution: each layer lea
 
 Let a mini batch have size $m$, then we call the k-th mini batch of activations:
 $$B_k=\curly{a_1,...,a_m}$$
-notice that since BN acts independently on each component (neuron), the activation of neuron j uses all $i\in[1,...,m]$ samples in the mini batch and thus we can drop $j$ from $a_{i,j}$
+notice that since BN acts independently on each component (neuron), and the $a_{i,j}$ can be neglected since $j=k$. The remaining index denotes the element of the minibatch (at what sample). 
