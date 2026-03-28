@@ -1,7 +1,33 @@
 # 1) Recap
 
-# 2) Feed Forward Neural Networks (FFNN)
-## 2.1) Recap On Perceptron
+# 2) Notations
+**Dataset:** $\mathcal D=\curly{(x_1,t_1),...,(x_N,t_N)}$ labeled training data: (input, correct output)
+**Mini-Batch of Dataset:** mini-batch $\subset\mathcal D$
+
+
+**Weights**:  $w_{i,j}^{(l)}$: weight that connects neuron $i$ of layer $l-1$ with neuron $j$ of layer $l$. Recall: $w_{\mathbf {j,i}}$ means direction $i\rightarrow j$.
+**Biases:** $b\iter l$: bias of layer $l$
+
+**Activation map:** $a_{i,j}\iter l$: is the activation function of neuron $j$ at l
+
+**Layer:** collection of neurons working in parallel:
+- **Input Layer:** receives the input (we can see it just as a passive feature map: $o=x$)
+- **Hidden Layers:** neurons with weights, biases, activation maps and feature maps 
+- **Output Layer:** produces the output $o=y$
+
+
+Start with some notation:
+- $w_{i,j}^{(l)}$: weights that connects neuron $i$ of layer $l-1$ with neuron $j$ of layer $l$
+- $W^{(l)},b^{(l)}$: parameters of layer $l$
+- $a_j^{(l)},o_j^{(l)}$: activation and output of neuron $j$ of layer $l$
+- $\mathcal W$: set of FFNN parameters (weights and biases)
+- $\mathcal L(\mathcal W,x)$: loss function of FFNN on input sample x
+- $\mathcal D=\curly{(x_1,t_1),...,(x_N,t_N)}$: labeled training data
+![[Pasted image 20260310110408.png|Repreentation|350]]
+recall: $w_{\mathbf {j,i}}$ means direction $i\rightarrow j$.
+
+# 3) Feed Forward Neural Networks (FFNN)
+## 3.1) Recap On Perceptron
 The perceptron is a **binary classification algorithm**, that is: $$f:\R^d\rightarrow\curly{-1,+1},\quad x\rightarrow t$$
 It divides the space into two regions divided by a hyperplane. These regions are called **halfspaces**: 
 $$H=\curly{x\rightarrow sign(w^Tx+b):w\in \R^d,b\in\R}$$
@@ -45,12 +71,12 @@ but a good $\phi$ is hard to find. **Neural networks learn the feature mapping**
 There are infinitely many feature mappings, we base them on two insights:
 1. $\phi$ is built as a composition of multiple simpler functions ($\phi=f\ o\ g\ o\ h\ o\ ...$)
 2. $\phi$ has a multi-layered stucture with increasing abstraction
-## 2.2) FFNN
+## 3.2) FFNN
 NN are able to learn the feature mapping. Each smaller function (neuron) is based on the perceptron.
 Instead of a sign function a differentiable activation function is used.
 $$y_j=f(a_j)=f\par{\sum_{i=1}^d}w_{j,i}x_i+b_j$$
 ![[Pasted image 20260310104558.png|Representation|250]]
-## 2.3) Single Layer FFNN
+## 3.3) Single Layer FFNN
 >[!col]
 >A layer of a FFNN is a **stack of multiple neurons**.
 >The input vector is fed to a hidden layer (neurons) that have:
@@ -68,7 +94,7 @@ $$y_j=f(a_j)=f\par{\sum_{i=1}^d}w_{j,i}x_i+b_j$$
 
 The number of hidden neurons required is exponential in the dimension of the input space $d$. This means single-layer FFNNs are of limited use in solving practical problems. Multiple layers can be used to solve this problem.
 
-## 2.4) Multi-Layered FFNN
+## 3.4) Multi-Layered FFNN
 #### Notation
 Start with some notation:
 - $w_{i,j}^{(l)}$: weights that connects neuron $i$ of layer $l-1$ with neuron $j$ of layer $l$
@@ -161,7 +187,7 @@ In multi-class, the **output should be a discrete probability distribution overt
 The most common choice is the **softmax function**
 $$y_{n,q}=\frac{\exp{a_q^{(L)}}}{\sum_{i\in Q}\exp{a_i^{(L)}}}$$
 
-## 2.5) FFNN Training (GD & BP)
+## 3.5) FFNN Training (GD & BP)
 The weight are updated via the **gradient descent** rule
 $$(w_{j,i}\iter l)\iter {n+1}=(w_{i,j}\iter{l})\iter{n}-\eta\nabla_{w_{i,j}\iter l}L(W,x)$$
 This is calculated via the **backpropagation algorithm:**
@@ -201,7 +227,7 @@ $$\frac{\partial a_k\iter{l+1}}{\partial a_j\iter l}=\frac{\partial a_k\iter{l+1
 
 Then finally:
 $$\delta_j\iter l=f'(a_j\iter l)\sum_k\delta_k\iter{l+1}w_{k,j}\iter{l+1}$$
-## 2.6) Activation Functions
+## 3.6) Activation Functions
 A pletora of functions can be used as activation functions.
 
 #### Sigmoid Activation Function
@@ -272,7 +298,7 @@ ELU'(z)=\begin{cases}\alpha\exp z,&z<0\\ 1,&z>0\end{cases}
 >
 >![[Pasted image 20260324113258.png|ELU|350]]
 
-## 2.7) Parameters
+## 3.7) Parameters
 #### Initialization
 A bad initialization can result in a slow learning process, but an analytical solution is not available: therefore **initialization strategies are random and heuristic**
 
@@ -298,7 +324,7 @@ We call an **epoch** one entire run of the training phase.
 
 TODO
 
-## 2.8) Limitations
+## 3.8) Limitations
 Since each layer is 1D we have:
 - **large number of parameters** to learn.
 - **loss of structural information**
@@ -308,8 +334,8 @@ Since each layer is 1D we have:
 >Let each layer be made of 50 neurons, one single layer brings to $196608\times 50=9.8 M$ parameters and occupies roughly $9.8M\times 32 bits=315 Mb$
 
 
-# 3) Convolutional Neural Network (CNN)
-## 3.1) Intro to CNNs
+# 4) Convolutional Neural Network (CNN)
+## 4.1) Intro to CNNs
 CNNs support input of up to 3 dimensions $i,j,q$  (length, height, depth).
 
 They replace Matrix Multiplication with Convolutional (cross-correlation) Operations:
@@ -319,7 +345,7 @@ $$o_{l,i,j}=\overbrace{f\par{\underbracket{\sum_{q=1}^{D_{in}}(K_{l,q}*X_q)(l,i,
 2. $(*)()$: convolve filter with input at depth $q$
 3. $b$: adds bias, $f$: activation function
 
-The activation function can be called $a_{i,j}$ which means activation function on neuron $j$ with sample $i$.
+The activation function can be called $a_{i,j}$ which means activation function (output) of neuron $j$ with sample $i$.
 
 In general at every layer we have $D_{out}$ filters (hyperparameter) that is slid over the whole input to generate a new activation map. The collection of $D_{out}$ feature maps is sent to the next layer.
 
@@ -340,7 +366,7 @@ Now call Stride $S$, Padding $P$, Filter size $F$ and input dimension $d$, then 
 $$O=\frac{d-F+2P}S+1$$
 An easy way to see the cross-correlation computation:
 ![[Pasted image 20260324190806.png|Cross-Correlation|350]]
-## 3.2) Strengths
+## 4.2) Strengths
 #### Local Connectivity
 Since the size of the filter is much smaller than the input we have some advantages:
 - Each neuron depends on a small subset of inputs of previous layers (filter size) (FFNN uses all neurons for next layer single neuron)
@@ -404,7 +430,7 @@ In BP (see later) the pooling affects the error message in two possible ways:
 - Max pooling: error message is assigned to the max value of the patch
 - Avg pooling: all inputs receive error message but ut is divided by the surface of the pooling patch
 
-## 3.3) Training (GD & BP) 
+## 4.3) Training (GD & BP) 
 Recall some notation:
 - Layers: $l=1,...,L$
 - Input feature map: Size $H\times W$ indices $i,j$
@@ -452,10 +478,10 @@ $$\delta_{i,j}^l=\sum_m\sum_n\delta_{i-m,j-n}^{l+1}w_{m,n}^{l+1}f'(a_{i,j}^l)\lo
 
 todo update bias.
 
-# 4) Overfitting and Regularization in Neural Networks
+# 5) Overfitting and Regularization in Neural Networks
 NN can easily have > 100M parameters and therefore overfitting is a common problem.
 
-## 4.1) Overfitting Avoidance
+## 5.1) Overfitting Avoidance
 Consider the validation vs training error:
 ![[Pasted image 20260325145713.png|Graph|350]]
 The **train-validation** curves are essential in understanding the status of the model. When the training and validation error start to diverge, the model is overfitting
@@ -473,7 +499,7 @@ ML asks to compute the distribution $p(x|t)$ given some samples $x_i|t_i$. This 
 
 This shows that **it is not possible to purely learn from data in absence of bias**
 
-## 4.2) Regularization
+## 5.2) Regularization
 Regularization is a form of inductive bias.
 
 #### L2 Regularization
@@ -557,7 +583,7 @@ $$\E[2w^T(X\odot R)^Tt]=2w^T\E[(X\odot R)^T]t=2w^TpX^Tt$$
 
 
 **This is similar to Tikhonov Regularization**
-# 5) Optimization Methods for Neural Networks
+# 6) Optimization Methods for Neural Networks
 
 The standard update rule is the gradient descent rule. However it is possible to optimize this rule by enhancing the **speed of convergence and robustness**.
 
@@ -693,8 +719,8 @@ $\endproof$
 
 ADAM combines momentum and weight specific LR and is therefore the preferred optimizer.
 
-# 6) Batch Normalization and Residual Networks
-## 6.1) Batch Normalization
+# 7) Batch Normalization and Residual Networks
+## 7.1) Batch Normalization
 **Batch normalization** is the technique used for controlling **covariate shift** by standardizing the input distribution and then rescaling it with tunable parameters.
 
 There are two types of covariate shifts:
@@ -708,4 +734,4 @@ This allows the receive inputs with more controlled distribution: each layer lea
 
 Let a mini batch have size $m$, then we call the k-th mini batch of activations:
 $$B_k=\curly{a_1,...,a_m}$$
-notice that since BN acts independently on each component (neuron), the activation is $a_{i,j}$ but the notation can be simplified to $a_{i}$.
+notice that since BN acts independently on each component (neuron), the activation of neuron j uses all $i\in[1,...,m]$ samples in the mini batch and thus we can drop $j$ from $a_{i,j}$
