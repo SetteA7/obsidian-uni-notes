@@ -6,7 +6,7 @@
 
 
 **Weights**:  $w_{i,j}^{(l)}$: weight that connects neuron $i$ of layer $l-1$ with neuron $j$ of layer $l$. Recall: $w_{\mathbf {i,j}}$ means direction $i\rightarrow j$.
-**Biases:** $b_{i,j}\iter l$: bias of layer $l$ at neuron 
+**Biases:** $b_{i,j}\iter l$: bias of layer $l$ at neuron $j$
 
 **Activation** $a_{i,j}\iter l$: is the activation of neuron $j$ at layer $l$ with training sample $i$
 **Activation map:** $a_i\iter l$: is the collection of activations of all neurons at layer $l$ given input $i$
@@ -16,18 +16,21 @@
 **Layer:** collection of neurons working in parallel. We call $W\iter l, b\iter l$ the set of parameters at layer $l$. The set of all parameters (all layers) is $\mathcal W$:
 - **Input Layer:** receives the input (we can see it just as a passive feature map: $o=x$)
 - **Hidden Layers:** neurons with weights, biases, activation maps and feature maps 
-- **Output Layer:** produces the output $o=y$
+- **Output Layer:** produces the output $y=o\iter L=g(a\iter L)$ ($g$ is different from $f$)
 
 **Loss Function:** $\mathcal L(\mathcal W; x)$
 
 More in general we have:
-#### Perceptron
-**Activation map**
-$$a_i\iter l=[a_{i,1}\iter l,...,a_{i,m}]^T\qquad a_{i,j}^{(l)} = \sum_{k} w_{j,k}^{(l)} o_{i,k}^{(l-1)} + b_j^{(l)}$$
+#### Perceptron (single neuron $j$)
+**Activation**
+$$a_{i,j}^{(l)} = \sum_{k} w_{j,k}^{(l)} o_{i,k}^{(l-1)} + b_j^{(l)}$$
 #### FFNN
-**Activation map**
+**Activation (single perceptron)**
+$$a_{i,j}^{(l)} = \sum_{k} w_{j,k}^{(l)} o_{i,k}^{(l-1)} + b_j^{(l)}$$
+**Activation Map**
+$$\mathbf{a}_i^{(l)} = W^{(l)} \mathbf{o}_i^{(l-1)} + \mathbf{b}^{(l)}$$
 
-**Feature:** 
+**Feature:** see [[#3.6) Activation Functions]]
 
 
 # 3) Feed Forward Neural Networks (FFNN)
@@ -78,7 +81,7 @@ There are infinitely many feature mappings, we base them on two insights:
 ## 3.2) FFNN
 NN are able to learn the feature mapping. Each smaller function (neuron) is based on the perceptron.
 Instead of a sign function a differentiable activation function is used.
-$$y_j=f(a_j)=f\par{\sum_{i=1}^d}w_{j,i}x_i+b_j$$
+$$y_j=f(a_j)=f\par{\sum_{i=1}^dw_{j,i}x_i+b_j}$$
 ![[Pasted image 20260310104558.png|Representation|250]]
 ## 3.3) Single Layer FFNN
 >[!col]
