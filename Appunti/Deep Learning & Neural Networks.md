@@ -28,10 +28,17 @@ $$a_{i,j}^{(l)} = \sum_{k} w_{j,k}^{(l)} o_{i,k}^{(l-1)} + b_j^{(l)}$$
 **Activation (single perceptron)**
 $$a_{i,j}^{(l)} = \sum_{k} w_{j,k}^{(l)} o_{i,k}^{(l-1)} + b_j^{(l)}$$
 **Activation Map**
-$$\mathbf{a}_i^{(l)} = W^{(l)} \mathbf{o}_i^{(l-1)} + \mathbf{b}^{(l)}$$
+$${a}_i^{(l)} = W^{(l)} {o}_i^{(l-1)} + {b}^{(l)}$$
 
 **Feature:** see [[#3.6) Activation Functions]]
 
+#### CNN
+**Activation**
+$$a_{i,j}^l=\sum_{q=1}^{D_{in}}\par{\sum_{m=0}^{M-1}\sum_{n=0}^{N-1}o_{i+m,j+n}^{l-1}w_{m,n}^l+b^l}=\sum(o\iter {l-1}*w\iter l)(i,j)+b\iter l$$
+
+**Activation map**
+$$a_i\iter l=\sum_{q=1}^{D_{in}}(W_{l,q}*O_q)(l,i,j)+b$$
+where $W_{l,q}$ is the filter (kernel) at layer $l$ and depth $q$ and $D_{in}$ is the dimension of input.
 
 # 3) Feed Forward Neural Networks (FFNN)
 ## 3.1) Recap On Perceptron
