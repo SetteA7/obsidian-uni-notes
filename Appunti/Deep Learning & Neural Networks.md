@@ -402,7 +402,7 @@ In BP (see later) the pooling affects the error message in two possible ways:
 - Max pooling: error message is assigned to the max value of the patch
 - Avg pooling: all inputs receive error message but ut is divided by the surface of the pooling patch
 
-## 3.3) Training (SGD & BP) 
+## 3.3) Training (GD & BP) 
 Recall some notation:
 - Layers: $l=1,...,L$
 - Input feature map: Size $H\times W$ indices $i,j$
@@ -423,7 +423,7 @@ $$\mathbf \delta ^L=\nabla_yL\odot f'(\mathbf a^L)=\begin{bmatrix}\delta_1^L\\\v
 $$\mathbf \delta^l=f'(a_{i,j}^l)\mathbf \delta^{l+1}*rot(180^\circ)(K^{l+1})$$
 4. Compute gradient using error signal matrices
 $$\frac{\partial L(W,X)}{\partial w_{m,n}^l}=(\mathbf {\delta}^l*\mathbf o^{l-1})(m,n)\qquad \frac{\partial L(W,X)}{\partial b^l}=\sum_{i=0}^{H-M}\sum_{j=0}^{W-N}\delta_{i,j}^l$$
-The learning rule is the SGD:
+The learning rule is the GD:
 $$w_{m,n}\iter{l+1}=w_{m,n}\iter l-\eta\frac{\partial L(W,X)}{\partial w_{m,n}\iter l}\qquad b\iter{l+1}=b\iter l-\eta\frac{\partial L(W,X)}{\partial b\iter l}$$
 
 ##### Mathematical Derivation
@@ -479,7 +479,7 @@ Works by adding the sum of the square of the weights to the loss function:
 $$L(D,W)+\lambda\sum_{w_i\in W}w_i^2$$
 It is like calculating the L2 norm (energy) of the weight vectors.
 
-In a SGD context, this applies a **weight decay** to the coefficients at every step.  If the gradient of the loss wrt a weight is small, this weight will progressively decay to about 0 during the training. This has the effect of reducing the unimportant weights.
+In a GD context, this applies a **weight decay** to the coefficients at every step.  If the gradient of the loss wrt a weight is small, this weight will progressively decay to about 0 during the training. This has the effect of reducing the unimportant weights.
 
 $$\begin{align}w_j\iter{n+1}&=w_j\iter n-\frac\eta K\sum_k\nabla\sq{L(x_k,t_k)+\lambda \sum_iw_i^2}\\
 &=w_j\iter n-\frac\eta K\sum_k\nabla L(x_k,t_k)-\frac\eta K\lambda\cdot K\nabla\sum_iw_i^2\\
@@ -489,7 +489,7 @@ $\endproof$
 #### L1 Regularization
 Used in some selected layers
 $$L(D,W)+\lambda\sum_{w_i\in W}|w_i|$$
-And by the same logic as before it will yield the SGD update:
+And by the same logic as before it will yield the GD update:
 $$w_j\iter{n+1}=w_j\iter n-\lambda \eta \text{sign}(w_j\iter n)-\frac\eta K\sum_k\nabla L(x_k,t_k)$$
 #### $L^q$ Regularization
 In general the regularization can consist in adding the power of $L^q$ signal:
@@ -563,10 +563,18 @@ First let' see how the algorithm knows when to stop:
 - Either the max training time is reached
 - Or the magnitude is below a certain threshold, that is:
 $$|L(D;w\iter {i+1})-L(D;w\iter i)|<\epsilon$$
-or if 
+or if the local minimum is shallow (normalize):
+$$\frac{|L(D;w\iter {i+1})-L(D;w\iter i)|}{|L(D;w\iter i)|}<\epsilon$$
+The variance of the gradient (with mini batches), that is noise of gradients is:
+$$\var(\nabla L_m)=\var(\frac1K\sum_{k=1}^K\nabla L(x_k.t_k;w\iter i))=\frac1{K^2}\var(\sum_{k=1}^K\nabla L(x_k.t_k;w\iter i))$$
+with independent gradients:
+$$\var(\sum_k^K\cdot)=K\var(\cdot)\rightarrow \var(\nabla L_m)=\frac 1K\var(\nabla L(x_k,t_k;w\iter i))$$
+#### SGD
+In GD noisy updates lead to **erratic behaviour**. Moreover functions are non-convex and with multiple minima. SGD solves this problem by using randomness (noise) in the update, however it is slow: In **saddle points** the GD basically stops (near to 0). With noisy updates however, the gradient takes a lot more steps to reach the minimum.
 
+**On average the SGD follows the right direction**
 
-#### 5) Momentum
+#### Momentum
 >[!col]
 >Imagine the loss function as a landscape. Imagine a ball rolling on the landscape. The slope makes it descent but constant slope in the same direction gives it momentum. More momentum means more force necessary to divert the ball $\rightarrow$ This region gives robustness to to momentary changes in the update direction.
 >$$ $$
