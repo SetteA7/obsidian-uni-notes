@@ -642,14 +642,18 @@ New idea: component-wise adaptive learning rate (LR)
 In fact using the same LR for all components is not recommended as some weights require slower/faster updates than others
 
 ![[Pasted image 20260320132706.png|Intuition|350]]
-Recall the gradient on a mini-batch at iteration i $g\iter i$
+Recall the gradient on a mini-batch at iteration i: $g\iter i=\frac1K\sum_{k=1}^K\nabla L(x_k,t_k;w\iter i)$
 Maintain a running sum of squared gradients **for m-th weight**
 $$\alpha_m\iter i=\sum_{j=1}^i(g_m\iter j)^2=(g_m\iter i)^2+\alpha_m\iter{i-1}$$
 And now compute the weight specific LR
 $$\eta_m\iter i=\frac{\eta\iter 0}{\sqrt{\alpha_m\iter i+\epsilon}}$$
 and thus for the m-th weight:
 $$w_m\iter{i+1}=w_m\iter i+\eta_m\iter i g_m\iter i$$
-However the sum only grows so the learning rate decreases and might prematurely stop. Use exponentially decaying moving average:
+This speeds up convergence and allows to explore rarely updated dimensions, that is, if a weight is rarely update its LR is high.
+However the sum only grows so the learning rate decreases and might prematurely stop. 
+
+###### RMSprop
+Use exponentially decaying moving average (RMSprop):
 $$r_m\iter i=\beta r_m\iter{i-1}+(1-\beta)(g_m\iter i)^2=\sum_{k=1}^i\beta^{i-k}(1-\beta)(g_m\iter k)^2$$
 
 this is an IIR filter
@@ -658,13 +662,17 @@ The exponents (from i to 1) decay exponentially fast: finite memory approximatio
 ##### Adaptive Moment Estimation (Adam)
 Also keep track of the second moment:
 $$\begin{align}
-\text{1st Gradient: }\ &\xi_m\iter i=\beta_1\xi_m\iter{i-1}+(1-\beta_1)g_m\iter i\\
-\text{2nd Gradient: }\ &\psi_m\iter i=\beta_2\psi_m\iter{i-1}+(1-\beta_2)(g_m\iter i)^2
+\text{1st Moment: }\ &\xi_m\iter i=\beta_1\xi_m\iter{i-1}+(1-\beta_1)g_m\iter i\\
+\text{2nd Moment: }\ &\psi_m\iter i=\beta_2\psi_m\iter{i-1}+(1-\beta_2)(g_m\iter i)^2
 \end{align}$$
 But this **is not biased** since we set $g_m\iter 0=0$.
 
 The bias correction just resorts to
 $$\hat \xi_m\iter i=\frac{\xi_m\iter i}{1-\beta_1^i}\qquad\hat\psi_m\iter i=\frac{\psi_m\iter i}{1-\beta_2^i}$$
 Proof:
+An estimator is biased if its expected value is not equal to the true value. 
+$$\begin{align}
+\E[\psi_m\iter i]=\E[\sum_{k=1}^K\beta_2^{i-k}(1-\beta_2)(g_m\iter k)^2]
+\end{align}$$
 todo
 $\endproof$
