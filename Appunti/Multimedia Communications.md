@@ -397,32 +397,57 @@ It uses a **greedy matching process:**
 - **New pattern is found:** Index of longest prefix $W$ is sent to bitstream, then $W+K$ is added to dictionary
 - **Prefix Merging:** This mechanism merges known prefixes with new suffixes, allowing the dictionary to naturally evolve and "track" local statistics.
 
-It works in this way:
-- Initialize table with alphabet
-- Scan symbol by symbol:
-	- Symbol already in table: continue and group symbols
-	- Symbol not in table: add sequence to table and output old codeword (corresponds to group - last symbol). Restart from last symbol
-
 Example:
 Input: $0001000000101000010000010$
-Initial Table: $0\ 1\ 2\ 3\ 4\ 5\ 6\ 7\ 8\ 9\ A\ B\ C\ D\ E$
 Alphabet: $0,1$
 
-Initialization: $0\rightarrow 0, \ 1\rightarrow 1$
+Initialization: $0\rightarrow 0, \ 1\rightarrow 1$ 
+
+
+| 0   | 1   |
+| --- | --- |
+| 0   | 1   |
+
 
 - First symbol: $0$
 The encoder passes through the first symbol: Symbol $0$ exists in table (0). Continue search. 
 Encoder now sees $00$: new symbol, adds it to table: $2\rightarrow00$. Write in output the codeword of $0$: 
 Output = $0$
+
+| 0   | 1   | 2   |
+| --- | --- | --- |
+| 0   | 1   | 00  |
 - Second symbol: $0$
 We are still at the second $0$. $0$ is in the table, continue. $00$ is in the table (2), continue.
 $001$ is not in table, add it: $3\rightarrow 001$
 Output: $0 \ 2$
+
+| 0   | 1   | 2   | 3   |
+| --- | --- | --- | --- |
+| 0   | 1   | 00  | 001 |
 - Fourth symbol: $1$
 1 is in table (1), continue. $10$ is not in table, add it: $4\rightarrow 10$
 Output: $0\ 2\ 1$
-- 
 
+| 0   | 1   | 2   | 3   | 4   |
+| --- | --- | --- | --- | --- |
+| 0   | 1   | 00  | 001 | 10  |
+- Fifth symbol: $0$
+$0$ is in table, continue. $00$ is in table (2), continue. $000$ is new, add it to table: $5\rightarrow 000$
+Output: $0 \ 2 \ 1 \ 2$
+
+| 0   | 1   | 2   | 3   | 4   | 5   |
+| --- | --- | --- | --- | --- | --- |
+| 0   | 1   | 00  | 001 | 10  | 000 |
+
+Here a merge is possible: notice that 2, 3 and 5 have the same prefix $00$. 
+
+| 0   | 1   | 2   | 3   | 4   |
+| --- | --- | --- | --- | --- |
+| 0   | 1   | 000 | 001 | 10  |
+
+- Seventh symbol. $0$
+0 is in table, 00 is in table, 000 is in table (2), 0000 is not in table, add it: $5\rightarrow 0000$
 
 # 3) Proofs
 **Kraft Inequality:**
