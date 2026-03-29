@@ -394,10 +394,9 @@ It uses a **greedy matching process:**
 - **Iterative search:** If $W+K$ is found, it continues to read until new pattern is found
 
 **Dictionary Evolution and Merging**
-- **New pattern is found:** Index of longest prefix $W$ is sent to bitstream, then $W+K$ is added to dictionary
+- **New pattern is found:** Index of longest prefix $W$ is sent to bitstream (output), then $W+K$ is added to dictionary
 - **Prefix Merging:** This mechanism merges known prefixes with new suffixes, allowing the dictionary to naturally evolve and "track" local statistics.
-
-Example:
+##### Example:
 Input: $0001000000101000010000010$
 Alphabet: $0,1$
 
@@ -448,7 +447,11 @@ Here a merge is possible: notice that 2, 3 and 5 have the same prefix $00$.
 
 - Seventh symbol. $0$
 0 is in table, 00 is in table, 000 is in table (2), 0000 is not in table, add it: $5\rightarrow 0000$
+Output: $0\ 2 \ 1 \ 2\ 2$
 
+| 0   | 1   | 2   | 3   | 4   | 5    |
+| --- | --- | --- | --- | --- | ---- |
+| 0   | 1   | 000 | 001 | 10  | 0000 |
 # 3) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
