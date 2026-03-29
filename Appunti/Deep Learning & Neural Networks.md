@@ -749,4 +749,17 @@ notice that since BN acts independently on each component (neuron), and the $a_{
 How does BN work?
 1) First find mean and variance of the mini batch
 $$\mu_k=\frac1m\sum_{i=1}^ma_i\qquad\sigma_k^2=\frac1m\sum_{i=1}^m(a_i-\mu_k)^2$$
-2) Standardize and rescale the input
+2) Standardize the input
+$$\hat a_i=\frac{a_i-\mu_i}{\sqrt{\sigma_k^2+\epsilon}}$$
+3) Rescale and shift via learnable parameters $\gamma,\beta$
+$$a_i'=\gamma\hat a_i+\beta$$
+In CNN the BN layer is shared across the feature map
+
+
+TODO
+
+# 8) Recurrent Neural Networks
+In forward neural networks, the inputs are IID $x_n\sim p(x)$, but this removes **correlation among samples** (video or text file) since the state of the NN is lost after processing the sample.
+
+Define the input to depend on past inputs:
+$$x_n\sim p(x_n|x_{n-1},x_{n-2})$$
