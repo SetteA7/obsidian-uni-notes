@@ -348,10 +348,10 @@ This approach consists in looking at  $N_s$ previous symbols to recognize the co
 
 ## 2.3) Other Coding Techniques
 
-#### Exp-Golomb Coding
+### 2.3.1) Exp-Golomb Coding
 Universal coding for integer numbers, size (bits) proportional to magnitude
-##### Unisgned Integer
-Given int $n\in\mathbb N^+$ the representation consists in
+#### Unisgned Integer
+Given int $n\in\mathbb N$ the representation consists in
 - write $n+1$ in binary
 - use min number of bits: $b=\floor{\log_2(n+1)}+1$
 - place $b-1$ leading zeroes
@@ -363,9 +363,41 @@ b-1=0\end{cases}\longrightarrow 1$$
 $$n=6\rightarrow \begin{cases}n+1=7_{10}=111_{2}\rightarrow 1_2\\
 b=\floor{\log_27}+1=3\\
 b-1=2\end{cases}\longrightarrow 00111$$
-##### Signed Integer
-Given int $n\in\mathbb N$ the representation consists in
-- Map 
+#### Signed Integer
+Given int $n\in\mathbb Z$ the representation consists in
+- Map $\mathbb Z\rightarrow \mathbb N$ using $m(n)=\begin{cases}2n-1 &n>0\\-2n &n\leq0\end{cases}$
+- Use Exp-Golomb for unsigned integer
+
+Example:
+$$n=-3\rightarrow m(n)=6\rightarrow 00111$$
+$$n=-6\rightarrow m(n)=12\rightarrow \begin{cases}n+1=13_{10}=1101_{2}\rightarrow 1_2\\
+b=\floor{\log_27}+1=4\\
+b-1=3\end{cases}\longrightarrow 0001011$$
+### 2.3.2) Dictionary Based Coding
+The idea is to ignore initial statistics and build a dictionary of codewords learned in long term. This allows universal capabilities
+
+>[!thm] Asymptotic Optimality Theorem
+>For stationary and ergodic sources, the dictionary approach is asymptotically optimal:
+>With length $n\rightarrow\infty$ the average codewrod length $L_n$ converges to the entropy rate $\mathcal H$ of the source
+
+Characteristics:
+- **Dynamic Dictionary Construction:** Dictionary built on the fly during encoding process
+- **Universality:** No prior knowledge of source statistics or probability distributions is required
+- **Adaptivity:** adapts to non stationary signals that change over time
+- **Practical Efficiency:** used in many formats (zip, gzip, etc)
+- **Why:** This approach scales well with long patterns
+
+#### LZW Encoding
+It uses a **greedy matching process:**
+- Encoder reads symbol by symbol
+- For each new input, it checks if the pattern (Prefix $W$+Next $K$) already exists
+- **Iterative search:** If $W+K$ is found, it continues to read until new pattern is found
+
+**Dictionary Evolution and Merging**
+- **New pattern is found:** Index of longest prefix $W$ is sent to bitstream, then $W+K$ is added to dictionary
+- **Prefix Merging:** This mechanism merges known prefixes with new suffixes, allowing the dictionary to naturally evolve and "track" local statistics.
+
+
 
 # 3) Proofs
 **Kraft Inequality:**
