@@ -387,7 +387,7 @@ Characteristics:
 - **Practical Efficiency:** used in many formats (zip, gzip, etc)
 - **Why:** This approach scales well with long patterns
 
-#### LZW Encoding
+#### LZW Encoding (TODO Important non si capisce un cazzo)
 It uses a **greedy matching process:**
 - Encoder reads symbol by symbol
 - For each new input, it checks if the pattern (Prefix $W$+Next $K$) already exists
