@@ -348,6 +348,25 @@ This approach consists in looking at  $N_s$ previous symbols to recognize the co
 
 ## 2.3) Other Coding Techniques
 
+#### Exp-Golomb Coding
+Universal coding for integer numbers, size (bits) proportional to magnitude
+##### Unisgned Integer
+Given int $n\in\mathbb N^+$ the representation consists in
+- write $n+1$ in binary
+- use min number of bits: $b=\floor{\log_2(n+1)}+1$
+- place $b-1$ leading zeroes
+
+Example:
+$$n=0\rightarrow \begin{cases}n+1=1_{10}\rightarrow 1_2\\
+b=\floor{\log_21}+1=1\\
+b-1=0\end{cases}\longrightarrow 1$$
+$$n=6\rightarrow \begin{cases}n+1=7_{10}=111_{2}\rightarrow 1_2\\
+b=\floor{\log_27}+1=3\\
+b-1=2\end{cases}\longrightarrow 00111$$
+##### Signed Integer
+Given int $n\in\mathbb N$ the representation consists in
+- Map 
+
 # 3) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
