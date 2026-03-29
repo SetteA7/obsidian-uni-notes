@@ -762,4 +762,17 @@ TODO
 In forward neural networks, the inputs are IID $x_n\sim p(x)$, but this removes **correlation among samples** (video or text file) since the state of the NN is lost after processing the sample.
 
 Define the input to depend on past inputs:
-$$x_n\sim p(x_n|x_{n-1},x_{n-2})$$
+$$x_n\sim p(x_n|x_{n-1},x_{n-2},...)$$
+the output of a layer becomes a function of:
+- Current input $x_k$
+- Internal neuron state $h_{k-1}$, hat is $h_k=f(h_{k-1},x_k;\mathcal W)$
+
+#### Vanilla RNN Layer
+The basic layer has the following input-output relation
+$$\begin{gather}
+a_k=Wh_{k-1}+Ux_k+b\\
+h_k=\tanh(a_k)\\
+\end{gather}$$
+
+![[Pasted image 20260329181703.png|Representation|250]]
+This is a Directed Acyclic Graph (DAG) (ok for backpropagation). The learnable parameters are $\mathcal W=\curly{W, U, V, b ,q}$
