@@ -397,6 +397,31 @@ It uses a **greedy matching process:**
 - **New pattern is found:** Index of longest prefix $W$ is sent to bitstream, then $W+K$ is added to dictionary
 - **Prefix Merging:** This mechanism merges known prefixes with new suffixes, allowing the dictionary to naturally evolve and "track" local statistics.
 
+It works in this way:
+- Initialize table with alphabet
+- Scan symbol by symbol:
+	- Symbol already in table: continue and group symbols
+	- Symbol not in table: add sequence to table and output old codeword (corresponds to group - last symbol). Restart from last symbol
+
+Example:
+Input: $0001000000101000010000010$
+Initial Table: $0\ 1\ 2\ 3\ 4\ 5\ 6\ 7\ 8\ 9\ A\ B\ C\ D\ E$
+Alphabet: $0,1$
+
+Initialization: $0\rightarrow 0, \ 1\rightarrow 1$
+
+- First symbol: $0$
+The encoder passes through the first symbol: Symbol $0$ exists in table (0). Continue search. 
+Encoder now sees $00$: new symbol, adds it to table: $2\rightarrow00$. Write in output the codeword of $0$: 
+Output = $0$
+- Second symbol: $0$
+We are still at the second $0$. $0$ is in the table, continue. $00$ is in the table (2), continue.
+$001$ is not in table, add it: $3\rightarrow 001$
+Output: $0 \ 2$
+- Fourth symbol: $1$
+1 is in table (1), continue. $10$ is not in table, add it: $4\rightarrow 10$
+Output: $0\ 2\ 1$
+- 
 
 
 # 3) Proofs
