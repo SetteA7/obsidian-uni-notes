@@ -745,3 +745,8 @@ This allows the receive inputs with more controlled distribution: each layer lea
 Let a mini batch have size $m$, then we call the k-th mini batch of activations:
 $$B_k=\curly{a_1,...,a_m}$$
 notice that since BN acts independently on each component (neuron), and the $a_{i,j}$ can be neglected since $j=k$. The remaining index denotes the element of the minibatch (at what sample). 
+
+How does BN work?
+1) First find mean and variance of the mini batch
+$$\mu_k=\frac1m\sum_{i=1}^ma_i\qquad\sigma_k^2=\frac1m\sum_{i=1}^m(a_i-\mu_k)^2$$
+2) Standardize and rescale the input
