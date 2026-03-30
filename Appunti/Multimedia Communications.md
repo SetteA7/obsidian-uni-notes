@@ -537,12 +537,17 @@ $$G_T=\frac{D_{PCM}}{D_T}=\frac{c_\mathcal N\sigma^2_{X}2^{-2R_k}}{c_\mathcal N\
 this shows that if the transform reduces the GM variance (with non id samples), then the transform is more efficient.
 
 >[!example|*]
->Consider a signal where $X_1,X_2\sim u\sq{-\frac{\Delta_1}{2\sqrt 2},\frac{\Delta_1}{2\sqrt 2}}$ and have the joitn distribution $f_{X_1,X_2}(x_1,x_2)=\begin{cases}\frac1{\Delta_1\Delta_2}&(x_1,x_2)\in S\\0&(x_1,x_2)\not\in S\end{cases}$ there $S$ is an oriented rectangle with dimension $\Delta_1\times\Delta_2$. With $\Delta_1\gg \Delta_2$.
+>Consider a signal where $X_1,X_2\sim u\sq{-\frac{\Delta_1}{2\sqrt 2},\frac{\Delta_1}{2\sqrt 2}}$ and have the joitn distribution $f_{X_1,X_2}(x_1,x_2)=\begin{cases}\frac1{\Delta_1\Delta_2}&(x_1,x_2)\in S\\0&(x_1,x_2)\not\in S\end{cases}$ there $S$ is an oriented rectangle ($45^\circ$) with dimension $\Delta_1\times\Delta_2$. With $\Delta_1\gg \Delta_2$.
+>![[Pasted image 20260330181539.png|Image|200]]
 >
 >Apply uniform quantization (best fit for uniform rv, but not optimal) directly on the samples:
 >Notice that $X_1,X_2$ have the same variance $\sigma^2=\Delta_1^2/24$ and form factor $c=1$
 >Based on how many bits are assigned to the single rv we get
->![[Pasted image 20260330181038.png|Table|]]
+>![[Pasted image 20260330181038.png|Table|250]]
+>Apply the following transform $\mathcal T=\frac1{\sqrt 2}\begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix}$ (orthogonal since $\mathcal T^T\mathcal T=I$) then the rvs become: $Y_i\sim u\sq{-\frac{\Delta_i}2,\frac{\Delta_i}2}$ and the joint distribution $f_{Y_1,Y_2}(y_1,y_2)=\begin{cases}\frac1{\Delta_1\Delta_2}&(y_1,y_2)\in S'\\0&(y_1,y_2)\not\in S'\end{cases}$ where $S'$ is the rotated surface from before
+>![[Pasted image 20260330181844.png|Image|200]]
+>Now the variances are different $\sigma^2_1=\Delta_1^2/12=2\sigma^2,\ \sigma_2^2=\Delta_2^2/12\ll\sigma^2$  and the distortion becomes:
+>![[Pasted image 20260330182023.png|Table|250]]
 
 ##### Proofs
 Inverse is by definition.
@@ -574,6 +579,12 @@ $$\begin{align}
 &=\sigma_{AM,Y}^2
 \end{align}$$
 $\endproof$
+## 3.3) Practical Implementation of Huang-Schulteiss
+
+HS has a series of limitations:
+- Returns negative values
+- Returns non-integer values
+
 
 # 4) Proofs
 **Kraft Inequality:**
