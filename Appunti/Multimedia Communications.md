@@ -585,6 +585,35 @@ HS has a series of limitations:
 - Returns negative values
 - Returns non-integer values
 
+The **Modified HS algorithm** is very simple:
+1. Use HS with all $M$ components
+2. If there are negative values, set $R=0$ of the component and recalculate HS with $M-N$ components
+3. When there are only positive values, floor the results
+4. Calculate residual rate and allocate eventual residual bits to the results that got rounded the most
+
+>[!example|*]
+>Let there be a gaussian input with 4 components and $R_{tot}=10$:
+>$$\sigma_1^2=1000, \ \sigma_2^2=100, \ \sigma_3^2=50,\ \sigma_4^2=1$$
+>The GM is $\approx47.29$
+>We get:
+>$$R(1)\approx4.7,\ R(2)\approx3.04,\ R(3)\approx2.54, \ R(4)\approx -0.28\stackrel{\text{negative}}\longrightarrow 0$$
+>Recompute HS with 1,2,3:
+>GM $\approx 171$
+>We get (also floor):
+>$$R(1)\approx4.61\rightarrow4,\ R(2)\approx2.95\rightarrow2,\ R(3)\approx2.45\rightarrow2, \ R(4)=0\rightarrow0$$
+>Since $4+2+2+0\not=10$ we can allocate 2 residual bits to components 1 and 4
+> $$R(1)=5,\ R(2)=3,\ R(3)=2, \ R(4)=0$$
+> The total distortion is:
+> $$D=\sum D_i=0.98+1.56+3.13+1=6.67$$
+> 
+
+The **greedy algorithm** returns the same allocation but is faster:
+- Initialization. $R_k=0\ \forall k\in\curly{0,...,M-1}\qquad D_k=\sigma_k^2\forall k\in\curly{0,...,M-1}$
+- While $\sum R_k\leq R_{tot}$
+	- $l=\arg\max_k D_k$
+	- $R_l\leftarrow R_l+1$
+	- $D_l\leftarrow D_l/4$
+
 
 # 4) Proofs
 **Kraft Inequality:**
