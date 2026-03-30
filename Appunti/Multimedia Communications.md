@@ -475,3 +475,5 @@ At each step the unavailable nodes are $\displaystyle\sum_{i=1}^{k-1}2^{-l_i}$. 
 $$\sum_{i=1}^N2^{-l_i}=\sum_{i=1}^{k-1}2^{-l_i}+2^{-l_k}\leq 1\rightarrow 1-\sum_{i=1}^{k-1}2^{-l_i}\geq2^{-l_k}$$
 Since the remaining free capacity is at least $2^{-l_k}$, there must exist at least one free node at depth $l_k$ where the k-th codeword can be placed.
 $$\endproof$$
+# 4) Transform Coding and JPEG
+
