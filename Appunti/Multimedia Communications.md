@@ -613,7 +613,37 @@ The **greedy algorithm** returns the same allocation but is faster:
 	- $l=\arg\max_k D_k$
 	- $R_l\leftarrow R_l+1$
 	- $D_l\leftarrow D_l/4$
+This takes $R_{tot}$ iterations
 
+
+>[!example|*]
+>Consider the same data as before:
+>![[Pasted image 20260330184338.png|Iterations 1-5|350]]
+>![[Pasted image 20260330184430.png|Iterations 6-10|350]]
+
+## 3.4) Orthogonal Transforms For Compression
+
+For gassian data we use the **KLT** (or principal component analysis (PCA) in ML)
+$$\mathcal T_{KLT}=E^T$$
+Where $E$ is the matrix of eigenvectors of the data covariance matrix.
+This is aligning the axis to the direction in which the data has the max variance
+
+![[Pasted image 20260330184734.png|Graphical Example|350]]
+
+However this approach has many downsides:
+- KLT is data dependent: statistics must be known and are hard to estimate, they also change for each dataset
+
+A general approach is used **Discrete Cosine Transform (DCT)**
+Each entry follows the form:
+$$(\mathcal T_{DCT})_{k,n}=\begin{cases}
+\frac1{\sqrt N} & k=0\\
+\sqrt{\frac{2}{N}}\cos(\frac{(2n+1)k\pi}{2N}) &k>0
+\end{cases}$$
+DFT is not used since DFT has high frequency components near the signal edges. The DCT is a way to mirror the signal before the periodicity
+
+Applying the DCT to a signal ( a sequence of N real numbers) produces N real coefficients and has a better sparsification property than DFT thanks to the symmetric periodization.
+
+![[Pasted image 20260330185522.png|Example With Mirroring|450]]
 
 # 4) Proofs
 **Kraft Inequality:**
