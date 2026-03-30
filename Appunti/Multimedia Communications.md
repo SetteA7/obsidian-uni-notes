@@ -452,7 +452,27 @@ Output: $0\ 2 \ 1 \ 2\ 2$
 | 0   | 1   | 2   | 3   | 4   | 5    |
 | --- | --- | --- | --- | --- | ---- |
 | 0   | 1   | 000 | 001 | 10  | 0000 |
-# 3) Proofs
+
+
+# 3) Transform Coding and JPEG
+
+Recall block coding:
+Let $X_k$ be a rv with variance $\sigma^2_k$, the quantizer distortion is: $D_k=c_k\sigma^2_k2^{-2R_k}$
+Now consider a block of rv (not iid): $X=[X_1,...,X_M]^T$
+The global distortion is:
+$$\begin{align}
+\mathcal D&=\frac1M\E[\|X-Q(X)\|^2]=\frac1M\E[(X-Q(X))^T(X-Q(X))]\\
+&=\frac1M\E[\sum_{k=1}^M(X_k-Q(X_k))^2]=\frac1M\sum_{k=1}^M\E[(X_k-Q(X_k))^2]\\
+&=\frac1M\sum_{k=1}^MD_k=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}
+\end{align}$$
+We must minimize this wit the constraint $\sum_{k=1}^{M-1}R_k\leq R_{tot}$:
+Via lagrange we get:
+$$J(R,\lambda)=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}+\lambda(\sum_{k=1}^{M-1}R_k- R_{tot})$$
+The solution is the **Huang-Schilteiss formula:**
+$$R_k^*=\frac{R_{tot}}M+\frac12\log\sq{\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}}$$
+
+
+# 4) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
 Codewords are already given. Set $L_\max=\max_i(l_i)$ ^3d4d31
@@ -475,5 +495,8 @@ At each step the unavailable nodes are $\displaystyle\sum_{i=1}^{k-1}2^{-l_i}$. 
 $$\sum_{i=1}^N2^{-l_i}=\sum_{i=1}^{k-1}2^{-l_i}+2^{-l_k}\leq 1\rightarrow 1-\sum_{i=1}^{k-1}2^{-l_i}\geq2^{-l_k}$$
 Since the remaining free capacity is at least $2^{-l_k}$, there must exist at least one free node at depth $l_k$ where the k-th codeword can be placed.
 $$\endproof$$
-# 4) Transform Coding and JPEG
 
+**Huang-Schulteiss Formula:**
+$$J(R,\lambda)=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}+\lambda(\sum_{k=1}^{M-1}R_k- R_{tot})$$
+Find the derivatives:
+$$\frac{\partial J}{\partial R_k}=-\frac{2\ln2}Mc_k\sigma^2_k2^{-2R_k}+\lambda\$$
