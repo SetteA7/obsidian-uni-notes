@@ -490,6 +490,12 @@ We want the matrix to be orthogonal and therefore $\mathcal T^{-1}=\mathcal T^T$
 This property is fundamental as the distortion on Y is the same on X:
 $$D_Y=\frac1M\E[\|Y-\hat Y\|^2]=\frac1M\E[\|\mathcal T(X-\hat X)\|^2]=\frac1M\E[\|(X-\hat X)\|^2]=D_X$$
 
+Let there be a Block coding on id gaussian rvs. By applying the Orthogonal Transform paradigm we can get the following results:
+- The computation of distortion can be applied directly to the quantized output:
+$$\mathcal D_T=\frac1M\E[\|X-\hat X\|^2]=\frac1M\E[\|\mathcal T^{-1}Y-\mathcal T^{-1}\hat Y\|^]=\frac1M\E[\|Y-\hat Y\|^2]=D_Y$$
+- With optimal allocation we get
+$$D_Y=c_{GM}\$$
+
 
 
 
