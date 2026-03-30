@@ -539,20 +539,10 @@ this shows that if the transform reduces the GM variance (with non id samples), 
 >[!example|*]
 >Consider a signal where $X_1,X_2\sim u\sq{-\frac{\Delta_1}{2\sqrt 2},\frac{\Delta_1}{2\sqrt 2}}$ and have the joitn distribution $f_{X_1,X_2}(x_1,x_2)=\begin{cases}\frac1{\Delta_1\Delta_2}&(x_1,x_2)\in S\\0&(x_1,x_2)\not\in S\end{cases}$ there $S$ is an oriented rectangle with dimension $\Delta_1\times\Delta_2$. With $\Delta_1\gg \Delta_2$.
 >
->Apply quantization directly on the samples:
->$X_1,X_2$ have the same variance $\Delta_1^2/24$
->
->Apply uniform quantization (best fit for uniform rv) with $L=4$ and we get the following table
-
-
-
-| bits | $R$   | $D_i$      | $D$ |
-| ---- | ----- | ---------- | --- |
-| $0$  | $0$   | $\sigma^2$ |     |
-| $1$  | $0.5$ | $$         |     |
-| $2$  | $1$   |            |     |
-| $3$  | $1.5$ |            |     |
-| $4$  | $2$   |            |     |
+>Apply uniform quantization (best fit for uniform rv, but not optimal) directly on the samples:
+>Notice that $X_1,X_2$ have the same variance $\sigma^2=\Delta_1^2/24$ and form factor $c=1$
+>Based on how many bits are assigned to the single rv we get
+>![[Pasted image 20260330181038.png|Table|]]
 
 ##### Proofs
 Inverse is by definition.
