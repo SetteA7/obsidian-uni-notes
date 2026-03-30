@@ -485,8 +485,11 @@ $$x\rightarrow y=\mathcal Tx\rightarrow \hat y=Q(y)\rightarrow\hat x=\mathcal T^
 #### Orthogonal Transform
 We want the matrix to be orthogonal and therefore $\mathcal T^{-1}=\mathcal T^T$
 - Inverse is immediate
-- Is an isometry, keeps $\mathcal L^2$ norm of any $X$: $\|\mathcal TX\|^2=(\mathcal T X)^T(\mathcal T X)=(X^T- Is an isometry, keeps $\mathcal L^2$ norm of any $X$: $\|\mathcal TX\|^2=(\mathcal T X)^T(\mathcal T X)=(X^T)(\mathcal T X)$
-^T)(\mathcal T X)$
+- Is an isometry, keeps $\mathcal L^2$ norm of any $X$: $$\|\mathcal TX\|^2=(\mathcal T X)^T(\mathcal T X)=(X^T\mathcal T^T)(\mathcal T X)X^T(\mathcal T^T\mathcal T)X=X^TX=\|X\|^2$$
+
+This property is fundamental as the distortion on Y is the same on X:
+$$D_Y=\frac1M\E[\|Y-\hat Y\|^2]=\frac1M\E[\|\mathcal T(X-\hat X)\|^2]=\frac1M\E[\|(X-\hat X)\|^2]=D_X$$
+
 
 
 
