@@ -430,10 +430,22 @@ Output: $0\ 2 \ 1 \ 2\ 2$
 
 # 3) Transform Coding and JPEG
 
-## 3.1) Block Coding
+## 3.1) Block Coding And Quantization
 Recall block coding:
 Let $X_k$ be a rv with variance $\sigma^2_k$, the quantizer distortion is: $D_k=c_k\sigma^2_k2^{-2R_k}$
 Now consider a block of rv (not iid): $X=[X_1,...,X_M]^T$
+
+**We apply a quantization step:**
+From the  **Huang-Schilteiss formula** the optimal rate per block is:
+$$R_k^*=\frac{R_{tot}}M+\frac12\log\sq{\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}}$$
+And by choosing uniform resource allocation $R_k=R_{tot}/M$ we get that the single sample distortion equals to the global distortion:
+$$\begin{gather}
+D_k^*=c_{GM}\sigma_{GM}^22^{-2R_k}\\
+\mathcal D^*=\frac1M\sum_{k=1}^{M}D_k=c_{GM}\sigma_{GM}^22^{-2R_k}
+\end{gather}$$
+In particular consider 
+
+Some proofs:
 The global distortion is:
 $$\begin{align}
 \mathcal D&=\frac1M\E[\|X-Q(X)\|^2]=\frac1M\E[(X-Q(X))^T(X-Q(X))]\\
