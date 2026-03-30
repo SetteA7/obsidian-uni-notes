@@ -445,47 +445,67 @@ D_k^*=c_{GM}\sigma_{GM}^22^{-2\overline R}\\
 \end{gather}$$
 In particular consider the gaussian case (shape factor constant $c_{GM}=x_k=c_\mathcal N$): 
 $$\mathcal D^*=c_\mathcal N\sigma_{GM}^22^{-2\overline R}$$
-and if the signals are iid (same variance $\sigma_{GM}^2\sigma_X^2$ and shape factor) the optimal rate is the uniform allocation.
+and if the signals are iid (same variance $\sigma_{GM}^2\sigma_X^2$ and shape factor) the optimal rate is the uniform allocation. For historical reasons it is called PCM:
 $$\begin{gather}
-R_k^*=\overline R+\frac12\log_2\underbrace{\sq{\frac{c_k\sigma_k^2}{c_{GM}\sigma_{GM}^2}}_{=0}}\\
-\mathcal D^* =c_X\sigma_X^22^{-2\overline R}
+R_k^*=\overline R+\frac12\log_2\underbrace{\sq{\frac{c_k\sigma_k^2}{c_{GM}\sigma_{GM}^2}}}_{=1}=\overline R\\
+\mathcal D_{PCM} =c_X\sigma_X^22^{-2\overline R}
 \end{gather}$$
 
-Some proofs:
+##### Proofs
 Using uniform resource allocation the global distortion is:
 $$\begin{align}
 \mathcal D&=\frac1M\E[\|X-Q(X)\|^2]=\frac1M\E[(X-Q(X))^T(X-Q(X))]\\
 &=\frac1M\E[\sum_{k=1}^M(X_k-Q(X_k))^2]=\frac1M\sum_{k=1}^M\E[(X_k-Q(X_k))^2]\\
 &=\frac1M\sum_{k=1}^MD_k=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}
 \end{align}$$
-We must minimize this wit the constraint $\sum_{k=1}^{M-1}R_k\leq R_{tot}$:
-Via lagrange multipliers we get:
+$\endproof$
+
+---
+The optimal rate is obtained by using the lagrangian multipliers method:
+The constraint is: $\displaystyle \sum_{k=1}^{M-1}R_k\leq R_{tot}$
+Then the optimization problem becomes:
 $$J(R,\lambda)=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}+\lambda(\sum_{k=1}^{M-1}R_k- R_{tot})$$
+Find the derivatives:
+$$\frac{\partial J}{\partial R_k}=-\frac{2\ln2}Mc_k\sigma^2_k2^{-2R_k}+\lambda\qquad \frac{\partial J}{\partial\lambda}=\sum_{k=1}^{M-1}R_k- R_{tot}$$
+Set the gradient to 0 and solve:
+$$\begin{gather}
+-\frac{2\ln2}Mc_k\sigma^2_k2^{-2R_k}+\lambda=0\\
+-2R_k={\log_2(\frac{M\lambda}{2\ln 2})}+\log_2(\frac1{c_k\sigma^2_k})\\
+R_k^*=\underbrace{\frac12\log_2\par{\frac{2\ln 2}{M}}}_{\lambda'}+\frac12\log_2(c_k\sigma_k^2)
+\end{gather}$$
+Now write it with $R_{tot}$
+$$\begin{align}
+R_{tot}&=\sum_{k=1}^MR_k^*=M\lambda'+\frac12\sum_{k=1}^M\log_2(c_k\sigma_k^2)\\
+\downarrow\\
+\lambda'&=\frac{R_{tot}}M-\frac1{2M}\sum_{k=1}^M\log_2(c_k\sigma^2_k)=\frac{R_{tot}}M-\frac12\log_2\par{\prod_{k=1}^M(c_k\sigma^2_k)^{1/M}}\\
+&=\frac{R_{tot}}M-\frac12\log_2(c_{GM}\sigma_{GM}^2)\\
+\downarrow\\
+R_k^*&=\lambda'+\frac12\log_2(c_k\sigma^2_k)=\frac{R_{tot}}M-\frac12\log_2(c_{GM}\sigma_{GM}^2)+\frac12(c_k\sigma^2_k)\\
+&=\frac{R_{tot}}M+\frac12\log_2(\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}})\\
+\end{align}$$
 The solution is the **Huang-Schilteiss formula:**
 $$R_k^*=\frac{R_{tot}}M+\frac12\log\sq{\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}}$$
+$\endproof$
 
-Apply this rate to the single distortion
+---
+
+Apply the optimal rate to the single distortion
 $$\begin{gather}
-D_k^*=c_{k}\sigma_{k}^22^{-2R_k^*}=c_{k}\sigma_{k}^22^{-2\overline R-\log_2\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}}=c_{GM}\sigma_{GM}^22^{-2\overline R}\\
-\mathcal D^*=\frac1M\sum_{k=1}^{M-1}D_k=c_{GM}\sigma_{GM}^22^{-2R_k}
+D_k^*=c_{k}\sigma_{k}^22^{-2R_k^*}=c_{k}\sigma_{k}^22^{-2\overline R-\log_2\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}}=c_{GM}\sigma_{GM}^22^{-2\overline R}
 \end{gather}$$
-In the gaussian case, the shape factor is unchanged and it becomes
-$$\begin{gather}
-R_k^*=\overline R+\frac12\log\sq{\frac{\sigma^2_k}{\sigma_{GM}^2}}\\
-\mathcal D^*=c_\mathcal N\sigma^2_{GM}2^{-2R_k}
-\end{gather}$$
-if IID then $c_{GM}=x_X\quad \sigma^2_{GM}=\sigma^2_X$
-$$D_{PCM}=c_\mathcal N\sigma^2_X2^{-2R_k}$$
-#### Arithmetic VS Geometric Mean (AM, GM)
+
+$\endproof$
+#### Digression on Arithmetic VS Geometric Mean (AM, GM)
 The means are defined as:
-$$z_{AM}=\frac1M\sum_{k=1}^Mz_k\qquad z_{GM}=\sqrt[M]{\prod_{k=1}^M z_k}$$
+$$z_{AM}=\frac1M\sum_{k=1}^Mz_k\geq z_{GM}=\sqrt[M]{\prod_{k=1}^M z_k}$$
+##### Proof
 By Jenses Inequality we have:
-$$f(\frac1M\sum_{k=1}^Mz_k)\geq \frac1M\sum_{k=1}^Mf(z_k)\rightarrow z_{AM}\geq z_{GM}$$
+$$f(\frac1M\sum_{k=1}^Mz_k)\geq \frac1M\sum_{k=1}^Mf(z_k)$$
 with $f$ the log function.
-$$\log(z_{AM})\geq\frac{1}{M}\sum_{k=1}^M \log(z_k) = \log\!\left(\prod_{k=1}^M z_k^{1/M}\right) = \log(z_{GM})$$
+$$\log(z_{AM})\geq\frac{1}{M}\sum_{k=1}^M \log(z_k) = \log\!\left(\prod_{k=1}^M z_k^{1/M}\right) = \log(z_{GM})\rightarrow z_{AM}\geq z_{GM}$$
 
 ## 3.2) Transform Coding
-The aim is to make the signal sparse, that is, few large samples (low rate EQ) and many small ones (high EQ). This transforms the id signal into blocks with diverse variances (same mean) so to minimize $\sigma_{GM}^2$.
+The aim is to make the signal sparse, that is, few large samples (low rate EQ) and many small ones (high EQ). This transforms the id (not iid) signal into blocks with diverse variances (same mean) so to minimize $\sigma_{GM}^2$.
 For example a fourier transform of a pure sound is sparse: All zereos except for $f_w$.
 
 The operator has the following properties:
@@ -502,12 +522,13 @@ We consider $Y=\mathcal TX$ where $\mathcal T$ is an invertible matrix
 So the paradigm becomes:
 $$x\rightarrow y=\mathcal Tx\rightarrow \hat y=Q(y)\rightarrow\hat x=\mathcal T^{-1}\hat y$$
 #### Orthogonal Transform
-We want the matrix to be orthogonal and therefore $\mathcal T^{-1}=\mathcal T^T$
-- Inverse is immediate
-- Is an isometry, keeps $\mathcal L^2$ norm of any $X$: $$\|\mathcal TX\|^2=(\mathcal T X)^T(\mathcal T X)=(X^T\mathcal T^T)(\mathcal T X)X^T(\mathcal T^T\mathcal T)X=X^TX=\|X\|^2$$
+Orthogonal Transform has $\mathcal T$ as an orthogonal matrix. This gives many advantages:
+- Inverse is immediate: $\mathcal T^{-1}=\mathcal T^T$
+- Is an isometry keeps $\mathcal L^2$ norm of any $X$: $\|\mathcal TX\|^2=\|X\|^2$
+- Isometry keeps distortion the same on the output: $D_X=D_Y$
 
-This property is fundamental as the distortion on Y is the same on X:
-$$D_Y=\frac1M\E[\|Y-\hat Y\|^2]=\frac1M\E[\|\mathcal T(X-\hat X)\|^2]=\frac1M\E[\|(X-\hat X)\|^2]=D_X$$
+Now consider block coding on id (not iid) gaussian rvs. With orthogonal transform we get:
+- Distortion can be applied directly to the quantized output: $D_T=D_Y$
 
 Let there be a Block coding on id gaussian rvs. By applying the Orthogonal Transform paradigm we can get the following results:
 - The computation of distortion can be applied directly to the quantized output:
@@ -519,6 +540,22 @@ $$D_Y=c_{GM,Y}\sigma_{GM,Y}^22^{-2R_k}$$
 $$\sigma_{AM,Y}^2=\frac1M\sum\E[Y^2_k]=\frac1M\E[\sum Y_k^2]=\frac1M\E[\|Y\|^2]=\frac1M\E[\|X^2\|]=\sigma_X^2$$
 - The Coding Gain is the ratio of the distortion of the original signal to the distortion of the transformed signal:
 $$G_T=\frac{D_{PCM}}{D_T}=\frac{c_\mathcal N\sigma^2_{X}2^{-2R_k}}{c_\mathcal N\sigma_{GM,Y}^22^{-2R_k}}=\frac{\sigma_{AM,Y}^2}{\sigma_{GM,Y}^2}\geq1$$
+##### Proofs
+Inverse is by definition.
+$\endproof$
+
+---
+
+Isometry 
+$$\|\mathcal TX\|^2=(\mathcal T X)^T(\mathcal T X)=(X^T\mathcal T^T)(\mathcal T X)X^T(\mathcal T^T\mathcal T)X=X^TX=\|X\|^2$$
+
+And distortion on isometry
+$$D_Y=\frac1M\E[\|Y-\hat Y\|^2]=\frac1M\E[\|\mathcal T(X-\hat X)\|^2]=\frac1M\E[\|(X-\hat X)\|^2]=D_X$$
+
+$\endproof$
+
+---
+
 
 
 
@@ -547,25 +584,3 @@ Since the remaining free capacity is at least $2^{-l_k}$, there must exist at le
 $$\endproof$$
 
 ---
-
-**Huang-Schulteiss Formula:**
-$$J(R,\lambda)=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}+\lambda(\sum_{k=1}^{M-1}R_k- R_{tot})$$
-Find the derivatives:
-$$\frac{\partial J}{\partial R_k}=-\frac{2\ln2}Mc_k\sigma^2_k2^{-2R_k}+\lambda\qquad \frac{\partial J}{\partial\lambda}=\sum_{k=1}^{M-1}R_k- R_{tot}$$
-Set the gradient to 0 and solve:
-$$\begin{gather}
--\frac{2\ln2}Mc_k\sigma^2_k2^{-2R_k}+\lambda=0\\
--2R_k={\log_2(\frac{M\lambda}{2\ln 2})}+\log_2(\frac1{c_k\sigma^2_k})\\
-R_k^*=\underbrace{\frac12\log_2\par{\frac{2\ln 2}{M}}}_{\lambda'}+\frac12\log_2(c_k\sigma_k^2)
-\end{gather}$$
-Now write it with $R_{tot}$
-$$\begin{align}
-R_{tot}&=\sum_{k=1}^MR_k^*=M\lambda'+\frac12\sum_{k=1}^M\log_2(c_k\sigma_k^2)\\
-\downarrow\\
-\lambda'&=\frac{R_{tot}}M-\frac1{2M}\sum_{k=1}^M\log_2(c_k\sigma^2_k)=\frac{R_{tot}}M-\frac12\log_2\par{\prod_{k=1}^M(c_k\sigma^2_k)^{1/M}}\\
-&=\frac{R_{tot}}M-\frac12\log_2(c_{GM}\sigma_{GM}^2)\\
-\downarrow\\
-R_k^*&=\lambda'+\frac12\log_2(c_k\sigma^2_k)=\frac{R_{tot}}M-\frac12\log_2(c_{GM}\sigma_{GM}^2)+\frac12(c_k\sigma^2_k)\\
-&=\frac{R_{tot}}M-\frac12\log_2(\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}})\\
-\end{align}$$
-$\endproof$
