@@ -445,8 +445,21 @@ $$J(R,\lambda)=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}+\lambda(\sum_{k=1}^{M-1
 The solution is the **Huang-Schilteiss formula:**
 $$R_k^*=\frac{R_{tot}}M+\frac12\log\sq{\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}}$$
 
-And therefore, using uniforme resources ($R_k=R_{tot}/M$) the optimal per-component distortion is:
-$$$$
+And therefore, using uniforme resources ($R_k=R_{tot}/M$) the optimal distortion is:
+$$\begin{gather}
+D_k^*=c_{GM}\sigma_{GM}^22^{-2R_k}\\
+\mathcal D^*=\frac1M\sum_{k=1}^{M-1}D_k=c_{GM}\sigma_{GM}^22^{-2R_k}
+\end{gather}$$
+In the gaussian case, the mean is unchanged and it becomes
+$$\begin{gather}
+R_k^*=R_k+\frac12\log\sq{\frac{\sigma^2_k}{\sigma_{GM}^2}}\\
+\mathcal D^*=c_\mathcal N\sigma^2_{GM}2^{-2R_k}
+\end{gather}$$
+##### Arithmetic VS Geometric Mean (AM, GM)
+The means are defined as:
+$$z_{AM}=\frac1M\sum_{k=1}^Mz_k\qquad z_{GM}=\sqrt[M]{\prod_{k=1}^M z_k}$$
+By Jenses Inequality we have:
+$$f(\frac1M\sum_{k=1}^Mz_k)\geq \frac1M\sum_{k=1}^Mf(z_k)\rightarrow z_{AM}\geq z_{GM}$$
 # 4) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
