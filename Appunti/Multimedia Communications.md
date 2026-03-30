@@ -528,36 +528,46 @@ Orthogonal Transform has $\mathcal T$ as an orthogonal matrix. This gives many a
 - Isometry keeps distortion the same on the output: $D_X=D_Y$
 
 Now consider block coding on id (not iid) gaussian rvs. With orthogonal transform we get:
-- Distortion can be applied directly to the quantized output: $D_T=D_Y$
+- Distortion can be applied directly to the quantized output:  $D_T=D_Y\stackrel{\text{optimal } R_k}=c_{GM,Y}\sigma_{GM,Y}^22^{-2R_k}$
+- Variance of $Y$ is the AM of $X$: $\sigma_{AM,Y}^2=\sigma_X^2$
+- AM variance is constant
 
-Let there be a Block coding on id gaussian rvs. By applying the Orthogonal Transform paradigm we can get the following results:
-- The computation of distortion can be applied directly to the quantized output:
-$$\mathcal D_T=\frac1M\E[\|X-\hat X\|^2]=\frac1M\E[\|\mathcal T^{-1}Y-\mathcal T^{-1}\hat Y\|^]=\frac1M\E[\|Y-\hat Y\|^2]=D_Y$$
-- With optimal allocation we get
-$$D_Y=c_{GM,Y}\sigma_{GM,Y}^22^{-2R_k}$$
-
-- If X is gaussian also Y is gaussian ($c$ the same) and the variance of Y is the AM of the block
-$$\sigma_{AM,Y}^2=\frac1M\sum\E[Y^2_k]=\frac1M\E[\sum Y_k^2]=\frac1M\E[\|Y\|^2]=\frac1M\E[\|X^2\|]=\sigma_X^2$$
-- The Coding Gain is the ratio of the distortion of the original signal to the distortion of the transformed signal:
+Finally define the **Coding Gain:**
 $$G_T=\frac{D_{PCM}}{D_T}=\frac{c_\mathcal N\sigma^2_{X}2^{-2R_k}}{c_\mathcal N\sigma_{GM,Y}^22^{-2R_k}}=\frac{\sigma_{AM,Y}^2}{\sigma_{GM,Y}^2}\geq1$$
+this shows that if the transform reduces the GM variance (with non id samples), then the transform is more efficient.
+
+>[!example|*]
+>
 ##### Proofs
 Inverse is by definition.
 $\endproof$
 
 ---
 
-Isometry 
+Isometry:
 $$\|\mathcal TX\|^2=(\mathcal T X)^T(\mathcal T X)=(X^T\mathcal T^T)(\mathcal T X)X^T(\mathcal T^T\mathcal T)X=X^TX=\|X\|^2$$
 
-And distortion on isometry
+And distortion on isometry:
 $$D_Y=\frac1M\E[\|Y-\hat Y\|^2]=\frac1M\E[\|\mathcal T(X-\hat X)\|^2]=\frac1M\E[\|(X-\hat X)\|^2]=D_X$$
 
 $\endproof$
 
 ---
 
+Same distortion:
+$$\mathcal D_T=\frac1M\E[\|X-\hat X\|^2]=\frac1M\E[\|\mathcal T^{-1}Y-\mathcal T^{-1}\hat Y\|^]=\frac1M\E[\|Y-\hat Y\|^2]=D_Y$$
+$\endproof$
 
+---
 
+Variance equivalences:
+$$\begin{align}
+\sigma_X^2&=\sigma_{AM,X}^2=\frac1M\sum_{k=1}^M\E[X_k^2]=\frac1M\E\sq{\sum_{k=1}^MX_k^2}=\frac1M\E[\|X\|^2]\\
+&\qquad(\text{recall: } \|Y\|^2=\|\mathcal TX\|^2=\|X\|^2)\\
+&=\frac1M\E[\|Y\|^2]=\frac1M\E\sq{\sum_{k=1}^MY_k^2}=\frac1M\sum_{k=1}^M\E[Y_k^2]\\
+&=\sigma_{AM,Y}^2
+\end{align}$$
+$\endproof$
 
 # 4) Proofs
 **Kraft Inequality:**
