@@ -402,57 +402,31 @@ Alphabet: $0,1$
 
 Initialization: $0\rightarrow 0, \ 1\rightarrow 1$ 
 
-
-| 0   | 1   |
-| --- | --- |
-| 0   | 1   |
-
-
 - First symbol: $0$
 The encoder passes through the first symbol: Symbol $0$ exists in table (0). Continue search. 
 Encoder now sees $00$: new symbol, adds it to table: $2\rightarrow00$. Write in output the codeword of $0$: 
 Output = $0$
 
-| 0   | 1   | 2   |
-| --- | --- | --- |
-| 0   | 1   | 00  |
 - Second symbol: $0$
 We are still at the second $0$. $0$ is in the table, continue. $00$ is in the table (2), continue.
 $001$ is not in table, add it: $3\rightarrow 001$
 Output: $0 \ 2$
 
-| 0   | 1   | 2   | 3   |
-| --- | --- | --- | --- |
-| 0   | 1   | 00  | 001 |
 - Fourth symbol: $1$
 1 is in table (1), continue. $10$ is not in table, add it: $4\rightarrow 10$
 Output: $0\ 2\ 1$
 
-| 0   | 1   | 2   | 3   | 4   |
-| --- | --- | --- | --- | --- |
-| 0   | 1   | 00  | 001 | 10  |
 - Fifth symbol: $0$
 $0$ is in table, continue. $00$ is in table (2), continue. $000$ is new, add it to table: $5\rightarrow 000$
 Output: $0 \ 2 \ 1 \ 2$
 
-| 0   | 1   | 2   | 3   | 4   | 5   |
-| --- | --- | --- | --- | --- | --- |
-| 0   | 1   | 00  | 001 | 10  | 000 |
 
 Here a merge is possible: notice that 2, 3 and 5 have the same prefix $00$. 
 
-| 0   | 1   | 2   | 3   | 4   |
-| --- | --- | --- | --- | --- |
-| 0   | 1   | 000 | 001 | 10  |
 
 - Seventh symbol. $0$
 0 is in table, 00 is in table, 000 is in table (2), 0000 is not in table, add it: $5\rightarrow 0000$
 Output: $0\ 2 \ 1 \ 2\ 2$
-
-| 0   | 1   | 2   | 3   | 4   | 5    |
-| --- | --- | --- | --- | --- | ---- |
-| 0   | 1   | 000 | 001 | 10  | 0000 |
-
 
 # 3) Transform Coding and JPEG
 
@@ -471,7 +445,8 @@ $$J(R,\lambda)=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}+\lambda(\sum_{k=1}^{M-1
 The solution is the **Huang-Schilteiss formula:**
 $$R_k^*=\frac{R_{tot}}M+\frac12\log\sq{\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}}$$
 
-
+And therefore, using uniforme resources ($R_k=R_{tot}/M$) the optimal per-component distortion is:
+$$$$
 # 4) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
@@ -499,4 +474,21 @@ $$\endproof$$
 **Huang-Schulteiss Formula:**
 $$J(R,\lambda)=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}+\lambda(\sum_{k=1}^{M-1}R_k- R_{tot})$$
 Find the derivatives:
-$$\frac{\partial J}{\partial R_k}=-\frac{2\ln2}Mc_k\sigma^2_k2^{-2R_k}+\lambda\$$
+$$\frac{\partial J}{\partial R_k}=-\frac{2\ln2}Mc_k\sigma^2_k2^{-2R_k}+\lambda\qquad \frac{\partial J}{\partial\lambda}=\sum_{k=1}^{M-1}R_k- R_{tot}$$
+Set the gradient to 0 and solve:
+$$\begin{gather}
+-\frac{2\ln2}Mc_k\sigma^2_k2^{-2R_k}+\lambda=0\\
+-2R_k={\log_2(\frac{M\lambda}{2\ln 2})}+\log_2(\frac1{c_k\sigma^2_k})\\
+R_k^*=\underbrace{\frac12\log_2\par{\frac{2\ln 2}{M}}}_{\lambda'}+\frac12\log_2(c_k\sigma_k^2)
+\end{gather}$$
+Now write it with $R_{tot}$
+$$\begin{align}
+R_{tot}&=\sum_{k=1}^MR_k^*=M\lambda'+\frac12\sum_{k=1}^M\log_2(c_k\sigma_k^2)\\
+\downarrow\\
+\lambda'&=\frac{R_{tot}}M-\frac1{2M}\sum_{k=1}^M\log_2(c_k\sigma^2_k)=\frac{R_{tot}}M-\frac12\log_2\par{\prod_{k=1}^M(c_k\sigma^2_k)^{1/M}}\\
+&=\frac{R_{tot}}M-\frac12\log_2(c_{GM}\sigma_{GM}^2)\\
+\downarrow\\
+R_k^*&=\lambda'+\frac12\log_2(c_k\sigma^2_k)=\frac{R_{tot}}M-\frac12\log_2(c_{GM}\sigma_{GM}^2)+\frac12(c_k\sigma^2_k)\\
+&=\frac{R_{tot}}M-\frac12\log_2(\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}})\\
+\end{align}$$
+$\endproof$
