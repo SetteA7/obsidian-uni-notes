@@ -438,34 +438,40 @@ Now consider a block of rv (not iid): $X=[X_1,...,X_M]^T$
 **We apply a quantization step:**
 From the  **Huang-Schilteiss formula** the optimal rate per block is:
 $$R_k^*=\frac{R_{tot}}M+\frac12\log\sq{\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}}$$
-And by choosing uniform resource allocation $R_k=R_{tot}/M$ we get that the single sample distortion equals to the global distortion:
+The optimal case diverges from the uniform Resource distribution case (call $\overline R=R_{tot}/M$) we get that the single sample distortion equals to the global distortion:
 $$\begin{gather}
-D_k^*=c_{GM}\sigma_{GM}^22^{-2R_k}\\
-\mathcal D^*=\frac1M\sum_{k=1}^{M}D_k=c_{GM}\sigma_{GM}^22^{-2R_k}
+D_k^*=c_{GM}\sigma_{GM}^22^{-2\overline R}\\
+\mathcal D^*=\frac1M\sum_{k=1}^{M}D_k=c_{GM}\sigma_{GM}^22^{-2\overline R}
 \end{gather}$$
-In particular consider 
+In particular consider the gaussian case (shape factor constant $c_{GM}=x_k=c_\mathcal N$): 
+$$\mathcal D^*=c_\mathcal N\sigma_{GM}^22^{-2\overline R}$$
+and if the signals are iid (same variance $\sigma_{GM}^2\sigma_X^2$ and shape factor) the optimal rate is the uniform allocation.
+$$\begin{gather}
+R_k^*=\overline R+\frac12\log_2\underbrace{\sq{\frac{c_k\sigma_k^2}{c_{GM}\sigma_{GM}^2}}_{=0}}\\
+\mathcal D^* =c_X\sigma_X^22^{-2\overline R}
+\end{gather}$$
 
 Some proofs:
-The global distortion is:
+Using uniform resource allocation the global distortion is:
 $$\begin{align}
 \mathcal D&=\frac1M\E[\|X-Q(X)\|^2]=\frac1M\E[(X-Q(X))^T(X-Q(X))]\\
 &=\frac1M\E[\sum_{k=1}^M(X_k-Q(X_k))^2]=\frac1M\sum_{k=1}^M\E[(X_k-Q(X_k))^2]\\
 &=\frac1M\sum_{k=1}^MD_k=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}
 \end{align}$$
 We must minimize this wit the constraint $\sum_{k=1}^{M-1}R_k\leq R_{tot}$:
-Via lagrange we get:
+Via lagrange multipliers we get:
 $$J(R,\lambda)=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}+\lambda(\sum_{k=1}^{M-1}R_k- R_{tot})$$
 The solution is the **Huang-Schilteiss formula:**
 $$R_k^*=\frac{R_{tot}}M+\frac12\log\sq{\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}}$$
 
-And therefore, using uniforme resources ($R_k=R_{tot}/M$) the optimal distortion is:
+Apply this rate to the single distortion
 $$\begin{gather}
-D_k^*=c_{GM}\sigma_{GM}^22^{-2R_k}\\
+D_k^*=c_{k}\sigma_{k}^22^{-2R_k^*}=c_{k}\sigma_{k}^22^{-2\overline R-\log_2\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}}=c_{GM}\sigma_{GM}^22^{-2\overline R}\\
 \mathcal D^*=\frac1M\sum_{k=1}^{M-1}D_k=c_{GM}\sigma_{GM}^22^{-2R_k}
 \end{gather}$$
-In the gaussian case, the mean is unchanged and it becomes
+In the gaussian case, the shape factor is unchanged and it becomes
 $$\begin{gather}
-R_k^*=R_k+\frac12\log\sq{\frac{\sigma^2_k}{\sigma_{GM}^2}}\\
+R_k^*=\overline R+\frac12\log\sq{\frac{\sigma^2_k}{\sigma_{GM}^2}}\\
 \mathcal D^*=c_\mathcal N\sigma^2_{GM}2^{-2R_k}
 \end{gather}$$
 if IID then $c_{GM}=x_X\quad \sigma^2_{GM}=\sigma^2_X$
