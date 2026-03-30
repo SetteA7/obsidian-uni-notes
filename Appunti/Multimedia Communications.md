@@ -430,6 +430,7 @@ Output: $0\ 2 \ 1 \ 2\ 2$
 
 # 3) Transform Coding and JPEG
 
+## 3.1) Block Coding
 Recall block coding:
 Let $X_k$ be a rv with variance $\sigma^2_k$, the quantizer distortion is: $D_k=c_k\sigma^2_k2^{-2R_k}$
 Now consider a block of rv (not iid): $X=[X_1,...,X_M]^T$
@@ -455,11 +456,40 @@ $$\begin{gather}
 R_k^*=R_k+\frac12\log\sq{\frac{\sigma^2_k}{\sigma_{GM}^2}}\\
 \mathcal D^*=c_\mathcal N\sigma^2_{GM}2^{-2R_k}
 \end{gather}$$
-##### Arithmetic VS Geometric Mean (AM, GM)
+if IID then $c_{GM}=x_X\quad \sigma^2_{GM}=\sigma^2_X$
+#### Arithmetic VS Geometric Mean (AM, GM)
 The means are defined as:
 $$z_{AM}=\frac1M\sum_{k=1}^Mz_k\qquad z_{GM}=\sqrt[M]{\prod_{k=1}^M z_k}$$
 By Jenses Inequality we have:
 $$f(\frac1M\sum_{k=1}^Mz_k)\geq \frac1M\sum_{k=1}^Mf(z_k)\rightarrow z_{AM}\geq z_{GM}$$
+with $f$ the log function.
+$$\log(z_{AM})\geq\frac{1}{M}\sum_{k=1}^M \log(z_k) = \log\!\left(\prod_{k=1}^M z_k^{1/M}\right) = \log(z_{GM})$$
+
+## 3.2) Transform Coding
+The aim is to make the signal sparse, that is, few large samples (low rate EQ) and many small ones (high EQ). This transforms the id signal into blocks with diverse variances (same mean) so to minimize $\sigma_{GM}^2$.
+For example a fourier transform of a pure sound is sparse: All zereos except for $f_w$.
+
+The operator has the following properties:
+- Reversible: $Y=T(X)\iff X=T^{-1}(Y)$
+- Input in $\R^M$: an image is $\R^2$
+- Input is not sparse
+- Output is sparse
+
+We consider $Y=\mathcal TX$ where $\mathcal T$ is an invertible matrix
+- Inverse exists by definition
+- This acts as a basis change: basis is set of signals to reconstruct intended signal
+- If $\mathcal T$ is orthogonal the quantization is the same
+
+So the paradigm becomes:
+$$x\rightarrow y=\mathcal Tx\rightarrow \hat y=Q(y)\rightarrow\hat x=\mathcal T^{-1}\hat y$$
+#### Orthogonal Transform
+We want the matrix to be orthogonal and therefore $\mathcal T^{-1}=\mathcal T^T$
+- Inverse is immediate
+- Is an isometry, keeps $\mathcal L^2$ norm of any $X$: $\|\mathcal TX\|^2=(\mathcal T X)^T(\mathcal T X)=(X^T- Is an isometry, keeps $\mathcal L^2$ norm of any $X$: $\|\mathcal TX\|^2=(\mathcal T X)^T(\mathcal T X)=(X^T)(\mathcal T X)$
+^T)(\mathcal T X)$
+
+
+
 # 4) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
@@ -483,6 +513,8 @@ At each step the unavailable nodes are $\displaystyle\sum_{i=1}^{k-1}2^{-l_i}$. 
 $$\sum_{i=1}^N2^{-l_i}=\sum_{i=1}^{k-1}2^{-l_i}+2^{-l_k}\leq 1\rightarrow 1-\sum_{i=1}^{k-1}2^{-l_i}\geq2^{-l_k}$$
 Since the remaining free capacity is at least $2^{-l_k}$, there must exist at least one free node at depth $l_k$ where the k-th codeword can be placed.
 $$\endproof$$
+
+---
 
 **Huang-Schulteiss Formula:**
 $$J(R,\lambda)=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}+\lambda(\sum_{k=1}^{M-1}R_k- R_{tot})$$
