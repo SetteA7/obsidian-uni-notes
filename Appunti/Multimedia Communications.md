@@ -457,6 +457,7 @@ R_k^*=R_k+\frac12\log\sq{\frac{\sigma^2_k}{\sigma_{GM}^2}}\\
 \mathcal D^*=c_\mathcal N\sigma^2_{GM}2^{-2R_k}
 \end{gather}$$
 if IID then $c_{GM}=x_X\quad \sigma^2_{GM}=\sigma^2_X$
+$$D_{PCM}=c_\mathcal N\sigma^2_X2^{-2R_k}$$
 #### Arithmetic VS Geometric Mean (AM, GM)
 The means are defined as:
 $$z_{AM}=\frac1M\sum_{k=1}^Mz_k\qquad z_{GM}=\sqrt[M]{\prod_{k=1}^M z_k}$$
@@ -494,8 +495,12 @@ Let there be a Block coding on id gaussian rvs. By applying the Orthogonal Trans
 - The computation of distortion can be applied directly to the quantized output:
 $$\mathcal D_T=\frac1M\E[\|X-\hat X\|^2]=\frac1M\E[\|\mathcal T^{-1}Y-\mathcal T^{-1}\hat Y\|^]=\frac1M\E[\|Y-\hat Y\|^2]=D_Y$$
 - With optimal allocation we get
-$$D_Y=c_{GM}\$$
+$$D_Y=c_{GM,Y}\sigma_{GM,Y}^22^{-2R_k}$$
 
+- If X is gaussian also Y is gaussian ($c$ the same) and the variance of Y is the AM of the block
+$$\sigma_{AM,Y}^2=\frac1M\sum\E[Y^2_k]=\frac1M\E[\sum Y_k^2]=\frac1M\E[\|Y\|^2]=\frac1M\E[\|X^2\|]=\sigma_X^2$$
+- The Coding Gain is the ratio of the distortion of the original signal to the distortion of the transformed signal:
+$$G_T=\frac{D_{PCM}}{D_T}=\frac{c_\mathcal N\sigma^2_{X}2^{-2R_k}}{c_\mathcal N\sigma_{GM,Y}^22^{-2R_k}}=\frac{\sigma_{AM,Y}^2}{\sigma_{GM,Y}^2}\geq1$$
 
 
 
