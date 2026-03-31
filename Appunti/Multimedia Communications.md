@@ -638,12 +638,40 @@ It has the following properties:
 - Best energy concentration (sparsity): $\sum \E[Y_i]\geq \sum\E[(T_iX_i)^2]$ where $T_i$ is a generic orthogonal matrix
 - Optimal for gaussian vectors: $\sigma_{GM,\mathcal N}^2\leq \sigma_{GM}^2$
 - Among all linear orthogonal transforms, the KLT is optimal for energy compaction: for any $N < M$, the sum of the first N variances is maximized by the KLT.
-- 
 
 However this approach has many downsides:
 - KLT is data dependent: statistics must be known and are hard to estimate, they also change for each dataset
+- Computationally expensive: $O(N^3)$ for eigenvector computation and $O(N^2)$ for multiplication
+- Since data depends, the basis function (matrix) must also be sent with the data
+- Assuming stationarity is not always true
+
+For a Markov Process (AR(1)) with correlation $\rho\rightarrow 1$, frequency transforms (DFT, DCT) offer near-optimal performance with fixed basis functions and fast algorithms ($O(N log N)$).
+#### Discrete Fourier Transform (DFT)
+The 1D case is the following:
+$$y[k]=\frac1{\sqrt M}\sum_{n=1}^Mx[n]e^{-j\frac{2\pi}Mkn}$$
+Or in matrix form:
+$$\mathcal T_{DFT}=\frac1{\sqrt M}\begin{bmatrix}
+1&1&1&...&1\\
+1&W_M&W_M^2&...&W_M^{M-1}\\
+1&W_M^2&W_M^4&...&W_M^{2(M-1)}\\
+\vdots & \vdots&\vdots&\ddots&\vdots\\
+1&W_M^{M-1}&W_M^{2(M-1)}&...&W_M^{(M-1)(M-1)}
+\end{bmatrix}$$
+Where $W_M=e^{-j2\pi/M}$ is the M-th primitive root of unity
+Each row is therefore the conjugate of a basis vector.
+the total energy is preserved: $\|y\|^2=\|x\|^2$
+
+In 2D, the DFT is a separable transform:
+$$Y=\mathcal T X\mathcal T^T$$
+this computes the rows and then the columns (horizontal and vertical frequency analysis)
+This transform decomposes the image into a weighted sum of $N^2$ orthogonal basis patterns:
+$$B_{k,l}(n,m)=\frac1Ne^{j\frac{2\pi}N(kn+lm)}$$
+
+
+#### Discrete Cosine Transform (DCT)
 
 A general approach is used **Discrete Cosine Transform (DCT)**
+
 Each entry follows the form:
 $$(\mathcal T_{DCT})_{k,n}=\begin{cases}
 \frac1{\sqrt N} & k=0\\
