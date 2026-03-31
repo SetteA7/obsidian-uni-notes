@@ -530,7 +530,7 @@ Orthogonal Transform has $\mathcal T$ as an orthogonal matrix. This gives many a
 Now consider block coding on id (not iid) gaussian rvs. With orthogonal transform we get:
 - Distortion can be applied directly to the quantized output:  $D_T=D_Y\stackrel{\text{optimal } R_k}=c_{GM,Y}\sigma_{GM,Y}^22^{-2R_k}$
 - Variance of $Y$ is the AM of $X$: $\sigma_{AM,Y}^2=\sigma_X^2$
-- AM variance is constant
+- AM variance is constant as it is the energy of the signal ($\mathcal L^2$ norm unchanged)
 
 Finally define the **Coding Gain:**
 $$G_T=\frac{D_{PCM}}{D_T}=\frac{c_\mathcal N\sigma^2_{X}2^{-2R_k}}{c_\mathcal N\sigma_{GM,Y}^22^{-2R_k}}=\frac{\sigma_{AM,Y}^2}{\sigma_{GM,Y}^2}\geq1$$
@@ -622,13 +622,23 @@ This takes $R_{tot}$ iterations
 >![[Pasted image 20260330184430.png|Iterations 6-10|350]]
 
 ## 3.4) Orthogonal Transforms For Compression
+Now let's find out how to build the orthogonal transform matrices for:
+- A rv with known statistical properties
+- The general case
 
-For gassian data we use the **KLT** (or principal component analysis (PCA) in ML)
-$$\mathcal T_{KLT}=E^T$$
-Where $E$ is the matrix of eigenvectors of the data covariance matrix.
+#### Karhunen-Loeve Transform (KLT)
+Let $X$ be a 0 mean random vector of size $M$ and correlation $R_X=\E[XX^T]$. With most relevant data we can consider that $R_X$ has M eigenvectors $u_1,...,u_M$. The KLT (or principal component analysis (PCA) in ML) matrix has for rows the eigenvectors
+$$\mathcal T_{KLT}=[u_1,...,u_M]^T$$
 This is aligning the axis to the direction in which the data has the max variance
 
 ![[Pasted image 20260330184734.png|Graphical Example|350]]
+It has the following properties:
+- Orthogonal: $\mathcal T_{KLT}^{-1}=\mathcal T_{KLT}^T$
+- It is decorrelating: $\E[Y_iY_j]=\lambda_i\delta_{ij}$
+- Best energy concentration (sparsity): $\sum \E[Y_i]\geq \sum\E[(T_iX_i)^2]$ where $T_i$ is a generic orthogonal matrix
+- Optimal for gaussian vectors: $\sigma_{GM,\mathcal N}^2\leq \sigma_{GM}^2$
+- Among all linear orthogonal transforms, the KLT is optimal for energy compaction: for any $N < M$, the sum of the first N variances is maximized by the KLT.
+- 
 
 However this approach has many downsides:
 - KLT is data dependent: statistics must be known and are hard to estimate, they also change for each dataset
