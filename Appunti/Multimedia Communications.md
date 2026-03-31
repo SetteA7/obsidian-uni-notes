@@ -698,10 +698,20 @@ The sparsification allows to give higher bits to many small valued coefficients 
 JPEG is an image compression standard defined in 1991 that defines **only the decoder** for interoperability and implementation competition
 
 ![[Pasted image 20260331111153.png|JPEG Scheme|450]]
-The steps are the following: pre processing: color space transform, chrome subsampling block split and average removal $\rightarrow$ DCT $\rightarrow$ Quantize $\rightarrow$ VCL
+The steps are the following: pre processing: color space transform, chrome subsampling, block split and average removal $\rightarrow$ DCT $\rightarrow$ Quantize $\rightarrow$ VCL
 
 DCT is performed on $8\times8$ blocks (small improves stationarity, large correlation, 8 is a good mittleground)
 
+The quantization is defined as uniform quantization (mid-thread):
+$$c_{ij}=\text{round}(\frac{c_{ij}}{q_{ij}})$$
+but q is not defined by standard and must be encoded
+
+A quantzation parameter is the **quality factor** $Q\in[1,100]$ that controls the scaling factor:
+$$S_F=\begin{cases}
+\frac{5000}Q&1\leq Q\leq 50\\
+200-2Q&50<Q\leq 99\\
+1 &Q=100
+\end{cases} \ \rightarrow q\leftarrow\frac{S_F}{100}q$$
 # 4) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
