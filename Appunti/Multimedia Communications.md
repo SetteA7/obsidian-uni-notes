@@ -666,22 +666,41 @@ $$Y=\mathcal T X\mathcal T^T$$
 this computes the rows and then the columns (horizontal and vertical frequency analysis)
 This transform decomposes the image into a weighted sum of $N^2$ orthogonal basis patterns:
 $$B_{k,l}(n,m)=\frac1Ne^{j\frac{2\pi}N(kn+lm)}$$
+each coefficient $Y[k,l]$ represents the frequency component of horizontal and vertical frequency combination
+Most energy is concentrated in the low frequencies.
 
+This is still not ideal since the DFT suposes a periodic signal. We compress finite signals and therefore on the image edges we have spectral leakage (low frequencies leak into high ones) making the signal less sparse
 
 #### Discrete Cosine Transform (DCT)
-
 A general approach is used **Discrete Cosine Transform (DCT)**
-
 Each entry follows the form:
 $$(\mathcal T_{DCT})_{k,n}=\begin{cases}
 \frac1{\sqrt N} & k=0\\
 \sqrt{\frac{2}{N}}\cos(\frac{(2n+1)k\pi}{2N}) &k>0
 \end{cases}$$
-DFT is not used since DFT has high frequency components near the signal edges. The DCT is a way to mirror the signal before the periodicity
+DFT is not used since DFT has high frequency components near the signal edges. The DCT is a way to mirror the signal before the periodicity. It has only positive frequencies
 
 Applying the DCT to a signal ( a sequence of N real numbers) produces N real coefficients and has a better sparsification property than DFT thanks to the symmetric periodization.
 
 ![[Pasted image 20260330185522.png|Example With Mirroring|450]]
+The DCT is also separable:
+$$Y=\mathcal T_{DCT}X\mathcal T_{DCT}^T$$
+A large-size, non-stationary image is more conveniently represented by dividing it into small blocks. 
+Example: 8 × 8 block-based DCT. Each 8 × 8 block of pixels from the image is projected onto the 64 basis vectors: The corresponding scalar product is the DCT coefficient telling how much the block is similar to the basis vector
+![[Pasted image 20260331110618.png|Block DCT|450]]
+![[Pasted image 20260331110634.png|8x8 Basis|250]]
+The sparsification allows to give higher bits to many small valued coefficients and lower bits to less frequent bigger values. How are the quantization coefficients computed?
+- HS formula (practical implementation)
+- Fixed steps (JPEG)
+
+## 3.5) JPEG Standard (TODO)
+
+JPEG is an image compression standard defined in 1991 that defines **only the decoder** for interoperability and implementation competition
+
+![[Pasted image 20260331111153.png|JPEG Scheme|450]]
+The steps are the following: pre processing: color space transform, chrome subsampling block split and average removal $\rightarrow$ DCT $\rightarrow$ Quantize $\rightarrow$ VCL
+
+DCT is performed on $8\times8$ blocks (small improves stationarity, large correlation, 8 is a good mittleground)
 
 # 4) Proofs
 **Kraft Inequality:**
@@ -706,5 +725,3 @@ At each step the unavailable nodes are $\displaystyle\sum_{i=1}^{k-1}2^{-l_i}$. 
 $$\sum_{i=1}^N2^{-l_i}=\sum_{i=1}^{k-1}2^{-l_i}+2^{-l_k}\leq 1\rightarrow 1-\sum_{i=1}^{k-1}2^{-l_i}\geq2^{-l_k}$$
 Since the remaining free capacity is at least $2^{-l_k}$, there must exist at least one free node at depth $l_k$ where the k-th codeword can be placed.
 $$\endproof$$
-
----
