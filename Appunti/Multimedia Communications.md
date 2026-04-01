@@ -693,6 +693,13 @@ The sparsification allows to give higher bits to many small valued coefficients 
 - HS formula (practical implementation)
 - Fixed steps (JPEG)
 
+Take a $8\times8$ block:
+- Center the signal (subtract 128)
+- Calculate the DCT coefficients
+- This returns 64 coefficients (can be used to reconstruct og signal)
+- The value at $(0,0)$ is the mean intensity called **DC** value 
+- The other values are called AC values
+
 ## 3.5) JPEG Standard (TODO)
 
 JPEG is an image compression standard defined in 1991 that defines **only the decoder** for interoperability and implementation competition
@@ -712,6 +719,17 @@ $$S_F=\begin{cases}
 200-2Q&50<Q\leq 99\\
 1 &Q=100
 \end{cases} \ \rightarrow q\leftarrow\frac{S_F}{100}q$$
+
+A zig-zag scan is performed on the quantized values
+
+Recap the steps:
+- Take 8x8 block
+- Center it: subtract 128
+- Calculate DCT coefficients and obtain matrix of 64 coefficients $c_{i,j}$. We call $c_{0,0}$ the DC component (mean luminosity) and the others AC components
+- Take a quantization matrix with entries $q_{i,j}$ scaled by the scaling factor.
+- Quantize the values of the DCT using a mid-thread quantization $c_{ij}=\text{round}(\frac{c_{ij}}{q_{ij}})$
+
+
 # 4) Wavelet
 
 
