@@ -712,7 +712,10 @@ $$S_F=\begin{cases}
 200-2Q&50<Q\leq 99\\
 1 &Q=100
 \end{cases} \ \rightarrow q\leftarrow\frac{S_F}{100}q$$
-# 4) Proofs
+# 4) Wavelet
+
+
+# 5) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
 Codewords are already given. Set $L_\max=\max_i(l_i)$ ^3d4d31
