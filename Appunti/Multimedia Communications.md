@@ -739,6 +739,7 @@ A zig-zag scan is performed on the quantized values in order to encode them in a
 | --------------- | --------------------------------------------------- | --- | ----------- |
 ![[Pasted image 20260401191026.png|Zig-Zag scan|200]]
 ![[Pasted image 20260401191058.png|Example of encoding|250]]
+#### Encoding
 The symbols are then encoded:
 **DC Encoding:**
 >[!col]
@@ -755,9 +756,18 @@ For example suppose $DC_P=-5_{10}=101_2$ that must be complemented to $010$. The
 DC values have a range  $\in[-1024,1060]$ a difference of two DC signals is $\in[-2040,2040]$ and thus with cardinality $4081$. Since there are 11 categories we have $\sum_{k=0}^{11}2^k=2^{12}=1096>4081$ values.
 
 **AC Encoding**
-Recall that hìthe AC coefficients are previously encoded using $(R,L)$ with $R$ (Run) the # of zeroes before $L$ (Level) the first non-zero AC value.
-- $L$ is encoded as $DC_P$
-- the prefix code is specified by $(a,b)$
+Recall that the AC coefficients are previously encoded using $(a,b)$ with $a$ the # of zeroes before $b$ the first non-zero AC value.
+- $b$ is encoded as with 2's complement.
+- the prefix code is specified by $(R,C)$ (Run, category). Run $=a\in[0,15]$ while Level is the class($k$) of $b$. These are saved in a table.
+
+Example: Encode (3,16):
+- Encode 16: $k=5$ and $16_{10}=10000_2$
+- $(L,C)=(0,5)\stackrel{\text{table}}\rightarrow11010$
+The codeword is $11010\ 10000$
+
+Two custom codewords are described:
+- End Of Block (EOB) $= (0,0) \rightarrow 1010$
+- Zero Run (ZR) $=(15,0)\rightarrow 11111111001$
 
 ---
 
@@ -768,8 +778,19 @@ Recap the steps:
 - Take a quantization matrix with entries $q_{i,j}$ scaled by the scaling factor.
 - Quantize the values of the DCT using a mid-thread quantization $c_{ij}=\text{round}(\frac{c_{ij}}{q_{ij}})$
 - Using the zig-zag scan, build the string
-- Encode the DC difference
+- Encode the DC difference and the $(a,b)$ values
 
+#### Frame Building
+The standard frame follows this logic:
+![[Pasted image 20260401200043.png|Frame|350]]
+- Frame header contains static info (size, color space, digitalization format)
+- Image is stored in a frame as various scans
+
+- Scan header contains quantization table (luminance and chrominance)
+- A single scan contains various segments, each segment is a concatenation of blocks
+- Segment header contains huffman tables
+
+JFIF (JPEG File Interchange Format) is the standard format for metadata in JPEG files 
 # 4) Wavelet
 
 
