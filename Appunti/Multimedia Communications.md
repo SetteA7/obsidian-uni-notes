@@ -687,9 +687,13 @@ The DCT is also separable:
 $$Y=\mathcal T_{DCT}X\mathcal T_{DCT}^T$$
 A large-size, non-stationary image is more conveniently represented by dividing it into small blocks. 
 
+---
 Each value follows the form
 $$C(i, j) = \frac{1}{4} \alpha(i) \alpha(j) \sum_{x=0}^{7} \sum_{y=0}^{7} f(x, y) \cos \left[ \frac{(2x+1)i\pi}{16} \right] \cos \left[ \frac{(2y+1)j\pi}{16} \right]$$
-with $\alpha$ a normalization factor $\alpha(u) = \begin{cases} \frac{1}{\sqrt{2}} & \text{if } u = 0 \\ 1 & \text{if } u > 0 \end{cases}$
+with $\alpha$ a normalization factor $\alpha(u) = \begin{cases} \frac{1}{\sqrt{2}} & \text{if } u = 0 \\ 1 & \text{if } u > 0 \end{cases}$. 
+
+Reason on the DC component: $C(0,0)=\frac14\frac12\sum\sum f(x,y)\cdot1\cdot1=\frac18\sum\sum f(x,y)$
+After centering the signal, the dc component is $\in[-1024,1016]$.
 
 Example: 8 × 8 block-based DCT. Each 8 × 8 block of pixels from the image is projected onto the 64 basis vectors: The corresponding scalar product is the DCT coefficient telling how much the block is similar to the basis vector
 ![[Pasted image 20260331110618.png|Block DCT|450]]
@@ -737,7 +741,10 @@ A zig-zag scan is performed on the quantized values in order to encode them in a
 ![[Pasted image 20260401191058.png|Example of encoding|250]]
 The symbols are then encoded:
 **DC Encoding:**
-DC values have a range  $\in[0,2040]$ 
+JPEG encodes the DC difference with a pseudo-huffman code.
+There are $k\in\curly{0,...,11}$ categories, each of them holding $2^k$ 
+
+DC values have a range  $\in[-1024,1060]$ a difference of two DC signals is $\in[-2040,2040]$ and thus with cardinality $4081$
 
 Recap the steps:
 - Take 8x8 block
