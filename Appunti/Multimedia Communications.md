@@ -741,10 +741,25 @@ A zig-zag scan is performed on the quantized values in order to encode them in a
 ![[Pasted image 20260401191058.png|Example of encoding|250]]
 The symbols are then encoded:
 **DC Encoding:**
+>[!col]
 JPEG encodes the DC difference with a pseudo-huffman code.
-There are $k\in\curly{0,...,11}$ categories, each of them holding $2^k$ 
+There are $k\in\curly{0,...,11}$ categories, each of them holding $2^k$ values using 2's complement. Each category is assigned a codeword (see table).
+> $$ $$
+>Call $DC_p$ the DC difference, the category is chosen $k=\ceil{\log_2(|DC_P|+1)}$
+>To the category the binary value of $DC_P$ is added as a suffix. If it is negative each value is complemented. 
+>
+>![[Pasted image 20260401193857.png|Category Code|250]]
 
-DC values have a range  $\in[-1024,1060]$ a difference of two DC signals is $\in[-2040,2040]$ and thus with cardinality $4081$
+For example suppose $DC_P=-5_{10}=101_2$ that must be complemented to $010$. The category is $k=3\rightarrow100$ and thus the codeword is $100\ 010$.
+
+DC values have a range  $\in[-1024,1060]$ a difference of two DC signals is $\in[-2040,2040]$ and thus with cardinality $4081$. Since there are 11 categories we have $\sum_{k=0}^{11}2^k=2^{12}=1096>4081$ values.
+
+**AC Encoding**
+Recall that hìthe AC coefficients are previously encoded using $(R,L)$ with $R$ (Run) the # of zeroes before $L$ (Level) the first non-zero AC value.
+- $L$ is encoded as $DC_P$
+- the prefix code is specified by $(a,b)$
+
+---
 
 Recap the steps:
 - Take 8x8 block
@@ -752,7 +767,8 @@ Recap the steps:
 - Calculate DCT coefficients and obtain matrix of 64 coefficients $c_{i,j}$. We call $c_{0,0}$ the DC component (mean luminosity) and the others AC components
 - Take a quantization matrix with entries $q_{i,j}$ scaled by the scaling factor.
 - Quantize the values of the DCT using a mid-thread quantization $c_{ij}=\text{round}(\frac{c_{ij}}{q_{ij}})$
-
+- Using the zig-zag scan, build the string
+- Encode the DC difference
 
 # 4) Wavelet
 
