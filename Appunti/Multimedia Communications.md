@@ -686,6 +686,11 @@ Applying the DCT to a signal ( a sequence of N real numbers) produces N real coe
 The DCT is also separable:
 $$Y=\mathcal T_{DCT}X\mathcal T_{DCT}^T$$
 A large-size, non-stationary image is more conveniently represented by dividing it into small blocks. 
+
+Each value follows the form
+$$C(i, j) = \frac{1}{4} \alpha(i) \alpha(j) \sum_{x=0}^{7} \sum_{y=0}^{7} f(x, y) \cos \left[ \frac{(2x+1)i\pi}{16} \right] \cos \left[ \frac{(2y+1)j\pi}{16} \right]$$
+with $\alpha$ a normalization factor $\alpha(u) = \begin{cases} \frac{1}{\sqrt{2}} & \text{if } u = 0 \\ 1 & \text{if } u > 0 \end{cases}$
+
 Example: 8 × 8 block-based DCT. Each 8 × 8 block of pixels from the image is projected onto the 64 basis vectors: The corresponding scalar product is the DCT coefficient telling how much the block is similar to the basis vector
 ![[Pasted image 20260331110618.png|Block DCT|450]]
 ![[Pasted image 20260331110634.png|8x8 Basis|250]]
@@ -720,7 +725,19 @@ $$S_F=\begin{cases}
 1 &Q=100
 \end{cases} \ \rightarrow q\leftarrow\frac{S_F}{100}q$$
 
-A zig-zag scan is performed on the quantized values
+A zig-zag scan is performed on the quantized values in order to encode them in a single string, where
+- the first value is the Difference of the DC component of this block and the previous block
+- the next values are a pair of numbers representing (# of zeroes in scan, value of first non zero)
+- final EOB special symbol is added to end the string  it is $(0,0)$
+
+
+| $DC_n-DC_{n-1}$ | $(\text{\# of zeroes},\text{non zero coeff value})$ | ... | EOB $(0,0)$ |
+| --------------- | --------------------------------------------------- | --- | ----------- |
+![[Pasted image 20260401191026.png|Zig-Zag scan|200]]
+![[Pasted image 20260401191058.png|Example of encoding|250]]
+The symbols are then encoded:
+**DC Encoding:**
+DC values have a range  $\in[0,2040]$ 
 
 Recap the steps:
 - Take 8x8 block
