@@ -792,7 +792,9 @@ The standard frame follows this logic:
 
 JFIF (JPEG File Interchange Format) is the standard format for metadata in JPEG files 
 # 4) Wavelet
-
+Recall the principle of a spectrum analyzer (short time fourier transform) ([[DSP 2]]). Frequency and time resolutions are inversely proportional to each other
+$$\Delta t\cdot \Delta f\geq \frac1{4\pi}$$
+Wavelet is the tool that allows the block of the JPEG to scale dynamically based on frequency (high frequency, smaller blocks. Low frequency, large blocks)
 
 # 5) Proofs
 **Kraft Inequality:**
