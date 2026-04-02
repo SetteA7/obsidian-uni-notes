@@ -851,6 +851,11 @@ Both are Orthogonal and energy conserving. A special case is the **Haar filter**
 
 **All this works only for infinite length signals**. What happens when signals are finite?
 
+**Standard approach:** zero padding and DTFT. This produces signal with $N+M-1$ size (N input size and M filter size). The periodicization of the DTFT introduces aliasing (jump in signal in time).
+![[Pasted image 20260402141513.png|Example Of Aliasing|350]]
+
+**Symmetrization:** We create a new signal by adding a mirror image of the original signal to the period. Let $x$ have period $N$ then $x_s$ has period $2N$. The convolution (with periodic filter) will return a periodic and symmetrical signal and thus only the first $N$ samples have to be computed
+![[Pasted image 20260402141526.png|Example of Symmetric signal (in black the N not calculated coefficients)|350]]
 
 ---
 Proof of output equation:
