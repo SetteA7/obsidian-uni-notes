@@ -737,6 +737,8 @@ A zig-zag scan is performed on the quantized values in order to encode them in a
 
 | $DC_n-DC_{n-1}$ | $(\text{\# of zeroes},\text{non zero coeff value})$ | ... | EOB $(0,0)$ |
 | --------------- | --------------------------------------------------- | --- | ----------- |
+
+
 ![[Pasted image 20260401191026.png|Zig-Zag scan|200]]
 ![[Pasted image 20260401191058.png|Example of encoding|250]]
 #### Encoding
@@ -840,6 +842,14 @@ Where we set the following bounds to obtain PR:
 
 The modulation matrix needs to be invertible:
 $$\forall z\in\mathbb C: |z|=1, \ \Delta(z)=H_0(z)H_1(-z)-H_1(z)H_0(-z)\not =0$$
+There are 2 types of Filters that can be used:
+- **Quadrature Mirror Filters:** 
+$$H_0(z)=H_1(-z) \text{ and } F_0(z)=H_0(z), \ F_1(z)=-H_1(z)$$
+- **Conjugate Quadrature Filters:** 
+$$H_0(z)=H_1(-z) \text{ and } F_0(z)=H_0(z^{-1}), \ F_1(z)=-H_1(z^{-1})$$
+Both are Orthogonal and energy conserving. A special case is the **Haar filter**, which is both A QMF and CQF at the same time (see later).
+
+**All this works only for infinite length signals**. What happens when signals are finite?
 
 
 ---
