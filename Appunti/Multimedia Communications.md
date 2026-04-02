@@ -816,6 +816,34 @@ The idea is to divide the signal in two parts: high and low frequency. These wil
 #### Perfect Reconstruction (PR)
 Let $x[k]$ be the original signal and $\tilde x[k]$ the signal after passing through the filter bank. Perfect reconstruction is achieved if $\tilde x[k]$ is a delayed copy of $x[k]$, that is:
 $$\tilde x_k=x_{k+l}\iff\tilde X(z)=z^{-l}X(z)$$
+It turns out that in the Z domain the output is:
+$$\begin{gather}
+\begin{aligned}
+\tilde X(z)&=\frac12[F_0(z)H_0(z)+F_1(z)H_1(z)]X(z)\\
+&+\frac12[F_0(z)H_0(-z)+F_1(z)H_1(-z)]X(-z)\\
+&=T(z)X(z)+A(z)X(-z)\\
+\end{aligned}\\ \\
+\tilde X(z)=\frac12\underbrace{\begin{bmatrix}
+H_0(z)&H_1(z)\\
+H_0(-z)&H_1(-z)
+\end{bmatrix}}_{\text{modulation matrix}}\cdot
+\begin{bmatrix}
+F_0(z)\\ F_1(z)
+\end{bmatrix}X(z)
+=\frac12\begin{bmatrix}
+2z^{-l}\\0
+\end{bmatrix}X(z)=z^{-l}X(z)
+\end{gather}$$
+Where we set the following bounds to obtain PR:
+- $T(z)=2z^{-l}$ is the Non Distortion (ND) condition
+- $A(z)=0$ the Aliasing Cancelation (AC) condition
+
+The modulation matrix needs to be invertible:
+$$\forall z\in\mathbb C: |z|=1, \ \Delta(z)=H_0(z)H_1(-z)-H_1(z)H_0(-z)\not =0$$
+
+
+---
+Proof of output equation:
 Analyze the bank in the Z domain:
 We first pass through the filter:
 $$\tilde c[k]=(h_0*x)(k)\zetatrans \tilde C(z)=\sum_n\tilde c_nz^{-n}=H_0(z)X(z)$$
@@ -828,18 +856,22 @@ c[k/2] & k\text{ even}\\
 \end{cases}\zetatrans\hat C(z)=C(z^2)$$
 The same is done for $d\rightarrow \hat D(z)=D(z^2)$. And the output is the sum of these signals through the filters:
 $$\tilde x[k]=(f_0*\hat c)(k)+(f_1*\hat d)(k)\zetatrans F_0(z)C(z^2)+F_1(z)D(z^2)$$
-
-
+Written in terms of the input signal:
+$$\begin{align}
+\tilde X(z)&=\frac12[F_0(z)H_0(z)+F_1(z)H_1(z)]X(z)\\
+&+\frac12[F_0(z)H_0(-z)+F_1(z)H_1(-z)]X(-z)
+\end{align}$$
+$\endproof$
 
 ---
-
+Proof of Interpolation and Decimation:
 To interpolate we notice that the output becomes
 $$\hat c[k] = [c_0, c_1, c_2, \dots]\rightarrow{c}[n] = [c_0, 0, c_1, 0, c_2, 0, \dots]$$
 Since every second element is zero, we define the z transform with a index substitution $n=2k$
 $$C(z)=\sum_n c[n]z^{-n}=\sum_k  c[2k]z^{-2k}=\sum_k\hat c[k]z^{-2k}=\hat C(z^{2})$$
 With this in mind the decimation is similar:
-	To compute it we first define a signal $s[k]$ that is the interpolated signal of $\tilde c[k]$. From the earlier result we know that
-The decimation in frequency ($C(z)=\sum \tilde c[2k]z^{-k}$) is obtained by defining a sequence
+To compute it we first define a signal $s[k]$ that is the interpolated signal of $\tilde c[k]$. From the earlier result we know that $S(z)=\tilde C(z^2)\rightarrow \tilde C(z)=S(z^{1/2})$
+Therefore we just need to compute the z transform of $s[k]$
 $$s[n]=\frac{1+(-1)^n}2\tilde c[n]=\begin{cases}
 \tilde c[n] & n\text{ even}\\
 0 & n\text{ odd}
@@ -848,8 +880,10 @@ $$s[n]=\frac{1+(-1)^n}2\tilde c[n]=\begin{cases}
 Then take the Z transform of $s$
 $$\begin{align}S(z) &= \sum_{n} \left( \tilde{c}[n] \cdot \frac{1 + (-1)^n}{2} \right) z^{-n}\\
 &= \frac{1}{2} \sum_{n} \tilde{c}[n] z^{-n} + \frac{1}{2} \sum_{n} \tilde{c}[n] ((-1)z)^{-n}\\
-&=\frac12\sq{\tilde C(z)+\tilde C(-z)}
+&=\frac12\sq{\tilde C(z)+\tilde C(-z)}\\
+\tilde C(z)&=S(z^{1/2})=\frac12\sq{\tilde C(z^{1/2})+\tilde C(-z^{1/2})}
 \end{align}$$
+$\endproof$
 
 # 5) Proofs
 **Kraft Inequality:**
