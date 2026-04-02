@@ -810,6 +810,26 @@ This works with the
 >and the coefficient is obtained by
 >$$c_k=<x(t),\phi_k(t)>=\int x(t)\phi_k^*(t)dt$$
 
+#### Filter Bank
+The idea is to divide the signal in two parts: high and low frequency. These will have their bandwidth halved and so they get decimated and interpolated with a factor of 2. These get recombined to get a delayed copy of the original signal.
+![[Pasted image 20260402131450.png|Filter Bank Scheme|350]]
+#### Perfect Reconstruction (PR)
+Let $x[k]$ be the original signal and $\tilde x[k]$ the signal after passing through the filter bank. Perfect reconstruction is achieved if $\tilde x[k]$ is a delayed copy of $x[k]$, that is:
+$$\tilde x_k=x_{k+l}\iff\tilde X(z)=z^{-l}X(z)$$
+Analyze the bank in the Z domain:
+We first pass through the filter:
+$$\tilde c[k]=(h_0*x)(k)\zetatrans \tilde C(z)=\sum_n\tilde c_nz^{-n}=H_0(z)X(z)$$
+Then decimate:
+$$c[k]=\tilde c[2k]\zetatrans C(z)=\frac12\sq{\tilde C(z^{1/2})+\tilde C(-z^{1/2})}$$
+
+
+---
+The decimation in frequency ($C(z)=\sum \tilde c[2k]z^{-k}$) is obtained by defining a sequence
+$$s[n]=\frac{1+(-1)^n}2\tilde c[n]=\begin{cases}
+\tilde c[n] & n\text{ even}\\
+0 & n\text{ odd}
+\end{cases}$$
+
 
 # 5) Proofs
 **Kraft Inequality:**
