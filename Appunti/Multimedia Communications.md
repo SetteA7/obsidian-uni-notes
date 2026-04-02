@@ -821,15 +821,35 @@ We first pass through the filter:
 $$\tilde c[k]=(h_0*x)(k)\zetatrans \tilde C(z)=\sum_n\tilde c_nz^{-n}=H_0(z)X(z)$$
 Then decimate:
 $$c[k]=\tilde c[2k]\zetatrans C(z)=\frac12\sq{\tilde C(z^{1/2})+\tilde C(-z^{1/2})}$$
+Then Interpolate:
+$$\hat c[k]=\begin{cases}
+c[k/2] & k\text{ even}\\
+0 & k\text{ odd}
+\end{cases}\zetatrans\hat C(z)=C(z^2)$$
+The same is done for $d\rightarrow \hat D(z)=D(z^2)$. And the output is the sum of these signals through the filters:
+$$\tilde x[k]=(f_0*\hat c)(k)+(f_1*\hat d)(k)\zetatrans F_0(z)C(z^2)+F_1(z)D(z^2)$$
+
 
 
 ---
+
+To interpolate we notice that the output becomes
+$$\hat c[k] = [c_0, c_1, c_2, \dots]\rightarrow{c}[n] = [c_0, 0, c_1, 0, c_2, 0, \dots]$$
+Since every second element is zero, we define the z transform with a index substitution $n=2k$
+$$C(z)=\sum_n c[n]z^{-n}=\sum_k  c[2k]z^{-2k}=\sum_k\hat c[k]z^{-2k}=\hat C(z^{2})$$
+With this in mind the decimation is similar:
+	To compute it we first define a signal $s[k]$ that is the interpolated signal of $\tilde c[k]$. From the earlier result we know that
 The decimation in frequency ($C(z)=\sum \tilde c[2k]z^{-k}$) is obtained by defining a sequence
 $$s[n]=\frac{1+(-1)^n}2\tilde c[n]=\begin{cases}
 \tilde c[n] & n\text{ even}\\
 0 & n\text{ odd}
-\end{cases}$$
+\end{cases}=[\tilde{c}[0], 0, \tilde{c}[2], 0, \tilde{c}[4], 0, \dots]$$
 
+Then take the Z transform of $s$
+$$\begin{align}S(z) &= \sum_{n} \left( \tilde{c}[n] \cdot \frac{1 + (-1)^n}{2} \right) z^{-n}\\
+&= \frac{1}{2} \sum_{n} \tilde{c}[n] z^{-n} + \frac{1}{2} \sum_{n} \tilde{c}[n] ((-1)z)^{-n}\\
+&=\frac12\sq{\tilde C(z)+\tilde C(-z)}
+\end{align}$$
 
 # 5) Proofs
 **Kraft Inequality:**
