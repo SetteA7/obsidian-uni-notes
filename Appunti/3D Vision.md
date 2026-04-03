@@ -248,11 +248,6 @@ $$vec(ABC)=(C^T\otimes A)vec(B)$$
 
 # 5) Stereo Systems
 Stereo system uses two views of the same scene to estimate depth. This si done via the disparity between points in a scene.
-
-Call $F$ the $3\times3$ **fundamental matrix** that encapsulates info about epipolar geometry
-$$F=[e']_\times Q'Q^{-1}$$
-such that the Lounget-Higgins equation becomes:
-$$m'^TFm=0$$
 #### Simple Triangulation
 Let two cameras be parallel and aligned (image plane corresponds), then by knowing:
 - $b$ distance between cameras. If unknown the distance is a scaling factor
@@ -262,23 +257,30 @@ Let two cameras be parallel and aligned (image plane corresponds), then by knowi
 The distance z is computed by
 $$z=\frac{bf}{u-u'}$$
 In this case the camera matrices are
-$$P=K[I|0]\qquad P'=K[I|(-b)^T]$$
+$$P=K[I|0]\qquad P'=K[I|(-b,0,0)^T]$$
 #### General Case
-In the generic case a stereo system is not in the ideal condition to estimate distance, however through homographies it is possible to do so.
-
-
+In the generic case a stereo system is not in the ideal condition to estimate distance using this formula
 $$\begin{bmatrix}
 p_1^TM-up_3^TM\\
 p_2^TM-vp_3^TM\\
 p_1'^TM-u'p_3'^TM\\
 p_2'^TM-v'p_3'^TM
 \end{bmatrix}=AM=0_{4\times 1}$$
-With a SVD ($A=U\Sigma V^T$) decomposition of A and by taking the last eigenvector (last vector of $V$) we get the solution. This can be generalized to $N$ cameras.
+With a SVD decomposition of A ($A=U\Sigma V^T$) and by taking the last eigenvector (last vector of $V$) we get the solution, that is the location of point $M$. This can be generalized to $N$ cameras.
 
-SVD finds the algebraic minimum, to minimize the geometric cost we can use
+SVD finds the algebraic minimum, to minimize the geometric cost we can use (find $M$ that minimizes)
 $$\epsilon(M)=\|\begin{bmatrix}u\\v\end{bmatrix}-\begin{bmatrix}\frac{p_1^TM}{p_3^TM}\\\frac{p_2^TM}{p_3^TM}\end{bmatrix}\|^2+
 \|\begin{bmatrix}u'\\v'\end{bmatrix}-\begin{bmatrix}\frac{p_1'^TM}{p_3'^TM}\\\frac{p_2'^TM}{p_3'^TM}\end{bmatrix}\|^2$$
+This however is harder to compute.
+
+
 **Suppose we know $m$ but not $m'$, it is possible to find $m'$ via the epipolar line.** This is because the ray of camera $C$ to point $M$ is seen by camera $C'$ as a line (epipolar line).
+
+Call $F$ the $3\times3$ **fundamental matrix** that encapsulates info about epipolar geometry
+$$F=[e']_\times Q'Q^{-1}$$
+such that the Lounget-Higgins equation becomes:
+$$m'^TFm=0$$
+The epipolar line is $l'=Fm$ so the equation tells us that $m'$ lies on $l'$.
 
 ---
 Proof of formula.
@@ -315,7 +317,7 @@ With a SVD ($A=U\Sigma V^T$) decomposition of A and by taking the last eigenvect
 $\endproof$
 
 #### Image Rectification
-Image rectification is the process of transforming the image so that the focal planes are the same (epipoles at infinite and vertical coordinates of conjugate points are the same). This allows us to find the distance using the simple triangulation.
+Image rectification is the process of transforming (using homographies) the image so that the focal planes are the same (epipoles at infinite and vertical coordinates of conjugate points are the same). This allows us to find the distance using the simple triangulation.
 ![[Pasted image 20260403185354.png|Rectification Process|300]]
 This is done by rotating around $C$ (or $C'$). This needs to be computed once, then if the cameras are not moved the rotation matrix is the same.
 
