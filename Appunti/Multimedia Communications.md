@@ -938,6 +938,8 @@ $\endproof$
 
 ## 4.2) Image Compression with Wavelets
 
+#### Embedded Zerotrees of Wavelet Coefficients (EZW)
+
 
 # 5) Proofs
 **Kraft Inequality:**
