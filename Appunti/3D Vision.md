@@ -276,7 +276,7 @@ With a SVD ($A=U\Sigma V^T$) decomposition of A and by taking the last eigenvect
 SVD finds the algebraic minimum, to minimize the geometric cost we can use
 $$\epsilon(M)=\|\begin{bmatrix}u\\v\end{bmatrix}-\begin{bmatrix}\frac{p_1^TM}{p_3^TM}\\\frac{p_2^TM}{p_3^TM}\end{bmatrix}\|^2+
 \|\begin{bmatrix}u'\\v'\end{bmatrix}-\begin{bmatrix}\frac{p_1'^TM}{p_3'^TM}\\\frac{p_2'^TM}{p_3'^TM}\end{bmatrix}\|^2$$
-**Suppose we know $m$ but not $m'$, it is possible to find $m'$ via the epipolar line.**
+**Suppose we know $m$ but not $m'$, it is possible to find $m'$ via the epipolar line.** This is because the ray of camera $C$ to point $M$ is seen by camera $C'$ as a line (epipolar line).
 
 ---
 Proof of formula.
@@ -313,3 +313,10 @@ With a SVD ($A=U\Sigma V^T$) decomposition of A and by taking the last eigenvect
 $\endproof$
 
 #### Image Rectification
+Image rectification is the process of transforming the image so that the focal planes are the same (epipoles at infinite and vertical coordinates of conjugate points are the same). This allows us to find the distance using the simple triangulation.
+![[Pasted image 20260403185354.png|Rectification Process|300]]
+This is done by rotating around $C$ (or $C'$). This needs to be computed once, then if the cameras are not moved the rotation matrix is the same.
+
+
+
+
