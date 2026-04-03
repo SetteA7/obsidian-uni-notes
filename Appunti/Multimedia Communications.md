@@ -794,6 +794,7 @@ The standard frame follows this logic:
 
 JFIF (JPEG File Interchange Format) is the standard format for metadata in JPEG files 
 # 4) Wavelet
+## 4.1) Discrete Wavelet Transform
 Recall the principle of a spectrum analyzer (short time fourier transform) ([[DSP 2]]). Frequency and time resolutions are inversely proportional to each other
 $$\text{Heisenberg-like Uncertainty principle: }\Delta t\cdot \Delta f\geq \frac1{4\pi}$$
 Wavelet is the tool that allows the block of the JPEG to scale dynamically based on frequency (high frequency, smaller blocks. Low frequency, large blocks). In fact an image is made of two parts:
@@ -875,6 +876,21 @@ They work by decomposing the signal into three wavelets
 ![[Pasted image 20260403162823.png|Three wavelet decomposition|350]]
 and then reconstructing the signal in order.
 
+#### 2D Wavelet Decomposition
+For 2D signals it is possible to use this schema:
+![[Pasted image 20260403163646.png|2D|350]]
+and for multi level decomposition just the output $c_i$ is used.
+The 4 outpust are:
+- $c$ (A): approximation coefficients (low res version of og image by LP filter in both directions)
+- $d^H$ (H): horizontal HP (HP on rows, LP on cols)
+- $d^V$ (V): vertical HP (HP on cols, LP on rows)
+- $d^D$: diagonal details
+
+Applying this sparsifies the signal:
+![[Pasted image 20260403164118.png|One Level|350]]
+![[Pasted image 20260403164140.png|5 Levels|350]]
+the optimal levels are between 4-6.
+
 
 
 ---
@@ -919,6 +935,9 @@ $$\begin{align}S(z) &= \sum_{n} \left( \tilde{c}[n] \cdot \frac{1 + (-1)^n}{2} \
 \tilde C(z)&=S(z^{1/2})=\frac12\sq{\tilde C(z^{1/2})+\tilde C(-z^{1/2})}
 \end{align}$$
 $\endproof$
+
+## 4.2) Image Compression with Wavelets
+
 
 # 5) Proofs
 **Kraft Inequality:**
