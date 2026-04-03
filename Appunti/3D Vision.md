@@ -248,10 +248,16 @@ $$vec(ABC)=(C^T\otimes A)vec(B)$$
 
 # 5) Stereo Systems
 Stereo system uses two views of the same scene to estimate depth. This si done via the disparity between points in a scene.
+
+This chapter will follow this structure:
+- Understand the basic case (simple triangulation)
+- Understand the general case and how this tells us that conjugate points are on the same epipolar line
+- Rectify the images so that the generic case becomes the simple triangulation case
+- Given $m$ find the matching point $m'$ 
 #### Simple Triangulation
 Let two cameras be parallel and aligned (image plane corresponds), then by knowing:
 - $b$ distance between cameras. If unknown the distance is a scaling factor
-- $f$
+- $f$ focal distance
 - $(u-u')$ disparity between two points
 
 The distance z is computed by
@@ -259,28 +265,30 @@ $$z=\frac{bf}{u-u'}$$
 In this case the camera matrices are
 $$P=K[I|0]\qquad P'=K[I|(-b,0,0)^T]$$
 #### General Case
-In the generic case a stereo system is not in the ideal condition to estimate distance using this formula
-$$\begin{bmatrix}
-p_1^TM-up_3^TM\\
-p_2^TM-vp_3^TM\\
-p_1'^TM-u'p_3'^TM\\
-p_2'^TM-v'p_3'^TM
-\end{bmatrix}=AM=0_{4\times 1}$$
-With a SVD decomposition of A ($A=U\Sigma V^T$) and by taking the last eigenvector (last vector of $V$) we get the solution, that is the location of point $M$. This can be generalized to $N$ cameras.
-
-SVD finds the algebraic minimum, to minimize the geometric cost we can use (find $M$ that minimizes)
-$$\epsilon(M)=\|\begin{bmatrix}u\\v\end{bmatrix}-\begin{bmatrix}\frac{p_1^TM}{p_3^TM}\\\frac{p_2^TM}{p_3^TM}\end{bmatrix}\|^2+
-\|\begin{bmatrix}u'\\v'\end{bmatrix}-\begin{bmatrix}\frac{p_1'^TM}{p_3'^TM}\\\frac{p_2'^TM}{p_3'^TM}\end{bmatrix}\|^2$$
-This however is harder to compute.
-
-
 **Suppose we know $m$ but not $m'$, it is possible to find $m'$ via the epipolar line.** This is because the ray of camera $C$ to point $M$ is seen by camera $C'$ as a line (epipolar line).
 
 Call $F$ the $3\times3$ **fundamental matrix** that encapsulates info about epipolar geometry
 $$F=[e']_\times Q'Q^{-1}$$
 such that the Lounget-Higgins equation becomes:
 $$m'^TFm=0$$
-The epipolar line is $l'=Fm$ so the equation tells us that $m'$ lies on $l'$.
+The epipolar line is $l'=Fm$ so the equation tells us that $m'$ lies on $l'$. 
+
+Now suppose that the matching points are known:
+In the generic case a stereo system is not in the ideal condition. The generic cameras are
+$$P=\begin{bmatrix}p_1^T\\p_2^T\\p_3^T\end{bmatrix}\qquad P'=\begin{bmatrix}p_1'^T\\ p_2'^T\\ p_3'^T\end{bmatrix}$$
+Knowing the two matching points, the point in 3d space $M$ is found by solving this equation
+$$\begin{bmatrix}
+p_1^TM-up_3^TM\\
+p_2^TM-vp_3^TM\\
+p_1'^TM-u'p_3'^TM\\
+p_2'^TM-v'p_3'^TM
+\end{bmatrix}=AM=0_{4\times 1}$$
+With a SVD decomposition of A ($A=U\Sigma V^T$) and by taking the last eigenvector (last vector of $V$) we get the solution. This can be generalized to $N$ cameras.
+
+Since in real case scenarios due to noise the points don't lie on the epipolar line but slightly diverge, then SVD finds the algebraic minimum, to minimize the geometric cost we can use (find $M$ that minimizes)
+$$\epsilon(M)=\|\begin{bmatrix}u\\v\end{bmatrix}-\begin{bmatrix}\frac{p_1^TM}{p_3^TM}\\\frac{p_2^TM}{p_3^TM}\end{bmatrix}\|^2+
+\|\begin{bmatrix}u'\\v'\end{bmatrix}-\begin{bmatrix}\frac{p_1'^TM}{p_3'^TM}\\\frac{p_2'^TM}{p_3'^TM}\end{bmatrix}\|^2\rightarrow M=\arg\min_M\epsilon(M)$$
+This however is harder to compute.
 
 ---
 Proof of formula.
@@ -315,6 +323,17 @@ p_2'^TM-v'p_3'^TM
 \end{bmatrix}=AM=0_{4\times 1}$$
 With a SVD ($A=U\Sigma V^T$) decomposition of A and by taking the last eigenvector (last vector of $V$) we get the solution. This can be generalized to $N$ cameras.
 $\endproof$
+
+---
+Proof that in the simple case the matching points are on the epipolar lines:
+Let
+$$P=K[I|0]\qquad P'=K[I|t=(-b,0,0)^T]$$
+Find $[t]_\times$:
+$$[\mathbf{t}]_\times = \begin{bmatrix} 0 & -t_z & t_y \\ t_z & 0 & -t_x \\ -t_y & t_x & 0 \end{bmatrix} = \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & b \\ 0 & -b & 0 \end{bmatrix}$$
+Since there is no rotation, $Q'Q^{-1}=I$ and the fundamental matrix is $F=[t]_\times I=[t]_\times$, then the epipolar line is:
+$$l' = F m = \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & b \\ 0 & -b & 0 \end{bmatrix} \begin{bmatrix} u \\ v \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ b \\ -bv \end{bmatrix}$$
+The Lounget-Higgins equation now is:
+$$m'^TFm=\begin{bmatrix}u'\\ v'\\1\end{bmatrix}\begin{bmatrix} 0 & b & -bv \end{bmatrix}=u'\cdot 0+v'\cdot b-1\cdot bv=0$$
 
 #### Image Rectification
 Image rectification is the process of transforming (using homographies) the image so that the focal planes are the same (epipoles at infinite and vertical coordinates of conjugate points are the same). This allows us to find the distance using the simple triangulation.
