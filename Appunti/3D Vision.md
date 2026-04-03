@@ -333,8 +333,22 @@ $$[\mathbf{t}]_\times = \begin{bmatrix} 0 & -t_z & t_y \\ t_z & 0 & -t_x \\ -t_y
 Since there is no rotation, $Q'Q^{-1}=I$ and the fundamental matrix is $F=[t]_\times I=[t]_\times$, then the epipolar line is:
 $$l' = F m = \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & b \\ 0 & -b & 0 \end{bmatrix} \begin{bmatrix} u \\ v \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ b \\ -bv \end{bmatrix}$$
 The Lounget-Higgins equation now is:
-$$m'^TFm=\begin{bmatrix}u'\\ v'\\1\end{bmatrix}\begin{bmatrix} 0 & b & -bv \end{bmatrix}=u'\cdot 0+v'\cdot b-1\cdot bv=0$$
+$$m'^TFm=\begin{bmatrix} u' & v' & 1 \end{bmatrix} \begin{bmatrix} 0 \\ b \\ -bv \end{bmatrix}=(u' \cdot 0) + (v' \cdot b) + (1 \cdot -bv) = b(v' - v)=0\stackrel{b\not =0}\rightarrow v'=v$$
+they are on the same epipolar line (horizontal) $m=[u,v,1], \ m'=[u'=u+d,v',1]$
+$\endproof$
+In the general case we have
+$$P=K\begin{bmatrix}I|0\end{bmatrix}\qquad P'=K'\begin{bmatrix}R|t\end{bmatrix}$$
+assume that $K=K'=I$. The optical ray of the first image and going to point $M$ is:
+$$M=\lambda \begin{bmatrix}m\\1\end{bmatrix}=\lambda\hat m$$
+These points are projected onto the second camera
+$$q'm'=\lambda Rm+t$$
+Multiply by $t$ to remove scalars (recall $t\times t=0$) and multiply by $m'$ to remove left term (recall $t\times m'\perp m'$)
+$$ t\times(q'm')=t\times(\lambda Rm+t)\rightarrow q' (\mathbf{t} \times m') = \lambda (\mathbf{t} \times R m)\rightarrow m'^T(t\times Rm)=0$$
+where $F=t\times R$ is the fundamental matrix
+$\endproof$
 
+
+---
 #### Image Rectification
 Image rectification is the process of transforming (using homographies) the image so that the focal planes are the same (epipoles at infinite and vertical coordinates of conjugate points are the same). This allows us to find the distance using the simple triangulation.
 ![[Pasted image 20260403185354.png|Rectification Process|300]]
@@ -400,3 +414,5 @@ ZNCC(u,v,d)=&\frac1{(2n+1)(2m+1)}\ \cdot\\
 with
 $$\sigma(u+v)=\frac1{(2n+1)(2m+1)}\sum_{k,l}(I(u+k,v+l)-M(u,v))^2$$
 **Census Transform**
+This transform the window in a binary string and then calcul
+
