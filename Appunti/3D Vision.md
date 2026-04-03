@@ -317,6 +317,37 @@ Image rectification is the process of transforming the image so that the focal p
 ![[Pasted image 20260403185354.png|Rectification Process|300]]
 This is done by rotating around $C$ (or $C'$). This needs to be computed once, then if the cameras are not moved the rotation matrix is the same.
 
+#### Conjugate Points Matching
+Since the cameras are differently orientated, some matches can be wrong for various reasons:
+- **False matches:** given by sift
+- **Occlusion:** due to parallax some points can be occluded in one image and be visible in the other
+- **Radiometric Distortion:** different lighting conditions based on different angles
+- **Perspective Distortion:** change of geometry based on different angles
 
+The constraints we are looking for are:
+- **Similarity:** similar pixels in both images
+- **Epipolar Geometry:** the correspondence is only o the epipolar line
+- **Smoothness:** close pixels have approx same disparity if on same region
+- **Uniqueness:** no double matches
+- **Ordering:** position depends on camera itself
 
+There are two different classes of algorithms (methods)
+- **Local Methods:** uses local characteristic that affects small regions at a time
+- **Global Methods:** constraint on whole scan line or entire image
 
+##### Local method: Block Matching
+Block matching is a local method that can be summarized by the following passages.
+- Around each pixel $m=(u,v)$,and its conjugate candidate $m'=(u+d,v)$ it selects a block of $(2n+1)\times(2m+1)$ pixels
+- Compute a coupling metric between the block around $m$ and $m'$
+- Operation repeated for different disparity values $d\in[d_\min,d_\max]$
+- Find $d$ that minimizes/maximizes the metric
+
+Various metrics can be used based on:
+- correlation
+- intensity difference (SSD. SAD)
+- rank operators
+
+These metrics are for dense estimation, find matching point for all pixels (in theory)
+
+**Sum of Squared Difference (SSD):**
+$$SSD(u,v,d)=\sum_{k,l}(I_1())$$
