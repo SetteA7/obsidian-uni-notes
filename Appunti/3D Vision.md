@@ -251,3 +251,36 @@ Call $F$ the $3\times3$ **fundamental matrix** that encapsulates info about epip
 $$F=[e']_\times Q'Q^{-1}$$
 such that the Lounget-Higgins equation becomes:
 $$m'^TFm=0$$
+
+In the generic case a stereo system is not in the ideal condition to estimate distance, however through homographies it is possible to do so 
+
+Let there be 2 cameras with matrices:
+$$P=\begin{bmatrix}p_1^T\\p_2^T\\p_3^T\end{bmatrix}\qquad P'=\begin{bmatrix}p_1'^T\\ p_2'^T\\ p_3'^T\end{bmatrix}$$
+where at the i-th row we have the vector $p_i^T$
+$$\begin{bmatrix}u\\v\\1\end{bmatrix}=qPM\rightarrow \begin{cases}
+u=p_1^TM\\
+v=p_2^TM\\
+1=p_3^TM
+\end{cases}\rightarrow 
+\begin{cases}
+u(p_3^TM)=p_1^TM\\
+v(p_3^TM)=p_2^TM\\
+\end{cases}\rightarrow 
+\begin{cases}
+p_1^TM-up_3^TM=0\\
+p_2^TM-vp_3^TM=0\\
+\end{cases}
+$$
+and the final system of linear equations in matrix form becomes (for each camera)
+$$\begin{bmatrix}
+p_1^TM-up_3^TM\\
+p_2^TM-vp_3^TM\\
+\end{bmatrix}=0_{2\times 1}$$
+combining both cameras we obtain
+$$\begin{bmatrix}
+p_1^TM-up_3^TM\\
+p_2^TM-vp_3^TM\\
+p_1'^TM-up_3'^TM\\
+p_2'^TM-vp_3'^TM
+\end{bmatrix}=AM=0_{4\times 1}$$
+With a SVD decomposition of A and by taking the last eigenvector we get the solution
