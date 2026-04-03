@@ -247,13 +247,39 @@ $$vec(ABC)=(C^T\otimes A)vec(B)$$
 ## 4.2) Epipolar Geometry
 
 # 5) Stereo Systems
+Stereo system uses two views of the same scene to estimate depth. This si done via the disparity between points in a scene.
+
 Call $F$ the $3\times3$ **fundamental matrix** that encapsulates info about epipolar geometry
 $$F=[e']_\times Q'Q^{-1}$$
 such that the Lounget-Higgins equation becomes:
 $$m'^TFm=0$$
+#### Simple Triangulation
+Let two cameras be parallel and aligned (image plane corresponds), then by knowing:
+- $b$ distance between cameras. If unknown the distance is a scaling factor
+- $f$
+- $(u-u')$ disparity between two points
 
-In the generic case a stereo system is not in the ideal condition to estimate distance, however through homographies it is possible to do so 
+The distance z is computed by
+$$z=\frac{bf}{u'-u}$$
+#### General Case
+In the generic case a stereo system is not in the ideal condition to estimate distance, however through homographies it is possible to do so.
 
+
+$$\begin{bmatrix}
+p_1^TM-up_3^TM\\
+p_2^TM-vp_3^TM\\
+p_1'^TM-u'p_3'^TM\\
+p_2'^TM-v'p_3'^TM
+\end{bmatrix}=AM=0_{4\times 1}$$
+With a SVD ($A=U\Sigma V^T$) decomposition of A and by taking the last eigenvector (last vector of $V$) we get the solution. This can be generalized to $N$ cameras.
+
+SVD finds the algebraic minimum, to minimize the geometric cost we can use
+$$\epsilon(M)=\|\begin{bmatrix}u\\v\end{bmatrix}-\begin{bmatrix}\frac{p_1^TM}{p_3^TM}\\\frac{p_2^TM}{p_3^TM}\end{bmatrix}\|^2+
+\|\begin{bmatrix}u'\\v'\end{bmatrix}-\begin{bmatrix}\frac{p_1'^TM}{p_3'^TM}\\\frac{p_2'^TM}{p_3'^TM}\end{bmatrix}\|^2$$
+**Suppose we know $m$ but not $m'$, it is possible to find $m'$ via the epipolar line.**
+
+---
+Proof of formula.
 Let there be 2 cameras with matrices:
 $$P=\begin{bmatrix}p_1^T\\p_2^T\\p_3^T\end{bmatrix}\qquad P'=\begin{bmatrix}p_1'^T\\ p_2'^T\\ p_3'^T\end{bmatrix}$$
 where at the i-th row we have the vector $p_i^T$
@@ -280,7 +306,10 @@ combining both cameras we obtain
 $$\begin{bmatrix}
 p_1^TM-up_3^TM\\
 p_2^TM-vp_3^TM\\
-p_1'^TM-up_3'^TM\\
-p_2'^TM-vp_3'^TM
+p_1'^TM-u'p_3'^TM\\
+p_2'^TM-v'p_3'^TM
 \end{bmatrix}=AM=0_{4\times 1}$$
-With a SVD decomposition of A and by taking the last eigenvector we get the solution
+With a SVD ($A=U\Sigma V^T$) decomposition of A and by taking the last eigenvector (last vector of $V$) we get the solution. This can be generalized to $N$ cameras.
+$\endproof$
+
+#### Image Rectification
