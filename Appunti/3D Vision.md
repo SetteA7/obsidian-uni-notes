@@ -247,3 +247,7 @@ $$vec(ABC)=(C^T\otimes A)vec(B)$$
 ## 4.2) Epipolar Geometry
 
 # 5) Stereo Systems
+Call $F$ the $3\times3$ **fundamental matrix** that encapsulates info about epipolar geometry
+$$F=[e']_\times Q'Q^{-1}$$
+such that the Lounget-Higgins equation becomes:
+$$m'^TFm=0$$
