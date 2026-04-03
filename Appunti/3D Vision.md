@@ -357,7 +357,7 @@ This is done by rotating around $C$ (or $C'$). This needs to be computed once, t
 #### Conjugate Points Matching
 Since the cameras are differently orientated, some matches can be wrong for various reasons:
 - **False matches:** given by sift
-- **Occlusion:** due to parallax some points can be occluded in one image and be visible in the other
+- **Occlusion:** due to parallax some points can be occluded in one image and be visible in the other. *Their identification is important*
 - **Radiometric Distortion:** different lighting conditions based on different angles
 - **Perspective Distortion:** change of geometry based on different angles
 
@@ -386,11 +386,18 @@ Various metrics can be used based on:
 
 These metrics are for dense estimation, find matching point for all pixels (in theory)
 
-**Sum of Squared Difference (SSD):**
+Small window: not reliable disparity, only reliable if signal is highly variable in the window
+Large window: noisy measurments
+
+A solution is to use multi resolution windows or fixed windows.
+
+###### **Sum of Squared Difference (SSD):**
+Minimize
 $$SSD(u,v,d)=\sum_{k,l}(I_1(u+k,v+l)-I_2(u+k+d,v+l))^2\quad k\in[-n,n]\  l\in[-m,m]$$
 Then minimize it
 $$d_0(u,v)=\arg\min_{d\in[-d_\max,d_\max]}SSD(u,v,d)$$
-**Sum of Absolute Differences (SAD)**
+###### **Sum of Absolute Differences (SAD)**
+Minimize
 $$SAD(u,v,d)=\sum_{k,l}|I_1(u+k,v+l)-I_2(u+k+d,v+l)|\quad k\in[-n,n]\  l\in[-m,m]$$
 And again minimize it
 
@@ -401,11 +408,14 @@ This is better than SAD since:
 
 larger block size smooths the output.
 
-**Normalized Cross Correlation (NCC)**
+###### **Normalized Cross Correlation (NCC)**
+Maximize
 $$NCC(u,v,d)=\frac1{(2n+1)(2m+1)}\sum_{k,l}\frac{I_1(u+k,v+l)I_2(u+k+d,v+l)}{\sqrt{M_1(u,v)}\sqrt{M_2(u+d,v)}}$$
 where $M$ is the mean intensity of the block
 $$M=\frac1{(2n+1)(2,+1)}\sum_{k,l} I(u+k,v+l)^2$$
-**Zero-Mean Normalized Cross Correlation (ZNCC)**
+
+###### **Zero-Mean Normalized Cross Correlation (ZNCC)**
+Maximize
 This is invariant to illumination changes as it normalizes with the window average ($M$) and variance ($\sigma$)
 $$\begin{align}
 ZNCC(u,v,d)=&\frac1{(2n+1)(2m+1)}\ \cdot\\
@@ -413,6 +423,24 @@ ZNCC(u,v,d)=&\frac1{(2n+1)(2m+1)}\ \cdot\\
 \end{align}$$
 with
 $$\sigma(u+v)=\frac1{(2n+1)(2m+1)}\sum_{k,l}(I(u+k,v+l)-M(u,v))^2$$
-**Census Transform**
-This transform the window in a binary string and then calcul
+###### **Census Transform**
+Minimize
+This transform the window in a binary string and then calculates the humming distance between windows
+The function that transforms two pixels into a bit is:
+$$\varepsilon(I,p,p')=\begin{cases}
+1 & I(p)>I(p')\\
+0
+\end{cases}$$
+And the block is found by concatenating ($S$ is the block)
+$$C[I(p)]=\bigodot_{p'\in S}\varepsilon(I,p,p')$$
+![[Pasted image 20260403202226.png|Example|250]]
 
+
+
+The **Sum of Census Hamming Distances (SCH)** is
+$$SCH(u,v,d)=\sum_{k,l}C[I_1(u+k,v+l]\ominus C[I_2(u+k+d,v+l)]$$
+This is:
+- invariant to changes in gain, bias, illumination
+- robust to occlusion
+- can be parallelized
+- only computes on integers (fast and precise)
