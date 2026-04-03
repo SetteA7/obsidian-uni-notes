@@ -177,7 +177,7 @@ Animating them via key poses is not trivial for complex motions: we resort to **
 
 However real life movements do not work precisely for animation (12 rules of animation) and some very complex elements (hair, water, physiscs) are simulated.
 
-#### Homography Estimation
+# 4) Homography Estimation
 3D objects need to be localized in the image.
 >[!def] Homography
 >Homography is the function that maps points of plane $\Pi$ on the image plane
@@ -244,4 +244,6 @@ $$vec(ABC)=(C^T\otimes A)vec(B)$$
 
 ----
 
-## 3.2) Epipolar Geometry
+## 4.2) Epipolar Geometry
+
+# 5) Stereo Systems

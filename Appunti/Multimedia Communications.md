@@ -936,7 +936,7 @@ $$\begin{align}S(z) &= \sum_{n} \left( \tilde{c}[n] \cdot \frac{1 + (-1)^n}{2} \
 \end{align}$$
 $\endproof$
 
-## 4.2) Image Compression with Wavelets
+## 4.2) Image Compression with Wavelets (TODO)
 
 #### Embedded Zerotrees of Wavelet Coefficients (EZW)
 
