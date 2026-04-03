@@ -260,7 +260,9 @@ Let two cameras be parallel and aligned (image plane corresponds), then by knowi
 - $(u-u')$ disparity between two points
 
 The distance z is computed by
-$$z=\frac{bf}{u'-u}$$
+$$z=\frac{bf}{u-u'}$$
+In this case the camera matrices are
+$$P=K[I|0]\qquad P'=K[I|(-b)^T]$$
 #### General Case
 In the generic case a stereo system is not in the ideal condition to estimate distance, however through homographies it is possible to do so.
 
@@ -340,14 +342,40 @@ Block matching is a local method that can be summarized by the following passage
 - Around each pixel $m=(u,v)$,and its conjugate candidate $m'=(u+d,v)$ it selects a block of $(2n+1)\times(2m+1)$ pixels
 - Compute a coupling metric between the block around $m$ and $m'$
 - Operation repeated for different disparity values $d\in[d_\min,d_\max]$
-- Find $d$ that minimizes/maximizes the metric
+- Find $d_0(u,v)$ that minimizes/maximizes the metric
 
 Various metrics can be used based on:
-- correlation
-- intensity difference (SSD. SAD)
-- rank operators
+- correlation (NCC, ZNCC) (maximize)
+- intensity difference (SSD. SAD) (minimize)
+- rank operators (census) (minimize)
 
 These metrics are for dense estimation, find matching point for all pixels (in theory)
 
 **Sum of Squared Difference (SSD):**
-$$SSD(u,v,d)=\sum_{k,l}(I_1())$$
+$$SSD(u,v,d)=\sum_{k,l}(I_1(u+k,v+l)-I_2(u+k+d,v+l))^2\quad k\in[-n,n]\  l\in[-m,m]$$
+Then minimize it
+$$d_0(u,v)=\arg\min_{d\in[-d_\max,d_\max]}SSD(u,v,d)$$
+**Sum of Absolute Differences (SAD)**
+$$SAD(u,v,d)=\sum_{k,l}|I_1(u+k,v+l)-I_2(u+k+d,v+l)|\quad k\in[-n,n]\  l\in[-m,m]$$
+And again minimize it
+
+This is better than SAD since:
+- is less sensitive to noise
+- requires well limited complexity
+- better functions can be defined such as Cauchy Functios
+
+larger block size smooths the output.
+
+**Normalized Cross Correlation (NCC)**
+$$NCC(u,v,d)=\frac1{(2n+1)(2m+1)}\sum_{k,l}\frac{I_1(u+k,v+l)I_2(u+k+d,v+l)}{\sqrt{M_1(u,v)}\sqrt{M_2(u+d,v)}}$$
+where $M$ is the mean intensity of the block
+$$M=\frac1{(2n+1)(2,+1)}\sum_{k,l} I(u+k,v+l)^2$$
+**Zero-Mean Normalized Cross Correlation (ZNCC)**
+This is invariant to illumination changes as it normalizes with the window average ($M$) and variance ($\sigma$)
+$$\begin{align}
+ZNCC(u,v,d)=&\frac1{(2n+1)(2m+1)}\ \cdot\\
+&\cdot \sum_{k,l}\frac{(I_1(u+k,v+l)-M_1(u,v))(I_2(u+k+d,v+l)-M_2(u+d,v))}{\sigma_1{(u,v)}\sigma_2{(u+d,v)}}
+\end{align}$$
+with
+$$\sigma(u+v)=\frac1{(2n+1)(2m+1)}\sum_{k,l}(I(u+k,v+l)-M(u,v))^2$$
+**Census Transform**
