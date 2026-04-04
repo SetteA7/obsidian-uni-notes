@@ -264,6 +264,7 @@ The distance z is computed by
 $$z=\frac{bf}{u-u'}$$
 In this case the camera matrices are
 $$P=K[I|0]\qquad P'=K[I|(-b,0,0)^T]$$
+## 5.2) Passive Stereo Systems
 #### General Case
 **Suppose we know $m$ but not $m'$, it is possible to find $m'$ via the epipolar line.** This is because the ray of camera $C$ to point $M$ is seen by camera $C'$ as a line (epipolar line).
 
@@ -444,3 +445,6 @@ This is:
 - robust to occlusion
 - can be parallelized
 - only computes on integers (fast and precise)
+
+
+## 5.3) Active Stereo Systems
