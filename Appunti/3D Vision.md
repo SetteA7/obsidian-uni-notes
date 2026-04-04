@@ -448,3 +448,15 @@ This is:
 
 
 ## 5.3) Active Stereo Systems
+Recall that given the pixel size $p_u,p_v$ the coordinates must be scaled by $k_i=1/p_i$ and the pixels are therefore interpolated.
+
+>[!exercise|*]
+>Suppose we have a stereo system with:
+>![[Pasted image 20260404161947.png|Parameters|300]]
+>What is the **maximum measurable distance?** Assume minimum disparity = 1 and rectified cameras.
+>Recall the distance formula:
+>$$z=\frac{bf}{\Delta u}$$
+>from the table we get: $b=0.15 \unit{m}, f=0.0018\unit m$.
+>
+
+$$\db$$
