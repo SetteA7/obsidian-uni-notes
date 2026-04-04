@@ -517,7 +517,15 @@ In the case of 1 projector and 1 camera we have that the relation of the point $
 $$M_p=RM_c+t$$
 The distance can be estimated by knowing the rotation between the two cameras $R$, their traslation $t$ and the point $u_p$ of the camera image plane.
 $$z_c=\frac{t_1-t_3u_p}{(u_pr_1^T-r_3^T)p_c}$$
-It is possible to use multiple stripes with $N$ different patterns to estimate multiple points at once:
+
+It is possible to use multiple stripes with $N$ different patterns to estimate multiple points at once: 
+TODO
+##### Structured light depth camera
+These cameras are based on active triangulation (kinect and others).
+
+The kinect camera projects an IR pattern on the scene. The pattern is know and when the camera captures the image, it calculates the disparity between the pattern and the captured image. Using the disparity the distance can be found by:
+$$z=0.1236\tan\par{\frac{D(u,v)}{2842.5}}$$
+
 
 
 ---
@@ -583,4 +591,8 @@ z_p-z_cr_3^Tp_c=t_3
 \end{cases}$$
 $v_p$ cannot be estimated so we remove that equation, we can now solve the system and we get:
 $$z_c=\frac{t_1-t_3u_p}{(u_pr_1^T-r_3^T)p_c}$$
+This is actually the generalized disparity case.
 $\endproof$
+Proof of simple active triangulation:
+Lets return to the case of simple triangulation $R=I$ and $t=[-b,0,0]^T$. The formula now becomes:
+$$z_c = \frac{-b - (0 \cdot u_p)}{(u_p [1, 0, 0] - [0, 0, 1]) \begin{bmatrix} u_c \\ v_c \\ 1 \end{bmatrix}}=\frac{-b}{u_pu_c-1}=\frac b{1-u_pu_c}$$
