@@ -149,10 +149,12 @@ where $\lambda$ is the variable of the ray that selects the point on the line ba
 >$$P=Q+t'V$$
 >and the intersection happens at distance $\|P-S\|$ from $S$.
 
-# 2) Illumination
+
+# 2) Rendering Techniques
+## 2.1) Illumination
 z-buffer vs raster vs ray tracing
 todo
-# 3) Animation
+## 2.2) Animation
 3D animation is the spiritual successor of stop motion animation. Some key frames are specified with some key poses and the remaining frames are interpolated.
 
 Uncanny valley: human characters result disturbing
@@ -177,7 +179,7 @@ Animating them via key poses is not trivial for complex motions: we resort to **
 
 However real life movements do not work precisely for animation (12 rules of animation) and some very complex elements (hair, water, physiscs) are simulated.
 
-# 4) Homography Estimation
+# 3) Homography Estimation
 3D objects need to be localized in the image.
 >[!def] Homography
 >Homography is the function that maps points of plane $\Pi$ on the image plane
@@ -244,9 +246,9 @@ $$vec(ABC)=(C^T\otimes A)vec(B)$$
 
 ----
 
-## 4.2) Epipolar Geometry
+## 3.2) Epipolar Geometry
 
-# 5) Stereo Systems
+# 4) Stereo Systems
 Stereo system uses two views of the same scene to estimate depth. This si done via the disparity between points in a scene.
 
 This chapter will follow this structure:
@@ -264,7 +266,7 @@ The distance z is computed by
 $$z=\frac{bf}{u-u'}$$
 In this case the camera matrices are
 $$P=K[I|0]\qquad P'=K[I|(-b,0,0)^T]$$
-## 5.2) Passive Stereo Systems
+## 4.2) Passive Stereo Systems
 #### General Case
 **Suppose we know $m$ but not $m'$, it is possible to find $m'$ via the epipolar line.** This is because the ray of camera $C$ to point $M$ is seen by camera $C'$ as a line (epipolar line).
 
@@ -493,7 +495,7 @@ P_4:\Delta z_=112 \unit m
 >
 
 
-## 5.3) Active Stereo Systems
+## 4.3) Active Stereo Systems
 Active stereo systems are used to illuminate the world with a light source (projector) and then using this additional information on the passive stereo system.
 
 This can be done via **Active Stereo Methods**:
@@ -516,7 +518,7 @@ Todo
 In the case of 1 projector and 1 camera we have that the relation of the point $M$ in the world coordinates of the two cameras is:
 $$M_p=RM_c+t$$
 The distance can be estimated by knowing the rotation between the two cameras $R$, their traslation $t$ and the point $u_p$ of the camera image plane.
-$$z_c=\frac{t_1-t_3u_p}{(u_pr_1^T-r_3^T)p_c}$$
+$$z_c=\frac{t_1-t_3u_p}{(u_pr_3^T-r_1^T)p_c}$$
 
 It is possible to use multiple stripes with $N$ different patterns to estimate multiple points at once: 
 TODO
@@ -526,7 +528,13 @@ These cameras are based on active triangulation (kinect and others).
 The kinect camera projects an IR pattern on the scene. The pattern is know and when the camera captures the image, it calculates the disparity between the pattern and the captured image. Using the disparity the distance can be found by:
 $$z=0.1236\tan\par{\frac{D(u,v)}{2842.5}}$$
 
+The pixel difference is of form $u_c=u_p+d$ 
 
+Pros and cons:
+todo
+
+Coding:
+todo
 
 ---
 
@@ -590,9 +598,16 @@ z_pv_p-z_cr_2^Tp_c=t_2\\
 z_p-z_cr_3^Tp_c=t_3
 \end{cases}$$
 $v_p$ cannot be estimated so we remove that equation, we can now solve the system and we get:
-$$z_c=\frac{t_1-t_3u_p}{(u_pr_1^T-r_3^T)p_c}$$
+$$z_c=\frac{t_1-t_3u_p}{(u_pr_3^T-r_1^T)p_c}$$
 This is actually the generalized disparity case.
 $\endproof$
 Proof of simple active triangulation:
 Lets return to the case of simple triangulation $R=I$ and $t=[-b,0,0]^T$. The formula now becomes:
-$$z_c = \frac{-b - (0 \cdot u_p)}{(u_p [1, 0, 0] - [0, 0, 1]) \begin{bmatrix} u_c \\ v_c \\ 1 \end{bmatrix}}=\frac{-b}{u_pu_c-1}=\frac b{1-u_pu_c}$$
+$$z_c = \frac{-b - (0 \cdot u_p)}{(u_p [0, 0, 1] - [1, 0, 0]) \begin{bmatrix} u_c \\ v_c \\ 1 \end{bmatrix}}=\frac{-b}{u_p-u_c}$$
+this reduces to the disparity.
+Otherwise solve directly the system (recall $z_p=z_c=z$):
+$$z_pp_c-z_cRp_c=t\rightarrow z \begin{bmatrix} u_p \\ v_p \\ 1 \end{bmatrix} = z \begin{bmatrix} u_c \\ v_c \\ 1 \end{bmatrix} + \begin{bmatrix} -b \\ 0 \\ 0 \end{bmatrix}$$
+the first line becomes:
+$$z u_p = z u_c - b \implies z(u_p - u_c) = -b \implies \mathbf{z = \frac{-b}{u_p - u_c}}$$
+exactly the disparity (with $f_c=-1$)
+$\endproof$
