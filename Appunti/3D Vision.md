@@ -512,14 +512,17 @@ or also **Active Triangulation Methods:**
 For short range scanners we have:
 Todo
 
-In the case of 1 projector and 1 camera we can notice that the real world coordinate is the same for both camera reference frames.
-$$M=M_c=M_p=[x,y,z]^T$$
-Therefore the camera coordinates can be fixed and we have the projector reference system:
+#### Active Triangulation
+In the case of 1 projector and 1 camera we have that the relation of the point $M$ in the world coordinates of the two cameras is:
 $$M_p=RM_c+t$$
-By normalizing the coordinates of the camera we have:
-$$p_c=[u_c,v_c1]^T=[x_c/z_c, y_c/z_c, 1]^T=\frac1{z_c}M_c$$
+The distance can be estimated by knowing the rotation between the two cameras $R$, their traslation $t$ and the point $u_p$ of the camera image plane.
+$$z_c=\frac{t_1-t_3u_p}{(u_pr_1^T-r_3^T)p_c}$$
+It is possible to use multiple stripes with $N$ different patterns to estimate multiple points at once:
+
+
 ---
 
+Proof of relation between $M_p$ and $M_c$:
 First focus on the projector $C$ project point $m_p$ to a real world point $M_p$ on plane $\Upsilon$.
 We have the classic relation:
 $$\begin{cases}
@@ -541,6 +544,11 @@ where
 $$M_p=\begin{bmatrix}
 x_p\\ y_p\\ z_p
 \end{bmatrix}=G_pM=[R_p|t_p]M$$
+The point M is therefore
+$$\begin{aligned}
+M_p=R_pM+t_c
+\end{aligned}$$
+
 Now focus on the camera. This will project point $M_c$ onto its image plane $m_c$. Expressing in normalized coordinates we have (identical as before):
 $$p_c=\begin{bmatrix}u_c\\ v_c\\1
 \end{bmatrix}=
@@ -552,7 +560,27 @@ where again:
 $$M_c=\begin{bmatrix}
 x_c\\ y_c\\ z_c
 \end{bmatrix}=G_cM=[R_c|t_c]M$$
-
-
+Set the reference point on the camera($R_c=I,T_c=0$). Now we have:
+$$M_c=M$$
 Clearly point $M$ is the same for both cameras and the relation between $M_c$ and $M_p$ becomes
-$$M_p=RM_c+t$$
+$$M_p=R_pM_c+t_p$$
+or in the general case:
+$$M_p=\underbrace{R_pR_c^T}_{R}M_c+\underbrace{t_p-R_pR_c^Tt_c}_t$$
+$\endproof$
+Proof of distance:
+From the previous result we have
+$$M_p=RM_c+t\qquad p_p=\frac1{z_p}M_p\qquad p_c=\frac1{z_c}M_c$$
+combining them we end up with
+$$\begin{aligned}
+z_pp_p=M_p\\
+z_cp_c=M_c
+\end{aligned}\rightarrow 
+z_pp_c-z_cRp_c=t\rightarrow
+\begin{cases}
+z_pu_p-z_cr_1^Tp_c=t_1\\
+z_pv_p-z_cr_2^Tp_c=t_2\\
+z_p-z_cr_3^Tp_c=t_3
+\end{cases}$$
+$v_p$ cannot be estimated so we remove that equation, we can now solve the system and we get:
+$$z_c=\frac{t_1-t_3u_p}{(u_pr_1^T-r_3^T)p_c}$$
+$\endproof$
