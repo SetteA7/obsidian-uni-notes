@@ -456,7 +456,13 @@ Recall that given the pixel size $p_u,p_v$ the coordinates must be scaled by $k_
 >What is the **maximum measurable distance?** Assume minimum disparity = 1 and rectified cameras.
 >Recall the distance formula:
 >$$z=\frac{bf}{\Delta u}$$
->from the table we get: $b=0.15 \unit{m}, f=0.0018\unit m$.
->
-
-$$\db$$
+>from the table we get: $b=0.15 \unit{m}, f_c=0.018\unit m$.
+>From the resolution and sensor size we get the pixel size (which is square):
+>$$p_u=\frac{23.55\unit{mm}}{6000}=3.9\unit{\mu m}\qquad p_v=\frac{15.6\unit{mm}}{4000}=3.9\unit{\mu m}$$
+>The focal becomes: $$f=\frac{f_c}{p_u}=4615$$
+>Since the minimum resolution is 1 we get:
+>$$z_\max=\frac{bf}1=692\unit m$$
+>What is the **depth estimation error?**
+>Derive the distance and find the magnitude:
+>$$\frac{\partial z}{\partial\Delta u}=-\frac{bf}{\Delta u^2}\rightarrow \abs{\partial z}=\frac{bf}{\Delta u^2}\partial \Delta\stackrel{\Delta u=\frac{bf}{z}}\longrightarrow \abs{\partial z}=\frac{z^2}{bf}\partial\Delta$$
+>This formula tells that it works for close distances but the error becomes increasingly large for bigger distances

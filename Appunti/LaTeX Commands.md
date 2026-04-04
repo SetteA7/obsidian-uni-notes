@@ -41,7 +41,7 @@ $$\R$$
   $$\complexgauss$$
   $\newcommand{\tr}{\text{tr}}$
 $$\tr$$
-  $\newcommand{\abs}[1]{\left| #1 \right|}$
+  $\newcommand{\abs}[1]{\left\| #1 \right\|}$
   $$\abs{input}$$
   $\newcommand{\E}{\mathbb{E}}$
   $$\E$$
