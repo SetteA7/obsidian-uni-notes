@@ -447,7 +447,8 @@ This is:
 - only computes on integers (fast and precise)
 
 
-## 5.3) Active Stereo Systems
+
+#### Exercises
 Recall that given the pixel size $p_u,p_v$ the coordinates must be scaled by $k_i=1/p_i$ and the pixels are therefore interpolated.
 
 >[!exercise|*]
@@ -474,17 +475,22 @@ Recall that given the pixel size $p_u,p_v$ the coordinates must be scaled by $k_
 >Find the parameters as before:
 >$$\begin{align}
 b=0.07\unit m\\
-f_l=0.06\unit m\\
+f_l=0.006\unit m\\
 p_u=7.4\unit{\mu m}\\
-f=8108\\
-z_\max =bf=81 \unit m
+f=810\\
+z_\max =bf=57 \unit m
 \end{align}$$
 >Recall the error formula:
->$$\Delta z=\frac{z^2}{bf}\Delta u\rightarrow \begin{cases}
-P_1: \Delta z_1=2 \unit m\\
-P_2:\Delta z_2=12.75\unit m\\
-p_3:\Delta z_3= \unit m
+>	$$\Delta z=\frac{z^2}{bf}\Delta u\stackrel{\Delta u=1}\rightarrow \begin{cases}
+P_1: \Delta z_1=1.7 \unit m\\
+P_2:\Delta z_2=11\unit m\\
+P_3:\Delta z_=74 \unit m\\
+P_4:\Delta z_=112 \unit m
 \end{cases}$$
 >so we can draw this quick graph:
+>![[Pasted image 20260404170045.png|Graph|350]]
+>Clearly $P_1,P_2$ are distinguishable but $P_3,P_4$ can be misinterpreted for any other point.
 >
 
+
+## 5.3) Active Stereo Systems
