@@ -494,3 +494,35 @@ P_4:\Delta z_=112 \unit m
 
 
 ## 5.3) Active Stereo Systems
+Active stereo systems are used to illuminate the world with a light source (projector) and then using this additional information on the passive stereo system.
+
+This can be done via **Active Stereo Methods**:
+- **Structured light:** place custom texture on the world
+![[Pasted image 20260404171146.png|Example|250]]
+- **Laser pointer:** a laser light is projected on a point of the scene; the two stereo cameras acquire the image and localize the point. Multiple acquisitions are needed (one 3D point per image).
+![[Pasted image 20260404171336.png|Example|250]]
+- **Laser Line:** a laser line (blade) is projected on the object; acquired line is intersected with the two epipolar lines. A single line of 3D point is acquired. Multiple acquisitions are needed.
+![[Pasted image 20260404171351.png|Example|250]]
+
+or also **Active Triangulation Methods:**
+- **Laser line:** similar to active stereo methods with laser line. Intersect the plane of the line with optic rays. Need for a geometric model of projector and calibration
+![[Pasted image 20260404171529.png|Example|250]]
+- **Coded light:** multiple bands are projected on the surfaces of objects. More lines (planes) = less images required.
+![[Pasted image 20260404171546.png|Example|250]]
+For short range scanners we have:
+
+| **Scanner Type**                 | **Pros**                                                                                                                                                                           | **Cons**                                                                                                                                                                                                |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Laser Triangulation**          | • Highly versatile (Area, Handheld, Portable arm)<br><br>• Excellent portability<br><br>• Minimal part preparation required<br><br>• High resistance to ambient light interference | • Lower overall accuracy compared to fringe pattern<br><br>• Reduced resolution<br><br>• Higher signal noise                                                                                            |
+| **Pattern Fringe Triangulation** | • Superior accuracy<br><br>• High-resolution data capture<br><br>• Low signal noise                                                                                                | • Restricted to stationary area scanning<br><br>• Larger footprint (less portable)<br><br>• Sensitive to surface finish (often requires spray/prep)<br><br>• Vulnerable to specific lighting conditions |
+
+---
+For long range:
+
+| **Scanner Type** | **Pros**                                                                                                          | **Cons**                                                                                        |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **Pulse-based**  | • Exceptional range capability ($2\text{m}$ – $1000\text{m}$)<br><br>• Ideal for large-scale outdoor environments | • Lower precision/accuracy<br><br>• Slow data acquisition speed<br><br>• Significant data noise |
+| **Phase-shift**  | • Higher precision and accuracy<br><br>• Rapid data acquisition<br><br>• Minimal signal noise                     | • Limited to medium-range applications only                                                     |
+
+---
+
