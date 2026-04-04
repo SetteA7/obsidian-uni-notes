@@ -510,24 +510,7 @@ or also **Active Triangulation Methods:**
 - **Coded light:** multiple bands are projected on the surfaces of objects. More lines (planes) = less images required.
 ![[Pasted image 20260404171546.png|Example|250]]
 For short range scanners we have:
-
-
-| **Scanner Type**                 | **Pros**                                                                                                                                                                           | **Cons**                                                                                                                                                                                                |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Laser Triangulation**          | • Highly versatile (Area, Handheld, Portable arm)<br><br>• Excellent portability<br><br>• Minimal part preparation required<br><br>• High resistance to ambient light interference | • Lower overall accuracy compared to fringe pattern<br><br>• Reduced resolution<br><br>• Higher signal noise                                                                                            |
-| **Pattern Fringe Triangulation** | • Superior accuracy<br><br>• High-resolution data capture<br><br>• Low signal noise                                                                                                | • Restricted to stationary area scanning<br><br>• Larger footprint (less portable)<br><br>• Sensitive to surface finish (often requires spray/prep)<br><br>• Vulnerable to specific lighting conditions |
-
-
----
-For long range:
-
-| **Scanner Type** | **Pros**                                                                                                          | **Cons**                                                                                        |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| **Pulse-based**  | • Exceptional range capability ($2\text{m}$ – $1000\text{m}$)<br><br>• Ideal for large-scale outdoor environments | • Lower precision/accuracy<br><br>• Slow data acquisition speed<br><br>• Significant data noise |
-| **Phase-shift**  | • Higher precision and accuracy<br><br>• Rapid data acquisition<br><br>• Minimal signal noise                     | • Limited to medium-range applications only                                                     |
-
----
-
+Todo
 
 In the case of 1 projector and 1 camera we can notice that the real world coordinate is the same for both camera reference frames.
 $$M=M_c=M_p=[x,y,z]^T$$
@@ -535,3 +518,41 @@ Therefore the camera coordinates can be fixed and we have the projector referenc
 $$M_p=RM_c+t$$
 By normalizing the coordinates of the camera we have:
 $$p_c=[u_c,v_c1]^T=[x_c/z_c, y_c/z_c, 1]^T=\frac1{z_c}M_c$$
+---
+
+First focus on the projector $C$ project point $m_p$ to a real world point $M_p$ on plane $\Upsilon$.
+We have the classic relation:
+$$\begin{cases}
+u_p=-f_p\frac{x_p}{z_p}\\
+v_p=-f_p\frac{y_p}{z_p}
+\end{cases}
+$$
+
+By assuming that point $m_p$ is in normalized coordinates $p_p$ (that is $f_p=-1$ or $K_p=I$):
+$$p_p=\begin{bmatrix}
+u_p\\ v_p\\1
+\end{bmatrix}=
+\begin{bmatrix}
+x_p/z_p\\ y_p/z_p\\z_p/z_p
+\end{bmatrix}=
+\frac1{z_p}M_p
+$$
+where 
+$$M_p=\begin{bmatrix}
+x_p\\ y_p\\ z_p
+\end{bmatrix}=G_pM=[R_p|t_p]M$$
+Now focus on the camera. This will project point $M_c$ onto its image plane $m_c$. Expressing in normalized coordinates we have (identical as before):
+$$p_c=\begin{bmatrix}u_c\\ v_c\\1
+\end{bmatrix}=
+\begin{bmatrix}
+x_c/z_c\\ y_c/z_c\\ z_c/z_c
+\end{bmatrix}=
+\frac1{z_c}M_c$$
+where again:
+$$M_c=\begin{bmatrix}
+x_c\\ y_c\\ z_c
+\end{bmatrix}=G_cM=[R_c|t_c]M$$
+
+
+Clearly point $M$ is the same for both cameras and the relation between $M_c$ and $M_p$ becomes
+$$M_p=RM_c+t$$
