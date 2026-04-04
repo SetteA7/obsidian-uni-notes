@@ -511,10 +511,12 @@ or also **Active Triangulation Methods:**
 ![[Pasted image 20260404171546.png|Example|250]]
 For short range scanners we have:
 
+
 | **Scanner Type**                 | **Pros**                                                                                                                                                                           | **Cons**                                                                                                                                                                                                |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Laser Triangulation**          | • Highly versatile (Area, Handheld, Portable arm)<br><br>• Excellent portability<br><br>• Minimal part preparation required<br><br>• High resistance to ambient light interference | • Lower overall accuracy compared to fringe pattern<br><br>• Reduced resolution<br><br>• Higher signal noise                                                                                            |
 | **Pattern Fringe Triangulation** | • Superior accuracy<br><br>• High-resolution data capture<br><br>• Low signal noise                                                                                                | • Restricted to stationary area scanning<br><br>• Larger footprint (less portable)<br><br>• Sensitive to surface finish (often requires spray/prep)<br><br>• Vulnerable to specific lighting conditions |
+
 
 ---
 For long range:
@@ -526,3 +528,10 @@ For long range:
 
 ---
 
+
+In the case of 1 projector and 1 camera we can notice that the real world coordinate is the same for both camera reference frames.
+$$M=M_c=M_p=[x,y,z]^T$$
+Therefore the camera coordinates can be fixed and we have the projector reference system:
+$$M_p=RM_c+t$$
+By normalizing the coordinates of the camera we have:
+$$p_c=[u_c,v_c1]^T=[x_c/z_c, y_c/z_c, 1]^T=\frac1{z_c}M_c$$
