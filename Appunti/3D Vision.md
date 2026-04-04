@@ -466,3 +466,25 @@ Recall that given the pixel size $p_u,p_v$ the coordinates must be scaled by $k_
 >Derive the distance and find the magnitude:
 >$$\frac{\partial z}{\partial\Delta u}=-\frac{bf}{\Delta u^2}\rightarrow \abs{\partial z}=\frac{bf}{\Delta u^2}\partial \Delta\stackrel{\Delta u=\frac{bf}{z}}\longrightarrow \abs{\partial z}=\frac{z^2}{bf}\partial\Delta$$
 >This formula tells that it works for close distances but the error becomes increasingly large for bigger distances
+
+
+>[!exercise|*]
+>Now suppose I have 4 points (table), which are percieved separate?
+>![[Pasted image 20260404163929.png|parameters|400]]
+>Find the parameters as before:
+>$$\begin{align}
+b=0.07\unit m\\
+f_l=0.06\unit m\\
+p_u=7.4\unit{\mu m}\\
+f=8108\\
+z_\max =bf=81 \unit m
+\end{align}$$
+>Recall the error formula:
+>$$\Delta z=\frac{z^2}{bf}\Delta u\rightarrow \begin{cases}
+P_1: \Delta z_1=2 \unit m\\
+P_2:\Delta z_2=12.75\unit m\\
+p_3:\Delta z_3= \unit m
+\end{cases}$$
+>so we can draw this quick graph:
+>
+
