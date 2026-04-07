@@ -616,4 +616,24 @@ $\endproof$
 A Time of Flight (ToF) sensor isn active sensor that estimates distance by measuring the time it takes to send a light pulse and receive the reflected signal.
 
 For a flat surface the distance ($z$) can be calculated by knowing the e2e time of flight ($\tau$)
-$$z=\frac {c\tau}2\qquad \tau=\frac{2z}{c}$$
+$$z=\frac {c\tau}2\qquad \tau=\frac{2z}{c}\qquad c\approx 3\cdot 10^8 \unit{m/s}$$
+The camera sends a **amplitude modulated signal** at a modulated frequency $f_{mod}$:
+$$s_E(t)=A_E[1+\sin(2\pi f_{mod}t)]$$
+When the signal is reflected and acquired by the camera, the returned signal is
+$$s_R(t)=A_R[1+\sin(2\pi f_{mod}t+\Delta\phi)]+B_R$$
+where $A_R\propto1/z^2$ and the phase $\Delta \phi\propto \tau$, while $B_R$ depends on other sources of illumination.
+
+![[Pasted image 20260407183227.png|Example|350]]
+now let's focus on the phase difference:
+$$\Delta\phi=2\pi f_{mod}\tau=2\pi f_{mod}\frac{2z}c\rightarrow z=\frac c{4\pi f_{mod}}\Delta \phi$$
+While $A_R,B_R$ are used to better estimate the process
+
+The signal is processed in discrete time with at least 4 samples/period. $T_S=1/4f_{mod}$, that is $F_S=4f_{mod}$.
+The estimation is the MD:
+$$(\hat A_R,\hat B_R,\hat {\Delta\phi})=\arg\min_{A_R,B_R,\Delta \phi}\sum_{n=0}^3\abs{s_R^n-A_R\sin(\frac\pi2+\Delta\phi)-B_R}^2$$
+
+The solution to the minimization problem becomes:
+$$\begin{gather}
+\hat A_R=\frac{\sqrt{(s_R\iter0-s_R\iter2)^2+(s_R\iter 1-s_R\iter 3)^2}}2\\
+\hat B_R=\frac{}2
+\end{gather}$$
