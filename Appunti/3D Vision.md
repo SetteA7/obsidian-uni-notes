@@ -617,6 +617,8 @@ A Time of Flight (ToF) sensor isn active sensor that estimates distance by measu
 
 For a flat surface the distance ($z$) can be calculated by knowing the e2e time of flight ($\tau$)
 $$z=\frac {c\tau}2\qquad \tau=\frac{2z}{c}\qquad c\approx 3\cdot 10^8 \unit{m/s}$$
+#### Basic Idea
+**Signal And acquisition:**
 The camera sends a **amplitude modulated signal** at a modulated frequency $f_{mod}$:
 $$s_E(t)=A_E[1+\sin(2\pi f_{mod}t)]$$
 When the signal is reflected and acquired by the camera, the returned signal is
@@ -624,14 +626,15 @@ $$s_R(t)=A_R[1+\sin(2\pi f_{mod}t+\Delta\phi)]+B_R$$
 where $A_R\propto1/z^2$ and the phase $\Delta \phi\propto \tau$, while $B_R$ depends on other sources of illumination.
 
 ![[Pasted image 20260407183227.png|Example|350]]
-now let's focus on the phase difference:
+Therefore the phase difference can be used to calculate the distance:
 $$\Delta\phi=2\pi f_{mod}\tau=2\pi f_{mod}\frac{2z}c\rightarrow z=\frac c{4\pi f_{mod}}\Delta \phi$$
 While $A_R,B_R$ are used to better estimate the process
 
+
+**Parameter Estimation:**
 The signal is processed in discrete time with at least 4 samples/period. $T_S=1/4f_{mod}$, that is $F_S=4f_{mod}$.
 The estimation is the MD:
 $$(\hat A_R,\hat B_R,\hat {\Delta\phi})=\arg\min_{A_R,B_R,\Delta \phi}\sum_{n=0}^3\abs{s_R^n-A_R\sin(n\frac\pi2+\Delta\phi)-B_R}^2$$
-
 The solution to the minimization problem becomes:
 $$\begin{gather}
 \hat A_R=\frac{\sqrt{(s_R\iter0-s_R\iter2)^2+(s_R\iter 1-s_R\iter 3)^2}}2\\
@@ -640,13 +643,35 @@ $$\begin{gather}
 \end{gather}$$
 where the arctan2 returns the correct quadrant.
 
-Since $\Delta\phi\in[0,2\pi]$ the distances are $z\in[0,c/2f_{mod}]$. (example $f=30\unit{Hz}\rightarrow z_\max =5 \unit m$). This **phaae wrapping** can be solved using multiple $f_{mod}$
+**Phase Wrapping and Further Estimations:**
+Since $\Delta\phi\in[0,2\pi]$ the distances are $z\in[0,c/2f_{mod}]$. (example $f=30\unit{Hz}\rightarrow z_\max =5 \unit m$). This **phase wrapping** can be solved using multiple $f_{mod}$
 
 Now focus on the other parameters:
-Noise depends on the incoming light power. Model it as a gaussian distribution with variance
+Noise depends on the incoming light power (scattering and other light sources). Model it as a gaussian distribution with variance
 $$\sigma_p=\frac{c}{4\pi f_{mod}}\frac{\sqrt{B_R}}{\sqrt 2 A_R}$$
 
 Within the area of a pixel, there might be multiple measured distances, so we take the mean between the biggest and the smallest distance.
+
+#### Matricial ToF Sensors
+For a camera with $N\times M$ pixels, we cannot use $N\times M$ rays. A lens can be used to collimate the rays:
+$$z_T\begin{bmatrix} u_T\\  v_T \\ 1
+\end{bmatrix}=K_T\begin{bmatrix}x_T\\ y_T \\ z_T
+\end{bmatrix}$$
+This adds a distortion of 
+$$\hat m_T=\begin{bmatrix}\hat u_T\\ \hat v_T \\ 1
+\end{bmatrix}=\psi(m_T)$$
+Now estimate the distance:
+$$\hat r_T=\sqrt{\hat x_T^2+\hat y_T^2+\hat z_T^2}=\abs{[\hat x_T^2,\hat y_T^2,\hat z_T^2]^T}$$
+and undistort the lens
+$$m_T=\psi^{-1}(m_T)$$
+The final distance is 
+$$\hat z_T=\frac{\hat r_T}{\abs{K_T^{-1}m_T}}$$
+which corresponds to the point in 3D space
+$$M_T=K_T^{-1}\begin{bmatrix} u_T\\  v_T \\ 1
+\end{bmatrix}\hat z_T$$
+
+## 5.2) Light Detection And Ranging (LiDaR)
+Lidar is a specific type of ToF sensor with wavelengths in IR (10 $\mu m$) or UV (250 $nm$)
 
 
 ---
