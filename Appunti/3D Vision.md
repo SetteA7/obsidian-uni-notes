@@ -643,6 +643,10 @@ where the arctan2 returns the correct quadrant.
 Since $\Delta\phi\in[0,2\pi]$ the distances are $z\in[0,c/2f_{mod}]$. (example $f=30\unit{Hz}\rightarrow z_\max =5 \unit m$). This **phaae wrapping** can be solved using multiple $f_{mod}$
 
 Now focus on the other parameters:
+Noise depends on the incoming light power. Model it as a gaussian distribution with variance
+$$\sigma_p=\frac{c}{4\pi f_{mod}}\frac{\sqrt{B_R}}{\sqrt 2 A_R}$$
+
+Within the area of a pixel, there might be multiple measured distances, so we take the mean between the biggest and the smallest distance.
 
 
 ---
