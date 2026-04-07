@@ -611,3 +611,9 @@ the first line becomes:
 $$z u_p = z u_c - b \implies z(u_p - u_c) = -b \implies \mathbf{z = \frac{-b}{u_p - u_c}}$$
 exactly the disparity (with $f_c=-1$)
 $\endproof$
+
+# 5) Lidar and ToF
+A Time of Flight (ToF) sensor isn active sensor that estimates distance by measuring the time it takes to send a light pulse and receive the reflected signal.
+
+For a flat surface the distance ($z$) can be calculated by knowing the e2e time of flight ($\tau$)
+$$z=\frac {c\tau}2\qquad \tau=\frac{2z}{c}$$
