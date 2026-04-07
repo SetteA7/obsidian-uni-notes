@@ -630,10 +630,26 @@ While $A_R,B_R$ are used to better estimate the process
 
 The signal is processed in discrete time with at least 4 samples/period. $T_S=1/4f_{mod}$, that is $F_S=4f_{mod}$.
 The estimation is the MD:
-$$(\hat A_R,\hat B_R,\hat {\Delta\phi})=\arg\min_{A_R,B_R,\Delta \phi}\sum_{n=0}^3\abs{s_R^n-A_R\sin(\frac\pi2+\Delta\phi)-B_R}^2$$
+$$(\hat A_R,\hat B_R,\hat {\Delta\phi})=\arg\min_{A_R,B_R,\Delta \phi}\sum_{n=0}^3\abs{s_R^n-A_R\sin(n\frac\pi2+\Delta\phi)-B_R}^2$$
 
 The solution to the minimization problem becomes:
 $$\begin{gather}
 \hat A_R=\frac{\sqrt{(s_R\iter0-s_R\iter2)^2+(s_R\iter 1-s_R\iter 3)^2}}2\\
-\hat B_R=\frac{}2
+\hat B_R=\frac{s_R\iter 0+s_R\iter 1+s_R\iter 2+s_R\iter 3}2\\
+\hat{\Delta\phi}=\text{arctan2}(s_R\iter0-s_R\iter 2,s_R\iter 1-s_R\iter 3)
 \end{gather}$$
+where the arctan2 returns the correct quadrant.
+
+Since $\Delta\phi\in[0,2\pi]$ the distances are $z\in[0,c/2f_{mod}]$. (example $f=30\unit{Hz}\rightarrow z_\max =5 \unit m$). This **phaae wrapping** can be solved using multiple $f_{mod}$
+
+Now focus on the other parameters:
+
+
+---
+using 2 modulated frequencies $f<f'$ 
+For each frequency calculate the phase difference as before:
+$$\Delta\phi_i=\par{2\pi f_i\frac{2z}c}(\mod2\pi)$$
+then calculate their difference:
+$$\begin{gather}\Delta\phi_{syn}=\Delta\phi_2-\Delta\phi_1(\mod 2\pi)\\ f_{syn}=f_2-f_1\end{gather}$$
+the max measurable distance is:
+$$z=\frac c{4\pi f_{syn}}\qquad z_\max=\frac c{2f_{syn}}\Delta\phi_{syn}$$
