@@ -941,7 +941,20 @@ $\endproof$
 #### Embedded Zerotrees of Wavelet Coefficients (EZW)
 
 
-# 5) Proofs
+
+# 5) Learned Image Coding
+This is the state of the art of compression techniques:
+
+>[!def] Learned Image Compression (LIC)
+>Learned Image Compression (LIC) or Neural Image Compression (NIC) refers yo the application of neural networks and machine learning to data compression tasks
+
+This is the state of the art since they don't use hand crafted rules but LIC algorithms are learned and outperform traditional algorithms.
+- Classic: It uses linear transforms to de-correlate pixels based on statistical assumptions
+- Neural: Learned non-linear transforms optimized directly for the data
+
+NN can be used twofold:
+. Combinatorial selection: hand 
+# 6) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
 Codewords are already given. Set $L_\max=\max_i(l_i)$ ^3d4d31
