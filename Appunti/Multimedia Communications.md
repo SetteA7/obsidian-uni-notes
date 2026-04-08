@@ -953,7 +953,27 @@ This is the state of the art since they don't use hand crafted rules but LIC alg
 - Neural: Learned non-linear transforms optimized directly for the data
 
 NN can be used twofold:
-. Combinatorial selection: hand 
+- Combinatorial Selection: hand crafted tools and ai optimizes their parameters
+- Continuous Learning: the filter is found via gradient descent
+
+#### DL Basics
+Recall how the perceptron works:
+$$y=f(w^Tx+b)=f\par{\sum_iw_ix_i+b}$$
+![[Pasted image 20260408130508.png|Example|250]]
+**Multi-Layer Perceptron (FFNN)**
+The output of a neuron is based on all the outputs of previous layer.
+- The input layer gives as output the input
+- The hidden layers give as output the output of their perceptrons
+- The output layer is same as hidden layer but with different activation function
+
+This is not good for images:
+- High dimension/Parameter Explosion
+- No translation invariance
+- Training difficulty
+![[Pasted image 20260408130753.png|Example|250]]
+ **Convolutional Neural Networks (CNN)**
+Instead of relying on all the previous outputs, CNNs use a subset of outputs but **share the same weight**. 
+
 # 6) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
