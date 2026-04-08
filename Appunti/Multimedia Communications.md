@@ -974,6 +974,10 @@ This is not good for images:
  **Convolutional Neural Networks (CNN)**
 Instead of relying on all the previous outputs, CNNs use a subset of outputs but **share the same weight**. 
 
+#### Neural Paradigm
+Instead of transforming fixed blocks, neural compression transforms the entire image into a deep 3D Latent Tensor.
+
+There is a problem with gradient descent in the quantizer step. The quantization function is a staricase function, that is $Q'(z)=\sum \delta_i$ which is zero almost everywhere so backpropagation cancels out.
 # 6) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
