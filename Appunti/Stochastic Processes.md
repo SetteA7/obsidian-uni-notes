@@ -103,7 +103,10 @@ A markov process is defined where $P$ is completely known and also $X_0$.
 If a specific series of events is required, it can be rewritten as:
 $$P[x_0=i_0, x_1=i_1,...,x_n=i_n]=p_{i_0}P_{i_0,i_1} P_{i_1,i_2}\cdot ...\cdot P_{i_{n-1},i_n}=p_{i_0}\prod_{k=1}^nP_{i_{k-1},i_k}$$
 
-The probability of doing a transition in exactly $n$ steps is
+The probability of doing a transition in exactly $n$ steps is:
+$$P_{ij}\iter n=P[x_n=i_n|x_0=i_0]=\sum_{k}P_{ik}P_{kj}\iter {n-1}$$
+In matrix form: 
+$$P\iter n=P\times P\times ...\times P=P^n$$
 
 
 Proof of series of transitions:
