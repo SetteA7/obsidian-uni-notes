@@ -779,6 +779,8 @@ Since a loop in the NN is unwanted, it is possible to represent a RNN as a Direc
 
 The learnable parameters are $\mathcal W=\curly{W, U, V, b ,q}$
 
+##### Learning
 For **learning** RNNs use SGD with a variant of backpropagation called **backpropagation through time (BTT)** on the unrolled graph.
 
-The standard BP cannot learn i
+
+#### Long Short Term Memory (LSTM)
