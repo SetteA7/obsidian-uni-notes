@@ -101,9 +101,19 @@ If P is finite, then these properties hold:
 A markov process is defined where $P$ is completely known and also $X_0$.
 
 If a specific series of events is required, it can be rewritten as:
-$$P[x_0=i_0, x_1=i_1,...,x_n=i_n]=p_{i_0}P_{i_0,i_1} P_{i_1,i_2}\cdot ...\cdot P_{i_{n-1},i_n}$$
+$$P[x_0=i_0, x_1=i_1,...,x_n=i_n]=p_{i_0}P_{i_0,i_1} P_{i_1,i_2}\cdot ...\cdot P_{i_{n-1},i_n}=p_{i_0}\prod_{k=1}^nP_{i_{k-1},i_k}$$
 
-Proof:
+The probability of doing a transition in exactly $n$ steps is
+
+
+Proof of series of transitions:
 By def of conditional probability and then markov process:
-$$P[x_0=i_0, x_1=i_1,...,x_n=i_n]=P[x_0=i_0,...,x_{n-1}=i_{n-1}]\cdot P[]$$
+$$\begin{align}
+P[x_0=i_0,...,x_n=i_n]&=P[x_0=i_0,...,x_{n-1}=i_{n-1}]\cdot P[x_n=i_n|x_0=i_0,...,x_{n-1}=i_{n-1}]\\
+&=P[x_0=i_0,...,x_{n-1}=i_{n-1}]\cdot P[x_n=i_n|x_{n-1}=i_{n-1}]\\
+&=P[x_0=i_0,...,x_{n-1}=i_{n-1}]\cdot P_{i_{n-1},i_n}\\
+\text{repeat }n-1\text{ times}\\
+&=p_{i_0}\prod_{k=1}^nP_{i_{k-1},i_k}
+\end{align}$$
 $\endproof$
+
