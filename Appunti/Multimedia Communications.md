@@ -953,8 +953,8 @@ This is the state of the art since they don't use hand crafted rules but LIC alg
 - Neural: Learned non-linear transforms optimized directly for the data
 
 NN can be used twofold:
-- Combinatorial Selection: hand crafted tools and ai optimizes their parameters
-- Continuous Learning: the filter is found via gradient descent
+- **Combinatorial Selection (Classic):** hand crafted tools and ai optimizes their parameters
+- **Continuous Learning (Neural):** the filter is found via gradient descent
 
 #### DL Basics
 Recall how the perceptron works:
@@ -965,6 +965,9 @@ The output of a neuron is based on all the outputs of previous layer.
 - The input layer gives as output the input
 - The hidden layers give as output the output of their perceptrons
 - The output layer is same as hidden layer but with different activation function
+
+The learning follows the gradient descent rule:
+$$\theta\iter {i+1}=$$
 
 This is not good for images:
 - High dimension/Parameter Explosion
