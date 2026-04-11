@@ -998,14 +998,28 @@ This allows for:
 Instead of transforming fixed blocks, neural compression transforms the entire image into a deep 3D Latent Tensor As explained before, this allows for spatial reduction and channel expansion (parallel features extraction)
 
 The traditional encoding is replaced by an autoencoder:
-- Analysis Transform ($g_a$): the 
+- Analysis Transform ($g_a$) (encoder): Uses CNN to map image $x$ to the tensor $y$
+- Bottleneck (compression): latents $y$ are quantized to $\hat y$ to be entropy encoded
+- Synthesis transform ($g_s$) (decoder): learns to reconstruct image from the quantized latents $\hat y$
+
+The optimization objective now becomes the minimization of the lagrangian:
+$$\mathcal L=R+\lambda D=\underbracket{ D_{KL}[q(\hat y|x)\|p(\hat y)]}_{\text{Rate}}+\underbracket{\lambda \E[\rho(x,\hat x)]}_{\text{Distortion}}$$
+
+In Neural Compression, instead of compressing the image, the output of the Analysis Transform ($y=g_a(x)$) is quantized.
 
 
-
+| Pixel Space                                     | Latent Space                                                |
+| ----------------------------------------------- | ----------------------------------------------------------- |
+| High Redundancy                                 | Features are decorrelated                                   |
+| Probabilities are hard to model                 | More predictable distributions (gaussian/Laplace)           |
+| Visible quantization errors (blocking, ringing) | Network hides noise in less perceptually important channels |
 
 There is a problem with gradient descent in the quantizer step. The quantization function is a staricase function, that is $Q'(z)=\sum \delta_i$ which is zero almost everywhere so backpropagation cancels out.
+To fix this n additive uniform noise is added 
+$$\hat z=Q(z)+u,\text{ where } u=\mathcal U(-0.5,0.5)$$
+This allows the quantization function to be differentuable and the noise is independend white noise at higher resolutions
 
-
+However this is not 
 
 # 6) Proofs
 **Kraft Inequality:**
