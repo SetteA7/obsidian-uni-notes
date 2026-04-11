@@ -80,3 +80,5 @@ since $T-t>x$ implies $T>t+x$ and thus $T>t$
 **Gamma Distribution:**
 $$\Gamma(\alpha)=(\alpha-1)!$$
 $$f(x)=\frac{\lambda}{\Gamma(\alpha)}(\lambda x)^{\alpha-1}e^{-\lambda x}$$
+# 2) Markov Chains
+A Markov process is a stochastic process with the **markovian property,** that is, 
