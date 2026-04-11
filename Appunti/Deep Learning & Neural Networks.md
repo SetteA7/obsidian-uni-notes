@@ -785,10 +785,25 @@ For **learning** RNNs use SGD with a variant of backpropagation called **backpro
 
 #### Long Short Term Memory (LSTM)
 Modifies RNN architecture.
+Three inputs:
+- Hidden state vector $h_{k-1}$
+- input vector $x_k$
+- Cell Input vector $\tilde c_k$: updates cell state based on selected components of input
+$$\tilde c_k=\tanh(W_cx_k+U_ch_{k-1}+b_c)$$
 Two internal states:
 - Hidden state $h_k$ (same as vailla RNN)
+$$h_k=o_k\odot \tanh(c_k)$$
 - Cell state $c_k$: improves gradient flow
+$$c_k=f_k\odot c_{k-1}+i_k\odot\tilde c_k$$
 Three gates:
-- Forget Gate $f_k$: helps forget useless past information
-- Input Gate $i_k$: controls how much info to let thorough
-- 
+- Forget Gate $f_k$: helps forget useless past information, the sigmoid activation function acts as the selector
+$$f_k=\sigma(W_fx_k+U_fh_{k-1}+b_f)$$
+- Input Gate $i_k$: controls how much info to let thorough, mathematically same as before
+$$i_k=\sigma(W_ix_k+U_ih_{k-1}+b_i)$$
+- Ouptut Gate $o_k$: produces output vector of LSTM
+$$o_k=\sigma(W_ox_k+U_oh_{k-1}+b_o)$$
+Learnable parameters: $\mathcal W=\curly{W_f,W_i,W_o,W_c,U_f,U_i,U_o,U_c,b_f,b_i,b_o,b_c}$
+
+![[Pasted image 20260411162103.png|Single LTSM Layer (Cell)|450]]
+Backpropagation can flow directly thorugh the $c_k\rightarrow c_{k-1}$ path without passing through the stacked tanh functions. This allows for deeper learning
+
