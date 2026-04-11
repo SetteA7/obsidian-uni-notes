@@ -960,6 +960,7 @@ NN can be used twofold:
 Recall how the perceptron works:
 $$y=f(w^Tx+b)=f\par{\sum_iw_ix_i+b}$$
 ![[Pasted image 20260408130508.png|Example|250]]
+##### FFNN
 **Multi-Layer Perceptron (FFNN)**
 The output of a neuron is based on all the outputs of previous layer.
 - The input layer gives as output the input
@@ -967,20 +968,45 @@ The output of a neuron is based on all the outputs of previous layer.
 - The output layer is same as hidden layer but with different activation function
 
 The learning follows the gradient descent rule:
-$$\theta\iter {i+1}=$$
+$$\theta\iter {i+1}=\theta \iter i-\eta\nabla_\theta\mathcal L(\theta\iter i)$$
+which can be easily computed by backpropagation.
 
 This is not good for images:
-- High dimension/Parameter Explosion
+- High dimension/Parameter Explosion: only 1D vector, so images are straightened and spatial correlations are lost
 - No translation invariance
 - Training difficulty
 ![[Pasted image 20260408130753.png|Example|250]]
+##### CNN
  **Convolutional Neural Networks (CNN)**
 Instead of relying on all the previous outputs, CNNs use a subset of outputs but **share the same weight**. 
+This allows for:
+- Local connectivity and weight sharing: this brings to translation invariance and reduces parameter count
+- Analysis: Convolutions compact information 
+- Synthesis: Transposed convolutions reconstruct the full-resolution image
 
+however, multiple filters are needed as each filter learns a specific detector (edges, textures, ...). Multiple kernels work in parallel and therefore the 2D input becomes a 3D tensor
+
+##### Activation Function
+The activation function is different than the standard ones (relo, sigmoid, ...). Instead for compression the **Generalized Divisive Normalization (DGN):** 
+$$w_i=\frac{v_i}{\sqrt{\beta_i+\sum_j\gamma_{ij}v_j^2}}$$
+where $\beta_i$ and $\gamma_{ij}$ are learned parameters.
+This allows for:
+- Lateral inhibition: the denominator measures local energy, if neighbors are big, this feature is suppressed
+- This works similar to the human visual system
+- decorrelates the signal making the distribution roughly normal
 #### Neural Paradigm
-Instead of transforming fixed blocks, neural compression transforms the entire image into a deep 3D Latent Tensor.
+Instead of transforming fixed blocks, neural compression transforms the entire image into a deep 3D Latent Tensor As explained before, this allows for spatial reduction and channel expansion (parallel features extraction)
+
+The traditional encoding is replaced by an autoencoder:
+- Analysis Transform ($g_a$): the 
+
+
+
 
 There is a problem with gradient descent in the quantizer step. The quantization function is a staricase function, that is $Q'(z)=\sum \delta_i$ which is zero almost everywhere so backpropagation cancels out.
+
+
+
 # 6) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
