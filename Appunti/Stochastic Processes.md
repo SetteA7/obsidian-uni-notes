@@ -85,3 +85,25 @@ $$\Gamma(\alpha)=(\alpha-1)!$$
 $$f(x)=\frac{\lambda}{\Gamma(\alpha)}(\lambda x)^{\alpha-1}e^{-\lambda x}$$
 # 2) Markov Chains
 A Markov process is a stochastic process with the **markovian property,** that is, 
+$$P_{i,j}^{n,n+1}=P[x_{n+1}=j|x_0=i_0,...,x_n=i_n]=P[x_{n+1}=j|x_n=i_n]$$
+where $i,j$ is the direction (from state $i$ to state $j$) at iteration $n$ to $n+1$. 
+Unless explicitly stated, $P_{ij}^{n,n+1}=P_{ij}$
+We can also define the **transition probability matrix**
+$$P=\begin{bmatrix}
+P_{00}& P_{01}&...\\
+P_{10}& P_{11}&...\\
+\vdots& \vdots& \ddots
+\end{bmatrix}$$
+If P is finite, then these properties hold:
+- $P_{ij}\in[0,1]$
+- $\displaystyle\sum _{j}P_{ij}=1$ for all $i$ (rows)
+
+A markov process is defined where $P$ is completely known and also $X_0$.
+
+If a specific series of events is required, it can be rewritten as:
+$$P[x_0=i_0, x_1=i_1,...,x_n=i_n]=p_{i_0}P_{i_0,i_1} P_{i_1,i_2}\cdot ...\cdot P_{i_{n-1},i_n}$$
+
+Proof:
+By def of conditional probability and then markov process:
+$$P[x_0=i_0, x_1=i_1,...,x_n=i_n]=P[x_0=i_0,...,x_{n-1}=i_{n-1}]\cdot P[]$$
+$\endproof$
