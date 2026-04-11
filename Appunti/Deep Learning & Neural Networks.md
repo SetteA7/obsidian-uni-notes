@@ -784,3 +784,11 @@ For **learning** RNNs use SGD with a variant of backpropagation called **backpro
 
 
 #### Long Short Term Memory (LSTM)
+Modifies RNN architecture.
+Two internal states:
+- Hidden state $h_k$ (same as vailla RNN)
+- Cell state $c_k$: improves gradient flow
+Three gates:
+- Forget Gate $f_k$: helps forget useless past information
+- Input Gate $i_k$: controls how much info to let thorough
+- 
