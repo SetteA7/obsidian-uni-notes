@@ -1019,7 +1019,18 @@ To fix this n additive uniform noise is added
 $$\hat z=Q(z)+u,\text{ where } u=\mathcal U(-0.5,0.5)$$
 This allows the quantization function to be differentuable and the noise is independend white noise at higher resolutions
 
-However this is not 
+##### Hyperprior
+The base compression can be improved by sending some additional information bits called **hyperprior**
+- **Hyper-Encoder:** takes latent tensors $y$ and extracts statistical natures $z$
+- **Hyper-Decoder:** decodes $\hat z$ to predict the standard deviation of the conditional propri probability
+
+#### JPEG-AI
+JPEG AI uses a **scale hyperprior autoencoder**
+![[Pasted image 20260411153005.png|JPEG AI Architecture|350]]
+It has a innovative feature called **dual-use bitstream**. This can decode the file in two useful ways:
+- Human Vision Decoder: reconstructs standard pixels for visual consumption
+- Computer Vision Task Decoder: extracts features directly form the latent space without full pixel reconstruction
+
 
 # 6) Proofs
 **Kraft Inequality:**
