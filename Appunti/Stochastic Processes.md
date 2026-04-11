@@ -63,8 +63,11 @@ $$y=\sum_{i=1}^nx_i\quad x_i\sim bern(p)$$
 $$\E[y]=n\E[x]=np\quad var(y)=n\var(x)=np(1-p)$$
 with $n\rightarrow\infty$ binomial becomes poisson with $\lambda = np$
 **Poisson:**
-$$P[x=k]=e^{-\lambda}\frac{\lambda^k}{k!}, \ k\geq 0$$
-$$\E[x]=\sum_{k=0}^\infty ke^{-\lambda}\frac{\lambda^k}{k!}=\lambda e^{-\lambda}\sum_{k=1}^\infty \frac{\lambda^{k-1}}{(k-1)!}=\lambda e^{-\lambda}e^{\lambda}=\lambda\quad\var(x)=\lambda$$
+$$\begin{gather}
+P[x=k]=e^{-\lambda}\frac{\lambda^k}{k!}, \ k\geq 0\\
+\E[x]=\sum_{k=0}^\infty ke^{-\lambda}\frac{\lambda^k}{k!}=\lambda e^{-\lambda}\sum_{k=1}^\infty \frac{\lambda^{k-1}}{(k-1)!}=\lambda e^{-\lambda}e^{\lambda}=\lambda\\
+\var(x)=\lambda
+\end{gather}$$
 **Geometric RV:**
 how many failures before the first success (0,0,0,1 will be 3 not 4) $Z$
 second definition: how many attempts until first success (definition of before +1) $Z+1$
