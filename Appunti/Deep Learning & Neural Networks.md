@@ -763,16 +763,22 @@ In forward neural networks, the inputs are IID $x_n\sim p(x)$, but this removes 
 
 Define the input to depend on past inputs:
 $$x_n\sim p(x_n|x_{n-1},x_{n-2},...)$$
-the output of a layer becomes a function of:
-- Current input $x_k$
-- Internal neuron state $h_{k-1}$, hat is $h_k=f(h_{k-1},x_k;\mathcal W)$
-
+It is possible to define a RNN by just two parameters per neuron:
+- current input vector $x_k$
+- internal neuron state $h_{k-1}$ where $h_k=f(h_{k-1};W)$
 #### Vanilla RNN Layer
 The basic layer has the following input-output relation
 $$\begin{gather}
-a_k=Wh_{k-1}+Ux_k+b\\
+a_k=Wx_{k}+Uh_{k-1}+b\\
 h_k=\tanh(a_k)\\
 \end{gather}$$
 
 ![[Pasted image 20260329181703.png|Representation|250]]
-This is a Directed Acyclic Graph (DAG) (ok for backpropagation). The learnable parameters are $\mathcal W=\curly{W, U, V, b ,q}$
+Since a loop in the NN is unwanted, it is possible to represent a RNN as a Directed Acylic Graph (DAG) which works for backpropagation, this representation is called **unrolled graph**:
+![[Pasted image 20260411154600.png|DAG|350]]
+
+The learnable parameters are $\mathcal W=\curly{W, U, V, b ,q}$
+
+For **learning** RNNs use SGD with a variant of backpropagation called **backpropagation through time (BTT)** on the unrolled graph.
+
+The standard BP cannot learn i
