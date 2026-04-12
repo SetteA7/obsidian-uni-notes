@@ -146,6 +146,9 @@ It is also possible to find the avg time spent before being absorbed:
 $$T=\min\curly{n\geq 0;X_n\geq r}$$
 the avg time that is spent starting in state $i$ before being absorbed in state $k$ can be found with the following formula:
 $$w_i=g(i)+\sum_{j=0}^{r-1}P_{ij}w_j\qquad g(i)=\begin{cases} 1 & \text{if transient}\\0\end{cases}$$
+to find the avg time spent in a specific state $j$ the formula is similar:
+$$v_i=g(i)+\sum_{j=0}^{r-1}P_{ij}v_j\qquad g(i)=\begin{cases} 1 & i=j\\0\end{cases}$$
+
 
 **Example:**
 
