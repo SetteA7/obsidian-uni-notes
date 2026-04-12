@@ -237,3 +237,14 @@ w_2=0\\
 w_3=0
 \end{cases}$$
 
+## 3.2) Random Walks
+A random walk is a set of states where the transition can only occur between adjacent states (or in the same state), that is:
+$$P=\begin{bmatrix}
+r_0 & p_0 & 0& 0&...&0&...\\
+q_1 & r_1& p_1 & 0&...&0&...\\
+0 & q_2 & r_2 & p_2&...&0&...\\
+\vdots & \vdots & \ddots & \ddots&\ddots\\
+0 & & & q_i&r_i&p_i \\
+\vdots&&&&&\ddots&...
+\end{bmatrix}$$
+$$P_{i,i+1}=p_i\quad P_{i,i-1}=q_i\quad P_{ii}=r_i$$
