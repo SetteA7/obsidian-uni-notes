@@ -96,7 +96,7 @@ P_{10}& P_{11}&...\\
 \end{bmatrix}$$
 If P is finite, then these properties hold:
 - $P_{ij}\in[0,1]$
-- $\displaystyle\sum _{j}P_{ij}=1$ for all $i$ (rows)
+- $\displaystyle\sum _{j}P_{ij}=1\quad \forall i$  (rows)
 
 A markov process is defined where $P$ is completely known and also $X_0$.
 
@@ -120,3 +120,7 @@ P[x_0=i_0,...,x_n=i_n]&=P[x_0=i_0,...,x_{n-1}=i_{n-1}]\cdot P[x_n=i_n|x_0=i_0,..
 \end{align}$$
 $\endproof$
 
+## 2.1) First Step Analysis
+First step analysis is a method to solve the markov process:
+- Find possible results at the first step
+- Invoke marko
