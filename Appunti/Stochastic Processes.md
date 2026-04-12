@@ -144,7 +144,7 @@ these can be found with the following formula:
 $$u_i=P_{ik}+\sum_{j=0}^{r-1}P_{ij}u_j$$
 It is also possible to find the avg time spent before being absorbed:
 $$T=\min\curly{n\geq 0;X_n\geq r}$$
-the avg time that is spent in a state $i$  before being absorbed in state $k$ can be found with the following formula:
+the avg time that is spent starting in state $i$ before being absorbed in state $k$ can be found with the following formula:
 $$w_i=g(i)+\sum_{j=0}^{r-1}P_{ij}w_j\qquad g(i)=\begin{cases} 1 & \text{if transient}\\0\end{cases}$$
 
 **Example:**
