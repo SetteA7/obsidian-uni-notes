@@ -129,6 +129,20 @@ First step analysis is a method to solve the markov process:
 - Find possible results at the first step
 - Invoke markov property and law of total probability
 
+Let the states be $0,...,N$, then:
+- Let the firs $r$ states ($0,...,r-1$) be transient: $P_{ij}\rightarrow 0$ for $i,j\in[0,r]$
+- The other states $r,...,N$ are absorbing: $P_{ii}=1$ for $i\in[r,N]$
+
+We can write the transition matrix as follows:
+$$P=\begin{bmatrix}
+Q&R\\0&I
+\end{bmatrix}$$
+We want to find the following:
+- Probability to get absorbed in state $k$, that is $P[X_T=k]$
+- Avg time to get absorbed, that is $T=\min\curly{n\geq 0;X_n\geq r}$
+
+
+
 
 
 >[!example|*] 3 state MC
@@ -160,6 +174,8 @@ u=&P[X_T=0|X_0=1]=\sum_{k=0}^2P[X_T=0|X_0=1,X_1=k]P[X_1=k|X_0=1]\\
 &=1\cdot\alpha+u\cdot \beta+0\cdot\gamma\\ \\
 \rightarrow u&=\frac\alpha{1-\beta}=\frac\alpha{\alpha+\gamma}
 \end{align}$$
+>This means that we finish in state 0 with probability $u$.
+>
 >to find $v$ we first calculate:
 $$\E[T|X_1=0]=0\quad \E[T|X_1=1]=v\quad \E[T|X_1=2]=0$$
 >we notice that $T\geq 1$ and it stops once one of the absorbing states is reached:
