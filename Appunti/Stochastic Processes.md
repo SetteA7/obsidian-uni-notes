@@ -123,4 +123,32 @@ $\endproof$
 ## 2.1) First Step Analysis
 First step analysis is a method to solve the markov process:
 - Find possible results at the first step
-- Invoke marko
+- Invoke markov property and law of total probability
+
+Consider the following markov process:
+$$P=\begin{bmatrix}
+1&0&0\\
+\alpha&\beta&\gamma\\
+0&0&1
+\end{bmatrix}$$
+where $\alpha+\beta+\gamma=1$ and $\alpha,\beta,\gamma\geq 1$
+this can be visualized as an absorbing MC:
+![[Pasted image 20260412144507.png|Representation|300]]
+Two questions arise:
+1. In what state does the process end?
+2. How much time (on average) does it take to get there?
+
+This can be formalized as:
+$$T=\min\curly{n\geq0;X_n=0\cap X_n=2}$$
+$$\begin{align}
+u=P[X_T=0|X_0=1]\\
+v=\E[T|X_0=1]
+\end{align}$$
+For first step analysis we first need to see the various transition probabilities:
+$$P[X_T=0|X_1=0]=1\quad P[X_T=0|X_1=1]=0\quad P[X_T=0|X_1=2]=u$$
+Now we can find $u$:
+$$\begin{align}
+u=&P[X_T=0|X_0=1]=\sum_{k=0}^2P[X_T=0|X_0=1,X_1=k]P[X_1=k|X_0=1]\\
+&=\sum_{k=0}^2P[X_T=0|X_1=k]P[X_1=k|X_0=1]=\sum_{k=0}^2P[X_T=0|X_1=k]P_{1k}\\
+&=1\cdot\alpha+0
+\end{align}$$
