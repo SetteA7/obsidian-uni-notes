@@ -223,29 +223,14 @@ P_{10}&P_{11}&P_{12}&P_{13}\\
 > $$u_i=P[X_T=2|X_0=i]\rightarrow \begin{cases}
 u_0=P_{02}+P_{00}u_0+P_{01}u_1\\
 u_1=P_{12}+P_{10}u_0+P_{11}u_1\\
-u_2=0+0\cdot u_0+P_{01}u_1\\
-u_3=0+P_{00}u_0+P_{01}u_1\\
+u_2=1\\
+u_3=0
 \end{cases}$$
-> 
-> $$T=\min\curly{n\geq 0;X_n=0\cap X_n=3}$$
-> $$\begin{align}
- u_i=P[X_T=0|X_0=i] \quad i=1,2\\
- v_i=\E[T|X_0=i] \quad i=1,2
- \end{align}$$
-> As before notice that:
-> $$\begin{align}
-u_0=1\quad u_1=u_1\quad u_2=u_2\quad u_3=0\\
-v_0=0\quad v_1=v_1\quad v_2=v_2\quad v_3=0
-\end{align}$$
-> Now we can find $u_1$ and $u_2$ and then solve the system:
-> $$\begin{cases}
- u_1=P_{10}+P_{11}u_1+P_{12}u_2\\
- u_2=P_{20}+P_{21}u_1+P_{22}u_2
- \end{cases}$$
- > same for $v_2,v_3$:
- > $$\begin{cases}
- v_1=1+P_{11}v_1+P_{12}v_2\\
- v_2=1+P_{21}v_1+P_{22}v_2
- \end{cases}$$
-
+> Now the times become:
+>$$\begin{cases}
+w_0=1+P_{00} w_0+P_{01}w_1\\ 
+w_1=1+P_{10}w_0+P_{11}w_1\\ 
+w_2=0\\
+w_3=0
+\end{cases}$$
 
