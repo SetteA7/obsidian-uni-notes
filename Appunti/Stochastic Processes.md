@@ -129,44 +129,79 @@ First step analysis is a method to solve the markov process:
 - Find possible results at the first step
 - Invoke markov property and law of total probability
 
->[!example|*] 3
-Consider the following markov process:
-$$P=\begin{bmatrix}
+
+
+>[!example|*] 3 state MC
+>Consider the following markov process:
+>$$P=\begin{bmatrix}
 1&0&0\\
 \alpha&\beta&\gamma\\
 0&0&1
 \end{bmatrix}$$
-where $\alpha+\beta+\gamma=1$ and $\alpha,\beta,\gamma\geq 1$
-this can be visualized as an absorbing MC:
-![[Pasted image 20260412144507.png|Representation|300]]
-Two questions arise:
-1. In what state does the process end?
-2. How much time (on average) does it take to get there?
-
-This can be formalized as:
-$$T=\min\curly{n\geq0;X_n=0\cap X_n=2}$$
-$$\begin{align}
+>where $\alpha+\beta+\gamma=1$ and $\alpha,\beta,\gamma\geq 1$
+>this can be visualized as an absorbing MC:
+>![[Pasted image 20260412144507.png|Representation|300]]
+>Two questions arise:
+> 1. In what state does the process end?
+> 2. How much time (on average) does it take to get there?
+>
+>This can be formalized as:
+>$$T=\min\curly{n\geq0;X_n=0\cap X_n=2}$$
+>$$\begin{align}
 u=P[X_T=0|X_0=1]\\
 v=\E[T|X_0=1]
 \end{align}$$
-For first step analysis we first need to see the various transition probabilities:
-$$P[X_T=0|X_1=0]=1\quad P[X_T=0|X_1=1]=u\quad P[X_T=0|X_1=2]=0$$
-Now we can find $u$:
-$$\begin{align}
+>For first step analysis we first need to see the various transition probabilities:
+>$$P[X_T=0|X_1=0]=1\quad P[X_T=0|X_1=1]=u\quad P[X_T=0|X_1=2]=0$$
+>Now we can find $u$:
+>$$\begin{align}
 u=&P[X_T=0|X_0=1]=\sum_{k=0}^2P[X_T=0|X_0=1,X_1=k]P[X_1=k|X_0=1]\\
 &=\sum_{k=0}^2P[X_T=0|X_1=k]P[X_1=k|X_0=1]=\sum_{k=0}^2P[X_T=0|X_1=k]P_{1k}\\
 &=1\cdot\alpha+u\cdot \beta+0\cdot\gamma\\ \\
 \rightarrow u&=\frac\alpha{1-\beta}=\frac\alpha{\alpha+\gamma}
 \end{align}$$
-to find $v$ we first calculate:
+>to find $v$ we first calculate:
 $$\E[T|X_1=0]=0\quad \E[T|X_1=1]=v\quad \E[T|X_1=2]=0$$
-we notice that $T\geq 1$ and it stops once one of the absorbing states is reached:
-$$\begin{align}
+>we notice that $T\geq 1$ and it stops once one of the absorbing states is reached:
+>$$\begin{align}
 v&=\E[T|X_0=1]=1+\sum_{k=0}^2P_{1k}\E[T|X_1=k]\\
 &=1+\alpha\cdot \beta\cdot v+\gamma\cdot 0\\
 &=1+\beta v\\ \\
 \rightarrow v&=\frac1{1-\beta}=\frac1{\alpha+\gamma}
 \end{align}$$
-Alternatively a direct calculation can be done:
-Notice that the probability is a geometric rv and thus:
+>Alternatively a direct calculation can be done:
+>Notice that the probability is a geometric rv and thus:
 $$\E[T|X_0=1]=\sum_{k=0}^\infty P[T>k|X_0=1]=\sum_k \beta^k=\frac1{1-\beta}$$
+
+
+>[!example|*] 4 state MC
+>Similar as before, but now with 4 states where 2 of them are absorbing.
+>$$P=\begin{bmatrix}
+1&0&0&0\\
+P_{10}&P_{11}&P_{12}&P_{13}\\
+P_{20}&P_{21}&P_{22}&P_{23}\\
+0&0&0&1
+\end{bmatrix}$$
+> The problem now becomes:
+> $$T=\min\curly{n\geq 0;X_n=0\cap X_n=3}$$
+> $$\begin{align}
+ u_i=P[X_T=0|X_0=i] \quad i=1,2\\
+ v_i=\E[T|X_0=i] \quad i=1,2
+ \end{align}$$
+> As before notice that:
+> $$\begin{align}
+u_0=1\quad u_1=u_1\quad u_2=u_2\quad u_3=0\\
+v_0=0\quad v_1=v_1\quad v_2=v_2\quad v_3=0
+\end{align}$$
+> Now we can find $u_1$ and $u_2$ and then solve the system:
+> $$\begin{cases}
+ u_1=P_{10}+P_{11}u_1+P_{12}u_2\\
+ u_2=P_{20}+P_{21}u_1+P_{22}u_2
+ \end{cases}$$
+ > same for $v_2,v_3$:
+ > $$\begin{cases}
+ v_1=1+P_{11}v_1+P_{12}v_2\\
+ v_2=1+P_{21}v_1+P_{22}v_2
+ \end{cases}$$
+
+
