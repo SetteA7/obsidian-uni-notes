@@ -144,26 +144,30 @@ these can be found with the following formula:
 $$u_i=P_{ik}+\sum_{j=0}^{r-1}P_{ij}u_j$$
 It is also possible to find the avg time spent before being absorbed:
 $$T=\min\curly{n\geq 0;X_n\geq r}$$
+the avg time that is spent in a state $i$  before being absorbed in state $k$ can be found with the following formula:
+$$w_i=\delta_{ik}+\sum_{j=0}^{r-1}P_{ij}w_j$$
 
-
-Example:
+**Example:**
 
 $$P = \left[ \begin{array}{c|cc} \beta & \alpha & \gamma \\ \hline 0 & 1 & 0 \\ 0 & 0 & 1 \end{array} \right]$$
 Invoke the first step analysis and find probabilities to being absorbed to state $k=1$:
 $$u_i=P[X_T=1|X_0=i]\rightarrow \begin{cases}
 u_0=\alpha+\beta u_0\\ u_1=1+0u_0\\ u_2=0+0u_0
 \end{cases}\rightarrow \begin{cases}
-u_0=\alpha+\beta u_0\\ u_1=1+0u_0\\ u_2=0+0u_0
+u_0=\frac\alpha{1-\beta}\\ u_1=1\\ u_2=0
 \end{cases}$$
-The first step consists in finding finding the transition probabilities:
-$$u_0=\alpha+\beta u_0\quad u_1=1+0u_0\quad u_2=0+0u_0$$
-condition to start in state 0, then $\sum_{k=0}^2p_kP[X_T=1|X_0=k]=u_0=\frac\alpha{1-\beta}$ 
+if the starting probabilities are known, then the total probability of being absorbed to state $1$ is
+$$P[\text{absorbed in }1]=\sum_{k=0}^2p_ku_k$$
+Now the times become:
+$$w_i=P[X_T=1|X_0=i]\rightarrow \begin{cases}
+u_0=\alpha+\beta u_0\\ u_1=1+0u_0\\ u_2=0+0u_0
+\end{cases}\rightarrow \begin{cases}
+u_0=\frac\alpha{1-\beta}\\ u_1=1\\ u_2=0
+\end{cases}$$
 
 
 
-
-
->[!example|*] 3 state MC
+>[!example|*] 3 state MC without general formula
 >Consider the following markov process:
 >$$P=\begin{bmatrix}
 1&0&0\\
@@ -176,16 +180,10 @@ condition to start in state 0, then $\sum_{k=0}^2p_kP[X_T=1|X_0=k]=u_0=\frac\alp
 >
 >
 >Two questions arise:
-> 1. In what state does the process end?
+> 1. Starting from $1$, what is the probability of being absorbed in 0?
 > 2. How much time (on average) does it take to get there?
 >
->This can be formalized as:
->$$T=\min\curly{n\geq0;X_n=0\cap X_n=2}$$
->$$\begin{align}
-u=P[X_T=0|X_0=1]\\
-v=\E[T|X_0=1]
-\end{align}$$
->For first step analysis we first need to see the various transition probabilities:
+>Invoke first step analysis we first need to see the various transition probabilities:
 >$$P[X_T=0|X_1=0]=1\quad P[X_T=0|X_1=1]=u\quad P[X_T=0|X_1=2]=0$$
 >Now we can find $u$:
 >$$\begin{align}
@@ -194,9 +192,8 @@ u=&P[X_T=0|X_0=1]=\sum_{k=0}^2P[X_T=0|X_0=1,X_1=k]P[X_1=k|X_0=1]\\
 &=1\cdot\alpha+u\cdot \beta+0\cdot\gamma\\ \\
 \rightarrow u&=\frac\alpha{1-\beta}=\frac\alpha{\alpha+\gamma}
 \end{align}$$
->This means that we finish in state 0 with probability $u$.
 >
->to find $v$ we first calculate:
+>To find $v$ we first calculate:
 $$\E[T|X_1=0]=0\quad \E[T|X_1=1]=v\quad \E[T|X_1=2]=0$$
 >we notice that $T\geq 1$ and it stops once one of the absorbing states is reached:
 >$$\begin{align}
