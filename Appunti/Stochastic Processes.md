@@ -138,9 +138,26 @@ $$P=\begin{bmatrix}
 Q&R\\0&I
 \end{bmatrix}$$
 We want to find the following:
-- Probability to get absorbed in state $k$ starting from $i$, that is $u_i=P[X_T=k|X_0=i]$
+The first step analysis consists in finding the possible transitions from any state $i$ to a set state $k$, that is:
+$$u_i=P[X_T=k|X_0=i] \quad \forall i$$
+these can be found with the following formula:
 $$u_i=P_{ik}+\sum_{j=0}^{r-1}P_{ij}u_j$$
-- Avg time to get absorbed, that is $T=\min\curly{n\geq 0;X_n\geq r}$
+It is also possible to find the avg time spent before being absorbed:
+$$T=\min\curly{n\geq 0;X_n\geq r}$$
+
+
+Example:
+
+$$P = \left[ \begin{array}{c|cc} \beta & \alpha & \gamma \\ \hline 0 & 1 & 0 \\ 0 & 0 & 1 \end{array} \right]$$
+Invoke the first step analysis and find probabilities to being absorbed to state $k=1$:
+$$u_i=P[X_T=1|X_0=i]\rightarrow \begin{cases}
+u_0=\alpha+\beta u_0\\ u_1=1+0u_0\\ u_2=0+0u_0
+\end{cases}\rightarrow \begin{cases}
+u_0=\alpha+\beta u_0\\ u_1=1+0u_0\\ u_2=0+0u_0
+\end{cases}$$
+The first step consists in finding finding the transition probabilities:
+$$u_0=\alpha+\beta u_0\quad u_1=1+0u_0\quad u_2=0+0u_0$$
+condition to start in state 0, then $\sum_{k=0}^2p_kP[X_T=1|X_0=k]=u_0=\frac\alpha{1-\beta}$ 
 
 
 
@@ -156,11 +173,7 @@ $$u_i=P_{ik}+\sum_{j=0}^{r-1}P_{ij}u_j$$
 >where $\alpha+\beta+\gamma=1$ and $\alpha,\beta,\gamma\geq 1$
 >this can be visualized as an absorbing MC:
 >![[Pasted image 20260412144507.png|Representation|300]]
->We can immediately recognize that by changing the state names (order) it is possible to obtain the general form:
->$$P = \left[ \begin{array}{c|cc} \beta & \alpha & \gamma \\ \hline 0 & 1 & 0 \\ 0 & 0 & 1 \end{array} \right]$$
->Now we wnat to first find the probability to end up in state $0$, that is: $u_i=P[X_T=0|X_0=i]$
->The first step consists in finding finding the transition probabilities:
->$$u_0=\beta+\alpha u_1+\gamma u_0\quad u_1=0+1\cdot u_1\quad u_2=0$$
+>
 >
 >Two questions arise:
 > 1. In what state does the process end?
