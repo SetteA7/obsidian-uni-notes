@@ -145,7 +145,7 @@ $$u_i=P_{ik}+\sum_{j=0}^{r-1}P_{ij}u_j$$
 It is also possible to find the avg time spent before being absorbed:
 $$T=\min\curly{n\geq 0;X_n\geq r}$$
 the avg time that is spent in a state $i$  before being absorbed in state $k$ can be found with the following formula:
-$$w_i=\delta_{ik}+\sum_{j=0}^{r-1}P_{ij}w_j$$
+$$w_i=g(i)+\sum_{j=0}^{r-1}P_{ij}w_j\qquad g(i)=\begin{cases} 1 & \text{if transient}\\0\end{cases}$$
 
 **Example:**
 
@@ -159,10 +159,14 @@ u_0=\frac\alpha{1-\beta}\\ u_1=1\\ u_2=0
 if the starting probabilities are known, then the total probability of being absorbed to state $1$ is
 $$P[\text{absorbed in }1]=\sum_{k=0}^2p_ku_k$$
 Now the times become:
-$$w_i=P[X_T=1|X_0=i]\rightarrow \begin{cases}
-u_0=\alpha+\beta u_0\\ u_1=1+0u_0\\ u_2=0+0u_0
-\end{cases}\rightarrow \begin{cases}
-u_0=\frac\alpha{1-\beta}\\ u_1=1\\ u_2=0
+$$\begin{cases}
+w_0=1+\beta w_0\\ 
+w_1=0w_0\\ 
+w_2=0w_0
+\end{cases}
+\rightarrow 
+\begin{cases}
+w_0=\frac1{1-\beta}\\ w_1=0\\ w_2=0
 \end{cases}$$
 
 
@@ -210,12 +214,19 @@ $$\E[T|X_0=1]=\sum_{k=0}^\infty P[T>k|X_0=1]=\sum_k \beta^k=\frac1{1-\beta}$$
 >[!example|*] 4 state MC
 >Similar as before, but now with 4 states where 2 of them are absorbing.
 >$$P=\begin{bmatrix}
-1&0&0&0\\
+P_{00}&P_{01}&P_{02}&P_{03}\\
 P_{10}&P_{11}&P_{12}&P_{13}\\
-P_{20}&P_{21}&P_{22}&P_{23}\\
+0&0&1&0\\
 0&0&0&1
 \end{bmatrix}$$
-> The problem now becomes:
+> Now find using the general formula for $k=2$:
+> $$u_i=P[X_T=2|X_0=i]\rightarrow \begin{cases}
+u_0=P_{02}+P_{00}u_0+P_{01}u_1\\
+u_1=P_{12}+P_{10}u_0+P_{11}u_1\\
+u_2=0+0\cdot u_0+P_{01}u_1\\
+u_3=0+P_{00}u_0+P_{01}u_1\\
+\end{cases}$$
+> 
 > $$T=\min\curly{n\geq 0;X_n=0\cap X_n=3}$$
 > $$\begin{align}
  u_i=P[X_T=0|X_0=i] \quad i=1,2\\
