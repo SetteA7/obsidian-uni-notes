@@ -138,7 +138,8 @@ $$P=\begin{bmatrix}
 Q&R\\0&I
 \end{bmatrix}$$
 We want to find the following:
-- Probability to get absorbed in state $k$, that is $P[X_T=k]$
+- Probability to get absorbed in state $k$ starting from $i$, that is $u_i=P[X_T=k|X_0=i]$
+$$u_i=P_{ik}+\sum_{j=0}^{r-1}P_{ij}u_j$$
 - Avg time to get absorbed, that is $T=\min\curly{n\geq 0;X_n\geq r}$
 
 
@@ -155,6 +156,12 @@ We want to find the following:
 >where $\alpha+\beta+\gamma=1$ and $\alpha,\beta,\gamma\geq 1$
 >this can be visualized as an absorbing MC:
 >![[Pasted image 20260412144507.png|Representation|300]]
+>We can immediately recognize that by changing the state names (order) it is possible to obtain the general form:
+>$$P = \left[ \begin{array}{c|cc} \beta & \alpha & \gamma \\ \hline 0 & 1 & 0 \\ 0 & 0 & 1 \end{array} \right]$$
+>Now we wnat to first find the probability to end up in state $0$, that is: $u_i=P[X_T=0|X_0=i]$
+>The first step consists in finding finding the transition probabilities:
+>$$u_0=\beta+\alpha u_1+\gamma u_0\quad u_1=0+1\cdot u_1\quad u_2=0$$
+>
 >Two questions arise:
 > 1. In what state does the process end?
 > 2. How much time (on average) does it take to get there?
