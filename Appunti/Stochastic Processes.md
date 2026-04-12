@@ -83,7 +83,11 @@ since $T-t>x$ implies $T>t+x$ and thus $T>t$
 **Gamma Distribution:**
 $$\Gamma(\alpha)=(\alpha-1)!$$
 $$f(x)=\frac{\lambda}{\Gamma(\alpha)}(\lambda x)^{\alpha-1}e^{-\lambda x}$$
-# 2) Markov Chains
+# 2) Important Stuff
+For discrete time rvs we have
+$$\E[X]=\sum_{n=1}^\infty nP[X=n]=\sum_{n=0}^\infty P[X>n]$$
+
+# 3) Markov Chains
 A Markov process is a stochastic process with the **markovian property,** that is, 
 $$P_{i,j}^{n,n+1}=P[x_{n+1}=j|x_0=i_0,...,x_n=i_n]=P[x_{n+1}=j|x_n=i_n]$$
 where $i,j$ is the direction (from state $i$ to state $j$) at iteration $n$ to $n+1$. 
@@ -120,11 +124,12 @@ P[x_0=i_0,...,x_n=i_n]&=P[x_0=i_0,...,x_{n-1}=i_{n-1}]\cdot P[x_n=i_n|x_0=i_0,..
 \end{align}$$
 $\endproof$
 
-## 2.1) First Step Analysis
+## 3.1) First Step Analysis
 First step analysis is a method to solve the markov process:
 - Find possible results at the first step
 - Invoke markov property and law of total probability
 
+>[!example|*] 3
 Consider the following markov process:
 $$P=\begin{bmatrix}
 1&0&0\\
@@ -145,10 +150,23 @@ u=P[X_T=0|X_0=1]\\
 v=\E[T|X_0=1]
 \end{align}$$
 For first step analysis we first need to see the various transition probabilities:
-$$P[X_T=0|X_1=0]=1\quad P[X_T=0|X_1=1]=0\quad P[X_T=0|X_1=2]=u$$
+$$P[X_T=0|X_1=0]=1\quad P[X_T=0|X_1=1]=u\quad P[X_T=0|X_1=2]=0$$
 Now we can find $u$:
 $$\begin{align}
 u=&P[X_T=0|X_0=1]=\sum_{k=0}^2P[X_T=0|X_0=1,X_1=k]P[X_1=k|X_0=1]\\
 &=\sum_{k=0}^2P[X_T=0|X_1=k]P[X_1=k|X_0=1]=\sum_{k=0}^2P[X_T=0|X_1=k]P_{1k}\\
-&=1\cdot\alpha+0
+&=1\cdot\alpha+u\cdot \beta+0\cdot\gamma\\ \\
+\rightarrow u&=\frac\alpha{1-\beta}=\frac\alpha{\alpha+\gamma}
 \end{align}$$
+to find $v$ we first calculate:
+$$\E[T|X_1=0]=0\quad \E[T|X_1=1]=v\quad \E[T|X_1=2]=0$$
+we notice that $T\geq 1$ and it stops once one of the absorbing states is reached:
+$$\begin{align}
+v&=\E[T|X_0=1]=1+\sum_{k=0}^2P_{1k}\E[T|X_1=k]\\
+&=1+\alpha\cdot \beta\cdot v+\gamma\cdot 0\\
+&=1+\beta v\\ \\
+\rightarrow v&=\frac1{1-\beta}=\frac1{\alpha+\gamma}
+\end{align}$$
+Alternatively a direct calculation can be done:
+Notice that the probability is a geometric rv and thus:
+$$\E[T|X_0=1]=\sum_{k=0}^\infty P[T>k|X_0=1]=\sum_k \beta^k=\frac1{1-\beta}$$
