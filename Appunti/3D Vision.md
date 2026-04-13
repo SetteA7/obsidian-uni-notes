@@ -1,5 +1,7 @@
 # 1) Mathematical Model
-## 1.1) Projective Plane
+
+## 1.1) Image Formation
+## 1.2) Projective Plane
 #### Perspective Projection
 Since from 3D to 2D some information is lost, the perspective is non-linear. The coordinates get divided by z, so that farther objects appear smaller.
 The following equations hold:
@@ -56,7 +58,7 @@ As a recap:
 - A direction $(d_x,d_y)$ corresponds to the homogeneous point $(d_x,d_y,0)$
 - The origin corresponds to the the z-axis line
 - Non euclidean points (points at infinite, directions) never cross the plane $z=1$.
-## 1.2) Transformations
+## 1.3) Transformations
 #### Affine and Projective Transformations
 $$ $$
 >[!def] Projective Transformations
@@ -80,7 +82,7 @@ $$H=\begin{bmatrix}sR_{n\times n}&b\\0&1\end{bmatrix}$$
 
 With $s=1$ it is called **euclidean transformation** and keeps distances and lengths.
 
-## 1.3) Camera Model
+## 1.4) Camera Model
 #### Camera Model with Homogeneous Coordinates
 In homogeneous coordinates the world-camera relation becomes
 $$M=\begin{bmatrix}X\\ Y\\ Z\\1\end{bmatrix},\qquad  m=\begin{bmatrix}u\\ v\\1\end{bmatrix}$$
@@ -800,7 +802,7 @@ In general the minimization target is
 $$\min_{R_i,t_i,M_j}\sum_{i=1}^N\sum_{j=1}^n\abs{m_j^i-K_i[R_it_i]M_j}^2$$
 
 ## 6.2) Structure From Motion (SfM)
-The aim of SfM is to reconstruct $M^J,P_i$ from a set of conjugate projection points $m_i^j\approx P_iM^j$. The solution is found wrt an arbitrary projection $T_{4\times 4}$.
+The aim of SfM is to reconstruct $M^J,P_i$ from a set of conjugate projection points $m_i^j\approx P_iM^j$. The solution is found wrt an arbitrary projection $T_{4\times 4}$. The output is a euclidean reconstruction wrt a similarity (rigid transform + scale change).
 
 
 C matrix tells how many points in common
