@@ -691,14 +691,36 @@ Also mmWaves were proposed for hand gestures (Pixel 4) or in autonomous driving.
 # 6) Multi View Reconstruction SLAM and SfM
 The aim of multi view reconstruction is to compute the 3D structure of a scene.
 
-Intrinsics of teh camera are known and conjugate points are available (SIFT).
+Intrinsics of the camera are known and conjugate points are available (SIFT).
 
 This is partially done by stereo systems but 2 cameras are needed and they need to be calibrated. The return a dense reconstruction
 
 Multi view reconstruction needs 1 camera and only intrinsic parameters are known and the camera is moving. The result is a sparse match of conjugate points and the camera location at different instants
 
+
+|             | Steropsis        | Multi View                                                  |
+| ----------- | ---------------- | ----------------------------------------------------------- |
+| Camera (s)  | 2                | 1 (ordered SLAM or unordered SfM)                           |
+| Calibration | Full calibration | Intrinsic parameters $K$ known (SLAM) or uncalibrated (SfM) |
+| Output      | Dense map        | Sparse                                                      |
+| Scale       | Absolute         | Relative                                                    |
+
+---
+
+We will compare two methods:
+
+|       | SLAM                           | SfM          |
+| ----- | ------------------------------ | ------------ |
+| Time  | Real Time                      | Offline      |
+| Input | Ordered                        | Unordered    |
+| Setup | Intrinsic parameters $K$ known | Uncalibrated |
+|       |                                |              |
+
+
 ## 6.1) Spatial Localization And Mapping (SLAM)
 SLAM works in real-time on an ordered sequence of images acquired from a fixed camera set-up.
+
+
 
 Consider two images taken by the same camera where the intrinsic parameters matrix $K$ is known.
 
@@ -739,51 +761,24 @@ $$\hat E=U\hat DV^T\qquad \hat D=\begin{bmatrix}
 0&\frac{\sigma_1+\sigma_2}2& 0\\
 0&0&0
 \end{bmatrix}$$
+From this we can get the decomposition $E=SR=\stackvec tR$
+where 4 decompositions are possible
+$$S=U(\pm S')U^T\qquad R=UR'U^T\text{ or } UR'^TU^T$$
+and
+$$S'\def\begin{bmatrix}0&-1&0\\1&0&0\\0&0&0\end{bmatrix}\qquad R'\def\begin{bmatrix}0&1&0\\-1&0&0\\0&0&1\end{bmatrix}$$
 
+Now $M_i$ can be estimated with triangulation.
 
-
-
-Finally the whole process becomes:
+The whole process is:
 - Input: two images, intrinsic parameters matrix $K$ and conjugate points $(m'_i,m_i)$
 1. Find couples of normalized points $(p'_i,p_i)$: $p=K^{-1}m\quad p'=K^{-1}m'$
-2. Compute E with 8 points algorithm
-3. Decompose E into $E=SR=\stackvec tR$
+2. Compute $E$ with 8 points algorithm
+3. Decompose $E$ into $E=SR=\stackvec tR$
 4. Compute projection matrix $P[I|0], P'[R|t]$
 5. Compute $M_i$ with triangulation
 
 
-Let the intrinsic parameters ($K$) be known, then it is possible to normalize the coordinates of conjugate points:
-$$p=K^{-1}m\quad p'=K^{-1}m'$$
-where, since the camera is in a different position in the two instances
-$$\begin{align}
-P=K[I|0]\qquad
-P'=K[I|0]G=K[R|t]
-\end{align}$$
-We can recall Lounget-Higgins:
-$$m'^T[e']_\times Q'Q^{-1}m=0\rightarrow p'^T[t]_\times Rp=0$$
-Where we define the **essential matrix**
-$$E\def[t]_\times R$$
-Properties:
-- Rank 2: since $\det(\stackvec t)=0$
-- Scale factor change does not affect $E$
-- 3 rotation d.o.f, 2 translation d.o.f.
-- since points are in front of camera, the third coordinate must be positive
 
->[!thm] Decomposing $E$
->A $3\times3$ real matrix $E$ can be decomposed into the product of a null anti-simmetric matrix $S$ and rotation $R$ iff $E$ has two equal singular values and one equal to zero:
->$$E=SR\iff\begin{cases}\sigma_1=\sigma_2\not=0\\\sigma_3=0\end{cases}$$
->where 4 decompositions are possible
->$$S=U(\pm S')U^T\qquad R=UR'U^T\text{ or } UR'^TU^T$$
->and
->$$S'\def\begin{bmatrix}0&-1&0\\1&0&0\\0&0&0\end{bmatrix}\qquad R'\def\begin{bmatrix}0&1&0\\-1&0&0\\0&0&1\end{bmatrix}$$
-
-Proof (todo)
-Set $S=\stackvec t\quad \abs t=1$ without loss of generality ($E$ defined wrt scale factor)
-Define rotation $Ut=[0,0,1]^T\def a\rightarrow t=U^Ta$
-Now $S=\stackvec t=\stackvec{U^Ta}=U^T\stackvec aU$ (valid if $\det U=1$ and is $3\times 3$)
-
-Then the decomposition becomes:
-$$EE^T=SRR^TS^T=SS^T=U^T\stackvec aUU^T\stackvec a^TU=U^T\begin{bmatrix}1&0&0\\0&1&0\\0&0&0\end{bmatrix}U$$
 
 
 C matrix tells how many points in common
