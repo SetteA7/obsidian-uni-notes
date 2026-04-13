@@ -800,6 +800,8 @@ In general the minimization target is
 $$\min_{R_i,t_i,M_j}\sum_{i=1}^N\sum_{j=1}^n\abs{m_j^i-K_i[R_it_i]M_j}^2$$
 
 ## 6.2) Structure From Motion (SfM)
+The aim of SfM is to reconstruct $M^J,P_i$ from a set of conjugate projection points $m_i^j\approx P_iM^j$. The solution is found wrt an arbitrary projection $T_{4\times 4}$.
+
 
 C matrix tells how many points in common
 
