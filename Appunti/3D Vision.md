@@ -703,10 +703,22 @@ SLAM works in real-time on an ordered sequence of images acquired from a fixed c
 Let the intrinsic parameters ($K$) be known, then it is possible to normalize the coordinates of conjugate points:
 $$p=K^{-1}m\quad p'=K^{-1}m'$$
 where, since the camera is in a different position in the two instances
-$$P=K[I|0]\quad P'=K[I|0]G=K[R|t]$$
+$$\begin{align}
+P=K[I|0]\qquad
+P'=K[I|0]G=K[R|t]
+\end{align}$$
 We can recall Lounget-Higgins:
-$$m'[e']_\times Q'Q^{-1}m=0\rightarrow p'^T[t]_\times Rp=0$$
+$$m'^T[e']_\times Q'Q^{-1}m=0\rightarrow p'^T[t]_\times Rp=0$$
+Where we define the **essential matrix**
+$$E\def[t]_\times R$$
+Properties:
+- Rank 2: since $\det(\stackvec t)=0$
+- Scale factor change does not affect $E$
+- 3 rotation d.o.f, 2 translation d.o.f.
 
+>[!thm] Decomposing $E$
+>A $3\times3$ real matrix $E$ can be decomposed into the product of a null anti-simmetric matrix $S$ and rotation $R$ iff $E$ has two equal singular values and one equal to zero:
+>$$E=SR\iff\begin{cases}\sigma_1=\sigma_2\not=0\end{cases}$$
 
 C matrix tells how many points in common
 

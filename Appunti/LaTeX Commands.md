@@ -54,3 +54,5 @@ $$\var$$
  $$A\iter{input}$$
  $\newcommand{\unit}[1]{\ \left[{#1}\right]}$
  $$\unit{input}$$
+ $\newcommand{\stackvec}[1]{\ \left[{#1}\right]_\times}$
+ $$\stackvec{input}$$
