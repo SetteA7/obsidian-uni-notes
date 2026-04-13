@@ -704,9 +704,16 @@ Consider two images taken by the same camera where the intrinsic parameters matr
 
 First we introduce the **Essential Matrix**
 $$E\def[t]_\times R$$
+which in the Lounget-Higgins equation is the relation between the two normalized points (one point is on the epipolar line of the other)
+$$p'^T[t]_\times Rp=0$$
+The essential matrix has these properties:
+- $\text{rank}(E)=2$ since $\det(\stackvec t)=0$
+- Scale factor change does not affect $E$
+- 3 rotation d.o.f, 2 translation d.o.f.
+- since points are in front of camera, the third coordinate must be positive
+- With SVD decomposition the 3 singular values are $\begin{cases}\sigma_1=\sigma_2\not=0\\\sigma_3=0\end{cases}$
 
-
-First $R,t$ (roto-traslation between the two frames) is estimated using the **8 Points Algorithm**:
+But $R,t$ (roto-traslation between the two frames) are not known and therefore $E$ needs to be estimated using the **8 Points Algorithm**:
 Let the first image have $P=K[I|0]$ and the second have $P'=[R|t]$.  The conjugate points $(m'_i,m_i)$ can be normalized to $(p=K^{-1}m, p'=K^{-1}m')$ which must satisfy the equation
 $$p_i'^TEp_i=0$$
 which can be decomposed into
@@ -718,7 +725,23 @@ p_1^T\otimes p_1'^T\\
 p_n^T\otimes p_n'^T
 \end{bmatrix}}_{U_n}
 \text{vec}(E)=0$$
-where the kernel of $U_n$ is the solution. Notice that if $n=8\rightarrow \text{dim} U_n=1$. If more than 8 couples are available, then this becomes a linear least squares problem.
+where the kernel of $U_n$ is the solution. Notice that if $n=8\rightarrow \text{dim} U_n=1$. If more than 8 couples are available, then this becomes a linear least squares problem where the solution is the minimum eigenvalue of $U_n^TU_n$.
+
+In general $E$ does not satisfy the last property and has this form:
+$$E=UDV^T\qquad D=\begin{bmatrix}
+\sigma_1&0&0\\
+0&\sigma_2& 0\\
+0&0&\sigma_3
+\end{bmatrix}\quad  \sigma_1\geq \sigma_2\geq \sigma_3$$
+the closest $\hat E$ in frobenious norm is used:
+$$\hat E=U\hat DV^T\qquad \hat D=\begin{bmatrix}
+\frac{\sigma_1+\sigma_2}2&0&0\\
+0&\frac{\sigma_1+\sigma_2}2& 0\\
+0&0&0
+\end{bmatrix}$$
+
+
+
 
 Finally the whole process becomes:
 - Input: two images, intrinsic parameters matrix $K$ and conjugate points $(m'_i,m_i)$
