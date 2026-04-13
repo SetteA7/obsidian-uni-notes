@@ -528,7 +528,8 @@ These cameras are based on active triangulation (kinect and others).
 The kinect camera projects an IR pattern on the scene. The pattern is know and when the camera captures the image, it calculates the disparity between the pattern and the captured image. Using the disparity the distance can be found by:
 $$z=0.1236\tan\par{\frac{D(u,v)}{2842.5}}$$
 
-The pixel difference is of form $u_c=u_p+d$ 
+The pixel difference is of form $u_c=u_p+d$ .
+This is a 2.5D not fully 3D since only one point of view
 
 Pros and cons:
 todo
@@ -690,6 +691,8 @@ C matrix tells how many points in common
 
 exam question:
 which of the following 3d reconstruction methods is the most accurate for teh following scene preservation?
+
+
 
 LiDAR, SfM with RGB camera, Laser scanner (active stereo), stereo camera system (laser scanner for palazzo ragione)
 
