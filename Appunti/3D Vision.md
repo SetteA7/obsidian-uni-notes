@@ -799,48 +799,27 @@ but these points are highly noisy, **Bundle Adjustment** is used, where
 In general the minimization target is
 $$\min_{R_i,t_i,M_j}\sum_{i=1}^N\sum_{j=1}^n\abs{m_j^i-K_i[R_it_i]M_j}^2$$
 
-
+## 6.2) Structure From Motion (SfM)
 
 C matrix tells how many points in common
 
-exam question:
-which of the following 3d reconstruction methods is the most accurate for teh following scene preservation?
+## 6.3) Example and Comparisons
+
+Now we will compare Steropsis, mainly (passive) stereo systems, Laser Scanner and LiDAR with Multi View Reconstruction methods
+
+**Which of the following 3d reconstruction methods is the most accurate for the following scene preservation?**
 
 
+|               | Historic Building                                           | Drone                               | Video Surveillance                        | Robot                                                       | AR Mirror                                 |
+| ------------- | ----------------------------------------------------------- | ----------------------------------- | ----------------------------------------- | ----------------------------------------------------------- | ----------------------------------------- |
+| Stereo System | Mixed; very high precision, but needs extensive calibration | Good                                | Mixed; Does not work in dark environments | Mixed; Does not work in dark environments, gives real scale | Mixed; needs 2 cameras but otherwise good |
+| Laser Scan    | Good; very high precision                                   | Bad; too slow, drone moves too much | Bad; Too slow for moving details          | Good; gives real scale                                      | Good                                      |
+| ToF Sensor    | Good                                                        | Good                                | Good; reliable and fast                   | Good; reliable and fast, gives real scale                   | Best choice                               |
+| LiDAR         | Mixed bad; captures spherical view                          | Bad; IR from sun changes perception | Good; reliable and fast                   | Good; reliable and fast, gives real scale                   | Good                                      |
+| SLAM          | Bad; Not too accurate                                       | Good                                | Bad; Camera is fixed                      | Good                                                        | Bad; Camera is fixed                      |
+| SfM           | Bad; Not too accurate                                       | Bad, too slow                       | Bad; Camera is fixed, also too slow       | Bad; too slow, need real time                               | Bad; Camera is fixed, too slow            |
 
-LiDAR, SfM with RGB camera, Laser scanner (active stereo), stereo camera system (laser scanner for palazzo ragione)
-
-- SfM not too good for accuracy
-- LiDAR is good for spherical
-- stereo is calibrated in a fixed space (lab) so not good for outside, but good for objects
-- Laser scanner is good because boh
-
-On a drone (remote sensing)
-- No Lidar because of indrared
-- No laser scan because of instability (it is sloow)
-- ToF good
-- SfM good
-
-video surveillance (hallway)
-- ToF depth camera good because indoor and many systems
-- laser scanner too slow for many details
-- stereo acceptable but not the best since when light off it does not work and infrared doesn't have high resolution
-- SfM is too slow and needs many angles
-
-on top of robot to reconstruct environment and control robot
-- laser scanner not because it is slow
-- SLAM ok
-- ToF good because reliable and fast
-- stereo is not reliable
-
-"smart" AR mirror
-- SfM bad since camera cannot move
-- ToF best choice
-- Laser too slow
-- Stereo ok
-
-
-## 6.2) Orientation
+## 6.4) Orientation
 Computing a rigid transformation of 3D points starting from a set of correspondences.
 - 2D-2D (rgb camera): we know the projection of 3D points on two image planes; compute the transformation between the two reference system
 - 3D-3D (depth camera): correspondences between 3D points are available; compute the transformations between the two coordinate systems
