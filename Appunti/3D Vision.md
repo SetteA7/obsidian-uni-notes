@@ -698,15 +698,36 @@ This is partially done by stereo systems but 2 cameras are needed and they need 
 Multi view reconstruction needs 1 camera and only intrinsic parameters are known and the camera is moving. The result is a sparse match of conjugate points and the camera location at different instants
 
 ## 6.1) Spatial Localization And Mapping (SLAM)
-SLAM works in real-time on an ordered sequence of images acquired from a fixed camera set-up
+SLAM works in real-time on an ordered sequence of images acquired from a fixed camera set-up.
 
-To estimate the points $M_i$ and the roto-translation parameters $R,t$ between two images the **8 Points Algorithm** is used.
+Consider two images taken by the same camera where the intrinsic parameters matrix $K$ is known.
+
+First we introduce the **Essential Matrix**
+$$E\def[t]_\times R$$
+
+
+First $R,t$ (roto-traslation between the two frames) is estimated using the **8 Points Algorithm**:
+Let the first image have $P=K[I|0]$ and the second have $P'=[R|t]$.  The conjugate points $(m'_i,m_i)$ can be normalized to $(p=K^{-1}m, p'=K^{-1}m')$ which must satisfy the equation
+$$p_i'^TEp_i=0$$
+which can be decomposed into
+$$(p_i^T\otimes p_i'^T)\text{vec}(E)=0
+\rightarrow 
+\underbrace{\begin{bmatrix}
+p_1^T\otimes p_1'^T\\
+\vdots\\
+p_n^T\otimes p_n'^T
+\end{bmatrix}}_{U_n}
+\text{vec}(E)=0$$
+where the kernel of $U_n$ is the solution. Notice that if $n=8\rightarrow \text{dim} U_n=1$. If more than 8 couples are available, then this becomes a linear least squares problem.
+
+Finally the whole process becomes:
 - Input: two images, intrinsic parameters matrix $K$ and conjugate points $(m'_i,m_i)$
 1. Find couples of normalized points $(p'_i,p_i)$: $p=K^{-1}m\quad p'=K^{-1}m'$
 2. Compute E with 8 points algorithm
 3. Decompose E into $E=SR=\stackvec tR$
 4. Compute projection matrix $P[I|0], P'[R|t]$
 5. Compute $M_i$ with triangulation
+
 
 Let the intrinsic parameters ($K$) be known, then it is possible to normalize the coordinates of conjugate points:
 $$p=K^{-1}m\quad p'=K^{-1}m'$$
