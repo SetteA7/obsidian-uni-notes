@@ -686,3 +686,6 @@ $$z=\frac c{4\pi f_{syn}}\qquad z_\max=\frac c{2f_{syn}}\Delta\phi_{syn}$$
 
 
 C matrix tells how many points in common
+
+exam question:
+which of the following 3d reconstruction methods is the most accurate for teh following scene preservation?
