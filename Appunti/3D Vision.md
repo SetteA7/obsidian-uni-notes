@@ -678,7 +678,7 @@ then calculate their difference:
 $$\begin{gather}\Delta\phi_{syn}=\Delta\phi_2-\Delta\phi_1(\mod 2\pi)\\ f_{syn}=f_2-f_1\end{gather}$$
 the max measurable distance is:
 $$z=\frac c{4\pi f_{syn}}\qquad z_\max=\frac c{2f_{syn}}\Delta\phi_{syn}$$
-## 5.2) Light Detection And Ranging (LiDaR)
+## 5.2) Light Detection And Ranging (LiDaR) TODO
 Lidar is a specific type of ToF sensor with wavelengths in IR (10 $\mu m$) or UV (250 $nm$)
 
 
