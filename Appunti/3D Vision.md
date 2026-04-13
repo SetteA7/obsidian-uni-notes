@@ -681,10 +681,31 @@ $$z=\frac c{4\pi f_{syn}}\qquad z_\max=\frac c{2f_{syn}}\Delta\phi_{syn}$$
 ## 5.2) Light Detection And Ranging (LiDaR) TODO
 Lidar is a specific type of ToF sensor with wavelengths in IR (10 $\mu m$) or UV (250 $nm$)
 
+## 5.3) 3D RF Sensor
+The radar-based RF sensor Walabot Pro senses the environment by transmitting, receiving and recording signals from an array of linearly polarized broadband antennas. It creates a 3D RF map of the radiated environment
 
----
+Combined with ML (DL) techniques it can be sued for hand gesture recognition or also **material classification**. 
 
-## 5.3) SFM
+Also mmWaves were proposed for hand gestures (Pixel 4) or in autonomous driving.
+
+# 6) Multi View Reconstruction SLAM and SfM
+The aim of multi view reconstruction is to compute the 3D structure of a scene.
+
+Intrinsics of teh camera are known and conjugate points are available (SIFT).
+
+This is partially done by stereo systems but 2 cameras are needed and they need to be calibrated. The return a dense reconstruction
+
+Multi view reconstruction needs 1 camera and only intrinsic parameters are known and the camera is moving. The result is a sparse match of conjugate points and the camera location at different instants
+
+## 6.1) Spatial Localization And Mapping (SLAM)
+SLAM works in real-time on an ordered sequence of images acquired from a fixed camera set-up
+
+Let the intrinsic parameters ($K$) be known, then it is possible to normalize the coordinates of conjugate points:
+$$p=K^{-1}m\quad p'=K^{-1}m'$$
+where, since the camera is in a different position in the two instances
+$$P=K[I|0]\quad P'=K[I|0]G=K[R|t]$$
+We can recall Lounget-Higgins:
+$$m'[e']_\times Q'Q^{-1}m=0\rightarrow p'^T[t]_\times Rp=0$$
 
 
 C matrix tells how many points in common
@@ -726,7 +747,7 @@ on top of robot to reconstruct environment and control robot
 - Stereo ok
 
 
-## 5.4) Orientation
+## 6.2) Orientation
 Computing a rigid transformation of 3D points starting from a set of correspondences.
 - 2D-2D (rgb camera): we know the projection of 3D points on two image planes; compute the transformation between the two reference system
 - 3D-3D (depth camera): correspondences between 3D points are available; compute the transformations between the two coordinate systems
