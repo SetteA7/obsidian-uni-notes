@@ -613,6 +613,7 @@ exactly the disparity (with $f_c=-1$)
 $\endproof$
 
 # 5) Lidar and ToF
+## 5.1) Time Of Flight (ToF)
 A Time of Flight (ToF) sensor isn active sensor that estimates distance by measuring the time it takes to send a light pulse and receive the reflected signal.
 
 For a flat surface the distance ($z$) can be calculated by knowing the e2e time of flight ($\tau$)
@@ -669,12 +670,6 @@ $$\hat z_T=\frac{\hat r_T}{\abs{K_T^{-1}m_T}}$$
 which corresponds to the point in 3D space
 $$M_T=K_T^{-1}\begin{bmatrix} u_T\\  v_T \\ 1
 \end{bmatrix}\hat z_T$$
-
-## 5.2) Light Detection And Ranging (LiDaR)
-Lidar is a specific type of ToF sensor with wavelengths in IR (10 $\mu m$) or UV (250 $nm$)
-
-
----
 using 2 modulated frequencies $f<f'$ 
 For each frequency calculate the phase difference as before:
 $$\Delta\phi_i=\par{2\pi f_i\frac{2z}c}(\mod2\pi)$$
@@ -682,6 +677,12 @@ then calculate their difference:
 $$\begin{gather}\Delta\phi_{syn}=\Delta\phi_2-\Delta\phi_1(\mod 2\pi)\\ f_{syn}=f_2-f_1\end{gather}$$
 the max measurable distance is:
 $$z=\frac c{4\pi f_{syn}}\qquad z_\max=\frac c{2f_{syn}}\Delta\phi_{syn}$$
+## 5.2) Light Detection And Ranging (LiDaR)
+Lidar is a specific type of ToF sensor with wavelengths in IR (10 $\mu m$) or UV (250 $nm$)
+
+
+---
+
 ## 5.3) SFM
 
 
@@ -699,7 +700,24 @@ LiDAR, SfM with RGB camera, Laser scanner (active stereo), stereo camera system 
 
 On a drone (remote sensing)
 - No Lidar because of indrared
-- No laser scan because of instability
+- No laser scan because of instability (it is sloow)
+- ToF good
+- SfM good
 
 video surveillance (hallway)
-- 
+- ToF depth camera good because indoor and many systems
+- laser scanner too slow for many details
+- stereo acceptable but not the best since when light off it does not work and infrared doesn't have high resolution
+- SfM is too slow and needs many angles
+
+on top of robot to reconstruct environment and control robot
+- laser scanner not because it is slow
+- SLAM ok
+- ToF good because reliable and fast
+- stereo is not reliable
+
+"smart" AR mirror
+- SfM bad since camera cannot move
+- ToF best choice
+- Laser too slow
+- Stereo ok
