@@ -689,3 +689,17 @@ C matrix tells how many points in common
 
 exam question:
 which of the following 3d reconstruction methods is the most accurate for teh following scene preservation?
+
+LiDAR, SfM with RGB camera, Laser scanner (active stereo), stereo camera system (laser scanner for palazzo ragione)
+
+- SfM not too good for accuracy
+- LiDAR is good for spherical
+- stereo is calibrated in a fixed space (lab) so not good for outside, but good for objects
+- Laser scanner is good because boh
+
+On a drone (remote sensing)
+- No Lidar because of indrared
+- No laser scan because of instability
+
+video surveillance (hallway)
+- 
