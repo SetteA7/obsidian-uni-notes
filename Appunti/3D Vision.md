@@ -700,6 +700,14 @@ Multi view reconstruction needs 1 camera and only intrinsic parameters are known
 ## 6.1) Spatial Localization And Mapping (SLAM)
 SLAM works in real-time on an ordered sequence of images acquired from a fixed camera set-up
 
+To estimate the points $M_i$ and the roto-translation parameters $R,t$ between two images the **8 Points Algorithm** is used.
+- Input: two images, intrinsic parameters matrix $K$ and conjugate points $(m'_i,m_i)$
+1. Find couples of normalized points $(p'_i,p_i)$: $p=K^{-1}m\quad p'=K^{-1}m'$
+2. Compute E with 8 points algorithm
+3. Decompose E into $E=SR=\stackvec tR$
+4. Compute projection matrix $P[I|0], P'[R|t]$
+5. Compute $M_i$ with triangulation
+
 Let the intrinsic parameters ($K$) be known, then it is possible to normalize the coordinates of conjugate points:
 $$p=K^{-1}m\quad p'=K^{-1}m'$$
 where, since the camera is in a different position in the two instances
@@ -715,10 +723,24 @@ Properties:
 - Rank 2: since $\det(\stackvec t)=0$
 - Scale factor change does not affect $E$
 - 3 rotation d.o.f, 2 translation d.o.f.
+- since points are in front of camera, the third coordinate must be positive
 
 >[!thm] Decomposing $E$
 >A $3\times3$ real matrix $E$ can be decomposed into the product of a null anti-simmetric matrix $S$ and rotation $R$ iff $E$ has two equal singular values and one equal to zero:
->$$E=SR\iff\begin{cases}\sigma_1=\sigma_2\not=0\end{cases}$$
+>$$E=SR\iff\begin{cases}\sigma_1=\sigma_2\not=0\\\sigma_3=0\end{cases}$$
+>where 4 decompositions are possible
+>$$S=U(\pm S')U^T\qquad R=UR'U^T\text{ or } UR'^TU^T$$
+>and
+>$$S'\def\begin{bmatrix}0&-1&0\\1&0&0\\0&0&0\end{bmatrix}\qquad R'\def\begin{bmatrix}0&1&0\\-1&0&0\\0&0&1\end{bmatrix}$$
+
+Proof (todo)
+Set $S=\stackvec t\quad \abs t=1$ without loss of generality ($E$ defined wrt scale factor)
+Define rotation $Ut=[0,0,1]^T\def a\rightarrow t=U^Ta$
+Now $S=\stackvec t=\stackvec{U^Ta}=U^T\stackvec aU$ (valid if $\det U=1$ and is $3\times 3$)
+
+Then the decomposition becomes:
+$$EE^T=SRR^TS^T=SS^T=U^T\stackvec aUU^T\stackvec a^TU=U^T\begin{bmatrix}1&0&0\\0&1&0\\0&0&0\end{bmatrix}U$$
+
 
 C matrix tells how many points in common
 
