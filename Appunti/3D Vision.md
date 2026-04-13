@@ -724,3 +724,10 @@ on top of robot to reconstruct environment and control robot
 - ToF best choice
 - Laser too slow
 - Stereo ok
+
+
+## 5.4) Orientation
+Computing a rigid transformation of 3D points starting from a set of correspondences.
+- 2D-2D (rgb camera): we know the projection of 3D points on two image planes; compute the transformation between the two reference system
+- 3D-3D (depth camera): correspondences between 3D points are available; compute the transformations between the two coordinate systems
+- 3D-2D ("calibration"): given the 3D points of the objects and their projections to camera plane, compute the transformation between camera system and object system.
