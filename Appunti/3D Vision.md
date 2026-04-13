@@ -700,28 +700,34 @@ Multi view reconstruction needs 1 camera and only intrinsic parameters are known
 
 |             | Steropsis        | Multi View                                                  |
 | ----------- | ---------------- | ----------------------------------------------------------- |
-| Camera (s)  | 2                | 1 (ordered SLAM or unordered SfM)                           |
+| Camera (s)  | 2 (fixed)        | 1 (moving)                                                  |
 | Calibration | Full calibration | Intrinsic parameters $K$ known (SLAM) or uncalibrated (SfM) |
-| Output      | Dense map        | Sparse                                                      |
+| Output      | Dense map        | Sparse conjugate points                                     |
 | Scale       | Absolute         | Relative                                                    |
 
 ---
 
 We will compare two methods:
 
-|       | SLAM                           | SfM          |
-| ----- | ------------------------------ | ------------ |
-| Time  | Real Time                      | Offline      |
-| Input | Ordered                        | Unordered    |
-| Setup | Intrinsic parameters $K$ known | Uncalibrated |
-|       |                                |              |
+|               | SLAM                           | SfM          |
+| ------------- | ------------------------------ | ------------ |
+| Time          | Real Time                      | Offline      |
+| Input         | Ordered                        | Unordered    |
+| Setup         | Intrinsic parameters $K$ known | Uncalibrated |
+| Spatial Scale | Local (few km)                 | Planetary    |
+| Frame         | Only last $N$ frames           | All frames   |
 
+---
 
 ## 6.1) Spatial Localization And Mapping (SLAM)
-SLAM works in real-time on an ordered sequence of images acquired from a fixed camera set-up.
+SLAM works in **real-time** on an **ordered** sequence of images acquired from a fixed camera set-up.
 
+However some key limitations arise:
+- Incremental process so errors stack up (drift)
+- Small spatial scale
+- Noisy estimation so bundle adjustment is needed
 
-
+#### 2 Images
 Consider two images taken by the same camera where the intrinsic parameters matrix $K$ is known.
 
 First we introduce the **Essential Matrix**
@@ -777,7 +783,21 @@ The whole process is:
 4. Compute projection matrix $P[I|0], P'[R|t]$
 5. Compute $M_i$ with triangulation
 
+#### Multiple Images
+In multiple scale it is important that all estimated $R_i,t_i$ are choerent wrt the same scale factor.
+Suppose we have 3 images, their real relation is
+$$t_{13}=R_{23}t_{12}+t_{23}$$
+but the SLAM takes them wrt to a scale factor
+$$\hat t_{13}=\mu_1\hat R_{23}\hat t_{12}+\mu_2\hat t_{23}\qquad \mu_1=\frac{\abs{t_{12}}}{\abs{t_{13}}}\quad \mu_2=\frac{\abs{t_{23}}}{\abs{t_{13}}}$$
+and has the solution (only wrt relative scale)
+$$\mu_1 = \frac{(\hat{t}_{13} \times \hat{t}_{23})^T (R_{23}\hat{t}_{12} \times \hat{t}_{23})}{\|R_{23}\hat{t}_{12} \times \hat{t}_{23}\|^2}$$
+but these points are highly noisy, **Bundle Adjustment** is used, where
+- Fix $M_j$ and compute $R_i,t_i$
+- Fix $R_i,t_i$ and compute $M_j$
+- repeat until threshold is reached
 
+In general the minimization target is
+$$\min_{R_i,t_i,M_j}\sum_{i=1}^N\sum_{j=1}^n\abs{m_j^i-K_i[R_it_i]M_j}^2$$
 
 
 
