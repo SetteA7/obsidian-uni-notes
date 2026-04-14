@@ -85,37 +85,33 @@ Here we can see that the image plane is defined by the plane $w=1$. Again with t
 If points are already lines. Then how do we represent a line in the projective plane?
 A line in homogeneous coordinates is expressed as the dot product of a point $X=(u,v,w)$ and a direction $Y=(a,b,c)$:
 $$X^TY=0\rightarrow au+bv+cw=0$$
-This corresponds to taking non-homogeneous point $x,y$ and making it intersect with a line:
+This corresponds to taking a non-homogeneous point $x,y$ and making it intersect with a line:
 $$ax+by+c=0\rightarrow a\frac uw+b\frac vw+c=0\stackrel{w\not =0}\longrightarrow au+bv+cw=0$$
+Clearly now based on the direction we can find these results:
+- $a=b=0$ then the line is an ideal line $l_\infty$ (never passes through $w=1$)
+- The full euclidean plane is contained in the projective plane
+- The euclidean origin corresponds to the the z-axis line
 
-
-
-Therefore the projective plane contains:
-- the euclidean plane $\mathbb R^2$; that is, all lines of form $(a,b,c)$ where at most one between $a,b$ is 0.
-- the line at infinity $l_\infty$; that is, the line of form $(0,0,c)=\lambda(0,0,1),\ c=\lambda\not =0$. Here the points are of form $(u,v,0)$ since $cw=0\rightarrow w=0$. These specify a direction
-
-The projective plane $\mathbb P^2$ is made of point triplets $(u,v,w)\not=(0,0,0)$ given the equivalence equation $(u,v,w)\sim \lambda(u,v,w)\ \forall \lambda \not =0$.
-
-This is like representing points as intersection of lines. In fact consider
+This is like representing points of $\mathbb P^2$ as intersection of lines in $\mathbb R^3$. In fact consider
 $$L_1=(a,b,c), L_2=(a',b',c')\rightarrow (u,v,w)=L_1\times L_2$$
 Consider two parallel lines $L_1=(a,b,c),L_2=(a,b,c')$ their intersection corresponds in a point at infinity:
 $$L_1\times L_2=(2b,-2a,0)=(-b,a,0)$$
+A direction $(d_x,d_y)$ corresponds to the homogeneous point $(d_x,d_y,0)$, this is where two parallel lines intersect.
+
+## 1.3) Transformations
+#### Affine and Projective Transformations
+
+
+| Transformation | D.o.f. | Matrix $H$                                                                                       | Preserves    | Description and additional info                       |
+| -------------- | ------ | ------------------------------------------------------------------------------------------------ | ------------ | ----------------------------------------------------- |
+| Projectivity   | 8      | $\begin{bmatrix}H_{11}&H_{12}&H_{13}\\ H_{21}&H_{22}&H_{23}\\ H_{31}&H_{32}&H_{33}\end{bmatrix}$ | Collinearity | $H$ is a non singular  matrix. Moreover $H=\lambda H$ |
+| Affinity       | 6      |                                                                                                  |              |                                                       |
+| Similarity     | 4      |                                                                                                  |              |                                                       |
+| Euclidean      | 3      |                                                                                                  |              |                                                       |
 
 
 ---
-Example for better understanding:
-An euclidean point $(2,4)$ becomes subset of points point $\lambda(2,4,1)$ in homogeneous coordinates. This corresponds to a line in $\mathbb R^3$ going through the origin and containing all the points $\lambda(2,4,1)$. In fact the equation of the line is $l(\lambda)=\begin{cases}u=2\lambda\\v=2\lambda\\w=\lambda\end{cases}=\lambda\cdot \begin{bmatrix}2\\4\\1\end{bmatrix}$.
-In general terms the point $(x,y)$ is the homogeneous line $\lambda[x,y,1]^T=(u,v,w), w\not = 0$
-
-As a recap:
-- The homogeneous origin is not defined
-- All euclidean points cross the plane $z=1$ (shifted xy plane) in homogeneous coordinates
-- A direction $(d_x,d_y)$ corresponds to the homogeneous point $(d_x,d_y,0)$
-- The origin corresponds to the the z-axis line
-- Non euclidean points (points at infinite, directions) never cross the plane $z=1$.
-## 1.3) Transformations
-#### Affine and Projective Transformations
-$$ $$
+$$\begin{bmatrix}H_{11}&H_{12}&H_{13}\\ H_{21}&H_{22}&H_{23}\\ H_{31}&H_{32}&H_{33}\end{bmatrix}$$
 >[!def] Projective Transformations
 **Projective transform** or projectivity is a linear application in homogeneous coordinates
 $$f:\mathbb P^n\rightarrow \mathbb P^n\qquad f:x\rightarrow Hx$$
