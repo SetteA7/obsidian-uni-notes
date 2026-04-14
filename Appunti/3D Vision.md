@@ -1,17 +1,33 @@
 # 1) Mathematical Model
 
 ## 1.1) Image Formation
+#### Pinhole Model
+
+Consider the following:
+- $M$ 3D world point
+- $m$ 2D image point corresponding, projection of $M$
+
+![[Pasted image 20260414190909.png|Geometry|250]]
+The projection is non-linear
+$$\frac fz=\frac{-u}x=\frac{-v}y\rightarrow \begin{cases}u=-f\frac xz\\v=-f\frac yz\end{cases}$$
+The angles and distances are lost, but straight lines remain straight.
+
+![[Pasted image 20260414191217.png|Notation|450]]
 ## 1.2) Projective Plane
 #### Perspective Projection
-Since from 3D to 2D some information is lost, the perspective is non-linear. The coordinates get divided by z, so that farther objects appear smaller.
-The following equations hold:
-$$\frac fz=\frac{-u}x=\frac{-v}y\rightarrow \begin{cases}u=-f\frac xz\\v=-f\frac yz\end{cases}$$
-Which is a non-linear operation
+Recall the non linear projection
+$$\begin{cases}u=-f \cdot x/z\\v=-f\cdot y/z\end{cases}$$
+
+This model takes a point $M$ and traces a line throuhg $C$. The intersection of that line and $R$ is $m$
 
 This allows to represent all 3D points, besides two:
 - point inside focal plane (f)
-- point on horizontal line (h)
+- point on horizontal plane passing through $C$  (h)
 ![[Pasted image 20260303152837.png|Example|350]]
+To solve this problem we extend the euclidean plane with ideal lines lying at infinite. This is the projective plane:
+$$\text{Projective Plane: }\mathbb P^2=\mathbb R^2\cup l_\infty$$
+_(can be generalized to $\mathbb P^N$)_
+
 
 #### Homogeneous Coordinates
 Consider two lines
@@ -31,6 +47,9 @@ The projective plane $\mathbb P^2$ is the union of the euclidean plane $\mathbb 
 | Given two different points there exists only one line that contains them                    | Given two different points there exists only one line that contains them |
 | There exists only one line with a given direction and containing a certain point P          | Two different lines have only one common point.                          |
 | Two different lines have either a common point (incident) or the same directioon (parallel) |                                                                          |
+
+---
+
 A line in with homogeneous coordinates is expressed in the following way:
 $$ax+by+c=0\rightarrow au+bv+cw=0$$
 where $X=(u,v,w)$ is a point and the line coefficients $Y=(a,b,c)$ then the line can be expressed via a dot product $X^TY=0$.
