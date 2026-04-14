@@ -28,17 +28,37 @@ To solve this problem we extend the euclidean plane with ideal lines lying at in
 $$\text{Projective Plane: }\mathbb P^2=\mathbb R^2\cup l_\infty$$
 _(can be generalized to $\mathbb P^N$)_
 
+The projective plane and the euclidean plane have different properties:
+
+| Cartesian Plane                                                                             | Projective Plane                                                         |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Given two different points there exists only one line that contains them                    | Given two different points there exists only one line that contains them |
+| There exists only one line with a given direction and containing a certain point P          | Two different lines have only one common point.                          |
+| Two different lines have either a common point (incident) or the same directioon (parallel) |                                                                          |
+
+---
 
 #### Homogeneous Coordinates
-Consider two lines
+Homogeneous coordinates are used in order to transform the non linear projection equation to a linear one. Concretely it just consists in addying a new coordinate:
+$$\tilde m=\begin{bmatrix}u\\ v\end{bmatrix}\longrightarrow  m=\begin{bmatrix}u\\ v\\1\end{bmatrix}$$
+But the last coordinate is not always 1.
+Call the last coordinate $w$. 
+- It turns out that any point with $w\not=0$ is an euclidean point corresponding to point $( u/w,v/w)$. That is:
+$$\forall \lambda \neq 0,\quad m=\begin{bmatrix} u \\ v \\ w \end{bmatrix} \sim \lambda m=\begin{bmatrix} \lambda u \\ \lambda v \\ \lambda w \end{bmatrix} \quad \longrightarrow \quad \tilde{m} = \begin{bmatrix} u/w \\ v/w \end{bmatrix}$$
+where $\sim$ is the equivalence w.r.t. scale factor.
+- Therefore if $(u,v,w)$ solves a system, so does $(\lambda u,\lambda v,\lambda w)$
+- If $w=0$ the point does not lie in euclidean space, it lieas at infinity and so it is a part of the projective plane.
+
+---
+Proof:
+Euclidean coordinates express the point as the intersection of two lines.
+Consider two generic lines:
 $$\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}a&b\\a'&b'\end{bmatrix}^{-1}\begin{bmatrix}-c\\-c'\end{bmatrix}\rightarrow \begin{bmatrix}x\\y\end{bmatrix}=\frac1{\det{\begin{bmatrix}a&b\\a'&b'\end{bmatrix}}}\begin{bmatrix}bc'-b'c\\a'c-ac'\end{bmatrix}$$
 From here they intersect at 
 $$x=\frac{bc'-b'c}{ab'-a'b}=\frac uw\qquad y=\frac{a'c-ac'}{ab'-a'b}=\frac vw$$
 where the point $(u,v,w)$ is the point in homogeneous coordinates.
-In particular:
-- $w=0$ the point lies at infinity (all of $(u,v,0)$ form line $l_\infty$)
-- $w\not=0$ point lies in euclidean space
-- if $(u,v,w)$ solves the system, then also $\lambda(u,v,w)$ does. This means a single Cartesian point can be represented by infinitely many proportional homogeneous triplets.
+The three cases presented are a direct consequence (cannot divide by $w=0$ so is not point in euclidean space)
+$\endproof$
 #### Projective Plane
 The projective plane $\mathbb P^2$ is the union of the euclidean plane $\mathbb R^2$ and the line at infinity $l_\infty$.
 
