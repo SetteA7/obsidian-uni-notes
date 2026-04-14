@@ -67,17 +67,28 @@ $$\mathbb P^n=\mathbb R^n\cup l_\infty$$
 In turns out that, a point in $\mathbb P^n$ are all the points on a line in $\mathbb R^{n+1}$.
 
 Limit the study to $n=2$:
+
+##### Points to Lines
 Recall that any non-zero homogeneous point $(u,v,w)\not = (0,0,0)$ is equivalent w.r.t. scale factor to other points:
 $$(u,v,w)\sim \lambda (u,v,w)\quad \forall\lambda\not =0$$
-However notice that a triplet of values is a line in $\mathbb R^3$
+However notice that a triplet of values is a line in $\mathbb R^3$ **passing through the origin**. In fact the line is:
+$$l(\lambda)=
+\begin{cases}
+x(\lambda)=\lambda u\\
+y(\lambda)=\lambda v\\
+z(\lambda)=\lambda w
+\end{cases}
+=\ \lambda\cdot \begin{bmatrix}u\\ v\\ w\end{bmatrix}$$
+Here we can see that the image plane is defined by the plane $w=1$. Again with this we can see that the projective plane contains all the points where $w\not =0$. 
 
+##### Lines to Points
+If points are already lines. Then how do we represent a line in the projective plane?
 A line in homogeneous coordinates is expressed as the dot product of a point $X=(u,v,w)$ and a direction $Y=(a,b,c)$:
 $$X^TY=0\rightarrow au+bv+cw=0$$
+This corresponds to taking non-homogeneous point $x,y$ and making it intersect with a line:
+$$ax+by+c=0\rightarrow a\frac uw+b\frac vw+c=0\stackrel{w\not =0}\longrightarrow au+bv+cw=0$$
 
 
-A line in with homogeneous coordinates is expressed in the following way:
-$$ax+by+c=0\rightarrow au+bv+cw=0$$
-where $X=(u,v,w)$ is a point and the line coefficients $Y=(a,b,c)$ then the line can be expressed via a dot product $X^TY=0$.
 
 Therefore the projective plane contains:
 - the euclidean plane $\mathbb R^2$; that is, all lines of form $(a,b,c)$ where at most one between $a,b$ is 0.
