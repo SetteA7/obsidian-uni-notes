@@ -44,10 +44,10 @@ $$\tilde m=\begin{bmatrix}u\\ v\end{bmatrix}\longrightarrow  m=\begin{bmatrix}u\
 But the last coordinate is not always 1.
 Call the last coordinate $w$. 
 - It turns out that any point with $w\not=0$ is an euclidean point corresponding to point $( u/w,v/w)$. That is:
-$$\forall \lambda \neq 0,\quad m=\begin{bmatrix} u \\ v \\ w \end{bmatrix} \sim \lambda m=\begin{bmatrix} \lambda u \\ \lambda v \\ \lambda w \end{bmatrix} \quad \longrightarrow \quad \tilde{m} = \begin{bmatrix} u/w \\ v/w \end{bmatrix}$$
-where $\sim$ is the equivalence w.r.t. scale factor.
+$$\forall \lambda \neq 0,\quad m=\begin{bmatrix} u \\ v \\ w \end{bmatrix} \simeq \lambda m=\begin{bmatrix} \lambda u \\ \lambda v \\ \lambda w \end{bmatrix} \quad \longrightarrow \quad \tilde{m} = \begin{bmatrix} u/w \\ v/w \end{bmatrix}$$
+where $\simeq$ is the equivalence w.r.t. scale factor.
 - Therefore if $(u,v,w)$ solves a system, so does $(\lambda u,\lambda v,\lambda w)$
-- If $w=0$ the point does not lie in euclidean space, it lieas at infinity and so it is a part of the projective plane.
+- If $w=0$ the point does not lie in euclidean space, it lies at infinity and so it is a part of the projective plane.
 
 Therefore homogeneous coordinates are used to represent points in the projective plane.
 
@@ -70,7 +70,7 @@ Limit the study to $n=2$:
 
 ##### Points to Lines
 Recall that any non-zero homogeneous point $(u,v,w)\not = (0,0,0)$ is equivalent w.r.t. scale factor to other points:
-$$(u,v,w)\sim \lambda (u,v,w)\quad \forall\lambda\not =0$$
+$$(u,v,w)\simeq \lambda (u,v,w)\quad \forall\lambda\not =0$$
 However notice that a triplet of values is a line in $\mathbb R^3$ **passing through the origin**. In fact the line is:
 $$l(\lambda)=
 \begin{cases}
@@ -102,39 +102,21 @@ A direction $(d_x,d_y)$ corresponds to the homogeneous point $(d_x,d_y,0)$, this
 #### Affine and Projective Transformations
 
 
-| Transformation | D.o.f. | Matrix $H$                                                                                       | Preserves    | Description and additional info                       |
-| -------------- | ------ | ------------------------------------------------------------------------------------------------ | ------------ | ----------------------------------------------------- |
-| Projectivity   | 8      | $\begin{bmatrix}H_{11}&H_{12}&H_{13}\\ H_{21}&H_{22}&H_{23}\\ H_{31}&H_{32}&H_{33}\end{bmatrix}$ | Collinearity | $H$ is a non singular  matrix. Moreover $H=\lambda H$ |
-| Affinity       | 6      |                                                                                                  |              |                                                       |
-| Similarity     | 4      |                                                                                                  |              |                                                       |
-| Euclidean      | 3      |                                                                                                  |              |                                                       |
+| Transformation | D.o.f. | Matrix $H$                                                                                       | Preserves           | Description and additional info                                                                       |
+| -------------- | ------ | ------------------------------------------------------------------------------------------------ | ------------------- | ----------------------------------------------------------------------------------------------------- |
+| Projectivity   | 8      | $\begin{bmatrix}H_{11}&H_{12}&H_{13}\\ H_{21}&H_{22}&H_{23}\\ H_{31}&H_{32}&H_{33}\end{bmatrix}$ | Collinearity        | $H$ is a non singular  matrix. Moreover $H=\lambda H$. This maps projective plane to projective plane |
+| Affinity       | 6      | $\begin{bmatrix}H_{11}&H_{12}&H_{13}\\ H_{21}&H_{22}&H_{23}\\ 0&0&1\end{bmatrix}$                | Parallelism         | maps real points in real points and ideal points in ideal points.                                     |
+| Similarity     | 4      | $\begin{bmatrix}sR&t\\0&1\end{bmatrix}$                                                          | Angles              |                                                                                                       |
+| Euclidean      | 3      | $\begin{bmatrix}R&t\\0&1\end{bmatrix}$                                                           | Distance and length |                                                                                                       |
 
 
 ---
-$$\begin{bmatrix}H_{11}&H_{12}&H_{13}\\ H_{21}&H_{22}&H_{23}\\ H_{31}&H_{32}&H_{33}\end{bmatrix}$$
->[!def] Projective Transformations
-**Projective transform** or projectivity is a linear application in homogeneous coordinates
-$$f:\mathbb P^n\rightarrow \mathbb P^n\qquad f:x\rightarrow Hx$$
->where H is a non singular $n+1\times n+1$ matrix.
->- They keep collinearity
->- Form a group ($f\in \mathcal G_P$)
->- H and $\lambda H$ are the same
-
->[!def] Affine Transformations
-**Affine transform** or affinity is a projectivity that maps real points in real points and ideal points in ideal points.
->An affinity must be equal to $$H=\begin{bmatrix}A_{n\times n}&b\\0&1\end{bmatrix}$$
->- Keeps parallelism
-
->[!def] Similarity Transformations
-A **similarity** is represented by
-$$H=\begin{bmatrix}sR_{n\times n}&b\\0&1\end{bmatrix}$$
->with $s$ scalar and $R$ orthogonal matrix
->- Keeps angles
-
-With $s=1$ it is called **euclidean transformation** and keeps distances and lengths.
 
 ## 1.4) Camera Model
 #### Camera Model with Homogeneous Coordinates
+Rewrite the projective equations so to use the homogeneous coordinates:
+$$\begin{cases}\tilde u=-f \frac xz\\\tilde v=-f\frac yz\end{cases}\longrightarrow\begin{cases}u=-fz\\v=-fy\\ z=1\end{cases}$$
+
 In homogeneous coordinates the world-camera relation becomes
 $$M=\begin{bmatrix}X\\ Y\\ Z\\1\end{bmatrix},\qquad  m=\begin{bmatrix}u\\ v\\1\end{bmatrix}$$
 and then
