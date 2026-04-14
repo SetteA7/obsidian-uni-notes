@@ -115,14 +115,12 @@ A direction $(d_x,d_y)$ corresponds to the homogeneous point $(d_x,d_y,0)$, this
 ## 1.4) Camera Model
 #### Camera Model with Homogeneous Coordinates
 Rewrite the projective equations so to use the homogeneous coordinates:
-$$\begin{cases}\tilde u=-f \frac xz\\\tilde v=-f\frac yz\end{cases}\longrightarrow\begin{cases}u=-fz\\v=-fy\\ z=1\end{cases}$$
+$$\begin{cases} u=-f \frac xz\\ v=-f\frac yx\end{cases}$$
 
-In homogeneous coordinates the world-camera relation becomes
-$$M=\begin{bmatrix}X\\ Y\\ Z\\1\end{bmatrix},\qquad  m=\begin{bmatrix}u\\ v\\1\end{bmatrix}$$
-and then
-$$Zm=\begin{bmatrix}-fx\\-fy\\z\end{bmatrix}=\underbrace{\begin{bmatrix} -f & 0 & 0 & 0\\0&-f&0&0\\0&0&1&0\end{bmatrix}}_{P}\begin{bmatrix}X\\ Y\\ Z \\ 1\end{bmatrix}=PM$$
-and so with respect to scale these are equal
-$$m\approx PM$$
+Which in matrix form becomes
+$$zm=z\begin{bmatrix}u\\ v\\ 1\end{bmatrix}=\begin{bmatrix}-fx\\-fy\\z\end{bmatrix}=\underbrace{\begin{bmatrix} -f & 0 & 0 & 0\\0&-f&0&0\\0&0&1&0\end{bmatrix}}_{P}\begin{bmatrix}X\\ Y\\ Z \\ 1\end{bmatrix}=PM$$
+and thus w.r.t. scale
+$$m\simeq PM$$
 - Case $P=[I|0]$: 
 	- Z is the optical axis
 	- Principal Point is the origin of image plane
