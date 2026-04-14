@@ -39,7 +39,7 @@ The projective plane and the euclidean plane have different properties:
 ---
 
 #### Homogeneous Coordinates
-Homogeneous coordinates are used in order to transform the non linear projection equation to a linear one. Concretely it just consists in addying a new coordinate:
+Homogeneous coordinates are used in order to transform the non linear projection equation to a linear one. Concretely it just consists in adding a new coordinate:
 $$\tilde m=\begin{bmatrix}u\\ v\end{bmatrix}\longrightarrow  m=\begin{bmatrix}u\\ v\\1\end{bmatrix}$$
 But the last coordinate is not always 1.
 Call the last coordinate $w$. 
@@ -48,6 +48,8 @@ $$\forall \lambda \neq 0,\quad m=\begin{bmatrix} u \\ v \\ w \end{bmatrix} \sim 
 where $\sim$ is the equivalence w.r.t. scale factor.
 - Therefore if $(u,v,w)$ solves a system, so does $(\lambda u,\lambda v,\lambda w)$
 - If $w=0$ the point does not lie in euclidean space, it lieas at infinity and so it is a part of the projective plane.
+
+Therefore homogeneous coordinates are used to represent points in the projective plane.
 
 ---
 Proof:
@@ -60,15 +62,18 @@ where the point $(u,v,w)$ is the point in homogeneous coordinates.
 The three cases presented are a direct consequence (cannot divide by $w=0$ so is not point in euclidean space)
 $\endproof$
 #### Projective Plane
-The projective plane $\mathbb P^2$ is the union of the euclidean plane $\mathbb R^2$ and the line at infinity $l_\infty$.
+Recall the projective plane contains the lines at infinite
+$$\mathbb P^n=\mathbb R^n\cup l_\infty$$
+In turns out that, a point in $\mathbb P^n$ are all the points on a line in $\mathbb R^{n+1}$.
 
-| Cartesian Plane                                                                             | Projective Plane                                                         |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| Given two different points there exists only one line that contains them                    | Given two different points there exists only one line that contains them |
-| There exists only one line with a given direction and containing a certain point P          | Two different lines have only one common point.                          |
-| Two different lines have either a common point (incident) or the same directioon (parallel) |                                                                          |
+Limit the study to $n=2$:
+Recall that any non-zero homogeneous point $(u,v,w)\not = (0,0,0)$ is equivalent w.r.t. scale factor to other points:
+$$(u,v,w)\sim \lambda (u,v,w)\quad \forall\lambda\not =0$$
+However notice that a triplet of values is a line in $\mathbb R^3$
 
----
+A line in homogeneous coordinates is expressed as the dot product of a point $X=(u,v,w)$ and a direction $Y=(a,b,c)$:
+$$X^TY=0\rightarrow au+bv+cw=0$$
+
 
 A line in with homogeneous coordinates is expressed in the following way:
 $$ax+by+c=0\rightarrow au+bv+cw=0$$
