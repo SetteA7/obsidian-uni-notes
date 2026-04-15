@@ -191,9 +191,9 @@ Recall that a line is defined by a point and a direction, in the projective plan
 - Direction vector: Ideal Point $[Q^{-1}m, 0]^T$
 Now find $PM$ with the ideal point:
 $$PM\rightarrow [Q|q]\begin{bmatrix}Q^{-1}m\\0\end{bmatrix}=QQ^{-1}m+q\cdot 0=m$$
-recall that q is non singular and invertible, then $QQ^{-1}=I$
+recall that $Q$ is non singular and invertible, then $QQ^{-1}=I$
 So the ray is obtained as
-$$M=C+\lambda\begin{bmatrix}Q^{-1}m\\0\end{bmatrix},\ \lambda \in \mathbb R\cup \curly\infty$$
+$$M(\lambda)=C+\lambda\begin{bmatrix}Q^{-1}m\\0\end{bmatrix},\ \lambda \in \mathbb R\cup \curly\infty$$
 where $\lambda$ is the variable of the ray that selects the point on the line based on the distance from $C$.
 
 >[!example]
@@ -207,11 +207,30 @@ where $\lambda$ is the variable of the ray that selects the point on the line ba
 >and the intersection happens at distance $\|P-S\|$ from $S$.
 
 
-# 2) Rendering Techniques
-## 2.1) Illumination
+# 2) Computer Graphics
+
+The standard image pipeline in computer graphics is:
+![[Pasted image 20260415153648.png|Pipeline|350]]
+## 2.1) Modeling
+The modeling of a 3D scene consists in modeling and placing the objects, while also illuminating the scene and selecting the viewpoints
+
+3 types of modeling exist:
+- Manual: use software to model by hand (Blender)
+- Automatic: obtain model from real 3D objects (SfM)
+- Procedural: use a function to generate a model (fur, grass, water, etc)
+
+Objects can be either finite, closed or continuous and can be represented as a volume or by contours.
+
+The classic polygon representation is the contour representation (b-rep) that uses a set of convex polygons to approximate a surface.
+
+Two main approaches exist:
+- Triangular mesh: dense, no redundancy
+
+
+## 2.2) Illumination
 z-buffer vs raster vs ray tracing
 todo
-## 2.2) Animation
+## 2.3) Animation
 3D animation is the spiritual successor of stop motion animation. Some key frames are specified with some key poses and the remaining frames are interpolated.
 
 Uncanny valley: human characters result disturbing
