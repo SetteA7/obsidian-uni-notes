@@ -157,7 +157,7 @@ the **extrinsic parameters** are therefore $R,t$.
 the coordinates can be normalized as $p=K^{-1}m$
 in these coordinates the projection matrix is $P[I|0]$
 #### Principal Point and Center of Projection
-The COP point is the optical center of the camera. Since every light ray passes thorugh this point, if an object is placed in C there are infinitely many rays passing through it, thus **the projection is not defined**
+The COP point is the optical center of the camera. Since every light ray passes thorugh this point, if an object is placed in C there are infinitely many rays passing through it, thus **the projection is not defined, that is COP is not defined in projective plane**
 From here we can see how the COP is the null space of $P$:
 $$PC=0$$
 In general the camera matrix has 3 rows, so we can explicit them:
@@ -175,31 +175,23 @@ The three rows of the system identify 3 planes:
 
 Since the COP is a real point in 3D space but is not defined in the projective plane we need to find it's cartesian coordinates.
 First give these notation:
-
-$$\rightarrow [Q|q]\begin{bmatrix}\tilde C\\1\end{bmatrix}=0\rightarrow Q\tilde C+q=0$$
-
-
-Rewrite the camera matrix as $P=K[R|t]=[Q_{3\times3}|q]$
-In general it has these rows, which lead to the prospective equation:
-$$P=\begin{bmatrix}p_1^T\\p_2^T\\p_3^T\end{bmatrix}\rightarrow m\simeq PM=\begin{bmatrix}p_1^TM\\p_2^TM\\p_3^TM\end{bmatrix}$$
-In homogeneous coordinates the COP is a point at infinity (and infinitely scalable) but we are more interested as it's precise euclidean point, that is:
-$$C=\begin{bmatrix}\tilde C\\1\end{bmatrix}$$
-
-
-The focal plane is defined by $\mathcal F:\ p_3^TM=0$
-By finding the intersection between the focal plane and the projection on the image plane of the two axes we can find $C$:
-$$\begin{cases}
-p_1^TC=0\\
-p_2^TC=0\\
-p_3^TC=0
-\end{cases}\iff PC=0\rightarrow [Q|q]\begin{bmatrix}\tilde C\\1\end{bmatrix}=0\rightarrow Q\tilde C+q=0$$
-In cartesian coordinates the cop becomes
-$$\tilde C=-Q^{-1}q$$
+$$P=K[R|t]=[Q_{3\times3}|q]\qquad C=\begin{bmatrix}\tilde C\\1\end{bmatrix}$$
+Then we have:
+$$PC=0\rightarrow [Q|q]\begin{bmatrix}\tilde C\\1\end{bmatrix}=0\rightarrow Q\tilde C+q=0\rightarrow \boxed{\tilde C=-Q^{-1}q}$$
+Try to understand what $Q$ and $q$ are:
+- $Q$ contains information on both rotation and intrinsic parameters of the camera
+- $q$ is related to translation of camera, but it is not the position
+- $-Q\tilde C$ is the position of the camera
+- $p_3$ is the optical axis
 #### Optical Ray
 Given a point $m$ in the imaging plane, a **ray** is the line that contains COP $C$ and $m$, that is, the set of points M such that:
-$$\curly{M:m\approx PM}$$
-Therefore by definition one point is $C$  and anther is the ideal point $[Q^{-1}m, 0]^T$ since $P[Q^{-1}m, 0]^T=[Q|q][Q^{-1}m, 0]^T=QQ^{-1}m+q0=m$
-
+$$\curly{M:m\simeq PM}$$
+Recall that a line is defined by a point and a direction, in the projective plane the line $M$ is defined by these two points:
+- COP: point $C$
+- Direction vector: Ideal Point $[Q^{-1}m, 0]^T$
+Now find $PM$ with the ideal point:
+$$PM\rightarrow [Q|q]\begin{bmatrix}Q^{-1}m\\0\end{bmatrix}=QQ^{-1}m+q\cdot 0=m$$
+recall that q is non singular and invertible, then $QQ^{-1}=I$
 So the ray is obtained as
 $$M=C+\lambda\begin{bmatrix}Q^{-1}m\\0\end{bmatrix},\ \lambda \in \mathbb R\cup \curly\infty$$
 where $\lambda$ is the variable of the ray that selects the point on the line based on the distance from $C$.
