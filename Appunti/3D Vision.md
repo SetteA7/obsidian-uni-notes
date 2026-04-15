@@ -224,10 +224,35 @@ Objects can be either finite, closed or continuous and can be represented as a v
 The classic polygon representation is the contour representation (b-rep) that uses a set of convex polygons to approximate a surface.
 
 Two main approaches exist:
-- Triangular mesh: dense, no redundancy
+- Triangular mesh: dense, no redundancy, high quality
+- Point Cloud: sparse, redundant, low complexity
+
+but also triangle clouds or voxelized point clouds are used.
+
+How are meshes represented?
+- Simple representation: define all faces as a list of triplets: simple but with much repetition
+$$T_1\curly{\par{a_1,a_2,a_3},\par{b_1,b_2,b_3},\par{c_1,c_2,c_3}}\qquad T_2\curly{\par{b_1,b_2,b_3},\par{d_1,d_2,d_3},\par{c_1,c_2,c_3}}$$
+![[Pasted image 20260415154945.png|Example|250]]
+- List of vertices: every face defined by list of vertices, edge repetition but no vertices, difficult to find adjacent faces
+$$\begin{gather}v_a=(a_1,a_2,a_3)\quad v_b=(b_1,b_2,b_3)\quad v_c=(c_1,c_2,c_3)\\
+T_1=\curly{v_a,v_b,v_c}\qquad T_2=(v_b,v_c,v_d)
+\end{gather}$$
+- List of edges: face defined by list of edges, no repetition, simpler adjacent search
+$$\begin{gather}l_1=(v_a,v_b)\quad l_2=(v_b,v_c)\quad l_3=v_c,v_a\quad l_4=(v_b,v_d)\quad l_5=(v_d,v_c)\\
+T_1=\curly{l_1,l_2,l_3}\qquad T_2=\curly{l_2,l_4,l_5}
+\end{gather}$$
+
+It is also possible to define surfaces with a **bezier curve** and a set of control points
+$$P(u,v)=\sum_i\sum_jX_{n,i}(u)X_{m,j}P_{ij}$$
+where $P_{ij}$ are the control points and $X$ the control function
+
+also using **Constructive Solid Geometry (CSG)** which builds models starting from some primitives and then boolean operations. This is used for CAD modeling
+## 2.2) Rendering and Illumination
+Now we move forward to the graphical pipeline and rendering part:
 
 
-## 2.2) Illumination
+
+
 z-buffer vs raster vs ray tracing
 todo
 ## 2.3) Animation
