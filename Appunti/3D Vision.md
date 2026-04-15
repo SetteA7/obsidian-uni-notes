@@ -157,32 +157,44 @@ the **extrinsic parameters** are therefore $R,t$.
 the coordinates can be normalized as $p=K^{-1}m$
 in these coordinates the projection matrix is $P[I|0]$
 #### Principal Point and Center of Projection
+The COP point is the optical center of the camera. Since every light ray passes thorugh this point, if an object is placed in C there are infinitely many rays passing through it, thus **the projection is not defined**
+From here we can see how the COP is the null space of $P$:
+$$PC=0$$
+In general the camera matrix has 3 rows, so we can explicit them:
+$$P=\begin{bmatrix}p_1^T\\p_2^T\\p_3^T\end{bmatrix}\rightarrow m\simeq PM=\begin{bmatrix}p_1^TM\\p_2^TM\\p_3^TM\end{bmatrix}$$
+Now find the null space:
+$$\begin{cases}
+p_1^TC=0\\
+p_2^TC=0\\
+p_3^TC=0
+\end{cases}\iff PC=0$$
+The three rows of the system identify 3 planes:
+- $p_3^TC=0$ is the focal plane
+- $p_2^TC=0$ is the plane defined by COP and x axis of image plane $u=0$
+- $p_1^TC=0$ is the plane defined by COP and y axis of image plane $v=0$
+
+Since the COP is a real point in 3D space but is not defined in the projective plane we need to find it's cartesian coordinates.
+First give these notation:
+
+$$\rightarrow [Q|q]\begin{bmatrix}\tilde C\\1\end{bmatrix}=0\rightarrow Q\tilde C+q=0$$
+
+
 Rewrite the camera matrix as $P=K[R|t]=[Q_{3\times3}|q]$
 In general it has these rows, which lead to the prospective equation:
 $$P=\begin{bmatrix}p_1^T\\p_2^T\\p_3^T\end{bmatrix}\rightarrow m\simeq PM=\begin{bmatrix}p_1^TM\\p_2^TM\\p_3^TM\end{bmatrix}$$
-In homogeneous coordinates the COP is a point at infinity (and infinitely scalable) but we are more interested as it's precise euclidean point.
+In homogeneous coordinates the COP is a point at infinity (and infinitely scalable) but we are more interested as it's precise euclidean point, that is:
+$$C=\begin{bmatrix}\tilde C\\1\end{bmatrix}$$
 
 
+The focal plane is defined by $\mathcal F:\ p_3^TM=0$
+By finding the intersection between the focal plane and the projection on the image plane of the two axes we can find $C$:
+$$\begin{cases}
+p_1^TC=0\\
+p_2^TC=0\\
+p_3^TC=0
+\end{cases}\iff PC=0\rightarrow [Q|q]\begin{bmatrix}\tilde C\\1\end{bmatrix}=0\rightarrow Q\tilde C+q=0$$
 In cartesian coordinates the cop becomes
 $$\tilde C=-Q^{-1}q$$
-where $
-
-
-
-A generic camera matrix 𝑃 can be rewritten according to its rows as:
-$$P=\begin{bmatrix}p_1^T\\p_2^T\\p_3^T\end{bmatrix}\rightarrow m\approx PM=\begin{bmatrix}p_1^TM\\p_2^TM\\p_3^TM\end{bmatrix}$$
-
-so the coordinates of a pixel in the plane becomes (cartesian coords):
-$$\begin{cases}
-u=\frac{p_1^TM}{p_3^TM}\\v=\frac{p_2^TM}{p_3^TM}
-\end{cases}$$
-Notice that the focal plane contains all the points at infinite, so 
-$$p_3^TM=0$$
-The points on axis $u=0$ and $v=0$ are the projection of 3D points that satisfy $p_1^TM=p_2^TM=0$ and therefore teh COP $C$ becomes $pC=0$.
-**In cartesian coordinates the cop becomes**
-$$\tilde C=-Q^{-1}q$$
-since by writing $P=[Q|q]$ and $C=[\tilde C, 1]^T$ this holds $PC=Q\tilde C+q=0$
-
 #### Optical Ray
 Given a point $m$ in the imaging plane, a **ray** is the line that contains COP $C$ and $m$, that is, the set of points M such that:
 $$\curly{M:m\approx PM}$$
