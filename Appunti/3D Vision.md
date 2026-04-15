@@ -113,6 +113,8 @@ A direction $(d_x,d_y)$ corresponds to the homogeneous point $(d_x,d_y,0)$, this
 ---
 
 ## 1.4) Camera Model
+
+To write the full camera model we need many steps:
 #### Camera Model with Homogeneous Coordinates
 Rewrite the projective equations so to use the homogeneous coordinates:
 $$\begin{cases} u=-f \frac xz\\ v=-f\frac yx\end{cases}$$
@@ -128,7 +130,10 @@ $$m\simeq PM$$
 	- No common axis
 	- Size and shape of CCD wrt to principal point
 
-Let $u_0,v_0$ be the coordinates of the principal point, $\theta$ the the orientation of the sensor wrt to CCD and $k_u,k_v$ the pixel size, then the camera matrix becomes
+We can further generalize $P$ by including:
+- pixel size $(k_u=1/p_u,k_v=1/p_v)$
+- principal point coordinates $(u_0,v_0)$
+- ange of image sensor $\theta$
 $$P=\left[
 \begin{array}{ccc|c}
  -f k_u & -fk_u\cot\theta & u_0 & 0 \\
@@ -136,19 +141,34 @@ $$P=\left[
   0 & 0 & 1 & 0
 \end{array}
 \right]$$
-Define the **intrsinsic parameter matrix**
+Define the **intrinsic parameter matrix**
 $$K=\begin{bmatrix}-fk_u&0&u_0\\0&-fk_u&v_0\\0&0&1\end{bmatrix}$$
-then $P=K[I_3|0]$
+then $P=K[I_3|0_3]$
 #### Camera Motion
 Now suppose the camera coordinates are not aligned with the world coordinates, then the camera coordinates $M_c$ become:
-$$M_c=GM=\begin{bmatrix}R&t\\0_{3\times 1}&1\end{bmatrix}$$
+$$M_c=GM=\begin{bmatrix}R&t\\0_{3\times 1}&1\end{bmatrix}M$$
 so in general we can do the following:
-$$m\approx PM_c=K[I_3|0]GM$$
+$$m\approx PM_c=K[I_3|0_3]M_c=K[I_3|0_3]GM$$
 and the **general camera matrix is**
-$$P=K[R|t]$$
+$$P_{3\times 4}=K_{3\times3}[R_{3\times3}|t_{3\times1}]$$
+
+the **extrinsic parameters** are therefore $R,t$.
+
 the coordinates can be normalized as $p=K^{-1}m$
 in these coordinates the projection matrix is $P[I|0]$
 #### Principal Point and Center of Projection
+Rewrite the camera matrix as $P=K[R|t]=[Q_{3\times3}|q]$
+In general it has these rows, which lead to the prospective equation:
+$$P=\begin{bmatrix}p_1^T\\p_2^T\\p_3^T\end{bmatrix}\rightarrow m\simeq PM=\begin{bmatrix}p_1^TM\\p_2^TM\\p_3^TM\end{bmatrix}$$
+In homogeneous coordinates the COP is a point at infinity (and infinitely scalable) but we are more interested as it's precise euclidean point.
+
+
+In cartesian coordinates the cop becomes
+$$\tilde C=-Q^{-1}q$$
+where $
+
+
+
 A generic camera matrix 𝑃 can be rewritten according to its rows as:
 $$P=\begin{bmatrix}p_1^T\\p_2^T\\p_3^T\end{bmatrix}\rightarrow m\approx PM=\begin{bmatrix}p_1^TM\\p_2^TM\\p_3^TM\end{bmatrix}$$
 
