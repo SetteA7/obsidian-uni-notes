@@ -261,8 +261,17 @@ This is applied to objects in the view frustum.
 #### Ray Casting
 Ray casting consists in fixing the COP and the image plane. An optic ray is drawn from COP ($\tilde Q$) to each pixel ($\tilde P$). The color of the pixel is computed along the ray.
 
-First the versor of the ray is computed:
-$$V=\frac{\tilde P-\tilde Q}{\abs{\tilde P-\tilde Q}}$$
+First the versor of the ray is computed and it is used to find the ray:
+$$V=\frac{\tilde P-\tilde Q}{\abs{\tilde P-\tilde Q}}\ \longrightarrow\ \tilde M(t)=\tilde Q+Vt$$
+Define a plane by a point $S$ and a normal vector $n$. The ray intersects the plane at
+$$t_0=\frac{(S-Q)\cdot n}{n\cdot V}$$
+A plane is very useful, as it can be used for many forms:
+- Disk with radius $r$ and center $S$: find distance between center and intersection of ray point $d=\abs{M(t_0)-S}^2$ if it is smaller than $r$ then the ray intersects the disk. ad distance $t_0$ at point $M(t_0)$
+$$d=\abs{M(t_0)-S}^2\rightarrow \begin{cases}\text{Intersection at } M(t_0)&\text{ if }d\leq r\\\text{No intersection}&\text{ if } d>r\end{cases}$$
+- Sphere with radius $r$ and center $S$: find distance between center and intersection of ray point $d=\abs{M(t_0)-S}^2$. Then find $a=\sqrt{r^2-b^2}$ and the two intersections are at distance $t_{1,2}=t_0\pm a$ and correspond to points $M(t_1),M(t_2)$.
+$$\begin{gather}d=\abs{M(t_0)-S}^2\rightarrow \begin{cases}\text{Intersection at } M(t_1),M(t_2)&\text{ if }d\leq r\\\text{No intersection}&\text{ if } d>r\end{cases}\\
+\text{If Intersection: } a=\sqr
+\end{gather}$$
 
 
 z-buffer vs raster vs ray tracing
