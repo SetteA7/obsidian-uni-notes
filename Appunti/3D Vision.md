@@ -280,7 +280,18 @@ d=\abs{M(t_0)-S}^2\rightarrow a=\sqrt{r^2-d^2}\\
 
 ![[Pasted image 20260416115908.png|Visualization|300]]
 
+#### Ray Casting
 
+Instead of tracing a ray through every pixel, each polygon traces a ray to the camera. The intersected pixels are used as a base to reconstruct the object.
+![[Pasted image 20260416170704.png|Example|350]]
+This is more performant than ray casting, however a z buffer is needed to solve clipping and culling and hidden surfaces problems.
+
+1. A perspective transformation is used to map the view frustum (defined by fov and clipping planes) to a canonic unit cube.
+2. Clipping is performed via painters algorithm or depth sort
+3. An illumination pass is performed
+4. Hidden surfaces are removed via backface culling
+5. shaders are applied
+6. a final scan conversion is performed to transform the 3D view to a 2D image
 #### Lighting Models
 A good lighting model should be able to encapsulate most physical light phenomena both from a material perspective and light perspective:
 - **Radiometry**: study of light propagates and is emitted
@@ -302,7 +313,7 @@ The biggest missing part is:
 ![[Pasted image 20260416164425.png|Example of light|150]]
 
 ##### Ray Tracing
-This enhances ray-casting and phong by taking into account the reflections ($k_sI_r$) and refraction ($k_tI_t$) of light.
+This enhances ray-casting and phong by taking into account the reflections ($k_sI_r$) and refraction ($k_tI_t$) of light. Moreover the reflection generates a new ray in the reflected direction. The pixel will have a weighted sum of the surface and reflected ray contributions.
 
 
 #### Shaders
