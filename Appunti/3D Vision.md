@@ -250,7 +250,19 @@ also using **Constructive Solid Geometry (CSG)** which builds models starting fr
 ## 2.2) Rendering and Illumination
 Now we move forward to the graphical pipeline and rendering part:
 
+Rendering is the set of algorithms used to generate the image of the scene.
+There are two main approaches to rendering: process objects one by one and update pixels accordingly or process each pixel separately.
 
+#### Z-Buffer
+Every pixel is extended with a depth value $(r,g,b)\rightarrow(r,g,b,d)$ this is the distance of the projected point to the camera. 
+![[Pasted image 20260416113234.png|Algorithm|450]]
+This is applied to objects in the view frustum.
+![[Pasted image 20260416113332.png|View Frustum|250]]
+#### Ray Casting
+Ray casting consists in fixing the COP and the image plane. An optic ray is drawn from COP ($\tilde Q$) to each pixel ($\tilde P$). The color of the pixel is computed along the ray.
+
+First the versor of the ray is computed:
+$$V=\frac{\tilde P-\tilde Q}{\abs{\tilde P-\tilde Q}}$$
 
 
 z-buffer vs raster vs ray tracing
