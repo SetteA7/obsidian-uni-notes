@@ -284,7 +284,33 @@ d=\abs{M(t_0)-S}^2\rightarrow a=\sqrt{r^2-d^2}\\
 #### Lighting Models
 A good lighting model should be able to encapsulate most physical light phenomena both from a material perspective and light perspective:
 - **Radiometry**: study of light propagates and is emitted
-- **Diffusion:** material property on how light is absorbed and emitted
+- **Diffusion:** material property on how light is absorbed and reflected
+
+##### Phong Model
+A good model for the light is the **phong model:**
+$$I_{\text{out}}=I_{\text{out, ambient}}+I_{\text{out, diff}}+I_{\text{out, refl}}+I_{\text{out,emit}}$$
+
+- **Ambient Light:** minimum light present on all objects, even unlit ones $I^{out}_a=I_ak_a$ since model doesn't take into account multiple bounces
+- **Diffused Light:** depends on normal (not viewing angle) $I_d^{out}=Ik_d\cos\theta$
+- **Specular Light:** this is how much glossy or rough the surface looks. 
+
+The biggest missing part is:
+ - attenuation
+ - reflection, refraction
+ - light source characterization, no light emitters
+
+![[Pasted image 20260416164425.png|Example of light|150]]
+
+##### Ray Tracing
+
+
+
+#### Shaders
+Small script that runs on gpu that modifies the pixel value of an entire object based on the light input and material.
+
+
+
+
 ## 2.3) Animation
 3D animation is the spiritual successor of stop motion animation. Some key frames are specified with some key poses and the remaining frames are interpolated.
 
