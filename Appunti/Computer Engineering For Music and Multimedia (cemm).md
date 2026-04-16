@@ -80,3 +80,4 @@ as do the longer molecules
 
 This can be solved by baking (in the oven) at max 50-60°C for 1h up to 8 hours. However a wrongly baked tape can be irreparably damaged.
 
+# 3) Midi
