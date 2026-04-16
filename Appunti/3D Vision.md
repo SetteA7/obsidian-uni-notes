@@ -269,9 +269,16 @@ A plane is very useful, as it can be used for many forms:
 - Disk with radius $r$ and center $S$: find distance between center and intersection of ray point $d=\abs{M(t_0)-S}^2$ if it is smaller than $r$ then the ray intersects the disk. ad distance $t_0$ at point $M(t_0)$
 $$d=\abs{M(t_0)-S}^2\rightarrow \begin{cases}\text{Intersection at } M(t_0)&\text{ if }d\leq r\\\text{No intersection}&\text{ if } d>r\end{cases}$$
 - Sphere with radius $r$ and center $S$: find distance between center and intersection of ray point $d=\abs{M(t_0)-S}^2$. Then find $a=\sqrt{r^2-b^2}$ and the two intersections are at distance $t_{1,2}=t_0\pm a$ and correspond to points $M(t_1),M(t_2)$.
-$$\begin{gather}d=\abs{M(t_0)-S}^2\rightarrow \begin{cases}\text{Intersection at } M(t_1),M(t_2)&\text{ if }d\leq r\\\text{No intersection}&\text{ if } d>r\end{cases}\\
-\text{If Intersection: } a=\sqr
+$$\begin{gather}
+d=\abs{M(t_0)-S}^2\rightarrow a=\sqrt{r^2-d^2}\\
+\downarrow\\
+\begin{cases}
+\text{Intersection at } M(t_1),M(t_2), \ t_{1,2}=t_o\pm a&\text{ if }a\in\R \\
+\text{No intersection}&\text{ otherwise }
+\end{cases}
 \end{gather}$$
+
+![[Pasted image 20260416115908.png|Visualization|300]]
 
 
 z-buffer vs raster vs ray tracing
