@@ -292,7 +292,7 @@ This is more performant than ray casting, however a z buffer is needed to solve 
 4. Hidden surfaces are removed via backface culling
 5. shaders are applied
 6. a final scan conversion is performed to transform the 3D view to a 2D image
-#### Lighting Models
+#### Lighting Models (Shading)
 A good lighting model should be able to encapsulate most physical light phenomena both from a material perspective and light perspective:
 - **Radiometry**: study of light propagates and is emitted
 - **Diffusion:** material property on how light is absorbed and reflected
