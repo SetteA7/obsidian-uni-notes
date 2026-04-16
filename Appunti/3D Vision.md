@@ -288,7 +288,7 @@ A good lighting model should be able to encapsulate most physical light phenomen
 
 ##### Phong Model
 A good model for the light is the **phong model:**
-$$I_{\text{out}}=I_{\text{out, ambient}}+I_{\text{out, diff}}+I_{\text{out, refl}}+I_{\text{out,emit}}$$
+$$I_{\text{out}}=I_{\text{out, ambient}}+I_{\text{out, diff}}+I_{\text{out, refl}}+I_{\text{out,emit}}=I_ak_a+I(k_d(n\cdot l)+k_s(n\cdot h)^n)$$
 
 - **Ambient Light:** minimum light present on all objects, even unlit ones $I^{out}_a=I_ak_a$ since model doesn't take into account multiple bounces
 - **Diffused Light:** depends on normal (not viewing angle) $I_d^{out}=Ik_d\cos\theta$
@@ -302,7 +302,7 @@ The biggest missing part is:
 ![[Pasted image 20260416164425.png|Example of light|150]]
 
 ##### Ray Tracing
-
+This enhances ray-casting and phong by taking into account the reflections ($k_sI_r$) and refraction ($k_tI_t$) of light.
 
 
 #### Shaders
