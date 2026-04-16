@@ -281,8 +281,10 @@ d=\abs{M(t_0)-S}^2\rightarrow a=\sqrt{r^2-d^2}\\
 ![[Pasted image 20260416115908.png|Visualization|300]]
 
 
-z-buffer vs raster vs ray tracing
-todo
+#### Lighting Models
+A good lighting model should be able to encapsulate most physical light phenomena both from a material perspective and light perspective:
+- **Radiometry**: study of light propagates and is emitted
+- **Diffusion:** material property on how light is absorbed and emitted
 ## 2.3) Animation
 3D animation is the spiritual successor of stop motion animation. Some key frames are specified with some key poses and the remaining frames are interpolated.
 
