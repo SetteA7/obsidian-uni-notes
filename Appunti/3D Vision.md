@@ -994,3 +994,279 @@ Computing a rigid transformation of 3D points starting from a set of corresponde
 - 2D-2D (rgb camera): we know the projection of 3D points on two image planes; compute the transformation between the two reference system
 - 3D-3D (depth camera): correspondences between 3D points are available; compute the transformations between the two coordinate systems
 - 3D-2D ("calibration"): given the 3D points of the objects and their projections to camera plane, compute the transformation between camera system and object system.
+
+
+# 7) Quiz
+
+## 7.1) Quiz 2
+#### **Question 1: Motion Modeling Strategies**
+
+Assign the most suitable strategy (Animation or Simulation) for each object/event.
+
+- **Body motion:** Animation
+    
+- **Clothes:** Simulation
+    
+- **Bone motion:** Animation
+    
+- **Low complexity motion rendering:** Animation
+    
+- **Hair and fur:** Simulation
+    
+
+**Explanation:** L'**Animation** si usa per movimenti controllati o predefiniti (come lo scheletro/ossa). La **Simulation** (fisica) è necessaria per fenomeni complessi dove il movimento dipende da forze esterne, collisioni e gravità, come tessuti e capelli.
+
+---
+
+#### **Question 2: Ray Casting vs. Z-Buffer**
+
+Select the true statements:
+
+- a) In ray casting, a ray is generated for each pixel.
+    
+- b) Z-buffer rendering is more efficient than ray casting.
+    
+- c) In ray casting, a ray always intersects one object only.
+    
+- d) In ray casting and z-buffer, the color of a pixel is determined by the closest object projected on that pixel.
+    
+
+**Correct answers:** **a, d** **Explanation:** Il Ray Casting proietta un raggio per ogni pixel per trovare l'intersezione più vicina. Sia Ray Casting che Z-buffer risolvono il problema della "visibilità" identificando l'oggetto più vicino alla camera per determinarne il colore. La (b) è spesso falsa (dipende dall'hardware, ma il rasterizzatore con Z-buffer è lo standard per la velocità), e la (c) è falsa perché un raggio può attraversare molti oggetti prima di fermarsi.
+
+---
+
+#### **Question 3: Phong Illumination Model**
+
+Select the true statement:
+
+- a) The ambient light component depends on the viewers' position.
+    
+- b) Phong model includes the reflected and refracted components as well.
+    
+- c) Specular component depends on the positions of the light source, on surface normals, and location of the viewer/camera.
+    
+
+**Correct answer:** **c** **Explanation:** La componente speculare simula il "luccichio" che cambia in base a dove si trova l'osservatore rispetto alla luce e alla normale della superficie. La luce ambientale (a) è costante ovunque, e il modello Phong base non gestisce rifrazioni (b) in modo nativo (serve il Ray Tracing).
+
+---
+
+#### **Question 4: Rendering Complexity**
+
+Given four 3D spheres and a frustum including only three of them, select the correct sentences:
+
+- a) Ray-tracing is less complex than ray-casting.
+    
+- b) Ray-casting is less complex than ray-tracing.
+    
+- c) Image resolution affects the computational complexity.
+    
+- d) Rendering complexity depends only on three out of four spheres.
+    
+
+**Correct answers:** **b, c, d** **Explanation:** Il Ray Tracing è più complesso perché calcola raggi secondari (riflessi/ombre). La risoluzione (c) conta perché determina il numero di raggi o pixel da processare. Gli oggetti fuori dal _view frustum_ (d) vengono scartati (culling), quindi non pesano sul rendering finale.
+
+---
+
+#### **Question 5: Graphical Pipeline (Rasterization)**
+
+Select the true statements:
+
+- a) Every 3D point in the scene is projected on the image.
+    
+- b) Objects outside the viewing frustrum are not considered.
+    
+- c) Anti-aliasing is used to correct occlusions.
+    
+- d) Objects need to be ordered with respect to their distance from the camera.
+    
+- e) Illumination effects are controlled by shading.
+    
+
+**Correct answers:** **b, d, e** **Explanation:** Il _view frustum culling_ elimina ciò che non è visibile (b). L'ordinamento (d) è fondamentale per gestire correttamente le sovrapposizioni (algoritmo del pittore o Z-buffer). Lo shading (e) definisce come la luce colpisce le superfici rasterizzate.
+
+---
+
+#### **Question 6: Texture Mapping (Inverse)**
+
+Inverse mapping...
+
+- a) ... maps texels into pixels.
+    
+- b) ... maps pixels into the corresponding texel.
+    
+- c) ... maps texels to a spherical surface.
+    
+
+**Correct answer:** **b** **Explanation:** Nell'**Inverse Mapping**, per ogni pixel dell'immagine finale, si "torna indietro" per vedere quale coordinata (u,v) della texture vi corrisponde. È il metodo più usato perché evita buchi nell'immagine finale.
+
+---
+
+#### **Question 7: 3D Mesh Models**
+
+Select the true statements:
+
+- a) Normal maps (bump mapping) define how light interacts with the surface.
+    
+- b) In complex models, using a texture map is more efficient than specifying a color for each face.
+    
+- c) In order to render the model, we need to define a normal map and a texture map.
+    
+- d) For each face, we necessarily need to specify a color.
+    
+
+**Correct answers:** **a, b** **Explanation:** Le Normal Maps (a) simulano micro-dettagli alterando il calcolo della luce senza aggiungere poligoni. Usare un'immagine (texture) è molto più efficiente (b) che gestire milioni di colori singoli per ogni faccia. (c) e (d) sono false perché sono componenti opzionali.
+
+---
+
+#### **Question 8: Textures in CG**
+
+Select the true statements:
+
+- a) ... contributes to create the finally-rendered image of an object.
+    
+- b) ... corresponds to the final rendering of the object.
+    
+- c) ... could require anti-aliasing filters after rendering.
+    
+- d) ... faithfully reproduce the area of the surface of 3D objects.
+    
+
+**Correct answers:** **a, c** **Explanation:** Le texture sono dati di input che contribuiscono al risultato (a). Richiedono filtri (c) come il mipmapping o filtri anisotropici per evitare artefatti (aliasing) quando l'oggetto è lontano o inclinato.
+
+---
+
+#### **Question 9: Bump Mapping**
+
+Select the true statements:
+
+- a) ... it defines how objects interact among themselves.
+    
+- b) ... it models the normals to the surface.
+    
+- c) ... it is useful for objects with repetitive or complex structure.
+    
+
+**Correct answers:** **b, c** **Explanation:** Il Bump Mapping non cambia la geometria, ma "inganna" l'occhio modificando le normali (b) usate per l'illuminazione, rendendolo perfetto per superfici rugose o ripetitive (c) come muri di mattoni o pelle.
+
+---
+
+#### **Question 10: Low-Complexity Rendering**
+
+Which strategies allow for quick rendering?
+
+- a) Bump mapping
+    
+- b) Texture mapping
+    
+- c) Ray-tracing
+    
+- d) Billboarding
+    
+- e) LOD adaptation
+    
+
+**Correct answers:** **a, b, d, e** **Explanation:** Tutte tranne il Ray-tracing. Il **Billboarding** usa piani 2D per oggetti distanti; il **LOD (Level of Detail)** riduce i poligoni lontano dalla camera; **Texture** e **Bump mapping** aggiungono dettaglio visivo senza appesantire la geometria.
+
+---
+
+#### **Question 11: Pose-to-Pose Animation**
+
+Select the correct statement:
+
+- a) It is totally handled by the computer.
+    
+- b) You must specify the first and the last poses of the motion segment.
+    
+- c) You can generate very complex motions by specifying a few poses.
+    
+- d) You must specify a pose for each frame.
+    
+
+**Correct answer:** **b** **Explanation:** L'animatore definisce i "Keyframes" (pose chiave), e il computer esegue l'interpolazione (in-betweening) tra la posa iniziale e finale.
+
+---
+
+#### **Question 12: Skinning**
+
+In animating a character, skinning...
+
+- a) ... fits a skeleton into a 3D mesh model.
+    
+- b) ... links joints and bones together.
+    
+- c) ... is used to animate the skeleton.
+    
+- d) ... is used to deform the mesh model according to the motion of the skeleton.
+    
+- e) ... associates the 3D mesh model to the skeleton.
+    
+
+**Correct answers:** **d, e** **Explanation:** Lo skinning è il processo che lega i vertici della mesh (la "pelle") alle ossa dello scheletro, definendo come la mesh si deve deformare quando le ossa si muovono.
+
+---
+
+#### **Question 13: Puppeteering**
+
+In CGI, puppeteering refers to...
+
+- a) ... controlling motion by capturing a real person/actor.
+    
+- b) ... animating using complex mathematical algorithms.
+    
+- c) ... using real puppets.
+    
+- d) ... using face motion capture to reproduce facial expression.
+    
+
+**Correct answers:** **a, d** **Explanation:** Il termine si riferisce all'uso del **Motion Capture (MoCap)**, dove i movimenti di un attore (corpo o faccia) guidano in tempo reale o differito il personaggio digitale.
+
+---
+
+#### **Question 14: Realistic Illumination**
+
+Which components are needed for realistic lighting from a point source?
+
+- a) Diffused light.
+    
+- b) Reflected light.
+    
+- c) Emitted light.
+    
+- d) Ambient light.
+    
+
+**Correct answers:** **a, b, d** **Explanation:** Per il realismo servono: **Ambient** (luce globale), **Diffused** (colore base colpito dalla luce) e **Reflected** (riflessi speculari). L'emitted light riguarda oggetti che brillano di luce propria, non la risposta di un oggetto a una fonte esterna.
+
+---
+
+#### **Question 15: Forward Mapping**
+
+In texture mapping, forward mapping...
+
+- a) ... maps image pixels to texels.
+    
+- b) ... maps texels to image pixels.
+    
+- c) ... could require an anti-aliasing filter.
+    
+- d) ... can be used only for color components.
+    
+
+**Correct answers:** **b, c** **Explanation:** Il **Forward Mapping** proietta i texel sulla superficie e poi sullo schermo. È meno efficiente dell'inverse mapping perché può lasciare pixel vuoti ("holes") nello schermo, richiedendo filtri pesanti.
+
+---
+
+#### 7.1.8) **Question 16: Skeleton Joints**
+
+Select the true statements:
+
+- a) joints support rotations, translations and stretchings.
+    
+- b) joints can have from 0 to 6 DOF.
+    
+- c) most of the joints have from 1 to 3 DOF.
+    
+- d) a joint can be connected to another joint without a bone in between.
+    
+
+**Correct answers:** **b, c** **Explanation:** I **Grandi di Libertà (DOF - Degrees of Freedom)** indicano come un giunto può muoversi. Nella maggior parte dei casi umani sono 1-3 (rotazioni), ma matematicamente possono arrivare a 6 (includendo traslazioni).
