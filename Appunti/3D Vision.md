@@ -360,10 +360,17 @@ that is:
 $$m'\simeq H_\Pi m\quad m\in \Pi$$
 Homography can also be composed:
 ![[Pasted image 20260309154735.png|Composition|350]]
-## 3.1) Homography Estimation
+#### Homography Estimation
 Let there be a set of coupled points between two images $m_i,m'_i=Hm_i$. To compute the homography $H$ between the two images, a set of at least $n=4$ matching points are needed with noise free matches.
 
-
+If matches are noisy, RANSAC is used
+First outliers are discarded, that is, keep only matches that
+$$\abs{m_i'-Hm_i}\leq \epsilon$$
+Now RANSAC is applied to the N matches in set $\mathcal M=\curly{m_i,m_i'}$.
+1. Select $N_0<N$ couples from $\mathcal M$ and create subset $\mathcal M_0$
+2. Compute the estimated matrix $H_0$ on $\mathcal M_0$
+3. Compute the number of inliers $N_{in}$
+4. if $N_{in}>T$ or max iterations stop, otherwise restart from 1.
 
 --- 
 Proof of noise free homography:
@@ -413,10 +420,6 @@ $$[A^{-1}u]_\times=A^T[u]_\times A$$
 - Frobenius: $\|A\|=\sqrt{\sum_{i,j} a_{i,j}^2}$
 - Euclidean: $\|A\|=\frac{\|Au\|}{\|u\|}$ with $\forall u: \|u\|\leq1$
 
-**Moore Penrose pseudoinverse:**
-
-**Singular Value Decomposition (SVD)**
-
 **Kronecker Product:**
 $$[A_{m\times n}\otimes B_{p\times q}]_{mp\times nq}=\begin{bmatrix}a_{1,1}B&a_{1,2}B&...& a_{1,n}\\
 a_{2,1}B&a_{2,2}B&...& a_{2,n}\\
@@ -433,6 +436,8 @@ $$vec(ABC)=(C^T\otimes A)vec(B)$$
 ----
 
 ## 3.2) Epipolar Geometry
+
+
 
 # 4) Stereo Systems
 Stereo system uses two views of the same scene to estimate depth. This si done via the disparity between points in a scene.
