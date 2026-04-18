@@ -437,25 +437,29 @@ $$vec(ABC)=(C^T\otimes A)vec(B)$$
 
 ## 3.2) Epipolar Geometry
 There are 3 main geometric structures in the epipolar geometry:
-- **Epipolar Plane:** plane containing $m,m',M$ or $m, C, C'$
-- **Epipolar Line:** intersection between epipolar plane and image plane
-- **Epipoles:** projection of principal point of camera into other cameras image plane.
+- **Epipolar Plane:** plane containing $m,m',M$ or $m, C, C'$ (intersection between $Mm,Mm'$)
+- **Epipolar Line:** intersection between epipolar plane and image plane (lines $em, e'm'$)
+- **Epipoles:** projection of principal point of camera into other cameras image plane. ($e=PC', e'=P'C$)
 
 ![[Pasted image 20260418113353.png|Example|250]]
-For noise-free matching point estimation we know that $m_i$ has matching point $m_i'$ on the epipolar line, no other part of image can contain it.
+For noise-free matching point estimation we know that $m_i$ has matching point $m_i'$ on the epipolar line, no other part of image can contain it. This is shown in the lounget higgins equation.
+
+We can define the **fundamental matrix** which contains all the information about the epipolar geometry.
+$$F=\stackvec{e'}Q'Q^{-1}$$
 
 A fundamental equation is the **Longuet Higgins Equation:**
 $$m'^T\stackvec{e'}Q'Q^{-1}m=m'^TFm=0$$
 this equation is a bilinear relation between $m,m'$ with $P=[Q|q],\ P'=[Q'|q']$.
 
-The **fundamental matrix** contains all the information about the epipolar geometry.
-$$F=\stackvec{e'}Q'Q^{-1}$$
-
+---
 Proof of Longuet Higgins Equation
 Let $P=[Q|q],\ P'=[Q'|q']$, then the optical ray of m is:
-$$M=C+\lambda [Q^{-1}m, 0]^T$$
-The projected line wrt $P'$ that is, the epipolar line, becomes:
-$$$$
+$$M=C+\lambda \begin{bmatrix}[Q^{-1}m\\ 0\end{bmatrix}$$
+The projected line wrt $P'$ that is, the epipolar line $e',m'$, becomes:
+$$P'M=P'C+\lambda P'\begin{bmatrix}[Q^{-1}m\\ 0\end{bmatrix}=e'+\lambda Q'Q^{-1}m+q'\cdot 0=e'+\lambda Q'Q^{-1}m$$
+so finally the epipolar line on $\mathcal R'$ is:
+$$m'\simeq P'M=e'+\lambda Q'Q^{-1}m $$
+from here just a few algebraic manipulations we get the Longuet Higgins Equation.
 # 4) Stereo Systems
 Stereo system uses two views of the same scene to estimate depth. This si done via the disparity between points in a scene.
 
@@ -497,8 +501,8 @@ p_2'^TM-v'p_3'^TM
 With a SVD decomposition of A ($A=U\Sigma V^T$) and by taking the last eigenvector (last vector of $V$) we get the solution. This can be generalized to $N$ cameras.
 
 Since in real case scenarios due to noise the points don't lie on the epipolar line but slightly diverge, then SVD finds the algebraic minimum, to minimize the geometric cost we can use (find $M$ that minimizes)
-$$\epsilon(M)=\|\begin{bmatrix}u\\v\end{bmatrix}-\begin{bmatrix}\frac{p_1^TM}{p_3^TM}\\\frac{p_2^TM}{p_3^TM}\end{bmatrix}\|^2+
-\|\begin{bmatrix}u'\\v'\end{bmatrix}-\begin{bmatrix}\frac{p_1'^TM}{p_3'^TM}\\\frac{p_2'^TM}{p_3'^TM}\end{bmatrix}\|^2\rightarrow M=\arg\min_M\epsilon(M)$$
+$$\epsilon(M)=\abs{\begin{bmatrix}u\\v\end{bmatrix}-\begin{bmatrix}\frac{p_1^TM}{p_3^TM}\\\frac{p_2^TM}{p_3^TM}\end{bmatrix}}^2+
+\abs{\begin{bmatrix}u'\\v'\end{bmatrix}-\begin{bmatrix}\frac{p_1'^TM}{p_3'^TM}\\\frac{p_2'^TM}{p_3'^TM}\end{bmatrix}}^2\rightarrow M=\arg\min_M\epsilon(M)$$
 This however is harder to compute.
 
 ---
