@@ -395,7 +395,7 @@ The $A$ matrix is a $2n\times 9$ matrix with rank 2 (2 eq in 8 unknowns). Theref
 The system can be solved by using SVD on $ker(A)=1$ .
 $\endproof$
 
-##### Basci Linear Algebra Recap
+##### Basic Linear Algebra Recap
 **Scalar product:**
 $$a^T\cdot b=<a,b>=\sum_{i=1}^na_ib_i=b^T\cdot a=|a||b|\cos\theta\rightarrow \theta=\frac{<a,b>}{|a||b|}$$
 **Outer (vector) product:**
@@ -436,9 +436,26 @@ $$vec(ABC)=(C^T\otimes A)vec(B)$$
 ----
 
 ## 3.2) Epipolar Geometry
+There are 3 main geometric structures in the epipolar geometry:
+- **Epipolar Plane:** plane containing $m,m',M$ or $m, C, C'$
+- **Epipolar Line:** intersection between epipolar plane and image plane
+- **Epipoles:** projection of principal point of camera into other cameras image plane.
 
+![[Pasted image 20260418113353.png|Example|250]]
+For noise-free matching point estimation we know that $m_i$ has matching point $m_i'$ on the epipolar line, no other part of image can contain it.
 
+A fundamental equation is the **Longuet Higgins Equation:**
+$$m'^T\stackvec{e'}Q'Q^{-1}m=m'^TFm=0$$
+this equation is a bilinear relation between $m,m'$ with $P=[Q|q],\ P'=[Q'|q']$.
 
+The **fundamental matrix** contains all the information about the epipolar geometry.
+$$F=\stackvec{e'}Q'Q^{-1}$$
+
+Proof of Longuet Higgins Equation
+Let $P=[Q|q],\ P'=[Q'|q']$, then the optical ray of m is:
+$$M=C+\lambda [Q^{-1}m, 0]^T$$
+The projected line wrt $P'$ that is, the epipolar line, becomes:
+$$$$
 # 4) Stereo Systems
 Stereo system uses two views of the same scene to estimate depth. This si done via the disparity between points in a scene.
 
