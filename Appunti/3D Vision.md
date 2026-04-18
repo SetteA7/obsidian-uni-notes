@@ -347,19 +347,24 @@ Animating them via key poses is not trivial for complex motions: we resort to **
 
 However real life movements do not work precisely for animation (12 rules of animation) and some very complex elements (hair, water, physiscs) are simulated.
 
-# 3) Homography Estimation
-3D objects need to be localized in the image.
+# 3) Homography
+$$ $$
 >[!def] Homography
 >Homography is the function that maps points of plane $\Pi$ on the image plane
 >$$\Pi:Z=0$$
->that is, it maps a plane into another plane
+>that is, it maps a plane into another plane.
+>The homography matrix $H_\Pi$ is a $3\times3$ non singular matrix with 8 d.o.f. 
 
-$$\begin{bmatrix}u\\v\\1\end{bmatrix}=\begin{bmatrix}p_{11}&p_{12}&p_{13}&p_{14}\\p_{21}&p_{22}&p_{23}&p_{24}\\p_{31}&p_{32}&p_{33}&p_{34}\end{bmatrix}\begin{bmatrix}x\\y\\0\\1\end{bmatrix}=\underbrace{\begin{bmatrix}p_{11}&p_{12}&p_{14}\\p_{21}&p_{22}&p_{24}\\p_{31}&p_{32}&p_{34}\end{bmatrix}}_{H}\begin{bmatrix}x\\y\\1\end{bmatrix}$$
+$$\begin{bmatrix}u\\v\\1\end{bmatrix}\simeq\begin{bmatrix}p_{11}&p_{12}&p_{13}&p_{14}\\p_{21}&p_{22}&p_{23}&p_{24}\\p_{31}&p_{32}&p_{33}&p_{34}\end{bmatrix}\begin{bmatrix}x\\y\\0\\1\end{bmatrix}\simeq\underbrace{\begin{bmatrix}p_{11}&p_{12}&p_{14}\\p_{21}&p_{22}&p_{24}\\p_{31}&p_{32}&p_{34}\end{bmatrix}}_{H_\Pi}\begin{bmatrix}x\\y\\1\end{bmatrix}$$
 that is:
-$$m'=H_\Pi m\quad m\in \Pi$$
-where $H$ is a $3 \times 3$ singular matrix defined wrt scale factor (8 DoF).
+$$m'\simeq H_\Pi m\quad m\in \Pi$$
 Homography can also be composed:
 ![[Pasted image 20260309154735.png|Composition|350]]
+## 3.1) Homography Estimation
+Let there be a set of coupled points between two images $m_i,m'_i=Hm_i$. 
+Notice that 
+$$$$
+
 Since $m_i'\approx Hm_i$ we have that 
 $$m_i'\times Hm_i\approx m_i'\times m_i'=0$$
 then
