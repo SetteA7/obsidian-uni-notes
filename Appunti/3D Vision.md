@@ -361,19 +361,32 @@ $$m'\simeq H_\Pi m\quad m\in \Pi$$
 Homography can also be composed:
 ![[Pasted image 20260309154735.png|Composition|350]]
 ## 3.1) Homography Estimation
+Let there be a set of coupled points between two images $m_i,m'_i=Hm_i$. To compute the homography $H$ between the two images, a set of at least $n=4$ matching points are needed with noise free matches.
+
+
+
+--- 
+Proof of noise free homography:
 Let there be a set of coupled points between two images $m_i,m'_i=Hm_i$. 
 Notice that 
-$$$$
+$$m_i'\times Hm_i=0\rightarrow \stackvec{m_i'}H m_i=0_{2\times 1}$$
+Apply the vec and notice:
+$$vec\par{\stackvec{m_i'}Hm_i}=vec (0)=0$$
+Now expand:
+$$\begin{gather}
+vec\par{\stackvec{m_i'}Hm_i}=(m_i^T\otimes\stackvec{m_i'})vec(H)=0 \\ 
+\downarrow \\ 
+\begin{bmatrix}
+m_1^T\otimes\stackvec{m_1'}\\
+m_2^T\otimes\stackvec{m_2'}\\
+\vdots\\
+m_n^T\otimes\stackvec{m_n'}\\
+\end{bmatrix}vec(H)=Avec (H)=0_{2n\times 1}
+\end{gather}$$
+The $A$ matrix is a $2n\times 9$ matrix with rank 2 (2 eq in 8 unknowns). Therefore at least $n=4$ matching points are needed for the estimation.
 
-Since $m_i'\approx Hm_i$ we have that 
-$$m_i'\times Hm_i\approx m_i'\times m_i'=0$$
-then
-$$[m'_i]_\times Hm_i=0\rightarrow \text{vec}([m'_i]_\times Hm_i)=0\rightarrow (m_i^T\otimes [m'_i]_\times)\text{vec(H)}=0$$
-
-call $A=m_i^T\otimes [m'_i]_\times$ with rank 2 and thus the sizes
-$$A_{2n\times 9}\ vec(H)_{9\times1}=0$$
-Only 4 points are needed for the homography
-
+The system can be solved by using SVD on $ker(A)=1$ .
+$\endproof$
 
 ##### Basci Linear Algebra Recap
 **Scalar product:**
