@@ -95,7 +95,7 @@ Clearly now based on the direction we can find these results:
 This is like representing points of $\mathbb P^2$ as intersection of lines in $\mathbb R^3$. In fact consider
 $$L_1=(a,b,c), L_2=(a',b',c')\rightarrow (u,v,w)=L_1\times L_2$$
 Consider two parallel lines $L_1=(a,b,c),L_2=(a,b,c')$ their intersection corresponds in a point at infinity:
-$$L_1\times L_2=(2b,-2a,0)=(-b,a,0)$$
+$$L_1\times L_2=(2b,-2a,0)\simeq(-b,a,0)$$
 A direction $(d_x,d_y)$ corresponds to the homogeneous point $(d_x,d_y,0)$, this is where two parallel lines intersect.
 
 ## 1.3) Transformations
@@ -117,7 +117,7 @@ A direction $(d_x,d_y)$ corresponds to the homogeneous point $(d_x,d_y,0)$, this
 To write the full camera model we need many steps:
 #### Camera Model with Homogeneous Coordinates
 Rewrite the projective equations so to use the homogeneous coordinates:
-$$\begin{cases} u=-f \frac xz\\ v=-f\frac yx\end{cases}$$
+$$\begin{cases} u=-f \frac xz\\ v=-f\frac yz\end{cases}$$
 
 Which in matrix form becomes
 $$zm=z\begin{bmatrix}u\\ v\\ 1\end{bmatrix}=\begin{bmatrix}-fx\\-fy\\z\end{bmatrix}=\underbrace{\begin{bmatrix} -f & 0 & 0 & 0\\0&-f&0&0\\0&0&1&0\end{bmatrix}}_{P}\begin{bmatrix}X\\ Y\\ Z \\ 1\end{bmatrix}=PM$$
