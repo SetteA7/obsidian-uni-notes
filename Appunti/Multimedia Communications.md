@@ -1043,6 +1043,8 @@ where:
 - $x,y$ are the points on the image
 - $u(x,y),v(x,y)$ is the velocity of the point $x,y$
 
+## 6.1) Variatonal Method
+
 
 # 7) Proofs
 **Kraft Inequality:**
