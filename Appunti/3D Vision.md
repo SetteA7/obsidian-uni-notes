@@ -449,7 +449,7 @@ $$F=\stackvec{e'}Q'Q^{-1}$$
 
 A fundamental equation is the **Longuet Higgins Equation:**
 $$m'^T\stackvec{e'}Q'Q^{-1}m=m'^TFm=0$$
-this equation is a bilinear relation between $m,m'$ with $P=[Q|q],\ P'=[Q'|q']$.
+this equation is a bilinear relation between $m,m'$ with $P=[Q|q],\ P'=[Q'|q']$. This allows to find if $m,m'$ are on the same epipolar line without knowing the depth of $M$.
 
 ---
 Proof of Longuet Higgins Equation
@@ -468,6 +468,8 @@ This chapter will follow this structure:
 - Understand the general case and how this tells us that conjugate points are on the same epipolar line
 - Rectify the images so that the generic case becomes the simple triangulation case
 - Given $m$ find the matching point $m'$ 
+
+## 4.1) Passive Stereo Systems
 #### Simple Triangulation
 Let two cameras be parallel and aligned (image plane corresponds), then by knowing:
 - $b$ distance between cameras. If unknown the distance is a scaling factor
@@ -478,7 +480,8 @@ The distance z is computed by
 $$z=\frac{bf}{u-u'}$$
 In this case the camera matrices are
 $$P=K[I|0]\qquad P'=K[I|(-b,0,0)^T]$$
-## 4.2) Passive Stereo Systems
+The estimation error is:
+$$\frac{\partial z}{\partial\Delta u}=-\frac{bf}{\Delta u^2}\rightarrow \abs{\partial z}=\frac{bf}{\Delta u^2}\partial \Delta\stackrel{\Delta u=\frac{bf}{z}}\longrightarrow \abs{\partial z}=\frac{z^2}{bf}\partial\Delta$$
 #### General Case
 **Suppose we know $m$ but not $m'$, it is possible to find $m'$ via the epipolar line.** This is because the ray of camera $C$ to point $M$ is seen by camera $C'$ as a line (epipolar line).
 
@@ -707,7 +710,7 @@ P_4:\Delta z_=112 \unit m
 >
 
 
-## 4.3) Active Stereo Systems
+## 4.2) Active Stereo Systems
 Active stereo systems are used to illuminate the world with a light source (projector) and then using this additional information on the passive stereo system.
 
 This can be done via **Active Stereo Methods**:
