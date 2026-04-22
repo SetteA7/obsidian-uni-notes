@@ -1032,7 +1032,13 @@ It has a innovative feature called **dual-use bitstream**. This can decode the f
 - Computer Vision Task Decoder: extracts features directly form the latent space without full pixel reconstruction
 
 
-# 6) Proofs
+
+
+# 6) Motion Estimation
+
+
+
+# 7) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
 Codewords are already given. Set $L_\max=\max_i(l_i)$ ^3d4d31
