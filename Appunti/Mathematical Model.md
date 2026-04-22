@@ -288,3 +288,10 @@ $$P(N=0)=1\qquad\lim_{N\rightarrow \infty}P(N)=0$$
 As before, the optimal value $N^*$ is the smallest integer $N$ such that:
 $$P(N) \le P_{target}$$
 $$\endproof$$
+
+
+
+$$P(N) = \begin{cases}
+p_{tx}^{N} + (1 - p_{tx}) p_{rx} \frac{p_{rx}^{N} - p_{tx}^{N}}{p_{rx} - p_{tx}}\\ \\
+p^N(1+(1-p)N) & \text{if }p_{rx},p_{tx}}
+\end{cases}\leq P_{target}$$
