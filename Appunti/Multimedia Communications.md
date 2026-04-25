@@ -1107,8 +1107,13 @@ This technique is very popular as it gives good results at a low computational c
 
 Consider a $P\times Q$ block of pixels inside the image:
 $$B_{p,q}=\curly{p,p+1,...,p+P-1}\times\curly{q,q+1,...,q+Q-1}$$
-And the luminance vector:
-$$f_k(B_{p,q})=[f(p,q,k),...,f(p+P-1,q)]$$
+And the luminance vector at time $k$:
+$$f_k(B_{p,q})=[f(p,q,k),...]^T$$
+The block matching method consists in computing the dissimilarity between blocks and selecting those with minimum dissimilarity. That is
+$$(\hat i,\hat j)=\arg\min_{i,j}d[f_k(B_{p,q}),f_h(B_{p-i,j-q})]$$
+In general we have a **forward motion**, that is $h=k-1$ with $h$ the current frame and $k$ the reference frame. Therefore the OF field at frame $h$ will show the direction in which the blocks will be at frame $k$.
+
+
 # 7) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
