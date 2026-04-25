@@ -1059,7 +1059,7 @@ where $c,d$ depend on $p,t_0,T$ but the time parameters are ignored and $p=(x,y)
 
 Finally the OF equation is:
 $$uf_x+vf_y+f_t=0$$
-with $u,v$ components of the velocity field, $f_x,f_y$ the components of $\nabla f$ and $f_t-V\nabla f$
+with $u,v$ components of the velocity field, $f_x,f_y$ the components of $\nabla f$ and $f_t=-V\nabla f$ which is the time derivative of $f$.
 
 
 Finally the OF equation is the **velocity field**:
