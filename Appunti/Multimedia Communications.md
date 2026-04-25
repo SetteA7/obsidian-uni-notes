@@ -1057,7 +1057,17 @@ where $c,d$ depend on $p,t_0,T$ but the time parameters are ignored and $p=(x,y)
 >$$f(x,y,t+T)=f(x-c,y-d,t)$$
 >But in practice due to sampling, aliasing and noise this is not true.
 
+Finally the OF equation is:
+$$uf_x+vf_y+f_t=0$$
+with $u,v$ components of the velocity field, $f_x,f_y$ the components of $\nabla f$ and $f_t-V\nabla f$
 
+
+Finally the OF equation is the **velocity field**:
+$$V(x,y)=\lim_{T\rightarrow 0}\frac{D(x,y)}T=\begin{bmatrix}u(x,y)\\ v(x,y)\end{bmatrix}$$
+By using taylor expansion on the CIH and finding the limit by dividing by $T\rightarrow0$ we get:
+$$\begin{gather}f(p,t+T)=f(p,t)-cf_x(p,t)-df_y(p,t)+o(\abs{D(p)})\\ \\
+\frac{f(p,t+T)-f(p,t)}{T}=\frac{-D\cdot \nabla f}T+\frac{o(\abs {D(p)})}T=-V\nabla f+\frac{o(\abs {D(p)})}T
+\end{gather}$$
 
 
 # 7) Proofs
