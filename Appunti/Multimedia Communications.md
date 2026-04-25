@@ -1058,8 +1058,9 @@ Finally the OF equation is:
 $$uf_x+vf_y+f_t=0$$
 with $u,v$ components of the velocity field, $f_x,f_y$ the space derivatives and $f_t$ the time derivative.
 
-
 This formula states that, the intensity change I see in a point depends only on the movement of the pixels.
+
+---
 
 >[!hypothesis] Constant Illumination
 >We consider a continuous representation of the video signal. The Constant Illumination Hypothesis (CIH) states that the luminance does not change along the motion trajectory:
@@ -1073,6 +1074,25 @@ And now find the partial time derivative:
 $$f_t\stackrel{T\rightarrow 0}=\frac{f(p,t+T)-f(p,t)}{T}=\frac{-D\cdot \nabla f}T+\frac{o(\abs {D(p)})}T=-V\nabla f+\frac{o(\abs {D(p)})}T$$
 From here the OF equation becomes:
 $$f_t=-V\nabla f\rightarrow V\nabla f+f_t=0\rightarrow uf_x+vf_y+f_t=0$$
+---
+
+However the OF equation has 2 unknowns. We need an additional constraint to solve the problem. Also CIH isn't true in practice.
+
+<div style="text-align: center;">
+  Solution: Minimize the energy of OF equation under suitable constraints.
+</div>
+
+**Horn and Schunk** introduced a constrain on the total variation of $V$ over a region $\mathscr R$:
+$$\begin{cases}
+\int\int_\mathscr R(uf_x+vf_y+f_t)^2dxdy=\min\\
+\int\int_\mathscr R\abs{\nabla u}^2+\abs{\nabla v}^2dxdy\leq\tau
+\end{cases}\rightarrow \begin{cases}
+u=\overline u-f_x\frac{\overline u f_x+\overline v f_y+f_t}{\lambda \abs{\nabla f}^2}\\
+v=\overline v-f_y\frac{\overline u f_x+\overline v f_y+f_t}{\lambda \abs{\nabla f}^2}
+\end{cases}$$
+
+
+
 
 # 7) Proofs
 **Kraft Inequality:**
