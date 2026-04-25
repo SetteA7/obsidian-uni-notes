@@ -1113,7 +1113,7 @@ The block matching method consists in computing the dissimilarity between blocks
 $$(\hat i,\hat j)=\arg\min_{i,j}d[f_k(B_{p,q}),f_h(B_{p-i,j-q})]$$
 In general we have a **forward motion**, that is $h=k-1$ with $h$ the current frame and $k$ the reference frame. Therefore the OF field at frame $h$ will show the direction in which the blocks will be at frame $k$.
 
-
+$$\forall(n, m) \in B_{p,q}, (u, v) = \arg \min_{(i,j) \in \mathcal{W}} d [f_k(B_{p,q}), f_h(B_{p-i, q-j})]$$
 # 7) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
