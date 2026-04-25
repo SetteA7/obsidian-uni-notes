@@ -1142,7 +1142,7 @@ The **number of candidates** can also be reduced by using some research strategi
 ![[Pasted image 20260425165247.png|Example|350]]
 - Diamond Search: search in 9 point diamond pattern, then extend pattern in direction of minima
 - Hexagon Search: same as diamond but with hexagon (more modern)
-- TZSearch: new technique that adaptively changes. Start with big block, if error is too big split it
+- TZSearch: new technique that adaptively changes. Start with big block, if error is too big split it, repeat.
 
 It is also possible to test sub-pixel positions by interpolation:
 $$f(n+a,m+b)=(1-a)(1-b)x+a(1-b)y+(1-a)bz+abw$$
@@ -1154,6 +1154,12 @@ $$f(n+a,m+b)=(1-a)(1-b)x+a(1-b)y+(1-a)bz+abw$$
 | ------------------------- | ----------------------------- |
 | Fixed number of steps     | Iterative, faster             |
 | Guarantees global minimum | Can get stuck in local minima |
+
+---
+
+## 6.3) Parametric Methods
+
+## 6.4) Deep Learning Methods
 
 # 7) Proofs
 **Kraft Inequality:**
