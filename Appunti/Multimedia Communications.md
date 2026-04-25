@@ -1124,6 +1124,8 @@ The three computing performance factors are:
 - Number of candidate vectors ($i,j\in\mathcal W$)
 - Cost function $d$
 
+A **large block size** reduces complexity (less blocks), less coding cost, increased MSE. The ideal block size is $16\times16$.
+
 The **cost function** is based on $\mathcal L_1$ norm (SAD) or $\mathcal L_2$ norm (SSD). With SSD the one with smallest MSE but more computing cost
 
 But a regularization term is also added, so the minimization is on $J$:
@@ -1131,8 +1133,12 @@ $$J(\text v)=d(\text v)+\lambda_{ME}r(\text v)$$
 where $\lambda_{ME}$ affects the importance of the regularization term.
 Possible regularization terms are:
 - Cost function: choose not best MSE, but best coding option.
+- Distance: prioritize vectors with length same as mean of adjacent blocks
 
-A **large block size** reduces complexity (less blocks), less coding cost, increased MSE. The ideal block size is $16\times16$.
+The **number of candidates** can also be reduced by using some research strategies:
+- 
+
+
 # 7) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
