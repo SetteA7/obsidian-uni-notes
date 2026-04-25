@@ -1090,10 +1090,25 @@ $$\begin{cases}
 u=\overline u-f_x\frac{\overline u f_x+\overline v f_y+f_t}{\lambda \abs{\nabla f}^2}\\
 v=\overline v-f_y\frac{\overline u f_x+\overline v f_y+f_t}{\lambda \abs{\nabla f}^2}
 \end{cases}$$
+where $\hat \cdot$ is the temporal average
+
+---
+The result is obtained via Lagrange multiplier with minimization on $u$ and $v$;
+$$J=\int\int_\mathscr R(uf_x+vf_y+f_t)^2+\lambda (\abs{\nabla u}^2+\abs{\nabla v}^2)dxdy$$
+this is done 
+
+TODO
 
 
+## 6.2) Block Matching Method
+This method allows to use discrete signals and having as a support a block of pixels rather than a single one.
 
+This technique is very popular as it gives good results at a low computational cost.
 
+Consider a $P\times Q$ block of pixels inside the image:
+$$B_{p,q}=\curly{p,p+1,...,p+P-1}\times\curly{q,q+1,...,q+Q-1}$$
+And the luminance vector:
+$$f_k(B_{p,q})=[f(p,q,k),...,f(p+P-1,q)]$$
 # 7) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
