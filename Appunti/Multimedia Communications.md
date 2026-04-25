@@ -1044,6 +1044,20 @@ where:
 - $u(x,y),v(x,y)$ is the velocity of the point $x,y$
 
 ## 6.1) Variatonal Method
+Consider a point of an object moving from pixel $p-D$ to $p$ in  time $T$. The trajectory of the pixel becomes:
+$$\begin{aligned}
+x(t_0)=p-D\\
+x(t_0+T)=p
+\end{aligned}
+\longrightarrow D(p.t_0,T)=x(t_0+T)-x(t_0)=\begin{bmatrix}c(x,y)\\d(x,y)\end{bmatrix}$$
+where $c,d$ depend on $p,t_0,T$ but the time parameters are ignored and $p=(x,y)$.
+
+>[!hypothesis] Constant Illumination
+>We consider a continuous representation of the video signal. The Constant Illumination Hypothesis (CIH) states that the luminance does not change along the motion trajectory:
+>$$f(x,y,t+T)=f(x-c,y-d,t)$$
+>But in practice due to sampling, aliasing and noise this is not true.
+
+
 
 
 # 7) Proofs
