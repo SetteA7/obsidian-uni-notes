@@ -1052,18 +1052,26 @@ x(t_0+T)=p
 \longrightarrow D(p.t_0,T)=x(t_0+T)-x(t_0)=\begin{bmatrix}c(x,y)\\d(x,y)\end{bmatrix}$$
 where $c,d$ depend on $p,t_0,T$ but the time parameters are ignored and $p=(x,y)$.
 
+We can find it's derivative and find the velocity field:
+$$V(x,y)=\lim_{T\rightarrow 0}\frac{D(x,y)}T=\begin{bmatrix}u(x,y)\\ v(x,y)\end{bmatrix}$$
+Finally the OF equation is:
+$$uf_x+vf_y+f_t=0$$
+with $u,v$ components of the velocity field, $f_x,f_y$ the space derivatives and $f_t$ the time derivative.
+
+
 >[!hypothesis] Constant Illumination
 >We consider a continuous representation of the video signal. The Constant Illumination Hypothesis (CIH) states that the luminance does not change along the motion trajectory:
 >$$f(x,y,t+T)=f(x-c,y-d,t)$$
 >But in practice due to sampling, aliasing and noise this is not true.
 
-Finally the OF equation is:
-$$uf_x+vf_y+f_t=0$$
-with $u,v$ components of the velocity field, $f_x,f_y$ the components of $\nabla f$ and $f_t=-V\nabla f$ which is the time derivative of $f$.
+We can use this hypothesis to derive the OF equation. The CIH tells us that with $T\rightarrow0: \frac{\partial f}{\partial t}=0$
+Now apply taylor to CIH:
+$$f(p,t+T)=f(p,t)-c(p)f_x(p,t)-d(p)f_y(p,t)+o(\abs{D(p)})=f(p,t)-D\nabla f+o(\abs{D(p)})$$
+And now find the time derivative and set it to 0:
+$$f_t\stackrel{T\rightarrow 0}=\frac{f(p,t+T)-f(p,t)}{T}=\frac{-D\cdot \nabla f}T+\frac{o(\abs {D(p)})}T=-V\nabla f+\frac{o(\abs {D(p)})}T=0$$
+From here the OF equation becomes:
+$$f_t=-V\nabla f\rightarrow $$
 
-
-Finally the OF equation is the **velocity field**:
-$$V(x,y)=\lim_{T\rightarrow 0}\frac{D(x,y)}T=\begin{bmatrix}u(x,y)\\ v(x,y)\end{bmatrix}$$
 By using taylor expansion on the CIH and finding the limit by dividing by $T\rightarrow0$ we get:
 $$\begin{gather}f(p,t+T)=f(p,t)-cf_x(p,t)-df_y(p,t)+o(\abs{D(p)})\\ \\
 \frac{f(p,t+T)-f(p,t)}{T}=\frac{-D\cdot \nabla f}T+\frac{o(\abs {D(p)})}T=-V\nabla f+\frac{o(\abs {D(p)})}T
