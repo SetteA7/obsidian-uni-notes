@@ -1112,8 +1112,27 @@ $$f_k(B_{p,q})=[f(p,q,k),...]^T$$
 The block matching method consists in computing the dissimilarity between blocks and selecting those with minimum dissimilarity. That is
 $$(\hat i,\hat j)=\arg\min_{i,j}d[f_k(B_{p,q}),f_h(B_{p-i,j-q})]$$
 In general we have a **forward motion**, that is $h=k-1$ with $h$ the current frame and $k$ the reference frame. Therefore the OF field at frame $h$ will show the direction in which the blocks will be at frame $k$.
+$$\forall(n, m) \in B_{p,q}, (u_{h\rightarrow k}, v_{h\rightarrow k}) = \arg \min_{(i,j) \in \mathcal{W}} d [f_k(B_{p,q}), f_h(B_{p-i, q-j})]$$
+#### Quality Measure
+One valid quality measure is the **energy of the prediction error**, that is the MSE of the predicted block and the real block. That is:
+$$e(n,m)=f_k(n,m)-\tilde f_k(n,m)\rightarrow \mathscr E=\frac1{NM}\sum_{n,m}e^2(n,m)\rightarrow PSNR=10\logt\frac{255^2}{\mathscr E}$$
+where $\tilde f_k(n,m)=f_h(n+u_{h\rightarrow k},m+v_{h\rightarrow k})$
 
-$$\forall(n, m) \in B_{p,q}, (u, v) = \arg \min_{(i,j) \in \mathcal{W}} d [f_k(B_{p,q}), f_h(B_{p-i, q-j})]$$
+#### Performance Factors
+The three computing performance factors are:
+- Block size $P,Q$
+- Number of candidate vectors ($i,j\in\mathcal W$)
+- Cost function $d$
+
+The **cost function** is based on $\mathcal L_1$ norm (SAD) or $\mathcal L_2$ norm (SSD). With SSD the one with smallest MSE but more computing cost
+
+But a regularization term is also added, so the minimization is on $J$:
+$$J(\text v)=d(\text v)+\lambda_{ME}r(\text v)$$
+where $\lambda_{ME}$ affects the importance of the regularization term.
+Possible regularization terms are:
+- Cost function: choose not best MSE, but best coding option.
+
+A **large block size** reduces complexity (less blocks), less coding cost, increased MSE. The ideal block size is $16\times16$.
 # 7) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
