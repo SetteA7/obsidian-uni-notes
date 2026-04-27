@@ -1042,10 +1042,12 @@ Computing a rigid transformation of 3D points starting from a set of corresponde
 - 3D-3D (depth camera): correspondences between 3D points are available; compute the transformations between the two coordinate systems
 - 3D-2D ("calibration"): given the 3D points of the objects and their projections to camera plane, compute the transformation between camera system and object system.
 
+# 7) Optical Flow
 
-# 7) Quiz
 
-## 7.1) Quiz 2
+# 8) Quiz
+
+## 8.1) Quiz 2
 #### **Question 1: Motion Modeling Strategies**
 
 Assign the most suitable strategy (Animation or Simulation) for each object/event.
