@@ -1044,10 +1044,12 @@ Computing a rigid transformation of 3D points starting from a set of corresponde
 
 # 7) Optical Flow
 
+# 8) 3D Gaussian Splatting
 
-# 8) Quiz
 
-## 8.1) Quiz 2
+# 9) Quiz
+
+## 9.1) Quiz 2
 #### **Question 1: Motion Modeling Strategies**
 
 Assign the most suitable strategy (Animation or Simulation) for each object/event.
