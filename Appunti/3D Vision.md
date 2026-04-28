@@ -482,7 +482,9 @@ $$P=K[I|0]=[K|0]\qquad P'=K'[R|t]$$
 The optical center becomes:
 $$C=\begin{bmatrix}-Q^{-1}q\\1\end{bmatrix}=\begin{bmatrix}0_{1\times 3}\\1\end{bmatrix}$$
 And the epipole is easily found:
-$$e'=P'C=K'[R|t]\begin{bmatrix}\vec 0\\1\end{bmatrix}=$$
+$$e'=P'C=K'[R|t]\begin{bmatrix}\vec 0\\1\end{bmatrix}=K't$$
+therefore we have:
+$$F=\stackvec{K't}K'RK^{-1}$$
 # 4) Stereo Systems
 Stereo system uses two views of the same scene to estimate depth. This is done via the **disparity** between points in a scene.
 
@@ -513,7 +515,7 @@ $$\frac{\partial z}{\partial\Delta u}=-\frac{bf}{\Delta u^2}\rightarrow \abs{\pa
 ---
 To prepare for the next section, compute the fundamental matrix in this case:
 Notice that:
-$$P=[K|0]\qquad P'=[K|Kt]$$
+$$P=K[I|0]=[K|0]\qquad P'=K[I|t]=[K|Kt]$$
 So it is clear that 
 $$Q'Q^{-1}=KK^{-1}=I$$
 Then the epipole must be found:
@@ -527,6 +529,10 @@ $$e'=Kt=\begin{bmatrix}-fk_u&0&u_0\\0&-fk_u&v_0\\0&0&1\end{bmatrix}\begin{bmatri
 Which in product form becomes:
 $$F\simeq \stackvec{e'}=bfk_u\begin{bmatrix}0&0&0\\0&0&1\\0&-1&0\end{bmatrix}$$
 this is the fundamental matrix.
+Alternatively we can use the world coordinates form:
+$$F=\stackvec{Kt}KRK^{-1}=\begin{bmatrix}
+-bfk_u\\0\\0
+\end{bmatrix}\times KIK^{-1}=\begin{bmatrix}0&0&0\\0&0&1\\0&-1&0\end{bmatrix}I=\begin{bmatrix}0&0&0\\0&0&1\\0&-1&0\end{bmatrix}$$
 
 #### General Case
 **Suppose we know $m$ but not $m'$, it is possible to find $m'$ via the epipolar line.** 
