@@ -445,7 +445,7 @@ There are 3 main geometric structures in the epipolar geometry:
 For noise-free matching point estimation we know that $m_i$ has matching point $m_i'$ on the epipolar line, no other part of image can contain it. This is shown in the lounget higgins equation.
 
 We can define the **fundamental matrix** which contains all the information about the epipolar geometry.
-$$F=\stackvec{e'}Q'Q^{-1}$$
+$$F=\stackvec{e'}Q'Q^{-1}=\stackvec{Kt}K'RK^{-1}$$
 
 A fundamental equation is the **Longuet Higgins Equation:**
 $$m'^T\stackvec{e'}Q'Q^{-1}m=m'^TFm=0$$
@@ -476,8 +476,13 @@ $$m'^T\stackvec {e'}m'=0=m'^T\stackvec {e'}\lambda Q'Q^{-1}m$$
 $\endproof$
 
 ---
-Fundamental Matrix with camera world coordinates
-
+Fundamental Matrix in the world coordinates system
+Center the world coordinates on $P$ and then $P'$ is a roto translation:
+$$P=K[I|0]=[K|0]\qquad P'=K'[R|t]$$
+The optical center becomes:
+$$C=\begin{bmatrix}-Q^{-1}q\\1\end{bmatrix}=\begin{bmatrix}0_{1\times 3}\\1\end{bmatrix}$$
+And the epipole is easily found:
+$$e'=P'C=K'[R|t]\begin{bmatrix}\vec 0\\1\end{bmatrix}=$$
 # 4) Stereo Systems
 Stereo system uses two views of the same scene to estimate depth. This is done via the **disparity** between points in a scene.
 
@@ -494,9 +499,12 @@ Let two cameras be parallel and aligned (image plane corresponds), then by knowi
 - $f$ focal distance
 - $(u-u')$ disparity between two points
 
+![[Pasted image 20260428104129.png|Study Case|300]]
+
 The distance z is computed by
 $$z=\frac{bf}{u-u'}$$
 _(if $b$ is not known the measure differs by a scale factor)_
+
 In this case the camera matrices are
 $$P=K[I|0]\qquad P'=K[I|(-b,0,0)^T]$$
 The estimation error is:
@@ -506,11 +514,23 @@ $$\frac{\partial z}{\partial\Delta u}=-\frac{bf}{\Delta u^2}\rightarrow \abs{\pa
 To prepare for the next section, compute the fundamental matrix in this case:
 Notice that:
 $$P=[K|0]\qquad P'=[K|Kt]$$
+So it is clear that 
+$$Q'Q^{-1}=KK^{-1}=I$$
 Then the epipole must be found:
-$$e'=P'C=[K|0]\begin{bmatrix}0&0&0&1\end{bmatrix}$$
+$$e'=P'C=[K|Kt]\begin{bmatrix}0\\0\\0\\1\end{bmatrix}=Kt$$
+By expanding both $K$ and $t$ we have:
+$$e'=Kt=\begin{bmatrix}-fk_u&0&u_0\\0&-fk_u&v_0\\0&0&1\end{bmatrix}\begin{bmatrix}
+-b\\0\\0
+\end{bmatrix}=\begin{bmatrix}
+-bfk_u\\0\\0
+\end{bmatrix}$$
+Which in product form becomes:
+$$F\simeq \stackvec{e'}=bfk_u\begin{bmatrix}0&0&0\\0&0&1\\0&-1&0\end{bmatrix}$$
+this is the fundamental matrix.
 
 #### General Case
-**Suppose we know $m$ but not $m'$, it is possible to find $m'$ via the epipolar line.** This is because the ray of camera $C$ to point $M$ is seen by camera $C'$ as a line (epipolar line).
+**Suppose we know $m$ but not $m'$, it is possible to find $m'$ via the epipolar line.** 
+This is because the ray of camera $C$ to point $M$ is seen by camera $C'$ as a line (epipolar line).
 
 Call $F$ the $3\times3$ **fundamental matrix** that encapsulates info about epipolar geometry
 $$F=[e']_\times Q'Q^{-1}$$
