@@ -40,11 +40,14 @@ On the controller open a terminal and run:
 ```
 zenoh-bridge-ros2dds --connect tcp/IP OF ROSBOT:7447
 ```
- In the lab it is:
+ In the lab it is (local network):
 ```
 zenoh-bridge-ros2dds --connect tcp/192.168.77.2:7447
 ```
-
+or (tailscale VPN)
+```
+zenoh-bridge-ros2dds --connect tcp/100.79.118.80:7447
+```
 #### Start Lidar
 In the lab there is an alias, use the one that works (only one works):
 ```
