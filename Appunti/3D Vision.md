@@ -452,8 +452,8 @@ $$m'^T\stackvec{e'}Q'Q^{-1}m=m'^TFm=0$$
 this equation is a bilinear relation between $m,m'$ with $P=[Q|q],\ P'=[Q'|q']$. This allows to find if $m,m'$ are on the same epipolar line without knowing the depth of $M$.
 
 ---
-Proof of Longuet Higgins Equation
-Lounget higgins equation relates matching points on the same epipolar line.
+Proof of Longuet-Higgins Equation
+Longuet-Higgins equation relates matching points on the same epipolar line.
 In the general case the two camera matrices are
 $$P\simeq [Q|q],\qquad P'\simeq [Q'|q']$$
 
@@ -468,13 +468,18 @@ Notice that since we don't know at what distance $M$ is located, we only know th
 
 Now we can do some algebraic manipulations to get the final equation:
 Vector multiplication by $e'$:
-$$e'\times m'=\stackvec {e'} m'=e'\times (e'+\lambda Q'Q^{-1}m)=\underbrace{e'\times e'}_{=0}+\lambda e'\times Q'Q^{-1}=\stackvec {e'}\lambda Q'Q^{-1}m$$
+$$e'\times m'=\stackvec {e'} m'=e'\times (e'+\lambda Q'Q^{-1}m)=\underbrace{e'\times e'}_{=0}+\lambda e'\times Q'Q^{-1}m=\stackvec {e'}\lambda Q'Q^{-1}m$$
 Now multiply by $m'^T$
-- The first term is immediately 0 since $\stackvec{e'}\perp 
-$$m'^T\stackvec {e'}m'=m'^T\stackvec {e'}\lambda Q'Q^{-1}m$$
+- The first term is immediately 0 since $\stackvec{e'}m'\perp e', m'$ and thus $m'^T\cdot \stackvec{e'}m'=0$ 
+- The second term is the Longuet-Higgins eq times $\lambda$
+$$m'^T\stackvec {e'}m'=0=m'^T\stackvec {e'}\lambda Q'Q^{-1}m$$
+$\endproof$
+
+---
+Fundamental Matrix with camera world coordinates
 
 # 4) Stereo Systems
-Stereo system uses two views of the same scene to estimate depth. This si done via the disparity between points in a scene.
+Stereo system uses two views of the same scene to estimate depth. This is done via the **disparity** between points in a scene.
 
 This chapter will follow this structure:
 - Understand the basic case (simple triangulation)
@@ -491,10 +496,19 @@ Let two cameras be parallel and aligned (image plane corresponds), then by knowi
 
 The distance z is computed by
 $$z=\frac{bf}{u-u'}$$
+_(if $b$ is not known the measure differs by a scale factor)_
 In this case the camera matrices are
 $$P=K[I|0]\qquad P'=K[I|(-b,0,0)^T]$$
 The estimation error is:
 $$\frac{\partial z}{\partial\Delta u}=-\frac{bf}{\Delta u^2}\rightarrow \abs{\partial z}=\frac{bf}{\Delta u^2}\partial \Delta\stackrel{\Delta u=\frac{bf}{z}}\longrightarrow \abs{\partial z}=\frac{z^2}{bf}\partial\Delta$$
+
+---
+To prepare for the next section, compute the fundamental matrix in this case:
+Notice that:
+$$P=[K|0]\qquad P'=[K|Kt]$$
+Then the epipole must be found:
+$$e'=P'C=[K|0]\begin{bmatrix}0&0&0&1\end{bmatrix}$$
+
 #### General Case
 **Suppose we know $m$ but not $m'$, it is possible to find $m'$ via the epipolar line.** This is because the ray of camera $C$ to point $M$ is seen by camera $C'$ as a line (epipolar line).
 
