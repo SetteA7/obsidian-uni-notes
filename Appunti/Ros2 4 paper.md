@@ -50,6 +50,15 @@ zenoh-bridge-ros2dds --connect tcp/100.79.118.80:7447
 ```
 
 It is possible to use UDP instead of TCP.
+_Quick copy paste:_
+```
+zenoh-bridge-ros2dds --listen udp/0.0.0.0:7447
+```
+
+```
+zenoh-bridge-ros2dds --connect udp/100.79.118.80:7447
+```
+
 #### Start Lidar
 In the lab there is an alias, use the one that works (only one works):
 ```
