@@ -460,12 +460,19 @@ $$P\simeq [Q|q],\qquad P'\simeq [Q'|q']$$
 The optical ray of m is:
 $$M=C+\lambda \begin{bmatrix}Q^{-1}m\\ 0\end{bmatrix}$$
 This is used to compute the epipolar line $e'$, so we project the line onto $P'$:
-$$P'M=P'C+\lambda P'\begin{bmatrix}Q^{-1}m\\ 0\end{bmatrix}=P'C+\lambda [Q'|q']\begin{bmatrix}Q^{-1}m\\ 0\end{bmatrix}=P'C+\lambda Q'Q^{-1}m
+$$P'M=P'C+\lambda P'\begin{bmatrix}Q^{-1}m\\ 0\end{bmatrix}=P'C+\lambda [Q'|q']\begin{bmatrix}Q^{-1}m\\ 0\end{bmatrix}=P'C+\lambda Q'Q^{-1}m+q'\cdot 0
 $$
-$$e'+\lambda Q'Q^{-1}m+q'\cdot 0=e'+\lambda Q'Q^{-1}m$$
-so finally the epipolar line on $\mathcal R'$ is:
-$$m'\simeq P'M=e'+\lambda Q'Q^{-1}m $$
-from here just a few algebraic manipulations we get the Longuet Higgins Equation.
+Recall that by definition $P'C=e'$ and therefore we have:
+$$m'\simeq P'M=e'+\lambda Q'Q^{-1}m$$
+Notice that since we don't know at what distance $M$ is located, we only know that $m'\simeq P'M$, that is $m'$ is on the epipolar line.
+
+Now we can do some algebraic manipulations to get the final equation:
+Vector multiplication by $e'$:
+$$e'\times m'=\stackvec {e'} m'=e'\times (e'+\lambda Q'Q^{-1}m)=\underbrace{e'\times e'}_{=0}+\lambda e'\times Q'Q^{-1}=\stackvec {e'}\lambda Q'Q^{-1}m$$
+Now multiply by $m'^T$
+- The first term is immediately 0 since $\stackvec{e'}\perp 
+$$m'^T\stackvec {e'}m'=m'^T\stackvec {e'}\lambda Q'Q^{-1}m$$
+
 # 4) Stereo Systems
 Stereo system uses two views of the same scene to estimate depth. This si done via the disparity between points in a scene.
 
