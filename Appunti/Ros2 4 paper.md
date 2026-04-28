@@ -48,6 +48,8 @@ or (tailscale VPN)
 ```
 zenoh-bridge-ros2dds --connect tcp/100.79.118.80:7447
 ```
+
+It is possible to use UDP instead of TCP.
 #### Start Lidar
 In the lab there is an alias, use the one that works (only one works):
 ```
