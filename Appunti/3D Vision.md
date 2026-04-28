@@ -554,7 +554,7 @@ p_2^TM-vp_3^TM\\
 p_1'^TM-u'p_3'^TM\\
 p_2'^TM-v'p_3'^TM
 \end{bmatrix}=AM=0_{4\times 1}$$
-With a SVD decomposition of A ($A=U\Sigma V^T$) and by taking the last eigenvector (last vector of $V$) we get the solution. This can be generalized to $N$ cameras.
+With a SVD decomposition of A ($A=U\Sigma V^T$) and by taking the last eigenvector (last vector of $V$) we get the solution. This can be generalized to $N$ cameras via the **linear eigen method** that returns $2N$ equations from $N$ cameras.
 
 Since in real case scenarios due to noise the points don't lie on the epipolar line but slightly diverge, then SVD finds the algebraic minimum, to minimize the geometric cost we can use (find $M$ that minimizes)
 $$\epsilon(M)=\abs{\begin{bmatrix}u\\v\end{bmatrix}-\begin{bmatrix}\frac{p_1^TM}{p_3^TM}\\\frac{p_2^TM}{p_3^TM}\end{bmatrix}}^2+
