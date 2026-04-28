@@ -136,3 +136,13 @@ Additionally also a ip def route was added
 ```
 sudo ip route add default via 192.168.77.1 dev eth0 metric 100
 ```
+
+# 3) Packet Loss (?)
+
+```
+sudo tc qdisc add dev eth0 root netem loss 10% limit 10000
+```
+
+```
+sudo tc qdisc del dev eth0 root netem
+```
