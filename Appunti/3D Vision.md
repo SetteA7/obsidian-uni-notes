@@ -374,7 +374,7 @@ Now RANSAC is applied to the N matches in set $\mathcal M=\curly{m_i,m_i'}$.
 
 --- 
 Proof of noise free homography:
-Let there be a set of coupled points between two images $m_i,m'_i=Hm_i$. 
+Let there be a set of coupled points between two images $m_i,m'_i\simeq Hm_i$. 
 Notice that 
 $$m_i'\times Hm_i=0\rightarrow \stackvec{m_i'}H m_i=0_{2\times 1}$$
 Apply the vec and notice:
@@ -437,9 +437,9 @@ $$vec(ABC)=(C^T\otimes A)vec(B)$$
 
 ## 3.2) Epipolar Geometry
 There are 3 main geometric structures in the epipolar geometry:
-- **Epipolar Plane:** plane containing $m,m',M$ or $m, C, C'$ (intersection between $Mm,Mm'$)
+- **Epipolar Plane $\mathscr E$:** plane containing $m,m',M$ or $m, C, C'$ (defined by intersection between $Mm,Mm'$)
 - **Epipolar Line:** intersection between epipolar plane and image plane (lines $em, e'm'$)
-- **Epipoles:** projection of principal point of camera into other cameras image plane. ($e=PC', e'=P'C$)
+- **Epipoles $e$:** projection of COP into other cameras image plane. ($e=PC', e'=P'C$)
 
 ![[Pasted image 20260418113353.png|Example|250]]
 For noise-free matching point estimation we know that $m_i$ has matching point $m_i'$ on the epipolar line, no other part of image can contain it. This is shown in the lounget higgins equation.
@@ -453,10 +453,16 @@ this equation is a bilinear relation between $m,m'$ with $P=[Q|q],\ P'=[Q'|q']$.
 
 ---
 Proof of Longuet Higgins Equation
-Let $P=[Q|q],\ P'=[Q'|q']$, then the optical ray of m is:
-$$M=C+\lambda \begin{bmatrix}[Q^{-1}m\\ 0\end{bmatrix}$$
-The projected line wrt $P'$ that is, the epipolar line $e',m'$, becomes:
-$$P'M=P'C+\lambda P'\begin{bmatrix}[Q^{-1}m\\ 0\end{bmatrix}=e'+\lambda Q'Q^{-1}m+q'\cdot 0=e'+\lambda Q'Q^{-1}m$$
+Lounget higgins equation relates matching points on the same epipolar line.
+In the general case the two camera matrices are
+$$P\simeq [Q|q],\qquad P'\simeq [Q'|q']$$
+
+The optical ray of m is:
+$$M=C+\lambda \begin{bmatrix}Q^{-1}m\\ 0\end{bmatrix}$$
+This is used to compute the epipolar line $e'$, so we project the line onto $P'$:
+$$P'M=P'C+\lambda P'\begin{bmatrix}Q^{-1}m\\ 0\end{bmatrix}=P'C+\lambda [Q'|q']\begin{bmatrix}Q^{-1}m\\ 0\end{bmatrix}=P'C+\lambda Q'Q^{-1}m
+$$
+$$e'+\lambda Q'Q^{-1}m+q'\cdot 0=e'+\lambda Q'Q^{-1}m$$
 so finally the epipolar line on $\mathcal R'$ is:
 $$m'\simeq P'M=e'+\lambda Q'Q^{-1}m $$
 from here just a few algebraic manipulations we get the Longuet Higgins Equation.
