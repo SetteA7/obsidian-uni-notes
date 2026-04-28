@@ -69,8 +69,8 @@ This is automatically enabled when setting up the router.
 #### Subnet Alignment
 The MikroTik DHCP server is set to the `192.168.77.0/24` network. This natively matches the ROSbot's existing static IP (`192.168.77.2`), requiring no internal IP changes on the robot. To do so the default `192.168.88.0/24` of the DHCP server was changed. Additionally also the IP pool needed to be modified and 
 
-#### DNS and Routing 
-The DHCP server was set with the network 192.168.77.0/24 to match the native IP of rosbot 192.168.77.2 which is a static IP. A change to the default netwplan was needed to handle DNS and routing:
+#### DNS and Routing On RosBOT via Netplan
+To ensure the ROSbot correctly resolves DNS and routes internet traffic over the wired connection (`eth0`), the default Netplan configuration was updated to explicitly define the MikroTik as the default gateway with a prioritized metric.
 
 ```yaml
 network:
