@@ -1376,105 +1376,88 @@ Select the true statements:
 **Correct answers:** **b, c** **Explanation:** I **Grandi di Libertà (DOF - Degrees of Freedom)** indicano come un giunto può muoversi. Nella maggior parte dei casi umani sono 1-3 (rotazioni), ma matematicamente possono arrivare a 6 (includendo traslazioni).
 
 ## 9.2) Quiz 3
-The epipolar geometry relations between two pictures taken by a moving camera simplifies into a homography ...
+#### Question 1: Epipolar Geometry and Homography
 
-Domanda 1Scegli una o più alternative:
+The epipolar geometry relations between two pictures taken by a moving camera simplifies into a homography...
 
-a.
-... when the camera is simply translating (no rotations).
+a) ... when the camera is simply translating (no rotations).
 
+b) ... when the camera is simply rotating (no translation).
 
-b.
-...when the camera is simply rotating (no translation).
+c) ... always.
 
+d) ... when the world coordinates correspond to the camera coordinates at the beginning.
 
-c.
-... always.
+e) ... when points acquired by the camera lie on a plane.
 
+Correct answers: b, e Explanation: La geometria epipolare si riduce a un'omografia piana nel caso in cui la scena osservata giaccia interamente su un piano, oppure quando la telecamera compie una rotazione pura attorno al proprio centro ottico (senza alcuna traslazione).
 
-d.
-... when the world coordinates correspond to the camera coordinates at the beginning.
+#### Question 2: Stereo Camera Rectification
 
+In stereo camera rectification, ...
 
-e.
-... when points acquired by the camera lie on a plane.
+a) ... camera rotates around the COP.
 
+b) ... the pixel m corresponding to a given 3D point changes.
 
+c) ... the COP of each camera is translated.
 
-In stereo camera rectification, ...  
+d) ... the optical rays for a given point M changes.
 
-Domanda 2Scegli una o più alternative:
+Correct answers: a, b Explanation: La rettificazione stereo virtualizza le telecamere simulando una rotazione attorno ai rispettivi centri di proiezione (COP), in modo da rendere i piani immagine complanari e paralleli alla baseline. Di conseguenza, le coordinate dei pixel cambiano per riflettere questa nuova proiezione, ma i centri di proiezione e i raggi ottici originali non subiscono traslazioni.
 
-a.
+#### Question 3: RANSAC Algorithm
 
- ... camera rotates around the COP.  
-
-b.
-
-... the pixel m corresponding to a given 3D point changes.  
-
-c.
-
- .... the COP of each camera is translated.  
-
-d.
-
- ... the optical rays for a given point M changes.
- 
 The RANSAC algorithm is useful to estimate homographies whenever:
 
-  
+a) Only a few couples of conjugate points are available.
 
-Domanda 3Scegli una o più alternative:
+b) The number of couple of conjugate points is really high.
 
-a.
+c) Point coordinates are noisy.
 
-Only a few couples of conjugate points are available.  
+d) Calibration parameters are available.
 
-b.
+Correct answers: a, c Explanation: Il RANSAC è un algoritmo robusto impiegato per stimare un modello matematico filtrando il rumore e i valori anomali (outlier). Essendo basato su campionamenti casuali di sottoinsiemi minimi di dati, risulta molto utile per ricavare la stima migliore anche in presenza di coordinate rumorose e quando le coppie di punti coniugati a disposizione sono limitate.
 
-The number of couple of conjugate points is really high.  
+#### Question 4: Disparity and Depth Calculation
 
-c.
+The following 3D points are seen by a stereo camera (two parallel RGB cameras); the difference between the horizontal pixel coordinates in the two views can be characterized by the disparity value. According to the disparity value, assign the correct distance with respect to the camera.
 
-Point coordinates are noisy  
+a) Disparity=3
 
-d.
+b) Disparity=35
 
-Calibration parameters are available.
+c) Disparity=54
 
-In a stereo system (with rectified cameras), we can say that ...  
+d) Disparity=15
 
-Domanda 5Scegli un'alternativa:
+_Distances to match: 15cm, 10cm, 36cm, 1.8m_
 
-a.
+Correct answers: a $\rightarrow$ z=1.8m, b $\rightarrow$ z=15cm, c $\rightarrow$ z=10cm, d $\rightarrow$ z=36cm Explanation: Maggiore è la disparità, più il punto è vicino alla telecamera. Essendo la profondità inversamente proporzionale alla disparità ($z = \frac{b \cdot f}{d}$), è sufficiente ordinare i valori di disparità in modo decrescente e associarli alle distanze in ordine crescente.
 
-... the allowed depth range increases with the baseline distance.  
+#### Question 5: Stereo System Depth Range
 
-b.
+In a stereo system (with rectified cameras), we can say that ...
 
-... disparity estimation depends on the vertical coordinate as well.  
+a) ... the allowed depth range increases with the baseline distance.
 
-c.
+b) ... disparity estimation depends on the vertical coordinate as well.
 
-.... depth accuracy increases proportionally with the distance of the point from the camera.
+c) ... depth accuracy increases proportionally with the distance of the point from the camera.
 
-In a stereo system, a disparity estimation using block matching could ...  
+Correct answers: a Explanation: In un sistema stereo, la profondità massima è descritta dall'equazione $z_{max} = b \cdot f$ (assumendo una disparità minima rilevabile pari a 1 pixel). Questo significa che, all'aumentare della lunghezza della baseline $b$, aumenta proporzionalmente il range di profondità massima che il sistema è in grado di percepire.
 
-Domanda 6Scegli una o più alternative:
+#### Question 6: Disparity Estimation via Block Matching
 
-a.
+In a stereo system, a disparity estimation using block matching could ...
 
-... verify the disparity consistency performing a left-right check.  
+a) ... verify the disparity consistency performing a left-right check.
 
-b.
+b) ... minimize the NCC value between displaced blocks.
 
- ... minimize the NCC value between displaced blocks.  
+c) ... minimize the SAD value between displaced blocks.
 
-c.
+d) ... reduce block size to minimize the effect of noise.
 
- ... minimize the SAD value between displaced blocks.  
-
-d.
-
- .... reduce block size to minimize the effect of noise.
+Correct answers: a, c Explanation: Nel block matching, metriche di errore come la SAD (Sum of Absolute Differences) devono essere minimizzate per trovare le corrispondenze tra blocchi (al contrario della NCC che, essendo una misura di correlazione, andrebbe massimizzata). Inoltre, un metodo standard per validare le stime della disparità (e filtrare le occlusioni) consiste nell'eseguire il "left-right consistency check".
