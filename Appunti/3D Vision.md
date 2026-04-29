@@ -634,7 +634,7 @@ Since the cameras are differently orientated, some matches can be wrong for vari
 
 The constraints we are looking for are:
 - **Similarity:** similar pixels in both images
-- **Epipolar Geometry:** the correspondence is only o the epipolar line
+- **Epipolar Geometry:** the correspondence is only on the epipolar line
 - **Smoothness:** close pixels have approx same disparity if on same region
 - **Uniqueness:** no double matches
 - **Ordering:** position depends on camera itself
@@ -663,9 +663,9 @@ Large window: noisy measurments
 A solution is to use multi resolution windows or fixed windows.
 
 ###### **Sum of Squared Difference (SSD):**
-Minimize
+Compute $\mathcal L_1$ norm in a small window
 $$SSD(u,v,d)=\sum_{k,l}(I_1(u+k,v+l)-I_2(u+k+d,v+l))^2\quad k\in[-n,n]\  l\in[-m,m]$$
-Then minimize it
+and minimize it
 $$d_0(u,v)=\arg\min_{d\in[-d_\max,d_\max]}SSD(u,v,d)$$
 ###### **Sum of Absolute Differences (SAD)**
 Minimize
@@ -702,7 +702,7 @@ $$\varepsilon(I,p,p')=\begin{cases}
 1 & I(p)>I(p')\\
 0
 \end{cases}$$
-And the block is found by concatenating ($S$ is the block)
+And the block is found by concatenating ($S$ is the block) (p is center pixel)
 $$C[I(p)]=\bigodot_{p'\in S}\varepsilon(I,p,p')$$
 ![[Pasted image 20260403202226.png|Example|250]]
 
