@@ -1374,3 +1374,107 @@ Select the true statements:
     
 
 **Correct answers:** **b, c** **Explanation:** I **Grandi di Libertà (DOF - Degrees of Freedom)** indicano come un giunto può muoversi. Nella maggior parte dei casi umani sono 1-3 (rotazioni), ma matematicamente possono arrivare a 6 (includendo traslazioni).
+
+## 9.2) Quiz 3
+The epipolar geometry relations between two pictures taken by a moving camera simplifies into a homography ...
+
+Domanda 1Scegli una o più alternative:
+
+a.
+... when the camera is simply translating (no rotations).
+
+
+b.
+...when the camera is simply rotating (no translation).
+
+
+c.
+... always.
+
+
+d.
+... when the world coordinates correspond to the camera coordinates at the beginning.
+
+
+e.
+... when points acquired by the camera lie on a plane.
+
+
+
+In stereo camera rectification, ...  
+
+Domanda 2Scegli una o più alternative:
+
+a.
+
+ ... camera rotates around the COP.  
+
+b.
+
+... the pixel m corresponding to a given 3D point changes.  
+
+c.
+
+ .... the COP of each camera is translated.  
+
+d.
+
+ ... the optical rays for a given point M changes.
+ 
+The RANSAC algorithm is useful to estimate homographies whenever:
+
+  
+
+Domanda 3Scegli una o più alternative:
+
+a.
+
+Only a few couples of conjugate points are available.  
+
+b.
+
+The number of couple of conjugate points is really high.  
+
+c.
+
+Point coordinates are noisy  
+
+d.
+
+Calibration parameters are available.
+
+In a stereo system (with rectified cameras), we can say that ...  
+
+Domanda 5Scegli un'alternativa:
+
+a.
+
+... the allowed depth range increases with the baseline distance.  
+
+b.
+
+... disparity estimation depends on the vertical coordinate as well.  
+
+c.
+
+.... depth accuracy increases proportionally with the distance of the point from the camera.
+
+In a stereo system, a disparity estimation using block matching could ...  
+
+Domanda 6Scegli una o più alternative:
+
+a.
+
+... verify the disparity consistency performing a left-right check.  
+
+b.
+
+ ... minimize the NCC value between displaced blocks.  
+
+c.
+
+ ... minimize the SAD value between displaced blocks.  
+
+d.
+
+ .... reduce block size to minimize the effect of noise.
