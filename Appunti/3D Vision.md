@@ -22,7 +22,7 @@ This model takes a point $M$ and traces a line through $C$. The intersection of 
 
 This allows to represent all 3D points, besides two:
 - point inside focal plane (f)
-- point on horizontal plane passing through $C$  (h) (here also no line can be define)
+- point on $C$  (h) (here also no line can be defined)
 ![[Pasted image 20260303152837.png|Example|350]]
 To solve this problem we extend the euclidean plane with ideal lines lying at infinite. This is the projective plane:
 $$\text{Projective Plane: }\mathbb P^2=\mathbb R^2\cup l_\infty$$
