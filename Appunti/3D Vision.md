@@ -264,7 +264,7 @@ Ray casting consists in fixing the COP and the image plane. An optic ray is draw
 First the versor of the ray is computed and it is used to find the ray:
 $$V=\frac{\tilde P-\tilde Q}{\abs{\tilde P-\tilde Q}}\ \longrightarrow\ \tilde M(t)=\tilde Q+Vt$$
 Define a plane by a point $S$ and a normal vector $n$. The ray intersects the plane at
-$$t_0=\frac{(S-Q)\cdot n}{n\cdot V}$$
+$$\text{Surface: } t_0=\frac{(S-Q)\cdot n}{n\cdot V}\qquad \text{Sphere: }t_0=(S-Q)V$$
 A plane is very useful, as it can be used for many forms:
 - Disk with radius $r$ and center $S$: find distance between center and intersection of ray point $d=\abs{M(t_0)-S}^2$ if it is smaller than $r$ then the ray intersects the disk. ad distance $t_0$ at point $M(t_0)$
 $$d=\abs{M(t_0)-S}^2\rightarrow \begin{cases}\text{Intersection at } M(t_0)&\text{ if }d\leq r\\\text{No intersection}&\text{ if } d>r\end{cases}$$
