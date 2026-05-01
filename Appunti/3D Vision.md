@@ -347,7 +347,8 @@ Animating them via key poses is not trivial for complex motions: we resort to **
 
 However real life movements do not work precisely for animation (12 rules of animation) and some very complex elements (hair, water, physiscs) are simulated.
 
-# 3) Homography
+# 3) Homography & Epipolar Geometry
+## 3.1) Homography
 $$ $$
 >[!def] Homography
 >Homography is the function that maps points of plane $\Pi$ on the image plane
