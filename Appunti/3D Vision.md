@@ -492,7 +492,7 @@ $$vec(ABC)=(C^T\otimes A)vec(B)$$
 There are 3 main geometric structures in the epipolar geometry:
 - **Epipolar Plane $\mathscr E$:** plane containing $m,m',M$ or $m, C, C'$ (defined by intersection between $Mm,Mm'$)
 - **Epipolar Line:** intersection between epipolar plane and image plane (lines $em, e'm'$)
-- **Epipoles $e$:** projection of COP into other cameras image plane. ($e=PC', e'=P'C$)
+- **Epipoles $e$:** projection of COP into other cameras image plane. ($\boxed{e=PC', e'=P'C}$)
 
 ![[Pasted image 20260418113353.png|Example|250]]
 For noise-free matching point estimation we know that $m_i$ has matching point $m_i'$ on the epipolar line, no other part of image can contain it. This is shown in the lounget higgins equation.
@@ -527,6 +527,11 @@ Now multiply by $m'^T$
 - The second term is the Longuet-Higgins eq times $\lambda$
 $$m'^T\stackvec {e'}m'=0=m'^T\stackvec {e'}\lambda Q'Q^{-1}m$$
 $\endproof$
+
+---
+
+#### Morion Estimation
+
 
 ---
 Fundamental Matrix in the world coordinates system
