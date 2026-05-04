@@ -464,7 +464,7 @@ b_1&b_2&b_3
 ( a_1b_2-a_2b_1)
 \end{bmatrix}$$
 we can also define the external product matrix:
-$$[a]_\times=\begin{bmatrix}0& -a_3& a_2\\a_3 & 0 & a_1\\-a_2 & a_1& 0\end{bmatrix}\rightarrow [a]_\times b=a\times b$$
+$$[a]_\times=\begin{bmatrix}0& -a_3& a_2\\a_3 & 0 & -a_1\\-a_2 & a_1& 0\end{bmatrix}\rightarrow [a]_\times b=a\times b$$
 moreover:
 $$\det(a\times b\times c)=a^T(b\times c)=(a\times b^T)c$$
 then also:
