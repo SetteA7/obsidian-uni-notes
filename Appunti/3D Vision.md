@@ -227,8 +227,6 @@ Two main approaches exist:
 - **Triangular mesh**: dense, no redundancy, high quality
 - **Point Cloud**: sparse, redundant, low complexity
 
-but also triangle clouds or voxelized point clouds are used.
-
 How are meshes represented?
 - **Simple representation**: define all faces as a list of triplets: simple but with much repetition
 $$T_1\curly{\par{a_1,a_2,a_3},\par{b_1,b_2,b_3},\par{c_1,c_2,c_3}}\qquad T_2\curly{\par{b_1,b_2,b_3},\par{d_1,d_2,d_3},\par{c_1,c_2,c_3}}$$
@@ -241,12 +239,22 @@ T_1=\curly{v_a,v_b,v_c}\qquad T_2=(v_b,v_c,v_d)
 $$\begin{gather}l_1=(v_a,v_b)\quad l_2=(v_b,v_c)\quad l_3=v_c,v_a\quad l_4=(v_b,v_d)\quad l_5=(v_d,v_c)\\
 T_1=\curly{l_1,l_2,l_3}\qquad T_2=\curly{l_2,l_4,l_5}
 \end{gather}$$
+##### PLY Format
+![[Pasted image 20260504113744.png|Example|250]]
+Consider the following PLY file. The header:
+- Defines 8 vertices with $(x,y,z)$ and (r,g,b) components
+- Defines 7 faces as a its of vertices index
+- Defines 5 edges as 2 vertices and (r,g,b)
+After the header these elements are defined one by one
 
+#### Other Formats
 It is also possible to define surfaces with a **bezier curve** and a set of control points
 $$P(u,v)=\sum_i\sum_jX_{n,i}(u)X_{m,j}P_{ij}$$
 where $P_{ij}$ are the control points and $X$ the control function
 
-also using **Constructive Solid Geometry (CSG)** which builds models starting from some primitives and then boolean operations. This is used for CAD modeling
+also using **Constructive Solid Geometry (CSG)** which builds models starting from some primitives and then boolean operations. This is used for CAD modeling.
+
+Spatial partitioning (voxels) are also used, these discretize the space in tiny cells that can be either empty or occupied.
 ## 2.2) Rendering and Illumination
 Now we move forward to the graphical pipeline and rendering part:
 
@@ -266,9 +274,9 @@ $$V=\frac{\tilde P-\tilde Q}{\abs{\tilde P-\tilde Q}}\ \longrightarrow\ \tilde M
 Define a plane by a point $S$ and a normal vector $n$. The ray intersects the plane at
 $$\text{Surface: } t_0=\frac{(S-Q)\cdot n}{n\cdot V}\qquad \text{Sphere: }t_0=(S-Q)V$$
 A plane is very useful, as it can be used for many forms:
-- Disk with radius $r$ and center $S$: find distance between center and intersection of ray point $d=\abs{M(t_0)-S}^2$ if it is smaller than $r$ then the ray intersects the disk. ad distance $t_0$ at point $M(t_0)$
+- **Disk** with radius $r$ and center $S$: find distance between center and intersection of ray point $d=\abs{M(t_0)-S}^2$ if it is smaller than $r$ then the ray intersects the disk. ad distance $t_0$ at point $M(t_0)$
 $$d=\abs{M(t_0)-S}^2\rightarrow \begin{cases}\text{Intersection at } M(t_0)&\text{ if }d\leq r\\\text{No intersection}&\text{ if } d>r\end{cases}$$
-- Sphere with radius $r$ and center $S$: find distance between center and intersection of ray point $d=\abs{M(t_0)-S}^2$. Then find $a=\sqrt{r^2-b^2}$ and the two intersections are at distance $t_{1,2}=t_0\pm a$ and correspond to points $M(t_1),M(t_2)$.
+- **Sphere** with radius $r$ and center $S$: find distance between center and intersection of ray point $d=\abs{M(t_0)-S}^2$. Then find $a=\sqrt{r^2-b^2}$ and the two intersections are at distance $t_{1,2}=t_0\pm a$ and correspond to points $M(t_1),M(t_2)$. (Moreover in the sphere we set $n=V$)
 $$\begin{gather}
 d=\abs{M(t_0)-S}^2\rightarrow a=\sqrt{r^2-d^2}\\
 \downarrow\\
@@ -280,8 +288,7 @@ d=\abs{M(t_0)-S}^2\rightarrow a=\sqrt{r^2-d^2}\\
 
 ![[Pasted image 20260416115908.png|Visualization|300]]
 
-#### Ray Casting
-
+#### Rasterization
 Instead of tracing a ray through every pixel, each polygon traces a ray to the camera. The intersected pixels are used as a base to reconstruct the object.
 ![[Pasted image 20260416170704.png|Example|350]]
 This is more performant than ray casting, however a z buffer is needed to solve clipping and culling and hidden surfaces problems.
