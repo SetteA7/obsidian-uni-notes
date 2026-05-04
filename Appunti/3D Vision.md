@@ -295,11 +295,26 @@ Instead of tracing a ray through every pixel, each polygon traces a ray to the c
 This is more performant than ray casting, however a z buffer is needed to solve clipping and culling and hidden surfaces problems.
 
 1. A perspective transformation is used to map the view frustum (defined by fov and clipping planes) to a canonic unit cube.
-2. Clipping is performed via painters algorithm or depth sort
+2. Clipping is performed via painters algorithm or depth sort. **Hidden Surface Removal** (HSR) is also applied
 3. An illumination pass is performed
 4. Hidden surfaces are removed via backface culling
 5. shaders are applied
 6. a final scan conversion is performed to transform the 3D view to a 2D image
+
+#### Hidden Surface Removal (HSR)
+This applies multiple techniques:
+- **Back Face Culling:** remove faces that are hidden wrt viewpoint
+- **List-priority:** order objects to render in sequence
+- **Painter/depth sort:** polygons ordered based on depth
+
+#### Scan Conversion
+Recall that in rasterization, each vertex of a polygon is mapped to a pixel, then **Bresenham algorithm** approximates what pixels to fill based on 2 connected verteces. 
+![[Pasted image 20260504123840.png|Bresenham|100]]
+
+**Scan line algorithm** is used to fill the pixels of the faces. Essentially it fills the pixels if the pixel is after a odd number of lines. The color is found by interpolation.
+![[Pasted image 20260504123822.png|Scan Line example|100]]
+
+
 ### 2.2.2) Lighting Models (Shading)
 A good lighting model should be able to encapsulate most physical light phenomena both from a material perspective and light perspective:
 - **Radiometry**: study of light propagates and is emitted
@@ -332,7 +347,6 @@ This enhances ray-casting and phong by taking into account the reflections ($k_s
 
 #### Shaders
 Small script that runs on gpu that modifies the pixel value of an entire object based on the light input and material.
-
 
 
 
