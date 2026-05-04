@@ -215,29 +215,29 @@ The standard image pipeline in computer graphics is:
 The modeling of a 3D scene consists in modeling and placing the objects, while also illuminating the scene and selecting the viewpoints
 
 3 types of modeling exist:
-- Manual: use software to model by hand (Blender)
-- Automatic: obtain model from real 3D objects (SfM)
-- Procedural: use a function to generate a model (fur, grass, water, etc)
+- **Manual**: use software to model by hand (Blender)
+- **Automatic**: obtain model from real 3D objects (SfM)
+- **Procedural**: use a function to generate a model (fur, grass, water, etc)
 
-Objects can be either finite, closed or continuous and can be represented as a volume or by contours.
+Objects are **finite, closed and continuous** and can be represented as a volume or by contours.
 
-The classic polygon representation is the contour representation (b-rep) that uses a set of convex polygons to approximate a surface.
+The classic polygon representation is the contour representation (boundary-rep) that uses a set of convex polygons to approximate a surface.
 
 Two main approaches exist:
-- Triangular mesh: dense, no redundancy, high quality
-- Point Cloud: sparse, redundant, low complexity
+- **Triangular mesh**: dense, no redundancy, high quality
+- **Point Cloud**: sparse, redundant, low complexity
 
 but also triangle clouds or voxelized point clouds are used.
 
 How are meshes represented?
-- Simple representation: define all faces as a list of triplets: simple but with much repetition
+- **Simple representation**: define all faces as a list of triplets: simple but with much repetition
 $$T_1\curly{\par{a_1,a_2,a_3},\par{b_1,b_2,b_3},\par{c_1,c_2,c_3}}\qquad T_2\curly{\par{b_1,b_2,b_3},\par{d_1,d_2,d_3},\par{c_1,c_2,c_3}}$$
 ![[Pasted image 20260415154945.png|Example|250]]
-- List of vertices: every face defined by list of vertices, edge repetition but no vertices, difficult to find adjacent faces
+- **List of vertices**: every face defined by list of vertices, edge repetition but no vertices, difficult to find adjacent faces
 $$\begin{gather}v_a=(a_1,a_2,a_3)\quad v_b=(b_1,b_2,b_3)\quad v_c=(c_1,c_2,c_3)\\
 T_1=\curly{v_a,v_b,v_c}\qquad T_2=(v_b,v_c,v_d)
 \end{gather}$$
-- List of edges: face defined by list of edges, no repetition, simpler adjacent search
+- **List of edges**: face defined by list of edges, no repetition, simpler adjacent search
 $$\begin{gather}l_1=(v_a,v_b)\quad l_2=(v_b,v_c)\quad l_3=v_c,v_a\quad l_4=(v_b,v_d)\quad l_5=(v_d,v_c)\\
 T_1=\curly{l_1,l_2,l_3}\qquad T_2=\curly{l_2,l_4,l_5}
 \end{gather}$$
