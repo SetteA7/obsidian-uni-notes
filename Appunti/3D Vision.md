@@ -348,7 +348,31 @@ This enhances ray-casting and phong by taking into account the reflections ($k_s
 #### Shaders
 Small script that runs on gpu that modifies the pixel value of an entire object based on the light input and material.
 
+### 2.2.3) Other Techniques
+#### Anti Aliasing
+Average the shading in order to hide discrete nature of images
+![[Pasted image 20260504124025.png|Example|450]]
+#### Textures
+To simplify models, it is possible to use textures (instead of one face per texture pixel). These are images that get overlayed on a model.
 
+The unit pixel of a texture is called a **texel**. To project it onto a surface (color mapping) the surface needs to be parameterized or mapped to vertices via a lookup table
+
+How are they mapped?
+- **Color Mapping:** Overlay image onto a 3d surface
+- **2-Step Mapping:** Map og texture to intermediate surface $S$ so that the map from $S$ to $O$ is simpler. O-Mapping can be done via intersection of normals (of the $S$ or $O$ surface) or via interm lines from centroids
+![[Pasted image 20260504124655.png|Example|250]]
+All these are done in one of two ways:
+- **Forward mapping:** maps texels $\rightarrow$ pixels. More computationally expensive, can result in missing textures and artifacts that require heavy filters.
+- **Inverse mapping:** most used as you only draw what is seen: Map vertex into pixel , find intersection between rays and tris, compute coordinate on texture, get pixel value. Map pixels $\rightarrow$ texels
+
+#### Bump Mapping
+Type of texture that defines normals as a texture without having them geometrically modeled on the surface. 
+
+#### Level of Detail (LOD)
+Design models with different amount of verteces and change them based on distance from camera
+
+#### Sprites
+Place 3d images in 3d world to create the illusion of 3d.
 
 ## 2.3) Animation
 3D animation is the spiritual successor of stop motion animation. Some key frames are specified with some key poses and the remaining frames are interpolated.
