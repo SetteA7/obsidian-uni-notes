@@ -261,6 +261,7 @@ Now we move forward to the graphical pipeline and rendering part:
 Rendering is the set of algorithms used to generate the image of the scene.
 There are two main approaches to rendering: process objects one by one and update pixels accordingly or process each pixel separately.
 
+### 2.2.1) Rendering Techniques
 #### Z-Buffer
 Every pixel is extended with a depth value $(r,g,b)\rightarrow(r,g,b,d)$ this is the distance of the projected point to the camera. 
 ![[Pasted image 20260416113234.png|Algorithm|450]]
@@ -299,21 +300,27 @@ This is more performant than ray casting, however a z buffer is needed to solve 
 4. Hidden surfaces are removed via backface culling
 5. shaders are applied
 6. a final scan conversion is performed to transform the 3D view to a 2D image
-#### Lighting Models (Shading)
+### 2.2.2) Lighting Models (Shading)
 A good lighting model should be able to encapsulate most physical light phenomena both from a material perspective and light perspective:
 - **Radiometry**: study of light propagates and is emitted
 - **Diffusion:** material property on how light is absorbed and reflected
 
 ##### Phong Model
 A good model for the light is the **phong model:**
-$$I_{\text{out}}=I_{\text{out, ambient}}+I_{\text{out, diff}}+I_{\text{out, refl}}+I_{\text{out,emit}}=I_ak_a+I(k_d(n\cdot l)+k_s(n\cdot h)^n)$$
+$$\begin{align}
+I_{\text{out}}&=I_{\text{out, ambient}}+I_{\text{out, diff}}+I_{\text{out, refl}}+I_{\text{out,emit}}\\
+&=I_ak_a+Ik_d(\vec n\cdot L)+Ik_s(\vec n\cdot h)^n
+\end{align}$$
 
 - **Ambient Light:** minimum light present on all objects, even unlit ones $I^{out}_a=I_ak_a$ since model doesn't take into account multiple bounces
-- **Diffused Light:** depends on normal (not viewing angle) $I_d^{out}=Ik_d\cos\theta$
-- **Specular Light:** this is how much glossy or rough the surface looks. 
+- **Diffused Light:** depends on surface normal (not viewing angle) $I_d^{out}=Ik_d\cos\theta$
+- **Specular Light:** this is how much glossy or rough the surface looks. This is calculated via the half way vector. 
+
+Let $S$ be the point on the surface and $R$ the (point) light source. All vectors must be exiting, then we can define them as:
+$$v=-\frac{P-Q}{\abs{P-Q}}\quad L=\frac{R-S}{\abs{R-S}}\quad h=\frac{L+v}{\abs{L+v}}$$
 
 The biggest missing part is:
- - attenuation
+ - attenuation (intensity decreases with distance)
  - reflection, refraction
  - light source characterization, no light emitters
 
