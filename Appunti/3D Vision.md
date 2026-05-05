@@ -309,9 +309,13 @@ d=\abs{M(t_0)-S}^2\rightarrow a=\sqrt{r^2-d^2}\\
 #### Rasterization
 Instead of tracing a ray through every pixel, each polygon traces a ray to the camera. The intersected pixels are used as a base to reconstruct the object.
 ![[Pasted image 20260416170704.png|Example|350]]
-This is more performant than ray casting, however a z buffer is needed to solve clipping and culling and hidden surfaces problems.
+This is **more performant than ray casting**, more problems have to be accounted for.
 
-1. A perspective transformation is used to map the view frustum (defined by fov and clipping planes) to a canonic unit cube.
+**Geometric Processing Step:**
+- First the scene (objects) are defined
+- Every object inside the view frustum will be rendered. The view frustum is first **transformed using a projective transformation** into a canonical unit cube
+
+1. A **perspective transformation** is used to map the view frustum (defined by fov and clipping planes) to a canonic unit cube.
 2. Clipping is performed via painters algorithm or depth sort. **Hidden Surface Removal** (HSR) is also applied
 3. An illumination pass is performed
 4. Hidden surfaces are removed via backface culling
