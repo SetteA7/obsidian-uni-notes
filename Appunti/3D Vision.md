@@ -66,7 +66,7 @@ Recall the projective plane contains the lines at infinite
 $$\mathbb P^n=\mathbb R^n\cup l_\infty$$
 In turns out that, a point in $\mathbb P^n$ are all the points on a line in $\mathbb R^{n+1}$.
 
-Limit the study to $n=2$:
+Limit the study to $n=3$
 
 ##### Points to Lines
 Recall that any non-zero homogeneous point $(u,v,w)\not = (0,0,0)$ is equivalent w.r.t. scale factor to other points:
@@ -143,7 +143,9 @@ $$P=\left[
 \right]$$
 Define the **intrinsic parameter matrix**
 $$K=\begin{bmatrix}-fk_u&0&u_0\\0&-fk_u&v_0\\0&0&1\end{bmatrix}$$
-then $P=K[I_3|0_3]$
+then $P=K[I_3|0_3]$.
+
+**$P$ is the projection matrix $\mathbb P^3\rightarrow\mathbb P^2$**
 #### Camera Motion
 Now suppose the camera coordinates are not aligned with the world coordinates, then the camera coordinates $M_c$ become:
 $$M_c=GM=\begin{bmatrix}R&t\\0_{3\times 1}&1\end{bmatrix}M$$
@@ -157,7 +159,10 @@ the **extrinsic parameters** are therefore $R,t$.
 the coordinates can be normalized as $p=K^{-1}m$
 in these coordinates the projection matrix is $P[I|0]$
 #### Principal Point and Center of Projection
-The COP point is the optical center of the camera. Since every light ray passes thorugh this point, if an object is placed in C there are infinitely many rays passing through it, thus **the projection is not defined, that is COP is not defined in projective plane**
+By how we previously defined $P$ it is clear how **the COP is the only point in $\mathbb P^3$ to not be defined in $\mathbb P^2$. In other words, it is the null space of $P$ by definition**
+
+Since every light ray passes through this point, if an object is placed in C there are infinitely many rays passing through it.
+
 From here we can see how the COP is the null space of $P$:
 $$PC=0$$
 In general the camera matrix has 3 rows, so we can explicit them:
