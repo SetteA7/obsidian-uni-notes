@@ -439,6 +439,7 @@ $$m'\simeq H_\Pi m\quad m\in \Pi$$
 Homography can also be composed:
 ![[Pasted image 20260309154735.png|Composition|350]]
 #### Homography Estimation
+##### Noise Free
 Let there be a set of coupled points between two images $m_i,m'_i=Hm_i$. To compute the homography $H$ between the two images, a set of at least $n=4$ matching points are needed with noise free matches.
 The solution is found by finding  $ker(A)$ of this system:
 $$\begin{bmatrix}
@@ -448,14 +449,20 @@ m_2^T\otimes\stackvec{m_2'}\\
 m_n^T\otimes\stackvec{m_n'}\\
 \end{bmatrix}vec(H)=Avec (H)=0_{2n\times 1}$$
 
-If matches are noisy, RANSAC is used
-First outliers are discarded, that is, keep only matches that
+##### Noisy: RANdom SAmple Consensus (RANSAC)
+If matches are noisy, RANSAC is used. This is an iterative method to compute homographies by finding a subset of inliers. 
+
+An inlier for a homography $H$ is a couple of matching points that satisfy
 $$\abs{m_i'-Hm_i}\leq \epsilon$$
+Let the set of couples be $\mathcal M=\curly{m_i,m_i'}$ with cardinality $N$. At each iteration 
+
 Now RANSAC is applied to the N matches in set $\mathcal M=\curly{m_i,m_i'}$.
-1. Select $N_0<N$ couples from $\mathcal M$ and create subset $\mathcal M_0$
-2. Compute the estimated matrix $H_0$ on $\mathcal M_0$
+1. Select $N_0<N$ couples from $\mathcal M$ and create subset $\mathcal M_0$.
+2. Compute the estimated matrix $H_0$ on $\mathcal M_0$ (via minimum distance)
 3. Compute the number of inliers $N_{in}$
-4. if $N_{in}>T$ or max iterations stop, otherwise restart from 1.
+4. if $N_{in}>T$ or max iterations stop, otherwise restart from 1. Always keep best $H_0,\mathcal M_0$ 
+
+5. Before concluding, recalculate inliers on all $\mathcal M$ (not just $\mathcal M_0$) an recompute $H_0$ on all inliers.
 
 --- 
 Proof of noise free homography:
