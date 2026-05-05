@@ -261,6 +261,17 @@ where $P_{ij}$ are the control points and $X$ the control function
 also using **Constructive Solid Geometry (CSG)** which builds models starting from some primitives and then boolean operations. This is used for CAD modeling.
 
 Spatial partitioning (voxels) are also used, these discretize the space in tiny cells that can be either empty or occupied.
+
+##### Recap
+Models are: **finite, closed and continuous**
+Defined via: **contours or volumes**
+Types of modeling strategies: **manual, automatic, procedural**
+
+**Polygon Meshes:** vertices, edges faces. Collection of flat polygons.
+**Point Clouds:** sparse collection of 3d points. Highly redundant.
+**Parametric Surfaces:** Bezier curves
+**Spatial Partitioning/Voxels:** quadtrees or marching cubes.
+**Constructive Solid Geometry:** boolean operation on elementary shapes
 ## 2.2) Rendering and Illumination
 Now we move forward to the graphical pipeline and rendering part:
 
