@@ -320,8 +320,10 @@ This is **more performant than ray casting**, more problems have to be accounted
 
 However lighting and clipping are notoriously hard to solve:
 - For clipping a z-buffer is usually used in combination with HSR.
-- For shading a mix between compute shaders and 
-
+- For shading a mix between compute shaders and some shading algorithm is used:
+	- **Flat shading:** normal is computed for one polygon and it is shaded the same on the entire surface
+	- **Gourad shading:** shade is computed for each vertex and interpolated for the surface pixels
+	- **Phong shading:** shade is computed pixel by pixel.
 #### Hidden Surface Removal (HSR)
 This applies multiple techniques:
 - **Back Face Culling:** remove faces that are hidden wrt viewpoint
