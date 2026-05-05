@@ -455,19 +455,24 @@ Proof of noise free homography:
 Let there be a set of coupled points between two images $m_i,m'_i\simeq Hm_i$. 
 Notice that 
 $$m_i'\times Hm_i=0\rightarrow \stackvec{m_i'}H m_i=0_{2\times 1}$$
-Apply the vec and notice:
+Apply the vec operator:
 $$vec\par{\stackvec{m_i'}Hm_i}=vec (0)=0$$
 Now expand:
-$$\begin{gather}
-vec\par{\stackvec{m_i'}Hm_i}=(m_i^T\otimes\stackvec{m_i'})vec(H)=0 \\ 
-\downarrow \\ 
+$$
+vec\par{\stackvec{m_i'}Hm_i}=(m_i^T\otimes\stackvec{m_i'})vec(H)=0 
+$$
+Notice that $m_i^T\otimes\stackvec{m_i'}$ is a $3\times9$ matrix and has rank 2, therefore the system is underdetermined with 2 equations in 8 unknowns. 
+
+$$
 \begin{bmatrix}
 m_1^T\otimes\stackvec{m_1'}\\
 m_2^T\otimes\stackvec{m_2'}\\
 \vdots\\
 m_n^T\otimes\stackvec{m_n'}\\
-\end{bmatrix}vec(H)=Avec (H)=0_{2n\times 1}
-\end{gather}$$
+\end{bmatrix}vec(H)=Avec (H)=0_{2n\times 1}$$
+with $n=4$ there is one solution, while with $n>4$ the system is overdetermined. 
+
+
 The $A$ matrix is a $2n\times 9$ matrix with rank 2 (2 eq in 8 unknowns). Therefore at least $n=4$ matching points are needed for the estimation.
 
 The system can be solved by using SVD on $ker(A)=1$ .
