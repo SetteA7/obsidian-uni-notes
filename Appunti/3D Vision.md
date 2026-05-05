@@ -548,6 +548,24 @@ this equation is a bilinear relation between $m,m'$ with $P=[Q|q],\ P'=[Q'|q']$.
 
 ---
 Proof of Longuet-Higgins Equation
+Longuet-Higgins equation relates matching points only by an epipolar line and the camera matrices.
+Let two generic camera matrices be:
+$$P\simeq [Q|q],\qquad P'\simeq [Q'|q']$$
+Since point $M$ is the same for both cameras, find the optical ray of the first camera and project it on the second camera in order to relate m and m' wrt scale:
+$$M=C+\lambda \begin{bmatrix}Q^{-1}m\\ 0\end{bmatrix}\rightarrow P'M=P'C+\lambda P'\begin{bmatrix}Q^{-1}m\\ 0\end{bmatrix}$$
+Notice that $P'C$ is the epipole on $P'$ by definition and therefore
+$$m'\simeq e'+\lambda Q'Q^{-1}m$$
+
+From here only a series of algebraic steps are needed:
+Vector multiply by $e'$:
+$$e'\times m'\simeq e'\times(e'\lambda Q'Q^{-1}m)=\lambda e'\times Q'Q^{-1}m$$
+and finally a scalar multiplication with $m'^T$:
+
+$$m'^T\cdot (e'\times m)=0=m'^T\cdot [e']_\times Q'Q^{-1}m$$
+By noticing that since by definition $e'\times m'\perp m'$ and therefore the LHS is 0 and by calling $[e']_\times Q'Q^{-1}=F$ we end up with the equation:
+$$m'^TFm=0$$
+
+
 Longuet-Higgins equation relates matching points on the same epipolar line.
 In the general case the two camera matrices are
 $$P\simeq [Q|q],\qquad P'\simeq [Q'|q']$$
