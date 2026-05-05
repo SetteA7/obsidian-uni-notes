@@ -361,6 +361,8 @@ The biggest missing part is:
 ##### Ray Tracing
 This enhances ray-casting and phong by taking into account the reflections ($k_sI_r$) and refraction ($k_tI_t$) of light. Moreover the reflection generates a new ray in the reflected direction. The pixel will have a weighted sum of the surface and reflected ray contributions.
 
+Therefore it becomes:
+$$I_{out}=\underbracket{I_ak_a+Ik_d(\vec n\cdot L)+Ik_s(\vec n\cdot h)^n}_{\text{Phong}}+k_sI_r+k_tI_t$$
 
 #### Shaders
 Small script that runs on gpu that modifies the pixel value of an entire object based on the light input and material.
