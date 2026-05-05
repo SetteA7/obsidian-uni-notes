@@ -312,15 +312,15 @@ Instead of tracing a ray through every pixel, each polygon traces a ray to the c
 This is **more performant than ray casting**, more problems have to be accounted for.
 
 **Geometric Processing Step:**
-- First the scene (objects) are defined
-- Every object inside the view frustum will be rendered. The view frustum is first **transformed using a projective transformation** into a canonical unit cube
+1. **Standard Coordinates:** scene and objects
+2. **Camera Coordinates:** via a **modelview matrix** transform space with camera as origin
+3. **Clip Coordinates:** a **projection matrix** defines the view frustum and clips all geometry outside of this view.
+4. **Normalized Device Coordinates:** The view frustum is first **transformed using a projective transformation** into a canonical unit cube
+5. **Window Coordinates:** with a **viewport matrix** the image is projected onto a 2D screen.
 
-1. A **perspective transformation** is used to map the view frustum (defined by fov and clipping planes) to a canonic unit cube.
-2. Clipping is performed via painters algorithm or depth sort. **Hidden Surface Removal** (HSR) is also applied
-3. An illumination pass is performed
-4. Hidden surfaces are removed via backface culling
-5. shaders are applied
-6. a final scan conversion is performed to transform the 3D view to a 2D image
+However lighting and clipping are notoriously hard to solve:
+- For clipping a z-buffer is usually used in combination with HSR.
+- For shading a mix between compute shaders and 
 
 #### Hidden Surface Removal (HSR)
 This applies multiple techniques:
