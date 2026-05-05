@@ -183,6 +183,12 @@ Try to understand what $Q$ and $q$ are:
 - $q$ is related to translation of camera, but it is not the position
 - $-Q\tilde C$ is the position of the camera
 - $p_3$ is the optical axis
+
+The principal point can also be easily found:
+Recall that $m_0=K[0,0,1]^T$. Let $P=[Q|q]$, then
+$$QQ^T=(KR)(KR)^T=KRR^TK^T=KK^T\rightarrow m_0=K\par{K^T\begin{bmatrix}0\\0\\1\end{bmatrix}}=K\begin{bmatrix}0\\0\\1\end{bmatrix}$$
+
+
 #### Optical Ray
 Given a point $m$ in the imaging plane, a **ray** is the line that contains COP $C$ and $m$, that is, the set of points M such that:
 $$\curly{M:m\simeq PM}$$
