@@ -440,6 +440,13 @@ Homography can also be composed:
 ![[Pasted image 20260309154735.png|Composition|350]]
 #### Homography Estimation
 Let there be a set of coupled points between two images $m_i,m'_i=Hm_i$. To compute the homography $H$ between the two images, a set of at least $n=4$ matching points are needed with noise free matches.
+The solution is found by finding  $ker(A)$ of this system:
+$$\begin{bmatrix}
+m_1^T\otimes\stackvec{m_1'}\\
+m_2^T\otimes\stackvec{m_2'}\\
+\vdots\\
+m_n^T\otimes\stackvec{m_n'}\\
+\end{bmatrix}vec(H)=Avec (H)=0_{2n\times 1}$$
 
 If matches are noisy, RANSAC is used
 First outliers are discarded, that is, keep only matches that
@@ -461,7 +468,7 @@ Now expand:
 $$
 vec\par{\stackvec{m_i'}Hm_i}=(m_i^T\otimes\stackvec{m_i'})vec(H)=0 
 $$
-Notice that $m_i^T\otimes\stackvec{m_i'}$ is a $3\times9$ matrix and has rank 2, therefore the system is underdetermined with 2 equations in 8 unknowns. 
+Notice that $m_i^T\otimes\stackvec{m_i'}$ is a $3\times9$ matrix and has rank 2, therefore the system is underdetermined with 2 equations in 8 unknowns. By adding some matching points couple we can solve the system.
 
 $$
 \begin{bmatrix}
@@ -470,12 +477,10 @@ m_2^T\otimes\stackvec{m_2'}\\
 \vdots\\
 m_n^T\otimes\stackvec{m_n'}\\
 \end{bmatrix}vec(H)=Avec (H)=0_{2n\times 1}$$
-with $n=4$ there is one solution, while with $n>4$ the system is overdetermined. 
+The $A$ matrix is a $2n\times9$ matrix with rank 8. With $n=4$ there is one solution, while with $n>4$ the system is overdetermined. 
 
-
-The $A$ matrix is a $2n\times 9$ matrix with rank 2 (2 eq in 8 unknowns). Therefore at least $n=4$ matching points are needed for the estimation.
-
-The system can be solved by using SVD on $ker(A)=1$ .
+The solution is to find $ker(A)$. 
+Since $dim(ker(A))=1$ the solution can be found by applying SVD decomposition on $A$ and taking the last row of $V^T$.
 $\endproof$
 
 ##### Basic Linear Algebra Recap
