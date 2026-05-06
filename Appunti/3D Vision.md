@@ -557,6 +557,9 @@ If the coordinates are also normalized:
 $$p=K^{-1}m\qquad p'=K'^{-1}m'$$
 The camera matrices become:
 $$P_0=K^{-1}P=[I|0]\qquad P_0'=[R|t]$$
+Recall that with normalized coordinates a point becomes:
+$$p=P_0M$$
+
 And we find a specific instance (world aligned+normalized) of the fundamental matrix called **Essential Matrix**:
 $$E=\stackvec tR$$
 
@@ -592,13 +595,18 @@ $$e'=P'C=K'[R|t]\begin{bmatrix}\vec 0\\1\end{bmatrix}=K't$$
 By plugging this into the fundamental matrix we have:
 $$F=\stackvec{K't}K'RK^{-1}$$
 
-#### Motion Estimation
+## 3.3) Homography Motion Estimation
+
 In motion the camera remains the same and thus $K=K'$. (we distinguish still for generality)
 
 ##### Rotational Motion
 In this case $t=0$. It turns out that 
 $$\frac{\lambda'}{\lambda}m'=K'RK^{-1}m=H_\infty m$$
-and the homography doesn't depend on 
+and the homography doesn't depend on the 3d structure of the points.
+
+---
+Proof:
+Let
 $$P=K[I|0]=[K|0]\qquad P'=K'[R|0]$$
 Plugging these into Lounguet Higgins we get:
 $$m'\simeq K't+\lambda K'RK^{-1}m$$
@@ -606,6 +614,14 @@ adjust $m'$ scale to get a strict equality:
 $$\lambda'm'=K't+\lambda K'RK^{-1}m$$
 By defining $H_\infty=K'RK^{-1}$ we get that:
 $$\frac{\lambda'}{\lambda}m'=H_\infty m$$
+$\endproof$
+
+##### Planar Scene
+In this case the homography is more evident: All $M$ points lie on plane $\Pi$, therefore they must satisfy the following (projective space - euclidean space):
+$$d^TM=0\qquad n^T\tilde M=d$$
+and therefore 
+$$\frac{\lambda'}{\lambda}m'=\par{H_\infty+\frac{K'tn^TK^{-1}}d}m=H_\Pi m\stackrel{d\rightarrow\infty}\longrightarrow H_\infty m$$
+
 
 
 ---
