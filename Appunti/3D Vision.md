@@ -551,14 +551,21 @@ A fundamental equation is the **Longuet Higgins Equation:**
 $$m'^T\stackvec{e'}Q'Q^{-1}m=m'^TFm=0$$
 this equation is a bilinear relation between $m,m'$ with $P=[Q|q],\ P'=[Q'|q']$. This allows to find if $m,m'$ are on the same epipolar line without knowing the depth of $M$.
 
+Louget higgins has also some other forms which are mainly used in proofs:
+$$m'\simeq e'+\lambda Q'Q^{-1}m\qquad \lambda'm'= e'+\lambda Q'Q^{-1}m$$
+
 By aligning the world coordinates to the first camera we can write the funamental matrix using the camera parameters and roto-translation:
 $$P=K[I|0]\quad P'=K'[R|t]\longrightarrow F=\stackvec{Kt}K'RK^{-1}$$
+Now louget higgins becomes:
+$$m'\simeq K'RK^{-1}m+K't$$
+
 If the coordinates are also normalized:
 $$p=K^{-1}m\qquad p'=K'^{-1}m'$$
 The camera matrices become:
 $$P_0=K^{-1}P=[I|0]\qquad P_0'=[R|t]$$
 Recall that with normalized coordinates a point becomes:
 $$p=P_0M$$
+
 
 And we find a specific instance (world aligned+normalized) of the fundamental matrix called **Essential Matrix**:
 $$E=\stackvec tR$$
@@ -596,10 +603,9 @@ By plugging this into the fundamental matrix we have:
 $$F=\stackvec{K't}K'RK^{-1}$$
 
 ## 3.3) Homography Motion Estimation
+With epipolar geometry and homography we can estimate motion. First we need to find the homographies for the two types of motion (rotational and planar). Then the motion of the camera can be studied by also setting $K=K'$
 
-In motion the camera remains the same and thus $K=K'$. (we distinguish still for generality)
-
-##### Rotational Motion
+#### Rotational Motion
 In this case $t=0$. It turns out that 
 $$\frac{\lambda'}{\lambda}m'=K'RK^{-1}m=H_\infty m$$
 and the homography doesn't depend on the 3d structure of the points.
@@ -616,15 +622,27 @@ By defining $H_\infty=K'RK^{-1}$ we get that:
 $$\frac{\lambda'}{\lambda}m'=H_\infty m$$
 $\endproof$
 
-##### Planar Scene
+#### Planar Scene
 In this case the homography is more evident: All $M$ points lie on plane $\Pi$, therefore they must satisfy the following (projective space - euclidean space):
 $$d^TM=0\qquad n^T\tilde M=d$$
+where $N$ is the normal vector to the surface
 and therefore 
 $$\frac{\lambda'}{\lambda}m'=\par{H_\infty+\frac{K'tn^TK^{-1}}d}m=H_\Pi m\stackrel{d\rightarrow\infty}\longrightarrow H_\infty m$$
-
-
+In fact in panoramic images, far away objects can be stitched together as if the motion were purely rotational based on their high distance from the camera.
 
 ---
+Proof:
+In this case the homography is more evident: All $M$ points lie on plane $\Pi$, therefore they must satisfy the following in euclidean space:
+$$n^T\tilde M=d$$
+Notice that for the first camera $\tilde M$ can be written as:
+$$\lambda m=PM=[K|0]\begin{bmatrix}\tilde M\\1\end{bmatrix}=K\tilde M$$
+and therefore:
+$$d=n^T\lambda K^{-1}m\rightarrow 1=\frac{n^T\lambda K^{-1}m}d$$
+Now the lounget higgins equation becomes:
+$$\frac{\lambda'}\lambda m'=K'RK^{-1}m+\frac1\lambda K't\cdot \frac{n^T\lambda K^{-1}m}d=H_\infty m+\frac{K'tn^TK^{-1}}dm$$
+
+#### Camera Motion Estimation
+
 
 # 4) Stereo Systems
 Stereo system uses two views of the same scene to estimate depth. This is done via the **disparity** between points in a scene.
