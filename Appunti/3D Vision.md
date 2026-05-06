@@ -545,11 +545,19 @@ There are 3 main geometric structures in the epipolar geometry:
 For noise-free matching point estimation we know that $m_i$ has matching point $m_i'$ on the epipolar line, no other part of image can contain it. This is shown in the lounget higgins equation.
 
 We can define the **fundamental matrix** which contains all the information about the epipolar geometry.
-$$F=\stackvec{e'}Q'Q^{-1}=\stackvec{Kt}K'RK^{-1}$$
+$$F=\stackvec{e'}Q'Q^{-1}$$
 
 A fundamental equation is the **Longuet Higgins Equation:**
 $$m'^T\stackvec{e'}Q'Q^{-1}m=m'^TFm=0$$
 this equation is a bilinear relation between $m,m'$ with $P=[Q|q],\ P'=[Q'|q']$. This allows to find if $m,m'$ are on the same epipolar line without knowing the depth of $M$.
+
+By aligning the world coordinates to the first camera we can write the funamental matrix using the camera parameters and roto-translation:
+$$P=K[I|0]\quad P'=K'[R|t]\longrightarrow F=\stackvec{Kt}K'RK^{-1}$$
+If the coordinates are normalized:
+$$p=K^{-1}m\qquad p'=K'^{-1}m'$$
+The camera matrices become:
+$$P_0=K^{-1}P=[I|0]\qquad P_0'=[R|t]$$
+
 
 ---
 Proof of Longuet-Higgins Equation
@@ -570,32 +578,11 @@ $$m'^T\cdot (e'\times m)=0=m'^T\cdot [e']_\times Q'Q^{-1}m$$
 By noticing that since by definition $e'\times m'\perp m'$ and therefore the LHS is 0 and by calling $[e']_\times Q'Q^{-1}=F$ we end up with the equation:
 $$m'^TFm=0$$
 
-
-Longuet-Higgins equation relates matching points on the same epipolar line.
-In the general case the two camera matrices are
-$$P\simeq [Q|q],\qquad P'\simeq [Q'|q']$$
-
-The optical ray of m is:
-$$M=C+\lambda \begin{bmatrix}Q^{-1}m\\ 0\end{bmatrix}$$
-This is used to compute the epipolar line $e'$, so we project the line onto $P'$:
-$$P'M=P'C+\lambda P'\begin{bmatrix}Q^{-1}m\\ 0\end{bmatrix}=P'C+\lambda [Q'|q']\begin{bmatrix}Q^{-1}m\\ 0\end{bmatrix}=P'C+\lambda Q'Q^{-1}m+q'\cdot 0
-$$
-Recall that by definition $P'C=e'$ and therefore we have:
-$$m'\simeq P'M=e'+\lambda Q'Q^{-1}m$$
-Notice that since we don't know at what distance $M$ is located, we only know that $m'\simeq P'M$, that is $m'$ is on the epipolar line.
-
-Now we can do some algebraic manipulations to get the final equation:
-Vector multiplication by $e'$:
-$$e'\times m'=\stackvec {e'} m'=e'\times (e'+\lambda Q'Q^{-1}m)=\underbrace{e'\times e'}_{=0}+\lambda e'\times Q'Q^{-1}m=\stackvec {e'}\lambda Q'Q^{-1}m$$
-Now multiply by $m'^T$
-- The first term is immediately 0 since $\stackvec{e'}m'\perp e', m'$ and thus $m'^T\cdot \stackvec{e'}m'=0$ 
-- The second term is the Longuet-Higgins eq times $\lambda$
-$$m'^T\stackvec {e'}m'=0=m'^T\stackvec {e'}\lambda Q'Q^{-1}m$$
 $\endproof$
 
 ---
 
-#### Morion Estimation
+#### Motion Estimation
 
 
 ---
