@@ -553,11 +553,12 @@ this equation is a bilinear relation between $m,m'$ with $P=[Q|q],\ P'=[Q'|q']$.
 
 By aligning the world coordinates to the first camera we can write the funamental matrix using the camera parameters and roto-translation:
 $$P=K[I|0]\quad P'=K'[R|t]\longrightarrow F=\stackvec{Kt}K'RK^{-1}$$
-If the coordinates are normalized:
+If the coordinates are also normalized:
 $$p=K^{-1}m\qquad p'=K'^{-1}m'$$
 The camera matrices become:
 $$P_0=K^{-1}P=[I|0]\qquad P_0'=[R|t]$$
-
+And we find a specific instance (world aligned+normalized) of the fundamental matrix called **Essential Matrix**:
+$$E=\stackvec tR$$
 
 ---
 Proof of Longuet-Higgins Equation
@@ -581,20 +582,34 @@ $$m'^TFm=0$$
 $\endproof$
 
 ---
-
-#### Motion Estimation
-
-
----
 Fundamental Matrix in the world coordinates system
 Center the world coordinates on $P$ and then $P'$ is a roto translation:
 $$P=K[I|0]=[K|0]\qquad P'=K'[R|t]$$
 The optical center becomes:
-$$C=\begin{bmatrix}-Q^{-1}q\\1\end{bmatrix}=\begin{bmatrix}0_{1\times 3}\\1\end{bmatrix}$$
-And the epipole is easily found:
+$$C=\begin{bmatrix}-Q^{-1}q\\1\end{bmatrix}=\begin{bmatrix}-K^{-1}q\\1\end{bmatrix}=\begin{bmatrix}0_{1\times 3}\\1\end{bmatrix}$$
+And the epipole is easily found by definition:
 $$e'=P'C=K'[R|t]\begin{bmatrix}\vec 0\\1\end{bmatrix}=K't$$
-therefore we have:
+By plugging this into the fundamental matrix we have:
 $$F=\stackvec{K't}K'RK^{-1}$$
+
+#### Motion Estimation
+In motion the camera remains the same and thus $K=K'$. (we distinguish still for generality)
+
+##### Rotational Motion
+In this case $t=0$. It turns out that 
+$$\frac{\lambda'}{\lambda}m'=K'RK^{-1}m=H_\infty m$$
+and the homography doesn't depend on 
+$$P=K[I|0]=[K|0]\qquad P'=K'[R|0]$$
+Plugging these into Lounguet Higgins we get:
+$$m'\simeq K't+\lambda K'RK^{-1}m$$
+adjust $m'$ scale to get a strict equality:
+$$\lambda'm'=K't+\lambda K'RK^{-1}m$$
+By defining $H_\infty=K'RK^{-1}$ we get that:
+$$\frac{\lambda'}{\lambda}m'=H_\infty m$$
+
+
+---
+
 # 4) Stereo Systems
 Stereo system uses two views of the same scene to estimate depth. This is done via the **disparity** between points in a scene.
 
