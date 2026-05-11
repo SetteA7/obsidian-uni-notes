@@ -1262,7 +1262,7 @@ Computing a rigid transformation of 3D points starting from a set of corresponde
 
 # 9) Point Cloud
 ## 9.1) Compression
-## 9.2) Coding & Segmentation
+## 9.2) Coding
 
 In moving scenes voxelization cannot be used (noise, etc). We use Video Point Cloud Coding (VPCC)
 ![[Pasted image 20260511151123.png|VPCC|450]]
@@ -1271,8 +1271,17 @@ Create patches:
 - Define 6 orthographc projections ($\pm x,\pm y,\pm z$)
 - Estimate normals of each point and assign to one projection
 - Refine depending on neighbours
-- 
+- TODO
+- Then projected to HEVC?
 
+#### AI Coding - JPEG Pleno
+The pipeline is divided in two parts:
+- Geometric encoding
+- Color encoding (takes also geometric info)
+
+![[Pasted image 20260511152953.png|Scheme|350]]
+## 9.3) Segmentation
+Segmentation is the task of dividing the input data into homogeneous regions that share the 
 
 # 10) Quiz
 
