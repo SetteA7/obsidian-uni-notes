@@ -1262,7 +1262,16 @@ Computing a rigid transformation of 3D points starting from a set of corresponde
 
 # 9) Point Cloud
 ## 9.1) Compression
-## 9.2) Segmentation
+## 9.2) Coding & Segmentation
+
+In moving scenes voxelization cannot be used (noise, etc). We use Video Point Cloud Coding (VPCC)
+![[Pasted image 20260511151123.png|VPCC|450]]
+This is based on HEVC.
+Create patches:
+- Define 6 orthographc projections ($\pm x,\pm y,\pm z$)
+- Estimate normals of each point and assign to one projection
+- Refine depending on neighbours
+- 
 
 
 # 10) Quiz
