@@ -1259,9 +1259,15 @@ Computing a rigid transformation of 3D points starting from a set of corresponde
 # 8) 3D Gaussian Splatting
 
 
-# 9) Quiz
 
-## 9.1) Quiz 2
+# 9) Point Cloud
+## 9.1) Compression
+## 9.2) Segmentation
+
+
+# 10) Quiz
+
+## 10.1) Quiz 2
 #### **Question 1: Motion Modeling Strategies**
 
 Assign the most suitable strategy (Animation or Simulation) for each object/event.
@@ -1534,7 +1540,7 @@ Select the true statements:
 
 **Correct answers:** **b, c** **Explanation:** I **Grandi di Libertà (DOF - Degrees of Freedom)** indicano come un giunto può muoversi. Nella maggior parte dei casi umani sono 1-3 (rotazioni), ma matematicamente possono arrivare a 6 (includendo traslazioni).
 
-## 9.2) Quiz 3
+## 10.2) Quiz 3
 #### Question 1: Epipolar Geometry and Homography
 
 The epipolar geometry relations between two pictures taken by a moving camera simplifies into a homography...
