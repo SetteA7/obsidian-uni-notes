@@ -1281,7 +1281,7 @@ The pipeline is divided in two parts:
 
 ![[Pasted image 20260511152953.png|Scheme|350]]
 ## 9.3) Segmentation
-Segmentation is the task of dividing the input data into homogeneous regions that share the 
+Segmentation is the task of dividing the input data into homogeneous regions that share the same meaning
 
 # 10) Quiz
 
