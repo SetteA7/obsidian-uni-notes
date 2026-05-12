@@ -1160,13 +1160,27 @@ Consider two images taken by the same camera where the intrinsic parameters matr
 First we introduce the **Essential Matrix**
 $$E\def[t]_\times R$$
 which in the Lounget-Higgins equation is the relation between the two normalized points (one point is on the epipolar line of the other)
-$$p'^T[t]_\times Rp=0$$
-The essential matrix has these properties:
+$$p'^TEp=0$$
+The essential matrix has these **properties**:
 - $\text{rank}(E)=2$ since $\det(\stackvec t)=0$
 - Scale factor change does not affect $E$
 - 3 rotation d.o.f, 2 translation d.o.f.
 - since points are in front of camera, the third coordinate must be positive
 - With SVD decomposition the 3 singular values are $\begin{cases}\sigma_1=\sigma_2\not=0\\\sigma_3=0\end{cases}$
+
+>[!thm] Decomposing Essential Matrix
+>A $3\times3$ essential matrix can be decomposed into the product of a non null antisymmetric matrix $S$ and a rotation $R$ iff $E$ has two equal singular values and the third equal to zero $\begin{cases}\sigma_1=\sigma_2\not=0\\\sigma_3=0\end{cases}$:
+>$$E=SR\iff \begin{cases}\sigma_1=\sigma_2\not=0\\\sigma_3=0\end{cases}$$
+>Proof:
+>Since $E=\stackvec tR$ then $S=\stackvec t$ with $\abs t=1$ (no loss of generality since E is defined wrt scale factor)
+>A rotation can be defined as $Ut=[0,0,1]^T\def a\rightarrow t=U^Ta$ and therefore
+>$$S=\stackvec t=\stackvec{U^Ta}=U^T\stackvec aU$$
+>since $U$ is a rotation $U^T=U^{-1}$
+>Now the singular values are found as:
+>$$EE^T=SRR^TS^T=SS^T=U^T\stackvec a UU^T\stackvec a^TU=U^T\beg$$
+
+The following property was used in the proof:
+$$\stackvec{A^{-1}u}=A^T\stackvec u A\iff \det A=1$$
 
 But $R,t$ (roto-traslation between the two frames) are not known and therefore $E$ needs to be estimated using the **8 Points Algorithm**:
 Let the first image have $P=K[I|0]$ and the second have $P'=[R|t]$.  The conjugate points $(m'_i,m_i)$ can be normalized to $(p=K^{-1}m, p'=K^{-1}m')$ which must satisfy the equation
@@ -1216,10 +1230,9 @@ Let the normalized coordinates be:
 $$p=K^{-1}m\qquad p'=K^{-1}m'$$
 Then by supposing that the first camera is centered on the origin and the second camera is just a rototranslation we have in normalized coordinates:
 $$P=[I|0]\qquad P'=[R|t]$$
-Recall the epipolar line:
-$$e'=P'C=[]$$
 Lounget Higgins now becomes:
-$$m'^T\stackvec{e'}Q'Q^{-1}m=p'^TK^T\stackvec{e'}RKp$$
+$$p'^T\stackvec tRp=p'^TEp=0$$
+Where $E=\stackvec tR$ is the essential matrix.
 #### Multiple Images
 In multiple scale it is important that all estimated $R_i,t_i$ are choerent wrt the same scale factor.
 Suppose we have 3 images, their real relation is
