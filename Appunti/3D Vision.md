@@ -1378,6 +1378,33 @@ Computing a rigid transformation of 3D points starting from a set of corresponde
 - 3D-3D (depth camera): correspondences between 3D points are available; compute the transformations between the two coordinate systems
 - 3D-2D ("calibration"): given the 3D points of the objects and their projections to camera plane, compute the transformation between camera system and object system.
 
+#### Mathematical Notation
+The standard way to represent rotations via matrices is with Yaw, Pitch and Roll $3\times 3$ matrices.
+$$\begin{aligned}
+&R_x=\begin{bmatrix}1 & 0 & 0\\
+0 & \cos\theta_x&-\sin\theta_x\\
+0 & \sin\theta_x&\cos\theta_x\end{bmatrix}
+\\
+&R_y=\begin{bmatrix}\cos\theta_y&0&\sin\theta_y\\
+0&1&0\\
+-\sin\theta_y&0&\cos\theta_y\end{bmatrix}
+\\
+&R_z=\begin{bmatrix}\cos\theta_z&-\sin\theta_z&0\\
+\sin\theta_z&\cos\theta_z&0\\
+0&0&1\end{bmatrix}
+\end{aligned}\longrightarrow R=R_xR_yR_z$$
+Which can be rewritten as
+$$R=I+\sin(\theta )N+(1-\cos\theta)N^2\qquad N=\stackvec u$$
+and also if $\abs u=1$
+$$r=\theta u$$
+However this presents a discontinuity between $-\pi,\pi$
+
+To solve this simple problem we introduce a heavily complex mathematical structure: Hamiltonians. This number space contains one real axis and 3 imaginary ones called $i,j,k$. So a number is expressed as
+$$a+ib+jc+kd$$
+These axes have the following properties:
+$$\begin{array}{c|rrrr} & 1 & i & j & k \\ \hline 1 & 1 & i & j & k \\ i & i & -1 & k & -j \\ j & j & -k & 1 & -i \\ k & k & j & i & 1 \end{array}$$
+essentially $i,j,k$ are versors with ther 
+
 # 7) Optical Flow
 
 # 8) 3D Gaussian Splatting
