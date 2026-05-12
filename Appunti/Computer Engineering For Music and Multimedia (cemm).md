@@ -30,6 +30,7 @@ The brain might trick us:
 - Shepard tones: seemingly infinite increase in pitch
 - Aural harmonics as integer multiple of original tone
 - Tartini's third note: play a perfect fifth, the brain will hear a third note one octave below (perfect fifth is $f_2=\frac32 f_1\rightarrow \Delta f=\frac12 f_1$)
+- Missing Fundamental
 
 
 Beats are a **amplitude modulation** phenomenon that allows two similar tone to be perceived as one beating tone. The beat frequency is $f_b=\Delta f$
@@ -58,6 +59,8 @@ The **sone scale** is used to describe relationships with sound of different lou
 $$phon=40+10\log_2(sone)\qquad sone = 2^{\frac{phon}{10}-4}$$
 
 **Volley Theory:** groups of neurons of the auditory system respond to a sound by firing action potentials slightly out of phase with one another so that, when combined, a greater frequency of sound can be encoded and sent to the brain to be analyzed
+**Localization Theory:** pitch changes based on where maximum is in membrane
+**Temporal theory:** pitch depends on temporal pattern of firing
 
 One octave is double the frequency, there are 12 semitones:
 $$s^{12}=2\qquad s=\sqrt[12]2$$
