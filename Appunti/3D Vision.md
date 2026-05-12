@@ -476,7 +476,7 @@ Notice that
 $$m_i'\times Hm_i=0\rightarrow \stackvec{m_i'}H m_i=0_{2\times 1}$$
 Apply the vec operator:
 $$vec\par{\stackvec{m_i'}Hm_i}=vec (0)=0$$
-Now expand:
+Now expand: ^77c63e
 $$
 vec\par{\stackvec{m_i'}Hm_i}=(m_i^T\otimes\stackvec{m_i'})vec(H)=0 
 $$
@@ -1157,6 +1157,7 @@ However some key limitations arise:
 #### 2 Images
 Consider two images taken by the same camera where the intrinsic parameters matrix $K$ is known.
 
+##### Essential Matrix
 First we introduce the **Essential Matrix**
 $$E\def[t]_\times R$$
 which in the Lounget-Higgins equation is the relation between the two normalized points (one point is on the epipolar line of the other)
@@ -1186,15 +1187,19 @@ The essential matrix has these **properties**:
 >It is possible to write $D$ as a product of two matrices $S'=\begin{bmatrix}0&-1&0\\1&0&0\\0&0&0\end{bmatrix},R'=\begin{bmatrix}0&1&0\\-1&0&0\\0&0&1\end{bmatrix}$ . 
 >Then notice the following:
 >$$E=UDV^T=US'\cdot U^TU\cdot R'V^T=(US'U^T)(UR'V^T)=SR$$
-> Where 4 possible choices can be made
+> Where 4 possible choices can be made with $\pm S, \pm R$ 
+
+^ecaece
 
 The following property was used in the proof:
 $$\stackvec{A^{-1}u}=A^T\stackvec u A\iff \det A=1$$
 
-But $R,t$ (roto-traslation between the two frames) are not known and therefore $E$ needs to be estimated using the **8 Points Algorithm**:
-Let the first image have $P=K[I|0]$ and the second have $P'=[R|t]$.  The conjugate points $(m'_i,m_i)$ can be normalized to $(p=K^{-1}m, p'=K^{-1}m')$ which must satisfy the equation
+##### 8 points Algorithm
+However, since $R,t$ are not known a priori the $E$ matrix needs to be estimated. 
+
+Let the first image have $P=K[I|0]$ and the second have $P'=[R|t]$.  The conjugate points $(m'_i,m_i)$ can be normalized $(p=K^{-1}m, p'=K^{-1}m')$ which must satisfy the equation
 $$p_i'^TEp_i=0$$
-which can be decomposed into
+which can be decomposed into (same as [homography estimation](#^77c63e))
 $$(p_i^T\otimes p_i'^T)\text{vec}(E)=0
 \rightarrow 
 \underbrace{\begin{bmatrix}
@@ -1203,9 +1208,13 @@ p_1^T\otimes p_1'^T\\
 p_n^T\otimes p_n'^T
 \end{bmatrix}}_{U_n}
 \text{vec}(E)=0$$
-where the kernel of $U_n$ is the solution. Notice that if $n=8\rightarrow \text{dim} U_n=1$. If more than 8 couples are available, then this becomes a linear least squares problem where the solution is the minimum eigenvalue of $U_n^TU_n$.
+where:
+- if $n=8\rightarrow \text{dim} U_n=1$ the kernel of $U_n$ is the solution. 
+- If more than 8 couples are available, then this becomes a linear least squares problem where the solution is the minimum eigenvalue of $U_n^TU_n$.
 
-In general $E$ does not satisfy the last property and has this form:
+$E$ depends on 5 dof values and the polynomial bounds of [[#^ecaece]]
+
+In general $E$ does not satisfy the theorem and has this form:
 $$E=UDV^T\qquad D=\begin{bmatrix}
 \sigma_1&0&0\\
 0&\sigma_2& 0\\
@@ -1243,7 +1252,7 @@ Lounget Higgins now becomes:
 $$p'^T\stackvec tRp=p'^TEp=0$$
 Where $E=\stackvec tR$ is the essential matrix.
 #### Multiple Images
-In multiple scale it is important that all estimated $R_i,t_i$ are choerent wrt the same scale factor.
+In multiple scale it is important that all estimated $R_i,t_i$ are coherent wrt the same scale factor.
 Suppose we have 3 images, their real relation is
 $$t_{13}=R_{23}t_{12}+t_{23}$$
 but the SLAM takes them wrt to a scale factor
@@ -1259,7 +1268,11 @@ In general the minimization target is
 $$\min_{R_i,t_i,M_j}\sum_{i=1}^N\sum_{j=1}^n\abs{m_j^i-K_i[R_it_i]M_j}^2$$
 
 ## 6.2) Structure From Motion (SfM)
-The aim of SfM is to reconstruct $M^J,P_i$ from a set of conjugate projection points $m_i^j\approx P_iM^j$. The solution is found wrt an arbitrary projection $T_{4\times 4}$. The output is a euclidean reconstruction wrt a similarity (rigid transform + scale change).
+SfM is an uncalibrated reconstruction starting from a set of pictures.
+
+Suppose that we have a set of conjugate points $m_i^j$, that is point $M^j$ projected into camera $P_i$, then the aim is to reconstruct $M^j$ and $P_i$ such that $m_i^j\simeq P_iM^j$.
+
+The solution is found wrt an arbitrary projection $T_{4\times 4}$. The output is a euclidean reconstruction wrt a similarity (rigid transform + scale change).
 
 
 C matrix tells how many points in common
