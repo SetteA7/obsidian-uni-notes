@@ -1409,6 +1409,16 @@ Essentially it can be seen as this:
 - One final fundamental property (which is a direct consequence of the first two) is $i\cdot j\cdot k=1$
 
 #### 2D-2D Orientation
+Used to **compute second camera orientation wrt first camera**
+1. Normalize coordinates
+2. Compute $E$ using 8 points algorithm
+3. Factorize $E$ to find $R,t$
+
+This is done via Horn's method:
+Lounguet Higgins can be written as
+$$p_i'^Tt\times Rp_i=0$$
+The LS solution is found by minimizing
+$$\epsilon=\sum_{i=1}^n(p_i^Tt\times Rp_i)^2$$
 
 
 # 7) Optical Flow
