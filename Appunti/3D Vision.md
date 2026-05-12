@@ -1488,8 +1488,23 @@ $$R=\arg\max_R<R,M'M^T>=U(\arg\max_R'<R'\Sigma>)V^T=UR'V^T$$
 which is maximized for $R'=I$.
 
 ##### Iterative Closest Point (ICP)
+Suppose that the points live on two surfaces
+$$M_i\in\mathcal M,M_j'\in\mathcal M'$$
+Given a point $M_i$ we assume that the corresponding point is the closes one:
+$$M_i'=\arg\min_j\abs{M'_j-M_i}^2$$
+This however works only of the two orientations are not too far
 
+Algorithm:
+1. $\forall M_i$ find $M_i'$
+2. Now compute $R,t$
+3. Change $M_i$ to be aligned: $M_i\leftarrow RM_i+t$
+4. Find avg error, if it is small enough stop, otherwise repeat:
+$$\epsilon =\frac1n\sum_{i=1}^n\abs{M_i'-M_i}^2$$
 
+#### 3D-2D External Orientation
+This aims to **find position and orientation of camera given some 3d points**
+
+![[Pasted image 20260512172547.png|Example|250]]
 # 7) Optical Flow
 
 # 8) 3D Gaussian Splatting

@@ -1,4 +1,9 @@
-# 1) Elements of Acoustics
+# 1) Acoustics and Psychoacoustics
+ANSI/ASA describes acoustic as **science of sound i**
+
+
+
+# 2) Elements of Acoustics
 Science of sound including production, transmission and effects. Also the qualities of a room that determine the character wrt auditory perception.
 
 Wave equation:
@@ -34,7 +39,7 @@ We measure sound intensity as acoustic pressure in dB with base reference intens
 $$SPL=10\log_t(I/I_0)=10\logt(p/p_0)$$
 Doubling the intensity means +3dB. Doubling the acoustic pressure means +6dB
 
-# 2) Audio Archives Preservation
+# 3) Audio Archives Preservation
 Preservation of archives is essential as carriers degrade quickly while playback devices and knowledge are fast obsolete.
 
 **Traditional preservation paradigm:** Preserve original
@@ -80,4 +85,4 @@ as do the longer molecules
 
 This can be solved by baking (in the oven) at max 50-60°C for 1h up to 8 hours. However a wrongly baked tape can be irreparably damaged.
 
-# 3) Midi
+# 4) Midi
