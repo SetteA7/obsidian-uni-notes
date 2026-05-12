@@ -1400,10 +1400,16 @@ $$r=\theta u$$
 However this presents a discontinuity between $-\pi,\pi$
 
 To solve this simple problem we introduce a heavily complex mathematical structure: Hamiltonians. This number space contains one real axis and 3 imaginary ones called $i,j,k$. So a number is expressed as
-$$a+ib+jc+kd$$
+$$q=a+ib+jc+kd\rightarrow q=e^{\frac12\theta(iu_x+ju_y+ku_z)}$$
 These axes have the following properties:
-$$\begin{array}{c|rrrr} & 1 & i & j & k \\ \hline 1 & 1 & i & j & k \\ i & i & -1 & k & -j \\ j & j & -k & 1 & -i \\ k & k & j & i & 1 \end{array}$$
-essentially $i,j,k$ are versors with ther 
+$$\begin{array}{c|rrrr} & 1 & i & j & k \\ \hline 1 & 1 & i & j & k \\ i & i & -1 & k & -j \\ j & j & -k & -1 & -i \\ k & k & j & i & -1 \end{array}$$
+Essentially it can be seen as this:
+- $i,j,k$ are versors and their product can be seen as a vector product
+- Each axis retains the complex identity $\sqrt{-1}=i,j,k$ 
+- One final fundamental property (which is a direct consequence of the first two) is $i\cdot j\cdot k=1$
+
+#### 2D-2D Orientation
+
 
 # 7) Optical Flow
 
