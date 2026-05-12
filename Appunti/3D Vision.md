@@ -1272,8 +1272,10 @@ SfM is an uncalibrated reconstruction starting from a set of pictures.
 
 Suppose that we have a set of conjugate points $m_i^j$, that is point $M^j$ projected into camera $P_i$, then the aim is to reconstruct $M^j$ and $P_i$ such that $m_i^j\simeq P_iM^j$.
 
-The solution is found wrt an arbitrary projection $T_{4\times 4}$. The output is a euclidean reconstruction wrt a similarity (rigid transform + scale change).
+The solution is found wrt an arbitrary projection $T_{4\times 4}$. The output is a euclidean reconstruction wrt a similarity (rigid transform + scale change), that is:
+$$\text{if } P_i,M^j\text{ is a slution, then } P_iT, T^{-1}M^j\text{ is a solution as well}$$
 
+![[Pasted image 20260512121515.png|Example|250]]
 
 C matrix tells how many points in common
 
