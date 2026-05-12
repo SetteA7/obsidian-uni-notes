@@ -1419,6 +1419,31 @@ Lounguet Higgins can be written as
 $$p_i'^Tt\times Rp_i=0$$
 The LS solution is found by minimizing
 $$\epsilon=\sum_{i=1}^n(p_i^Tt\times Rp_i)^2$$
+by setting $t\leftarrow t+\delta t$ and $R\leftarrow R+\delta R$ we end up with:
+$$p_i'^T(t+\delta t)\times (R+\delta R)p_i=p_i'^T(t+\delta t)\times(Rp_i+\delta Rp_i)=0$$
+and the minimization becomes:
+$$\epsilon=\sum_{i=1}^n(s_i+c_i^T\delta t+d_i\delta w)^2$$
+with:
+$$\begin{align}
+&s_i=p_i'^Tt\times Rp_i\\
+&c_i=Rp_i\times p_i'\\
+&d_i=Rp_i\times(p_i'\times t)
+\end{align}$$
+and an additional constraint to unitary translation (correction must not alter length)
+$$t^T\delta t=0$$
+And using Lagrange's multipliers we can solve
+$$\epsilon '=\epsilon+2\lambda (t^T\delta t)$$
+where we can find $\delta t,\delta w,\lambda$ b
+
+---
+Proof TODO
+by setting $t\leftarrow t+\delta t$ and $R\leftarrow R+\delta R$ we end up with:
+$$p_i'^T(t+\delta t)\times (R+\delta R)p_i=p_i'^T(t+\delta t)\times(Rp_i+\delta Rp_i)=0$$
+and using the following property on $\delta Rp_i$:
+$${dM}={d\theta}\ u\times M\rightarrow p_i'^T(t+\delta t)\times(Rp_i+\delta \theta \times Rp_i)=0$$
+and the property
+$$a^T(b\times c)=(a\times b)^Tc$$
+
 
 
 # 7) Optical Flow
