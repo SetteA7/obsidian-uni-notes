@@ -10,8 +10,7 @@ with $f,g$ twice differentiable functions
 
 Recall the fundamental properties of waves:
 $$\lambda =\frac vf\quad f=\frac1T$$
-We measure sound intensity as acoustic pressure in dB with base reference intensity $I_0=20 \mu Pa$
-$$ IdB=10\logt\par{\frac I{I_0}}$$
+
 Each periodic signal can be decomposed into a series of simple periodi cwaves called harmonics. The set of all harmonics is called the spectrum:
 $$f(t)=\frac{a_0}2+\sum_{n=1}^Na_n\cos(nt)+b_n\sin(nt)$$
 For periodic waves, the partials are integer multiples of the fundamental frequency $f_0$.
@@ -23,6 +22,8 @@ For auditory communications we have:
 - Medium: allows for sound propagation
 - Receiver: ear-brain transforms acoustic pressure into neural impulses
 
+**The warmer a medium the faster the sound**. Steel has the fastest propagation. It propagates the fastest in solids, then liquids then gasses. In air at 0 C it is 331.5 m/s, at 20 C it is 344 m/s
+
 There are three domains of acoustics based on where the sound lives: Air, ear, brain:
 ![[Pasted image 20260305143943.png|3 domains|450]]
 The brain might trick us:
@@ -31,11 +32,25 @@ The brain might trick us:
 - Tartini's third note: play a perfect fifth, the brain will hear a third note one octave below (perfect fifth is $f_2=\frac32 f_1\rightarrow \Delta f=\frac12 f_1$)
 
 
-Beats are a **amplitude modulation** phenomenon that allows 
+Beats are a **amplitude modulation** phenomenon that allows two similar tone to be perceived as one beating tone. The beat frequency is $f_b=\Delta f$
+
 #### Auditory System TODO
 
 
+#### Elements of Psychoacoustics
+The perceived loudness of a sound depends on different factors not only on intensity. 
+The unit of measure for loudness is Phon 
 
+The acoustic pressure $p$ is derived from the velocity $v$ of the particles. Intensity is the power per unit area $I\sim p^2$. The scale is the decibel.
+We define the base reference intensity as the minimum sound intensity that can be heard by a normal hearing person.
+$$I_0=10^{-12}\unit{\frac W{m^2}}\qquad p_0=2\cdot 10^{-5} \unit{Pa}$$
+
+$$ dB=10\logt\par{\frac I{I_0}}=20\logt\par{\frac{p}{p_0}}$$
+**Doubling intensity means +3dB, doubling pressure is +6 db** since $log(2)\approx 0.3$
+
+We do not hear all sound equally however:
+![[Pasted image 20260512181324.png|Example|350]]
+At 10 dB we hear 5kHz but not 50 Hz. A curve was empirically derived.
 # 2) Elements of Acoustics
 Science of sound including production, transmission and effects. Also the qualities of a room that determine the character wrt auditory perception.
 
