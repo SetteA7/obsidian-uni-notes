@@ -1454,9 +1454,14 @@ $$a^T(b\times c)=(a\times b)^Tc$$
 This computes the orientation between two set of points:
 We know $\tilde M_i,\tilde M_i'$, then
 $$\tilde M_i'=s(R\tilde M_i+t)\quad i=1,...,n$$
+And therefore we must find $R,s,t$ such that
+$$\min_{s,R,t}=\sum_{i=1}^n\abs{\tilde M_i'-s(R\tilde M_i+t)}^2$$
 which can be solved via SVD
 ![[Pasted image 20260512163507.png|Example|250]]
+##### SVD Based Method / Procrustian Problem
 The best estimate for $t$ is the average of points:
+$$t = \frac{1}{s} \left( \frac{1}{n} \sum_{i=1}^{n} \tilde{M}_{i}' \right) - R \left( \frac{1}{n} \sum_{i=1}^{n} \tilde{M}_{i} \right)$$
+
 $$\hat t=\frac 1n(\sum_{i=1}^n\tilde M_i'-\sum_{i=1}^n\tilde M_i)$$
 Then we consider the points as being zero centered:
 $$\overline M_i=\tilde M_i-\frac1n\sum_{i=1}^n \tilde M_i$$
