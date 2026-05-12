@@ -1462,7 +1462,28 @@ Then we consider the points as being zero centered:
 $$\overline M_i=\tilde M_i-\frac1n\sum_{i=1}^n \tilde M_i$$
 and minimize 
 $$\min_{s,R}\sum_i\abs{\overline M_i'-sR\overline M_i}^2$$
-##### Orthogonal Procustian Problem
+##### Orthogonal Procrustian Problem
+Notice that $R$ is orthogonal so it has unit norm, therefore
+$$\abs {\overline M_i'}=s\abs{\overline M_i}$$
+Create the matrices
+$$\overline M_{3\times n}=[\overline M_1\ ... \ \overline M_n]$$
+the summation now becomes:
+$$\epsilon = \abs{\overline M'-R\overline M}_F^2$$
+And we must find the nerarest orthogonal matrix to:
+$$M_P=\overline M'\overline M^T=U\Sigma V^T\rightarrow R=\arg\min_R\abs{R\overline M-\overline M'}_F$$
+The solution can be found from SVD:
+$$R=UV^T$$
+
+---
+Proof
+Recall that the frobenius norm can be written in the following way (for notation $M=\overline M$):
+$$\abs{RM-M'}_F=<RM-M',RM-M'>=\abs{RM}_F^2+\abs{M}_F^2-2<RM,M'>$$
+By noticing that $\abs{RM}_F^2=\abs{M}_F^2$ and thus the argmin becomes the maximization of the double product we have
+$$R=\arg\max_R<R,M'M^T>=U(\arg\max_R'<R'\Sigma>)V^T=UR'V^T$$
+which is maximized for $R'=I$.
+
+##### Iterative Closest Point (ICP)
+
 
 # 7) Optical Flow
 
