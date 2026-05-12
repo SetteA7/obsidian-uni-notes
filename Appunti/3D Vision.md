@@ -1272,10 +1272,26 @@ SfM is an uncalibrated reconstruction starting from a set of pictures.
 
 Suppose that we have a set of conjugate points $m_i^j$, that is point $M^j$ projected into camera $P_i$, then the aim is to reconstruct $M^j$ and $P_i$ such that $m_i^j\simeq P_iM^j$.
 
-The solution is found wrt an arbitrary projection $T_{4\times 4}$. The output is a euclidean reconstruction wrt a similarity (rigid transform + scale change), that is:
+The solution is found wrt an arbitrary projection $T_{4\times 4}$. The output is a **euclidean reconstruction** wrt a similarity (rigid transform + scale change), that is:
 $$\text{if } P_i,M^j\text{ is a slution, then } P_iT, T^{-1}M^j\text{ is a solution as well}$$
 
 ![[Pasted image 20260512121515.png|Example|250]]
+
+
+Given $i=1,...,h$ cameras and $j=1,...,n$ points we have
+$$\zeta_i^jm_i^j=P_iM^j\rightarrow \begin{bmatrix}
+\zeta_1^1m_1^1& \zeta_1^2m_1^2&...&\zeta_1^nm_1^n\\
+&\vdots\\
+\zeta_h^1m_h^1& \zeta_h^2m_h^2&...&\zeta_h^nm_h^n
+\end{bmatrix}=\begin{bmatrix}P_1\\\vdots\\ P_h\end{bmatrix}\begin{bmatrix}M^1&...&M^n\end{bmatrix}$$
+Which can be rewritten as
+$$W_{h\times n}=P_{h\times 4}M_{4\times n}$$
+
+If the scale factor $\zeta _i^j$ is known then $W$ is known and it can be solved via SVD.
+In fact since $P$ has rank 4 only the first values of $D$ are different from zero:
+$$W=$$
+
+
 
 C matrix tells how many points in common
 
