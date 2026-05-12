@@ -51,6 +51,16 @@ $$ dB=10\logt\par{\frac I{I_0}}=20\logt\par{\frac{p}{p_0}}$$
 We do not hear all sound equally however:
 ![[Pasted image 20260512181324.png|Example|350]]
 At 10 dB we hear 5kHz but not 50 Hz. A curve was empirically derived.
+
+Also the **equal loudness curve** was defined, that **given a frequency tells you what pressure it should have to match the pressure of a 1 kHz sinusoid with 1000 pressure**. This is the **Phon scale**
+
+The **sone scale** is used to describe relationships with sound of different loudness values. **A doubling of loudness is 10 phon.**
+$$phon=40+10\log_2(sone)\qquad sone = 2^{\frac{phon}{10}-4}$$
+
+**Volley Theory:** groups of neurons of the auditory system respond to a sound by firing action potentials slightly out of phase with one another so that, when combined, a greater frequency of sound can be encoded and sent to the brain to be analyzed
+
+One octave is double the frequency, there are 12 semitones:
+$$s^{12}=2\qquad s=\sqrt[12]2$$
 # 2) Elements of Acoustics
 Science of sound including production, transmission and effects. Also the qualities of a room that determine the character wrt auditory perception.
 
