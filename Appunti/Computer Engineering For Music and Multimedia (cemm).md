@@ -1,7 +1,32 @@
 # 1) Acoustics and Psychoacoustics
-ANSI/ASA describes acoustic as **science of sound i**
+ANSI/ASA describes acoustic as **science of sound including production, transmission and effects, including biological and psicological effects. The qualities of a room together determine the character wrt adutiroy effects**
 
+The wave equation is:
+$$\frac{\partial ^2p}{\partial x^2}-\frac1{c^2}\frac{\partial p}{\partial t^2}=0$$
+where $p$ is the pressure and $c$ the speed of sound.
+The general solution ( with $c$ constant)
+$$p=f(ct-x)+g(ct+x)$$
+with $f,g$ twice differentiable functions
 
+Recall the fundamental properties of waves:
+$$\lambda =\frac vf\quad f=\frac1T$$
+We measure sound intensity as acoustic pressure in dB with base reference intensity $I_0=20 \mu Pa$
+$$ IdB=10\logt\par{\frac I{I_0}}$$
+Each periodic signal can be decomposed into a series of simple periodi cwaves called harmonics. The set of all harmonics is called the spectrum:
+$$f(t)=\frac{a_0}2+\sum_{n=1}^Na_n\cos(nt)+b_n\sin(nt)$$
+For periodic waves, the partials are integer multiples of the fundamental frequency $f_0$.
+
+A standing wave is a wave where the peaks (max/min) and nodes (zero) do not change position over time.
+
+For auditory communications we have:
+- Source: vibrating object with energy injected to it
+- Medium: allows for sound propagation
+- Receiver: ear-brain transforms acoustic pressure into neural impulses
+
+There are three domains of acoustics based on where the sound lives: Air, ear, brain:
+![[Pasted image 20260305143943.png|3 domains|450]]
+The brain might trick us:
+- Shepard tones: seemingl
 
 # 2) Elements of Acoustics
 Science of sound including production, transmission and effects. Also the qualities of a room that determine the character wrt auditory perception.
