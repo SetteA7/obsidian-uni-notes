@@ -1210,6 +1210,16 @@ The whole process is:
 4. Compute projection matrix $P[I|0], P'[R|t]$
 5. Compute $M_i$ with triangulation
 
+---
+Proof Essential Matrix:
+Let the normalized coordinates be:
+$$p=K^{-1}m\qquad p'=K^{-1}m'$$
+Then by supposing that the first camera is centered on the origin and the second camera is just a rototranslation we have in normalized coordinates:
+$$P=[I|0]\qquad P'=[R|t]$$
+Recall the epipolar line:
+$$e'=P'C=[]$$
+Lounget Higgins now becomes:
+$$m'^T\stackvec{e'}Q'Q^{-1}m=p'^TK^T\stackvec{e'}RKp$$
 #### Multiple Images
 In multiple scale it is important that all estimated $R_i,t_i$ are choerent wrt the same scale factor.
 Suppose we have 3 images, their real relation is
