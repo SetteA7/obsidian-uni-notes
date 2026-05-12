@@ -26,7 +26,15 @@ For auditory communications we have:
 There are three domains of acoustics based on where the sound lives: Air, ear, brain:
 ![[Pasted image 20260305143943.png|3 domains|450]]
 The brain might trick us:
-- Shepard tones: seemingl
+- Shepard tones: seemingly infinite increase in pitch
+- Aural harmonics as integer multiple of original tone
+- Tartini's third note: play a perfect fifth, the brain will hear a third note one octave below (perfect fifth is $f_2=\frac32 f_1\rightarrow \Delta f=\frac12 f_1$)
+
+
+Beats are a **amplitude modulation** phenomenon that allows 
+#### Auditory System TODO
+
+
 
 # 2) Elements of Acoustics
 Science of sound including production, transmission and effects. Also the qualities of a room that determine the character wrt auditory perception.
