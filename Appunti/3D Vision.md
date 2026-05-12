@@ -1302,6 +1302,19 @@ This is a chicken-egg problem. It can be solved via an iterative operation.
 7. Repeat from 2
 8. End
 
+#### SfM Pipeline
+The pipeline is straight forward
+1. Collect images (unordered)
+2. Find matching points via SIFT and create matrix $C$. The $C$ matrix contains how many matching points are in common between two images
+3. Compute epipolar geometry (order matters)
+4. Decompose matrix into $R,T$
+5. Refine using bundle adjustment
+
+
+![[Pasted image 20260512152215.png|C Matrix|250]]
+Due to artefacting (jpeg compression, noise) it is possible that the matching points are highly noisy. 
+
+
 ---
 Proofs:
 Given $i=1,...,h$ cameras and $j=1,...,n$ points we have
@@ -1341,7 +1354,7 @@ m_1^j & 0 & ... & 0\\
 \begin{bmatrix}\zeta_1^j\\\vdots\\\zeta_h^j\end{bmatrix}=Q^j\zeta^j$$
 This becomes a chicken - egg problem.
 
-C matrix tells how many points in common
+
 
 ## 6.3) Example and Comparisons
 
