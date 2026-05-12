@@ -1414,6 +1414,8 @@ Used to **compute second camera orientation wrt first camera**
 2. Compute $E$ using 8 points algorithm
 3. Factorize $E$ to find $R,t$
 
+![[Pasted image 20260512163446.png|Example|250]]
+
 This is done via Horn's method:
 Lounguet Higgins can be written as
 $$p_i'^Tt\times Rp_i=0$$
@@ -1433,7 +1435,12 @@ and an additional constraint to unitary translation (correction must not alter l
 $$t^T\delta t=0$$
 And using Lagrange's multipliers we can solve
 $$\epsilon '=\epsilon+2\lambda (t^T\delta t)$$
-where we can find $\delta t,\delta w,\lambda$ b
+where we can find $\delta t,\delta w,\lambda$ by finding their partial derivatives and setting them to 0. Finally:
+$$\begin{align}
+&t\leftarrow t+\delta t\\
+&R=R\begin{bmatrix}0&-\delta w_3&\delta w_2\\\delta w_3&0&-\delta w_1\\-\delta w_2&\delta w_1&0\end{bmatrix}=R\stackvec{\delta w}
+\end{align}$$
+
 
 ---
 Proof TODO
@@ -1443,8 +1450,19 @@ and using the following property on $\delta Rp_i$:
 $${dM}={d\theta}\ u\times M\rightarrow p_i'^T(t+\delta t)\times(Rp_i+\delta \theta \times Rp_i)=0$$
 and the property
 $$a^T(b\times c)=(a\times b)^Tc$$
-
-
+#### 3D-3D Absolute Orientation
+This computes the orientation between two set of points:
+We know $\tilde M_i,\tilde M_i'$, then
+$$\tilde M_i'=s(R\tilde M_i+t)\quad i=1,...,n$$
+which can be solved via SVD
+![[Pasted image 20260512163507.png|Example|250]]
+The best estimate for $t$ is the average of points:
+$$\hat t=\frac 1n(\sum_{i=1}^n\tilde M_i'-\sum_{i=1}^n\tilde M_i)$$
+Then we consider the points as being zero centered:
+$$\overline M_i=\tilde M_i-\frac1n\sum_{i=1}^n \tilde M_i$$
+and minimize 
+$$\min_{s,R}\sum_i\abs{\overline M_i'-sR\overline M_i}^2$$
+##### Orthogonal Procustian Problem
 
 # 7) Optical Flow
 
