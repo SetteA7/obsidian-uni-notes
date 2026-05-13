@@ -66,43 +66,24 @@ One octave is double the frequency, there are 12 semitones:
 $$s^{12}=2\qquad s=\sqrt[12]2$$
 
 But our brain looses to distinguish the double frequency as an octave at high frequencies and  needs more frequency
-# 2) Elements of Acoustics
-Science of sound including production, transmission and effects. Also the qualities of a room that determine the character wrt auditory perception.
 
-Wave equation:
-$$\frac{\partial ^2p}{\partial x^2}-\frac1{c^2}\frac{\partial p}{\partial t^2}=0$$
-The general solution (c constant)
-$$p=f(ct-x)+g(ct+x)$$
-with $f,g$ twice differentiable functions
+**Critical bands** are used to quantify the ability of the human ear to distinguish between individual frequency tones. The human ear can hear from 20 to 20,000 Hertz, but the ability to distinguish individual tones varies as a function of frequency.
+![[Pasted image 20260513152645.png|Log Cochlea Scale|250]]
 
-Sound waves are transversal waves and create a **disturbance** since they move adjacent particles
+This is given from the **cochlea** as it has a logarithmic spiral shape. The tones are therefore not distinguished but percieved as modulating or beating. These bands decrease in bandwidth as the intensity increases.
 
-infrasound $<20$ Hz
-audible 20Hz - 16 kHz
-ultrasound $>16$ kHz
+![[Pasted image 20260513152710.png|Example|250]]
+These bands are described via the **bark** scale. That is the distance of 1 CB is 1 bark.
 
-Decibel:
-$$dB=10\log(S_1/S_2)$$
-Timbre:
-perception of sound quality
+**Masking** happens when a sound of higher intensity masks a sound of lower intensity. A pure tone can be masked with:
+- +17 dB white noise up to 1 kHz
+- linear grow after 1kHz
+It can also be masked with another pure tone
 
-Chladni Plates: nodal line is where there is no perturbation
+#### Quiz
 
-Todo
-Reverberation
 
-There are three domains of acoustics based on where the sound lives: Air, ear, brain:
-![[Pasted image 20260305143943.png|3 domains|450]]
-
-#### Loudness
-Perceived intensity (brain) of a sound depends on several feature of the signal. In fact we perceive equal loudness for different frequencies at different intensities
-![[Pasted image 20260305151824.png|Perceived Sound|350]]
-
-We measure sound intensity as acoustic pressure in dB with base reference intensity $I_0=10^{-12} W/m^2$ or reference pressure $p_0=2 \cdot 10^{-12}$Pa. In dB we have
-$$SPL=10\log_t(I/I_0)=10\logt(p/p_0)$$
-Doubling the intensity means +3dB. Doubling the acoustic pressure means +6dB
-
-# 3) Audio Archives Preservation
+# 2) Audio Archives Preservation
 Preservation of archives is essential as carriers degrade quickly while playback devices and knowledge are fast obsolete.
 
 **Traditional preservation paradigm:** Preserve original
@@ -148,4 +129,4 @@ as do the longer molecules
 
 This can be solved by baking (in the oven) at max 50-60°C for 1h up to 8 hours. However a wrongly baked tape can be irreparably damaged.
 
-# 4) Midi
+# 3) Midi
