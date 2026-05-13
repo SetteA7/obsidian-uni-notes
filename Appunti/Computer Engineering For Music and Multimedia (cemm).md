@@ -64,6 +64,8 @@ $$phon=40+10\log_2(sone)\qquad sone = 2^{\frac{phon}{10}-4}$$
 
 One octave is double the frequency, there are 12 semitones:
 $$s^{12}=2\qquad s=\sqrt[12]2$$
+
+But our brain looses the octave to double frequency  
 # 2) Elements of Acoustics
 Science of sound including production, transmission and effects. Also the qualities of a room that determine the character wrt auditory perception.
 
