@@ -1,6 +1,7 @@
 # 1) Acoustics and Psychoacoustics
 ANSI/ASA describes acoustic as **science of sound including production, transmission and effects, including biological and psicological effects. The qualities of a room together determine the character wrt adutiroy effects**
 
+## 1.1) Acoustics
 The wave equation is:
 $$\frac{\partial ^2p}{\partial x^2}-\frac1{c^2}\frac{\partial p}{\partial t^2}=0$$
 where $p$ is the pressure and $c$ the speed of sound.
@@ -24,6 +25,8 @@ For auditory communications we have:
 
 **The warmer a medium the faster the sound**. Steel has the fastest propagation. It propagates the fastest in solids, then liquids then gasses. In air at 0 C it is 331.5 m/s, at 20 C it is 344 m/s
 
+![[Pasted image 20260513155125.png|Table|350]]
+
 There are three domains of acoustics based on where the sound lives: Air, ear, brain:
 ![[Pasted image 20260305143943.png|3 domains|450]]
 The brain might trick us:
@@ -35,10 +38,10 @@ The brain might trick us:
 
 Beats are a **amplitude modulation** phenomenon that allows two similar tone to be perceived as one beating tone. The beat frequency is $f_b=\Delta f$
 
-#### Auditory System TODO
+## 1.2) Auditory System TODO
 
 
-#### Elements of Psychoacoustics
+## 1.3) Elements of Psychoacoustics
 The perceived loudness of a sound depends on different factors not only on intensity. 
 The unit of measure for loudness is Phon 
 
@@ -80,9 +83,7 @@ These bands are described via the **bark** scale. That is the distance of 1 CB i
 - linear grow after 1kHz
 It can also be masked with another pure tone
 
-#### Quiz
-
-
+## 1.4) Take Home Concepts
 # 2) Audio Archives Preservation
 Preservation of archives is essential as carriers degrade quickly while playback devices and knowledge are fast obsolete.
 
@@ -130,3 +131,211 @@ as do the longer molecules
 This can be solved by baking (in the oven) at max 50-60°C for 1h up to 8 hours. However a wrongly baked tape can be irreparably damaged.
 
 # 3) Midi
+
+
+# 4) Quiz
+## 4.1) Acoustics and Psychoacoustics
+### 4.1.1) Questions
+#### Question 1: Argument
+At which frequency is the human ear most sensitive among these values?
+1. 20 Hz
+2. 100 Hz
+3. 2000 Hz
+4. 20000 Hz
+
+Correct answer: 3
+The human ear is most sensitive in the range of 2000 to 5000 Hz, which is critical for understanding speech. Frequencies at the extremes (20 Hz or 20000 Hz) require much higher intensity to be perceived.
+
+#### Question 2: Argument
+What is the term for the smallest change in frequency that can be detected by the human ear?
+1. Pitch
+2. Timbre
+3. Just noticeable difference (JND)
+4. Resonance
+
+Correct answer: 3
+The JND is the physical threshold where a change becomes perceptible to the brain. Pitch is the subjective perception of frequency, timbre is sound quality, and resonance is a physical amplification phenomenon.
+
+#### Question 3: Argument
+What is the threshold of hearing for the average human?
+1. 0 dB
+2. 20 dB
+3. 40 dB
+4. 60 dB
+
+Correct answer: 1
+By convention, 0 dB represents the reference level for the minimum sound pressure audible by a healthy ear at 1000 Hz. It does not mean total silence, but the lower limit of average human perception.
+
+#### Question 4: Argument
+Frequency modulation in the cochlea is primarily used to:
+1. Adjust the pitch of sounds
+2. Amplify soft sounds
+3. Protect the ear from damage
+4. Encode the frequency of incoming sounds
+
+Correct answer: 4
+The cochlea acts as a frequency analyzer, converting mechanical vibrations into neural signals to encode spectral information for the brain. It does not "adjust" pitch, which is a higher-level perception.
+
+#### Question 5: Argument
+The basilar membrane in the cochlea is known for:
+1. Constant thickness and stiffness across its length
+2. Increasing thickness and decreasing stiffness from apex to base
+3. Decreasing thickness and increasing stiffness from apex to base
+4. Uniform stiffness across its length
+
+Correct answer: 3
+The membrane is narrower and stiffer at the base (responding to high frequencies) and becomes wider and more flexible toward the apex (responding to low frequencies). This gradient allows for tonal decomposition.
+
+#### Question 6: Argument
+The term 'critical band' refers to:
+1. A specific group of frequencies within which the ear cannot distinguish separate tones
+2. The frequency response of the middle ear
+3. The maximum amplitude of sound that the ear can tolerate
+4. The smallest increment in tone frequency detectable by the ear
+
+Correct answer: 1
+The critical band describes the auditory system's filtering; if two tones fall within the same band, they interfere and the ear cannot resolve them individually.
+
+#### Question 7: Argument
+The term 'tonotopy' refers to:
+1. The mapping of sound intensity in the auditory cortex
+2. The spatial arrangement of frequency along the cochlea
+3. The temporal sequence of sound processing in the brain
+4. The synchronization of neural signals with sound waves
+
+Correct answer: 2
+Tonotopy is the spatial organization where different frequencies stimulate specific points along the cochlea and the auditory nervous system. It is not related to intensity or processing speed.
+
+#### Question 8: Argument
+What is the role of the outer hair cells in the cochlea?
+1. Transmit sound to the brain
+2. Act as microphones
+3. Protect the inner hair cells
+4. They improve the frequency resolution of the cochlea, allowing us to distinguish between different pitches more accurately.
+
+Correct answer: 4
+Outer hair cells act as a "cochlear amplifier," physically changing shape to sharpen the vibration of the basilar membrane, which improves sensitivity and frequency selectivity.
+
+#### Question 9: Argument
+In which medium does sound travel the fastest?
+1. Air
+2. Water
+3. Steel
+4. Vacuum
+
+Correct answer: 3
+Sound travels fastest in solids due to high density and molecular rigidity. In a vacuum, sound cannot travel at all because there is no medium to propagate the mechanical wave.
+
+#### Question 10: Argument
+True or False: Sound waves are longitudinal waves.
+1. True
+2. False
+
+Correct answer: 1
+In air and liquids, sound travels as longitudinal waves where particles oscillate parallel to the direction of wave propagation, creating compressions and rarefactions.
+
+#### Question 11: Argument
+True or False: Sound waves with higher frequencies have longer wavelengths.
+1. True
+2. False
+
+Correct answer: 2
+Frequency and wavelength are inversely proportional (v = f * lambda). Therefore, higher frequencies result in shorter wavelengths when the speed in the medium is constant.
+
+#### Question 12: Argument
+True or False: The frequency of a sound wave determines its loudness.
+1. True
+2. False
+
+Correct answer: 2
+Frequency determines the pitch (high or low). Loudness is primarily determined by the amplitude of the wave and the resulting sound pressure level.
+
+#### Question 13: Argument
+True or False: The frequency of a sound wave determines its speed.
+1. True
+2. False
+
+Correct answer: 2
+The speed of sound depends only on the physical properties of the medium (temperature, density, elasticity). High and low frequency sounds travel at the same speed in the same conditions.
+
+#### Question 14: Argument
+What is the speed of sound in dry air at 20°C?
+1. 343 m/s
+2. 434 m/s
+3. 440 m/s
+4. 3430 m/s
+
+Correct answer: 1
+343 m/s is the standard value for the speed of sound in air at room temperature. 440 refers to the standard tuning frequency (A4), not speed.
+
+#### Question 15: Argument
+What is the unit used to measure frequency?
+1. Decibels (dB)
+2. Hertz (Hz)
+3. Pascals (Pa)
+4. Newtons (N)
+
+Correct answer: 2
+Hertz (Hz) measures cycles per second. Decibels measure intensity levels, Pascals measure pressure, and Newtons measure force.
+
+#### Question 16: Argument
+What is the unit used to measure sound intensity?
+1. Decibels (dB)
+2. Hertz (Hz)
+3. Watts
+4. Pascals (Pa)
+
+Correct answer: 1
+The decibel is a logarithmic unit used to express the ratio of a physical quantity (like sound pressure) to a reference level, which matches how the human ear perceives volume.
+
+#### Question 17: Argument
+What property of a sound wave determines its pitch?
+1. Amplitude
+2. Frequency
+3. Wavelength
+4. Speed
+
+Correct answer: 2
+Pitch is the psychological perception of frequency. The higher the frequency (more cycles per second), the higher the perceived pitch of the sound.
+
+#### Question 18: Argument
+What property of a sound wave determines its timbre?
+1. Amplitude
+2. Frequency
+3. Wavelength
+4. Shape of the wave
+
+Correct answer: 4
+Timbre is determined by the complexity of the waveform, which is the result of the fundamental frequency combined with various harmonics. It allows us to distinguish between different instruments.
+
+#### Question 19: Argument
+What type of wave is sound?
+1. Transverse
+2. Longitudinal
+3. Electromagnetic
+4. Mechanical
+
+Correct answer: 2
+While sound is a mechanical wave (4), "longitudinal" specifically describes the geometry of the wave motion where particles vibrate back and forth along the path of the wave.
+### 4.1.2) Table
+| **Question**                                                                                 | **Possible Choices**                                                                                                                                              | **Answer** | **Explanation**                                                                                                                                  |
+| -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| At which frequency is the human ear most sensitive among these values?                       | 1. 20 Hz<br>2. 100 Hz<br>3. 2000 Hz<br>4. 20000 Hz                                                                                                                | 3          | The human ear is most sensitive between 2000 and 5000 Hz, a range critical for speech. Extreme frequencies require higher intensity to be heard. |
+| What is the term for the smallest change in frequency that can be detected by the human ear? | 1. Pitch<br>2. Timbre<br>3. Just noticeable difference (JND)<br>4. Resonance                                                                                      | 3          | JND is the threshold where physical change becomes perceptible. Pitch is the perception of frequency, and timbre is sound quality.               |
+| What is the threshold of hearing for the average human?                                      | 1. 0 dB<br>2. 20 dB<br>3. 40 dB<br>4. 60 dB                                                                                                                       | 1          | 0 dB is the standard reference for the minimum sound pressure audible to a healthy ear at 1000 Hz.                                               |
+| Frequency modulation in the cochlea is primarily used to:                                    | 1. Adjust pitch<br>2. Amplify soft sounds<br>3. Protect from damage<br>4. Encode frequency                                                                        | 4          | The cochlea acts as a frequency analyzer, converting vibrations into neural signals to encode spectral info for the brain.                       |
+| The basilar membrane in the cochlea is known for:                                            | 1. Constant thickness/stiffness<br>2. Incr. thickness/Decr. stiffness (apex to base)<br>3. Decr. thickness/Incr. stiffness (apex to base)<br>4. Uniform stiffness | 3          | The membrane is narrow/stiff at the base (high freq) and wide/flexible at the apex (low freq), allowing for tonal decomposition.                 |
+| The term 'critical band' refers to:                                                          | 1. Frequency group within which ear cannot distinguish tones<br>2. Middle ear response<br>3. Max amplitude tolerated<br>4. Smallest freq increment                | 1          | If two tones fall within the same critical band, they interfere and the auditory system cannot resolve them individually.                        |
+| The term 'tonotopy' refers to:                                                               | 1. Intensity mapping<br>2. Spatial arrangement of frequency in cochlea<br>3. Temporal sequence<br>4. Neural synchronization                                       | 2          | Tonotopy is the spatial organization where specific frequencies stimulate specific points along the cochlea and nervous system.                  |
+| What is the role of the outer hair cells in the cochlea?                                     | 1. Transmit sound to brain<br>2. Act as microphones<br>3. Protect inner cells<br>4. Improve frequency resolution                                                  | 4          | They act as a "cochlear amplifier," physically changing shape to sharpen membrane vibration, improving sensitivity and selectivity.              |
+| In which medium does sound travel the fastest?                                               | 1. Air<br>2. Water<br>3. Steel<br>4. Vacuum                                                                                                                       | 3          | Sound travels fastest in solids due to high molecular rigidity. It cannot travel in a vacuum as there is no medium.                              |
+| True or False: Sound waves are longitudinal waves.                                           | 1. True<br>2. False                                                                                                                                               | 1          | In fluids like air, sound travels as longitudinal waves where particles oscillate parallel to the direction of wave propagation.                 |
+| True or False: Higher frequencies have longer wavelengths.                                   | 1. True<br>2. False                                                                                                                                               | 2          | Frequency and wavelength are inversely proportional ($v = f \cdot \lambda$); higher frequencies result in shorter wavelengths.                   |
+| True or False: Frequency determines loudness.                                                | 1. True<br>2. False                                                                                                                                               | 2          | Frequency determines pitch (high/low). Loudness is determined by the amplitude of the wave and sound pressure level.                             |
+| True or False: Frequency determines speed.                                                   | 1. True<br>2. False                                                                                                                                               | 2          | Speed depends only on the physical properties of the medium (temperature, density). All frequencies travel at the same speed in one medium.      |
+| What is the speed of sound in dry air at 20°C?                                               | 1. 343 m/s<br>2. 434 m/s<br>3. 440 m/s<br>4. 3430 m/s                                                                                                             | 1          | 343 m/s is the standard value for air at room temperature. 440 Hz is a musical pitch reference, not a speed.                                     |
+| What is the unit used to measure frequency?                                                  | 1. Decibels (dB)<br>2. Hertz (Hz)<br>3. Pascals (Pa)<br>4. Newtons (N)                                                                                            | 2          | Hertz (Hz) measures cycles per second. dB measures intensity, Pa measures pressure, and N measures force.                                        |
+| What is the unit used to measure sound intensity level?                                      | 1. Decibels (dB)<br>2. Hertz (Hz)<br>3. Watts<br>4. Pascals (Pa)                                                                                                  | 1          | Decibels are logarithmic units expressing the ratio of a physical quantity to a reference level, matching human perception.                      |
+| What property of a sound wave determines its pitch?                                          | 1. Amplitude<br>2. Frequency<br>3. Wavelength<br>4. Speed                                                                                                         | 2          | Pitch is the psychological perception of frequency; more cycles per second result in a "higher" perceived sound.                                 |
+| What property of a sound wave determines its timbre?                                         | 1. Amplitude<br>2. Frequency<br>3. Wavelength<br>4. Shape of the wave                                                                                             | 4          | Timbre is determined by the waveform's complexity (harmonics), allowing us to distinguish different instruments.                                 |
+| What type of wave is sound?                                                                  | 1. Transverse<br>2. Longitudinal<br>3. Electromagnetic<br>4. Mechanical                                                                                           | 2          | Sound is a mechanical wave, and "longitudinal" describes the particle motion being parallel to the path of the wave.                             |
