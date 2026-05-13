@@ -30,7 +30,7 @@ The brain might trick us:
 - Shepard tones: seemingly infinite increase in pitch
 - Aural harmonics as integer multiple of original tone
 - Tartini's third note: play a perfect fifth, the brain will hear a third note one octave below (perfect fifth is $f_2=\frac32 f_1\rightarrow \Delta f=\frac12 f_1$)
-- Missing Fundamental
+- Missing Fundamental: If the fundamental is removed from a harmonic spectrum, it is heard all the same
 
 
 Beats are a **amplitude modulation** phenomenon that allows two similar tone to be perceived as one beating tone. The beat frequency is $f_b=\Delta f$
@@ -65,7 +65,7 @@ $$phon=40+10\log_2(sone)\qquad sone = 2^{\frac{phon}{10}-4}$$
 One octave is double the frequency, there are 12 semitones:
 $$s^{12}=2\qquad s=\sqrt[12]2$$
 
-But our brain looses the octave to double frequency  
+But our brain looses to distinguish the double frequency as an octave at high frequencies and  needs more frequency
 # 2) Elements of Acoustics
 Science of sound including production, transmission and effects. Also the qualities of a room that determine the character wrt auditory perception.
 
