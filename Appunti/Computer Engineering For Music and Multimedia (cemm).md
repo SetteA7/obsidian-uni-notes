@@ -1,3 +1,5 @@
+This document is meant to be used in the following way. Each chapter is a brief recap of what was in the slides. **Take Home Concepts** is a list of concepts recapped at the end of the slides while **Stuff to Know** is what is listed under the # Open-ended exam questions. The **Quiz** part contains the quizzes he uploaded with solutions and explanations.
+
 # 1) Acoustics and Psychoacoustics
 ANSI/ASA describes acoustic as **science of sound including production, transmission and effects, including biological and psicological effects. The qualities of a room together determine the character wrt adutiroy effects**
 
@@ -5,7 +7,7 @@ ANSI/ASA describes acoustic as **science of sound including production, transmis
 The wave equation is:
 $$\frac{\partial ^2p}{\partial x^2}-\frac1{c^2}\frac{\partial p}{\partial t^2}=0$$
 where $p$ is the pressure and $c$ the speed of sound.
-The general solution ( with $c$ constant)
+The general solution ( with $c$ constant) is a **longitudinal** wave
 $$p=f(ct-x)+g(ct+x)$$
 with $f,g$ twice differentiable functions
 
@@ -39,8 +41,13 @@ The brain might trick us:
 Beats are a **amplitude modulation** phenomenon that allows two similar tone to be perceived as one beating tone. The beat frequency is $f_b=\Delta f$
 
 ## 1.2) Auditory System TODO
+The ear is divided into external, middle and inner ear.
 
+The inner ear contains the **cochlea** 
 
+The **basilar membrane** is **narrow-rigid at the base, wide-soft at the apex**. This is a bank of filters tuned at specific vibrations.
+Low at base, high at apex.
+It is non-linear $\rightarrow$ additional aural harmonics
 ## 1.3) Elements of Psychoacoustics
 The perceived loudness of a sound depends on different factors not only on intensity. 
 The unit of measure for loudness is Phon 
@@ -84,6 +91,26 @@ These bands are described via the **bark** scale. That is the distance of 1 CB i
 It can also be masked with another pure tone
 
 ## 1.4) Take Home Concepts
+- **Basilar membrane** (auditory filters, tonotopic mapping): 
+	- **Auditory Filters:** The basilar membrane is narrow and rigid at its base and wide and soft at its apex, which allows it to act as a bank of filters tuned to different frequency bands.
+	- **Tonotopic Mapping:** This spatial arrangement creates a mapping where high frequencies produce maximum vibrations at the base and low frequencies produce them at the apex.
+- **Nonlinearities in the BM** (difference tones, Tartini's 3rd sound)
+	- **Difference Tones:** When two sine tones are played loudly enough, the ear’s nonlinear distortion creates additional "difference tones" at frequencies like $(x-y)$ or $(2y-x)$.    
+	- **Tartini's 3rd Sound:** This specific phenomenon occurs when two notes (like a perfect fifth) are played; the listener perceives a third, lower note produced by intermodulation distortion in the ear.
+- **Loudness perception** (threshold of hearing, equal-loudness curves, loudness scales – phons and sones)
+	- **Threshold of Hearing:** This is the minimum sound pressure level required for a sound to be just audible, which varies significantly depending on the frequency of the stimulus.
+    
+	- **Equal-Loudness Curves:** These curves (ISO 226:2003) describe the physical intensity needed for sinusoids of different frequencies to be perceived as having the same loudness as a reference 1 kHz tone. * **Loudness Scales (Phons and Sones):** The **Phon** scale matches the perceived loudness of any tone to the decibel level of an equally loud 1 kHz sinusoid, while the **Sone** scale is a linear scale where a doubling of loudness corresponds to an increase of 10 phons.
+- **Pitch perception** (sinuoidal/harmonic/inharmonic sounds, pitch scales – mel)
+- **Masking and critical bands** (masking thresholds critical bandwidth, auditory filterbank, bark scale)
+
+## 1.5) Stuff to Know
+- Definition of Period, Frequency, velocity, wavelength, Standing waves 
+- Description of the human ear
+- Sound Intensity: Decibel, Phon, Sone.
+- Pitch
+- Critical band, beating.
+- Masking
 # 2) Audio Archives Preservation
 Preservation of archives is essential as carriers degrade quickly while playback devices and knowledge are fast obsolete.
 
