@@ -99,8 +99,8 @@ It can also be masked with another pure tone
 	- **Tartini's 3rd Sound:** This specific phenomenon occurs when two notes (like a perfect fifth) are played; the listener perceives a third, lower note produced by intermodulation distortion in the ear.
 - **Loudness perception** (threshold of hearing, equal-loudness curves, loudness scales – phons and sones)
 	- **Threshold of Hearing:** This is the minimum sound pressure level required for a sound to be just audible, which varies significantly depending on the frequency of the stimulus.
-    
-	- **Equal-Loudness Curves:** These curves (ISO 226:2003) describe the physical intensity needed for sinusoids of different frequencies to be perceived as having the same loudness as a reference 1 kHz tone. * **Loudness Scales (Phons and Sones):** The **Phon** scale matches the perceived loudness of any tone to the decibel level of an equally loud 1 kHz sinusoid, while the **Sone** scale is a linear scale where a doubling of loudness corresponds to an increase of 10 phons.
+	- **Equal-Loudness Curves:** These curves (ISO 226:2003) describe the physical intensity needed for sinusoids of different frequencies to be perceived as having the same loudness as a reference 1 kHz tone. 
+	- **Loudness Scales (Phons and Sones):** The **Phon** scale matches the perceived loudness of any tone to the decibel level of an equally loud 1 kHz sinusoid, while the **Sone** scale is a linear scale where a doubling of loudness corresponds to an increase of 10 phons.
 - **Pitch perception** (sinuoidal/harmonic/inharmonic sounds, pitch scales – mel)
 - **Masking and critical bands** (masking thresholds critical bandwidth, auditory filterbank, bark scale)
 
