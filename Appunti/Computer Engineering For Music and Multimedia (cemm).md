@@ -190,7 +190,9 @@ A second approach is the **micro-granular synthesis** which defines the grains a
 
 ## 2.4) Frequency Domain Model Synthesis
 #### Additive Synthesis
-Created by superimposing elementary sounds (sine waves).
+Created by superimposing elementary sounds (sine waves). Any almost periodic sound can be decomposed into a series of simple sine waves. Additionally these waves chan also change over time.
+
+It is usually used when a specific sound is needed for example in psychoacoustic as it serves more as an analytical tool.
 
 # 3) Subtractive Synthesis
 
