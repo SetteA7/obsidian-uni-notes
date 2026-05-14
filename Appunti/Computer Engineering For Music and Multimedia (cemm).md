@@ -195,6 +195,7 @@ Created by superimposing elementary sounds (sine waves). Any almost periodic sou
 It is usually used when a specific sound is needed for example in psychoacoustic as it serves more as an analytical tool.
 
 # 3) Subtractive Synthesis
+Subtractive synthesis consists in applying filters to a spectrally rich waveforms. Some frequencies will be subtracted
 
 #### Ring Modulation
 
