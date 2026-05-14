@@ -90,6 +90,7 @@ These bands are described via the **bark** scale. That is the distance of 1 CB i
 - linear grow after 1kHz
 It can also be masked with another pure tone
 
+The fundamental defines the pitch, the partials define the timbre.
 ## 1.4) Take Home Concepts
 - **Basilar membrane** (auditory filters, tonotopic mapping): 
 	- **Auditory Filters:** The basilar membrane is narrow and rigid at its base and wide and soft at its apex, which allows it to act as a bank of filters tuned to different frequency bands.
@@ -194,10 +195,18 @@ Created by superimposing elementary sounds (sine waves). Any almost periodic sou
 
 It is usually used when a specific sound is needed for example in psychoacoustic as it serves more as an analytical tool.
 
-# 3) Subtractive Synthesis
-Subtractive synthesis consists in applying filters to a spectrally rich waveforms. Some frequencies will be subtracted
+Additive synthesis can be done in PD.
+![[Pasted image 20260514172813.png|Additive PD|250]]
+We start with a base 100 Hz fundamental frequency
 
+# 3) Subtractive Synthesis
+Subtractive synthesis consists in applying filters to a spectrally rich waveforms. Some frequencies will be subtracted and some enhanced. This does not suppose any kind of periodic signal.
+
+## 3.1) Non Linear Model Synthesis
 #### Ring Modulation
+Ring modulation consists in multiplying the signal with a sinusoid carrier signal
+$$s=m[n]\cos(2\pi\frac{f_i}{F_s}n+\phi_c)$$
+the produced output moves the spectrum in vicinity of the carrier
 
 #### Frequency Modulation
 
