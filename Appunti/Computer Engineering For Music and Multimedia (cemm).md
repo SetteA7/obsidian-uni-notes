@@ -178,12 +178,19 @@ Noise generator produces a sequence of random sounds with however clear statisti
 ### 2.3.2) Time-Segment Based Models
 #### Sampling (Wavetable) Synthesis
 This technique consists is sampling real sounds and then processing and playing them.
-Some easy processing is speeding up the sound which heightens the pitch. But this has a bad effect. It lacks **prosodic** rules, which is the ability to modi
-
+Some easy processing is speeding up the sound which heightens the pitch. But this has a bad effect. It lacks **prosodic** rules, which is the ability to modify the sound on the go with dynamics, vibratos etc.
 #### Granular Synthesis
+Granular synthesis consists in dividing sounds into **grains;** small windows of acoustic elements in time domain. The mixing of these grains can recreate a complex sound. This was born from tape music.
+
+From real sounds the grains are obtained by taking slightly overlapping windows to allow for both reproduction of the sound and the extraction of grains.
+
+When segments are not very short we call it **synthesis by time segment processing**.
+
+A second approach is the **micro-granular synthesis** which defines the grains as a windowed sinusoidal signal.
 
 ## 2.4) Frequency Domain Model Synthesis
 #### Additive Synthesis
+Created by superimposing elementary sounds (sine waves).
 
 # 3) Subtractive Synthesis
 
