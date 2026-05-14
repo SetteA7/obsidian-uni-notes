@@ -281,6 +281,24 @@ This can be solved by baking (in the oven) at max 50-60°C for 1h up to 8 hours.
 # 6) Pure Data TODO
 PD is a cross platform open source real time dataflow program environment
 ![[Pasted image 20260514104835.png|PD|200]]
+The creator is **Miller Puckette**.
+
+There are 5 basic elements:
+- **Objects:** specific class with inlets, outlets and methods. Can be data type or signal type
+- **Messages:** contains numbers or symbols. The **$** symbol is a variable.
+- **Number:** holds a number (can be read and can be written)
+- **Comments:** comments
+- **GUI:** gui elements like toggles, bangs
+
+The two types of data are:
+- **Data:** number/symbol
+- **Audio Signal:** specific 32 bit float sequence. Sample rate and bit depth depend on sound card. Objects with tilde $\sim$ work on audio signals (ex. osc$\sim$) 
+
+>[!col]
+>![[Pasted image 20260514181401.png|Osc DAC Combo|250]]
+>
+>One of the fundamental blocks is the **osc$\sim$** and **dac$\sim$** combo. The osc generates a cos and the dac converts the digital signal into analog signal that we can listen to through our speakers or headphone.
+
 # 7) Midi TODO
 
 
