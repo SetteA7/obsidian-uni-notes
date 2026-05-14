@@ -295,9 +295,20 @@ The two types of data are:
 - **Audio Signal:** specific 32 bit float sequence. Sample rate and bit depth depend on sound card. Objects with tilde $\sim$ work on audio signals (ex. osc$\sim$) 
 
 >[!col]
->![[Pasted image 20260514181401.png|Osc DAC Combo|250]]
+>![[Pasted image 20260514181401.png|Osc DAC Combo|150]]
 >
 >One of the fundamental blocks is the **osc$\sim$** and **dac$\sim$** combo. The osc generates a cos and the dac converts the digital signal into analog signal that we can listen to through our speakers or headphone.
+
+The inputs of the oscillator are:
+1. Frequency
+2. Phase $[0,1]$
+How it is defined in the image, the frequency is already defined as 440.
+
+arrays are defined via **tabwrite** 
+
+usually the inputs are **first hot, then cold:**
+- **Hot:** object reads value of hot input path immediately
+- **Cold:** object reads value of cold input path but doesn't update until the hot path is updated
 
 # 7) Midi TODO
 
