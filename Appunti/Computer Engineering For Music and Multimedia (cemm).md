@@ -167,12 +167,19 @@ This is a signal based approach. A characteristic of a musical sound is its comp
 This produces a simple signal from a given data. The basic ones are oscillators for periodic signals and noise generators for random signals.
 
 ##### Table Lookup Oscillator
-An oscillator generates a simple periodic waveform. Instead of calculating this waveform, rather a lookup table with equidistant samples of the sound to generat eis used.
+An oscillator generates a simple periodic waveform. Instead of calculating this waveform, rather a lookup table with equidistant samples of the sound to generate is used. This is then amplified $a[n]$. Therefore: $s[n]=a[n]f[n]$
+
+This is low quality approach as it lacks timbre and more complex modulations
 
 ##### Noise Generator
+Natural sounds are not perfectly periodic. They contain varying statistical properties therefore a noise generator is required. 
+Noise generator produces a sequence of random sounds with however clear statistical properties (flat spectral density)
 
 ### 2.3.2) Time-Segment Based Models
-#### Sampling Synthesis
+#### Sampling (Wavetable) Synthesis
+This technique consists is sampling real sounds and then processing and playing them.
+Some easy processing is speeding up the sound which heightens the pitch. But this has a bad effect. It lacks **prosodic** rules, which is the ability to modi
+
 #### Granular Synthesis
 
 ## 2.4) Frequency Domain Model Synthesis
