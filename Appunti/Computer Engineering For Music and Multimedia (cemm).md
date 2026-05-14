@@ -225,12 +225,25 @@ Wavetable vs Additive Synthesis:
 Subtractive synthesis consists in applying filters to a spectrally rich waveforms. Some frequencies will be subtracted and some enhanced. This does not suppose any kind of periodic signal.
 
 ## 3.1) Non Linear Model Synthesis
+
+#### Amplitude Modulation
+In a modulation we multiply the signal (carrier) with another signal (modulator). In AM we do it on the amplitude. Some additional processing has to be done on sinusoids as they shoudl 
+Some additional frequencies called sidebands are produced. These are the frequencies $f_{s_{1,2}}=f_c\pm f_m$.
+
+![[Pasted image 20260514184555.png|Representation|150]]
+In PD this looks like, for example
+![[Pasted image 20260514184720.png|PD Ring Modulation Example|150]]
+
+
 #### Ring Modulation
 Ring modulation consists in multiplying the signal with a sinusoid carrier signal
 $$s=m[n]\cos(2\pi\frac{f_i}{F_s}n+\phi_c)$$
 the produced output moves the spectrum in vicinity of the carrier
+Some additional frequencies called sidebands are produced. These are the frequencies $f_{s_{1,2}}=f_c\pm f_m$.
 
 ![[Pasted image 20260514183828.png|Representation|250]]
+
+
 
 #### Frequency Modulation
 
