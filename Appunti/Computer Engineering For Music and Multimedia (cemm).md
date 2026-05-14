@@ -179,7 +179,9 @@ Noise generator produces a sequence of random sounds with however clear statisti
 ### 2.3.2) Time-Segment Based Models
 #### Sampling (Wavetable) Synthesis
 This technique consists is sampling real sounds and then processing and playing them.
-Some easy processing is speeding up the sound which heightens the pitch. But this has a bad effect. It lacks **prosodic** rules, which is the ability to modify the sound on the go with dynamics, vibratos etc.
+Some easy processing is speeding up the sound which heightens the pitch. But this has a bad effect. It lacks **prosodic** rules, which is the ability to modify the sound on the go with dynamics, vibratos etc. This also implements some little distortion.
+
+The control parameters are the amplitude $a[n]$ and the fundamental frequency $f[n]$. 
 #### Granular Synthesis
 Granular synthesis consists in dividing sounds into **grains;** small windows of acoustic elements in time domain. The mixing of these grains can recreate a complex sound. This was born from tape music.
 
@@ -197,8 +199,14 @@ It is usually used when a specific sound is needed for example in psychoacoustic
 
 Additive synthesis can be done in PD.
 ![[Pasted image 20260514172813.png|Additive PD|250]]
-We start with a base 100 Hz fundamental frequency
+We start with a base 100 Hz fundamental frequency. This is fed:
+- directly to an oscillator
+- to four odd integer multipliers
 
+The odd integer multipliers show that only the odd harmonic partials are kept until $H9$. These are fed to an oscillator (with a gain of 0.75). Then the amplitude is divided by the partial index.
+
+Finally all these signals are added together (additive synthesis) and are passed to a **Digital to Analog Converter (DAC)** in order to be played. The result is also printed in a table every 100 ms.
+We can see (and hear) that this approximates a square wave.
 # 3) Subtractive Synthesis
 Subtractive synthesis consists in applying filters to a spectrally rich waveforms. Some frequencies will be subtracted and some enhanced. This does not suppose any kind of periodic signal.
 
