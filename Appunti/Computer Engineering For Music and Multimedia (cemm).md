@@ -181,7 +181,7 @@ Noise generator produces a sequence of random sounds with however clear statisti
 This technique consists is sampling real sounds and then processing and playing them.
 Some easy processing is speeding up the sound which heightens the pitch. But this has a bad effect. It lacks **prosodic** rules, which is the ability to modify the sound on the go with dynamics, vibratos etc. This also implements some little distortion.
 
-The control parameters are the amplitude $a[n]$ and the fundamental frequency $f[n]$. 
+The control parameters are the amplitude $a[n]$ and the fundamental frequency $f[n]$. The numeric array presents only one period of the periodic signal. 
 #### Granular Synthesis
 Granular synthesis consists in dividing sounds into **grains;** small windows of acoustic elements in time domain. The mixing of these grains can recreate a complex sound. This was born from tape music.
 
@@ -207,6 +207,18 @@ The odd integer multipliers show that only the odd harmonic partials are kept un
 
 Finally all these signals are added together (additive synthesis) and are passed to a **Digital to Analog Converter (DAC)** in order to be played. The result is also printed in a table every 100 ms.
 We can see (and hear) that this approximates a square wave.
+
+Wavetable vs Additive Synthesis:
+
+|                               | Wavetable                                       | Additive                                      |
+| ----------------------------- | ----------------------------------------------- | --------------------------------------------- |
+| **Principle**                 | Plays back precomputed periods stored in tables | Builds sound by summing many elementary waves |
+| **Computational Cost**        | Low                                             | High (many oscillators)                       |
+| **Control Over Spectrum**     | Indirect (post process)                         | Direct (modify directly the partials)         |
+| **Dynamic Timbre Change**     | Through wavetable interpolation                 | modify partials                               |
+| **Sound Design Flexibility**  | Limited by available tables                     | Theoretically unlimited                       |
+| **Implementation Complexity** | Simple                                          | More complex to implement and control         |
+
 # 3) Subtractive Synthesis
 Subtractive synthesis consists in applying filters to a spectrally rich waveforms. Some frequencies will be subtracted and some enhanced. This does not suppose any kind of periodic signal.
 
