@@ -120,6 +120,7 @@ It can also be masked with another pure tone
 
 
 # 2) Sound Synthesis & Sound Design
+## 2.1) Sound Analysis
 Sound is analyzed in the frequency domain which is consistent on how the human ear perceives sound. The characteristics of the sound can be better seen (high/low frequencies, harmonic vs non harmonic partials). Moreover **some filters are efficient in frequency domain**
 
 We use the Discrete Fourier Transform (DFT)
@@ -136,6 +137,28 @@ Also the Short Time Fourier Transform (STFT) is used to analyze **time varying s
 
 To get a frequency response of a room we can find the Room Impulse Response (RIR) by recording the sound that a balloon makes in the quiet room. Since the balloon can be considered as a dirac delta:
 $$y[n]=(h*\delta)[n]=h[n]$$
+## 2.2) Classification of Sound Models
+Various classifications of sound exist based on specific needs
+
+#### Classification Based on Model Structure
+This is based on **how the sound was generated**
+- **Direct Generation:** techniques based on one or more independent blocks and sum of the results: **Additive and granular synthesis**
+- **Feed Forward Structure:** feed forward multi block structure (lot of post processing): All non linear models **subtractive synthesis, ring and frequency modulation synthesis**
+- **Interacting Structure:** interacting multi block (feedback). Most physiscs based models
+
+#### Classification Based on Cognitive Representation
+This is based on **what the model aims to represent**
+- **Signal Based Models:** Represents shape of wave, the acoustic perception. The focus is on receiver and human ear
+- **Physics Based Model:** Represents acoustic signal as by product of physical mechanism of the production of the sound. Focus on emitter, sound source.
+
+#### Classification Based on Underlying Techniques
+These are based on the **processing domain**. 
+- **Time Domain Models:** based on time characteristics
+- **Frequency Domain Models:** based on spectral characteristics
+
+Filters are **linear** transformations, Modulation is a **non linear** one. 
+The processing is either on **sample basis** or most commonly on **block processing**, that is, N samples analyzed at a time like with FFT.
+These can be done via **harware or software**
 
 
 # 3) Subtractive Synthesis
@@ -191,8 +214,11 @@ This can be solved by baking (in the oven) at max 50-60°C for 1h up to 8 hours.
 # 6) Pure Data TODO
 PD is a cross platform open source real time dataflow program environment
 ![[Pasted image 20260514104835.png|PD|200]]
-# 7) Quiz
-## 7.1) Acoustics and Psychoacoustics
+# 7) Midi TODO
+
+
+# 8) Quiz
+## 8.1) Acoustics and Psychoacoustics
 
 | **Question**                                                                                 | **Possible Choices**                                                                                                                                              | **Answer** | **Explanation**                                                                                                                                  |
 | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -215,7 +241,7 @@ PD is a cross platform open source real time dataflow program environment
 | What property of a sound wave determines its pitch?                                          | 1. Amplitude<br>2. Frequency<br>3. Wavelength<br>4. Speed                                                                                                         | 2          | Pitch is the psychological perception of frequency; more cycles per second result in a "higher" perceived sound.                                 |
 | What property of a sound wave determines its timbre?                                         | 1. Amplitude<br>2. Frequency<br>3. Wavelength<br>4. Shape of the wave                                                                                             | 4          | Timbre is determined by the waveform's complexity (harmonics), allowing us to distinguish different instruments.                                 |
 | What type of wave is sound?                                                                  | 1. Transverse<br>2. Longitudinal<br>3. Electromagnetic<br>4. Mechanical                                                                                           | 2          | Sound is a mechanical wave, and "longitudinal" describes the particle motion being parallel to the path of the wave.                             |
-## 7.2) Sound Synthesis & Sound Design
+## 8.2) Sound Synthesis & Sound Design
 | **Question**                                                         | **Possible Choices**                                                                                          | **Answer** | **Explanation**                                                                                                                                                               |
 | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | In what does granular synthesis divide the sound?                    | 1. Frequencies<br>2. Waveforms<br>3. Tiny  particles/fragments in time domain<br>4. Partials                  | 3          | Granular synthesis deconstructs sound into microscopic snippets (grains) in the time domain. It doesn't look at individual partials or abstract waveforms until reassembly.   |
