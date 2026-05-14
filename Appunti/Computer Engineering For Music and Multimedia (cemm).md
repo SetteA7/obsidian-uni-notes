@@ -102,7 +102,13 @@ It can also be masked with another pure tone
 	- **Equal-Loudness Curves:** These curves (ISO 226:2003) describe the physical intensity needed for sinusoids of different frequencies to be perceived as having the same loudness as a reference 1 kHz tone. 
 	- **Loudness Scales (Phons and Sones):** The **Phon** scale matches the perceived loudness of any tone to the decibel level of an equally loud 1 kHz sinusoid, while the **Sone** scale is a linear scale where a doubling of loudness corresponds to an increase of 10 phons.
 - **Pitch perception** (sinuoidal/harmonic/inharmonic sounds, pitch scales – mel)
+	- **Sound Types (Sinusoidal/Harmonic/Inharmonic):** Pitch perception varies by source: pure sinusoids have a clear height, harmonic sounds can maintain a "virtual pitch" even if the fundamental frequency is missing, and inharmonic sounds (like bells) may have unclear or complex pitch sensations.
+	- **Pitch Scales (Mel):** The **Mel** scale is a perceptual scale that maps physical frequency to "ratio pitch," where doubling the mel value corresponds to a perceived doubling of pitch.
 - **Masking and critical bands** (masking thresholds critical bandwidth, auditory filterbank, bark scale)
+	- - **Masking Thresholds:** This is the sound pressure level a test signal must reach to become just audible in the presence of a louder "masking" signal.
+	- **Critical Bandwidth:** The human ear processes sound through "hearing bands" created by the cochlea; if two tones fall within the same critical band, they are difficult to distinguish and may result in "beating" or "roughness"
+	- **Auditory Filterbank:** This concept treats the ear as a series of overlapping filters that quantify our ability to distinguish individual frequencies.
+	- **Bark Scale:** The Bark scale is a psychoacoustic scale ranging from 1 to 24 that represents these discrete critical bands across the entire audible frequency range.
 
 ## 1.5) Stuff to Know
 - Definition of Period, Frequency, velocity, wavelength, Standing waves 
@@ -111,7 +117,16 @@ It can also be masked with another pure tone
 - Pitch
 - Critical band, beating.
 - Masking
-# 2) Audio Archives Preservation
+
+
+# 2) Sound Synthesis & Sound Design
+
+
+# 3) Subtractive Synthesis
+
+# 4) Live Electronics
+
+# 5) Audio Archives Preservation
 Preservation of archives is essential as carriers degrade quickly while playback devices and knowledge are fast obsolete.
 
 **Traditional preservation paradigm:** Preserve original
@@ -157,194 +172,12 @@ as do the longer molecules
 
 This can be solved by baking (in the oven) at max 50-60°C for 1h up to 8 hours. However a wrongly baked tape can be irreparably damaged.
 
-# 3) Midi
+# 6) Pure Data TODO
+PD is a cross platform open source real time dataflow program environment
+![[Pasted image 20260514104835.png|PD|200]]
+# 7) Quiz
+## 7.1) Acoustics and Psychoacoustics
 
-
-# 4) Quiz
-## 4.1) Acoustics and Psychoacoustics
-### 4.1.1) Questions
-#### Question 1: Argument
-At which frequency is the human ear most sensitive among these values?
-1. 20 Hz
-2. 100 Hz
-3. 2000 Hz
-4. 20000 Hz
-
-Correct answer: 3
-The human ear is most sensitive in the range of 2000 to 5000 Hz, which is critical for understanding speech. Frequencies at the extremes (20 Hz or 20000 Hz) require much higher intensity to be perceived.
-
-#### Question 2: Argument
-What is the term for the smallest change in frequency that can be detected by the human ear?
-1. Pitch
-2. Timbre
-3. Just noticeable difference (JND)
-4. Resonance
-
-Correct answer: 3
-The JND is the physical threshold where a change becomes perceptible to the brain. Pitch is the subjective perception of frequency, timbre is sound quality, and resonance is a physical amplification phenomenon.
-
-#### Question 3: Argument
-What is the threshold of hearing for the average human?
-1. 0 dB
-2. 20 dB
-3. 40 dB
-4. 60 dB
-
-Correct answer: 1
-By convention, 0 dB represents the reference level for the minimum sound pressure audible by a healthy ear at 1000 Hz. It does not mean total silence, but the lower limit of average human perception.
-
-#### Question 4: Argument
-Frequency modulation in the cochlea is primarily used to:
-1. Adjust the pitch of sounds
-2. Amplify soft sounds
-3. Protect the ear from damage
-4. Encode the frequency of incoming sounds
-
-Correct answer: 4
-The cochlea acts as a frequency analyzer, converting mechanical vibrations into neural signals to encode spectral information for the brain. It does not "adjust" pitch, which is a higher-level perception.
-
-#### Question 5: Argument
-The basilar membrane in the cochlea is known for:
-1. Constant thickness and stiffness across its length
-2. Increasing thickness and decreasing stiffness from apex to base
-3. Decreasing thickness and increasing stiffness from apex to base
-4. Uniform stiffness across its length
-
-Correct answer: 3
-The membrane is narrower and stiffer at the base (responding to high frequencies) and becomes wider and more flexible toward the apex (responding to low frequencies). This gradient allows for tonal decomposition.
-
-#### Question 6: Argument
-The term 'critical band' refers to:
-1. A specific group of frequencies within which the ear cannot distinguish separate tones
-2. The frequency response of the middle ear
-3. The maximum amplitude of sound that the ear can tolerate
-4. The smallest increment in tone frequency detectable by the ear
-
-Correct answer: 1
-The critical band describes the auditory system's filtering; if two tones fall within the same band, they interfere and the ear cannot resolve them individually.
-
-#### Question 7: Argument
-The term 'tonotopy' refers to:
-1. The mapping of sound intensity in the auditory cortex
-2. The spatial arrangement of frequency along the cochlea
-3. The temporal sequence of sound processing in the brain
-4. The synchronization of neural signals with sound waves
-
-Correct answer: 2
-Tonotopy is the spatial organization where different frequencies stimulate specific points along the cochlea and the auditory nervous system. It is not related to intensity or processing speed.
-
-#### Question 8: Argument
-What is the role of the outer hair cells in the cochlea?
-1. Transmit sound to the brain
-2. Act as microphones
-3. Protect the inner hair cells
-4. They improve the frequency resolution of the cochlea, allowing us to distinguish between different pitches more accurately.
-
-Correct answer: 4
-Outer hair cells act as a "cochlear amplifier," physically changing shape to sharpen the vibration of the basilar membrane, which improves sensitivity and frequency selectivity.
-
-#### Question 9: Argument
-In which medium does sound travel the fastest?
-1. Air
-2. Water
-3. Steel
-4. Vacuum
-
-Correct answer: 3
-Sound travels fastest in solids due to high density and molecular rigidity. In a vacuum, sound cannot travel at all because there is no medium to propagate the mechanical wave.
-
-#### Question 10: Argument
-True or False: Sound waves are longitudinal waves.
-1. True
-2. False
-
-Correct answer: 1
-In air and liquids, sound travels as longitudinal waves where particles oscillate parallel to the direction of wave propagation, creating compressions and rarefactions.
-
-#### Question 11: Argument
-True or False: Sound waves with higher frequencies have longer wavelengths.
-1. True
-2. False
-
-Correct answer: 2
-Frequency and wavelength are inversely proportional (v = f * lambda). Therefore, higher frequencies result in shorter wavelengths when the speed in the medium is constant.
-
-#### Question 12: Argument
-True or False: The frequency of a sound wave determines its loudness.
-1. True
-2. False
-
-Correct answer: 2
-Frequency determines the pitch (high or low). Loudness is primarily determined by the amplitude of the wave and the resulting sound pressure level.
-
-#### Question 13: Argument
-True or False: The frequency of a sound wave determines its speed.
-1. True
-2. False
-
-Correct answer: 2
-The speed of sound depends only on the physical properties of the medium (temperature, density, elasticity). High and low frequency sounds travel at the same speed in the same conditions.
-
-#### Question 14: Argument
-What is the speed of sound in dry air at 20°C?
-1. 343 m/s
-2. 434 m/s
-3. 440 m/s
-4. 3430 m/s
-
-Correct answer: 1
-343 m/s is the standard value for the speed of sound in air at room temperature. 440 refers to the standard tuning frequency (A4), not speed.
-
-#### Question 15: Argument
-What is the unit used to measure frequency?
-1. Decibels (dB)
-2. Hertz (Hz)
-3. Pascals (Pa)
-4. Newtons (N)
-
-Correct answer: 2
-Hertz (Hz) measures cycles per second. Decibels measure intensity levels, Pascals measure pressure, and Newtons measure force.
-
-#### Question 16: Argument
-What is the unit used to measure sound intensity?
-1. Decibels (dB)
-2. Hertz (Hz)
-3. Watts
-4. Pascals (Pa)
-
-Correct answer: 1
-The decibel is a logarithmic unit used to express the ratio of a physical quantity (like sound pressure) to a reference level, which matches how the human ear perceives volume.
-
-#### Question 17: Argument
-What property of a sound wave determines its pitch?
-1. Amplitude
-2. Frequency
-3. Wavelength
-4. Speed
-
-Correct answer: 2
-Pitch is the psychological perception of frequency. The higher the frequency (more cycles per second), the higher the perceived pitch of the sound.
-
-#### Question 18: Argument
-What property of a sound wave determines its timbre?
-1. Amplitude
-2. Frequency
-3. Wavelength
-4. Shape of the wave
-
-Correct answer: 4
-Timbre is determined by the complexity of the waveform, which is the result of the fundamental frequency combined with various harmonics. It allows us to distinguish between different instruments.
-
-#### Question 19: Argument
-What type of wave is sound?
-1. Transverse
-2. Longitudinal
-3. Electromagnetic
-4. Mechanical
-
-Correct answer: 2
-While sound is a mechanical wave (4), "longitudinal" specifically describes the geometry of the wave motion where particles vibrate back and forth along the path of the wave.
-### 4.1.2) Table
 | **Question**                                                                                 | **Possible Choices**                                                                                                                                              | **Answer** | **Explanation**                                                                                                                                  |
 | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | At which frequency is the human ear most sensitive among these values?                       | 1. 20 Hz<br>2. 100 Hz<br>3. 2000 Hz<br>4. 20000 Hz                                                                                                                | 3          | The human ear is most sensitive between 2000 and 5000 Hz, a range critical for speech. Extreme frequencies require higher intensity to be heard. |
