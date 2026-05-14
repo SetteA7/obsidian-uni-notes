@@ -148,7 +148,7 @@ This is based on **how the sound was generated**
 
 #### Classification Based on Cognitive Representation
 This is based on **what the model aims to represent**
-- **Signal Based Models:** Represents shape of wave, the acoustic perception. The focus is on receiver and human ear
+- **Signal Based Models:** Represents shape of wave, the acoustic perception **ignoring the underlying physical model**. The focus is on receiver and human ear
 - **Physics Based Model:** Represents acoustic signal as by product of physical mechanism of the production of the sound. Focus on emitter, sound source.
 
 #### Classification Based on Underlying Techniques
@@ -158,10 +158,30 @@ These are based on the **processing domain**.
 
 Filters are **linear** transformations, Modulation is a **non linear** one. 
 The processing is either on **sample basis** or most commonly on **block processing**, that is, N samples analyzed at a time like with FFT.
-These can be done via **harware or software**
+These can be done via **hardware or software**
 
+## 2.3) Time Domain Model Synthesis
+This is a signal based approach. A characteristic of a musical sound is its complex dynamic behavior. Depends on external control and internal structure and generating process
+
+#### Basic Generators
+This produces a simple signal from a given data. The basic ones are oscillators for periodic signals and noise generators for random signals.
+
+##### Table Lookup Oscillator
+
+##### Noise Generator
+
+### 2.3.2) Time-Segment Based Models
+#### Sampling Synthesis
+#### Granular Synthesis
+
+## 2.4) Frequency Domain Model Synthesis
+#### Additive Synthesis
 
 # 3) Subtractive Synthesis
+
+#### Ring Modulation
+
+#### Frequency Modulation
 
 # 4) Live Electronics
 
