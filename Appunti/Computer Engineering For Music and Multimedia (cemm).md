@@ -120,8 +120,22 @@ It can also be masked with another pure tone
 
 
 # 2) Sound Synthesis & Sound Design
+Sound is analyzed in the frequency domain which is consistent on how the human ear perceives sound. The characteristics of the sound can be better seen (high/low frequencies, harmonic vs non harmonic partials). Moreover **some filters are efficient in frequency domain**
 
+We use the Discrete Fourier Transform (DFT)
+$$X(k)=\sum_{n=0}^{N-1}x(n)e^{-j\omega_kn}$$
+In computers this is implemented via the Fast Fourier Transform (FFT)
+From N samples in the time domain we get N samples in the frequency domain.
+For better understanding see [[DSP 2#5.3) Fast Fourier Transform (FFT)]].
 
+Each value of the FFT is called **bin** and represents the amplitude of a frequency of $f_s/n$ Hz where $f_s$ is the sampling frequency and $n$ the size of the FFT. Since the DFT is periodic only the first $0-f_s/2$ bins have an utility.
+
+If the FFT is bigger than the signal, zero padding is used.
+
+Also the Short Time Fourier Transform (STFT) is used to analyze **time varying signals**. STFT has a compromise. $N$ is the window length: **bigger N implies better frequency resolution but worse time resolution** this is called the **uncertainty principle**. Also here see [[DSP 2#5.3) Fast Fourier Transform (FFT)]]. 
+
+To get a frequency response of a room we can find the Room Impulse Response (RIR) by recording the sound that a balloon makes in the quiet room. Since the balloon can be considered as a dirac delta:
+$$y[n]=(h*\delta)[n]=h[n]$$
 # 3) Subtractive Synthesis
 
 # 4) Live Electronics
