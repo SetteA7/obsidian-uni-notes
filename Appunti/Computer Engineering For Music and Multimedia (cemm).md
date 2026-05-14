@@ -167,6 +167,7 @@ This is a signal based approach. A characteristic of a musical sound is its comp
 This produces a simple signal from a given data. The basic ones are oscillators for periodic signals and noise generators for random signals.
 
 ##### Table Lookup Oscillator
+An oscillator generates a simple periodic waveform. Instead of calculating this waveform, rather a lookup table with equidistant samples of the sound to generat eis used.
 
 ##### Noise Generator
 
