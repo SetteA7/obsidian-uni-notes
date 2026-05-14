@@ -197,6 +197,8 @@ Created by superimposing elementary sounds (sine waves). Any almost periodic sou
 
 It is usually used when a specific sound is needed for example in psychoacoustic as it serves more as an analytical tool.
 
+![[Pasted image 20260514183743.png|Representation|250]]
+
 Additive synthesis can be done in PD.
 ![[Pasted image 20260514172813.png|Additive PD|250]]
 We start with a base 100 Hz fundamental frequency. This is fed:
@@ -228,7 +230,11 @@ Ring modulation consists in multiplying the signal with a sinusoid carrier signa
 $$s=m[n]\cos(2\pi\frac{f_i}{F_s}n+\phi_c)$$
 the produced output moves the spectrum in vicinity of the carrier
 
+![[Pasted image 20260514183828.png|Representation|250]]
+
 #### Frequency Modulation
+
+![[Pasted image 20260514183808.png|Representation|250]]
 
 # 4) Live Electronics
 
@@ -304,7 +310,10 @@ The inputs of the oscillator are:
 2. Phase $[0,1]$
 How it is defined in the image, the frequency is already defined as 440.
 
-arrays are defined via **tabwrite** 
+>[!col]
+>![[Pasted image 20260514183511.png|Graphing Stuff|100]]
+>
+>Arrays are defined via **tabwrite**. With the help of  **metro** that sends a bang the array is saved (every 100 ms) and by activating the DSP this is printed to the GUI graph called *oscilloscope*
 
 usually the inputs are **first hot, then cold:**
 - **Hot:** object reads value of hot input path immediately
