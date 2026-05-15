@@ -226,8 +226,12 @@ Subtractive synthesis consists in applying filters to a spectrally rich waveform
 
 ## 3.1) Non Linear Model Synthesis
 
+In a modulation we modify the og the signal (carrier) with another signal (modulator).
 #### Amplitude Modulation
-In a modulation we multiply the signal (carrier) with another signal (modulator). In AM we do it on the amplitude. Some additional processing has to be done on sinusoids as they shoudl 
+In AM we modify the amplitude and thus a multiplication is used: 
+$$x(t)=c(t)m(t)$$
+Some additional processing has to be done on sinusoids as they should not become negative (phase inversion, ring modulation).
+$$x(t)=\sin(\omega_ct)\sq{\frac{1+\sin(\omega_mt)}2}$$
 Some additional frequencies called sidebands are produced. These are the frequencies $f_{s_{1,2}}=f_c\pm f_m$.
 
 ![[Pasted image 20260514184555.png|Representation|150]]
@@ -239,12 +243,13 @@ In PD this looks like, for example
 Ring modulation consists in multiplying the signal with a sinusoid carrier signal
 $$s=m[n]\cos(2\pi\frac{f_i}{F_s}n+\phi_c)$$
 the produced output moves the spectrum in vicinity of the carrier
-Some additional frequencies called sidebands are produced. These are the frequencies $f_{s_{1,2}}=f_c\pm f_m$.
+Only the sidebands $f_{s_{1,2}}=f_c\pm f_m$ are present
 
 ![[Pasted image 20260514183828.png|Representation|250]]
 
 
-
+In PD this becomes
+![[Pasted image 20260514190022.png|RM in PD Example|150]]
 #### Frequency Modulation
 
 ![[Pasted image 20260514183808.png|Representation|250]]
