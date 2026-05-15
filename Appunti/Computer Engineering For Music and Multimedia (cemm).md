@@ -284,7 +284,6 @@ A **Low Pass Filter (LPF)** cuts high frequencies after a threshold. The attenua
 # 5) Audio Archives Preservation
 ## 5.1) Historical Debate
 Ongoing debate fro 30+ years.
-
 #### William Storm
 **1980:** **William Storm** wrote first article on audio restoration and re-recording procedures with 2 common practices:
 - Type I: Sound preservation + audio history
@@ -293,17 +292,19 @@ Ongoing debate fro 30+ years.
 **Type I is defined as:**
 <p style="text-align: center;">The perpetuation of the sound of an original recording as it was initially reproduced and heard by the people of the era.</p>
 The recording therefore must preserve the content of the recording and the original sound quality characteristics of the historical playback technology of that era.
+- **Focus on listener experience**: recreate how it was heard: same playback equipment.
 
 **Type II is defined as:**
 <p style="text-align: center;">The knowledge acquired through audiohistory preservation provides the sound engineer with a logical place to begin the next step—the search for the true sound of an artist.</p>
 Therefore a newer playback technology can be used with the intent of obtaining the live sound of the artist via a process that is objective valid and verifiable. This allows to transcend the limitations of the original recording.
+- **Focus on artist intent:** true sound past technical limits: modern technology to extract a clean, "live" sound that is objective and verifiable.
 
 #### Dietrich Schuller
 **Unesco:** Unesco commisioned a guide on *save history, not rewrite it* influenced by **Dietrich Schuller**.
 <p style="text-align: center;">
 Analyse what the original carrier represents, technically and artistically, and to start from that analysis in defining what the various aims of re-recording may be.</p>
-Schuller saw the use of og equipment as an exotic aim to capture the og recording feeling. He divided the restoration in 2 parts:
-- **Intentional:** recording, equalization, and noise reduction systems
+This approach is more analytical. It focuses on the carrier itself. Not focused on feeling anymore. He categorized audio changes in two categories:
+- **Intentional:** Choices made by og sound engineer/artists: eq curves, noise reduction
 - **Unintentional:
 	- **imperfection of the recording technique of the time:** unwanted noise, distortions, etc.
 	- **misalignment of recording equipment:** wrong speed, deviation from the vertical cutting angle in cylinders, or misalignment of the recording in magnetic tape (see later)
@@ -317,22 +318,37 @@ Type B uses external info on the original recording to compensate for the imperf
 
 Type C is more in depth and must be documented as the decisions might deviate too much from the og recording. This fixes strict technical limitation
 
-| **Category**                         | **Examples**                            | **Action in Type B**                       |
-| ------------------------------------ | --------------------------------------- | ------------------------------------------ |
-| **Intentional**                      | EQ curves, Noise reduction (Dolby)      | Compensate/Reverse to reach "true" sound.  |
-| **Unintentional (Faults)**           | Wrong playback speed, Tape misalignment | Correct to match intended recording state. |
-| **Unintentional (Technical Limits)** | Surface noise, Rumble, Distorted mics   | **Left alone** (Only addressed in Type C). |
+| **Type**   | **Description**                                                                                                 | **Goal**                                                                          |
+| ---------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **Type A** | Equivalent to Storm’s Type I.                                                                                   | Reconstruct the "exotic" historical listening experience.                         |
+| **Type B** | **The Preservation Standard.** Corrects intentional EQ and technical alignment errors using modern gear.        | Create an objective "master copy" based on scientific knowledge.                  |
+| **Type C** | **Active Restoration.** Compensates for technical limits (removing hiss, rumble, or fixing frequency response). | Create a "clean" version; requires strict documentation because it is subjective. |
 
 ---
 
 #### George Brock-Nannestad
-George Brock-Nannestad focused on pre 1925 recordings and applied reverse engineering to them. He goes back to Miller.
+George Brock-Nannestad focused on pre 1925 acoustic recordings and applied reverse engineering to them. He wants to find the true sound from the recording we are hearing.
+- Treat recording as an invertible math function
+- tries to "undo" the physics of the 1920s equipment to reveal the actual sound that entered the room.
 
+## 5.2) Operational Protocol
+The idea is to keep a preservation copy of the og document: an organized data set that groups all the information represented by the source document.
+1. **Preparation of the Carrier**
+	- Physical Documentation
+		- Photographic Documentation
+		- Scanned Images
+		- Data validation
+	- Visual inspection
+	- Chemical analysis
+	- Optimization of the carrier
+2. Signal Transfer
+	- Analysis of recording format
+	- 
+3. Data Processing and Archival
 
-
-
+## 5.3) Passive Preservation
+## 5.4) Carriers
 Preservation of archives is essential as carriers degrade quickly while playback devices and knowledge are fast obsolete.
-
 
 **Traditional preservation paradigm:** Preserve original
 
