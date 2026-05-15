@@ -285,20 +285,54 @@ A **Low Pass Filter (LPF)** cuts high frequencies after a threshold. The attenua
 ## 5.1) Historical Debate
 Ongoing debate fro 30+ years.
 
-**1980:** William Storm wrote first article on audio restoration and re-recording procedures with 2 common practices:
+#### William Storm
+**1980:** **William Storm** wrote first article on audio restoration and re-recording procedures with 2 common practices:
 - Type I: Sound preservation + audio history
 - Type II: Sound preservation of an artist
 
-Type I is defined as:
+**Type I is defined as:**
 <p style="text-align: center;">The perpetuation of the sound of an original recording as it was initially reproduced and heard by the people of the era.</p>
 The recording therefore must preserve the content of the recording and the original sound quality characteristics of the historical playback technology of that era.
 
-Type II is defined as:
-<p style="text-align: center;">The knowledge acquired through audiohistory preservation provides the sound engineer with a logical place to begin the next step—the search for the true sound of an artist</p>
-Therefore a newer playback technology can be used with the intent of obtaining the live sound of the artist via a process that is objective valid 
+**Type II is defined as:**
+<p style="text-align: center;">The knowledge acquired through audiohistory preservation provides the sound engineer with a logical place to begin the next step—the search for the true sound of an artist.</p>
+Therefore a newer playback technology can be used with the intent of obtaining the live sound of the artist via a process that is objective valid and verifiable. This allows to transcend the limitations of the original recording.
+
+#### Dietrich Schuller
+**Unesco:** Unesco commisioned a guide on *save history, not rewrite it* influenced by **Dietrich Schuller**.
+<p style="text-align: center;">
+Analyse what the original carrier represents, technically and artistically, and to start from that analysis in defining what the various aims of re-recording may be.</p>
+Schuller saw the use of og equipment as an exotic aim to capture the og recording feeling. He divided the restoration in 2 parts:
+- **Intentional:** recording, equalization, and noise reduction systems
+- **Unintentional:
+	- **imperfection of the recording technique of the time:** unwanted noise, distortions, etc.
+	- **misalignment of recording equipment:** wrong speed, deviation from the vertical cutting angle in cylinders, or misalignment of the recording in magnetic tape (see later)
+
+Three approaches were finally formulated:
+- **Type A:** same as Type I of Storm
+- **Type B:** recording as it has been produced, precisely equalized for intentional recording equalizations, compensated for eventual errors caused by misaligned recording equipment and replayed on modern equipment to minimize replay distortions
+- **Type C:** The recording as produced, but with additional compensation for recording imperfections caused by the recording technique of the time
+
+Type B uses external info on the original recording to compensate for the imperfections. The same post prcessing (eq, filters, noise gates) are used. The reconstruction is more objective but still lenient to a slight subjectivity.
+
+Type C is more in depth and must be documented as the decisions might deviate too much from the og recording. This fixes strict technical limitation
+
+| **Category**                         | **Examples**                            | **Action in Type B**                       |
+| ------------------------------------ | --------------------------------------- | ------------------------------------------ |
+| **Intentional**                      | EQ curves, Noise reduction (Dolby)      | Compensate/Reverse to reach "true" sound.  |
+| **Unintentional (Faults)**           | Wrong playback speed, Tape misalignment | Correct to match intended recording state. |
+| **Unintentional (Technical Limits)** | Surface noise, Rumble, Distorted mics   | **Left alone** (Only addressed in Type C). |
+
+---
+
+#### George Brock-Nannestad
+George Brock-Nannestad focused on pre 1925 recordings and applied reverse engineering to them. He goes back to Miller.
+
+
 
 
 Preservation of archives is essential as carriers degrade quickly while playback devices and knowledge are fast obsolete.
+
 
 **Traditional preservation paradigm:** Preserve original
 
