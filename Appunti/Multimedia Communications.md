@@ -1193,8 +1193,11 @@ But not all blocks should be replaced so they are signaled as intra (use og bloc
 
 For each $B_k\iter p$ do:
 - Perform Motion Estimation (ME) with ref image $h$:
-$$J(v)=d(B_k\iter p,B_h\iter{p+v})+\lambda_{ME}r(v)$$
-- 
+$$J(v)=d(B_k\iter p,B_h\iter{p+v})+\lambda_{ME}r(v)\rightarrow v^*=\arg\min_v J(v)$$
+- **Mode select**: decide if inter or intra (see later how)
+	- If intra use jpeg
+	- If inter encode $v^*$ and $E(p)=B_k\iter p-B_h\iter{p+v}$
+
 # 8) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
