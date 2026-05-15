@@ -333,6 +333,7 @@ George Brock-Nannestad focused on pre 1925 acoustic recordings and applied rever
 
 ## 5.2) Operational Protocol
 The idea is to keep a preservation copy of the og document: an organized data set that groups all the information represented by the source document.
+
 1. **Preparation of the Carrier**
 	- Physical Documentation
 		- Photographic Documentation
@@ -341,10 +342,19 @@ The idea is to keep a preservation copy of the og document: an organized data se
 	- Visual inspection
 	- Chemical analysis
 	- Optimization of the carrier
-2. Signal Transfer
+2. **Signal Transfer**
 	- Analysis of recording format
-	- 
-3. Data Processing and Archival
+	- System setup
+		- Replay equipment
+		- Remediation equipment (converter, acquisition software, monitoring, etc.)
+	- Monitoring
+	- Data validation
+	- Archival of source carrier
+3. **Data Processing and Archival**
+	- Metadata extraction
+	- Completion of copy
+
+The input of the remediation process is an audio document, and the expected output is its preservation copy—along with the source document ready to be stored again.
 
 ## 5.3) Passive Preservation
 ## 5.4) Carriers
