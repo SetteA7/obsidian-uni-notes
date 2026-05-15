@@ -355,10 +355,44 @@ The idea is to keep a preservation copy of the og document: an organized data se
 	- Completion of copy
 
 The input of the remediation process is an audio document, and the expected output is its preservation copy—along with the source document ready to be stored again. The og copy has fundamental value that cannot be replaced by any copy.
+
 ## 5.3) Passive Preservation
 
+here is a list of carriers (see later)
 
-## 5.4) Carriers
+| **Carrier**                 | **Period** | **Composition**                     | **Characteristics**                                           |
+| --------------------------- | ---------- | ----------------------------------- | ------------------------------------------------------------- |
+| **Cylinders**               | 1886–1950s | Wax or Nitrocellulose               | Early acoustic format; extremely fragile.                     |
+| **Coarse Groove (Shellac)** | 1887–1960  | Mineral powders + Shellac binder    | Brittle; breaks easily if dropped.                            |
+| **Instantaneous Discs**     | 1930–1950s | Cellulose coating on Aluminum/Glass | **High Risk.** Used for one-off recordings; prone to peeling. |
+| **Vinyl (Microgroove)**     | 1948–Today | PVC-polyacetate copolymer           | More durable but sensitive to heat and bending.               |
+
+---
+The 4 major threats are:
+- **Humidity (Most dangerous):** Hydrolisis causes discs to 
+
+## 5.4) Methodology
+These are the steps to follow:
+
+1. **What should be preserved?**
+Based on risk (vinegar syndrome in tapes), demand and obsolete equipment that is disappearing
+
+2. **Physical Preparation**
+Before fixing, good documentation with: hq photos, video of carrier. Also visual inspection and delicate cleaning. 
+
+3. **Capture Phase**
+Here transform soundwaves in bits. Use highest-end replay equipment and A/D converters. 96 kHz and 24-bit minimum. Must be human assisted
+
+4. **Preservtion Copy**
+Unimedia data set. Audio as BWF. Visual evidence, metadata and description
+
+5. **Ethical Standpoint**
+Do not remove tape errors (hiss, scratch). his noise is "secondary information" that tells the story of how the document was transmitted. It is better to have a high-resolution file containing the noise than a "clean" file where historical data has been filtered out.
+
+6. **Data Integrity**
+One wrong bit can destroy the whole process. The protocol requires three types of verification (MD5, SHA-1, and CRC32) to ensure the file hasn't changed over time. At least **two copies** must exist at all times in different physical locations to avoid a single point of failure. 
+
+## 5.5) Carriers
 Preservation of archives is essential as carriers degrade quickly while playback devices and knowledge are fast obsolete.
 
 **Traditional preservation paradigm:** Preserve original
