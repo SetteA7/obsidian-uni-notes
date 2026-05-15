@@ -265,6 +265,18 @@ The **Low Frequency Oscillator (LFO)** is an oscillator with frequencies below t
 ![[Pasted image 20260515110221.png|LFO Used fro Tremolo and Vibrato|350]]
 
 #### Amplitude Envelope
+Each sound has 4 transients:
+- **Attack:** start from zero to max value
+- **Decay:** after max decrease
+- **Sustain:** constant amplitude for a time frame
+- **Release:** amplitude decreases to 0
+
+![[Pasted image 20260515110525.png|4 Phases of Sound|350]]
+The evolution of a sound’s amplitude over time, across its four transients, is called the amplitude envelope. In electronic music, it is often referred to by the acronym **ADSR (Attack, Decay, Sustain, Release).**
+
+#### Filters 
+
+A **Low Pass Filter (LPF)** filter cuts high frequencies after a threshold. The attenuation curve starts at the cutoff frequency and decreases to 0.
 
 # 4) Live Electronics
 
