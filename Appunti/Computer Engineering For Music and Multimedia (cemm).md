@@ -354,9 +354,10 @@ The idea is to keep a preservation copy of the og document: an organized data se
 	- Metadata extraction
 	- Completion of copy
 
-The input of the remediation process is an audio document, and the expected output is its preservation copy—along with the source document ready to be stored again.
-
+The input of the remediation process is an audio document, and the expected output is its preservation copy—along with the source document ready to be stored again. The og copy has fundamental value that cannot be replaced by any copy.
 ## 5.3) Passive Preservation
+
+
 ## 5.4) Carriers
 Preservation of archives is essential as carriers degrade quickly while playback devices and knowledge are fast obsolete.
 
