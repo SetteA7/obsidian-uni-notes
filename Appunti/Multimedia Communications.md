@@ -1158,10 +1158,26 @@ $$f(n+a,m+b)=(1-a)(1-b)x+a(1-b)y+(1-a)bz+abw$$
 ---
 
 ## 6.3) Parametric Methods
+A parametric model shows the motion field as a closed form function of the pixel position. The dof are the parameters of the function. It can be global or region based (local).
+Block Matching is a special case of parametric methods with 2 parameters per bock (u,v translations), that is:
+$$v(p)=\begin{bmatrix}v_x\\ v_y\end{bmatrix}=\begin{bmatrix}b_1\\ b_2\end{bmatrix}$$
+The affine model is
+$$v(p)=b+Bp=\begin{bmatrix}b_1\\ b_2\end{bmatrix}+\begin{bmatrix}b_3 & b_4\\ b_5 & b_6\end{bmatrix}p$$
+This has only 6 dof but can represent many complex fields: rotation, zoom, translation
 
+How are the parameters of the model estimated?
+First dense field, then find global motion by least squares
 ## 6.4) Deep Learning Methods
 
-# 7) Proofs
+# 7) Video Compression Principles
+Video compression uses the spatial redundancy (seen in jpeg) but also time redundancy via motion fields
+
+![[Pasted image 20260515171702.png|General Scheme|350]]
+The temporal compression works by dividing the image in blocks $B_k\iter p$ and finding the most similar block $B_h\iter{p+v}$ in the ref image. The resulting displacements form the motion field.
+
+
+
+# 8) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
 Codewords are already given. Set $L_\max=\max_i(l_i)$ ^3d4d31
