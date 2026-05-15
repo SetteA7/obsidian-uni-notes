@@ -253,10 +253,11 @@ In PD this becomes
 #### Frequency Modulation
 Here the frequency is modulated with another signal:
 $$x(t)=\sin\par{\omega_ct +A_m\sin(\omega_m t)}$$
-where $A_m$ is the freque
+where $A_m$ is the frequency deviation which shows how much the frequency is changed.
 
 ![[Pasted image 20260514183808.png|Representation|250]]
-
+In PD we have
+![[Pasted image 20260515103436.png|Frequency Modulation Example|250]]
 # 4) Live Electronics
 
 # 5) Audio Archives Preservation
