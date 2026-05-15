@@ -258,6 +258,14 @@ where $A_m$ is the frequency deviation which shows how much the frequency is cha
 ![[Pasted image 20260514183808.png|Representation|250]]
 In PD we have
 ![[Pasted image 20260515103436.png|Frequency Modulation Example|250]]
+## 3.2) Misc Stuff to know about subtractive synthesis.
+#### Low Frequency Oscillator (LFO)
+The **Low Frequency Oscillator (LFO)** is an oscillator with frequencies below the audible range (<20 Hz). It is used to modulate parameters. If higher frequencies are used, the result is AM or FM. The depth is the strength of the modulation
+
+![[Pasted image 20260515110221.png|LFO Used fro Tremolo and Vibrato|350]]
+
+#### Amplitude Envelope
+
 # 4) Live Electronics
 
 # 5) Audio Archives Preservation
@@ -306,7 +314,7 @@ as do the longer molecules
 
 This can be solved by baking (in the oven) at max 50-60°C for 1h up to 8 hours. However a wrongly baked tape can be irreparably damaged.
 
-# 6) Pure Data TODO
+# 6) Pure Data
 PD is a cross platform open source real time dataflow program environment
 ![[Pasted image 20260514104835.png|PD|200]]
 The creator is **Miller Puckette**.
