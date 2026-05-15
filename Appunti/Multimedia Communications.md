@@ -1175,8 +1175,26 @@ Video compression uses the spatial redundancy (seen in jpeg) but also time redun
 ![[Pasted image 20260515171702.png|General Scheme|350]]
 The temporal compression works by dividing the image in blocks $B_k\iter p$ and finding the most similar block $B_h\iter{p+v}$ in the ref image. The resulting displacements form the motion field.
 
+The resulting vector fields are similar to the geometry of the scene, so the signal is NOT sparse. Therefore Exp-Golomb should **not** be used (not centered in 0).
 
+We can still use predictors:
+To reduce the bitrate we exploit the correlation between adjacent vectors. We define a Motion Vector Predictor (MVP) and encode only the Difference (MVD)
+$$MVD=MV-MVP$$
+One useful predictor is the median amongst 3 adjacent blocks:
+![[Pasted image 20260515172404.png|Median Blocks|250]]
+This reduces substantially the number of bits needed.
 
+#### Motion Compensation
+We can predict the entire new image by copying the blocks in the new position:
+$$\hat I_k(p)=I_h(p+v^*(p))$$
+
+![[Pasted image 20260515172715.png|Example|400]]
+But not all blocks should be replaced so they are signaled as intra (use og block) or inter frame blocks (use predictor). 
+
+For each $B_k\iter p$ do:
+- Perform Motion Estimation (ME) with ref image $h$:
+$$J(v)=d(B_k\iter p,B_h\iter{p+v})+\lambda_{ME}r(v)$$
+- 
 # 8) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
