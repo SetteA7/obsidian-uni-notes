@@ -282,6 +282,22 @@ A **Low Pass Filter (LPF)** cuts high frequencies after a threshold. The attenua
 # 4) Live Electronics
 
 # 5) Audio Archives Preservation
+## 5.1) Historical Debate
+Ongoing debate fro 30+ years.
+
+**1980:** William Storm wrote first article on audio restoration and re-recording procedures with 2 common practices:
+- Type I: Sound preservation + audio history
+- Type II: Sound preservation of an artist
+
+Type I is defined as:
+<p style="text-align: center;">The perpetuation of the sound of an original recording as it was initially reproduced and heard by the people of the era.</p>
+The recording therefore must preserve the content of the recording and the original sound quality characteristics of the historical playback technology of that era.
+
+Type II is defined as:
+<p style="text-align: center;">The knowledge acquired through audiohistory preservation provides the sound engineer with a logical place to begin the next step—the search for the true sound of an artist</p>
+Therefore a newer playback technology can be used with the intent of obtaining the live sound of the artist via a process that is objective valid 
+
+
 Preservation of archives is essential as carriers degrade quickly while playback devices and knowledge are fast obsolete.
 
 **Traditional preservation paradigm:** Preserve original
