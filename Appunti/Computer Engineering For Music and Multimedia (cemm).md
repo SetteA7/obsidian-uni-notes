@@ -251,6 +251,9 @@ Only the sidebands $f_{s_{1,2}}=f_c\pm f_m$ are present
 In PD this becomes
 ![[Pasted image 20260514190022.png|RM in PD Example|150]]
 #### Frequency Modulation
+Here the frequency is modulated with another signal:
+$$x(t)=\sin\par{\omega_ct +A_m\sin(\omega_m t)}$$
+where $A_m$ is the freque
 
 ![[Pasted image 20260514183808.png|Representation|250]]
 
