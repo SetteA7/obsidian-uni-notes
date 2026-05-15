@@ -275,8 +275,9 @@ Each sound has 4 transients:
 The evolution of a sound’s amplitude over time, across its four transients, is called the amplitude envelope. In electronic music, it is often referred to by the acronym **ADSR (Attack, Decay, Sustain, Release).**
 
 #### Filters 
+A **Low Pass Filter (LPF)** cuts high frequencies after a threshold. The attenuation curve starts at the cutoff frequency and decreases to 0. In PD a LPF is the object **lop$\sim$**. The attenuation per octave is 6db per object, so concatenating them like in the image we can get more attenuation.
 
-A **Low Pass Filter (LPF)** filter cuts high frequencies after a threshold. The attenuation curve starts at the cutoff frequency and decreases to 0.
+![[Pasted image 20260515112202.png|LPF in PD|250]]
 
 # 4) Live Electronics
 
