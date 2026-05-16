@@ -1270,8 +1270,7 @@ The block $B_k$ is encoded as follows:
 The decoder is a subset of the encoder!
 ![[Pasted image 20260516145213.png|Decoder Is Subset After Lossless Decoding|350]]
 The decoder is a simplified version without ME, mode decision, partition, control.
-Each block is decoded based on the mode, however the modes are not standardized, just their syntax.
-- It is possible to take a suboptimal decision
+Each block is decoded based on the mode, however the modes are not standardized, just their syntax. The encoder could take a suboptimal approach, the decoder doesn't care.
 
 
 # 8) Proofs
