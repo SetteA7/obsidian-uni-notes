@@ -1260,7 +1260,10 @@ The $J_k$ equation can be seen as a line in the R-D plane and the solution is th
 This is the full video encoder:
 ![[Pasted image 20260516141302.png|Video Encoder|450]]
 The block $B_k$ is encoded as follows:
-- The residual error $e_k=B_k-\hat B_k$ is found and encoded in a jpeg like format.
+- 🔵 The residual error $e_k=B_k-\hat B_k$ is found and encoded in a jpeg like format.
+- 💚 Local decoder: find $\tilde B_k=\tilde e_k + \hat B_k$. This is how the block will be decoded and it is saved in frame buffer (if inter).
+- 🧡 Predictors: ME/MC predictors (based on $B_k$+buffer) or Intra predictors. This predicts
+- ⚪ Control: Final generated bits are saved in channel buffer. If the rate is too high, the control block expands the quantization step. 
 
 
 
