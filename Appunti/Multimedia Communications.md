@@ -1260,14 +1260,18 @@ The $J_k$ equation can be seen as a line in the R-D plane and the solution is th
 This is the full video encoder:
 ![[Pasted image 20260516141302.png|Video Encoder|450]]
 The block $B_k$ is encoded as follows:
-- 🔵 The residual error $e_k=B_k-\hat B_k$ is found and encoded in a jpeg like format.
+- 🔵 The residual error $e_k=B_k-\hat B_k$ is found and encoded in a jpeg like format. Also the mode is encoded.
 - 💚 Local decoder: find $\tilde B_k=\tilde e_k + \hat B_k$. This is how the block will be decoded and it is saved in frame buffer (if inter).
 - 🧡 Predictors: ME/MC predictors (based on $B_k$+buffer) or Intra predictors. This predicts
 - ⚪ Control: Final generated bits are saved in channel buffer. If the rate is too high, the control block expands the quantization step. The buffer is written at speed $R_C$ and read at speed $R_T$.
 	- If $R_C>R_T$: the buffer grows, if it surpasses a threshold the controller increases the quantization step $\longrightarrow R_C\nearrow$ 
 	- If $R_C<R_T$: the buffer empties, if it decreases below a threshold the controller reduces the quantization step $\longrightarrow R_C\searrow$ 
 
-
+The decoder is a subset of the encoder!
+![[Pasted image 20260516145213.png|Decoder Is Subset After Lossless Decoding|350]]
+The decoder is a simplified version without ME, mode decision, partition, control.
+Each block is decoded based on the mode, however the modes are not standardized, just their syntax.
+- It is possible to take a suboptimal decision
 
 
 # 8) Proofs
