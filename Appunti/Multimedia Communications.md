@@ -1256,6 +1256,7 @@ The $J_k$ equation can be seen as a line in the R-D plane and the solution is th
 - High $\lambda$: Lower bit budget, will choose points with less rate and more distortion (direct)
 - Low $\lambda$: Higher bit budget, will choose points with less distortion and more rate (lossless)
 ![[Pasted image 20260516121055.png|Example|300]]
+## 7.4) Hybrid Video Codec
 
 
 
