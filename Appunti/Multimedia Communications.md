@@ -1204,7 +1204,7 @@ But not all blocks should be replaced so they are signaled as intra (use og bloc
 For each $B_k\iter p$ do:
 - Perform Motion Estimation (ME) with ref image $h$:
 $$J(v)=d(B_k\iter p,B_h\iter{p+v})+\lambda_{ME}r(v)\rightarrow v^*=\arg\min_v J(v)$$
-- **Mode select**: decide if inter or intra (see later how)
+- **Mode select**: decide if inter or intra (see [[#7.3) Mode Selection]])
 	- If intra use jpeg
 	- If inter encode $v^*$ and $E(p)=B_k\iter p-B_h\iter{p+v}$
 
@@ -1216,7 +1216,31 @@ Each frame can be one of the following three:
 - P Frame: Predictive coded, Inter frame
 - B Frame: Bi directional prediction
 
-The frames are organized into a periodical structure called Group of Pictures (GOP). This structure shows how **frames**
+The frames are organized into a periodical structure called Group of Pictures (GOP). This structure shows **how frames can be predicted from other frames**. In older standards I,P frames are called Anchor Frames (AF).
+
+**In MPEG-1, MPEG-2:**
+- First frame of GOP is **always** I frame
+- Between two AF there are some B frames (possibly also zero)
+
+I Frames are JPEG like coed:
+- Low complexity and rate
+- Can be decoded independently from other frames
+- I frames are used for fast forward
+- Stop error propagation
+- Must have high quality as GOP depends on this frame
+
+P Frames are predicted from previous AF. They have therefore a higher complexity but a higher compression rate per same block
+
+B Frames have very high complexity (double ME) but also very high compression ratio.
+
+## 7.3) Mode Selection
+The mode selection problem is to decide how to encode each block or frame. Until H.264 the blocks were called macroblocks (MB), now they are coding units (CU).
+
+4 Types of CU
+- **Intra:** No temporal prediction, available for all frames
+- **Inter:** ME/MC prediction. Not on I frames
+- **Direct:** Motion vector from last frame, no additional coding. Not on I frames
+- **Lossless:** available for all frames
 
 # 8) Proofs
 **Kraft Inequality:**
