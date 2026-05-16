@@ -1272,8 +1272,18 @@ The decoder is a subset of the encoder!
 The decoder is a simplified version without ME, mode decision, partition, control.
 Each block is decoded based on the mode, however the modes are not standardized, just their syntax. The encoder could take a suboptimal approach, the decoder doesn't care.
 
+# 8) Modern Video Compression Standards
+The decoder is the only part defined in the standard:
+Standards exclusively define the bitstream syntax and the decoding process. Encoder architecture and optimization strategies remain open problems for industrial competition.
 
-# 8) Proofs
+The improvements come from how many ways the encoder can encode the images. This is mainly related to how the image can be partitioned in blocks.
+
+**H.264/AVC** has $16\times16$ MB or $8\times8$ and $4\times4$ MB which are inefficient for 1080p or 4K videos.
+
+H.265/HEVC has a Coding Tree Unit (CTU) where a MB of $64\times 64$ can be divided into other squares until $4\times 4$
+
+
+# 9) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
 Codewords are already given. Set $L_\max=\max_i(l_i)$ ^3d4d31
