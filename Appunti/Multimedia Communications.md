@@ -1263,7 +1263,9 @@ The block $B_k$ is encoded as follows:
 - 🔵 The residual error $e_k=B_k-\hat B_k$ is found and encoded in a jpeg like format.
 - 💚 Local decoder: find $\tilde B_k=\tilde e_k + \hat B_k$. This is how the block will be decoded and it is saved in frame buffer (if inter).
 - 🧡 Predictors: ME/MC predictors (based on $B_k$+buffer) or Intra predictors. This predicts
-- ⚪ Control: Final generated bits are saved in channel buffer. If the rate is too high, the control block expands the quantization step. 
+- ⚪ Control: Final generated bits are saved in channel buffer. If the rate is too high, the control block expands the quantization step. The buffer is written at speed $R_C$ and read at speed $R_T$.
+	- If $R_C>R_T$: the buffer grows, if it surpasses a threshold the controller increases the quantization step $\longrightarrow R_C\nearrow$ 
+	- If $R_C<R_T$: the buffer empties, if it decreases below a threshold the controller reduces the quantization step $\longrightarrow R_C\searrow$ 
 
 
 
