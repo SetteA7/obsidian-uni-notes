@@ -1135,6 +1135,15 @@ Possible regularization terms are:
 - Cost function: choose not best MSE, but best coding option.
 - Distance: prioritize vectors with length same as mean of adjacent blocks
 
+
+| Cost Function      | Pro                                   | Con                    |
+| ------------------ | ------------------------------------- | ---------------------- |
+| SSD                | Optimizes PSNR                        | Larger rate (outliers) |
+| SAD                | Better rate (implicit regularization) | Worse PSNR             |
+| SAD+regularization | Best option                           |                        |
+
+---
+
 The **number of candidates** can also be reduced by using some research strategies:
 - Naive: test every vector $i,j$
 - Less naive: test every vector in a $2A+1\times 2B+1$ window center in $i,j$ 
@@ -1159,7 +1168,7 @@ $$f(n+a,m+b)=(1-a)(1-b)x+a(1-b)y+(1-a)bz+abw$$
 
 ## 6.3) Parametric Methods
 A parametric model shows the motion field as a closed form function of the pixel position. The dof are the parameters of the function. It can be global or region based (local).
-Block Matching is a special case of parametric methods with 2 parameters per bock (u,v translations), that is:
+Block Matching is a special case of parametric methods with 2 parameters per bock (u,v translations), that is the **translational**:
 $$v(p)=\begin{bmatrix}v_x\\ v_y\end{bmatrix}=\begin{bmatrix}b_1\\ b_2\end{bmatrix}$$
 The affine model is
 $$v(p)=b+Bp=\begin{bmatrix}b_1\\ b_2\end{bmatrix}+\begin{bmatrix}b_3 & b_4\\ b_5 & b_6\end{bmatrix}p$$
@@ -1167,7 +1176,8 @@ This has only 6 dof but can represent many complex fields: rotation, zoom, trans
 
 How are the parameters of the model estimated?
 First dense field, then find global motion by least squares
-## 6.4) Deep Learning Methods
+## 6.4) Deep Learning Methods TODO
+
 
 # 7) Video Compression Principles
 Video compression uses the spatial redundancy (seen in jpeg) but also time redundancy via motion fields
@@ -1198,6 +1208,7 @@ $$J(v)=d(B_k\iter p,B_h\iter{p+v})+\lambda_{ME}r(v)\rightarrow v^*=\arg\min_v J(
 	- If intra use jpeg
 	- If inter encode $v^*$ and $E(p)=B_k\iter p-B_h\iter{p+v}$
 
+A variable block size is more effective although it is more complex to implement.
 # 8) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
