@@ -1280,7 +1280,8 @@ The improvements come from how many ways the encoder can encode the images. This
 
 **H.264/AVC** has $16\times16$ MB or $8\times8$ and $4\times4$ MB which are inefficient for 1080p or 4K videos.
 
-H.265/HEVC has a Coding Tree Unit (CTU) where a MB of $64\times 64$ can be divided into other squares until $4\times 4$
+**H.265/HEVC** has a Coding Tree Unit (CTU) where a MB of $64\times 64$ can be divided into other squares until $4\times 4$
+
 
 
 # 9) Proofs
