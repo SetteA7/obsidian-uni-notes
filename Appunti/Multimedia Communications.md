@@ -1257,6 +1257,11 @@ The $J_k$ equation can be seen as a line in the R-D plane and the solution is th
 - Low $\lambda$: Higher bit budget, will choose points with less distortion and more rate (lossless)
 ![[Pasted image 20260516121055.png|Example|300]]
 ## 7.4) Hybrid Video Codec
+This is the full video encoder:
+![[Pasted image 20260516141302.png|Video Encoder|450]]
+The block $B_k$ is encoded as follows:
+- The residual error $e_k=B_k-\hat B_k$ is found and encoded in a jpeg like format.
+
 
 
 
