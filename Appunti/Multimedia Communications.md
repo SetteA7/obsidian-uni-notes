@@ -1209,6 +1209,15 @@ $$J(v)=d(B_k\iter p,B_h\iter{p+v})+\lambda_{ME}r(v)\rightarrow v^*=\arg\min_v J(
 	- If inter encode $v^*$ and $E(p)=B_k\iter p-B_h\iter{p+v}$
 
 A variable block size is more effective although it is more complex to implement.
+
+## 7.2) Group of Pictures (GOP)
+Each frame can be one of the following three:
+- I Frame: Intra coded, no prediction
+- P Frame: Predictive coded, Inter frame
+- B Frame: Bi directional prediction
+
+The frames are organized into a periodical structure called Group of Pictures (GOP). This structure shows how **frames**
+
 # 8) Proofs
 **Kraft Inequality:**
 Proof of Necessity ($\implies$): 
