@@ -1236,11 +1236,28 @@ B Frames have very high complexity (double ME) but also very high compression ra
 ## 7.3) Mode Selection
 The mode selection problem is to decide how to encode each block or frame. Until H.264 the blocks were called macroblocks (MB), now they are coding units (CU).
 
-4 Types of CU
+4 Types of coding modes for each CU (mode selection problem)
 - **Intra:** No temporal prediction, available for all frames
 - **Inter:** ME/MC prediction. Not on I frames
 - **Direct:** Motion vector from last frame, no additional coding. Not on I frames
 - **Lossless:** available for all frames
+
+Moreover since CUs can be of varying sizes we also have a **block partition problem.**
+
+The solution is very much a brute force one:
+Suppose fixed block size. The aim is to find the coding mode $i_k$ that minimizes $D$ while having rate $R$. Quantization step is given
+$$D=\sum_{k=1}^KD_k(i_k,Q)\qquad R=\sum_{k=1}^KR_k(i_k,Q)$$
+Therefore we must minimize
+$$J(i,Q,\lambda)=\sum_{k=1}^KD_k(i_k,Q)+\lambda\sum_{k=1}^KR_k(i_k,Q)=D+\lambda R$$
+Too complex, therefore we just minimize
+$$J_k(i_k,Q,\lambda)=D_k(i_k,Q)+\lambda R_k(i_k,Q)$$
+The parameter $\lambda$ is determined empirically for each coded and also $\lambda_{ME}=\sqrt\lambda$
+The $J_k$ equation can be seen as a line in the R-D plane and the solution is the first point that is touched by the line. 
+- High $\lambda$: Lower bit budget, will choose points with less rate and more distortion (direct)
+- Low $\lambda$: Higher bit budget, will choose points with less distortion and more rate (lossless)
+![[Pasted image 20260516121055.png|Example|300]]
+
+
 
 # 8) Proofs
 **Kraft Inequality:**
