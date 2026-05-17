@@ -1546,6 +1546,33 @@ So the system is limited by:
 - Brightness not constant
 - Occlusion and noise
 
+#### Tracking in 1D Case
+Consider this case
+![[Pasted image 20260517121336.png|Example|300]]
+From the brightness constancy and by supposing small motion we get:
+$$I_x=\frac{\partial I}{\partial x}|_t\quad I_t=\frac{\partial I}{\partial t}|_{x=p}\rightarrow v=-\frac{I_t}{I_x}$$
+This converges at about the 5th iteration.
+
+1. Compute local derivative around $p$: $I_x$
+2. Initialize velocity vector $v\leftarrow 0$
+3. Repeat the following:
+	1. Compensate for current velocity vector: $I'(x,t+1)=I(x+v,t+1)$
+	2. Compute temporal derivative $I_t=I'(p,t+1)-I(p,t)$
+	3. Update velocity vector $v\leftarrow v-I_t/I_x$
+
+
+It is possible to regularize the window $S$.
+**Horn Schunk** regularization:
+$$\min\int_S[\nabla I^Tv+\dot I]+\lambda\par{\abs{\nabla v_x}^2+\abs{\nabla v_y}^2}^2dS$$
+this penalizes the large change in displacement. A close imperfect match is better than a very distant perfect match.
+
+**Lucas Kanade** regularization:
+Here $v$ is assumed constant and that the central pixel $p$ of window $S$ is more likely:
+$$\forall x_i\in S\quad \nabla I(x_i,t)^Tv=-\dot I(x_i,t)$$
+This is solved via pseudo inverse and by calling $A$ the spatial derivative matrix and $b$ the temporal derivative matrix:
+$$Av=b\rightarrow v=A^\dagger b=(A^TA)^{-1}A^Tb$$
+
+
 ---
 Proof of Image brightness constancy equation
 Let
