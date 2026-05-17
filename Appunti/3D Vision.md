@@ -1609,10 +1609,20 @@ This allows for coupling points along a trajectory
 3. Repeat until convergence
 
 # 8) 3D Gaussian Splatting Rendering
-A 3DGS is a collection of scaled and translated gaussians in 3D space. The rendering uses ray casting and by simulatng light absorption through the gaussians.
+A point cloud is usually rendered as a volume.  The rendering uses ray casting and by simulating light absorption through the volume.
 
+The opacity is computed with the density at sample $j$ $\sigma_j$ and distance between samples $\delta_j$
+$$\alpha_i=1-\exp{-\sigma_i\delta_i}\in[0,1]$$
+So the transmittance of the i-th sample is:
+$$T_i=\prod_{j=1}^{i-1}1-\alpha_j$$
+The final color takes into account the transmittance at each sample:
+$$C=\sum_{i=1}^N T_i\alpha_ic_i$$
 
+Here is a graphical example
+![[Pasted image 20260517124855.png|Example|350]]
+This has a significant throwback: it must sample also empty space which also takes computational effort
 
+3DGS wants to optimize this process.
 
 
 # 9) Point Cloud
