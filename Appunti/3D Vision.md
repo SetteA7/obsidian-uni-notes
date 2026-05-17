@@ -1512,10 +1512,23 @@ Define scale factor:
 $$\zeta_ip_i=[R|t]M_i\rightarrow \zeta_iK^{-1}m_i=R\tilde M_i+t$$
 The system of $n$ points becomes
 $$K^{-1}\underbrace{[\zeta_1m_1,\ \zeta_2m_2,\ ..., \ \zeta_nm_n]}_W=[R|t]\underbrace{[M_1,\ M_2,\ ...,\ M_n]}_M\rightarrow K^{-1}W=[R|t]M$$
+Let $r=\text{rank}(M)$ then the solution via SVD requires the last $n-r$ rows of $V^T$:
+$$MV_r=0\rightarrow K^{-1}WV_r=0$$
+Notice that W under vec can be written as:
+$$vec(W)=\begin{bmatrix}\zeta_1m_1\\\vdots\\\zeta_nm_n\end{bmatrix}=\begin{bmatrix}m_1& 0&...&0\\
+0 & m_2 &...&0\\
+\vdots&&\ddots&\vdots\\
+0 & ... &  & m_n\end{bmatrix}\begin{bmatrix}\zeta_1\\\vdots\\\zeta_n\end{bmatrix}=D\zeta$$
+And with the vec trick we end up with:
+$$(V_r^T\otimes K^{-1})vec(W)=((V_r^T\otimes K^{-1})^TD)\zeta=0$$
+So $\zeta$ can be found with the kernel of $(V_r^T\otimes K^{-1})^TD$. And to do so we need at least
+$$n\geq \frac{3r-1}2$$
+points
 
-
+##### Lowe's Non Linear Method TODO
 
 # 7) Optical Flow
+
 
 # 8) 3D Gaussian Splatting
 
