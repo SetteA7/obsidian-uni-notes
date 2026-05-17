@@ -1546,6 +1546,20 @@ So the system is limited by:
 - Brightness not constant
 - Occlusion and noise
 
+
+---
+Proof of Image brightness constancy equation
+Let
+$$I(x,t)=I(x+v\Delta t,t+\Delta t)$$
+With the first order taylor expansion we get:
+$$I(x+v\Delta t,t+\Delta t)=I(x,t)+\tilde\nabla I(x,t)^T\begin{bmatrix}v\Delta t\\\Delta t\end{bmatrix}=I(x,t)+\nabla I(x,t)v\Delta t+\dot I(x,t)\Delta t$$
+with $\tilde\nabla I(x,t)$ is the array of all partial derivatives (space, time)
+$$\tilde\nabla I(x,t)=\begin{bmatrix}
+\nabla I(x,t)\\
+\dot I(x,t)
+\end{bmatrix}$$
+
+
 #### Tracking in 1D Case
 Consider this case
 ![[Pasted image 20260517121336.png|Example|300]]
@@ -1561,31 +1575,43 @@ This converges at about the 5th iteration.
 	3. Update velocity vector $v\leftarrow v-I_t/I_x$
 
 
+#### Algorithms
 It is possible to regularize the window $S$.
-**Horn Schunk** regularization:
+##### **Horn Schunk** regularization:
 $$\min\int_S[\nabla I^Tv+\dot I]+\lambda\par{\abs{\nabla v_x}^2+\abs{\nabla v_y}^2}^2dS$$
 this penalizes the large change in displacement. A close imperfect match is better than a very distant perfect match.
 
-**Lucas Kanade** regularization:
+##### **Lucas Kanade** regularization:
 Here $v$ is assumed constant and that the central pixel $p$ of window $S$ is more likely:
 $$\forall x_i\in S\quad \nabla I(x_i,t)^Tv=-\dot I(x_i,t)$$
 This is solved via pseudo inverse and by calling $A$ the spatial derivative matrix and $b$ the temporal derivative matrix:
 $$Av=b\rightarrow v=A^\dagger b=(A^TA)^{-1}A^Tb$$
+Now add the weights:
+$$\forall x_i\in S\quad w(x_i)\nabla I(x_i,t)^Tv=-w(x_i)\dot I(x_i,t)$$
+with $W$ the weight matrix:
+$$A=AW, b=Wb\rightarrow v=(A^TW^2A)^{-1}A^TW^2b$$
+
+The algorithm is:
+1. Filter spatially using 2D gaussian kernel
+2. Filter temporally using 1D gaussian kernel
+3. For every image and pixel do:
+	1. Compute gradient $\nabla I(x_i,t)$ and spatial derivative $\dot I(x_i,t)$
+	2. compute $A,b$
+	3. compute $v=$ pseudo inverse
+
+The problem is well conditioned if $c=\lambda_\max/\lambda_\min\approx 1$ that is, the matrix can be inverted and therefore it implies we have strong textures. This does not work well on edges!
+
+##### Kanade Lucas Tomasi TODO
+This allows for coupling points along a trajectory
+
+1. Estimate field using Lucas Kanade
+2. Warp the image based on the field
+3. Repeat until convergence
+
+# 8) 3D Gaussian Splatting Rendering
+A 3DGS is a collection of scaled and translated gaussians in 3D space. The rendering uses ray casting and by simulatng light absorption through the gaussians.
 
 
----
-Proof of Image brightness constancy equation
-Let
-$$I(x,t)=I(x+v\Delta t,t+\Delta t)$$
-With the first order taylor expansion we get:
-$$I(x+v\Delta t,t+\Delta t)=I(x,t)+\tilde\nabla I(x,t)^T\begin{bmatrix}v\Delta t\\\Delta t\end{bmatrix}=I(x,t)+\nabla I(x,t)v\Delta t+\dot I(x,t)\Delta t$$
-with $\tilde\nabla I(x,t)$ is the array of all partial derivatives (space, time)
-$$\tilde\nabla I(x,t)=\begin{bmatrix}
-\nabla I(x,t)\\
-\dot I(x,t)
-\end{bmatrix}$$
-
-# 8) 3D Gaussian Splatting
 
 
 
