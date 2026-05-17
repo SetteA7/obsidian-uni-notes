@@ -1528,7 +1528,7 @@ points
 ##### Lowe's Non Linear Method TODO
 
 # 7) Optical Flow
-Optical flows relates a motion vector field to pixels. This represents the 2D projection of the physical movement of points relative to observer which is equal as saying the 2D displacements of the pixel patches on the image plane
+Optical flows relates a motion vector field to pixels. This represents the 2D projection of the physical movement of points relative to observer which is equal as saying the 2D displacements of the pixel patches on the image plane. Optical flow is important as it allows to understand scene dynamics.
 
 One common assumption is the **constant illumination assumption:**
 $$I(p_i,t)=I(p_i+v_i,t+1)$$
@@ -1538,6 +1538,13 @@ From here we get the **Image brightness constancy equation**
 $$\nabla I(x,t)v+\dot I(x,t)=0$$
 which has 2 unknowns ($v=(v_x,v_y)$) but one single equation (underdetermined).
 
+It is possible that with repetitive motion the vexctor field might break (large spot with same color)
+![[Pasted image 20260517120823.png|Example|250]]
+So the system is limited by:
+- Textureless surfaces
+- Aperture problems: motion perpendicular to edge, not along it
+- Brightness not constant
+- Occlusion and noise
 
 ---
 Proof of Image brightness constancy equation
