@@ -1528,7 +1528,28 @@ points
 ##### Lowe's Non Linear Method TODO
 
 # 7) Optical Flow
+Optical flows relates a motion vector field to pixels. This represents the 2D projection of the physical movement of points relative to observer which is equal as saying the 2D displacements of the pixel patches on the image plane
 
+One common assumption is the **constant illumination assumption:**
+$$I(p_i,t)=I(p_i+v_i,t+1)$$
+this is obviously not true in practice (not lambertian surfaces, occlusions)
+
+From here we get the **Image brightness constancy equation**
+$$\nabla I(x,t)v+\dot I(x,t)=0$$
+which has 2 unknowns ($v=(v_x,v_y)$) but one single equation (underdetermined).
+
+
+---
+Proof of Image brightness constancy equation
+Let
+$$I(x,t)=I(x+v\Delta t,t+\Delta t)$$
+With the first order taylor expansion we get:
+$$I(x+v\Delta t,t+\Delta t)=I(x,t)+\tilde\nabla I(x,t)^T\begin{bmatrix}v\Delta t\\\Delta t\end{bmatrix}=I(x,t)+\nabla I(x,t)v\Delta t+\dot I(x,t)\Delta t$$
+with $\tilde\nabla I(x,t)$ is the array of all partial derivatives (space, time)
+$$\tilde\nabla I(x,t)=\begin{bmatrix}
+\nabla I(x,t)\\
+\dot I(x,t)
+\end{bmatrix}$$
 
 # 8) 3D Gaussian Splatting
 
