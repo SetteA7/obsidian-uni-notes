@@ -1505,6 +1505,16 @@ $$\epsilon =\frac1n\sum_{i=1}^n\abs{M_i'-M_i}^2$$
 This aims to **find position and orientation of camera given some 3d points**
 
 ![[Pasted image 20260512172547.png|Example|250]]
+In general 6 normalized points are required to estimate $R,t$
+$$p_i=\begin{bmatrix}u_i\\ v_i\\1\end{bmatrix}=K^{-1}m_i\qquad p_i\simeq[R|t]M_i$$
+##### Fiore's Linear Method
+Define scale factor:
+$$\zeta_ip_i=[R|t]M_i\rightarrow \zeta_iK^{-1}m_i=R\tilde M_i+t$$
+The system of $n$ points becomes
+$$K^{-1}\underbrace{[\zeta_1m_1,\ \zeta_2m_2,\ ..., \ \zeta_nm_n]}_W=[R|t]\underbrace{[M_1,\ M_2,\ ...,\ M_n]}_M\rightarrow K^{-1}W=[R|t]M$$
+
+
+
 # 7) Optical Flow
 
 # 8) 3D Gaussian Splatting
