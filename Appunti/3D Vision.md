@@ -1623,7 +1623,32 @@ Here is a graphical example
 This has a significant throwback: it must sample also empty space which also takes computational effort
 
 3DGS wants to optimize this process.
+We represent the 3D scene as a set of $N$ 3D gaussians $c_i,\mu_i,\Sigma_i$. Which are colored, translated and scaled. These parameters are learned.
 
+The optimization is done by a step called **Adaptive Density Control** which: adds gaussians in more detailed areas that require more precision and removes them from less relevant regions
+
+**Densification Strategy:**
+- Start from SfM points
+- Every 100 iterations add new gaussians
+- Every 3000 iterations do a reset step for regularization
+- Densification until iteratio 15.000
+- Run for 30.000 optimizations
+
+The densification step can:
+- Clone: duplicate gaussians in under-Reconstructed regions
+- Split: divide gaussian into smaller ones in over-Reconstructed regions
+
+![[Pasted image 20260517130326.png|Example|250]]
+Regularization reduces all $\alpha$ near to 0 and augments it only for relevant gaussians. All gaussians with $\alpha$ under a threshold are purged (culling step).
+
+Finally they are rendered via a rasterization step:
+1. Tile the screen into fixed square $16\times16$ tiles
+2. Project and cull: Project gaussians into screen and discard those outside of frustum and those with less than 99% certainty to belong to a tile
+3. Assign sorting keys: rendered gaussians get a key containing their depth and tile
+4. Sort al gaussians: sort front to back (radix sort) so to process first closest splats
+5. Build per tile list: For each tile, store the first and last indices in the sorted list of Gaussians that overlap it.
+6. $\alpha$ blend per pixel: find the color on each pixel
+$$\sigma_n=\frac12\Delta_n^T\Sigma_n^{-1}\Delta_n\quad \alpha'_n=\alpha_n\exp{-\sigma_n}\quad T_n=\prod_{m=1}^{n-1}1-\alpha'_m\rightarrow C_i=\sum_{n=1}^N c_n\alpha'_nT_n$$
 
 # 9) Point Cloud
 ## 9.1) Compression
