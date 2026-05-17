@@ -46,5 +46,16 @@ Objective metrics are validated by spatial error mapping. The high-frequency det
 
 ---
 
+### 1.3.2) A Note on AV1 Efficiency (Anomalous Test)
+While an initial comparative test utilizing AV1 was fundamentally flawed in its configuration—relying on Constant Quality (CQ 27) instead of a targeted bitrate the underlying video data generated was highly interesting.
+
+The AV1 video stream itself operated at a remarkably low **~750 kbps** (less than 20% of the HEVC video bitrate), yet it achieved a higher objective quality score with a mean PSNR of **40.23 dB**.
+
+![[AV1_PSNR_Comp.png]] ![[AV1_Img_Comp.png]]
+This anomalous setup inadvertently highlighted AV1's generational leap in spatial and temporal compression, demonstrating its capacity to maintain structural integrity and superior mathematical fidelity even when operating with a fraction of the bandwidth.
+
+#### 1.4.1) Statistical and Visual Insights:
+- **Unprecedented Bitrate Efficiency:** Despite being heavily data-starved at less than a megabit per second, AV1 outperformed HEVC's ~4,000 kbps allocation. The PSNR vs. MAE scatter plot for AV1 remains exceptionally tight. This proves that AV1's advanced variable block-size partitioning (up to 128x128 superblocks) and superior directional intra-prediction can map spatial redundancies far more effectively than HEVC.
+- **High-Entropy Resilience:** Looking at the visual error maps, AV1 holds up remarkably well during the high-complexity highway scene (around 208s). While it experiences an expected drop in PSNR (down to 38.10 dB), the signal degradation is highly controlled. It avoids the catastrophic macroblocking and structural collapse seen in older codecs, preserving a cohesive, readable image structure despite extreme compression constraints.
 ## 1.4) Conclusion
 For a target bitrate of ~4.6 Mbps at 1080p, MPEG-2 is mathematically starved. It lacks the advanced temporal prediction and spatial transform efficiency required to handle high-motion video, resulting in severe artifacting. Furthermore, its limitation to 8-bit quantization permanently discards color volume. HEVC QSV is the only viable codec for this application, preserving the 10-bit color depth and maintaining high signal fidelity throughout high-entropy scenes.
