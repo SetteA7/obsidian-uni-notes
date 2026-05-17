@@ -6,7 +6,7 @@ date: 2026-05-17
 # 1) Video Codec Performance Analysis: HEVC QSV vs. MPEG-2 QSV
 
 ## 1.1) Overview and Encoding Parameters
-This document evaluates the encoding efficiency and signal degradation of HEVC (Main 10) against legacy MPEG-2 (Main) when compressing a 4K 10-bit source to a 1080p target at a heavily constrained bitrate (~4.6 Mbps). 
+This document evaluates the encoding efficiency and signal degradation of HEVC (Main 10) against legacy MPEG-2 (Main) when compressing a 4K 10-bit source to a 1080p target at a heavily constrained bitrate (~4.6 Mbps). The audio remained uncompressed due to the film being La La Land and has a phenomenal soundtrack. 
 
 | Attribute | The Source (Original) | MPEG2 QSV | HEVC QSV (Best) | HEVC QSV (Worst) |
 | :--- | :--- | :--- | :--- | :--- |
