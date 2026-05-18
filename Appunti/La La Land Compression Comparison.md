@@ -1,8 +1,3 @@
----
-tags: [video-compression, hevc, mpeg2, qsv, signal-processing]
-date: 2026-05-17
----
-
 # 1) Video Codec Performance Analysis: HEVC QSV vs. MPEG-2 QSV
 
 ## 1.1) Overview and Encoding Parameters
