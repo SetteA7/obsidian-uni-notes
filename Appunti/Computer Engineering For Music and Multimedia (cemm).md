@@ -281,6 +281,29 @@ A **Low Pass Filter (LPF)** cuts high frequencies after a threshold. The attenua
 
 # 4) Live Electronics TODO
 
+Live electronics is **voices or instruments TRANSFORMED by live electronics** in the sense that it is an extension. The performers are acoustic and electronic musicians. 
+
+The sound director has a similar role to the conductor (interpretation, balance, coordination, sound quality)
+The electronic musician has a different role based on the piece
+
+The instrument is a constantly evolving system with quickly obsolescent hardware and software. 
+
+---
+
+In the '60s the connection between devices was done with cables and switches. Therefore one single patch with few controllers was used. 
+
+
+in the '70s cables are replaced by matrix plug boards to freely change patches.
+
+Sound direction:
+- Live electronics system design: work is often divided among several people with different technical skills, involving experts or specialized companies
+- Production of piece: assist composer in design, choose devices, design patches and take care of pre production
+- Concert: tune the concert hall
+
+## 4.1) Notable Performances:
+
+#### K. Stockhausen Mixtur (1964)
+For orchestra, 4 sine wave generators and 4 ring modulations
 
 # 5) Audio Archives Preservation
 ## 5.1) Historical Debate
@@ -477,7 +500,7 @@ usually the inputs are **first hot, then cold:**
 - **Hot:** object reads value of hot input path immediately
 - **Cold:** object reads value of cold input path but doesn't update until the hot path is updated
 
-# 7) Midi TODO
+# 7) Midi
 A synth is an instrument that generates audio signals. A sequencer is a device (or software) that can **manage and reproduce sequences of control signals**, which enable an electronic instrument to be controlled
 
 To generalize these control signals a standard was designed: **Musical Instrument Design Interface (MIDI)**. It standardizes:
