@@ -478,6 +478,8 @@ usually the inputs are **first hot, then cold:**
 - **Cold:** object reads value of cold input path but doesn't update until the hot path is updated
 
 # 7) Midi TODO
+A synth is an instrument that generates audio signals. A sequencer is a device (or software) that can **manage and reproduce sequences of control signals**, which enable an electronic instrument to be controlled
+
 
 
 # 8) Quiz
