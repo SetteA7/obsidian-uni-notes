@@ -281,17 +281,20 @@ A **Low Pass Filter (LPF)** cuts high frequencies after a threshold. The attenua
 
 # 4) Live Electronics TODO
 
-Live electronics is **voices or instruments TRANSFORMED by live electronics** in the sense that it is an extension. The performers are acoustic and electronic musicians. 
+Live electronics is **voices or instruments TRANSFORMED by live electronics** in the sense that it is an extension. The performers are acoustic and electronic musicians + director. 
 
 The sound director has a similar role to the conductor (interpretation, balance, coordination, sound quality)
 The electronic musician has a different role based on the piece
 
-The instrument is a constantly evolving system with quickly obsolescent hardware and software. 
+The instrument is a constantly evolving system with quickly obsolescent hardware and software. Each pieve has a different system. Hard to sustain repertoire.
+
+Traditional music has additive sound interaction! Live electronics is a functional interaction. 
 
 ---
 
 In the '60s the connection between devices was done with cables and switches. Therefore one single patch with few controllers was used. 
 
+This limits the variety of sounds that can be performed
 
 in the '70s cables are replaced by matrix plug boards to freely change patches.
 
@@ -302,8 +305,27 @@ Sound direction:
 
 ## 4.1) Notable Performances:
 
-#### K. Stockhausen Mixtur (1964)
+#### K. Stockhausen _Mixtur_ (1964)
 For orchestra, 4 sine wave generators and 4 ring modulations
+
+#### Karlheinz Stockhausen _Microphonie I_ (1964)
+For tamtam (gong), 2 microphones, 2 filters and 2 controllers. 
+Microphone is the instrument. It's sound is processed by bandpass filter (controlled by dual slider). The sound is spread via quadraphonic stereo speakers
+
+The bands are controlled by potentiometers (30-10k Hz)
+
+#### David Behrman: _Players with circuits_ (1966)
+In USA. 4 performers:
+- 2 for sound sources 1, 2
+- 3 for oscillator and preamp volume tone controls
+
+#### Steve Reich _Pendulum music_ (1968)
+example of the electroacoustic nature of Live Electronics. The microphone oscillates and feedback is the performance
+
+#### Karlheinz Stockhausen _Solo_ (1966)
+1 melody instrument with looping feedback. 4 assistent technician
+
+
 
 # 5) Audio Archives Preservation
 ## 5.1) Historical Debate
