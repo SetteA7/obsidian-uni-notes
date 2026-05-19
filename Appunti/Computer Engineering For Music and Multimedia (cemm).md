@@ -601,7 +601,7 @@ Example:
 | Which areas have tested the effectiveness of the preservation methods described?        | 1. Asian art galleries<br>2. European audio archives<br>3. North American film studios<br>4. South American libraries                                                            | **2**      | The protocol was refined and assessed through research projects involving some of the most prominent audio archives in Italy and Europe.                           |
 
 
-## 8.5) Live Music
+## 8.5) Live Electronics
 
 | **Question**                                                                                     | **Possible Choices**                                                                                                                               | **Answer** | **Explanation**                                                                                                                                              |
 | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
