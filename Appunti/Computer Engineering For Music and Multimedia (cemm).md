@@ -311,6 +311,10 @@ Voltage Controlled Matrix is a matrix controlled by a microcomputer
 
 4x system: 8 processors boards each independently programmed
 
+This brought paradigm shift: same computer can be programmed to perform very different functions: different musical needs in both quality and quantity. Sound direction can be (partially) automated.
+
+in the 80s a rib of the 4x system, called **4i** rrived at the CSC, thanks to the collaboration between the Venice Biennale (LIMB), CSC and IRCAM and above all **Giuseppe Di Giugno (inventor)**. It is less powerful but with same set of functions: 4 DAC, 2 ADC 16 khz audio
+
 
 ## 4.1) Notable Performances:
 
@@ -329,7 +333,7 @@ In USA. 4 performers:
 - 3 for oscillator and preamp volume tone controls
 
 #### Steve Reich _Pendulum music_ (1968)
-example of the electroacoustic nature of Live Electronics. The microphone oscillates and feedback is the performance
+example of the electroacoustic nature of Live Electronics. The microphone oscillates and feedback is the performance. 
 
 #### Karlheinz Stockhausen _Solo_ (1966)
 1 melody instrument with looping feedback. 4 assistent technician
@@ -338,7 +342,7 @@ example of the electroacoustic nature of Live Electronics. The microphone oscill
 First use of VCM. 7 patch changes in 1 second
 
 #### Luigi Nono _Prometeo_ (1984)
-Mobile sound applied to voices and solo instruments
+Mobile sound applied to voices and solo instruments. Used 4i system
 
 #### Pierre Boulez _Repons_ (1981)
 a piece for a large chamber orchestra with six percussion soloists and live electronics.
@@ -349,6 +353,11 @@ a piece for a large chamber orchestra with six percussion soloists and live elec
 
 Sound changes from speaker to speaker, the louder the amplitude the more the effect.
 
+#### Philippe Manoury, _Jupiter_ for flute and live electronics (1987)
+First use of partially automated sound direction. first pieces to use a program that follows the score and allows the control of live electronic processing and synthesis through a stream of musical events from a live instrument
+
+#### Salvatore Sciarrino _Perseo e Andromeda_ (1991)
+uses 4i system. opera in one act for soprano, mezzo-soprano, baritone, bass and synthesis sounds
 
 # 5) Audio Archives Preservation
 ## 5.1) Historical Debate
@@ -711,4 +720,4 @@ First bit set to 0. The other 15 bits are used to indicate into how many ticks t
 | Main software for live electronics in the new millennium includes:                               | 1. Ableton<br>2. PureData<br>3. Super Collider<br>4. CSound<br>5. Cubase<br>6. Audacity                                                            | **2**      | While others are used, PureData (PD) is the open-source standard for real-time graphical programming in this context.                                        |
 | Zinovieff's EMS matrix made it easier to:                                                        | 1. Edit the patch while playing<br>2. Control spatialisation<br>3. Vary parameters<br>4. Record sounds                                             | **1**      | By using a pin-matrix instead of patch cables, the user could instantly change signal routing during a performance.                                          |
 | The MIDI protocol, introduced in the mid-1980s:                                                  | 1. Replaced analogue voltage control<br>2. Enabled digital audio processing<br>3. Allowed for real-time synthesis<br>4. Facilitated spatialisation | **1**      | MIDI standardized the way digital devices talked to each other, replacing the cumbersome Control Voltage (CV/Gate) systems.                                  |
-| The Publison DHM 89 B2 (1978) offered:                                                           | 1. Digital reverb<br>2. Pitch shifting (+1/-2 octaves)<br>3. Pitch shifting (+2/-1 octaves)<br>4. Both 1 and 2                                     | **4**      | This hardware unit was famous for combining high-quality digital delay/reverb with unique pitch-shifting capabilities.                                       |
+| The Publison DHM 89 B2 (1978) offered:                                                           | 1. Digital reverb<br>2. Pitch shifting (+1/-2 octaves)<br>3. Pitch shifting (+2/-1 octaves)<br>4. Both 1 and 2                                     | **2**      | This hardware unit was famous for combining high-quality digital delay/reverb with unique pitch-shifting capabilities.                                       |
