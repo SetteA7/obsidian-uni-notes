@@ -495,8 +495,35 @@ Not all ports are required on a single device.
 
 A MIDI message is composed by **1 status byte** (first bit 1) followed by **one or more data bytes** (first byte 0)
 - **Status Byte:** $1\text{ TTT CCCC}$ where $T=$ type and $C=$ channel
-- **Data Byte:** $0 \text{ VVVVVVV}$ where $V=$ v
+- **Data Byte:** $0 \text{ VVVVVVV}$ where $V=$ value of data
+
+If the same status is sent various times (with possible value changes) then only the data bytes have to be sent. This is called **Running Status**
+
+![[Pasted image 20260519113349.png|Example|450]]
+The most common messages are:
+
+| **Tipo di messaggio**                       | **Codice (Status Byte / Tipo)** | **Data Bytes e relativi intervalli**                                                                                                               |
+| ------------------------------------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Note Off**                                | `000`                           | **Data Byte 1:** Note number (0-127)<br>**Data Byte 2:** Velocity (0-127)                                                                          |
+| **Note On**                                 | `001`                           | **Data Byte 1:** Note number (0-127)<br>**Data Byte 2:** Velocity (0-127)                                                                          |
+| **Polyphonic Key Pressure** (Poly Pressure) | `010`                           | **Data Byte 1:** Note number (0-127)<br>**Data Byte 2:** Pressure (0-127)                                                                          |
+| **Control Change**                          | `011`                           | **Data Byte 1:** Controller Voice (0-120 per Voice, 121-127 per Mode)<br>**Data Byte 2:** Controller Value (0-127)                                 |
+| **Program Change**                          | `100`                           | **Data Byte 1:**  Program/Preset Number (0-127)<br>**Data Byte 2:** _Nessuno_                                                                      |
+| **Channel Pressure** (Mono Pressure)        | `101`                           | **Data Byte 1:** Pressure (0-127)  <br>**Data Byte 2:** _Nessuno_                                                                                  |
+| **Pitch Bend**                              | `110`                           | **Data Byte 1:** LSB - Valore Fine (range complessivo a 14 bit: 0-16383)<br>**Data Byte 2:** MSB - Valore Coarse (Valore centrale di riposo: 8192) |
+
+---
+Here are some examples.
 #### Note ON Message
+Note ON: $001$
+The data is a note number (0-127) and then velocity (0-127)
+Example:
+![[Pasted image 20260519112900.png|Example|450]]
+#### Note OFF Message
+Not OFF: $000$
+The data is a note number (0-127) and then velocity (0-127)
+Example:
+![[Pasted image 20260519112958.png|Example|450]]
 
 
 # 8) Quiz
