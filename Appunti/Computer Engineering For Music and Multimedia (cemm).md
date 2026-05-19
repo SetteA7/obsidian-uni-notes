@@ -526,6 +526,10 @@ Example:
 ![[Pasted image 20260519112958.png|Example|450]]
 
 
+
+---
+To allow for more effects on a not the ****
+
 # 8) Quiz
 ## 8.1) Acoustics and Psychoacoustics
 
