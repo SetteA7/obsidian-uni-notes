@@ -315,7 +315,7 @@ Voltage Controlled Matrix is a matrix controlled by a microcomputer
 ## 4.1) Notable Performances:
 
 #### K. Stockhausen _Mixtur_ (1964)
-For orchestra, 4 sine wave generators and 4 ring modulations
+For orchestra, 4 sine wave generators and **4 ring modulations**
 
 #### Karlheinz Stockhausen _Microphonie I_ (1964)
 For tamtam (gong), 2 microphones, 2 filters and 2 controllers. 
@@ -342,7 +342,13 @@ Mobile sound applied to voices and solo instruments
 
 #### Pierre Boulez _Repons_ (1981)
 a piece for a large chamber orchestra with six percussion soloists and live electronics.
-6 soloists: 
+- 6 soloists: cimbalom, xylophone and glockenspiel, vibraphone, harp, piano, piano and Yamaha DX 7 keyboard synthesizer
+- 6 loudspeakers, for live spatialized sounds diffusion
+
+![[Pasted image 20260519134159.png|Concert Hall|450]]
+
+Sound changes from speaker to speaker, the louder the amplitude the more the effect.
+
 
 # 5) Audio Archives Preservation
 ## 5.1) Historical Debate
