@@ -528,8 +528,23 @@ Example:
 
 
 ---
-To allow for more effects on a not the ****
+To allow for more effects on a not the **MIDI Polyphonic Expression MPE**. Each note has its own channel and on each channel Note On/Off, Pitch Bend, Channel Pressure (Aftertouch) e Control Change can be applied
 
+Instead of using a physical machine, a file `.mid` is used. It keeps track of:
+- Meta events: name, instruments, meter
+- Sysex events: system message
+- MIDI events: midi messages
+
+There are three types of MIDI files:
+- **Type 0:** single track with all info in one, different instruments on different files
+- **Type 1:** multiple separated tracks
+- **Type 2:** multiple tracks and sections (almost never used)
+
+The MIDI files are separated into chunks, each one with header **MThd** and one or more track chunks **MTrk**.
+
+![[Pasted image 20260519123728.png|Header|450]]
+Temporal resolution: 
+First bit set to 0. The other 15 bits are used to indicate into how many ticks the single “quarter note” should be divided therefore it is in Pulse Per Quarter Notes (PPQN). There are 
 # 8) Quiz
 ## 8.1) Acoustics and Psychoacoustics
 
