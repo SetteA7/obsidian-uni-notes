@@ -480,6 +480,23 @@ usually the inputs are **first hot, then cold:**
 # 7) Midi TODO
 A synth is an instrument that generates audio signals. A sequencer is a device (or software) that can **manage and reproduce sequences of control signals**, which enable an electronic instrument to be controlled
 
+To generalize these control signals a standard was designed: **Musical Instrument Design Interface (MIDI)**. It standardizes:
+- digital interface and connectors
+- communication protocol
+
+MIDI 1.0 was proposed in 1983 and finalized in 1996.
+
+Three hardware interfaces:
+- **MIDI IN:** receives control signals
+- **MIDI OUT:** sends generated signals
+- **MIDI THRU:** replicates as MIDI OUT what was received as MIDI IN.
+
+Not all ports are required on a single device. 
+
+A MIDI message is composed by **1 status byte** (first bit 1) followed by **one or more data bytes** (first byte 0)
+- **Status Byte:** $1\text{ TTT CCCC}$ where $T=$ type and $C=$ channel
+- **Data Byte:** $0 \text{ VVVVVVV}$ where $V=$ v
+#### Note ON Message
 
 
 # 8) Quiz
@@ -506,6 +523,7 @@ A synth is an instrument that generates audio signals. A sequencer is a device (
 | What property of a sound wave determines its pitch?                                          | 1. Amplitude<br>2. Frequency<br>3. Wavelength<br>4. Speed                                                                                                         | 2          | Pitch is the psychological perception of frequency; more cycles per second result in a "higher" perceived sound.                                 |
 | What property of a sound wave determines its timbre?                                         | 1. Amplitude<br>2. Frequency<br>3. Wavelength<br>4. Shape of the wave                                                                                             | 4          | Timbre is determined by the waveform's complexity (harmonics), allowing us to distinguish different instruments.                                 |
 | What type of wave is sound?                                                                  | 1. Transverse<br>2. Longitudinal<br>3. Electromagnetic<br>4. Mechanical                                                                                           | 2          | Sound is a mechanical wave, and "longitudinal" describes the particle motion being parallel to the path of the wave.                             |
+|                                                                                              |                                                                                                                                                                   |            |                                                                                                                                                  |
 ## 8.2) Sound Synthesis & Sound Design
 | **Question**                                                         | **Possible Choices**                                                                                          | **Answer** | **Explanation**                                                                                                                                                               |
 | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
