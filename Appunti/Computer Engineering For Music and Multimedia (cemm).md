@@ -294,14 +294,23 @@ Traditional music has additive sound interaction! Live electronics is a function
 
 In the '60s the connection between devices was done with cables and switches. Therefore one single patch with few controllers was used. 
 
-This limits the variety of sounds that can be performed
+This limits the variety of sounds that can be performed. In the '70s cables are replaced by matrix plug boards to freely change patches.
 
-in the '70s cables are replaced by matrix plug boards to freely change patches.
+![[Pasted image 20260519131609.png|Boards|150]]
+
 
 Sound direction:
 - Live electronics system design: work is often divided among several people with different technical skills, involving experts or specialized companies
 - Production of piece: assist composer in design, choose devices, design patches and take care of pre production
 - Concert: tune the concert hall
+
+**1971 Haller and Lawo** create first prototype of Halaphon to generate spatial audio
+Voltage Controlled Matrix is a matrix controlled by a microcomputer
+
+**1981 Pierre Boulez** first real time sound processing qith 4x system. Producied at IRCAM it was most powerful real time sound generation. 
+
+4x system: 8 processors boards each independently programmed
+
 
 ## 4.1) Notable Performances:
 
@@ -325,7 +334,15 @@ example of the electroacoustic nature of Live Electronics. The microphone oscill
 #### Karlheinz Stockhausen _Solo_ (1966)
 1 melody instrument with looping feedback. 4 assistent technician
 
+#### Luigi Nono _Quando stanno morendo. Diario Polacco n. 2_ (1982)
+First use of VCM. 7 patch changes in 1 second
 
+#### Luigi Nono _Prometeo_ (1984)
+Mobile sound applied to voices and solo instruments
+
+#### Pierre Boulez _Repons_ (1981)
+a piece for a large chamber orchestra with six percussion soloists and live electronics.
+6 soloists: 
 
 # 5) Audio Archives Preservation
 ## 5.1) Historical Debate
