@@ -1651,9 +1651,13 @@ Finally they are rendered via a rasterization step:
 $$\sigma_n=\frac12\Delta_n^T\Sigma_n^{-1}\Delta_n\quad \alpha'_n=\alpha_n\exp{-\sigma_n}\quad T_n=\prod_{m=1}^{n-1}1-\alpha'_m\rightarrow C_i=\sum_{n=1}^N c_n\alpha'_nT_n$$
 
 # 9) Point Cloud
-Point clouds contain a huge set of points and therefore information. This is hard to transmit, moreover PC have different sources and therefore different characteristics. Therefore we resort to **point cloud compression**
+Point clouds come from various sources and have different characteristics. They contain huge amount of information and are hard to tx.
 
+Point cloud can be
+- **static:** 10s M points
+- **dynamic:** 1M per frame, 30 fps
 
+Each point has $(x,y,z)$ coords and some attributes (normals, color, etc). **Point cloud codinc (PCC)** exploits the high redundancy and correlation between samples. 
 ## 9.1) Compression
 ## 9.2) Coding
 
