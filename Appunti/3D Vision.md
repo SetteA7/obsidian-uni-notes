@@ -1676,9 +1676,21 @@ Two coding schemes were proposed:
 Geometry compression is handled via **octrees**. 
 Octree voxelizes the geometry at various levels of detail. 
 
-We say that a octant is full if it contains one geometry component.
-- First create a dense voxel grid.
-- Then start by dividing the grid into a 2x2x2 volume grid. Encode 
+We say that a octant is full if it contains one geometry component. An empty octant (bit value = 0) means that the furter resolutions are empty and will not need to be encoded. One full octant is encoded as 1, this means that the bitstream will contain a further byte of this octant at a deeper lod.
+
+- First create a dense voxel grid (multiple of 2). This is the lossy step.
+- Now divide the space into 8 parts (2x2x2 volume). Encode the bits and add the byte to bitstream. The bitstream holds the following info:
+	- Bit $= 0$: all further lods are empty and won't be further encoded
+	- Bit $= 1$: The next lod will be encoded further in bitstream
+- For each octant, divide it in 8 parts and redo the encoding.
+- Continue until original lod is achieved.
+![[Pasted image 20260520155329.png|Example|450]]
+This example has a max lod of 2 (4x4x4) and will be encoded as:
+$$\underbrace{[1110000]}_{\text{Lod: 1}}\ \underbrace{[1\times 8][11110000][11001100]}_{\text{Lod: 2}}$$
+
+Alternatively **TriSoup** is used. Approximate dense geometry as a surface by reconstructing it as triangles
+- First build pruned octree
+- Each cube represents 
 ## 9.2) Coding
 
 In moving scenes voxelization cannot be used (noise, etc). We use Video Point Cloud Coding (VPCC)
