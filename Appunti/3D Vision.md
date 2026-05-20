@@ -1651,6 +1651,7 @@ Finally they are rendered via a rasterization step:
 $$\sigma_n=\frac12\Delta_n^T\Sigma_n^{-1}\Delta_n\quad \alpha'_n=\alpha_n\exp{-\sigma_n}\quad T_n=\prod_{m=1}^{n-1}1-\alpha'_m\rightarrow C_i=\sum_{n=1}^N c_n\alpha'_nT_n$$
 
 # 9) Point Cloud
+## 9.1) Compression
 Point clouds come from various sources and have different characteristics. They contain huge amount of information and are hard to tx.
 
 Point cloud can be
@@ -1666,9 +1667,18 @@ This chapter heavily relies on concepts from [[Multimedia Communications]]. Here
 - **Decoding: Entropy Decode:** $P(\hat y)$ is decoded into $\hat y$
 - **Decoding: Synthesis Transform:** $\hat y$ is decoded into $\hat x$ which is a lossless reconstruction of $\hat x$
 
+#### MPEG PCC 
+The general scheme is the following:
+![[Pasted image 20260520153828.png|General Scheme|350]]
+Two coding schemes were proposed:
 
+**G-PCC:**  
+Geometry compression is handled via **octrees**. 
+Octree voxelizes the geometry at various levels of detail. 
 
-## 9.1) Compression
+We say that a octant is full if it contains one geometry component.
+- First create a dense voxel grid.
+- Then start by dividing the grid into a 2x2x2 volume grid. Encode 
 ## 9.2) Coding
 
 In moving scenes voxelization cannot be used (noise, etc). We use Video Point Cloud Coding (VPCC)
