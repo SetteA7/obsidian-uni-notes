@@ -1696,13 +1696,14 @@ This example has a max lod of 2 (4x4x4) and will be encoded as:
 $$\underbrace{[11100000]}_{\text{Lod: 1}}\ \underbrace{[1\times 8][11110000][11001100]}_{\text{Lod: 2}}$$
 **Cellular Automata Block Transform**
 
-Actually **TriSoup** is used. Approximate dense geometry as a surface by reconstructing it as triangles
+Alternatively **TriSoup** is used. Approximate dense geometry as a surface by reconstructing it as triangles
 - First build pruned octree
 - Each cube represents the surface passing through or near that cube
 - TODO
 
-Now focus on the **attributes:**
-
+Now focus on the **attributes**, mainly colors:
+Each non empty voxel has a r,g,b color.
+A similar 
 
 ## 9.2) Coding
 
