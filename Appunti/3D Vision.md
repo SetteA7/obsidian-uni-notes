@@ -1667,14 +1667,15 @@ This chapter heavily relies on concepts from [[Multimedia Communications]]. Here
 - **Decoding: Entropy Decode:** $P(\hat y)$ is decoded into $\hat y$
 - **Decoding: Synthesis Transform:** $\hat y$ is decoded into $\hat x$ which is a lossless reconstruction of $\hat x$
 
-#### MPEG PCC 
+**MPEG PCC** 
 The general scheme is the following:
 ![[Pasted image 20260520153828.png|General Scheme|350]]
 Two coding schemes were proposed:
 - **G-PCC**
 - **V-PCC**
 
-We will focus on **G-PCC:**  
+#### G-PCC
+Now will focus on **G-PCC:**  
 
 ![[Pasted image 20260520160858.png|Scheme|400]]
 Let's start with the **geometry analysis**:
@@ -1703,7 +1704,8 @@ Alternatively **TriSoup** is used. Approximate dense geometry as a surface by re
 
 Now focus on the **attributes**, mainly colors:
 Each non empty voxel has a r,g,b color.
-A similar 
+A similar transform to wavelet can be used to encode each color (different lods)
+Also **PredLift** can be used, which uses predictive coding (color difference) at the lowest lod
 
 ## 9.2) Coding
 
