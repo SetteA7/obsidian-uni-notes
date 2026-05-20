@@ -1671,8 +1671,8 @@ This chapter heavily relies on concepts from [[Multimedia Communications]]. Here
 The general scheme is the following:
 ![[Pasted image 20260520153828.png|General Scheme|350]]
 Two coding schemes were proposed:
-- **G-PCC**
-- **V-PCC**
+- **G-PCC**: focuses on compressing geometric info using octree
+- **V-PCC**: focuses on temporal compression using HEVC
 
 #### G-PCC
 Now will focus on **G-PCC:**  
@@ -1704,7 +1704,7 @@ Alternatively **TriSoup** is used. Approximate dense geometry as a surface by re
 
 Now focus on the **attributes**, mainly colors:
 Each non empty voxel has a r,g,b color.
-A similar transform to wavelet can be used to encode each color (different lods)
+A similar transform to wavelet can be used to encode each color (different lods). DC values are quantized and included in the reduced resolution voxel
 Also **PredLift** can be used, which uses predictive coding (color difference) at the lowest lod
 
 ## 9.2) Coding
