@@ -1657,7 +1657,17 @@ Point cloud can be
 - **static:** 10s M points
 - **dynamic:** 1M per frame, 30 fps
 
-Each point has $(x,y,z)$ coords and some attributes (normals, color, etc). **Point cloud codinc (PCC)** exploits the high redundancy and correlation between samples. 
+Each point has $(x,y,z)$ coords and some attributes (normals, color, etc). **Point cloud codinc (PCC)** exploits the high redundancy and correlation between samples.
+
+This chapter heavily relies on concepts from [[Multimedia Communications]]. Here is brief recap on how a lossy encoder/decoder works:
+- **Analysis Transform:** $x$ is transformed into a more efficient (possibly sparse) representation $y=G(x)$
+- **Lossy Step (Quantization):** $y$ is quantized $\hat y=Q(y)$
+- **Entropy Encode:** using entropy coding $\hat y$ is transformed into a lossless more efficient representation to use into bitstream $P(\hat y)$
+- **Decoding: Entropy Decode:** $P(\hat y)$ is decoded into $\hat y$
+- **Decoding: Synthesis Transform:** $\hat y$ is decoded into $\hat x$ which is a lossless reconstruction of $\hat x$
+
+
+
 ## 9.1) Compression
 ## 9.2) Coding
 
