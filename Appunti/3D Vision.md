@@ -1671,9 +1671,16 @@ This chapter heavily relies on concepts from [[Multimedia Communications]]. Here
 The general scheme is the following:
 ![[Pasted image 20260520153828.png|General Scheme|350]]
 Two coding schemes were proposed:
+- **G-PCC**
+- **V-PCC**
 
-**G-PCC:**  
-Geometry compression is handled via **octrees**. 
+We will focus on **G-PCC:**  
+
+![[Pasted image 20260520160858.png|Scheme|400]]
+Let's start with the **geometry analysis**:
+The first, **lossy** step is the voxelization of the scene into a dense voxel grid (power of 2).
+
+The next steps depend on the **octree:**
 Octree voxelizes the geometry at various levels of detail. 
 
 We say that a octant is full if it contains one geometry component. An empty octant (bit value = 0) means that the furter resolutions are empty and will not need to be encoded. One full octant is encoded as 1, this means that the bitstream will contain a further byte of this octant at a deeper lod.
@@ -1686,11 +1693,17 @@ We say that a octant is full if it contains one geometry component. An empty oct
 - Continue until original lod is achieved.
 ![[Pasted image 20260520155329.png|Example|450]]
 This example has a max lod of 2 (4x4x4) and will be encoded as:
-$$\underbrace{[1110000]}_{\text{Lod: 1}}\ \underbrace{[1\times 8][11110000][11001100]}_{\text{Lod: 2}}$$
+$$\underbrace{[11100000]}_{\text{Lod: 1}}\ \underbrace{[1\times 8][11110000][11001100]}_{\text{Lod: 2}}$$
+**Cellular Automata Block Transform**
 
-Alternatively **TriSoup** is used. Approximate dense geometry as a surface by reconstructing it as triangles
+Actually **TriSoup** is used. Approximate dense geometry as a surface by reconstructing it as triangles
 - First build pruned octree
-- Each cube represents 
+- Each cube represents the surface passing through or near that cube
+- TODO
+
+Now focus on the **attributes:**
+
+
 ## 9.2) Coding
 
 In moving scenes voxelization cannot be used (noise, etc). We use Video Point Cloud Coding (VPCC)
