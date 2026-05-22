@@ -1681,7 +1681,15 @@ The **transformations** on point clouds are:
 - Cellular Automata
 - Random PC access
 
-### 9.1.1) **MPEG PCC** 
+
+### 9.1.1) PCC Quality Metrics
+Two qualities:
+- PSNR D1: similar to standard PSNR, that is MSE between compressed point and og point
+- PSNR D2: project point on plane defined by normal. MSE between og point and projected reconstructed point.
+
+Bitrate in bit per voxel (bpv): $bpv=B/N$
+
+### 9.1.2) **MPEG PCC** 
 The general scheme is the following:
 ![[Pasted image 20260520153828.png|General Scheme|350]]
 Two coding schemes were proposed:
@@ -1735,14 +1743,14 @@ Approximate dense geometry as a surface by reconstructing it as triangles
 - Each cube represents the surface passing through or near that cube
 - signal what segment contains a vertex.
 
-##### Attributes Steps
+##### Attributes Steps TODO
 Now focus on the **attributes**, mainly RGB colors.
 
 RAHT:
 Process in a $2\times2\times2$ voxel block the DCT on the colors on the $x,y,z$ coordinates. For each coordinate find DC and AC values using
 $$\begin{bmatrix}DC\\AC\end{bmatrix}=\frac{1}{\sqrt{w_1+w_2}}\begin{bmatrix}\sqrt{w_1} & \sqrt{w_2}\\-\sqrt{w_1}&\sqrt{w_2}\end{bmatrix}\begin{bmatrix}C_1\\C_2\end{bmatrix}$$
 
-A similar transform to wavelet can be used to encode each color (different lods). DC values are quantized and included in the reduced resolution voxel
+
 Also **PredLift** can be used, which uses predictive coding (color difference) at the lowest lod
 
 ## 9.2) Coding
