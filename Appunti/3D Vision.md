@@ -1667,20 +1667,39 @@ This chapter heavily relies on concepts from [[Multimedia Communications]]. Here
 - **Decoding: Entropy Decode:** $P(\hat y)$ is decoded into $\hat y$
 - **Decoding: Synthesis Transform:** $\hat y$ is decoded into $\hat x$ which is a lossless reconstruction of $\hat x$
 
-Point 
+Point clouds can be **represented** in multiple ways:
+- octree (see G-PCC)
+- Triangle Cloud: group points into triangles to create pieces of meshes.
+- point arrays: rows of $x,y,z$ coords (useful for sparse data)
+- depth maps
+- different coordinates (cylindrical, spherical, etc)
+- multiview projection (see V-PCC)
 
+The **transformations** on point clouds are:
+- 3D Wavelet Transform
+- Graph Transform
+- Cellular Automata
+- Random PC access
 
-**MPEG PCC** 
+### 9.1.1) **MPEG PCC** 
 The general scheme is the following:
 ![[Pasted image 20260520153828.png|General Scheme|350]]
 Two coding schemes were proposed:
-- **G-PCC**: focuses on compressing geometric info using octree
-- **V-PCC**: focuses on temporal compression using HEVC
+- **(Geometry) G-PCC (TMC13)**: focuses on compressing geometric info using octree. Static PC
+- **(Video) V-PCC (TMC2)**: focuses on temporal compression using HEVC. Dynamic PC
 
 #### G-PCC
 Now will focus on **G-PCC:**  
 
 ![[Pasted image 20260520160858.png|Scheme|400]]
+![[Pasted image 20260522154555.png|Encoder/Decoder|500]]
+
+The general idea (encoder) is the following:
+- Transform position (voxelize) and attributes (wavelet)
+- **Geometry:** Construct octree and analyze surface approximation (TriSoup) send geometry info arithmetically encoded to bitstream
+- **Attributes:** wrt reconstructed geometry compute RAHT and LODs, send them quantized and arithmetic encoded to bitstream
+
+##### Geometry Steps
 Let's start with the **geometry analysis**:
 The first, **lossy** step is the voxelization of the scene into a dense voxel grid (power of 2).
 
