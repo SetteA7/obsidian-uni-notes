@@ -1795,7 +1795,7 @@ $$H(\hat y|\hat z)+H(\hat z)=H(\hat y,\hat z)=H(\hat y)$$
 5. Finally, the received bitstreams yield  $\hat y_F=\hat r+\mu$, $y_C$ and thus $\hat y=(y_C+\hat y_F)$ which using the **synthesis transform** becomes $\hat x$
 
 ## 9.2) Segmentation
-Segmentation is the task of dividing the input data into homogeneous regions that share the same meaning
+Segmentation is the task of dividing the input data into homogeneous regions that share the same semantic meaning. 
 
 
 
