@@ -1701,11 +1701,11 @@ The general idea (encoder) is the following:
 
 ##### Geometry Steps
 Let's start with the **geometry analysis**:
-The first, **lossy** step is the voxelization of the scene into a dense voxel grid (power of 2).
 
-The next steps depend on the **octree:**
-Octree voxelizes the geometry at various levels of detail. 
+1. **Voxelization:** first step, is *lossy* and transforms the scene into a dense voxel grid (power of 2).
 
+
+2. **Octree:** voxelization with different LODs, compression happens for empty voxels
 We say that a octant is full if it contains one geometry component. An empty octant (bit value = 0) means that the furter resolutions are empty and will not need to be encoded. One full octant is encoded as 1, this means that the bitstream will contain a further byte of this octant at a deeper lod.
 
 - First create a dense voxel grid (multiple of 2). This is the lossy step.
@@ -1714,15 +1714,19 @@ We say that a octant is full if it contains one geometry component. An empty oct
 	- Bit $= 1$: The next lod will be encoded further in bitstream
 - For each octant, divide it in 8 parts and redo the encoding.
 - Continue until original lod is achieved.
+- The bitstream allows a gradual reconstruction from the worst lod to the original one.
 ![[Pasted image 20260520155329.png|Example|450]]
-This example has a max lod of 2 (4x4x4) and will be encoded as:
+This example has a max lod of 2 ($4\times4\times4, \quad 4=2^{LOD}$) and will be encoded as:
 $$\underbrace{[11100000]}_{\text{Lod: 1}}\ \underbrace{[1\times 8][11110000][11001100]}_{\text{Lod: 2}}$$
-**Cellular Automata Block Transform**
+3. **Cellular Automata Block Transform:** Non-linear transformation. Used to maximize empty space (and therefore better octree compression)
+Use a $2\times 2\times2$ voxel cube and transform it into a 8-bit state $s$. Use a transformation to evaluate the state of the voxels in the cube based on their neighbors. This is a DCT representation, so similar to wavelet it adds 6 additional LODs per octree lod
 
-Alternatively **TriSoup** is used. Approximate dense geometry as a surface by reconstructing it as triangles
+
+4.  **TriSoup:** compression of dense geometry. Uses pruned octree.
+Approximate dense geometry as a surface by reconstructing it as triangles
 - First build pruned octree
 - Each cube represents the surface passing through or near that cube
-- TODO
+- signal what segment contains a vertex.
 
 Now focus on the **attributes**, mainly colors:
 Each non empty voxel has a r,g,b color.
