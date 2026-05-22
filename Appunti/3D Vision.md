@@ -1781,11 +1781,23 @@ The pipeline is divided in two parts:
 In detail we have:
 ![[Pasted image 20260522183402.png|Architecture|350]]
 A total of 3 informations are sent:
-- Encoded Coordinates: $x\stackrel{\tex}\rightarrow y=(y_C,y_F),\ y_c$ is G-PCC encoded and sent
-- Side Info: $x\rightarrow y$
+- Encoded Coordinates ($y_C$): $x\stackrel{\text{Analysis Transform}}\longrightarrow y=(y_C,y_F),\ y_c$ is G-PCC encoded and sent
+- Side Info ($(\mu,\sigma)$): $x\stackrel{\text{Analysis Transform}}\longrightarrow y\stackrel{\text{Hyper-Analysis Transform}}\longrightarrow z$ which contains info on distribution
+- Latents Bitstream ($\hat r$): $r=y_F-\mu_{\hat z}$ so that $\hat r+\mu_{\hat z}=\hat y_F$
+
+
+The pipeline is the following
+1. **Analysis Transform** input $x$ into the latent representation $y=(y_C,y_F)$
+2. **Send** $y_C$ through standard G-PCC pipeline
+3. **Compute Hyper Analysis Transform** of $y\rightarrow z$ and round it ($\hat z$) so to be able to compute Hyper-Synthesis Transform of $\hat z\rightarrow (\mu,\sigma)$ so to have $P(\hat y|\hat z)=\mathcal N(\mu,\sigma)$. This is required since $P(\hat y)$ cannot be estimated for each PC. Mathematically the entropy is the same:
+$$H(\hat y|\hat z)+H(\hat z)=H(\hat y,\hat z)=H(\hat y)$$
+4. Encode the latents as $r=y_F-\mu$, and round them. 
+5. Finally, the received bitstreams yield  $\hat y_F=\hat r+\mu$, $y_C$ and thus $\hat y=(y_C+\hat y_F)$ which using the **synthesis transform** becomes $\hat x$
 
 ## 9.2) Segmentation
 Segmentation is the task of dividing the input data into homogeneous regions that share the same meaning
+
+
 
 # 10) Gen AI & Diffusion
 
