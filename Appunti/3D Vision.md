@@ -1764,19 +1764,13 @@ Patches are created in the following way:
 - Based on the normal of each point, assign the point to one projection
 - Refine the position based on neighbours
 - Points are connected using a connected component algorithm: 3D Patch
-- So each patch defines: 2 coordinates remain the same, third coordinate the distance.
+- So each patch defines: 2 coordinates remain the same, third coordinate (projection) encodes the distance.
 
-## 9.2) Coding
-
-In moving scenes voxelization cannot be used (noise, etc). We use Video Point Cloud Coding (VPCC)
-
-This is based on HEVC.
-Create patches:
-- Define 6 orthographc projections ($\pm x,\pm y,\pm z$)
-- Estimate normals of each point and assign to one projection
-- Refine depending on neighbours
-- TODO
-- Then projected to HEVC?
+#### Coding with AI
+The general idea behind AI coding is to use some AI information to aid the coding process. This however introduces some challengers, mainly:
+- Multiple models for different data types
+- Many approaches lack features of standard codexes (ex: scalability)
+- Specific design hard to generalize
 
 #### AI Coding - JPEG Pleno
 The pipeline is divided in two parts:
@@ -1784,12 +1778,15 @@ The pipeline is divided in two parts:
 - Color encoding (takes also geometric info)
 
 ![[Pasted image 20260511152953.png|Scheme|350]]
-## 9.3) Segmentation
+## 9.2) Segmentation
 Segmentation is the task of dividing the input data into homogeneous regions that share the same meaning
 
-# 10) Quiz
+# 10) Gen AI & Diffusion
 
-## 10.1) Quiz 2
+
+# 11) Quiz
+
+## 11.1) Quiz 2
 #### **Question 1: Motion Modeling Strategies**
 
 Assign the most suitable strategy (Animation or Simulation) for each object/event.
@@ -2062,7 +2059,7 @@ Select the true statements:
 
 **Correct answers:** **b, c** **Explanation:** I **Grandi di Libertà (DOF - Degrees of Freedom)** indicano come un giunto può muoversi. Nella maggior parte dei casi umani sono 1-3 (rotazioni), ma matematicamente possono arrivare a 6 (includendo traslazioni).
 
-## 10.2) Quiz 3
+## 11.2) Quiz 3
 #### Question 1: Epipolar Geometry and Homography
 
 The epipolar geometry relations between two pictures taken by a moving camera simplifies into a homography...
