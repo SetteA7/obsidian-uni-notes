@@ -315,7 +315,7 @@ This brought paradigm shift: same computer can be programmed to perform very dif
 
 in the 80s a rib of the 4x system, called **4i** rrived at the CSC, thanks to the collaboration between the Venice Biennale (LIMB), CSC and IRCAM and above all **Giuseppe Di Giugno (inventor)**. It is less powerful but with same set of functions: 4 DAC, 2 ADC 16 khz audio
 
-
+1980 midi started to replace voltage control. 1988 Max (software) 
 ## 4.1) Notable Performances:
 
 #### K. Stockhausen _Mixtur_ (1964)
@@ -330,7 +330,7 @@ The bands are controlled by potentiometers (30-10k Hz)
 #### David Behrman: _Players with circuits_ (1966)
 In USA. 4 performers:
 - 2 for sound sources 1, 2
-- 3 for oscillator and preamp volume tone controls
+- 2 for oscillator and preamp volume tone controls
 
 #### Steve Reich _Pendulum music_ (1968)
 example of the electroacoustic nature of Live Electronics. The microphone oscillates and feedback is the performance. 
@@ -357,7 +357,7 @@ Sound changes from speaker to speaker, the louder the amplitude the more the eff
 First use of partially automated sound direction. first pieces to use a program that follows the score and allows the control of live electronic processing and synthesis through a stream of musical events from a live instrument
 
 #### Salvatore Sciarrino _Perseo e Andromeda_ (1991)
-uses 4i system. opera in one act for soprano, mezzo-soprano, baritone, bass and synthesis sounds
+uses 4i system. opera in one act for soprano, mezzo-soprano, baritone, bass and synthesis sounds. 4i gave musical parts with freer timing
 
 # 5) Audio Archives Preservation
 ## 5.1) Historical Debate
