@@ -304,7 +304,7 @@ Sound direction:
 - Production of piece: assist composer in design, choose devices, design patches and take care of pre production
 - Concert: tune the concert hall
 
-**1971 Haller and Lawo** create first prototype of Halaphon to generate spatial audio
+**1971 Haller and Lawo** create first prototype of Halaphon to generate spatial audio. Used in Donaueschinger Musiktage for the premiere of Planto por las Victimas de la Violencia by Cristóbal Halffter.
 Voltage Controlled Matrix is a matrix controlled by a microcomputer
 
 **1981 Pierre Boulez** first real time sound processing qith 4x system. Producied at IRCAM it was most powerful real time sound generation. 
@@ -315,7 +315,7 @@ This brought paradigm shift: same computer can be programmed to perform very dif
 
 in the 80s a rib of the 4x system, called **4i** rrived at the CSC, thanks to the collaboration between the Venice Biennale (LIMB), CSC and IRCAM and above all **Giuseppe Di Giugno (inventor)**. It is less powerful but with same set of functions: 4 DAC, 2 ADC 16 khz audio
 
-1980 midi started to replace voltage control. 1988 Max (software) 
+1980 midi started to replace voltage control. 1988 Max (software) for midi piano and real time software
 ## 4.1) Notable Performances:
 
 #### K. Stockhausen _Mixtur_ (1964)
