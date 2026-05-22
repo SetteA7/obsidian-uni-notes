@@ -1778,6 +1778,12 @@ The pipeline is divided in two parts:
 - Color encoding (takes also geometric info)
 
 ![[Pasted image 20260511152953.png|Scheme|350]]
+In detail we have:
+![[Pasted image 20260522183402.png|Architecture|350]]
+A total of 3 informations are sent:
+- Encoded Coordinates: $x\stackrel{\tex}\rightarrow y=(y_C,y_F),\ y_c$ is G-PCC encoded and sent
+- Side Info: $x\rightarrow y$
+
 ## 9.2) Segmentation
 Segmentation is the task of dividing the input data into homogeneous regions that share the same meaning
 
