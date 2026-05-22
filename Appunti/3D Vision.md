@@ -1797,6 +1797,24 @@ $$H(\hat y|\hat z)+H(\hat z)=H(\hat y,\hat z)=H(\hat y)$$
 ## 9.2) Segmentation
 Segmentation is the task of dividing the input data into homogeneous regions that share the same semantic meaning. 
 
+Segmentation is usually a convolutional autoencoder. Call $G$ the ground truth and $P$ the predictions, we define 5 metrics:
+- Precision:
+$$\text{Precision}=\frac{A\cap P}P$$
+- Recall:
+$$\text{Recall}=\frac{A\cap P}A$$
+- Dice:
+$$\text{Dice}=\frac{2\par{A\cap P}}{A+P}$$
+- **Intersection Over Union (IoU):**
+$$\text{IoU}=\frac{A\cap P}{A\cup B}$$
+- **Mean Intersection Over Union (mIoU):**
+$$mIoU=\frac1{K+1}\sum_{i=0}^K\frac{p_{ii}}{\sum_{j=0}^K p_{ij}+\sum_{j=0}^Kp_{ji}p_{ii}}$$
+
+
+Accuracy is not used as it is not representative of the result (road image with one segment road is accurate at 60% but has mIoU of 3%)
+
+The loss functions are:
+- **Cross Entropy:** $$L_{CE}=-\sum_{\text{classes}}y\log y_{pred}$$
+- Dice loss: $$L_{Dice}=1-\text{Dice}$$
 
 
 # 10) Gen AI & Diffusion
