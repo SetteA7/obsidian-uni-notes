@@ -1753,10 +1753,23 @@ $$\begin{bmatrix}DC\\AC\end{bmatrix}=\frac{1}{\sqrt{w_1+w_2}}\begin{bmatrix}\sqr
 
 Also **PredLift** can be used, which uses predictive coding (color difference) at the lowest lod
 
+#### V-PCC
+G-PCC doesn't perform well in moving scenes, V-PCC consists in compressing the 3D scene into 2D information and transferring them using standard HEVC format.
+
+![[Pasted image 20260511151123.png|VPCC|500]]
+
+1. **Patches:**
+Patches are created in the following way:
+- Define 6 6 ortographc projections ($\pm x,\pm y,\pm z$)
+- Based on the normal of each point, assign the point to one projection
+- Refine the position based on neighbours
+- Points are connected using a connected component algorithm: 3D Patch
+- So each patch defines: 2 coordinates remain the same, third coordinate the distance.
+
 ## 9.2) Coding
 
 In moving scenes voxelization cannot be used (noise, etc). We use Video Point Cloud Coding (VPCC)
-![[Pasted image 20260511151123.png|VPCC|450]]
+
 This is based on HEVC.
 Create patches:
 - Define 6 orthographc projections ($\pm x,\pm y,\pm z$)
