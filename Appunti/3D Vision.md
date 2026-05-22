@@ -1718,8 +1718,15 @@ We say that a octant is full if it contains one geometry component. An empty oct
 ![[Pasted image 20260520155329.png|Example|450]]
 This example has a max lod of 2 ($4\times4\times4, \quad 4=2^{LOD}$) and will be encoded as:
 $$\underbrace{[11100000]}_{\text{Lod: 1}}\ \underbrace{[1\times 8][11110000][11001100]}_{\text{Lod: 2}}$$
+
+
 3. **Cellular Automata Block Transform:** Non-linear transformation. Used to maximize empty space (and therefore better octree compression)
-Use a $2\times 2\times2$ voxel cube and transform it into a 8-bit state $s$. Use a transformation to evaluate the state of the voxels in the cube based on their neighbors. This is a DCT representation, so similar to wavelet it adds 6 additional LODs per octree lod
+Use a $2\times 2\times2$ voxel cube and transform it into a 8-bit state $s$. Use a transformation to evaluate the state of the voxels in the cube based on their neighbors. 
+
+This transformation is (similar to) a DCT. Therefore 
+$$\text{8-bit State: }s\stackrel{\text{CA Transform}}\longrightarrow\text{DCT Coefficients: } s^p$$
+
+so similar to wavelet it adds *6 additional LODs per octree lod*
 
 
 4.  **TriSoup:** compression of dense geometry. Uses pruned octree.
@@ -1728,8 +1735,13 @@ Approximate dense geometry as a surface by reconstructing it as triangles
 - Each cube represents the surface passing through or near that cube
 - signal what segment contains a vertex.
 
-Now focus on the **attributes**, mainly colors:
-Each non empty voxel has a r,g,b color.
+##### Attributes Steps
+Now focus on the **attributes**, mainly RGB colors.
+
+RAHT:
+Process in a $2\times2\times2$ voxel block the DCT on the colors on the $x,y,z$ coordinates. For each coordinate find DC and AC values using
+$$\begin{bmatrix}DC\\AC\end{bmatrix}=\frac{1}{\sqrt{w_1+w_2}}\begin{bmatrix}\sqrt{w_1} & \sqrt{w_2}\\-\sqrt{w_1}&\sqrt{w_2}\end{bmatrix}\begin{bmatrix}C_1\\C_2\end{bmatrix}$$
+
 A similar transform to wavelet can be used to encode each color (different lods). DC values are quantized and included in the reduced resolution voxel
 Also **PredLift** can be used, which uses predictive coding (color difference) at the lowest lod
 
