@@ -1652,13 +1652,13 @@ $$\sigma_n=\frac12\Delta_n^T\Sigma_n^{-1}\Delta_n\quad \alpha'_n=\alpha_n\exp{-\
 
 # 9) Point Cloud
 ## 9.1) Compression
-Point clouds come from various sources and have different characteristics. They contain huge amount of information and are hard to tx.
+Point clouds come from various sources and have different characteristics. They contain huge amount of information and are hard to transmit efficiently.
 
 Point cloud can be
 - **static:** 10s M points
 - **dynamic:** 1M per frame, 30 fps
 
-Each point has $(x,y,z)$ coords and some attributes (normals, color, etc). **Point cloud codinc (PCC)** exploits the high redundancy and correlation between samples.
+Each point has $(x,y,z)$ coords and some attributes (normals, color, etc). **Point cloud coding (PCC)** exploits the high redundancy and correlation between samples. It should be possible to have flexible (multiple resolutions and quality) levels.
 
 This chapter heavily relies on concepts from [[Multimedia Communications]]. Here is brief recap on how a lossy encoder/decoder works:
 - **Analysis Transform:** $x$ is transformed into a more efficient (possibly sparse) representation $y=G(x)$
@@ -1666,6 +1666,9 @@ This chapter heavily relies on concepts from [[Multimedia Communications]]. Here
 - **Entropy Encode:** using entropy coding $\hat y$ is transformed into a lossless more efficient representation to use into bitstream $P(\hat y)$
 - **Decoding: Entropy Decode:** $P(\hat y)$ is decoded into $\hat y$
 - **Decoding: Synthesis Transform:** $\hat y$ is decoded into $\hat x$ which is a lossless reconstruction of $\hat x$
+
+Point 
+
 
 **MPEG PCC** 
 The general scheme is the following:
