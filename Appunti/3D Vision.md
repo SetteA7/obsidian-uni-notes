@@ -1835,10 +1835,16 @@ This technique is used to **represent a 3D scene with implicit neural representa
 Train network on a set of images where position $(x,y,z)$ and the viewing direction $(\theta,\phi)$ are known. The network will be overfitted to that specific scene and can now generate arbitrary views. 
 
 
-Used for synthetic view generation, complex geometry handling, compression.
+Used for synthetic view generation, complex geometry handling, compression. But gaussian splats are more efficient! This model is used for very HQ stuff: radio study, complex lighting simulations...
+
+There are many other downsides:
+- very slow training time: needs to be re trained for every different scene
+- hard to converge: depends on initial conditions
 
 ## 10.3) Generative Adversarial Networks (GAN)
 The idea of a GAN is to generate realistic data through a competition where one network learns to create convincing fakes while another network learns to detect them.
+
+
 
 # 11) Quiz
 
