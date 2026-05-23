@@ -1893,7 +1893,8 @@ A diffusion model is a generative model that learns how noise is added to an ima
 
 This can be seen as a markov chain that starts with a clean image and every step of the chain one layer of noise is added, until the image is only noise.
 
-The forward process (diffusion process)m
+The forward process (diffusion process) is the product of all the gaussian noises added:
+$$q(x_{1:T}|x_0)\def \prod_{t=1}^Tq(x_t|x_{t-1})\text{ with } q(x_t|x_{t-1})=\mathcal(x_t;\sqrt{1-\beta_t}x_{t-1})$$
 
 # 11) Quiz
 
