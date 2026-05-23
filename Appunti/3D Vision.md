@@ -1844,7 +1844,9 @@ There are many other downsides:
 ## 10.3) Generative Adversarial Networks (GAN)
 The idea of a GAN is to generate realistic data through a competition where one network learns to create convincing fakes while another network learns to detect them.
 
-
+The two competing networks are:
+- **Discriminator:** wants to distinguish between real samples and fake samples $D(X)=\begin{cases}0&\text{image is fake}\\ 1&\text{image is real}\end{cases}$
+- **Generator:** processes some noise to send to the discriminator. It wants to fool the discriminator
 
 # 11) Quiz
 
