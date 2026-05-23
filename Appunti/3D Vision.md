@@ -1819,8 +1819,26 @@ The loss functions are:
 
 # 10) Gen AI & Diffusion
 
-## 10.1) Generative Adversarial Networks (GAN)
-The idea of a GAN is to find a general feature space of the object it wants to create and sample from it in order to create a new object of the same type.
+## 10.1) Variational Autoencoders (VAE)
+The idea of a VAE is to to find a general feature space of the object it wants to create and sample from it in order to create a new object of the same type.
+
+The **training phase** consists in letting the autoencoder map samples into a (compressed) latent feature space so that samples are mapped into clustered regions.
+
+## 10.2) Implicit Neural Representations (INRs)
+When $\#\text{parameters}\approx \#\text{samples}$ the model will likely overfit. This is usually an undesired behaviour as the main aim of a model is to generalize.
+
+In some cases this is actually helpful. If a model is trained on just one image, it will generalize it and make it **independent of spatial resolution**
+
+#### Neural Radiance Field (NeRF)
+This technique is used to **represent a 3D scene with implicit neural representations for the synthesys of an arbitrary view**
+
+Train network on a set of images where position $(x,y,z)$ and the viewing direction $(\theta,\phi)$ are known. The network will be overfitted to that specific scene and can now generate arbitrary views. 
+
+
+Used for synthetic view generation, complex geometry handling, compression.
+
+## 10.3) Generative Adversarial Networks (GAN)
+The idea of a GAN is to generate realistic data through a competition where one network learns to create convincing fakes while another network learns to detect them.
 
 # 11) Quiz
 
