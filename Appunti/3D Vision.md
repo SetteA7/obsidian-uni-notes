@@ -1850,21 +1850,30 @@ The two competing networks are:
 
 We define the loss as:
 $$L(D,G)=\E_{x\sim p_r}[\log D(x)]+\E_z[\log (1-D(G(z)))]$$
-with $\E_{x\sim p_r}$ when it is sampled from real distribution, and the otehr expectation when the image is fake.
+with $\E_{x\sim p_r}$ when it is sampled from real distribution, and the other expectation when the image is fake.
 This needs to be
 - minimized by generator $D(G(z))\rightarrow 1,\ D(x)\rightarrow 0$
 - maximized by discriminator $D(G(z))\rightarrow 0,\ D(x)\rightarrow 1$
 
-This is solved with game theory: it is a **Zero-Sum von-Neuman Game**
+This is solved with game theory: it is a **Zero-Sum von-Neuman Game**. Logically, if both the generator and the discriminator are perfect, the discriminator will only guess randomly.
 
-using the definition of expectation we can rewrite the loss as:
+We can show this by using the definition of expectation to rewrite the loss as:
 $$\begin{align}L(D,G)&=\E_{x\sim p_r}[\log D(x)]+\E_z[\log (1-D(G(z)))]\\
 &=\int_xp_r(x)\log D(x)dx+\int_zp_g(z)\log(1-D(z))dz
 \end{align}$$
 Now let: $\tilde x=D(x)\quad A=p_r(x)\quad B=p_g(x)$ the function in the integrals becomes:
 $$f(\tilde x)=A\log(\tilde x)+B\log(1-\tilde x)$$
-so the minimization needs just to be performed on D(x):
-$$\frac{df}{d\tilde x}=\frac A{\tilde x}-\frac B{1-\tilde x}=$$
+so the minimization/maximization needs just to be performed on D(x), that is to set the derivative of $f$ to 0:
+$$\frac{df}{d\tilde x}=\frac A{\tilde x}-\frac B{1-\tilde x}=\frac{A-(A+B)\tilde x}{\tilde x(1-\tilde x)}=0\rightarrow \tilde x=\frac{A}{A+B}\rightarrow D(x)=\frac{p_r(x)}{p_r(x)+p_g(x)}$$
+and the generator is perfect if $p_g\rightarrow p_r$ and this brings to $D(x)\rightarrow\frac12$. Which doesn't make the discriminator work.
+To avoid this a different loss is defined:
+$$L(D,G)=-\frac12\E_z[\log (D(G(z))]$$
+
+
+The GAN **training** is done in 2 steps:
+1. Train $D$ only on its loss (perfect samples $D(x)\rightarrow 1$ and crappy generated data $D(z)\rightarrow 0$) the weights are updated via standard backpropagation
+2. Train $G$ with the discriminator of step 1. Update weights via standard backpropagation (passing through $D$ also)
+3. repeat steps 1,2
 # 11) Quiz
 
 ## 11.1) Quiz 2
