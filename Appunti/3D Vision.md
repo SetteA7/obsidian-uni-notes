@@ -1887,7 +1887,7 @@ This uses a pre trained network (InceptionNet) that measures the properties of h
 
 The conditional label distribution has low entropy $p(y|x)$ while the general distribution has high entropy
 
-## 10.4) Diffusion Models
+## 10.4) Diffusion Models TODO
 
 A diffusion model is a generative model that learns how noise is added to an image and learns to denoise it.
 
