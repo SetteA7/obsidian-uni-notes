@@ -1819,6 +1819,8 @@ The loss functions are:
 
 # 10) Gen AI & Diffusion
 
+## 10.1) Generative Adversarial Networks (GAN)
+The idea of a GAN is to find a general feature space of the object it wants to create and sample from it in order to create a new object of the same type.
 
 # 11) Quiz
 
