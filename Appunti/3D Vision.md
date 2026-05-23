@@ -1881,10 +1881,11 @@ This however has some problems:
 - failure to convergence
 
 #### Quality Metrics
-Various quality metrics are used as it is difficult to measure the quality of the generated data (discriminator guesses randomly in ideal case). we introduce in particular the **Inception Score (IS)**
+Various quality metrics are used as it is difficult to measure the quality of the generated data (discriminator guesses randomly in ideal case). we introduce in particular the **Inception Score (IS)** and **Frechet Inception Distance (FID)**
 
-This uses a pre trained network 
+This uses a pre trained network (InceptionNet) that measures the properties of high classifiability and diversity for samples.
 
+The conditional label distribution has low entropy $p(y|x)$ while the general distribution has high entropy
 # 11) Quiz
 
 ## 11.1) Quiz 2
