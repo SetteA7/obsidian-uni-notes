@@ -1886,6 +1886,15 @@ Various quality metrics are used as it is difficult to measure the quality of th
 This uses a pre trained network (InceptionNet) that measures the properties of high classifiability and diversity for samples.
 
 The conditional label distribution has low entropy $p(y|x)$ while the general distribution has high entropy
+
+## 10.4) Diffusion Models
+
+A diffusion model is a generative model that learns how noise is added to an image and learns to denoise it.
+
+This can be seen as a markov chain that starts with a clean image and every step of the chain one layer of noise is added, until the image is only noise.
+
+The forward process (diffusion process)m
+
 # 11) Quiz
 
 ## 11.1) Quiz 2
