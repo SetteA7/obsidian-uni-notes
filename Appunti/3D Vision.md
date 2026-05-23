@@ -1845,9 +1845,26 @@ There are many other downsides:
 The idea of a GAN is to generate realistic data through a competition where one network learns to create convincing fakes while another network learns to detect them.
 
 The two competing networks are:
-- **Discriminator:** wants to distinguish between real samples and fake samples $D(X)=\begin{cases}0&\text{image is fake}\\ 1&\text{image is real}\end{cases}$
-- **Generator:** processes some noise to send to the discriminator. It wants to fool the discriminator
+- **Discriminator:** wants to distinguish between real samples and fake samples $D(\cdot)=\begin{cases}0&\text{image is fake}\\ 1&\text{image is real}\end{cases}$. It doesn't want to be fooled by the generator $D(G(Z))\rightarrow 0,\ D(X)\rightarrow 1$
+- **Generator:** processes some noise to send to the discriminator. It wants to fool the discriminator, that is: $D(G(Z))\rightarrow 1$ and therefore a real image $D(X)\rightarrow0$.
 
+We define the loss as:
+$$L(D,G)=\E_{x\sim p_r}[\log D(x)]+\E_z[\log (1-D(G(z)))]$$
+with $\E_{x\sim p_r}$ when it is sampled from real distribution, and the otehr expectation when the image is fake.
+This needs to be
+- minimized by generator $D(G(z))\rightarrow 1,\ D(x)\rightarrow 0$
+- maximized by discriminator $D(G(z))\rightarrow 0,\ D(x)\rightarrow 1$
+
+This is solved with game theory: it is a **Zero-Sum von-Neuman Game**
+
+using the definition of expectation we can rewrite the loss as:
+$$\begin{align}L(D,G)&=\E_{x\sim p_r}[\log D(x)]+\E_z[\log (1-D(G(z)))]\\
+&=\int_xp_r(x)\log D(x)dx+\int_zp_g(z)\log(1-D(z))dz
+\end{align}$$
+Now let: $\tilde x=D(x)\quad A=p_r(x)\quad B=p_g(x)$ the function in the integrals becomes:
+$$f(\tilde x)=A\log(\tilde x)+B\log(1-\tilde x)$$
+so the minimization needs just to be performed on D(x):
+$$\frac{df}{d\tilde x}=\frac A{\tilde x}-\frac B{1-\tilde x}=$$
 # 11) Quiz
 
 ## 11.1) Quiz 2
