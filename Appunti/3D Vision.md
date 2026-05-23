@@ -1858,7 +1858,7 @@ This needs to be
 This is solved with game theory: it is a **Zero-Sum von-Neuman Game**. Logically, if both the generator and the discriminator are perfect, the discriminator will only guess randomly.
 
 We can show this by using the definition of expectation to rewrite the loss as:
-$$\begin{align}L(D,G)&=\E_{x\sim p_r}[\log D(x)]+\E_z[\log (1-D(G(z)))]\\
+$$\begin{align}L(D,G)&=\E_{x\sim p_r}[\log D(x)]+\E_{z\sim p_g}[\log (1-D(G(z)))]\\
 &=\int_xp_r(x)\log D(x)dx+\int_zp_g(z)\log(1-D(z))dz
 \end{align}$$
 Now let: $\tilde x=D(x)\quad A=p_r(x)\quad B=p_g(x)$ the function in the integrals becomes:
@@ -1874,6 +1874,17 @@ The GAN **training** is done in 2 steps:
 1. Train $D$ only on its loss (perfect samples $D(x)\rightarrow 1$ and crappy generated data $D(z)\rightarrow 0$) the weights are updated via standard backpropagation
 2. Train $G$ with the discriminator of step 1. Update weights via standard backpropagation (passing through $D$ also)
 3. repeat steps 1,2
+
+This however has some problems:
+- vanishing gradients (as $p_g\rightarrow p_r$)
+- Mode collapse: only one subset of possible outputs is generated
+- failure to convergence
+
+#### Quality Metrics
+Various quality metrics are used as it is difficult to measure the quality of the generated data (discriminator guesses randomly in ideal case). we introduce in particular the **Inception Score (IS)**
+
+This uses a pre trained network 
+
 # 11) Quiz
 
 ## 11.1) Quiz 2
