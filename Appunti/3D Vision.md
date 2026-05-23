@@ -1893,8 +1893,18 @@ A diffusion model is a generative model that learns how noise is added to an ima
 
 This can be seen as a markov chain that starts with a clean image and every step of the chain one layer of noise is added, until the image is only noise.
 
-The forward process (diffusion process) is the product of all the gaussian noises added:
-$$q(x_{1:T}|x_0)\def \prod_{t=1}^Tq(x_t|x_{t-1})\text{ with } q(x_t|x_{t-1})=\mathcal(x_t;\sqrt{1-\beta_t}x_{t-1})$$
+The **forward process** (diffusion process) is the product of all the gaussian noises added:
+$$q(x_{1:T}|x_0)\def \prod_{t=1}^Tq(x_t|x_{t-1})\text{ with } q(x_t|x_{t-1})=\mathcal(x_t;\sqrt{1-\beta_t}x_{t-1},\beta_tI)$$
+Recall that a sum of gaussian = gaussian with combined parameters. Now define
+$$\begin{cases}\alpha_t=1-\beta_t\\ \overline\alpha_t=\prod_{s=1}^t\alpha_s\end{cases}\longrightarrow q(x_t|x_0)=\mathcal N\par{x_t;\sqrt{\overline\alpha_t}x_0,(1-\overline\alpha_t)I}$$
+so it is possible to skip sampling steps:
+$$x_t=\sqrt{\overline\alpha_t}x_0+(1-\overline\alpha_t)\epsilon\qquad \text{ with }\epsilon\sim\mathcal(0,I)$$
+which implies that as $t\rightarrow \infty$ we get to $\mathcal N(0,I)$ since $\overline\alpha_t\rightarrow 0$.
+
+![[Pasted image 20260523182445.png|Example|450]]
+
+The **reverse process** is done by CNNs (not GANs)
+
 
 # 11) Quiz
 
