@@ -243,7 +243,7 @@ In PD this looks like, for example
 Ring modulation consists in multiplying the signal with a sinusoid carrier signal
 $$s=m[n]\cos(2\pi\frac{f_i}{F_s}n+\phi_c)$$
 the produced output moves the spectrum in vicinity of the carrier
-Only the sidebands $f_{s_{1,2}}=f_c\pm f_m$ are present
+Only the sidebands $f_{s_{1,2}}=f_c\pm f_m$ are present. This is used to represent **tremolo** effects
 
 ![[Pasted image 20260514183828.png|Representation|250]]
 
