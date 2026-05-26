@@ -172,11 +172,12 @@ An oscillator generates a simple periodic waveform. Instead of calculating this 
 
 This is low quality approach as it lacks timbre and more complex modulations
 
+More precisely, the table are read via a pointer that moves along the table that contains the samples. Each time a sound is reproduced, the pointer is set to the next sample. If the step is not an integer some aliasing is noticed.
 ##### Noise Generator
 Natural sounds are not perfectly periodic. They contain varying statistical properties therefore a noise generator is required. 
 Noise generator produces a sequence of random sounds with however clear statistical properties (flat spectral density).
 
-This is done via generators of pseudo casual
+This is done via generators of pseudo casual numbers.
 
 ### 2.3.2) Time-Segment Based Models
 #### Sampling (Wavetable) Synthesis
