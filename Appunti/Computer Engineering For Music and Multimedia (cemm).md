@@ -174,7 +174,9 @@ This is low quality approach as it lacks timbre and more complex modulations
 
 ##### Noise Generator
 Natural sounds are not perfectly periodic. They contain varying statistical properties therefore a noise generator is required. 
-Noise generator produces a sequence of random sounds with however clear statistical properties (flat spectral density)
+Noise generator produces a sequence of random sounds with however clear statistical properties (flat spectral density).
+
+This is done via generators of pseudo casual
 
 ### 2.3.2) Time-Segment Based Models
 #### Sampling (Wavetable) Synthesis
