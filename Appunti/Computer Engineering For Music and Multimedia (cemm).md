@@ -144,7 +144,7 @@ Various classifications of sound exist based on specific needs
 #### Classification Based on Model Structure
 This is based on **how the sound was generated**
 - **Direct Generation:** techniques based on one or more independent blocks and sum of the results: **Additive and granular synthesis**
-- **Feed Forward Structure:** feed forward multi block structure (lot of post processing): All non linear models **subtractive synthesis, ring and frequency modulation synthesis**
+- **Feed Forward Structure:** feed forward multi block structure (lot of post processing): All non linear models **ring and frequency modulation synthesis**
 - **Interacting Structure:** interacting multi block (feedback). Most physiscs based models
 
 #### Classification Based on Cognitive Representation
@@ -721,3 +721,5 @@ First bit set to 0. The other 15 bits are used to indicate into how many ticks t
 | Zinovieff's EMS matrix made it easier to:                                                        | 1. Edit the patch while playing<br>2. Control spatialisation<br>3. Vary parameters<br>4. Record sounds                                             | **1**      | By using a pin-matrix instead of patch cables, the user could instantly change signal routing during a performance.                                          |
 | The MIDI protocol, introduced in the mid-1980s:                                                  | 1. Replaced analogue voltage control<br>2. Enabled digital audio processing<br>3. Allowed for real-time synthesis<br>4. Facilitated spatialisation | **1**      | MIDI standardized the way digital devices talked to each other, replacing the cumbersome Control Voltage (CV/Gate) systems.                                  |
 | The Publison DHM 89 B2 (1978) offered:                                                           | 1. Digital reverb<br>2. Pitch shifting (+1/-2 octaves)<br>3. Pitch shifting (+2/-1 octaves)<br>4. Both 1 and 2                                     | **2**      | This hardware unit was famous for combining high-quality digital delay/reverb with unique pitch-shifting capabilities.                                       |
+# 9) TODO better
+Classification of sound models
