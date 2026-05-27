@@ -227,7 +227,9 @@ Wavetable vs Additive Synthesis:
 # 3) Subtractive Synthesis
 Subtractive synthesis consists in applying filters to a spectrally rich waveforms. Some frequencies will be subtracted and some enhanced. This does not suppose any kind of periodic signal.
 
-## 3.1) Non Linear Model Synthesis
+This synthesis, along with the next ones are a form of Feed Forward synthesis
+
+## 3.1) Non Linear Model Synthesis (time)
 
 In a modulation we modify the og the signal (carrier) with another signal (modulator).
 #### Amplitude Modulation
