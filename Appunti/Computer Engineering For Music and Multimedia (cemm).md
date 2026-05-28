@@ -43,6 +43,10 @@ Beats are a **amplitude modulation** phenomenon that allows two similar tone to 
 ## 1.2) Auditory System TODO
 The ear is divided into external, middle and inner ear.
 
+External: channels the sound into middle ear
+
+Middle: has eardrum and bones, amplifies vibrations, transmits into mechanical vibrations in the inner ear
+
 The inner ear contains the **cochlea** 
 
 The **basilar membrane** is **narrow-rigid at the base, wide-soft at the apex**. This is a bank of filters tuned at specific vibrations.
