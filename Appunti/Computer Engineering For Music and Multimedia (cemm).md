@@ -291,7 +291,7 @@ Live electronics is **voices or instruments TRANSFORMED by live electronics** in
 The sound director has a similar role to the conductor (interpretation, balance, coordination, sound quality)
 The electronic musician has a different role based on the piece
 
-The instrument is a constantly evolving system with quickly obsolescent hardware and software. Each pieve has a different system. Hard to sustain repertoire.
+The instrument is a constantly evolving system with quickly obsolescent hardware and software. Each piece has a different system. Hard to sustain repertoire.
 
 Traditional music has additive sound interaction! Live electronics is a functional interaction. 
 
