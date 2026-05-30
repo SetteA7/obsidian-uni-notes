@@ -1228,7 +1228,7 @@ The essential matrix has these **properties**:
 >By SVD we have $E=UDV^T$ with $D=\begin{bmatrix}1&0&0\\0&1&0\\0&0&0\end{bmatrix}$.
 >It is possible to write $D$ as a product of two matrices $S'=\begin{bmatrix}0&-1&0\\1&0&0\\0&0&0\end{bmatrix},R'=\begin{bmatrix}0&1&0\\-1&0&0\\0&0&1\end{bmatrix}$ . 
 >Then notice the following:
->$$E=UDV^T=US'\cdot U^TU\cdot R'V^T=(US'U^T)(UR'V^T)=SR$$
+>$$E=UDV^T=US'R'V^T=US'\cdot (U^TU)\cdot R'V^T=(US'U^T)(UR'V^T)=SR$$
 > Where 4 possible choices can be made with $\pm S, \pm R$ 
 
 ^ecaece
@@ -1239,7 +1239,7 @@ $$\stackvec{A^{-1}u}=A^T\stackvec u A\iff \det A=1$$
 ##### 8 points Algorithm
 However, since $R,t$ are not known a priori the $E$ matrix needs to be estimated. 
 
-Let the first image have $P=K[I|0]$ and the second have $P'=[R|t]$.  The conjugate points $(m'_i,m_i)$ can be normalized $(p=K^{-1}m, p'=K^{-1}m')$ which must satisfy the equation
+Let the first image have $P=K[I|0]$ and the second have $P'=K[R|t]$.  The conjugate points $(m'_i,m_i)$ can be normalized $(p=K^{-1}m, p'=K^{-1}m')$ which must satisfy the equation
 $$p_i'^TEp_i=0$$
 which can be decomposed into (same as [homography estimation](#^77c63e))
 $$(p_i^T\otimes p_i'^T)\text{vec}(E)=0
