@@ -1229,6 +1229,14 @@ The essential matrix has these **properties**:
 >It is possible to write $D$ as a product of two matrices $S'=\begin{bmatrix}0&-1&0\\1&0&0\\0&0&0\end{bmatrix},R'=\begin{bmatrix}0&1&0\\-1&0&0\\0&0&1\end{bmatrix}$ . 
 >Then notice the following:
 >$$E=UDV^T=US'R'V^T=US'\cdot (U^TU)\cdot R'V^T=(US'U^T)(UR'V^T)=SR$$
+> S is antisymmetric ($A^T=-A$) since:
+> - Notice that $S'^T=-S$
+> - $S^T=(US'U^T)^T=US'^TU^T=-US'U^T=-S$
+> And it is non null ($S\not=0$) since $US'U^T=0\rightarrow U^TUS'U^TU=U^T0U=0\rightarrow S'=0$ which is not true
+>
+>R is a rotation matrix ($RR^T=I$) since
+>- Notice $R'R'^T=I$
+>- $RR^T = UR' (V^T V) (R')^T U^T = UR' (I) (R')^T U^T = U (R' (R')^T) U^T=UU^T=I$
 > Where 4 possible choices can be made with $\pm S, \pm R$ 
 
 ^ecaece
