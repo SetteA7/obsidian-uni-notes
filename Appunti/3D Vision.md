@@ -606,17 +606,22 @@ $$F=\stackvec{K't}K'RK^{-1}$$
 Derive $E$ from LH
 Let
 $$P=K[I|0]\qquad P'=K[R|t]$$
-So $Q=I,Q'=R$
+So $Q=KI,Q'=KR$
 Now recall LH:
 $$m'^T\stackvec{e'}Q'Q^{-1}m'=0$$
 The epipole in this case becomes:
 $$e'=P'C=K[R|t]\begin{bmatrix}0_{3\times1}\\1\end{bmatrix}=Kt$$
 Now recall that:
 $$\stackvec{Mv}=\det(M)M^{-T}\stackvec v M^{-1}\simeq M^{-T}\stackvec v M^{-1}$$
+therefore
+$$[Kt]_\times\simeq K^{-T}[t]_\times K^{-1}$$
+therefore the fundamental matrix becomes:
+$$[Kt]_\times RK^{-1}=K^{-T}[t]_\times K^{-1}KRK^{-1}=K^{-T}[t]_\times RK^{-1}$$
 Now normalize the coordinates:
 $$p=K^{-1}m\qquad p'=K^{-1}m'$$
 by substituting into LH:
-$$m'^T\stackvec{e'}Q'Q^{-1}m'=p'^TK^{-T}$$
+$$m'^T\stackvec{e'}Q'Q^{-1}m'=p'^TK^TK^{-T}\stackvec t RK^{-1}Kp=p'^T\stackvec tRp=0$$
+Where $E=\stackvec t R$.
 
 ## 3.3) Homography Motion Estimation
 With epipolar geometry and homography we can estimate motion. First we need to find the homographies for the two types of motion (rotational and planar). Then the motion of the camera can be studied by also setting $K=K'$
@@ -1288,6 +1293,27 @@ $$P=[I|0]\qquad P'=[R|t]$$
 Lounget Higgins now becomes:
 $$p'^T\stackvec tRp=p'^TEp=0$$
 Where $E=\stackvec tR$ is the essential matrix.
+
+---
+Derive $E$ from LH
+Let
+$$P=K[I|0]\qquad P'=K[R|t]$$
+So $Q=KI,Q'=KR$
+Now recall LH:
+$$m'^T\stackvec{e'}Q'Q^{-1}m'=0$$
+The epipole in this case becomes:
+$$e'=P'C=K[R|t]\begin{bmatrix}0_{3\times1}\\1\end{bmatrix}=Kt$$
+Now recall that:
+$$\stackvec{Mv}=\det(M)M^{-T}\stackvec v M^{-1}\simeq M^{-T}\stackvec v M^{-1}$$
+therefore
+$$[Kt]_\times\simeq K^{-T}[t]_\times K^{-1}$$
+therefore the fundamental matrix becomes:
+$$[Kt]_\times RK^{-1}=K^{-T}[t]_\times K^{-1}KRK^{-1}=K^{-T}[t]_\times RK^{-1}$$
+Now normalize the coordinates:
+$$p=K^{-1}m\qquad p'=K^{-1}m'$$
+by substituting into LH:
+$$m'^T\stackvec{e'}Q'Q^{-1}m'=p'^TK^TK^{-T}\stackvec t RK^{-1}Kp=p'^T\stackvec tRp=0$$
+Where $E=\stackvec t R$.
 #### Multiple Images
 In multiple scale it is important that all estimated $R_i,t_i$ are coherent wrt the same scale factor.
 Suppose we have 3 images, their real relation is
