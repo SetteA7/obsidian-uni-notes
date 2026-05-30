@@ -1019,7 +1019,7 @@ $$\begin{aligned}
 z_pp_p=M_p\\
 z_cp_c=M_c
 \end{aligned}\rightarrow 
-z_pp_c-z_cRp_c=t\rightarrow
+z_cp_c-z_cRp_c=t\rightarrow
 \begin{cases}
 z_pu_p-z_cr_1^Tp_c=t_1\\
 z_pv_p-z_cr_2^Tp_c=t_2\\
