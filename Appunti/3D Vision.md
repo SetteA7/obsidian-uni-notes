@@ -2332,3 +2332,27 @@ d) ... reduce block size to minimize the effect of noise.
 Correct answers: a, c Explanation: Nel block matching, metriche di errore come la SAD (Sum of Absolute Differences) devono essere minimizzate per trovare le corrispondenze tra blocchi (al contrario della NCC che, essendo una misura di correlazione, andrebbe massimizzata). Inoltre, un metodo standard per validare le stime della disparità (e filtrare le occlusioni) consiste nell'eseguire il "left-right consistency check".
 
 # 12) Q&A
+## 12.1) Present how active stereo systems work and overviews the different 3D scanners that are exploiting such principle
+
+Active stereo systems differ from passive ones since the employ one active light projector (laser, IR, ...) and one or more cameras. These allow for more precise measurements and also in more complex environments (for example dark areas). 
+
+We identify two main technologies. Active stereo and active triangulations.
+
+The first method is more similar to the traditional stereo system as two cameras and one projector are employed. The projector illuminates the scene and the cameras calculate the disparity on the laser projections. Three main methods exist:
+- Structured light: a texture is painted on the whole object
+- Laser pointer: one single laser point is shot, multiple shots are needed for an entire object
+- Laser line: one vertical line is shot, also here multiple shots are needed
+
+The active triangulation employs one camera and one laser. Calibration is needed. Here we can identify:
+- Laser line: one vertical line is shot (since v_p cannot be estimated), also here multiple shots are needed
+- Coded light: a series of bands is used to speed up the process
+
+Active methods however have some limitations:
+- Occlusion
+- different objects have different reflectivites which skew the measurements
+- external illumination
+- noise
+
+Active stereo methods work best in short range and have low costs, they hive high precision but require the correct environment. Another type of 3D sensor is the ToF sensor. This sensor measures the phase shift (phase-shift )of the returning ray or also the time of flight itself (pulse based). The first category works at up to 100m and has high precision and high speed, the latter are used for even longer distances but are more noisy.
+
+The kinekt v1 was the first commercial active structured light stereo method, which allowed to generate a depth map at relatively high refresh rates using IR cameras. The v2 of the same technology resorted to a ToF scanner. It is worth noticing that both only create a "2.5"D view of the scene as a fixed acmera cannot create a 3D point cloud
