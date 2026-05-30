@@ -1044,6 +1044,8 @@ $\endproof$
 ## 5.1) Time Of Flight (ToF)
 A Time of Flight (ToF) sensor isn active sensor that estimates distance by measuring the time it takes to send a light pulse and receive the reflected signal.
 
+This is a very fast approach, that can be extended to an entire image (matricial ToF), highly accurate with robustness to noise ad deformations and might also be very low power.
+
 For a flat surface the distance ($z$) can be calculated by knowing the e2e time of flight ($\tau$)
 $$z=\frac {c\tau}2\qquad \tau=\frac{2z}{c}\qquad c\approx 3\cdot 10^8 \unit{m/s}$$
 #### Basic Idea
