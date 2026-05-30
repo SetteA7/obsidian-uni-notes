@@ -602,6 +602,22 @@ $$e'=P'C=K'[R|t]\begin{bmatrix}\vec 0\\1\end{bmatrix}=K't$$
 By plugging this into the fundamental matrix we have:
 $$F=\stackvec{K't}K'RK^{-1}$$
 
+---
+Derive $E$ from LH
+Let
+$$P=K[I|0]\qquad P'=K[R|t]$$
+So $Q=I,Q'=R$
+Now recall LH:
+$$m'^T\stackvec{e'}Q'Q^{-1}m'=0$$
+The epipole in this case becomes:
+$$e'=P'C=K[R|t]\begin{bmatrix}0_{3\times1}\\1\end{bmatrix}=Kt$$
+Now recall that:
+$$\stackvec{Mv}=\det(M)M^{-T}\stackvec v M^{-1}\simeq M^{-T}\stackvec v M^{-1}$$
+Now normalize the coordinates:
+$$p=K^{-1}m\qquad p'=K^{-1}m'$$
+by substituting into LH:
+$$m'^T\stackvec{e'}Q'Q^{-1}m'=p'^TK^{-T}$$
+
 ## 3.3) Homography Motion Estimation
 With epipolar geometry and homography we can estimate motion. First we need to find the homographies for the two types of motion (rotational and planar). Then the motion of the camera can be studied by also setting $K=K'$
 
