@@ -2356,3 +2356,21 @@ Active methods however have some limitations:
 Active stereo methods work best in short range and have low costs, they hive high precision but require the correct environment. Another type of 3D sensor is the ToF sensor. This sensor measures the phase shift (phase-shift )of the returning ray or also the time of flight itself (pulse based). The first category works at up to 100m and has high precision and high speed, the latter are used for even longer distances but are more noisy.
 
 The kinekt v1 was the first commercial active structured light stereo method, which allowed to generate a depth map at relatively high refresh rates using IR cameras. The v2 of the same technology resorted to a ToF scanner. It is worth noticing that both only create a "2.5"D view of the scene as a fixed acmera cannot create a 3D point cloud
+
+## 12.2) Describe how Time-of-Flight sensors work.
+ToF sensors measure the distance of an object using the physical properties of light itself. In fact the traveled distance will be $z=c\tau/2$ with tau the e2e time. 
+
+Phase shift based ToF sensors can be more precise by inferring on the phase f_mod of the amplitude modulated signal:
+The system emits s$_E(t)=A_E(1+sin(2\pi f_{mod} t))$
+It will receive $s_R(t)=A_R(1+sin(2\pi f_{mod} t+\Delta\phi))+B_R$
+
+Where $B_R$ is the additional recorded light (assumed as constant), $A_R$ is the amplitude attenuation proportional to $1/z^2$ and $\Delta\phi$ is proportional to \tau. In fact the distance can now be inferred from the phase as:
+$\Delta\phi=2\pi f_{mod} \tau=2\pi f_{mod} \frac{2z}c$ From here $z=\frac{c}{4\pi f_{mod}}\Delta\phi$
+
+This however has one limitation, the phase wrapping, if the distance is not in the range $[0,c/2 f_{mod}]$ then the measurement will be incorrect. This can be fixed by sending multiple impulses with different phases.
+
+Since the cameras have a sampling time, it must be assured that at least 4 samples are recorded in the period, that is F_$s=4f_{mod}$. Then with these 4 measuremenst the phase can be inferred as
+$arctan2(s_R(0)-s_R(2/F_s), s_R(1/F_s)-s_R(3/F_s).$
+
+Other issues are given by pixel size, where one pixel has many measurements, $z_\max-z_\min/2$ is chosen. Radiation noise is modeled as a gaussian
+
