@@ -1215,11 +1215,11 @@ The essential matrix has these **properties**:
 >A $3\times3$ essential matrix can be decomposed into the product of a non null antisymmetric matrix $S$ and a rotation $R$ iff $E$ has two equal singular values and the third equal to zero $\begin{cases}\sigma_1=\sigma_2\not=0\\\sigma_3=0\end{cases}$:
 >$$E=SR\iff \begin{cases}\sigma_1=\sigma_2\not=0\\\sigma_3=0\end{cases}$$
 >Proof:
->Proof of $\implies$
->Since $E=\stackvec tR$ then $S=\stackvec t$ with $\abs t=1$ (no loss of generality since E is defined wrt scale factor)
+>Proof of $\implies$:
+>Since $E=\stackvec tR=SR$ then $S=\stackvec t$ with $\abs t=1$ (no loss of generality since E is defined wrt scale factor)
 >A rotation can be defined as $Ut=[0,0,1]^T\def a\rightarrow t=U^Ta$ and therefore
->$$S=\stackvec t=\stackvec{U^Ta}=U^T\stackvec aU$$
->since $U$ is a rotation $U^T=U^{-1}$
+>$$S=\stackvec t=\stackvec{U^Ta}=(U^T)^{-T}\stackvec a(U^T)^{-1}=U^{-1}\stackvec a U^{-T}=U^T\stackvec aU$$
+>since $U$ is a rotation $U^T=U^{-1}$ and also $U=U^{-T}$
 >The singular values can be found by SVD decomposition $E=U\Sigma V^T$. By computing $EE^T=U(\Sigma\Sigma^T)U^T$ and noticing that $\Sigma$ is diagonal, then the diagonal of $\Sigma$ has the squared singular values of $E$:
 >Now the singular values are found as:
 >$$EE^T=SRR^TS^T=SS^T=U^T\stackvec a UU^T\stackvec a^TU=U^T\begin{bmatrix}1&0&0\\0&1&0\\0&0&0\end{bmatrix}U$$
