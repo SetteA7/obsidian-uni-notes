@@ -1217,7 +1217,7 @@ The essential matrix has these **properties**:
 >Proof:
 >Proof of $\implies$:
 >Since $E=\stackvec tR=SR$ then $S=\stackvec t$ with $\abs t=1$ (no loss of generality since E is defined wrt scale factor)
->A rotation can be defined as $Ut=[0,0,1]^T\def a\rightarrow t=U^Ta$ and therefore
+>Define a rotation $U$ as to have $Ut=[0,0,1]^T\def a\rightarrow t=U^Ta$ and therefore
 >$$S=\stackvec t=\stackvec{U^Ta}=(U^T)^{-T}\stackvec a(U^T)^{-1}=U^{-1}\stackvec a U^{-T}=U^T\stackvec aU$$
 >since $U$ is a rotation $U^T=U^{-1}$ and also $U=U^{-T}$
 >The singular values can be found by SVD decomposition $E=U\Sigma V^T$. By computing $EE^T=U(\Sigma\Sigma^T)U^T$ and noticing that $\Sigma$ is diagonal, then the diagonal of $\Sigma$ has the squared singular values of $E$:
