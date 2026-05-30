@@ -2330,3 +2330,5 @@ c) ... minimize the SAD value between displaced blocks.
 d) ... reduce block size to minimize the effect of noise.
 
 Correct answers: a, c Explanation: Nel block matching, metriche di errore come la SAD (Sum of Absolute Differences) devono essere minimizzate per trovare le corrispondenze tra blocchi (al contrario della NCC che, essendo una misura di correlazione, andrebbe massimizzata). Inoltre, un metodo standard per validare le stime della disparità (e filtrare le occlusioni) consiste nell'eseguire il "left-right consistency check".
+
+# 12) Q&A
