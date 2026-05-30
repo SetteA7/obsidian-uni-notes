@@ -1110,15 +1110,19 @@ $$z=\frac c{4\pi f_{syn}}\qquad z_\max=\frac c{2f_{syn}}\Delta\phi_{syn}$$
 ## 5.2) Light Detection And Ranging (LiDaR) TODO
 Lidar is a specific type of ToF sensor with wavelengths in IR (10 $\mu m$) or UV (250 $nm$)
 
-Two methods exists:
+Two detection methods exists:
 - **Energy detection (incoherent):** measure amplitude change ($\propto1/z^2$) used for:
+- **Optical heterodyne (coherent):** phase and amplitude variation, this is more precise uses less power but requires more complex electronics. this is used for
+
+Many scan technologies exist:
+- Incoherent:
 	- MEMs (Microelectromechanical systems): mirrors who tilt angles, requires multiple mirros and is suscettibel to shock and vibrations
 	- Flash LiDAR: focal plane of photodetectors captures back scattered light, requires high power but is not sensitive to vibrations
 	- Optical Phased Array (OPA): optical phase modulator controls speed of light passing through lense
-- **Optical heterodyne (coherent):** phase and amplitude variation, this is more precise uses less power but requires more complex electronics. this is used for
+- coherent: 
 	- Frequency-modulated continuous wave (FMCW)
 
-It can either use a pulse model, with micropulses (burst of impulses) at high energy, or lasers (not for scientific use)
+It can either use a pulse model, with micropulses (burst of impulses) at low or high energy, or lasers
 
 The waveform of the laser is modified by the objects, this can be used to infer the type of the object
 
