@@ -984,7 +984,7 @@ x_p/z_p\\ y_p/z_p\\z_p/z_p
 \end{bmatrix}=
 \frac1{z_p}M_p
 $$
-where 
+where wrt the reference system of the projector we have
 $$M_p=\begin{bmatrix}
 x_p\\ y_p\\ z_p
 \end{bmatrix}=G_pM=[R_p|t_p]M$$

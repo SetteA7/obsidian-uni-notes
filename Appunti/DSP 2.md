@@ -436,6 +436,8 @@ $$\beta=\begin{cases} 0 &h[n]\text{ symmetric}\\ \frac\pi2 &h[n]\text{ antisymme
 | **Type 3** | even | antisymmetric | yes           | $2\sin\theta$        | $z_i\implies1/z_i$, $z=\pm1$ is a zero |  No low pass  | $(N-2)/2$ |
 | **Type 4** | odd  | antisymmetric | no            | $2\sin\frac\theta2$  |  $z_i\implies1/z_i$, $z=1$ is a zero   |  No low pass  | $(N-1)/2$ |
 
+---
+
 >[!rmk|*]
 >A causal IIR system cannot satisfy these constraints (infinite and one sided thus can't be symmetric)
 
