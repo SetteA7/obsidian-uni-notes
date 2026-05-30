@@ -1331,7 +1331,7 @@ In general the minimization target is
 $$\min_{R_i,t_i,M_j}\sum_{i=1}^N\sum_{j=1}^n\abs{m_j^i-K_i[R_it_i]M_j}^2$$
 
 ## 6.2) Structure From Motion (SfM)
-SfM is an uncalibrated reconstruction starting from a set of pictures.
+SfM is an uncalibrated reconstruction starting from a set of pictures. These pictures don't need the cameras to be calibrated (since $R,t$ will be estimated), however $K$ needs to be known. Moreover the images must not be a pure rotation, as otherwise triangulation won't work
 
 Suppose that we have a set of conjugate points $m_i^j$, that is point $M^j$ projected into camera $P_i$, then the aim is to reconstruct $M^j$ and $P_i$ such that $m_i^j\simeq P_iM^j$.
 
