@@ -1471,7 +1471,7 @@ Lounguet Higgins can be written as
 $$p_i'^Tt\times Rp_i=0$$
 The LS solution is found by minimizing
 $$\epsilon=\sum_{i=1}^n(p_i^Tt\times Rp_i)^2$$
-by suppising they are gradually refined, we can replace $t,R$ with $\delta t, \delta w$ and have:
+by supposing they are gradually refined, we can replace $t,R$ with $\delta t, \delta w$ and have:
 $$\epsilon=\sum_{i=1}^n(s_i+c_i^T\delta t+d_i\delta w)^2$$
 with:
 $$\begin{align}
@@ -1488,16 +1488,6 @@ $$\begin{align}
 &t\leftarrow t+\delta t\\
 &R=R\begin{bmatrix}0&-\delta w_3&\delta w_2\\\delta w_3&0&-\delta w_1\\-\delta w_2&\delta w_1&0\end{bmatrix}=R\stackvec{\delta w}
 \end{align}$$
-
-
----
-Proof TODO
-by setting $t\leftarrow t+\delta t$ and $R\leftarrow R+\delta R$ we end up with:
-$$p_i'^T(t+\delta t)\times (R+\delta R)p_i=p_i'^T(t+\delta t)\times(Rp_i+\delta Rp_i)=0$$
-and using the following property on $\delta Rp_i$:
-$${dM}={d\theta}\ u\times M\rightarrow p_i'^T(t+\delta t)\times(Rp_i+\delta \theta \times Rp_i)=0$$
-and the property
-$$a^T(b\times c)=(a\times b)^Tc$$
 #### 3D-3D Absolute Orientation
 This computes the orientation between two set of points:
 We know $\tilde M_i,\tilde M_i'$, then
@@ -1506,16 +1496,11 @@ And therefore we must find $R,s,t$ such that
 $$\min_{s,R,t}=\sum_{i=1}^n\abs{\tilde M_i'-s(R\tilde M_i+t)}^2$$
 which can be solved via SVD
 ![[Pasted image 20260512163507.png|Example|250]]
-##### SVD Based Method / Procrustian Problem
+##### SVD Based Method / Orthogonal Procrustian Problem
 The best estimate for $t$ is the average of points:
 $$t = \frac{1}{s} \left( \frac{1}{n} \sum_{i=1}^{n} \tilde{M}_{i}' \right) - R \left( \frac{1}{n} \sum_{i=1}^{n} \tilde{M}_{i} \right)$$
-
-$$\hat t=\frac 1n(\sum_{i=1}^n\tilde M_i'-\sum_{i=1}^n\tilde M_i)$$
-Then we consider the points as being zero centered:
-$$\overline M_i=\tilde M_i-\frac1n\sum_{i=1}^n \tilde M_i$$
-and minimize 
+then the minimization problem becomes
 $$\min_{s,R}\sum_i\abs{\overline M_i'-sR\overline M_i}^2$$
-##### Orthogonal Procrustian Problem
 Notice that $R$ is orthogonal so it has unit norm, therefore
 $$\abs {\overline M_i'}=s\abs{\overline M_i}$$
 Create the matrices
