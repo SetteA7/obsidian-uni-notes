@@ -2351,3 +2351,22 @@ $arctan2(s_R(0)-s_R(2/F_s), s_R(1/F_s)-s_R(3/F_s).$
 
 Other issues are given by pixel size, where one pixel has many measurements, $z_\max-z_\min/2$ is chosen. Radiation noise is modeled as a gaussian
 
+Proofs:
+Active stereo system:
+- Active triangulation
+- ToF phase distance
+Multiview:
+- Find LH in normalized coords (E matrix)
+- Prove theorem E=SR if 2 eigenvalues the same and third one 0
+- 8 points
+- Bundle adjustment (only explanation)
+- Projective Reconstruction (chicken-egg)
+Orientation:
+- ICP, orthogonal procrustean algorithm
+- Optional: Fiore, Lowe and 
+Optical Flow:
+- Image brightness constancy equation
+- 1D tracking
+- Lucas Kanad, Kanade Lucas Tomasi
+Gaussian Splat:
+- Transmittance (discorsivo)
