@@ -1403,7 +1403,7 @@ The pipeline is straight forward
 ![[Pasted image 20260512152215.png|C Matrix|250]]
 **Image collection:** As stated before images don't need to be ordered, however the camera parameter matrix $K$ needs to be known. Moreover, compressed images should be avoided as they are not reliable for key point matching.
 
-**Matching Points and Best Next **
+**Matching Points and Best Next View:** 
 
 ## 6.3) Example and Comparisons
 
