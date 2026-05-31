@@ -1562,7 +1562,10 @@ So $\zeta$ can be found with the kernel of $(V_r^T\otimes K^{-1})^TD$. And to do
 $$n\geq \frac{3r-1}2$$
 points
 
+Linear ,ethod that is very fast with no convergence problems, however it needs lot of points and minimizes algebraic error
 ##### Lowe's Non Linear Method TODO
+Needs less points but requires more computation and wrong matches affect the result more.
+
 
 # 7) Optical Flow
 Optical flows relates a motion vector field to pixels. This represents the 2D projection of the physical movement of points relative to observer which is equal as saying the 2D displacements of the pixel patches on the image plane. Optical flow is important as it allows to understand scene dynamics.
