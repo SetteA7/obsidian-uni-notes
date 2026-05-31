@@ -1501,12 +1501,16 @@ The best estimate for $t$ is the average of points:
 $$t = \frac{1}{s} \left( \frac{1}{n} \sum_{i=1}^{n} \tilde{M}_{i}' \right) - R \left( \frac{1}{n} \sum_{i=1}^{n} \tilde{M}_{i} \right)$$
 then the minimization problem becomes
 $$\min_{s,R}\sum_i\abs{\overline M_i'-sR\overline M_i}^2$$
-Notice that $R$ is orthogonal so it has unit norm, therefore
+where $\overline M_i$ are the zero centered points $\overline M_i=\tilde M_i-\frac1n\sum_{i=1}^n \tilde M_i$
+
+Notice that $R$ is orthogonal so it has unit norm, therefore we have that the points norm match a scaled version of the original ones (procrustes!):
 $$\abs {\overline M_i'}=s\abs{\overline M_i}$$
 Create the matrices
-$$\overline M_{3\times n}=[\overline M_1\ ... \ \overline M_n]$$
-the summation now becomes:
-$$\epsilon = \abs{\overline M'-R\overline M}_F^2$$
+$$\overline M_{3\times n}=[s\overline M_1\ ... \ s\overline M_n]\qquad \overline M_{3\times n}'=[\overline M_1'\ ... \ \overline M_n']$$
+the minimization problem now becomes:
+$$\epsilon = \sum_{i=1}^n\abs{\overline M_i'-sR\overline M_i}^2=\abs{\overline M'-R\overline M}_F^2$$
+Which is the formal definition of the precrustian problem.
+
 And we must find the nerarest orthogonal matrix to:
 $$M_P=\overline M'\overline M^T=U\Sigma V^T\rightarrow R=\arg\min_R\abs{R\overline M-\overline M'}_F$$
 The solution can be found from SVD:
