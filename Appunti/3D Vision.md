@@ -1347,15 +1347,30 @@ The solution is found wrt an arbitrary projection $T_{4\times 4}$. The output is
 $$\text{if } P_i,M^j\text{ is a slution, then } P_iT, T^{-1}M^j\text{ is a solution as well}$$
 
 ![[Pasted image 20260512121515.png|Example|250]]
-Given $i=1,...,h$ cameras and $j=1,...,n$ points we can suppose:
-- Scale factors $\zeta_i^j$ known, $P,M$ unknown: 
+
+#### Projective Reconstruction
+Given $i=1,...,h$ cameras and $j=1,...,n$ points we can write this  system:
+
 $$\zeta_i^jm_i^j=P_iM^j\rightarrow \begin{bmatrix}
 \zeta_1^1m_1^1& \zeta_1^2m_1^2&...&\zeta_1^nm_1^n\\
 &\vdots\\
 \zeta_h^1m_h^1& \zeta_h^2m_h^2&...&\zeta_h^nm_h^n
 \end{bmatrix}=\begin{bmatrix}P_1\\\vdots\\ P_h\end{bmatrix}\begin{bmatrix}M^1&...&M^n\end{bmatrix}$$
-Solve via SVD
-- $P,M$ known, scale factors unknown:
+Which can be rewritten as
+$$W_{h\times n}=P_{h\times 4}M_{4\times n}$$
+Matrix $W$ has $m^i_j$ known but the scale factors $\zeta_h^n$ unknown. Both $P,M$ matrices are unknown.
+The solution to this system is a chicken-egg problem as knowing the scale factors allows to find $P,M$ and vice versa. In fact:
+
+- If the scale factor $\zeta _i^j$ is known then $W$ is known and it can be solved via SVD.
+Since $W$ is defined by $P$ and $M$ then if $M$ has rank 4, also $W$ has rank 4. This leads to the factorization
+$$W=\underbrace{U_{3h\times 4}\begin{bmatrix}\sigma_1 & 0 & 0 & 0 \\
+0 & \sigma_2 & 0 & 0\\
+0& 0& \sigma_3 & 0 \\
+0 & 0 & 0 & \sigma_4\end{bmatrix}}_{P}\underbrace{V_{4\times n}^T}_M=PM$$
+this minimizes the frobenious norm
+If the data is noisy then $rank (W)\not=4$ but by zeroing the singular values after $\sigma_4$ the solution can still be obtained.
+
+- Now suppose only $P,M$ are known, then:
 $$PM^j=\begin{bmatrix}\zeta_1^jm_1^j\\\vdots\\\zeta_h^jm_h^j\end{bmatrix}=\begin{bmatrix}
 m_1^j & 0 & ... & 0\\
 0 & m_2^j & ... & 0\\
@@ -1363,7 +1378,10 @@ m_1^j & 0 & ... & 0\\
 0 & ... & & 0
 \end{bmatrix}
 \begin{bmatrix}\zeta_1^j\\\vdots\\\zeta_h^j\end{bmatrix}=Q^j\zeta^j$$
-This is a chicken-egg problem. It can be solved via an iterative operation.
+
+
+
+This can be solved via an iterative operation.
 1. Set scale factors to $1$ and generate $W$.
 2. Normalize $W$ (so that scale factors are not 0)
 3. Apply SVD and find $P,M$
@@ -1383,49 +1401,9 @@ The pipeline is straight forward
 
 
 ![[Pasted image 20260512152215.png|C Matrix|250]]
-Due to artefacting (jpeg compression, noise) it is possible that the matching points are highly noisy. 
+**Image collection:** As stated before images don't need to be ordered, however the camera parameter matrix $K$ needs to be known. Moreover, compressed images should be avoided as they are not reliable for key point matching.
 
-
----
-Proofs:
-Given $i=1,...,h$ cameras and $j=1,...,n$ points we have
-$$\zeta_i^jm_i^j=P_iM^j\rightarrow \begin{bmatrix}
-\zeta_1^1m_1^1& \zeta_1^2m_1^2&...&\zeta_1^nm_1^n\\
-&\vdots\\
-\zeta_h^1m_h^1& \zeta_h^2m_h^2&...&\zeta_h^nm_h^n
-\end{bmatrix}=\begin{bmatrix}P_1\\\vdots\\ P_h\end{bmatrix}\begin{bmatrix}M^1&...&M^n\end{bmatrix}$$
-Which can be rewritten as
-$$W_{h\times n}=P_{h\times 4}M_{4\times n}$$
-
-If the scale factor $\zeta _i^j$ is known then $W$ is known and it can be solved via SVD.
-In fact since $P$ has rank 4 only the first values of $D$ are different from zero:
-$$W=UDV^T\qquad D=\begin{bmatrix}\sigma_1 & 0 & 0 & 0 &0& ...&0\\
-0 & \sigma_2 & 0 & 0 &0& ...&0\\
-0& 0& \sigma_3 & 0 &0&...&0\\
-0 & 0 & 0 & \sigma_4&0& ...&0\\
-0&0 & 0 &0 & 0&...&0\\
-\vdots & & & & &\ddots&\vdots\\
-0 & & & ...  & & & 0\end{bmatrix}$$
-which leads to 
-$$W=U_{3h\times 4}\begin{bmatrix}\sigma_1 & 0 & 0 & 0 \\
-0 & \sigma_2 & 0 & 0\\
-0& 0& \sigma_3 & 0 \\
-0 & 0 & 0 & \sigma_4\end{bmatrix}V_{4\times n}^T$$
-which leads to $P=UD, M=V^T$
-This solution minimized the Frobenius norm $\abs{W-PM}_2^2$
-If the data is noisy then $rank (W)\not=4$ but by zeroing the singular values after $\sigma_4$ the solution can still be obtained.
-
-But scales are still unknown! Now suppose $P,M$ are known, then:
-$$PM^j=\begin{bmatrix}\zeta_1^jm_1^j\\\vdots\\\zeta_h^jm_h^j\end{bmatrix}=\begin{bmatrix}
-m_1^j & 0 & ... & 0\\
-0 & m_2^j & ... & 0\\
-\vdots & &\ddots& \vdots\\
-0 & ... & & 0
-\end{bmatrix}
-\begin{bmatrix}\zeta_1^j\\\vdots\\\zeta_h^j\end{bmatrix}=Q^j\zeta^j$$
-This becomes a chicken - egg problem.
-
-
+**Matching Points and Best Next **
 
 ## 6.3) Example and Comparisons
 
