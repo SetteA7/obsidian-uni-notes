@@ -2378,6 +2378,17 @@ $arctan2(s_R(0)-s_R(2/F_s), s_R(1/F_s)-s_R(3/F_s).$
 
 Other issues are given by pixel size, where one pixel has many measurements, $z_\max-z_\min/2$ is chosen. Radiation noise is modeled as a gaussian
 
+## 12.3) Define the acquisition conditions to apply a Structure-from-Motion (SfM) algorithm and describe its phases.
+
+SfM is  an unordered 3D reconstruction algorithm that works in 5 phases:
+1. Image collection: images need to be collected. These images don't need to be calibrated but the parameter matrix K has to be specified. Moreover compressed or edited images result in bad performance as features are modified
+2. Matching points: SIFT or similar algorithms are used to find matching points. These are then used to build the C matrix. This is a matrix that holds information on how many matching points are in each picture wrt every other one. This is used to find an ordering to the images.
+3. With the now ordered set of images, compute the epipolar geometry
+4. Using some algorithm like the 8-points algorithm on the ordered images to get R,t.
+5. Use bundle adjustment to refine the obtained R,t.
+
+
+
 Proofs:
 Active stereo system:
 - Active triangulation
