@@ -2387,6 +2387,19 @@ SfM is  an unordered 3D reconstruction algorithm that works in 5 phases:
 4. Using some algorithm like the 8-points algorithm on the ordered images to get R,t.
 5. Use bundle adjustment to refine the obtained R,t.
 
+## 12.4) Describe the 8 points algorithm and how it can be refined using the bundle adjustment
+
+The 8 points algorithm allows to estimate E from 8 (noise free) points, or more in case of noise. The algorithm is a direct consequence of Louget Higgins in normalized coordinates $p_i^TEp_i=0$ and the theorem $vec(ABC)=(C^T\otimes A)vec(B)$ which can be used to create with 8 matching points the system $U_nvec(E)=0$ where a row of $U_n$ is $p_i^T\otimes p_i'^T$.
+
+The kernel of U_n is the solution to find E. An exact solution is obtained with 8 noise free points, while noisy matches and more than 8 points find the least squares solution. 
+
+Moreover, recall from the theorem on E decomposition that $E=SR \iff \sigma_1=\sigma_2\not =0\  \sigma_3 =0$ but this is often not the case. So let $E=UDV^T$ with $D$ with $\sigma_1\geq\sigma_2\geq \sigma_3$ so find $\hat E=U\hat DV^T$  that minimizes frobenius norm when $\hat\sigma_1=\hat\sigma_2=\frac{\sigma_1+\sigma_2}2 \ \hat\sigma_3=0$.
+
+Now that $E$ was obtained, $R,t$ can also be ontained. Bundle adjustment will further optimize $R_i,t_i $via an iterative algorithm. It optimizes this function:
+$\min \sum _j\sum_i \abs{m_j^i-K_i[R_i|t_i]M_j}^2$
+
+where there are j cameras and i points.
+This is done by once fixing$ M_j$ and computing $R_i,t_i$ and then by fixing $R_i,t_i$ and computing $M_j$. This can be repeated until convergence
 
 
 Proofs:
