@@ -1685,31 +1685,37 @@ the 3D gaussian is an anisotropic (ellipsoid) figure in space.
 SfM is used to generate the first PC where the first gaussians are set
 
 **Loop:**
-The 3DGS algorithm renders the scene and compares it to the og images in order to use the **adaptive density control** to optimize and imporve the scene
+The 3DGS algorithm renders the scene and compares it to the og images in order to use the **adaptive density control** to optimize and improve the scene
 
-The optimization is done by a step called **Adaptive Density Control** which: adds gaussians in more detailed areas that require more precision and removes them from less relevant regions
+**Adaptive Density Control**
+the aim of the algorithm is to increase the gaussians in higher precision areas and decrease them in lower precision areas. Every 100 steps gaussians are added (densification), while every 3000 steps gaussians are removed (regularization)
 
-**Densification Strategy:**
+**Strategy:**
 - Start from SfM points
 - Every 100 iterations add new gaussians
 - Every 3000 iterations do a reset step for regularization
 - Densification until iteration 15.000
 - Run for 30.000 optimizations
 
-The densification step can:
+**The densification step can:**
 - Clone: duplicate gaussians in under-Reconstructed regions
 - Split: divide gaussian into smaller ones in over-Reconstructed regions
 
 ![[Pasted image 20260517130326.png|Example|250]]
+**The regularization step can:**
 Regularization reduces all $\alpha$ near to 0 and augments it only for relevant gaussians. All gaussians with $\alpha$ under a threshold are purged (culling step).
 
-Finally they are rendered via a rasterization step:
-1. Tile the screen into fixed square $16\times16$ tiles
-2. Project and cull: Project gaussians into screen and discard those outside of frustum and those with less than 99% certainty to belong to a tile
-3. Assign sorting keys: rendered gaussians get a key containing their depth and tile
-4. Sort al gaussians: sort front to back (radix sort) so to process first closest splats
-5. Build per tile list: For each tile, store the first and last indices in the sorted list of Gaussians that overlap it.
-6. $\alpha$ blend per pixel: find the color on each pixel
+**Rasterization Rendering Step**
+1. **Tile Screen:** tile screen into $16\times16$ tiles (enables parallel processing)
+2. **Project and Cull:** Project gaussian into space to obtain 2D ellipse. Discard gaussians outside of view frustum and that do not intersect tile with 99% probability
+3. **Assign Keys:** Remaining gaussians get a key containing depth and tile ID they intersect
+4. **Sort Gaussians:** use radix sort to sort gaussians closer to camera, important for transparence handling
+5. **Build Per Tile lists:** store only first and last
+
+6. Assign sorting keys: rendered gaussians get a key containing their depth and tile
+7. Sort al gaussians: sort front to back (radix sort) so to process first closest splats
+8. Build per tile list: For each tile, store the first and last indices in the sorted list of Gaussians that overlap it.
+9. $\alpha$ blend per pixel: find the color on each pixel
 $$\sigma_n=\frac12\Delta_n^T\Sigma_n^{-1}\Delta_n\quad \alpha'_n=\alpha_n\exp{-\sigma_n}\quad T_n=\prod_{m=1}^{n-1}1-\alpha'_m\rightarrow C_i=\sum_{n=1}^N c_n\alpha'_nT_n$$
 
 # 9) Point Cloud
