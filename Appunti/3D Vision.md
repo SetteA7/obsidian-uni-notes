@@ -1628,7 +1628,7 @@ Here $v$ is assumed constant and that the central pixel $p$ of window $S$ is mor
 $$\forall x_i\in S\quad \nabla I(x_i,t)^Tv=-\dot I(x_i,t)$$
 This is solved via pseudo inverse and by calling $A$ the spatial derivative matrix and $b$ the temporal derivative matrix:
 $$Av=b\rightarrow v=A^\dagger b=(A^TA)^{-1}A^Tb$$
-Now add the weights:
+Now add the weights (useful since we know center pixel more likely to be correct):
 $$\forall x_i\in S\quad w(x_i)\nabla I(x_i,t)^Tv=-w(x_i)\dot I(x_i,t)$$
 with $W$ the weight matrix (diagonal!):
 $$A=AW, b=Wb\rightarrow v=(A^TW^2A)^{-1}A^TW^2b$$
@@ -1641,7 +1641,12 @@ The algorithm is:
 	2. compute $A,b$
 	3. compute $v=$ pseudo inverse
 
-The problem is well conditioned if $c=\lambda_\max/\lambda_\min\approx 1$ that is, the matrix can be inverted and therefore it implies we have strong textures. This does not work well on edges!
+
+In Harris corner detection method $A^TW^2A$ is used. The problem is well conditioned if $c=\lambda_\max/\lambda_\min\approx 1$ that is, the matrix can be inverted and therefore it implies we have strong textures. This does not work well on edges!
+
+Edge example: $\lambda_1\gg \lambda_2$:
+![[Pasted image 20260601123144.png|Example|350]]
+
 
 ##### Kanade Lucas Tomasi TODO
 This allows for coupling points along a trajectory
