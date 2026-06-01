@@ -1902,7 +1902,6 @@ This technique is used to **represent a 3D scene with implicit neural representa
 
 Train network on a set of images where position $(x,y,z)$ and the viewing direction $(\theta,\phi)$ are known. The network will be overfitted to that specific scene and can now generate arbitrary views. 
 
-
 Used for synthetic view generation, complex geometry handling, compression. But gaussian splats are more efficient! This model is used for very HQ stuff: radio study, complex lighting simulations...
 
 There are many other downsides:
