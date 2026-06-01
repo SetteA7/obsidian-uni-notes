@@ -1711,11 +1711,7 @@ Regularization reduces all $\alpha$ near to 0 and augments it only for relevant 
 3. **Assign Keys:** Remaining gaussians get a key containing depth and tile ID they intersect
 4. **Sort Gaussians:** use radix sort to sort gaussians closer to camera, important for transparence handling
 5. **Build Per Tile lists:** store only first and last
-
-6. Assign sorting keys: rendered gaussians get a key containing their depth and tile
-7. Sort al gaussians: sort front to back (radix sort) so to process first closest splats
-8. Build per tile list: For each tile, store the first and last indices in the sorted list of Gaussians that overlap it.
-9. $\alpha$ blend per pixel: find the color on each pixel
+6. **$\alpha$ blend per pixel**: find the color on each pixel
 $$\sigma_n=\frac12\Delta_n^T\Sigma_n^{-1}\Delta_n\quad \alpha'_n=\alpha_n\exp{-\sigma_n}\quad T_n=\prod_{m=1}^{n-1}1-\alpha'_m\rightarrow C_i=\sum_{n=1}^N c_n\alpha'_nT_n$$
 
 # 9) Point Cloud
