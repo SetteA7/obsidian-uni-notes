@@ -2402,6 +2402,28 @@ where there are j cameras and i points.
 This is done by once fixing$ M_j$ and computing $R_i,t_i$ and then by fixing $R_i,t_i$ and computing $M_j$. This can be repeated until convergence
 
 
+## 12.5) Describe how optical flow computation works and what strategies can be adopted to improve the final accuracy. Provide some details about Horn-Schunk and Luca Kanade algorithms.
+
+Optical flow is the problem of computing a vector field describing the movement of the pixels between two images. One fundamental assumption is the constant brightness equation $I(x,t)=I(x+v\Delta t,t+\Delta t)$ which does not always hold but is used with taylors firts expansion to find one equation that defines v: $\nabla I(x,t) v+\dot I(x,t)=0$ with $\nabla$ the spatial gradient and \dot I the temporal derivative. This however is an underdetermined system as it is one equation for two unknowns $v=(v_1,v_2)$
+
+This is used in the Horn Shunk method by computing the optical flow on the areas, and regularizing them on the variance of the field, that is: $\min\int_S I_x v+I_t+\lambda(|\nabla v_x|^2+|\nabla v_y|^2)^2dS$
+where $\lambda$ is the strength of the regularization. This penalizes the large change in displacement. A close imperfect match is better than a very distant perfect match.
+
+A more complex algorithm is the Lucas Kanade algorithm which uses the moore penrose pseudo inverse:
+Let $I_x v=-I_t$ then this can be transformed for each window $S$ as $Av=b$. MP pseudoinverse allows to find the least squares solution as $v=(A^TA)^{-1}A^Tb$.
+
+By hypothesis the pixel at the center of the surface is more likely to be correct in the displacement so regularize with some weights $w_i I_x v=- w_i I_t$ and the matrix $W=diag(w_i)$. Then the problem becomes $A'v=b'$ with $A'=WA$ and $b'=Wb$ and therefore v$=(A^TW^2A)^{-1}A^TW^2b$
+
+In order to achieve the best results these conditions should be applied:
+- Filter spatially with 2D gaussian kerne
+- Filter temporally with 1D gaussian kernel
+- Lucas Kanade is similar to harris corner detection, so it doesn't work well on edges and requires a strong texture to work better, so that the eigenvalues $\lambda_1\simeq\lambda_2$
+- **Coarse to fine:** this is used for large movements (these violate infinitesimal movement hypothesis) as a pyramid at various scale factors are built so that the smaller resolution attenuates the movement. The vector fields is first calculated at the lowest reslution, then this is used to warp the image at the next resolution and so on until the og image is warped and teh final vector field is reconstructed.
+
+
+
+
+
 Proofs:
 Active stereo system:
 - Active triangulation
