@@ -1616,19 +1616,21 @@ This converges at about the 5th iteration.
 
 
 #### Algorithms
-It is possible to regularize the window $S$.
+It is possible to regularize the window $S$. Using a window implieas that all pixels inside the window have the same velocity, a bigger block size optimizes algorithm complexity but decreases accuracy.
+
+A set of bounds can be implemented to make the estimation more accurate.
 ##### **Horn Schunk** regularization:
 $$\min\int_S[\nabla I^Tv+\dot I]+\lambda\par{\abs{\nabla v_x}^2+\abs{\nabla v_y}^2}^2dS$$
 this penalizes the large change in displacement. A close imperfect match is better than a very distant perfect match.
 
 ##### **Lucas Kanade** regularization:
-Here $v$ is assumed constant and that the central pixel $p$ of window $S$ is more likely:
+Here $v$ is assumed constant and that the central pixel $p$ of window $S$ is more likely to be correct:
 $$\forall x_i\in S\quad \nabla I(x_i,t)^Tv=-\dot I(x_i,t)$$
 This is solved via pseudo inverse and by calling $A$ the spatial derivative matrix and $b$ the temporal derivative matrix:
 $$Av=b\rightarrow v=A^\dagger b=(A^TA)^{-1}A^Tb$$
 Now add the weights:
 $$\forall x_i\in S\quad w(x_i)\nabla I(x_i,t)^Tv=-w(x_i)\dot I(x_i,t)$$
-with $W$ the weight matrix:
+with $W$ the weight matrix (diagonal!):
 $$A=AW, b=Wb\rightarrow v=(A^TW^2A)^{-1}A^TW^2b$$
 
 The algorithm is:
