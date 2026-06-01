@@ -1658,10 +1658,15 @@ This allows for coupling points along a trajectory
 # 8) 3D Gaussian Splatting Rendering
 A point cloud is usually rendered as a volume.  The rendering uses ray casting and by simulating light absorption through the volume.
 
-The opacity is computed with the density at sample $j$ $\sigma_j$ and distance between samples $\delta_j$
-$$\alpha_i=1-\exp{-\sigma_i\delta_i}\in[0,1]$$
-So the transmittance of the i-th sample is:
-$$T_i=\prod_{j=1}^{i-1}1-\alpha_j$$
+
+The transmittance is the amount of light that reaches point t along a ray (without being abosrbed)
+$$T_i=\exp{-\sum_{j=1}^{i-1}\sigma_j\delta_j}=\prod_{j=1}^{i-1}\exp{-\sigma_j\delta_j}$$
+where $i$ is the sample index we are reaching, and $j$ all previous samples indexes.
+Opacity is the amount of light absorbed by the segment:
+$$\alpha_i=1-\exp{-\sigma_i\delta_i}$$
+It is possible to rewrite the transmittance as a function of opacity by noticing:
+$$1-\alpha_i=\exp{-\sigma_i\delta_i}\rightarrow T_i=\prod_{j=1}^{i-1}\exp{-\sigma_j\delta_j}=\prod_{j=1}^{i-1}(1-\alpha_i)$$
+
 The final color takes into account the transmittance at each sample:
 $$C=\sum_{i=1}^N T_i\alpha_ic_i$$
 
@@ -1669,8 +1674,18 @@ Here is a graphical example
 ![[Pasted image 20260517124855.png|Example|350]]
 This has a significant throwback: it must sample also empty space which also takes computational effort
 
+
+#### 3DGS Algorithm
 3DGS wants to optimize this process.
 We represent the 3D scene as a set of $N$ 3D gaussians $c_i,\mu_i,\Sigma_i$. Which are colored, translated and scaled. These parameters are learned.
+
+the 3D gaussian is an anisotropic (ellipsoid) figure in space. 
+
+**Initialization:**
+SfM is used to generate the first PC where the first gaussians are set
+
+**Loop:**
+The 3DGS algorithm renders the scene and compares it to the og images in order to use the **adaptive density control** to optimize and imporve the scene
 
 The optimization is done by a step called **Adaptive Density Control** which: adds gaussians in more detailed areas that require more precision and removes them from less relevant regions
 
@@ -1678,7 +1693,7 @@ The optimization is done by a step called **Adaptive Density Control** which: ad
 - Start from SfM points
 - Every 100 iterations add new gaussians
 - Every 3000 iterations do a reset step for regularization
-- Densification until iteratio 15.000
+- Densification until iteration 15.000
 - Run for 30.000 optimizations
 
 The densification step can:
