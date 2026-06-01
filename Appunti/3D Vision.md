@@ -1631,7 +1631,7 @@ $$Av=b\rightarrow v=A^\dagger b=(A^TA)^{-1}A^Tb$$
 Now add the weights (useful since we know center pixel more likely to be correct):
 $$\forall x_i\in S\quad w(x_i)\nabla I(x_i,t)^Tv=-w(x_i)\dot I(x_i,t)$$
 with $W$ the weight matrix (diagonal!):
-$$A=AW, b=Wb\rightarrow v=(A^TW^2A)^{-1}A^TW^2b$$
+$$A=WA, b=Wb\rightarrow v=(A^TW^2A)^{-1}A^TW^2b$$
 
 The algorithm is:
 1. Filter spatially using 2D gaussian kernel
