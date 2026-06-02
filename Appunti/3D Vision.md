@@ -1740,10 +1740,10 @@ Point clouds can be **represented** in multiple ways:
 - multiview projection (see V-PCC)
 
 The **transformations** on point clouds are:
-- 3D Wavelet Transform
-- Graph Transform
-- Cellular Automata
-- Random PC access
+- 3D Wavelet Transform: applied on octree, divides DC and AC components (low/high frequency). This allows to add 6 more LOD levels to each octree LOD.
+- Graph Transform: build a graph on the PC
+- Cellular Automata: use information of neighbors to optimize the octree representation
+- Random PC access: cluster of relevant data so that it is stored in same block on the disk.
 
 
 ### 9.1.1) PCC Quality Metrics
