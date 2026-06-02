@@ -2417,6 +2417,14 @@ In order to achieve the best results these conditions should be applied:
 - **Coarse to fine:** this is used for large movements (these violate infinitesimal movement hypothesis) as a pyramid at various scale factors are built so that the smaller resolution attenuates the movement. The vector fields is first calculated at the lowest reslution, then this is used to warp the image at the next resolution and so on until the og image is warped and teh final vector field is reconstructed.
 
 
+## 12.6) Describe how Trasmittance function works in volume rendering and how it is employed in 3D Gaussian splatting to compute colors.
+
+Transmittance is the amount of light that given a source and a ray, is reached untila  certain point on the ray. Transmittance in 3D graphics is calculated by dividing the space is discrete samples and the transmittance at sample i is given by $T_i=\exp{-\sum_{1\leq j\leq i-1}\sigma_j\delta_j}=\prod_{1\leq j\leq i-1} \exp{-\delta_j\sigma_j}$
+
+We can also define the attenuation as the property of absorption of an object (or sample i) as $\alpha_i=1-\exp{-\delta_i\sigma_i}$ and thus we can rewrite the transmittance as $T_i=\prod_{1\leq j\leq i-1}1-\alpha_i$. By also defining c_i as the color of sample i, then color of the pixel is calculated as $C=\sum_i T_i\alpha_ic_i$
+
+This however is not computationally advantageous as the ray usually passes through empty space and rarely through objects, however the sampling is done also through empty space. 3DGS wants to solve this issue by transforming a PC in a series of anisotropic surfaces, that is gaussians with mean, variance and color so to be able to render the object with more traditional rendering techniques
+
 
 
 
