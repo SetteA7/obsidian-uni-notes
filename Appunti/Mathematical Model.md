@@ -262,7 +262,7 @@ And therefore the two adjusted formulas are correct.
 
 Moreover the symmetric link case holds when substituting at beginning of proof.
 $$\endproof$$
-#### S.M.A.R.T Algorithm
+#### S.M.A.R.T Algorithm IMPORTANT CHANGE $N^*+1$ to just $N^*$ in code!!!
 $$ $$
 >[!corollary] S.M.A.R.T. Algorithm
 >Let $P_{target}\ll 1$ denote the desired crash probability of a mobile robot under the SMART implementation, then its ideal threshold should be:
