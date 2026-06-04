@@ -1869,7 +1869,7 @@ $$\text{Recall}=\frac{A\cap P}A$$
 - Dice:
 $$\text{Dice}=\frac{2\par{A\cap P}}{A+P}$$
 - **Intersection Over Union (IoU):**
-$$\text{IoU}=\frac{A\cap P}{A\cup B}$$
+$$\text{IoU}=\frac{A\cap P}{A\cup P}$$
 - **Mean Intersection Over Union (mIoU):**
 $$mIoU=\frac1{K+1}\sum_{i=0}^K\frac{p_{ii}}{\sum_{j=0}^K p_{ij}+\sum_{j=0}^Kp_{ji}p_{ii}}$$
 
