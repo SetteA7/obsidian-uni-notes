@@ -1537,7 +1537,7 @@ Algorithm:
 3. Change $M_i$ to be aligned: $M_i\leftarrow RM_i+t$
 4. Find avg error, if it is small enough stop, otherwise repeat:
 $$\epsilon =\frac1n\sum_{i=1}^n\abs{M_i'-M_i}^2$$
-This method works only with small rotations (less than$20^\circ$) and many points
+This method works only with small rotations (less than $20^\circ$) and many points
 #### 3D-2D External Orientation
 This aims to **find position and orientation of camera given some 3d points**
 
