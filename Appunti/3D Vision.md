@@ -1137,7 +1137,7 @@ Two detection methods exists:
 
 Many scan technologies exist:
 - Incoherent:
-	- MEMs (Microelectromechanical systems): mirrors who tilt angles, requires multiple mirros and is suscettibel to shock and vibrations
+	- MEMs (Microelectromechanical systems): mirrors who tilt angles, requires multiple mirrors and is susceptible to shock and vibrations
 	- Flash LiDAR: focal plane of photodetectors captures back scattered light, requires high power but is not sensitive to vibrations
 	- Optical Phased Array (OPA): optical phase modulator controls speed of light passing through lense
 - coherent: 
@@ -1147,11 +1147,11 @@ It can either use a pulse model, with micropulses (burst of impulses) at low or 
 
 The waveform of the laser is modified by the objects, this can be used to infer the type of the object
 
-The final PC is saved as a .las file.
+The final PC is saved as a .las file. (x,y,z, intensity. classification)
 
 
 ## 5.3) 3D RF Sensor
-The radar-based RF sensor Walabot Pro senses the environment by transmitting, receiving and recording signals from an array of linearly polarized broadband antennas. It creates a 3D RF map of the radiated environment
+The radar-based RF sensor Wallabot Pro senses the environment by transmitting, receiving and recording signals from an array of linearly polarized broadband antennas. It creates a 3D RF map of the radiated environment
 
 Combined with ML (DL) techniques it can be sued for hand gesture recognition or also **material classification**. 
 
