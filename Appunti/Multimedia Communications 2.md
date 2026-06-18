@@ -16,7 +16,7 @@ with:
 Moreover we define:
 - Thresholds $(t_1,t_n)$
 - Levels: $L=n-1$
-- Region $\Theta_i$: Two subsequent thresholds define a region $\Theta_i=(t_i,t_{i+1})=\curly{x:Q(x)\hat x_i}$ these are a partition (non intersecting intervals)
+- Region $\Theta_i$: Two subsequent thresholds define a region $\Theta_i=(t_i,t_{i+1})=\curly{x:Q(x)=\hat x_i}$ these are a partition (non intersecting intervals)
 - Quantization error: $e=x-Q(x)$. The smaller the regions, the better the error.
 
 Quantization can be seen as an encoding/decoding process:
@@ -68,10 +68,15 @@ From here we can define **deadzone quantization**:
 The central cell is larger than the others, it is zero if $\abs x<\tau$
 ![[Pasted image 20260618151808.png|Deadzone UQ|250]]
 $$i=\begin{cases}sign(x)\floor{\frac{\abs x+\frac{\tau\Delta}2}\Delta} & \abs x\geq\tau\\0&\abs x<\tau\end{cases}$$
+
+### 2.1.2) Analytical RD curve
+
+
 #### Recap:
 Here is a tabe:
 
-|      | Signed | Unsigned |
-| ---- | ------ | -------- |
-| Type | Mid-   |          |
-|      |        |          |
+|                        | Signed                                             | Unsigned                                         | Deadzone  |
+| ---------------------- | -------------------------------------------------- | ------------------------------------------------ | --------- |
+| Type                   | Mid-rise                                           | Mid-tread                                        | Mid-tread |
+| Implementation: $Q(x)$ | $$\Delta\cdot\floor{\frac x\Delta}+\frac \Delta2$$ | $$\Delta \cdot \text{round}\par{\frac x\Delta}$$ |           |
+Given range and levels, UQ has the **smalles maximum error** (optimal minimax quantizer) of $e_\max=\frac{\Delta_i} 2=\frac A{2L}$
