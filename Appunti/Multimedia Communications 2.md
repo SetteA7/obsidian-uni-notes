@@ -117,13 +117,17 @@ $$\gamma^2=\frac{X^2_\max}{\sigma_X^2}=\frac{A^2/4}{\sigma_X^2}$$
 ### 2.1.3) Recap:
 Here is a tabe:
 
-|                        | Signed                                           | Unsigned                                           | Deadzone (Signed) | High Resolution |
-| ---------------------- | ------------------------------------------------ | -------------------------------------------------- | ----------------- | --------------- |
-| Type                   | Mid-tread                                        | Mid-rise                                           | Mid-tread         |                 |
-| Implementation: $Q(x)$ | $$\Delta \cdot \text{round}\par{\frac x\Delta}$$ | $$\Delta\cdot\floor{\frac x\Delta}+\frac \Delta2$$ |                   |                 |
+|                        | Unsigned                                           | Signed                                           | Deadzone (Signed)        | High Resolution                                  |
+| ---------------------- | -------------------------------------------------- | ------------------------------------------------ | ------------------------ | ------------------------------------------------ |
+| Type                   | Mid-rise                                           | Mid-tread                                        | Mid-tread (large center) | Any ($L\rightarrow \infty$)                      |
+| Implementation: $Q(x)$ | $$\Delta\cdot\floor{\frac x\Delta}+\frac \Delta2$$ | $$\Delta \cdot \text{round}\par{\frac x\Delta}$$ |                          | $$\Delta \cdot \text{round}\par{\frac x\Delta}$$ |
+| $L$                    | Even                                               | Odd                                              | Odd                      | Any                                              |
+| RD Curve               | -                                                  | if uniform input $\sigma_X^22^{-2R}$             |                          | $\frac{\gamma^2}3\sigma_X^22^{-2R}$              |
 Given range and levels, UQ has the **smalles maximum error** (optimal minimax quantizer) of $e_\max=\frac{\Delta_i} 2=\frac A{2L}$
 
 Only quantizer with analytical solution for RD curve with uniform input distrbution (see [[#Uniform RV with UQ]]):
 $$D(R)=\sigma_X^22^{-2R}$$
 in the general case (no knowledge on input distribution):
 $$D(R)=\frac{A^2}{12}2^{-2R}$$
+this is used for HRUQ also. Recall $\gamma^2$ is max power over avg power
+## 2.2) Optimal Scalar Quantization (SQ)
