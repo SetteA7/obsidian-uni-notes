@@ -37,5 +37,41 @@ For a signal of duration $N$ we use the MSE:
 $$D=\frac1N\sum_{n=0}^{N-1}d[x(n),Q\big(x(n)\big)]$$
 for a random signal this can be done via an expected value:
 $$D=\E\sq{\abs{X(n)-Q(X(n))}^2}=\E\sq{\abs{E(n)}^2}=\sigma^2_{E}$$
+
+**Mid treat quantizers** are quantizers where values near 0 are have quantization level $=0$. This reduces noise. **Mid rise** quantizers amplify noise!
 ## 2.1) Uniform Quantizer (UQ)
-Input signal $\in(0,A) is divided into $L$ equal sized cells of size $\Delta=A/L$
+Input signal $\in(0,A)$ (unsigned) or $\in(-\frac A2,\frac A2)$ (signed) is divided into $L$ equal sized cells of size $\Delta=A/L$. Where the quantization levels $\hat x_i$ is the midpoint. clearly this is now **mid rise**
+$$\begin{gather}
+\forall i, \ \Delta^i=\Delta=A/L\\
+t^i=t^{i-1}+\Delta\\
+\hat x^i=\frac{t^i+t^{i-1}}2\\
+\Theta^i=\par{\hat x^i-\frac\Delta2,\hat x^i+\frac\Delta2}
+\end{gather}$$
+#### Unsigned Data
+For unsigned data $\in(0,A)$ we have 
+$$\begin{align}
+&\text{Thresholds: }t_i=(i-1)\Delta\\
+
+\\
+&\text{Encoder: }i=\ceil{\frac x2}\\
+&\text{Decoder: }\hat x^i=i\Delta-\frac \Delta 2\\
+&\implies Q(x)=\Delta\ceil{\frac x2}-\frac\Delta2
+\end{align}$$
+#### Signed Data
+Since values are unsigned a mid thread quantizer is necessary, therefore we need an **odd number of levels**. The threshold at $t^{N/2}$ will have $\hat x^{N/2}=0$.
+$$\begin{align}
+&\text{Encoder: }i=\text{round}\par{\frac x2}\\
+&\text{Decoder: }\hat x^i=i\Delta\\
+&\implies Q(x)=\Delta\text{round}\par{\frac x2}
+\end{align}$$
+From here we can define **deadzone quantization**:
+The central cell is larger than the others, it is zero if $\abs x<\tau$
+![[Pasted image 20260618151808.png|Deadzone UQ|250]]
+$$i=\begin{cases}sign(x)\floor{\frac{\abs x+\frac{\tau\Delta}2}\Delta} & \abs x\geq\tau\\0&\abs x<\tau\end{cases}$$
+#### Recap:
+Here is a tabe:
+
+|      | Signed | Unsigned |
+| ---- | ------ | -------- |
+| Type | Mid-   |          |
+|      |        |          |
