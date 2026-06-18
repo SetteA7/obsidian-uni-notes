@@ -69,8 +69,6 @@ The central cell is larger than the others, it is zero if $\abs x<\tau$
 ![[Pasted image 20260618151808.png|Deadzone UQ|250]]
 $$i=\begin{cases}sign(x)\floor{\frac{\abs x+\frac{\tau\Delta}2}\Delta} & \abs x\geq\tau\\0&\abs x<\tau\end{cases}$$
 
-### 2.1.2) Analytical RD curve
-
 
 #### Recap:
 Here is a tabe:
@@ -80,3 +78,17 @@ Here is a tabe:
 | Type                   | Mid-rise                                           | Mid-tread                                        | Mid-tread |
 | Implementation: $Q(x)$ | $$\Delta\cdot\floor{\frac x\Delta}+\frac \Delta2$$ | $$\Delta \cdot \text{round}\par{\frac x\Delta}$$ |           |
 Given range and levels, UQ has the **smalles maximum error** (optimal minimax quantizer) of $e_\max=\frac{\Delta_i} 2=\frac A{2L}$
+
+Only quantizer with analytical solution for RD curve
+
+## 2.2) RD Curve
+First recall the definition of uniform RV:
+$$X\sim\mathcal U(a,b)\iff f_X(x)=\begin{cases}\frac1{b-a}&a\leq x\leq b\\ 0\end{cases}\qquad \begin{aligned}
+&\E[X]=\frac{a+b}2\\
+&\var(X)=\frac{(b-1)^2}{12}
+\end{aligned}$$
+and also the Law of the Unconscious Statistician (LOTUS):
+$$E[g(x)]=\int g(x)f_X(x)dx$$
+#### Uniform RV with UQ
+Hypothesis: $X\sim\mathcal U(-\frac A2,\frac A2)$ quantized with UQ of $L$ levels.
+Goeal: find 
