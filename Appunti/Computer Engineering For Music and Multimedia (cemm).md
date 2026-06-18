@@ -1,734 +1,1309 @@
-This document is meant to be used in the following way. Each chapter is a brief recap of what was in the slides. **Take Home Concepts** is a list of concepts recapped at the end of the slides while **Stuff to Know** is what is listed under the # Open-ended exam questions. The **Quiz** part contains the quizzes he uploaded with solutions and explanations.
-
-# 1) Acoustics and Psychoacoustics
-ANSI/ASA describes acoustic as **science of sound including production, transmission and effects, including biological and psicological effects. The qualities of a room together determine the character wrt adutiroy effects**
-
-## 1.1) Acoustics
-The wave equation is:
-$$\frac{\partial ^2p}{\partial x^2}-\frac1{c^2}\frac{\partial p}{\partial t^2}=0$$
-where $p$ is the pressure and $c$ the speed of sound.
-The general solution ( with $c$ constant) is a **longitudinal** wave
-$$p=f(ct-x)+g(ct+x)$$
-with $f,g$ twice differentiable functions
-
-Recall the fundamental properties of waves:
-$$\lambda =\frac vf\quad f=\frac1T$$
-
-Each periodic signal can be decomposed into a series of simple periodi cwaves called harmonics. The set of all harmonics is called the spectrum:
-$$f(t)=\frac{a_0}2+\sum_{n=1}^Na_n\cos(nt)+b_n\sin(nt)$$
-For periodic waves, the partials are integer multiples of the fundamental frequency $f_0$.
-
-A standing wave is a wave where the peaks (max/min) and nodes (zero) do not change position over time.
-
-For auditory communications we have:
-- Source: vibrating object with energy injected to it
-- Medium: allows for sound propagation
-- Receiver: ear-brain transforms acoustic pressure into neural impulses
-
-**The warmer a medium the faster the sound**. Steel has the fastest propagation. It propagates the fastest in solids, then liquids then gasses. In air at 0 C it is 331.5 m/s, at 20 C it is 344 m/s
-
-![[Pasted image 20260513155125.png|Table|350]]
-
-There are three domains of acoustics based on where the sound lives: Air, ear, brain:
-![[Pasted image 20260305143943.png|3 domains|450]]
-The brain might trick us:
-- Shepard tones: seemingly infinite increase in pitch
-- Aural harmonics as integer multiple of original tone
-- Tartini's third note: play a perfect fifth, the brain will hear a third note one octave below (perfect fifth is $f_2=\frac32 f_1\rightarrow \Delta f=\frac12 f_1$)
-- Missing Fundamental: If the fundamental is removed from a harmonic spectrum, it is heard all the same
-
-
-Beats are a **amplitude modulation** phenomenon that allows two similar tone to be perceived as one beating tone. The beat frequency is $f_b=\Delta f$
-
-## 1.2) Auditory System TODO
-The ear is divided into external, middle and inner ear.
-
-External: channels the sound into middle ear
-
-Middle: has eardrum and bones, amplifies vibrations, transmits into mechanical vibrations in the inner ear
-
-The inner ear contains the **cochlea** 
-
-The **basilar membrane** is **narrow-rigid at the base, wide-soft at the apex**. This is a bank of filters tuned at specific vibrations.
-Low at base, high at apex.
-It is non-linear $\rightarrow$ additional aural harmonics
-## 1.3) Elements of Psychoacoustics
-The perceived loudness of a sound depends on different factors not only on intensity. 
-The unit of measure for loudness is Phon 
-
-The acoustic pressure $p$ is derived from the velocity $v$ of the particles. Intensity is the power per unit area $I\sim p^2$. The scale is the decibel.
-We define the base reference intensity as the minimum sound intensity that can be heard by a normal hearing person.
-$$I_0=10^{-12}\unit{\frac W{m^2}}\qquad p_0=2\cdot 10^{-5} \unit{Pa}$$
-
-$$ dB=10\logt\par{\frac I{I_0}}=20\logt\par{\frac{p}{p_0}}$$
-**Doubling intensity means +3dB, doubling pressure is +6 db** since $log(2)\approx 0.3$
-
-We do not hear all sound equally however:
-![[Pasted image 20260512181324.png|Example|350]]
-At 10 dB we hear 5kHz but not 50 Hz. A curve was empirically derived.
-
-Also the **equal loudness curve** was defined, that **given a frequency tells you what pressure it should have to match the pressure of a 1 kHz sinusoid with 1000 pressure**. This is the **Phon scale**
-
-The **sone scale** is used to describe relationships with sound of different loudness values. **A doubling of loudness is 10 phon.**
-$$phon=40+10\log_2(sone)\qquad sone = 2^{\frac{phon}{10}-4}$$
-
-**Volley Theory:** groups of neurons of the auditory system respond to a sound by firing action potentials slightly out of phase with one another so that, when combined, a greater frequency of sound can be encoded and sent to the brain to be analyzed
-**Localization Theory:** pitch changes based on where maximum is in membrane
-**Temporal theory:** pitch depends on temporal pattern of firing
-
-One octave is double the frequency, there are 12 semitones:
-$$s^{12}=2\qquad s=\sqrt[12]2$$
-
-But our brain looses to distinguish the double frequency as an octave at high frequencies and  needs more frequency
-
-**Critical bands** are used to quantify the ability of the human ear to distinguish between individual frequency tones. The human ear can hear from 20 to 20,000 Hertz, but the ability to distinguish individual tones varies as a function of frequency.
-![[Pasted image 20260513152645.png|Log Cochlea Scale|250]]
-
-This is given from the **cochlea** as it has a logarithmic spiral shape. The tones are therefore not distinguished but percieved as modulating or beating. These bands decrease in bandwidth as the intensity increases.
-
-![[Pasted image 20260513152710.png|Example|250]]
-These bands are described via the **bark** scale. That is the distance of 1 CB is 1 bark.
-
-**Masking** happens when a sound of higher intensity masks a sound of lower intensity. A pure tone can be masked with:
-- +17 dB white noise up to 1 kHz
-- linear grow after 1kHz
-It can also be masked with another pure tone
-
-The fundamental defines the pitch, the partials define the timbre.
-## 1.4) Take Home Concepts
-- **Basilar membrane** (auditory filters, tonotopic mapping): 
-	- **Auditory Filters:** The basilar membrane is narrow and rigid at its base and wide and soft at its apex, which allows it to act as a bank of filters tuned to different frequency bands.
-	- **Tonotopic Mapping:** This spatial arrangement creates a mapping where high frequencies produce maximum vibrations at the base and low frequencies produce them at the apex.
-- **Nonlinearities in the BM** (difference tones, Tartini's 3rd sound)
-	- **Difference Tones:** When two sine tones are played loudly enough, the ear’s nonlinear distortion creates additional "difference tones" at frequencies like $(x-y)$ or $(2y-x)$.    
-	- **Tartini's 3rd Sound:** This specific phenomenon occurs when two notes (like a perfect fifth) are played; the listener perceives a third, lower note produced by intermodulation distortion in the ear.
-- **Loudness perception** (threshold of hearing, equal-loudness curves, loudness scales – phons and sones)
-	- **Threshold of Hearing:** This is the minimum sound pressure level required for a sound to be just audible, which varies significantly depending on the frequency of the stimulus.
-	- **Equal-Loudness Curves:** These curves (ISO 226:2003) describe the physical intensity needed for sinusoids of different frequencies to be perceived as having the same loudness as a reference 1 kHz tone. 
-	- **Loudness Scales (Phons and Sones):** The **Phon** scale matches the perceived loudness of any tone to the decibel level of an equally loud 1 kHz sinusoid, while the **Sone** scale is a linear scale where a doubling of loudness corresponds to an increase of 10 phons.
-- **Pitch perception** (sinuoidal/harmonic/inharmonic sounds, pitch scales – mel)
-	- **Sound Types (Sinusoidal/Harmonic/Inharmonic):** Pitch perception varies by source: pure sinusoids have a clear height, harmonic sounds can maintain a "virtual pitch" even if the fundamental frequency is missing, and inharmonic sounds (like bells) may have unclear or complex pitch sensations.
-	- **Pitch Scales (Mel):** The **Mel** scale is a perceptual scale that maps physical frequency to "ratio pitch," where doubling the mel value corresponds to a perceived doubling of pitch.
-- **Masking and critical bands** (masking thresholds critical bandwidth, auditory filterbank, bark scale)
-	- - **Masking Thresholds:** This is the sound pressure level a test signal must reach to become just audible in the presence of a louder "masking" signal.
-	- **Critical Bandwidth:** The human ear processes sound through "hearing bands" created by the cochlea; if two tones fall within the same critical band, they are difficult to distinguish and may result in "beating" or "roughness"
-	- **Auditory Filterbank:** This concept treats the ear as a series of overlapping filters that quantify our ability to distinguish individual frequencies.
-	- **Bark Scale:** The Bark scale is a psychoacoustic scale ranging from 1 to 24 that represents these discrete critical bands across the entire audible frequency range.
-
-## 1.5) Stuff to Know
-- Definition of Period, Frequency, velocity, wavelength, Standing waves 
-- Description of the human ear
-- Sound Intensity: Decibel, Phon, Sone.
-- Pitch
-- Critical band, beating.
-- Masking
-
-
-# 2) Sound Synthesis & Sound Design
-## 2.1) Sound Analysis
-Sound is analyzed in the frequency domain which is consistent on how the human ear perceives sound. The characteristics of the sound can be better seen (high/low frequencies, harmonic vs non harmonic partials). Moreover **some filters are efficient in frequency domain**
-
-We use the Discrete Fourier Transform (DFT)
-$$X(k)=\sum_{n=0}^{N-1}x(n)e^{-j\omega_kn}$$
-In computers this is implemented via the Fast Fourier Transform (FFT)
-From N samples in the time domain we get N samples in the frequency domain.
-For better understanding see [[DSP 2#5.3) Fast Fourier Transform (FFT)]].
-
-Each value of the FFT is called **bin** and represents the amplitude of a frequency of $f_s/n$ Hz where $f_s$ is the sampling frequency and $n$ the size of the FFT. Since the DFT is periodic only the first $0-f_s/2$ bins have an utility.
-
-If the FFT is bigger than the signal, zero padding is used.
-
-Also the Short Time Fourier Transform (STFT) is used to analyze **time varying signals**. STFT has a compromise. $N$ is the window length: **bigger N implies better frequency resolution but worse time resolution** this is called the **uncertainty principle**. Also here see [[DSP 2#5.3) Fast Fourier Transform (FFT)]]. 
-
-To get a frequency response of a room we can find the Room Impulse Response (RIR) by recording the sound that a balloon makes in the quiet room. Since the balloon can be considered as a dirac delta:
-$$y[n]=(h*\delta)[n]=h[n]$$
-## 2.2) Classification of Sound Models
-Various classifications of sound exist based on specific needs
-
-#### Classification Based on Model Structure
-This is based on **how the sound was generated**
-- **Direct Generation:** techniques based on one or more independent blocks and sum of the results: **Additive and granular synthesis**
-- **Feed Forward Structure:** feed forward multi block structure (lot of post processing): All non linear models **ring and frequency modulation synthesis**
-- **Interacting Structure:** interacting multi block (feedback). Most physiscs based models
-
-#### Classification Based on Cognitive Representation
-This is based on **what the model aims to represent**
-- **Signal Based Models:** Represents shape of wave, the acoustic perception **ignoring the underlying physical model**. The focus is on receiver and human ear
-- **Physics Based Model:** Represents acoustic signal as by product of physical mechanism of the production of the sound. Focus on emitter, sound source.
-
-#### Classification Based on Underlying Techniques
-These are based on the **processing domain**. 
-- **Time Domain Models:** based on time characteristics
-- **Frequency Domain Models:** based on spectral characteristics
-
-Filters are **linear** transformations, Modulation is a **non linear** one. 
-The processing is either on **sample basis** or most commonly on **block processing**, that is, N samples analyzed at a time like with FFT.
-These can be done via **hardware or software**
-
-## 2.3) Time Domain Model Synthesis
-This is a signal based approach. A characteristic of a musical sound is its complex dynamic behavior. Depends on external control and internal structure and generating process
-
-#### Basic Generators
-This produces a simple signal from a given data. The basic ones are oscillators for periodic signals and noise generators for random signals.
-
-##### Table Lookup Oscillator
-An oscillator generates a simple periodic waveform. Instead of calculating this waveform, rather a lookup table with equidistant samples of the sound to generate is used. This is then amplified $a[n]$. Therefore: $s[n]=a[n]f[n]$
-
-This is low quality approach as it lacks timbre and more complex modulations
-
-More precisely, the table are read via a pointer that moves along the table that contains the samples. Each time a sound is reproduced, the pointer is set to the next sample. If the step is not an integer some aliasing is noticed.
-##### Noise Generator
-Natural sounds are not perfectly periodic. They contain varying statistical properties therefore a noise generator is required. 
-Noise generator produces a sequence of random sounds with however clear statistical properties (flat spectral density).
-
-This is done via generators of pseudo casual numbers.
-
-### 2.3.2) Time-Segment Based Models
-#### Sampling (Wavetable) Synthesis
-This technique consists is sampling real sounds and then processing and playing them.
-Some easy processing is speeding up the sound which heightens the pitch. But this has a bad effect. It lacks **prosodic** rules, which is the ability to modify the sound on the go with dynamics, vibratos etc. This also implements some little distortion.
-
-The control parameters are the amplitude $a[n]$ and the fundamental frequency $f[n]$. The numeric array presents only one period of the periodic signal. 
-#### Granular Synthesis
-Granular synthesis consists in dividing sounds into **grains;** small windows of acoustic elements in time domain. The mixing of these grains can recreate a complex sound. This was born from tape music.
-
-From real sounds the grains are obtained by taking slightly overlapping windows to allow for both reproduction of the sound and the extraction of grains.
-
-When segments are not very short we call it **synthesis by time segment processing**.
-
-A second approach is the **micro-granular synthesis** which defines the grains as a windowed sinusoidal signal.
-
-## 2.4) Frequency Domain Model Synthesis
-#### Additive Synthesis
-Created by superimposing elementary sounds (sine waves). Any almost periodic sound can be decomposed into a series of simple sine waves. Additionally these waves chan also change over time.
-
-It is usually used when a specific sound is needed for example in psychoacoustic as it serves more as an analytical tool.
-
-![[Pasted image 20260514183743.png|Representation|250]]
-
-Additive synthesis can be done in PD.
-![[Pasted image 20260514172813.png|Additive PD|250]]
-We start with a base 100 Hz fundamental frequency. This is fed:
-- directly to an oscillator
-- to four odd integer multipliers
-
-The odd integer multipliers show that only the odd harmonic partials are kept until $H9$. These are fed to an oscillator (with a gain of 0.75). Then the amplitude is divided by the partial index.
-
-Finally all these signals are added together (additive synthesis) and are passed to a **Digital to Analog Converter (DAC)** in order to be played. The result is also printed in a table every 100 ms.
-We can see (and hear) that this approximates a square wave.
-
-Wavetable vs Additive Synthesis:
-
-|                               | Wavetable                                       | Additive                                      |
-| ----------------------------- | ----------------------------------------------- | --------------------------------------------- |
-| **Principle**                 | Plays back precomputed periods stored in tables | Builds sound by summing many elementary waves |
-| **Computational Cost**        | Low                                             | High (many oscillators)                       |
-| **Control Over Spectrum**     | Indirect (post process)                         | Direct (modify directly the partials)         |
-| **Dynamic Timbre Change**     | Through wavetable interpolation                 | modify partials                               |
-| **Sound Design Flexibility**  | Limited by available tables                     | Theoretically unlimited                       |
-| **Implementation Complexity** | Simple                                          | More complex to implement and control         |
-
-# 3) Subtractive Synthesis
-Subtractive synthesis consists in applying filters to a spectrally rich waveforms. Some frequencies will be subtracted and some enhanced. This does not suppose any kind of periodic signal.
-
-This synthesis, along with the next ones are a form of Feed Forward synthesis
-
-## 3.1) Non Linear Model Synthesis (time)
-
-In a modulation we modify the og the signal (carrier) with another signal (modulator).
-#### Amplitude Modulation
-In AM we modify the amplitude and thus a multiplication is used: 
-$$x(t)=c(t)m(t)$$
-Some additional processing has to be done on sinusoids as they should not become negative (phase inversion, ring modulation).
-$$x(t)=\sin(\omega_ct)\sq{\frac{1+\sin(\omega_mt)}2}$$
-Some additional frequencies called sidebands are produced. These are the frequencies $f_{s_{1,2}}=f_c\pm f_m$.
-
-![[Pasted image 20260514184555.png|Representation|150]]
-In PD this looks like, for example
-![[Pasted image 20260514184720.png|PD Ring Modulation Example|150]]
-
-
-#### Ring Modulation
-Ring modulation consists in multiplying the signal with a sinusoid carrier signal
-$$s=m[n]\cos(2\pi\frac{f_i}{F_s}n+\phi_c)$$
-the produced output moves the spectrum in vicinity of the carrier
-Only the sidebands $f_{s_{1,2}}=f_c\pm f_m$ are present. This is used to represent **tremolo** effects
-
-![[Pasted image 20260514183828.png|Representation|250]]
-
-
-In PD this becomes
-![[Pasted image 20260514190022.png|RM in PD Example|150]]
-#### Frequency Modulation
-Here the frequency is modulated with another signal:
-$$x(t)=\sin\par{\omega_ct +A_m\sin(\omega_m t)}$$
-where $A_m$ is the frequency deviation which shows how much the frequency is changed.
-
-![[Pasted image 20260514183808.png|Representation|250]]
-In PD we have
-![[Pasted image 20260515103436.png|Frequency Modulation Example|250]]
-## 3.2) Misc Stuff to know about subtractive synthesis.
-#### Low Frequency Oscillator (LFO)
-The **Low Frequency Oscillator (LFO)** is an oscillator with frequencies below the audible range (<20 Hz). It is used to modulate parameters. If higher frequencies are used, the result is AM or FM. The depth is the strength of the modulation
-
-![[Pasted image 20260515110221.png|LFO Used fro Tremolo and Vibrato|350]]
-
-#### Amplitude Envelope
-Each sound has 4 transients:
-- **Attack:** start from zero to max value
-- **Decay:** after max decrease
-- **Sustain:** constant amplitude for a time frame
-- **Release:** amplitude decreases to 0
-
-![[Pasted image 20260515110525.png|4 Phases of Sound|350]]
-The evolution of a sound’s amplitude over time, across its four transients, is called the amplitude envelope. In electronic music, it is often referred to by the acronym **ADSR (Attack, Decay, Sustain, Release).**
-
-#### Filters 
-A **Low Pass Filter (LPF)** cuts high frequencies after a threshold. The attenuation curve starts at the cutoff frequency and decreases to 0. In PD a LPF is the object **lop$\sim$**. The attenuation per octave is 6db per object, so concatenating them like in the image we can get more attenuation.
-
-![[Pasted image 20260515112202.png|LPF in PD|250]]
-
-# 4) Live Electronics TODO
-
-Live electronics is **voices or instruments TRANSFORMED by live electronics** in the sense that it is an extension. The performers are acoustic and electronic musicians + director. 
-
-The sound director has a similar role to the conductor (interpretation, balance, coordination, sound quality)
-The electronic musician has a different role based on the piece
-
-The instrument is a constantly evolving system with quickly obsolescent hardware and software. Each piece has a different system. Hard to sustain repertoire.
-
-Traditional music has additive sound interaction! Live electronics is a functional interaction. 
+# 1) Quantization
+The quantization is the processo of mapping a function $Q$ from $\mathbb R$ to a discrete set called *Dictionary.*
+$$Q:x\in\mathbb R\rightarrow y\in C=\curly{\hat x_1,\hat x_2,...}\subset\mathbb R$$
+where
+- $C$ is the Dictionary a subset of $\mathbb R$
+- $\hat x_i$ quantization level (code-word)
+- $e=x-Q(x)$: The quantization noise (error)
+- $\Theta_i=\curly{x:Q(x)=\hat x_i}$ the decision region. Defined as non intersecting intervals
+
+Quantization can be seen as an encoding/decoding process:
+take signal $x(n)$: the encoding step assigns each sample of $x(n)$ to a quantization level $i(n)$. The decoder associates to each quantization level $i(n)$ the corresponding code word (value).
+
+**Performance criteria** are composed of **Rate** $R$ and **distortion** $D$.
+By assumption $\boxed{R=\log_2 L}$, which is the 
+
+- The rate $R$ is the avg number of bits needed to represent a sample. We define
+$$\boxed{R=\log_2 L}$$
+- The distortion $D$ is the MSE which in case of a random signal equals to the variance:
+$$D=\E[|x(n)-Q(x(n))|^2]=\sigma_Q^2$$
+## 1.1) Uniforma Quantization (UQ)
+In uniforma quantizers the input range is divided into $L=2^b$ equal-sized cells with size $\Delta=A/L$. Each cell is represented by its mid-point i.e. the levels are the centers of the cells.
+$$\begin{gather}
+\forall i, \ \Delta^i=\Delta=A/L\\
+t^i=t^{i-1}+\Delta\\
+\hat x^i=\frac{t^i+t^{i-1}}2\\
+\Theta^i=\par{\hat x^i-\frac\Delta2,\hat x^i+\frac\Delta2}
+\end{gather}$$
+#### Unsigned Data
+In this case the data is in $(a,A)$ and the ceil function suffices. The thresholds are $(0,\Delta,2\Delta,...,L\Delta)$ and thus $t^i=(i-1)\Delta$.
+$$\begin{align}
+&\text{Encoder: }i=\ceil{\frac x2}\\
+&\text{Decoder: }\hat x^i=i\Delta-\frac \Delta 2\\
+&\implies Q(x)=\Delta\ceil{\frac x2}-\frac\Delta2
+\end{align}$$
+#### Unsigned Data
+In this case the data is in $(-A/2,A/2)$ and the round function is used. Moreover since 0 must be a quantizer value not a threshold a **odd number of levels is required**
+$$\begin{align}
+&\text{Encoder: }i=\text{round}\par{\frac x2}\\
+&\text{Decoder: }\hat x^i=i\Delta\\
+&\implies Q(x)=\Delta\text{round}\par{\frac x2}
+\end{align}$$
+This is called a **mid-tread** quantizer which keeps near 0 values (noise) to 0.
+
+## 1.2) Rate Distortion (RD) Curve
+First recall the uniform distribution:
+$$\mathcal X\sim u(a,b),\quad f_X(x)=\begin{cases}\frac1{b-a} &x\in[a,b]\\0&\text{elsewhere}\end{cases}, \quad\E[\mathcal X]=\frac{b-a}2,\quad\var(\mathcal X)=\frac{(b-a)^2}{12}$$
+And the Law of the Unconscious Statistician (LOTUS):
+$$E[g(x)]=\int g(x)f_X(x)dx$$
 
 ---
 
-In the '60s the connection between devices was done with cables and switches. Therefore one single patch with few controllers was used. 
+These allows to calculate the distortion of a uniform RV quantized with UQ:
 
-This limits the variety of sounds that can be performed. In the '70s cables are replaced by matrix plug boards to freely change patches.
+Let $X\sim U\par{-\frac A2,\frac A2}$ and $Q(x)$ a UQ with $L$ levels. Then:
+$$D=\sigma^2_Q=\E[(X-\hat X)^2]=\frac{\Delta^2}{12}=\frac1{12}\frac{A^2}{L^2}=\sigma^2_x2^{-2R}$$
+$$SNR=10\logt\frac{\E[X^2]}{D}=10\logt2^{2R}\approx 6R$$
 
-![[Pasted image 20260519131609.png|Boards|150]]
+Proof:
+todo calculation of interval
+From here recall that $R=\log_2 L\rightarrow L=2^R$ and that since $X$ is uniform it has variance $A^2/12$ and thus $\frac{A^2}{12L^2}=\sigma^2_x/2^{2R}$.
+The SNR is very straight forward: Notice $\E[X^2]=\sigma^2_x$ 
+
+#### High Resolution (HR) Quantization
+For high resolution we mean $L\rightarrow\infty$
+For a region $\Theta^i$ the value $p_x$ is constant.
+The quantization noise in $\Theta^i$ is $\sim u\par{-\frac{\Delta}{2},\frac{\Delta}{2}}$ and with the total probability law we have
+$$E\sim u\par{-\frac{\Delta}{2},\frac{\Delta}{2}}\rightarrow D=\frac{\Delta^2}{12}=\frac{A^2}{12}2^{-2R}$$
+and the SNR becomes
+$$SNR=10\logt\frac{\E[X^2]}D=10\logt\frac{\sigma_X^2}{A^2/12}2^{2R}\approx 6R-10\logt\frac{A^2/4}{3\sigma_X^2}=6R-10\logt\frac{\gamma^2}3$$
+ where $\gamma^2$ is the load factor, that is, the ratio between peak power and avg power. With this in mind:
+ $$D=\frac{\gamma^2}3\sigma_x^22^{-2R}=K_X\sigma_X^22^{-2R}$$
+
+## 1.3) Optimal Scalar Quantization (SQ)
+For a given probability density function $p_X(x)$ we want to find the quantizer (thresholds $t^i$ and levels $\hat x^i$) that minimizes the distortion $D$ for a given rate $R$
+
+#### Optimal HR Quantizer
+Recall the HR hypothesis:
+$$L\rightarrow \infty\quad \max_i\Delta_i\rightarrow 0\quad \forall i,u\ \in\Theta^i, \ p_X(x)\approx P_i$$
+The RD curve becomes:
+$$\sigma^2_Q=c_X\sigma^2_X2^{-2R}\quad\text{with }c_X=\frac1{12}\sq{\int p_U^{1/3}(t)dt}\text{ and }U=\frac X{\sigma_X}$$
+$c_X$ is the shape factor since it only depends on the pdf.
+some common shape factors are:
+- Uniform: $c_X=1$
+- Gaussian $c_X=\frac{\sqrt 3}2\pi\approx 2.72$
+
+#### Non HR Quantizer
+The solution doesn't have closed analytical formula, but
+- There exists necessary conditions
+- Lloyd-Max algorithm for local minima
+
+How does the algorithm work?
+1. Choose initial dictionary $C^{(0)}=\curly{\hat x^i_0}_{i=1,...,L}$
+2. Find best thresholds for given dictionary $\curly{t^i=\frac{\hat x^i+\hat x^{i+1}}{2}}$
+3. Find best dictionary for given thresholds $C\iter1=\curly{\hat x_{\iter1}^i}$
+4. iterate 2. 3. until convergence (stop condition)
+
+The initial dictionary can be chosen:
+- Uniform Initialization: $\hat x^n=-A_0+n\Delta \ \forall n=1,...,L$
+- Random initialization: code-words are initialized with the same distribution as data
+
+The (quantizer) decision rule is the nearest neighbor:
+$$k=\arg\min_n| x-\hat x^n|\rightarrow Q(x)=\hat x^k$$
+The threshold decision rule is:
+$$t^i=\frac{\hat x^i+\hat x^{i+1}}2$$
+
+## 1.4) Predictive SQ
+Quantization alone is not effective for compression of non-sparse data. Often samples have dependencies between each other (image has many adjecent pixels of same color).
+
+This algorithm exploits the sample correlationand reduces the variance by increasing sparsity
+But what is a sparse signal?
+
+>[!def] Sparse Signal
+>A signal is sparse if most of its components are zero or close to zero
+>- The variance of a sparse signal is low
+>- Zero (or close to zero) samples can be neglected (quantized to 0) without introducing distortion
+>- Natural signal are not sparse but can easily be transformed into one
+
+The basic idea is to define the prediction error as the signal error
+$$q(n)=y(n)-\hat y(n)=x(n)-v(n)-(\hat x(n)-v(n))=\overline q(n)$$
+![[Pasted image 20260320160934.png|Quantizer process|350]]
+So the SNR can be written as a sum of two terms:
+$$SNR=10\logt\frac{\sigma_X^2}{D}=10\logt\frac{\sigma_X^2}{\sigma_Y^2}+10\logt\frac{\sigma_Y^2}D=G_P+G_Q$$
+Where $G_Q$ is the standard quantizer SNR on the signal $y$ while $G_P$ is the term added which is positive only if the variance of the sparse signal $y$ is lower than the og signal $x$
+
+>[!example]
+>Consider a gaussian signal $X(n) \sim\mathcal N(0,\sigma^2)$ and $V(n)=X(n-1)$. Moreover suppose that $\E[X(n)X(m)]=\sigma^2\rho^{|n-m|}$. The sparse signal becomes $$Y(n)=X(n)-X(n-1)$$
+>The variance moreover becomes:
+>$$\begin{align}\sigma_Y^2&=\E[(X(n)-X(n-1))^2]\\
+&=\E[X(n)^2+X(n-1)^2-2X(n)X(n-1)]\\
+&=2\sigma^2-2\sigma^2\rho\end{align}$$
+> and the prediction gain becomes
+> $$G_p=10\logt\frac{\sigma^2}{2(1-\rho)\sigma^2}$$
+> which is good only if $G_P>0\rightarrow \rho>\frac12$
+
+#### Linear Predictor
+A linear predictor is a linear combination of the $P$ previous values
+$$v(n)=-\sum_{i=1}^Pa_ix_{n-i}$$
+I like to see it this way $x_{n-1}=x(n-i)$
+The prediction error becomes
+$$y(n)=x(n)-v(n)=\sum_{i=0}^P{a_i}x_{n-i}$$
+with $a_0=1$
+The transfer function reduces to
+$$A(z)=\sum_{i=0}^Pa_iz^{-i}=1+a_1z^{-1}+...+a_{P}z^{-P}$$
+Therefore the problem becomes a minimization problem: find values of $a_i$ that minimize the variance:
+$$\begin{align}
+\sigma_Y^2&=\E[Y(n)]=\E\sq{X(n)+\sum_{i=1}^Pa_iX(n-i)}^2\\
+&=\E[X(n)^2+2\sum_{i=1}^Pa_i\E[X(n)X(n-i)]+\sum_{i=1}^P\sum_{j=1}^Pa_ia_j\E[X(n-i)X(n-j)]]\\
+&=\sigma_X^2+2r^t a+a^tR_Xa
+\end{align}$$
+where $a$ is the vector with $a_i$ entries and $r$ is the autocorrelation matrix
+![[Pasted image 20260320163517.png|r definition|]]
+by deriving wrt a we get
+$$\frac{\partial \sigma_Y^2}{\partial a}=2r+2R_xa\rightarrow a_{opt}=-R_Xr\rightarrow \sigma_Y^2=\sigma_X^2+r^ta_{opt}$$
+and the autocorrelation can be estimated as
+$$\hat r_X(k)=\frac1N\sum_{n=0}^{N-1-k}X(n)X(n+k)$$
+TODO capire meglio
 
 
-Sound direction:
-- Live electronics system design: work is often divided among several people with different technical skills, involving experts or specialized companies
-- Production of piece: assist composer in design, choose devices, design patches and take care of pre production
-- Concert: tune the concert hall
+# 2) Lossless Coding
+Lossless coding means to decrease the number of bits needed to encode the data without losing any information: the process is reversible.
 
-**1971 Haller and Lawo** create first prototype of Halaphon to generate spatial audio. Used in Donaueschinger Musiktage for the premiere of Planto por las Victimas de la Violencia by Cristóbal Halffter.
-Voltage Controlled Matrix is a matrix controlled by a microcomputer
+The idea is based on variable length coding (VLC) where more probable symbols are encoded in shorter codewords.
 
-**1981 Pierre Boulez** first real time sound processing qith 4x system. Producied at IRCAM it was most powerful real time sound generation. 
-
-4x system: 8 processors boards each independently programmed
-
-This brought paradigm shift: same computer can be programmed to perform very different functions: different musical needs in both quality and quantity. Sound direction can be (partially) automated.
-
-in the 80s a rib of the 4x system, called **4i** rrived at the CSC, thanks to the collaboration between the Venice Biennale (LIMB), CSC and IRCAM and above all **Giuseppe Di Giugno (inventor)**. It is less powerful but with same set of functions: 4 DAC, 2 ADC 16 khz audio
-
-1980 midi started to replace voltage control. 1988 Max (software) for midi piano and real time software
-## 4.1) Notable Performances:
-
-#### K. Stockhausen _Mixtur_ (1964)
-For orchestra, 4 sine wave generators and **4 ring modulations**
-
-#### Karlheinz Stockhausen _Microphonie I_ (1964)
-For tamtam (gong), 2 microphones, 2 filters and 2 controllers. 
-Microphone is the instrument. It's sound is processed by bandpass filter (controlled by dual slider). The sound is spread via quadraphonic stereo speakers
-
-The bands are controlled by potentiometers (30-10k Hz)
-
-#### David Behrman: _Players with circuits_ (1966)
-In USA. 4 performers:
-- 2 for sound sources 1, 2
-- 2 for oscillator and preamp volume tone controls
-
-#### Steve Reich _Pendulum music_ (1968)
-example of the electroacoustic nature of Live Electronics. The microphone oscillates and feedback is the performance. 
-
-#### Karlheinz Stockhausen _Solo_ (1966)
-1 melody instrument with looping feedback. 4 assistent technician
-
-#### Luigi Nono _Quando stanno morendo. Diario Polacco n. 2_ (1982)
-First use of VCM. 7 patch changes in 1 second
-
-#### Luigi Nono _Prometeo_ (1984)
-Mobile sound applied to voices and solo instruments. Used 4i system
-
-#### Pierre Boulez _Repons_ (1981)
-a piece for a large chamber orchestra with six percussion soloists and live electronics.
-- 6 soloists: cimbalom, xylophone and glockenspiel, vibraphone, harp, piano, piano and Yamaha DX 7 keyboard synthesizer
-- 6 loudspeakers, for live spatialized sounds diffusion
-
-![[Pasted image 20260519134159.png|Concert Hall|450]]
-
-Sound changes from speaker to speaker, the louder the amplitude the more the effect.
-
-#### Philippe Manoury, _Jupiter_ for flute and live electronics (1987)
-First use of partially automated sound direction. first pieces to use a program that follows the score and allows the control of live electronic processing and synthesis through a stream of musical events from a live instrument
-
-#### Salvatore Sciarrino _Perseo e Andromeda_ (1991)
-uses 4i system. opera in one act for soprano, mezzo-soprano, baritone, bass and synthesis sounds. 4i gave musical parts with freer timing
-
-# 5) Audio Archives Preservation
-## 5.1) Historical Debate
-Ongoing debate fro 30+ years.
-#### William Storm
-**1980:** **William Storm** wrote first article on audio restoration and re-recording procedures with 2 common practices:
-- Type I: Sound preservation + audio history
-- Type II: Sound preservation of an artist
-
-**Type I is defined as:**
-<p style="text-align: center;">The perpetuation of the sound of an original recording as it was initially reproduced and heard by the people of the era.</p>
-The recording therefore must preserve the content of the recording and the original sound quality characteristics of the historical playback technology of that era.
-- **Focus on listener experience**: recreate how it was heard: same playback equipment.
-
-**Type II is defined as:**
-<p style="text-align: center;">The knowledge acquired through audiohistory preservation provides the sound engineer with a logical place to begin the next step—the search for the true sound of an artist.</p>
-Therefore a newer playback technology can be used with the intent of obtaining the live sound of the artist via a process that is objective valid and verifiable. This allows to transcend the limitations of the original recording.
-- **Focus on artist intent:** true sound past technical limits: modern technology to extract a clean, "live" sound that is objective and verifiable.
-
-#### Dietrich Schuller
-**Unesco:** Unesco commisioned a guide on *save history, not rewrite it* influenced by **Dietrich Schuller**.
-<p style="text-align: center;">
-Analyse what the original carrier represents, technically and artistically, and to start from that analysis in defining what the various aims of re-recording may be.</p>
-This approach is more analytical. It focuses on the carrier itself. Not focused on feeling anymore. He categorized audio changes in two categories:
-- **Intentional:** Choices made by og sound engineer/artists: eq curves, noise reduction
-- **Unintentional:
-	- **imperfection of the recording technique of the time:** unwanted noise, distortions, etc.
-	- **misalignment of recording equipment:** wrong speed, deviation from the vertical cutting angle in cylinders, or misalignment of the recording in magnetic tape (see later)
-
-Three approaches were finally formulated:
-- **Type A:** same as Type I of Storm
-- **Type B:** recording as it has been produced, precisely equalized for intentional recording equalizations, compensated for eventual errors caused by misaligned recording equipment and replayed on modern equipment to minimize replay distortions
-- **Type C:** The recording as produced, but with additional compensation for recording imperfections caused by the recording technique of the time
-
-Type B uses external info on the original recording to compensate for the imperfections. The same post prcessing (eq, filters, noise gates) are used. The reconstruction is more objective but still lenient to a slight subjectivity.
-
-Type C is more in depth and must be documented as the decisions might deviate too much from the og recording. This fixes strict technical limitation
-
-| **Type**   | **Description**                                                                                                 | **Goal**                                                                          |
-| ---------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **Type A** | Equivalent to Storm’s Type I.                                                                                   | Reconstruct the "exotic" historical listening experience.                         |
-| **Type B** | **The Preservation Standard.** Corrects intentional EQ and technical alignment errors using modern gear.        | Create an objective "master copy" based on scientific knowledge.                  |
-| **Type C** | **Active Restoration.** Compensates for technical limits (removing hiss, rumble, or fixing frequency response). | Create a "clean" version; requires strict documentation because it is subjective. |
-
----
-
-#### George Brock-Nannestad
-George Brock-Nannestad focused on pre 1925 acoustic recordings and applied reverse engineering to them. He wants to find the true sound from the recording we are hearing.
-- Treat recording as an invertible math function
-- tries to "undo" the physics of the 1920s equipment to reveal the actual sound that entered the room.
-
-## 5.2) Operational Protocol
-The idea is to keep a preservation copy of the og document: an organized data set that groups all the information represented by the source document.
-
-1. **Preparation of the Carrier**
-	- Physical Documentation
-		- Photographic Documentation
-		- Scanned Images
-		- Data validation
-	- Visual inspection
-	- Chemical analysis
-	- Optimization of the carrier
-2. **Signal Transfer**
-	- Analysis of recording format
-	- System setup
-		- Replay equipment
-		- Remediation equipment (converter, acquisition software, monitoring, etc.)
-	- Monitoring
-	- Data validation
-	- Archival of source carrier
-3. **Data Processing and Archival**
-	- Metadata extraction
-	- Completion of copy
-
-The input of the remediation process is an audio document, and the expected output is its preservation copy—along with the source document ready to be stored again. The og copy has fundamental value that cannot be replaced by any copy.
-
-## 5.3) Passive Preservation
-
-here is a list of carriers (see later)
-
-| **Carrier**                 | **Period** | **Composition**                     | **Characteristics**                                           |
-| --------------------------- | ---------- | ----------------------------------- | ------------------------------------------------------------- |
-| **Cylinders**               | 1886–1950s | Wax or Nitrocellulose               | Early acoustic format; extremely fragile.                     |
-| **Coarse Groove (Shellac)** | 1887–1960  | Mineral powders + Shellac binder    | Brittle; breaks easily if dropped.                            |
-| **Instantaneous Discs**     | 1930–1950s | Cellulose coating on Aluminum/Glass | **High Risk.** Used for one-off recordings; prone to peeling. |
-| **Vinyl (Microgroove)**     | 1948–Today | PVC-polyacetate copolymer           | More durable but sensitive to heat and bending.               |
+Lets start with some notation:
+- **Alphabet:** $\mathcal X=\curly{x_1,...,x_M}$ set of symbols to encode
+- **Code:** application between $\mathcal X$ and $\curly{0,1}$ (set of finite length bit strings)
 
 ---
-The 4 major threats are:
-- **Humidity (Most dangerous):** Hydrolisis causes discs to fall apart. Also fungus and mold are more present
-- **Temperature:** above 40C makes vinyl warp. Accelerates chemical deterioration
-- **Mechanical Deformation:** discs must be stored vertically.
-- **Dust & Dirt:** make interference. Also fingerprints damage
+Digression on fixed length coding (FLC): in FLC all codewords ave the same length, that is $M$ symbols $\rightarrow$ $\ceil{\log M}$ bits to encode each symbol.
 
-## 5.4) Methodology
-These are the steps to follow:
-
-1. **What should be preserved?**
-Based on risk (vinegar syndrome in tapes), demand and obsolete equipment that is disappearing
-
-2. **Physical Preparation**
-Before fixing, good documentation with: hq photos, video of carrier. Also visual inspection and delicate cleaning. 
-
-3. **Capture Phase**
-Here transform soundwaves in bits. Use highest-end replay equipment and A/D converters. 96 kHz and 24-bit minimum. Must be human assisted
-
-4. **Preservtion Copy**
-Unimedia data set. Audio as BWF. Visual evidence, metadata and description
-
-5. **Ethical Standpoint**
-Do not remove tape errors (hiss, scratch). his noise is "secondary information" that tells the story of how the document was transmitted. It is better to have a high-resolution file containing the noise than a "clean" file where historical data has been filtered out.
-
-6. **Data Integrity**
-One wrong bit can destroy the whole process. The protocol requires three types of verification (MD5, SHA-1, and CRC32) to ensure the file hasn't changed over time. At least **two copies** must exist at all times in different physical locations to avoid a single point of failure. 
-
-## 5.5) Carriers
-Preservation of archives is essential as carriers degrade quickly while playback devices and knowledge are fast obsolete.
-
-**Traditional preservation paradigm:** Preserve original
-
-This paradigm however does not take into account the deterioration of the media and the machines used to play them
-
-The digitization process was not considered a good solution for preservation, but it had only an access-oriented value. The rapid growth of computer sciences quickly led to the obsolescence of technologies, that had a short lifetime expectation. 
-As digitization assumed more importance (better performance, birate, ecc) and started to be considered a good way to store information.
-
-In acoustic music (or speech recordings) the carrier only acts as a container of the artwork, not part of it.
-In electroacoustic music however the carrier coincides with the artwork: the carrier is the witness of the process.
-
-#### Preservation vs Restoration
-Physical degradation of the carrier can be slowed down (but not stopped) with good preservation strategies.
-
-Preservation consists in keeping the original acoustic information and carriers. There are two types of preservation
-- Indirect: operating on the environment in which the audio document is stored.
-- Direct: operating on the carrier itself with procedures for the stabilization of its physical conditions, without causing an alteration of the structure and the composition
-
-Restoration is the process of recovering the original information from a degraded carrier, possibly through digitalization.
-
-#### Incision Based Carriers
-The Phonographic Disc is the first carrier standardized for audio preservation. This immediately led to problems (also future formats)
-- From the standard, a disc should be run at 78 RPM. However due to different voltages (60 Hz vs 50Hz) the disc runs at slightly different speeds (78.26 vs 77.92 RPM)
-- Disc is prone to degradation. The diamond needle slightly scratches the disc at every run so after a dozen listens the disc is damaged. Dust and scratches also damage the listening experience (crackle sound)
-- They introduced a equalization. High frequencies are boosted, therefore an eq curve is needed to return a flat profile
-
-#### Magnetic Based Carriers
-These range from tapes to cassettes.
-
-The first was the Open-Reel Tape (30's) and had various diameters and speeds.
-In general the magnetic tape works as follows:
-![[Pasted image 20260319151744.png|Tape|350]]
-**Vinegar Syndrome:**
-Humidity and temperature affect the acetic acid which degrades and damages the tape.
-
-**Soft Binder Syndrome– Sticky Shed Syndrome (SBS-SSS)**
-Deterioration of magnetic tape binder. The binder polymers used in magnetic tape
-constructions are subject to a **chemical process known as hydrolysis**. In this process,
-**long molecules are broken apart** by a reaction with water to produce shorter molecules.
-The **shorter molecules do not impart the same degree of integrity** to the binder system
-as do the longer molecules
-
-This can be solved by baking (in the oven) at max 50-60°C for 1h up to 8 hours. However a wrongly baked tape can be irreparably damaged.
-
-# 6) Pure Data
-PD is a cross platform open source real time dataflow program environment
-![[Pasted image 20260514104835.png|PD|200]]
-The creator is **Miller Puckette**.
-
-There are 5 basic elements:
-- **Objects:** specific class with inlets, outlets and methods. Can be data type or signal type
-- **Messages:** contains numbers or symbols. The **$** symbol is a variable.
-- **Number:** holds a number (can be read and can be written)
-- **Comments:** comments
-- **GUI:** gui elements like toggles, bangs
-
-The two types of data are:
-- **Data:** number/symbol
-- **Audio Signal:** specific 32 bit float sequence. Sample rate and bit depth depend on sound card. Objects with tilde $\sim$ work on audio signals (ex. osc$\sim$) 
-
->[!col]
->![[Pasted image 20260514181401.png|Osc DAC Combo|150]]
->
->One of the fundamental blocks is the **osc$\sim$** and **dac$\sim$** combo. The osc generates a cos and the dac converts the digital signal into analog signal that we can listen to through our speakers or headphone.
-
-The inputs of the oscillator are:
-1. Frequency
-2. Phase $[0,1]$
-How it is defined in the image, the frequency is already defined as 440.
-
->[!col]
->![[Pasted image 20260514183511.png|Graphing Stuff|100]]
->
->Arrays are defined via **tabwrite**. With the help of  **metro** that sends a bang the array is saved (every 100 ms) and by activating the DSP this is printed to the GUI graph called *oscilloscope*
-
-usually the inputs are **first hot, then cold:**
-- **Hot:** object reads value of hot input path immediately
-- **Cold:** object reads value of cold input path but doesn't update until the hot path is updated
-
-# 7) Midi
-A synth is an instrument that generates audio signals. A sequencer is a device (or software) that can **manage and reproduce sequences of control signals**, which enable an electronic instrument to be controlled
-
-To generalize these control signals a standard was designed: **Musical Instrument Design Interface (MIDI)**. It standardizes:
-- digital interface and connectors
-- communication protocol
-
-MIDI 1.0 was proposed in 1983 and finalized in 1996.
-
-Three hardware interfaces:
-- **MIDI IN:** receives control signals
-- **MIDI OUT:** sends generated signals
-- **MIDI THRU:** replicates as MIDI OUT what was received as MIDI IN.
-
-Not all ports are required on a single device. 
-
-A MIDI message is composed by **1 status byte** (first bit 1) followed by **one or more data bytes** (first byte 0)
-- **Status Byte:** $1\text{ TTT CCCC}$ where $T=$ type and $C=$ channel
-- **Data Byte:** $0 \text{ VVVVVVV}$ where $V=$ value of data
-
-If the same status is sent various times (with possible value changes) then only the data bytes have to be sent. This is called **Running Status**
-
-![[Pasted image 20260519113349.png|Example|450]]
-The most common messages are:
-
-| **Tipo di messaggio**                       | **Codice (Status Byte / Tipo)** | **Data Bytes e relativi intervalli**                                                                                                               |
-| ------------------------------------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Note Off**                                | `000`                           | **Data Byte 1:** Note number (0-127)<br>**Data Byte 2:** Velocity (0-127)                                                                          |
-| **Note On**                                 | `001`                           | **Data Byte 1:** Note number (0-127)<br>**Data Byte 2:** Velocity (0-127)                                                                          |
-| **Polyphonic Key Pressure** (Poly Pressure) | `010`                           | **Data Byte 1:** Note number (0-127)<br>**Data Byte 2:** Pressure (0-127)                                                                          |
-| **Control Change**                          | `011`                           | **Data Byte 1:** Controller Voice (0-120 per Voice, 121-127 per Mode)<br>**Data Byte 2:** Controller Value (0-127)                                 |
-| **Program Change**                          | `100`                           | **Data Byte 1:**  Program/Preset Number (0-127)<br>**Data Byte 2:** _Nessuno_                                                                      |
-| **Channel Pressure** (Mono Pressure)        | `101`                           | **Data Byte 1:** Pressure (0-127)  <br>**Data Byte 2:** _Nessuno_                                                                                  |
-| **Pitch Bend**                              | `110`                           | **Data Byte 1:** LSB - Valore Fine (range complessivo a 14 bit: 0-16383)<br>**Data Byte 2:** MSB - Valore Coarse (Valore centrale di riposo: 8192) |
+>[!example] FLC Text Compression
+>An alphabet with 26 symbols is encoded with $\ceil{\log 26}=\ceil{4.7}=5$ bits per codeword. This has a compression ratio of 1.
 
 ---
-Here are some examples.
-#### Note ON Message
-Note ON: $001$
-The data is a note number (0-127) and then velocity (0-127)
+In VLC each codeword $c_i$ has length $l_i$. This is possible if
+- **Decodability Condition:** prefix to distinguish codewords
+- **Non-equiprobable symbols**
+
+>[!example] Example on Decodability Condition
+>Consider the following alphabet $\mathcal X=\curly{A,B,C}$ with the following 4 codes:
+>![[Pasted image 20260311130752.png|Coding Schemes|350]]
+>- Code 1 cannot be decoded uniquely: example 111111 can be either BBB or CC
+>- Code 2 is instaneously decodable (prefix condition)
+>- Code 3 is decodable with delay less than or equal to 1 bit (delay counted from last bit)
+>- Code 4 is decodable with an undefined delay
+
+## 2.1) Principle of Information Theory
+From the 4 codes before we can see that there is a favorite one, based on the following theorem we can choose to focus on **instantaneous codes**
+
+>[!thm] McMillan's Theorem
+>Decodable codes do not improve performance with respect to instantaneous codes
+
+>[!thm] Kraft’s Inequality
+>There exists a instantaneous code with lengths $\curly{l_1,...,l_M}$ iff
+>$$\sum_i2^{-l_i}\leq 1$$
+>See [proof](#^3d4d31).
+
+If the equality holds then the code is said to be **optimal**.
+
+#### Information and Entropy Recap
+Suppose symbols $\curly{x_i}$ with probabilities $p_i$.
+- The information of a symbol is 
+$$I(x_i)=-\log_2 p_i=\log_2 \frac1{p_i}$$
+- The source entropy of $X=\curly{x_i}$ is
+$$H(X)=-\sum_ip_i\log_2p_i=-\E[\log_2(p_X(x))]$$
+this is the avg uncertainty of $X$.
+
+- Joint Entropy:
+$$H(X,Y)=-\sum_{i,j}p_{i,j}\log p_{i,j}$$
+- Conditional Entropy
+$$\begin{align}H(X|Y)=\sum_jp_jH(X|Y=y_j)\rightarrow H(X,Y)&=H(Y)+H(X|Y)\\ &=H(Y)+H(Y|X)\end{align}$$
+- Properties:
+$$\begin{align}
+&H(X)>0\\
+&H(X,Y)=H(X)+H(Y|X)=H(Y)+H(X|Y)\\
+&H(X,Y)\leq H(X)+H(Y) \ (\text{= if }\perp)\\
+&H(X|Y)\leq H(X)\ (\text{= if }\perp)\\
+&H(X)\leq \log_2 M \ (\text{= if }X\sim u)
+\end{align}$$
+
+#### Lagrange's Method
+Lagrange's method is used to solve minmax problems with constraints.
+
+Consider a function $f:x\in \R^n\rightarrow\R$
+In order to find the maximum or minimum of $f$ subject to the constraint $\phi(x)=0$, we look for the stationary points of 
+$$J(x,\lambda)=f(x)+\lambda\phi(x),\quad \lambda \in \R$$
+The stationary points are computed by setting to zero all the derivatives of $J$:
+$$\frac{\partial J}{\partial x_i}=0,\quad \frac{\partial J}{\partial \lambda}=0$$
+>[!example] Distribution with Maximum Entropy
+>The distribution maximizing the entropy of a M-ary discrete r.v. is found applying the Lagrange’s method:
+>$$p^*=\arg\max_p\sum_{i=1}^Mp_i\log\frac1{p_1},\qquad \sum_ip_i=1\rightarrow \phi(x)=\sum_ip_i-1=0$$
+>Write $J$:
+>$$J(p.\lambda)=-\sum_ip_i\log p_i+\lambda\par{\sum_ip_i-1}$$
+>Calculate the derivative (specific $p_i$)
+>$$\frac{\partial J}{\partial p_i}=-\par{\frac{\log e}{p_i}p_i+\log p_i}+\lambda=0\rightarrow p_i=\lambda-\log e$$
+>The max uncertainty is obtained by setting all probabilities equal, that is $p_i=1/M$.
+
+## 2.2) Optimal Code
+Given a set of $M$ symbols with probabilities $p_i$ we want to find the set of $M$ lengths $l_i$ such that:
+- Kraft Inequality is satisfied (prefix code)
+- $\forall i =1,...,M,\ l_i\in\mathbb N$
+- The avg length $L=\sum_ip_il_i$ is minimized among all sets of $l_i$
+$\implies$ constrained minimization problem
+$$l^*=\arg\min_l\sum_ip_il_i\quad\text{ subject to }\sum_i2^{-l_i}=1$$
+TODO Proof
+The optimal length, which is also the lower bound, corresponds to the entropy:
+$$L^*=-\sum_ip_i\log p_i=H(X)$$
+However $H(X)\in \mathbb R$ not $\mathbb N$.
+Taking $l_i=\ceil{-\log p_i}$ suffices to find a code such that $H(X)\leq L^*<H(X)+1$
+
+Proof:
+Kraft is satisfied:
+$$\begin{gather}
+l_i=-\log p_i+\delta_i \quad \delta \in[0,1)\\
+2^{-l_i}=p_i2^{-\delta_i}=\epsilon_ip_i\quad\epsilon_i\in\left(\frac12,1\right]\\
+\sum_i2^{-l_i}=\sum_i\epsilon_ip_i\leq\sum_ip_i=1
+\end{gather}$$
+The avg length is:
+$$\begin{gather}
+l_i=\ceil{-\log p_i}<-\log p_i+1\rightarrow p_il_i=-p_i\log p_i+p_i\\
+H(X)<\sum_i p_il_i<\sum_i-pi\log p_i+p_i\\
+H(X)\leq L^*<H(X)+1
+\end{gather}$$
+$$\endproof$$
+#### Huffman Coding
+Huffman discovered how to build the optimal lossless coder for any source with known probabilities.
+
+Algorithm:
+1. Create leaf nodes for each symbol, weighted by $p_i$
+2. While there is more than one node:
+	- Select two nodes with lowest weights
+	- Create a new internal node as their parent
+	- Set new node’s weight as sum of children’s weights
+3. Assign ’0’ to left edges, ’1’ to right edges
+4. Read code for each symbol from root to leaf
+
+![[Pasted image 20260313110534.png|Example|250]]
+This code has avg length $L^*=2.3$ and entropy $H(X)=2.246$
+
+As a brief recap consider this:
+$$\boxed{\begin{gather}
+l_i=\ceil{\log_2p_i}\qquad H(X)=-\sum_ip_i\log_2p_i\\
+H(X)\leq L^*=\sum_ip_il_i<H(X)+1
+\end{gather}}$$
+#### Block Coding
+Instead of mapping one symbol into one codeword, we can map many subsequent symbols into a single codeword. 
+This gives a better performance as:
+Let $X^K=(X_1,X_2,...X_K)$ a block of K symbols. Then 
+$$H(X^K)=H(X_1,X_2,...,X_K)\leq\sum_{i=1}^KH(X_i)$$
+Then there are 2 scenarios ($L_s$ is the avg symbol length):
+- Symbols not independent:
+$$\frac{H(X^K)}K<H(X_i)\rightarrow L<H(X^K)+1\iff L_s<\frac{H(X^K)}K+\frac1K$$
+- Symbols identically distributed (but not necessarily independent):
+$$L_s<\frac{H(X^K)}K+\frac1K\leq H(X_i)+\frac 1K$$
+These blocks are encoded via Huffman.
+
+
+>[!example] BW image with iid pixels
+>Let a BW image have probability $p$ of having a black pixel. Then we group pixels into blocks of 2, the probabilities are:
+>$$P(BB)=p^2\quad P(BW)=P(WB)=p(1-p)\approx p\quad P(WW)=(1-p)^2\approx 1-2p$$
+>from here
+>$$H(X_1,X_2)=2H(X)\ll 2$$
+>Apply the huffman code to the blocks and by an appropriate code we have
+>$$L\approx 1\text{ but } L_s\approx \frac 12$$
+
+Now define the Entropic Rate:
+>[!def] Entropic Rate
+>When the rate is converging, then
+>$$\mathcal H(X)=\lim_{K\rightarrow\infty}\frac{H(K)}{K}=\lim_{K\rightarrow\infty} L^*_s\leq H(X)$$
+
+Recall the avg length of the optimal code:
+$$\begin{gather}
+H(X^K)\leq L^*<H(X^K)+1\\
+\frac{H(X^K)}{K}\leq L_s^*<\frac{H(X^K)}{K}+\frac{1}{K}\\
+\downarrow K\rightarrow\infty\\
+L^*_s\rightarrow\mathcal H(X)\leq H(X)
+\end{gather}$$
+where the last steps inequality uses the joint entropy property.
+
+
+Therefore huffman code is optimal with larger and larger block sizes. This is practically unobtainable as complexity is exponential with K and probability estimation is hard with bigger blocks.
+
+#### Arithmetic Coding
+Arithmetic coding solves the exponential complexity with $K$ increasing. This coding is suboptimal but asymptotically optimal.
+$$L\leq H(X^K)+2\rightarrow L_s=\frac LK\stackrel{K\rightarrow\infty}\longrightarrow\mathcal H(X)$$
+This is done achieved by **encoding a sequence as the center interval** with arbitrary precision $q\in[0,1]$ a fractional number. The arithmetic code can encode blocks of any size, even the entirety of the message.
+
+This requires **2 multiplications and 2 sums per symbol**
+
+![[Pasted image 20260323135724.png|Example|350]]
+The avg length can be calculated as (iid symbols):
+$$\begin{gather}
+L(n)=-\ceil{\sum_{i=1}^n\log_2p(x_i)}+1<-{\sum_{i=1}^n\log_2p(x_i)}+2\\
+\overline L(n)<\frac{-{\sum_{i=1}^n\log_2p(x_i)}+2}n\\
+\begin{aligned}
+L=\E[\overline L(n)]&<\frac{-\sum_{i=0}^n\E[\log_2p(x_i)]+2}n\\
+&<\frac{-\sum_{i=0}^n H(X_i)+2}n\\
+&<H(X)+\frac 2n\stackrel{n\rightarrow\infty}\longrightarrow H(X)
+\end{aligned}
+\end{gather}$$
+For non iid symbols we have
+$$L(n)<-\log_2p(x^n)+2\rightarrow L=\frac{\E[L(n)]}n<\frac{H(X^n)+2}{n}\rightarrow\mathcal H(X)$$
+
+However $p(x^n)$ is hard to estimate for non iid symbols (if iid $p(x^n)=\prod_i^n p(x_i)$)
+
+#### Context Based Coding
+This approach consists in looking at  $N_s$ previous symbols to recognize the context (max $N_c=M^{N_s}$ with $M$ the alphabet) and changes the encoder based on the context. This conditioning reduces the entropy of the source.
+
+## 2.3) Other Coding Techniques
+
+### 2.3.1) Exp-Golomb Coding
+Universal coding for integer numbers, size (bits) proportional to magnitude
+#### Unisgned Integer
+Given int $n\in\mathbb N$ the representation consists in
+- write $n+1$ in binary
+- use min number of bits: $b=\floor{\log_2(n+1)}+1$
+- place $b-1$ leading zeroes
+
 Example:
-![[Pasted image 20260519112900.png|Example|450]]
-#### Note OFF Message
-Not OFF: $000$
-The data is a note number (0-127) and then velocity (0-127)
+$$n=0\rightarrow \begin{cases}n+1=1_{10}\rightarrow 1_2\\
+b=\floor{\log_21}+1=1\\
+b-1=0\end{cases}\longrightarrow 1$$
+$$n=6\rightarrow \begin{cases}n+1=7_{10}=111_{2}\rightarrow 1_2\\
+b=\floor{\log_27}+1=3\\
+b-1=2\end{cases}\longrightarrow 00111$$
+#### Signed Integer
+Given int $n\in\mathbb Z$ the representation consists in
+- Map $\mathbb Z\rightarrow \mathbb N$ using $m(n)=\begin{cases}2n-1 &n>0\\-2n &n\leq0\end{cases}$
+- Use Exp-Golomb for unsigned integer
+
 Example:
-![[Pasted image 20260519112958.png|Example|450]]
+$$n=-3\rightarrow m(n)=6\rightarrow 00111$$
+$$n=-6\rightarrow m(n)=12\rightarrow \begin{cases}n+1=13_{10}=1101_{2}\rightarrow 1_2\\
+b=\floor{\log_27}+1=4\\
+b-1=3\end{cases}\longrightarrow 0001011$$
+### 2.3.2) Dictionary Based Coding
+The idea is to ignore initial statistics and build a dictionary of codewords learned in long term. This allows universal capabilities
+
+>[!thm] Asymptotic Optimality Theorem
+>For stationary and ergodic sources, the dictionary approach is asymptotically optimal:
+>With length $n\rightarrow\infty$ the average codewrod length $L_n$ converges to the entropy rate $\mathcal H$ of the source
+
+Characteristics:
+- **Dynamic Dictionary Construction:** Dictionary built on the fly during encoding process
+- **Universality:** No prior knowledge of source statistics or probability distributions is required
+- **Adaptivity:** adapts to non stationary signals that change over time
+- **Practical Efficiency:** used in many formats (zip, gzip, etc)
+- **Why:** This approach scales well with long patterns
+
+#### LZW Encoding (TODO Important non si capisce un cazzo)
+It uses a **greedy matching process:**
+- Encoder reads symbol by symbol
+- For each new input, it checks if the pattern (Prefix $W$+Next $K$) already exists
+- **Iterative search:** If $W+K$ is found, it continues to read until new pattern is found
+
+**Dictionary Evolution and Merging**
+- **New pattern is found:** Index of longest prefix $W$ is sent to bitstream (output), then $W+K$ is added to dictionary
+- **Prefix Merging:** This mechanism merges known prefixes with new suffixes, allowing the dictionary to naturally evolve and "track" local statistics.
+##### Example:
+Input: $0001000000101000010000010$
+Alphabet: $0,1$
+
+Initialization: $0\rightarrow 0, \ 1\rightarrow 1$ 
+
+- First symbol: $0$
+The encoder passes through the first symbol: Symbol $0$ exists in table (0). Continue search. 
+Encoder now sees $00$: new symbol, adds it to table: $2\rightarrow00$. Write in output the codeword of $0$: 
+Output = $0$
+
+- Second symbol: $0$
+We are still at the second $0$. $0$ is in the table, continue. $00$ is in the table (2), continue.
+$001$ is not in table, add it: $3\rightarrow 001$
+Output: $0 \ 2$
+
+- Fourth symbol: $1$
+1 is in table (1), continue. $10$ is not in table, add it: $4\rightarrow 10$
+Output: $0\ 2\ 1$
+
+- Fifth symbol: $0$
+$0$ is in table, continue. $00$ is in table (2), continue. $000$ is new, add it to table: $5\rightarrow 000$
+Output: $0 \ 2 \ 1 \ 2$
+
+
+Here a merge is possible: notice that 2, 3 and 5 have the same prefix $00$. 
+
+
+- Seventh symbol. $0$
+0 is in table, 00 is in table, 000 is in table (2), 0000 is not in table, add it: $5\rightarrow 0000$
+Output: $0\ 2 \ 1 \ 2\ 2$
+
+# 3) Transform Coding and JPEG
+
+## 3.1) Block Coding And Quantization
+Recall block coding:
+Let $X_k$ be a rv with variance $\sigma^2_k$, the quantizer distortion is: $D_k=c_k\sigma^2_k2^{-2R_k}$
+Now consider a block of rv (not iid): $X=[X_1,...,X_M]^T$
+
+**We apply a quantization step:**
+From the  **Huang-Schilteiss formula** the optimal rate per block is:
+$$R_k^*=\frac{R_{tot}}M+\frac12\log\sq{\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}}$$
+The optimal case diverges from the uniform Resource distribution case (call $\overline R=R_{tot}/M$) we get that the single sample distortion equals to the global distortion:
+$$\begin{gather}
+D_k^*=c_{GM}\sigma_{GM}^22^{-2\overline R}\\
+\mathcal D^*=\frac1M\sum_{k=1}^{M}D_k=c_{GM}\sigma_{GM}^22^{-2\overline R}
+\end{gather}$$
+In particular consider the gaussian case (shape factor constant $c_{GM}=x_k=c_\mathcal N$): 
+$$\mathcal D^*=c_\mathcal N\sigma_{GM}^22^{-2\overline R}$$
+and if the signals are iid (same variance $\sigma_{GM}^2\sigma_X^2$ and shape factor) the optimal rate is the uniform allocation. For historical reasons it is called PCM:
+$$\begin{gather}
+R_k^*=\overline R+\frac12\log_2\underbrace{\sq{\frac{c_k\sigma_k^2}{c_{GM}\sigma_{GM}^2}}}_{=1}=\overline R\\
+\mathcal D_{PCM} =c_X\sigma_X^22^{-2\overline R}
+\end{gather}$$
+
+##### Proofs
+Using uniform resource allocation the global distortion is:
+$$\begin{align}
+\mathcal D&=\frac1M\E[\|X-Q(X)\|^2]=\frac1M\E[(X-Q(X))^T(X-Q(X))]\\
+&=\frac1M\E[\sum_{k=1}^M(X_k-Q(X_k))^2]=\frac1M\sum_{k=1}^M\E[(X_k-Q(X_k))^2]\\
+&=\frac1M\sum_{k=1}^MD_k=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}
+\end{align}$$
+$\endproof$
+
+---
+The optimal rate is obtained by using the lagrangian multipliers method:
+The constraint is: $\displaystyle \sum_{k=1}^{M-1}R_k\leq R_{tot}$
+Then the optimization problem becomes:
+$$J(R,\lambda)=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}+\lambda(\sum_{k=1}^{M-1}R_k- R_{tot})$$
+Find the derivatives:
+$$\frac{\partial J}{\partial R_k}=-\frac{2\ln2}Mc_k\sigma^2_k2^{-2R_k}+\lambda\qquad \frac{\partial J}{\partial\lambda}=\sum_{k=1}^{M-1}R_k- R_{tot}$$
+Set the gradient to 0 and solve:
+$$\begin{gather}
+-\frac{2\ln2}Mc_k\sigma^2_k2^{-2R_k}+\lambda=0\\
+-2R_k={\log_2(\frac{M\lambda}{2\ln 2})}+\log_2(\frac1{c_k\sigma^2_k})\\
+R_k^*=\underbrace{\frac12\log_2\par{\frac{2\ln 2}{M}}}_{\lambda'}+\frac12\log_2(c_k\sigma_k^2)
+\end{gather}$$
+Now write it with $R_{tot}$
+$$\begin{align}
+R_{tot}&=\sum_{k=1}^MR_k^*=M\lambda'+\frac12\sum_{k=1}^M\log_2(c_k\sigma_k^2)\\
+\downarrow\\
+\lambda'&=\frac{R_{tot}}M-\frac1{2M}\sum_{k=1}^M\log_2(c_k\sigma^2_k)=\frac{R_{tot}}M-\frac12\log_2\par{\prod_{k=1}^M(c_k\sigma^2_k)^{1/M}}\\
+&=\frac{R_{tot}}M-\frac12\log_2(c_{GM}\sigma_{GM}^2)\\
+\downarrow\\
+R_k^*&=\lambda'+\frac12\log_2(c_k\sigma^2_k)=\frac{R_{tot}}M-\frac12\log_2(c_{GM}\sigma_{GM}^2)+\frac12(c_k\sigma^2_k)\\
+&=\frac{R_{tot}}M+\frac12\log_2(\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}})\\
+\end{align}$$
+The solution is the **Huang-Schilteiss formula:**
+$$R_k^*=\frac{R_{tot}}M+\frac12\log\sq{\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}}$$
+$\endproof$
+
+---
+
+Apply the optimal rate to the single distortion
+$$\begin{gather}
+D_k^*=c_{k}\sigma_{k}^22^{-2R_k^*}=c_{k}\sigma_{k}^22^{-2\overline R-\log_2\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}}=c_{GM}\sigma_{GM}^22^{-2\overline R}
+\end{gather}$$
+
+$\endproof$
+#### Digression on Arithmetic VS Geometric Mean (AM, GM)
+The means are defined as:
+$$z_{AM}=\frac1M\sum_{k=1}^Mz_k\geq z_{GM}=\sqrt[M]{\prod_{k=1}^M z_k}$$
+##### Proof
+By Jenses Inequality we have:
+$$f(\frac1M\sum_{k=1}^Mz_k)\geq \frac1M\sum_{k=1}^Mf(z_k)$$
+with $f$ the log function.
+$$\log(z_{AM})\geq\frac{1}{M}\sum_{k=1}^M \log(z_k) = \log\!\left(\prod_{k=1}^M z_k^{1/M}\right) = \log(z_{GM})\rightarrow z_{AM}\geq z_{GM}$$
+
+## 3.2) Transform Coding
+The aim is to make the signal sparse, that is, few large samples (low rate EQ) and many small ones (high EQ). This transforms the id (not iid) signal into blocks with diverse variances (same mean) so to minimize $\sigma_{GM}^2$.
+For example a fourier transform of a pure sound is sparse: All zereos except for $f_w$.
+
+The operator has the following properties:
+- Reversible: $Y=T(X)\iff X=T^{-1}(Y)$
+- Input in $\R^M$: an image is $\R^2$
+- Input is not sparse
+- Output is sparse
+
+We consider $Y=\mathcal TX$ where $\mathcal T$ is an invertible matrix
+- Inverse exists by definition
+- This acts as a basis change: basis is set of signals to reconstruct intended signal
+- If $\mathcal T$ is orthogonal the quantization is the same
+
+So the paradigm becomes:
+$$x\rightarrow y=\mathcal Tx\rightarrow \hat y=Q(y)\rightarrow\hat x=\mathcal T^{-1}\hat y$$
+#### Orthogonal Transform
+Orthogonal Transform has $\mathcal T$ as an orthogonal matrix. This gives many advantages:
+- Inverse is immediate: $\mathcal T^{-1}=\mathcal T^T$
+- Is an isometry keeps $\mathcal L^2$ norm of any $X$: $\|\mathcal TX\|^2=\|X\|^2$
+- Isometry keeps distortion the same on the output: $D_X=D_Y$
+
+Now consider block coding on id (not iid) gaussian rvs. With orthogonal transform we get:
+- Distortion can be applied directly to the quantized output:  $D_T=D_Y\stackrel{\text{optimal } R_k}=c_{GM,Y}\sigma_{GM,Y}^22^{-2R_k}$
+- Variance of $Y$ is the AM of $X$: $\sigma_{AM,Y}^2=\sigma_X^2$
+- AM variance is constant as it is the energy of the signal ($\mathcal L^2$ norm unchanged)
+
+Finally define the **Coding Gain:**
+$$G_T=\frac{D_{PCM}}{D_T}=\frac{c_\mathcal N\sigma^2_{X}2^{-2R_k}}{c_\mathcal N\sigma_{GM,Y}^22^{-2R_k}}=\frac{\sigma_{AM,Y}^2}{\sigma_{GM,Y}^2}\geq1$$
+this shows that if the transform reduces the GM variance (with non id samples), then the transform is more efficient.
+
+>[!example|*]
+>Consider a signal where $X_1,X_2\sim u\sq{-\frac{\Delta_1}{2\sqrt 2},\frac{\Delta_1}{2\sqrt 2}}$ and have the joitn distribution $f_{X_1,X_2}(x_1,x_2)=\begin{cases}\frac1{\Delta_1\Delta_2}&(x_1,x_2)\in S\\0&(x_1,x_2)\not\in S\end{cases}$ there $S$ is an oriented rectangle ($45^\circ$) with dimension $\Delta_1\times\Delta_2$. With $\Delta_1\gg \Delta_2$.
+>![[Pasted image 20260330181539.png|Image|200]]
+>
+>Apply uniform quantization (best fit for uniform rv, but not optimal) directly on the samples:
+>Notice that $X_1,X_2$ have the same variance $\sigma^2=\Delta_1^2/24$ and form factor $c=1$
+>Based on how many bits are assigned to the single rv we get
+>![[Pasted image 20260330181038.png|Table|250]]
+>Apply the following transform $\mathcal T=\frac1{\sqrt 2}\begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix}$ (orthogonal since $\mathcal T^T\mathcal T=I$) then the rvs become: $Y_i\sim u\sq{-\frac{\Delta_i}2,\frac{\Delta_i}2}$ and the joint distribution $f_{Y_1,Y_2}(y_1,y_2)=\begin{cases}\frac1{\Delta_1\Delta_2}&(y_1,y_2)\in S'\\0&(y_1,y_2)\not\in S'\end{cases}$ where $S'$ is the rotated surface from before
+>![[Pasted image 20260330181844.png|Image|200]]
+>Now the variances are different $\sigma^2_1=\Delta_1^2/12=2\sigma^2,\ \sigma_2^2=\Delta_2^2/12\ll\sigma^2$  and the distortion becomes:
+>![[Pasted image 20260330182023.png|Table|250]]
+
+##### Proofs
+Inverse is by definition.
+$\endproof$
+
+---
+
+Isometry:
+$$\|\mathcal TX\|^2=(\mathcal T X)^T(\mathcal T X)=(X^T\mathcal T^T)(\mathcal T X)X^T(\mathcal T^T\mathcal T)X=X^TX=\|X\|^2$$
+
+And distortion on isometry:
+$$D_Y=\frac1M\E[\|Y-\hat Y\|^2]=\frac1M\E[\|\mathcal T(X-\hat X)\|^2]=\frac1M\E[\|(X-\hat X)\|^2]=D_X$$
+
+$\endproof$
+
+---
+
+Same distortion:
+$$\mathcal D_T=\frac1M\E[\|X-\hat X\|^2]=\frac1M\E[\|\mathcal T^{-1}Y-\mathcal T^{-1}\hat Y\|^]=\frac1M\E[\|Y-\hat Y\|^2]=D_Y$$
+$\endproof$
+
+---
+
+Variance equivalences:
+$$\begin{align}
+\sigma_X^2&=\sigma_{AM,X}^2=\frac1M\sum_{k=1}^M\E[X_k^2]=\frac1M\E\sq{\sum_{k=1}^MX_k^2}=\frac1M\E[\|X\|^2]\\
+&\qquad(\text{recall: } \|Y\|^2=\|\mathcal TX\|^2=\|X\|^2)\\
+&=\frac1M\E[\|Y\|^2]=\frac1M\E\sq{\sum_{k=1}^MY_k^2}=\frac1M\sum_{k=1}^M\E[Y_k^2]\\
+&=\sigma_{AM,Y}^2
+\end{align}$$
+$\endproof$
+## 3.3) Practical Implementation of Huang-Schulteiss
+
+HS has a series of limitations:
+- Returns negative values
+- Returns non-integer values
+
+The **Modified HS algorithm** is very simple:
+1. Use HS with all $M$ components
+2. If there are negative values, set $R=0$ of the component and recalculate HS with $M-N$ components
+3. When there are only positive values, floor the results
+4. Calculate residual rate and allocate eventual residual bits to the results that got rounded the most
+
+>[!example|*]
+>Let there be a gaussian input with 4 components and $R_{tot}=10$:
+>$$\sigma_1^2=1000, \ \sigma_2^2=100, \ \sigma_3^2=50,\ \sigma_4^2=1$$
+>The GM is $\approx47.29$
+>We get:
+>$$R(1)\approx4.7,\ R(2)\approx3.04,\ R(3)\approx2.54, \ R(4)\approx -0.28\stackrel{\text{negative}}\longrightarrow 0$$
+>Recompute HS with 1,2,3:
+>GM $\approx 171$
+>We get (also floor):
+>$$R(1)\approx4.61\rightarrow4,\ R(2)\approx2.95\rightarrow2,\ R(3)\approx2.45\rightarrow2, \ R(4)=0\rightarrow0$$
+>Since $4+2+2+0\not=10$ we can allocate 2 residual bits to components 1 and 4
+> $$R(1)=5,\ R(2)=3,\ R(3)=2, \ R(4)=0$$
+> The total distortion is:
+> $$D=\sum D_i=0.98+1.56+3.13+1=6.67$$
+> 
+
+The **greedy algorithm** returns the same allocation but is faster:
+- Initialization. $R_k=0\ \forall k\in\curly{0,...,M-1}\qquad D_k=\sigma_k^2\forall k\in\curly{0,...,M-1}$
+- While $\sum R_k\leq R_{tot}$
+	- $l=\arg\max_k D_k$
+	- $R_l\leftarrow R_l+1$
+	- $D_l\leftarrow D_l/4$
+This takes $R_{tot}$ iterations
+
+
+>[!example|*]
+>Consider the same data as before:
+>![[Pasted image 20260330184338.png|Iterations 1-5|350]]
+>![[Pasted image 20260330184430.png|Iterations 6-10|350]]
+
+## 3.4) Orthogonal Transforms For Compression
+Now let's find out how to build the orthogonal transform matrices for:
+- A rv with known statistical properties
+- The general case
+
+#### Karhunen-Loeve Transform (KLT)
+Let $X$ be a 0 mean random vector of size $M$ and correlation $R_X=\E[XX^T]$. With most relevant data we can consider that $R_X$ has M eigenvectors $u_1,...,u_M$. The KLT (or principal component analysis (PCA) in ML) matrix has for rows the eigenvectors
+$$\mathcal T_{KLT}=[u_1,...,u_M]^T$$
+This is aligning the axis to the direction in which the data has the max variance
+
+![[Pasted image 20260330184734.png|Graphical Example|350]]
+It has the following properties:
+- Orthogonal: $\mathcal T_{KLT}^{-1}=\mathcal T_{KLT}^T$
+- It is decorrelating: $\E[Y_iY_j]=\lambda_i\delta_{ij}$
+- Best energy concentration (sparsity): $\sum \E[Y_i]\geq \sum\E[(T_iX_i)^2]$ where $T_i$ is a generic orthogonal matrix
+- Optimal for gaussian vectors: $\sigma_{GM,\mathcal N}^2\leq \sigma_{GM}^2$
+- Among all linear orthogonal transforms, the KLT is optimal for energy compaction: for any $N < M$, the sum of the first N variances is maximized by the KLT.
+
+However this approach has many downsides:
+- KLT is data dependent: statistics must be known and are hard to estimate, they also change for each dataset
+- Computationally expensive: $O(N^3)$ for eigenvector computation and $O(N^2)$ for multiplication
+- Since data depends, the basis function (matrix) must also be sent with the data
+- Assuming stationarity is not always true
+
+For a Markov Process (AR(1)) with correlation $\rho\rightarrow 1$, frequency transforms (DFT, DCT) offer near-optimal performance with fixed basis functions and fast algorithms ($O(N log N)$).
+#### Discrete Fourier Transform (DFT)
+The 1D case is the following:
+$$y[k]=\frac1{\sqrt M}\sum_{n=1}^Mx[n]e^{-j\frac{2\pi}Mkn}$$
+Or in matrix form:
+$$\mathcal T_{DFT}=\frac1{\sqrt M}\begin{bmatrix}
+1&1&1&...&1\\
+1&W_M&W_M^2&...&W_M^{M-1}\\
+1&W_M^2&W_M^4&...&W_M^{2(M-1)}\\
+\vdots & \vdots&\vdots&\ddots&\vdots\\
+1&W_M^{M-1}&W_M^{2(M-1)}&...&W_M^{(M-1)(M-1)}
+\end{bmatrix}$$
+Where $W_M=e^{-j2\pi/M}$ is the M-th primitive root of unity
+Each row is therefore the conjugate of a basis vector.
+the total energy is preserved: $\|y\|^2=\|x\|^2$
+
+In 2D, the DFT is a separable transform:
+$$Y=\mathcal T X\mathcal T^T$$
+this computes the rows and then the columns (horizontal and vertical frequency analysis)
+This transform decomposes the image into a weighted sum of $N^2$ orthogonal basis patterns:
+$$B_{k,l}(n,m)=\frac1Ne^{j\frac{2\pi}N(kn+lm)}$$
+each coefficient $Y[k,l]$ represents the frequency component of horizontal and vertical frequency combination
+Most energy is concentrated in the low frequencies.
+
+This is still not ideal since the DFT suposes a periodic signal. We compress finite signals and therefore on the image edges we have spectral leakage (low frequencies leak into high ones) making the signal less sparse
+
+#### Discrete Cosine Transform (DCT)
+A general approach is used **Discrete Cosine Transform (DCT)**
+Each entry follows the form:
+$$(\mathcal T_{DCT})_{k,n}=\begin{cases}
+\frac1{\sqrt N} & k=0\\
+\sqrt{\frac{2}{N}}\cos(\frac{(2n+1)k\pi}{2N}) &k>0
+\end{cases}$$
+DFT is not used since DFT has high frequency components near the signal edges. The DCT is a way to mirror the signal before the periodicity. It has only positive frequencies
+
+Applying the DCT to a signal ( a sequence of N real numbers) produces N real coefficients and has a better sparsification property than DFT thanks to the symmetric periodization.
+
+![[Pasted image 20260330185522.png|Example With Mirroring|450]]
+The DCT is also separable:
+$$Y=\mathcal T_{DCT}X\mathcal T_{DCT}^T$$
+A large-size, non-stationary image is more conveniently represented by dividing it into small blocks. 
+
+---
+Each value follows the form
+$$C(i, j) = \frac{1}{4} \alpha(i) \alpha(j) \sum_{x=0}^{7} \sum_{y=0}^{7} f(x, y) \cos \left[ \frac{(2x+1)i\pi}{16} \right] \cos \left[ \frac{(2y+1)j\pi}{16} \right]$$
+with $\alpha$ a normalization factor $\alpha(u) = \begin{cases} \frac{1}{\sqrt{2}} & \text{if } u = 0 \\ 1 & \text{if } u > 0 \end{cases}$. 
+
+Reason on the DC component: $C(0,0)=\frac14\frac12\sum\sum f(x,y)\cdot1\cdot1=\frac18\sum\sum f(x,y)$
+After centering the signal, the dc component is $\in[-1024,1016]$.
+
+Example: 8 × 8 block-based DCT. Each 8 × 8 block of pixels from the image is projected onto the 64 basis vectors: The corresponding scalar product is the DCT coefficient telling how much the block is similar to the basis vector
+![[Pasted image 20260331110618.png|Block DCT|450]]
+![[Pasted image 20260331110634.png|8x8 Basis|250]]
+The sparsification allows to give higher bits to many small valued coefficients and lower bits to less frequent bigger values. How are the quantization coefficients computed?
+- HS formula (practical implementation)
+- Fixed steps (JPEG)
+
+Take a $8\times8$ block:
+- Center the signal (subtract 128)
+- Calculate the DCT coefficients
+- This returns 64 coefficients (can be used to reconstruct og signal)
+- The value at $(0,0)$ is the mean intensity called **DC** value 
+- The other values are called AC values
+
+## 3.5) JPEG Standard (TODO)
+
+JPEG is an image compression standard defined in 1991 that defines **only the decoder** for interoperability and implementation competition
+
+![[Pasted image 20260331111153.png|JPEG Scheme|450]]
+The steps are the following: pre processing: color space transform, chrome subsampling, block split and average removal $\rightarrow$ DCT $\rightarrow$ Quantize $\rightarrow$ VCL
+
+DCT is performed on $8\times8$ blocks (small improves stationarity, large correlation, 8 is a good mittleground)
+
+The quantization is defined as uniform quantization (mid-thread):
+$$c_{ij}=\text{round}(\frac{c_{ij}}{q_{ij}})$$
+but q is not defined by standard and must be encoded
+
+A quantzation parameter is the **quality factor** $Q\in[1,100]$ that controls the scaling factor:
+$$S_F=\begin{cases}
+\frac{5000}Q&1\leq Q\leq 50\\
+200-2Q&50<Q\leq 99\\
+1 &Q=100
+\end{cases} \ \rightarrow q\leftarrow\frac{S_F}{100}q$$
+
+A zig-zag scan is performed on the quantized values in order to encode them in a single string, where
+- the first value is the Difference of the DC component of this block and the previous block
+- the next values are a pair of numbers representing (# of zeroes in scan, value of first non zero)
+- final EOB special symbol is added to end the string  it is $(0,0)$
+
+
+| $DC_n-DC_{n-1}$ | $(\text{\# of zeroes},\text{non zero coeff value})$ | ... | EOB $(0,0)$ |
+| --------------- | --------------------------------------------------- | --- | ----------- |
+
+
+![[Pasted image 20260401191026.png|Zig-Zag scan|200]]
+![[Pasted image 20260401191058.png|Example of encoding|250]]
+#### Encoding
+The symbols are then encoded:
+**DC Encoding:**
+>[!col]
+JPEG encodes the DC difference with a pseudo-huffman code.
+There are $k\in\curly{0,...,11}$ categories, each of them holding $2^k$ values using 2's complement. Each category is assigned a codeword (see table).
+> $$ $$
+>Call $DC_p$ the DC difference, the category is chosen $k=\ceil{\log_2(|DC_P|+1)}$
+>To the category the binary value of $DC_P$ is added as a suffix. If it is negative each value is complemented. 
+>
+>![[Pasted image 20260401193857.png|Category Code|250]]
+
+For example suppose $DC_P=-5_{10}=101_2$ that must be complemented to $010$. The category is $k=3\rightarrow100$ and thus the codeword is $100\ 010$.
+
+DC values have a range  $\in[-1024,1060]$ a difference of two DC signals is $\in[-2040,2040]$ and thus with cardinality $4081$. Since there are 11 categories we have $\sum_{k=0}^{11}2^k=2^{12}=1096>4081$ values.
+
+**AC Encoding**
+Recall that the AC coefficients are previously encoded using $(a,b)$ with $a$ the # of zeroes before $b$ the first non-zero AC value.
+- $b$ is encoded as with 2's complement.
+- the prefix code is specified by $(R,C)$ (Run, category). Run $=a\in[0,15]$ while Level is the class($k$) of $b$. These are saved in a table.
+
+Example: Encode (3,16):
+- Encode 16: $k=5$ and $16_{10}=10000_2$
+- $(L,C)=(0,5)\stackrel{\text{table}}\rightarrow11010$
+The codeword is $11010\ 10000$
+
+Two custom codewords are described:
+- End Of Block (EOB) $= (0,0) \rightarrow 1010$
+- Zero Run (ZR) $=(15,0)\rightarrow 11111111001$
+
+---
+
+Recap the steps:
+- Take 8x8 block
+- Center it: subtract 128
+- Calculate DCT coefficients and obtain matrix of 64 coefficients $c_{i,j}$. We call $c_{0,0}$ the DC component (mean luminosity) and the others AC components
+- Take a quantization matrix with entries $q_{i,j}$ scaled by the scaling factor.
+- Quantize the values of the DCT using a mid-thread quantization $c_{ij}=\text{round}(\frac{c_{ij}}{q_{ij}})$
+- Using the zig-zag scan, build the string
+- Encode the DC difference and the $(a,b)$ values
+
+#### Frame Building
+The standard frame follows this logic:
+![[Pasted image 20260401200043.png|Frame|350]]
+- Frame header contains static info (size, color space, digitalization format)
+- Image is stored in a frame as various scans
+
+- Scan header contains quantization table (luminance and chrominance)
+- A single scan contains various segments, each segment is a concatenation of blocks
+- Segment header contains huffman tables
+
+JFIF (JPEG File Interchange Format) is the standard format for metadata in JPEG files 
+# 4) Wavelet
+## 4.1) Discrete Wavelet Transform
+Recall the principle of a spectrum analyzer (short time fourier transform) ([[DSP 2]]). Frequency and time resolutions are inversely proportional to each other
+$$\text{Heisenberg-like Uncertainty principle: }\Delta t\cdot \Delta f\geq \frac1{4\pi}$$
+Wavelet is the tool that allows the block of the JPEG to scale dynamically based on frequency (high frequency, smaller blocks. Low frequency, large blocks). In fact an image is made of two parts:
+- Anomalies: High frequency content (edges, contours). This needs a good time resolution to see where they are located
+- Trends: low frequency content (smooth areas, textures). This needs good frequency resolution to better capture subtle shifts in the image
+
+To achieve this we use a **mother wavelet** $\psi(t)$ and generate the basis through scaling and translation:
+$$\psi_{a,b}(t)=\frac1{\sqrt a}\psi\par{\frac{t-b}{a}}$$
+This works with the
+
+>[!thm] Universal Principle
+>The linear transforms used in signal processing and compression are defined by projection of the input signal onto an appropriate set of basis functions.
+>
+>Given an orthonormal basis $\curly{\phi_k(t)}$ any signal can be perfectly represented as 
+>$$x(t)=\sum_kc_k\phi_k(t)$$
+>and the coefficient is obtained by
+>$$c_k=<x(t),\phi_k(t)>=\int x(t)\phi_k^*(t)dt$$
+
+#### Filter Bank
+The idea is to divide the signal in two parts: high and low frequency. These will have their bandwidth halved and so they get decimated and interpolated with a factor of 2. These get recombined to get a delayed copy of the original signal.
+![[Pasted image 20260402131450.png|Filter Bank Scheme|350]]
+#### Perfect Reconstruction (PR)
+Let $x[k]$ be the original signal and $\tilde x[k]$ the signal after passing through the filter bank. Perfect reconstruction is achieved if $\tilde x[k]$ is a delayed copy of $x[k]$, that is:
+$$\tilde x_k=x_{k+l}\iff\tilde X(z)=z^{-l}X(z)$$
+It turns out that in the Z domain the output is:
+$$\begin{gather}
+\begin{aligned}
+\tilde X(z)&=\frac12[F_0(z)H_0(z)+F_1(z)H_1(z)]X(z)\\
+&+\frac12[F_0(z)H_0(-z)+F_1(z)H_1(-z)]X(-z)\\
+&=T(z)X(z)+A(z)X(-z)\\
+\end{aligned}\\ \\
+\tilde X(z)=\frac12\underbrace{\begin{bmatrix}
+H_0(z)&H_1(z)\\
+H_0(-z)&H_1(-z)
+\end{bmatrix}}_{\text{modulation matrix}}\cdot
+\begin{bmatrix}
+F_0(z)\\ F_1(z)
+\end{bmatrix}X(z)
+=\frac12\begin{bmatrix}
+2z^{-l}\\0
+\end{bmatrix}X(z)=z^{-l}X(z)
+\end{gather}$$
+Where we set the following bounds to obtain PR:
+- $T(z)=2z^{-l}$ is the Non Distortion (ND) condition
+- $A(z)=0$ the Aliasing Cancelation (AC) condition
+
+The modulation matrix needs to be invertible:
+$$\forall z\in\mathbb C: |z|=1, \ \Delta(z)=H_0(z)H_1(-z)-H_1(z)H_0(-z)\not =0$$
+There are 2 types of Filters that can be used:
+- **Quadrature Mirror Filters:** 
+$$H_0(z)=H_1(-z) \text{ and } F_0(z)=H_0(z), \ F_1(z)=-H_1(z)$$
+- **Conjugate Quadrature Filters:** 
+$$H_0(z)=H_1(-z) \text{ and } F_0(z)=H_0(z^{-1}), \ F_1(z)=-H_1(z^{-1})$$
+Both are Orthogonal and energy conserving. A special case is the **Haar filter**, which is both A QMF and CQF at the same time (see later).
+
+**All this works only for infinite length signals**. What happens when signals are finite?
+
+- **Standard approach:** zero padding and DTFT. This produces **coefficient expansion,** the output signal has $N+M-1$ coefficients (N input size and M filter size). 
+- **Circular Convolution:** This is obtained via periodicization of the signal. This however introduces boundary artifacts (aliasing in frequency) because of the implicit periodicization of the circular convolution (DFT)
+![[Pasted image 20260402141513.png|Example Of Boundary Artifacts|350]]
+- **Symmetrization:** We create a new signal by adding a mirror image of the original signal to the period. Let $x$ have period $N$ then $x_s$ has period $2N$. The circular convolution (with periodic filter) will return a periodic and symmetrical signal and thus only the first $N$ samples have to be computed. This does not create artifacts.
+![[Pasted image 20260402141526.png|Example of Symmetric signal (in black the N not calculated coefficients)|350]]
+
+#### Haar and Biorthogonal Filters
+The only symmetric FIR orthogonal filter is the Haar filter
+$$\begin{align}
+h_0[k]=[1,1]&\quad f_0[k]=[1,1]\\
+h_1[k]=[1,-1]&\quad f_1[k]=[-1,1]
+\end{align}$$
+Unfortunately this is a filter with Vanishing moment (VM) of $p=1$. The high pass filter will not respond to polynomials with degree $<p$. We need at least $2p$ taps. 
+
+Haar has $p=1$ and can only represent piecewise linear functions.
+We consider the **Cohen-Daubechies-Fauveau (CDF)** biorthogonal filter:
+- Symmetric
+- Maximize VM
+- close to orthogonal ($\omega_i\approx 1$)
+
+They work by decomposing the signal into three wavelets
+![[Pasted image 20260403162823.png|Three wavelet decomposition|350]]
+and then reconstructing the signal in order.
+
+#### 2D Wavelet Decomposition
+For 2D signals it is possible to use this schema:
+![[Pasted image 20260403163646.png|2D|350]]
+and for multi level decomposition just the output $c_i$ is used.
+The 4 outpust are:
+- $c$ (A): approximation coefficients (low res version of og image by LP filter in both directions)
+- $d^H$ (H): horizontal HP (HP on rows, LP on cols)
+- $d^V$ (V): vertical HP (HP on cols, LP on rows)
+- $d^D$: diagonal details
+
+Applying this sparsifies the signal:
+![[Pasted image 20260403164118.png|One Level|350]]
+![[Pasted image 20260403164140.png|5 Levels|350]]
+the optimal levels are between 4-6.
 
 
 
 ---
-To allow for more effects on a not the **MIDI Polyphonic Expression MPE**. Each note has its own channel and on each channel Note On/Off, Pitch Bend, Channel Pressure (Aftertouch) e Control Change can be applied
+Proof of output equation:
+Analyze the bank in the Z domain:
+We first pass through the filter:
+$$\tilde c[k]=(h_0*x)(k)\zetatrans \tilde C(z)=\sum_n\tilde c_nz^{-n}=H_0(z)X(z)$$
+Then decimate:
+$$c[k]=\tilde c[2k]\zetatrans C(z)=\frac12\sq{\tilde C(z^{1/2})+\tilde C(-z^{1/2})}$$
+Then Interpolate:
+$$\hat c[k]=\begin{cases}
+c[k/2] & k\text{ even}\\
+0 & k\text{ odd}
+\end{cases}\zetatrans\hat C(z)=C(z^2)$$
+The same is done for $d\rightarrow \hat D(z)=D(z^2)$. And the output is the sum of these signals through the filters:
+$$\tilde x[k]=(f_0*\hat c)(k)+(f_1*\hat d)(k)\zetatrans F_0(z)C(z^2)+F_1(z)D(z^2)$$
+Written in terms of the input signal:
+$$\begin{align}
+\tilde X(z)&=\frac12[F_0(z)H_0(z)+F_1(z)H_1(z)]X(z)\\
+&+\frac12[F_0(z)H_0(-z)+F_1(z)H_1(-z)]X(-z)
+\end{align}$$
+$\endproof$
 
-Instead of using a physical machine, a file `.mid` is used. It keeps track of:
-- Meta events: name, instruments, meter
-- Sysex events: system message
-- MIDI events: midi messages
+---
+Proof of Interpolation and Decimation:
+To interpolate we notice that the output becomes
+$$\hat c[k] = [c_0, c_1, c_2, \dots]\rightarrow{c}[n] = [c_0, 0, c_1, 0, c_2, 0, \dots]$$
+Since every second element is zero, we define the z transform with a index substitution $n=2k$
+$$C(z)=\sum_n c[n]z^{-n}=\sum_k  c[2k]z^{-2k}=\sum_k\hat c[k]z^{-2k}=\hat C(z^{2})$$
+With this in mind the decimation is similar:
+To compute it we first define a signal $s[k]$ that is the interpolated signal of $\tilde c[k]$. From the earlier result we know that $S(z)=\tilde C(z^2)\rightarrow \tilde C(z)=S(z^{1/2})$
+Therefore we just need to compute the z transform of $s[k]$
+$$s[n]=\frac{1+(-1)^n}2\tilde c[n]=\begin{cases}
+\tilde c[n] & n\text{ even}\\
+0 & n\text{ odd}
+\end{cases}=[\tilde{c}[0], 0, \tilde{c}[2], 0, \tilde{c}[4], 0, \dots]$$
 
-There are three types of MIDI files:
-- **Type 0:** single track with all info in one, different instruments on different files
-- **Type 1:** multiple separated tracks
-- **Type 2:** multiple tracks and sections (almost never used)
+Then take the Z transform of $s$
+$$\begin{align}S(z) &= \sum_{n} \left( \tilde{c}[n] \cdot \frac{1 + (-1)^n}{2} \right) z^{-n}\\
+&= \frac{1}{2} \sum_{n} \tilde{c}[n] z^{-n} + \frac{1}{2} \sum_{n} \tilde{c}[n] ((-1)z)^{-n}\\
+&=\frac12\sq{\tilde C(z)+\tilde C(-z)}\\
+\tilde C(z)&=S(z^{1/2})=\frac12\sq{\tilde C(z^{1/2})+\tilde C(-z^{1/2})}
+\end{align}$$
+$\endproof$
 
-The MIDI files are separated into chunks, each one with header **MThd** and one or more track chunks **MTrk**.
+## 4.2) Image Compression with Wavelets (TODO)
 
-![[Pasted image 20260519123728.png|Header|450]]
-Temporal resolution: 
-First bit set to 0. The other 15 bits are used to indicate into how many ticks the single “quarter note” should be divided therefore it is in Pulse Per Quarter Notes (PPQN). There are 
-# 8) Quiz
-## 8.1) Acoustics and Psychoacoustics
-
-| **Question**                                                                                 | **Possible Choices**                                                                                                                                              | **Answer** | **Explanation**                                                                                                                                  |
-| -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| At which frequency is the human ear most sensitive among these values?                       | 1. 20 Hz<br>2. 100 Hz<br>3. 2000 Hz<br>4. 20000 Hz                                                                                                                | 3          | The human ear is most sensitive between 2000 and 5000 Hz, a range critical for speech. Extreme frequencies require higher intensity to be heard. |
-| What is the term for the smallest change in frequency that can be detected by the human ear? | 1. Pitch<br>2. Timbre<br>3. Just noticeable difference (JND)<br>4. Resonance                                                                                      | 3          | JND is the threshold where physical change becomes perceptible. Pitch is the perception of frequency, and timbre is sound quality.               |
-| What is the threshold of hearing for the average human?                                      | 1. 0 dB<br>2. 20 dB<br>3. 40 dB<br>4. 60 dB                                                                                                                       | 1          | 0 dB is the standard reference for the minimum sound pressure audible to a healthy ear at 1000 Hz.                                               |
-| Frequency modulation in the cochlea is primarily used to:                                    | 1. Adjust pitch<br>2. Amplify soft sounds<br>3. Protect from damage<br>4. Encode frequency                                                                        | 4          | The cochlea acts as a frequency analyzer, converting vibrations into neural signals to encode spectral info for the brain.                       |
-| The basilar membrane in the cochlea is known for:                                            | 1. Constant thickness/stiffness<br>2. Incr. thickness/Decr. stiffness (apex to base)<br>3. Decr. thickness/Incr. stiffness (apex to base)<br>4. Uniform stiffness | 3          | The membrane is narrow/stiff at the base (high freq) and wide/flexible at the apex (low freq), allowing for tonal decomposition.                 |
-| The term 'critical band' refers to:                                                          | 1. Frequency group within which ear cannot distinguish tones<br>2. Middle ear response<br>3. Max amplitude tolerated<br>4. Smallest freq increment                | 1          | If two tones fall within the same critical band, they interfere and the auditory system cannot resolve them individually.                        |
-| The term 'tonotopy' refers to:                                                               | 1. Intensity mapping<br>2. Spatial arrangement of frequency in cochlea<br>3. Temporal sequence<br>4. Neural synchronization                                       | 2          | Tonotopy is the spatial organization where specific frequencies stimulate specific points along the cochlea and nervous system.                  |
-| What is the role of the outer hair cells in the cochlea?                                     | 1. Transmit sound to brain<br>2. Act as microphones<br>3. Protect inner cells<br>4. Improve frequency resolution                                                  | 4          | They act as a "cochlear amplifier," physically changing shape to sharpen membrane vibration, improving sensitivity and selectivity.              |
-| In which medium does sound travel the fastest?                                               | 1. Air<br>2. Water<br>3. Steel<br>4. Vacuum                                                                                                                       | 3          | Sound travels fastest in solids due to high molecular rigidity. It cannot travel in a vacuum as there is no medium.                              |
-| True or False: Sound waves are longitudinal waves.                                           | 1. True<br>2. False                                                                                                                                               | 1          | In fluids like air, sound travels as longitudinal waves where particles oscillate parallel to the direction of wave propagation.                 |
-| True or False: Higher frequencies have longer wavelengths.                                   | 1. True<br>2. False                                                                                                                                               | 2          | Frequency and wavelength are inversely proportional ($v = f \cdot \lambda$); higher frequencies result in shorter wavelengths.                   |
-| True or False: Frequency determines loudness.                                                | 1. True<br>2. False                                                                                                                                               | 2          | Frequency determines pitch (high/low). Loudness is determined by the amplitude of the wave and sound pressure level.                             |
-| True or False: Frequency determines speed.                                                   | 1. True<br>2. False                                                                                                                                               | 2          | Speed depends only on the physical properties of the medium (temperature, density). All frequencies travel at the same speed in one medium.      |
-| What is the speed of sound in dry air at 20°C?                                               | 1. 343 m/s<br>2. 434 m/s<br>3. 440 m/s<br>4. 3430 m/s                                                                                                             | 1          | 343 m/s is the standard value for air at room temperature. 440 Hz is a musical pitch reference, not a speed.                                     |
-| What is the unit used to measure frequency?                                                  | 1. Decibels (dB)<br>2. Hertz (Hz)<br>3. Pascals (Pa)<br>4. Newtons (N)                                                                                            | 2          | Hertz (Hz) measures cycles per second. dB measures intensity, Pa measures pressure, and N measures force.                                        |
-| What is the unit used to measure sound intensity level?                                      | 1. Decibels (dB)<br>2. Hertz (Hz)<br>3. Watts<br>4. Pascals (Pa)                                                                                                  | 1          | Decibels are logarithmic units expressing the ratio of a physical quantity to a reference level, matching human perception.                      |
-| What property of a sound wave determines its pitch?                                          | 1. Amplitude<br>2. Frequency<br>3. Wavelength<br>4. Speed                                                                                                         | 2          | Pitch is the psychological perception of frequency; more cycles per second result in a "higher" perceived sound.                                 |
-| What property of a sound wave determines its timbre?                                         | 1. Amplitude<br>2. Frequency<br>3. Wavelength<br>4. Shape of the wave                                                                                             | 4          | Timbre is determined by the waveform's complexity (harmonics), allowing us to distinguish different instruments.                                 |
-| What type of wave is sound?                                                                  | 1. Transverse<br>2. Longitudinal<br>3. Electromagnetic<br>4. Mechanical                                                                                           | 2          | Sound is a mechanical wave, and "longitudinal" describes the particle motion being parallel to the path of the wave.                             |
-|                                                                                              |                                                                                                                                                                   |            |                                                                                                                                                  |
-## 8.2) Sound Synthesis & Sound Design
-| **Question**                                                         | **Possible Choices**                                                                                          | **Answer** | **Explanation**                                                                                                                                                               |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| In what does granular synthesis divide the sound?                    | 1. Frequencies<br>2. Waveforms<br>3. Tiny  particles/fragments in time domain<br>4. Partials                  | 3          | Granular synthesis deconstructs sound into microscopic snippets (grains) in the time domain. It doesn't look at individual partials or abstract waveforms until reassembly.   |
-| What are physical sound models primarily concerned with?             | 1. Environmental effects<br>2. Simulating physical mechanisms<br>3. Perceptual aspects<br>4. Granular effects | 2          | Physical modeling focuses on the mathematical laws of physics governing how an object (like a string or tube) produces sound, rather than just mimicking the output wave.     |
-| What can nonlinear distortion and ring modulation change?            | 1. Frequency<br>2. Spectrum<br>3. Both frequency and spectrum<br>4. None                                      | 3          | These processes create new frequencies (sidebands/harmonics) not present in the original signal, fundamentally altering both the frequency content and the harmonic spectrum. |
-| What do hybrid models combine in sound generation?                   | 1. Time domain models<br>2. Frequency domain models<br>3. Both time and frequency domain<br>4. None           | 3          | Hybrid models leverage the advantages of both time-domain (like physical modeling) and frequency-domain (like additive synthesis) processing to create complex textures.      |
-| What does granular synthesis specifically divide sound into?         | 1. Partials<br>2. Grains<br>3. Waveforms<br>4. Beats                                                          | 2          | The "grain" is the fundamental unit of this synthesis. Partials belong to additive synthesis, while beats refer to rhythmic or amplitude interference patterns.               |
-| What involves separation into sinusoidal and noisy components?       | 1. Subtractive synthesis<br>2. Additive synthesis<br>3. Spectral Modeling Synthesis (SMS)<br>4. FM synthesis  | 3          | SMS models sound as a deterministic part (sinusoids) and a stochastic part (residual noise). Additive synthesis only deals with the sinusoidal components.                    |
-| What is the main focus of physical sound models?                     | 1. Transformation<br>2. Synthesis<br>3. Simulation of physical mechanisms<br>4. Signal processing             | 3          | While used for synthesis, the defining goal is simulating the mechanical or physical source of the sound (the "instrument") rather than the resulting signal.                 |
-| Which method is specifically used for voice compression?             | 1. Additive synthesis<br>2. FM synthesis<br>3. Subtractive synthesis<br>4. Linear Predictive Coding (LPC)     | 4          | LPC models the human vocal tract. It is efficient for compression because it transmits the parameters of the vocal filter rather than the full audio waveform.                |
-| Which model emphasizes the shape of the sound wave reaching the ear? | 1. Live electronics<br>2. Signal-based model<br>3. Frequency domain<br>4. Time domain                         | 2          | A signal-based model focuses purely on the resultant acoustic waveform and its characteristics as it arrives at the listener's ear.                                           |
-| Which synthesis method is complementary to additive synthesis?       | 1. Subtractive synthesis<br>2. FM synthesis<br>3. Granular synthesis<br>4. Spectral Modeling                  | 1          | Additive "builds" sound by adding sine waves (bottom-up), while subtractive "shapes" sound by filtering frequencies out of a complex source (top-down).                       |
-## 8.3) Subtractive Synthesis
-| **Question**                                                                                       | **Possible Choices**                                                                                                                                               | **Answer** | **Explanation**                                                                                                                                                |
-| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| In subtractive synthesis, what does it mean when a filter is "fully open"?                         | 1. It removes all frequencies<br>2. It allows all frequencies to pass through<br>3. It only allows the fundamental<br>4. It creates a resonant peak                | 2          | A "fully open" filter (usually a low-pass) has its cutoff frequency set so high that it doesn't attenuate any audible harmonics, letting the raw signal pass.  |
-| In subtractive synthesis, what is often used to control parameters like filter cutoff or LFO rate? | 1. Amplifier<br>2. Oscillator<br>3. Modulation wheel<br>4. Reverb unit                                                                                             | 3          | The mod wheel is a standard performance controller for real-time manipulation. Amplifiers and oscillators are internal sound modules, not tactile controllers. |
-| What component is essential for shaping the timbre in subtractive synthesis?                       | 1. Oscillator<br>2. Filter<br>3. Amplifier<br>4. Sequencer                                                                                                         | 2          | The filter is the "subtractive" core; it shapes timbre by removing harmonics. The oscillator provides the source, and the amplifier controls volume.           |
-| What does ADSR stand for in the context of envelope generators?                                    | 1. Attack, Decay, Sustain, Release<br>2. Amplitude, Duration, Slope, Range<br>3. Adjust, Define, Shape, Refine<br>4. Audio, Distortion, Synthesis, Resonance       | 1          | ADSR represents the four stages of a standard envelope: Attack (start), Decay (drop), Sustain (hold level), and Release (fade out).                            |
-| What does the term "cutoff frequency" refer to in subtractive synthesis?                           | 1. Highest oscillator frequency<br>2. The frequency where attenuation begins<br>3. Lowest oscillator frequency<br>4. Where the amplifier cuts the signal           | 2          | The cutoff is the "border" frequency where the filter starts reducing the volume of the signal. It determines the brightness of the sound.                     |
-| What does VCF stand for in the context of subtractive synthesis?                                   | 1. Very Complex Filter<br>2. Voltage Controlled Filter<br>3. Variable Cutoff Frequency<br>4. Vocal Chord Formant                                                   | 2          | VCF refers to a filter whose parameters (like cutoff) can be controlled by an external voltage, allowing for modulation by envelopes or LFOs.                  |
-| What happens when you apply a low-pass filter to a sawtooth wave?                                  | 1. The sound becomes brighter<br>2. The sound becomes duller<br>3. The fundamental is removed<br>4. Amplitude increases                                            | 2          | A low-pass filter removes high-frequency harmonics. Since sawtooth waves are rich in highs, removing them makes the sound "duller" or "warmer."                |
-| What happens when you increase the resonance of a filter?                                          | 1. Cutoff becomes lower<br>2. Frequencies around cutoff are emphasized<br>3. Overall volume decreases<br>4. Attack time becomes longer                             | 2          | Resonance (or Q) boosts the narrow band of frequencies right at the cutoff point, creating a "whistling" or "ringing" character.                               |
-| What is the function of LFO in subtractive synthesis?                                              | 1. To generate the main audio signal<br>2. To modulate various parameters<br>3. To filter unwanted frequencies<br>4. To amplify final output                       | 2          | A Low-Frequency Oscillator (LFO) operates below the audible range to create repeating patterns like vibrato (pitch) or tremolo (volume).                       |
-| What is the primary characteristic of subtractive synthesis?                                       | 1. Adding harmonics<br>2. Removing frequencies from a rich sound<br>3. Generating waves from scratch<br>4. Combining multiple oscillators                          | 2          | Subtractive synthesis starts with a complex, harmonic-rich wave (like a sawtooth) and "sculpts" it by filtering out unwanted parts.                            |
-| What is the purpose of a noise generator?                                                          | 1. Create pitched tones<br>2. Add unpitched, random frequencies<br>3. Control filter cutoff<br>4. Modulate amplitude                                               | 2          | Noise generators produce random signals (white/pink noise) used for non-pitched sounds like wind, percussion, or adding "grit" to a tone.                      |
-| What is the purpose of an envelope generator?                                                      | 1. Generate initial waveform<br>2. Control how sound changes over time<br>3. Add harmonics<br>4. Mix different oscillators                                         | 2          | Envelopes provide a "shape" to the sound, determining how volume, pitch, or filter cutoff evolves from the moment a key is pressed to when it's released.      |
-| What is the typical function of the sustain stage in an ADSR envelope?                             | 1. How quickly sound reaches full volume<br>2. Level sound stays at while key is held<br>3. How quickly sound fades to silence<br>4. Initial volume level          | 2          | Unlike Attack, Decay, and Release (which are time values), Sustain is a _level_ value that sets the volume for as long as the note is held.                    |
-| What type of synthesis is considered the opposite of subtractive?                                  | 1. FM synthesis<br>2. Additive synthesis<br>3. Wavetable synthesis<br>4. Granular synthesis                                                                        | 2          | Subtractive removes frequencies from a complex source; Additive builds complex sounds by stacking simple sine waves together.                                  |
-| Which of the following is typically used as a sound source?                                        | 1. Sine wave<br>2. Triangle wave<br>3. Sawtooth wave<br>4. All of the above                                                                                        | 4          | Subtractive synthesis can use any of these; sawtooth and square are common for their rich harmonics, while sine/triangle provide purer foundations.            |
-| Which of these is an advantage of subtractive synthesis?                                           | 1. Perfect replication of acoustic instruments<br>2. Very little processing power<br>3. Highly intuitive and easy to understand<br>4. Generates infinite harmonics | 3          | Its popularity stems from its logical "source-then-filter" workflow, which is much easier for beginners to grasp than FM or Additive synthesis.                |
-| Which of these is NOT typically a core module in a subtractive synth?                              | 1. Oscillator<br>2. Filter<br>3. Amplifier<br>4. Reverb                                                                                                            | 4          | Reverb is an effect often added at the end, but the core architecture of subtractive synthesis is defined by the VCO, VCF, and VCA chain.                      |
-| Which parameter is typically NOT controlled by an envelope?                                        | 1. Volume<br>2. Filter cutoff<br>3. Oscillator pitch<br>4. Oscillator waveform                                                                                     | 4          | Waveform is usually a static setting. Volume, Filter, and Pitch are frequently modulated by envelopes to create dynamic expression.                            |
-| Which of these waveforms is typically the richest in harmonics?                                    | 1. Sine wave<br>2. Triangle wave<br>3. Square wave<br>4. Sawtooth wave                                                                                             | 4          | A sawtooth wave contains all integer harmonics (1, 2, 3, 4...), making it the most complex and popular starting point for filtering.                           |
-| Which type of filter is most commonly used in subtractive synthesis?                               | 1. High-pass<br>2. Band-pass<br>3. Low-pass<br>4. Notch                                                                                                            | 3          | The Low-Pass Filter (LPF) is the "classic" synthesizer sound, used to mimic the natural damping of frequencies found in acoustic instruments.                  |
-
-## 8.4) Audio Archives Preservation
-
-| **Question**                                                                            | **Possible Choices**                                                                                                                                                             | **Answer** | **Explanation**                                                                                                                                                    |
-| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| How does the methodology aim to minimize information loss in the preservation process?  | 1. By avoiding digital tools<br>2. Through specific re-recording recommendations<br>3. By ignoring technological advances<br>4. By using manual processes only                   | **2**      | The methodology relies on precise technical standards (like 96kHz/24-bit) and specific signal chain setups to extract the maximum amount of data from the carrier. |
-| What are the methodological principles designed to ensure in preserved audio documents? | 1. Inaccuracy and unreliability<br>2. Accuracy and authenticity<br>3. Complexity and confusion<br>4. Minimal user access                                                         | **2**      | By following a strict, documented protocol, the resulting "Preservation Copy" reaches a level of philological authenticity and technical accuracy.                 |
-| What benefit does automation in the software provide in the preservation process?       | 1. Increases cognitive load<br>2. Reduces cognitive load during preservation<br>3. Decreases efficiency<br>4. Requires additional staff                                          | **2**      | Automation handles repetitive tasks (like metadata naming or checksum generation), allowing the operator to focus entirely on the delicate playback process.       |
-| What does automation in the software primarily reduce in the preservation process?      | 1. The accuracy of data<br>2. The cognitive load during the preservation process<br>3. The speed of processing<br>4. The reliability of preservation outcomes                    | **2**      | Reducing cognitive load prevents human error during complex technical transfers, ensuring the operator can monitor the signal effectively.                         |
-| What is considered integral to the methodology for preserving audio documents?          | 1. Financial considerations<br>2. Ethical considerations<br>3. Political implications<br>4. Geographic limitations                                                               | **2**      | Ethics dictate the "Save History, Not Rewrite It" approach, ensuring the restorer respects the original document rather than altering it subjectively.             |
-| What is the design purpose of the software tools in the preservation process?           | 1. To complicate the preservation tasks<br>2. To automate and facilitate repetitive tasks<br>3. To increase the need for human intervention<br>4. To phase out all digital tools | **2**      | Software is used to standardize the workflow, manage files, and validate data integrity without making the process unnecessarily complex.                          |
-| Which areas have tested the effectiveness of the preservation methods described?        | 1. Asian art galleries<br>2. European audio archives<br>3. North American film studios<br>4. South American libraries                                                            | **2**      | The protocol was refined and assessed through research projects involving some of the most prominent audio archives in Italy and Europe.                           |
+#### Embedded Zerotrees of Wavelet Coefficients (EZW)
 
 
-## 8.5) Live Electronics
 
-| **Question**                                                                                     | **Possible Choices**                                                                                                                               | **Answer** | **Explanation**                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| David Behrman's _Players with Circuits_ (1966) involved:                                         | 1. Four performers<br>2. Entire orchestra<br>3. Two performers<br>4. A solo performer                                                              | **1**      | This seminal work of early live electronics was scored for four performers using handmade electronic circuits.                                               |
-| From the 2000s onwards, personal computers became powerful enough to serve as:                   | 1. Live audio patching and processing<br>2. Controlling<br>3. Both 1 and 2<br>4. None of the above                                                 | **3**      | Modern PCs consolidated the ability to handle both the complex signal processing and the control data (MIDI/OSC) in one unit.                                |
-| In Luigi Nono's _Quando stanno morendo_ (1982), how many patch changes could occur in 7 seconds? | 1. 3<br>2. 5<br>3. 7<br>4. 9                                                                                                                       | **3**      | Nono's work with the SWR Experimentalstudio pushed the limits of analog/digital control, requiring up to 7 changes in a single bar.                          |
-| In Nono's _Prometeo_, the "mobile sound" technique was:                                          | 1. Applied to voices and solo instruments<br>2. Used for spatialisation<br>3. A real-time synthesis technique<br>4. A live processing technique    | **1**      | The technique involved moving sound sources and processed signals through space, specifically applied to the acoustic performers.                            |
-| In Salvatore Sciarrino's _Perseo e Andromeda_ (1991), the 4i system was used for:                | 1. Sound spatialisation<br>2. Musical parts with freer timing<br>3. Playback of pre-recorded sounds<br>4. Both 2 and 3                             | **2**      | The 4i system (developed by Giuseppe Di Giugno) allowed for more flexible temporal control than previous automated systems.                                  |
-| In Stockhausen's _Mikrophonie I_, the microphone was used:                                       | 1. Passively to record sound<br>2. Actively as a musical instrument<br>3. For amplification only<br>4. For spatialisation                          | **2**      | Performers moved microphones physically across the surface of a large tam-tam, treating the mic as a "playabale" excitation source.                          |
-| In the 1970s, the biggest perceived problem in live electronics was:                             | 1. Lack of power<br>2. Inability to vary patching during performance<br>3. Lack of interfaces<br>4. Lack of spatialisation                         | **2**      | Hardwired analog patches were static; changing the "routing" of the signal mid-performance was nearly impossible until matrices and digital control arrived. |
-| In the early years of live electronics, the sound director was often:                            | 1. The composer<br>2. A technician<br>3. An electronic performer<br>4. Both 1 and 2                                                                | **4**      | Before the role of "Computer Music Designer" was professionalized, the composer and a specialized technician usually shared these duties.                    |
-| Stockhausen's _Mixtur_ (1964) used how many ring modulators?                                     | 1. 2<br>2. 3<br>3. 4<br>4. 5                                                                                                                       | **3**      | The orchestra was divided into 4 groups, each assigned to a ring modulator to be transformed in real-time.                                                   |
-| Live electronics is primarily characterized by:                                                  | 1. Live processing of voices/instruments<br>2. Synthesized sounds<br>3. Microphones/Amps only<br>4. Processing pre-recorded sounds                 | **1**      | Unlike "tape music," live electronics focuses on the real-time transformation of acoustic sound as it is performed.                                          |
-| Max, developed by Miller Puckette in 1988, was initially:                                        | 1. Graphical environment for music control<br>2. Real-time audio software<br>3. Digital synthesizer<br>4. Spatialisation system                    | **1**      | Max originally only handled control data (MIDI); the audio processing side (MSP) was added later in the late 90s.                                            |
-| Philippe Manoury's _Jupiter_ (1987) was one of the first to use:                                 | 1. Score following and control<br>2. Real-time synthesis<br>3. Spatialisation<br>4. Graphical UI                                                   | **1**      | It utilized "score following" (the computer "listened" to the flutist) to trigger electronic events at the correct musical time.                             |
-| Steve Reich's _Pendulum Music_ (1968) is an example of:                                          | 1. Live processing<br>2. Sonification through the Larsen effect<br>3. Synthesized sounds<br>4. Recorded sound parts                                | **2**      | The piece relies entirely on microphones swinging over speakers, creating feedback pulses (the Larsen effect).                                               |
-| The 4X system, developed at IRCAM, was:                                                          | 1. Digital sound generation/processing machine<br>2. Analogue synthesizer<br>3. Spatialisation system<br>4. Control computer                       | **1**      | The 4X was a groundbreaking, high-speed digital processor used for massive real-time transformations (e.g., in Boulez's _Répons_).                           |
-| The combination "PC—MIDI—Sampler" led to the birth of:                                           | 1. Real-time computer music<br>2. 'Pseudo live processing' or 'studio electronics'<br>3. Digital synthesis<br>4. Analogue processing               | **2**      | It allowed performers to trigger high-quality studio-made sounds live, mimicking complex processing that was actually pre-recorded.                          |
-| The Halaphon spatialiser was first used in:                                                      | 1. Stockhausen's _Mixtur_<br>2. Nono's _Prometeo_<br>3. Halffter's _Planto por las Victimas..._<br>4. Reich's _Pendulum Music_                     | **3**      | Developed by Peter Lawo, the Halaphon allowed for sound rotation and movement, debuting in Cristóbal Halffter's work.                                        |
-| Main software for live electronics in the new millennium includes:                               | 1. Ableton<br>2. PureData<br>3. Super Collider<br>4. CSound<br>5. Cubase<br>6. Audacity                                                            | **2**      | While others are used, PureData (PD) is the open-source standard for real-time graphical programming in this context.                                        |
-| Zinovieff's EMS matrix made it easier to:                                                        | 1. Edit the patch while playing<br>2. Control spatialisation<br>3. Vary parameters<br>4. Record sounds                                             | **1**      | By using a pin-matrix instead of patch cables, the user could instantly change signal routing during a performance.                                          |
-| The MIDI protocol, introduced in the mid-1980s:                                                  | 1. Replaced analogue voltage control<br>2. Enabled digital audio processing<br>3. Allowed for real-time synthesis<br>4. Facilitated spatialisation | **1**      | MIDI standardized the way digital devices talked to each other, replacing the cumbersome Control Voltage (CV/Gate) systems.                                  |
-| The Publison DHM 89 B2 (1978) offered:                                                           | 1. Digital reverb<br>2. Pitch shifting (+1/-2 octaves)<br>3. Pitch shifting (+2/-1 octaves)<br>4. Both 1 and 2                                     | **2**      | This hardware unit was famous for combining high-quality digital delay/reverb with unique pitch-shifting capabilities.                                       |
-# 9) TODO better
-Classification of sound models
+# 5) Learned Image Coding
+This is the state of the art of compression techniques:
+
+>[!def] Learned Image Compression (LIC)
+>Learned Image Compression (LIC) or Neural Image Compression (NIC) refers yo the application of neural networks and machine learning to data compression tasks
+
+This is the state of the art since they don't use hand crafted rules but LIC algorithms are learned and outperform traditional algorithms.
+- Classic: It uses linear transforms to de-correlate pixels based on statistical assumptions
+- Neural: Learned non-linear transforms optimized directly for the data
+
+NN can be used twofold:
+- **Combinatorial Selection (Classic):** hand crafted tools and ai optimizes their parameters
+- **Continuous Learning (Neural):** the filter is found via gradient descent
+
+#### DL Basics
+Recall how the perceptron works:
+$$y=f(w^Tx+b)=f\par{\sum_iw_ix_i+b}$$
+![[Pasted image 20260408130508.png|Example|250]]
+##### FFNN
+**Multi-Layer Perceptron (FFNN)**
+The output of a neuron is based on all the outputs of previous layer.
+- The input layer gives as output the input
+- The hidden layers give as output the output of their perceptrons
+- The output layer is same as hidden layer but with different activation function
+
+The learning follows the gradient descent rule:
+$$\theta\iter {i+1}=\theta \iter i-\eta\nabla_\theta\mathcal L(\theta\iter i)$$
+which can be easily computed by backpropagation.
+
+This is not good for images:
+- High dimension/Parameter Explosion: only 1D vector, so images are straightened and spatial correlations are lost
+- No translation invariance
+- Training difficulty
+![[Pasted image 20260408130753.png|Example|250]]
+##### CNN
+ **Convolutional Neural Networks (CNN)**
+Instead of relying on all the previous outputs, CNNs use a subset of outputs but **share the same weight**. 
+This allows for:
+- Local connectivity and weight sharing: this brings to translation invariance and reduces parameter count
+- Analysis: Convolutions compact information 
+- Synthesis: Transposed convolutions reconstruct the full-resolution image
+
+however, multiple filters are needed as each filter learns a specific detector (edges, textures, ...). Multiple kernels work in parallel and therefore the 2D input becomes a 3D tensor
+
+##### Activation Function
+The activation function is different than the standard ones (relo, sigmoid, ...). Instead for compression the **Generalized Divisive Normalization (DGN):** 
+$$w_i=\frac{v_i}{\sqrt{\beta_i+\sum_j\gamma_{ij}v_j^2}}$$
+where $\beta_i$ and $\gamma_{ij}$ are learned parameters.
+This allows for:
+- Lateral inhibition: the denominator measures local energy, if neighbors are big, this feature is suppressed
+- This works similar to the human visual system
+- decorrelates the signal making the distribution roughly normal
+#### Neural Paradigm
+Instead of transforming fixed blocks, neural compression transforms the entire image into a deep 3D Latent Tensor As explained before, this allows for spatial reduction and channel expansion (parallel features extraction)
+
+The traditional encoding is replaced by an autoencoder:
+- Analysis Transform ($g_a$) (encoder): Uses CNN to map image $x$ to the tensor $y$
+- Bottleneck (compression): latents $y$ are quantized to $\hat y$ to be entropy encoded
+- Synthesis transform ($g_s$) (decoder): learns to reconstruct image from the quantized latents $\hat y$
+
+The optimization objective now becomes the minimization of the lagrangian:
+$$\mathcal L=R+\lambda D=\underbracket{ D_{KL}[q(\hat y|x)\|p(\hat y)]}_{\text{Rate}}+\underbracket{\lambda \E[\rho(x,\hat x)]}_{\text{Distortion}}$$
+
+In Neural Compression, instead of compressing the image, the output of the Analysis Transform ($y=g_a(x)$) is quantized.
+
+
+| Pixel Space                                     | Latent Space                                                |
+| ----------------------------------------------- | ----------------------------------------------------------- |
+| High Redundancy                                 | Features are decorrelated                                   |
+| Probabilities are hard to model                 | More predictable distributions (gaussian/Laplace)           |
+| Visible quantization errors (blocking, ringing) | Network hides noise in less perceptually important channels |
+
+There is a problem with gradient descent in the quantizer step. The quantization function is a staricase function, that is $Q'(z)=\sum \delta_i$ which is zero almost everywhere so backpropagation cancels out.
+To fix this n additive uniform noise is added 
+$$\hat z=Q(z)+u,\text{ where } u=\mathcal U(-0.5,0.5)$$
+This allows the quantization function to be differentuable and the noise is independend white noise at higher resolutions
+
+##### Hyperprior
+The base compression can be improved by sending some additional information bits called **hyperprior**
+- **Hyper-Encoder:** takes latent tensors $y$ and extracts statistical natures $z$
+- **Hyper-Decoder:** decodes $\hat z$ to predict the standard deviation of the conditional propri probability
+
+#### JPEG-AI
+JPEG AI uses a **scale hyperprior autoencoder**
+![[Pasted image 20260411153005.png|JPEG AI Architecture|350]]
+It has a innovative feature called **dual-use bitstream**. This can decode the file in two useful ways:
+- Human Vision Decoder: reconstructs standard pixels for visual consumption
+- Computer Vision Task Decoder: extracts features directly form the latent space without full pixel reconstruction
+
+
+
+
+# 6) Motion Estimation
+Videos are different from images as they implement temporal information. This information is mostly found in the movement. The study of **optical flow** consists in defining the movement of a pixel between two subsequent images into a **vector field**. 
+
+Optical flow consists in finding a 2D vector field $V(x,y)$:
+$$V:(x,y)\in \mathscr I\subset\R^2\rightarrow (u,v)$$
+where:
+- $x,y$ are the points on the image
+- $u(x,y),v(x,y)$ is the velocity of the point $x,y$
+
+## 6.1) Variatonal Method
+Consider a point of an object moving from pixel $p-D$ to $p$ in  time $T$. The trajectory of the pixel becomes:
+$$\begin{aligned}
+x(t_0)=p-D\\
+x(t_0+T)=p
+\end{aligned}
+\longrightarrow D(p.t_0,T)=x(t_0+T)-x(t_0)=\begin{bmatrix}c(x,y)\\d(x,y)\end{bmatrix}$$
+where $c,d$ depend on $p,t_0,T$ but the time parameters are ignored and $p=(x,y)$.
+
+We can find it's derivative and find the velocity field:
+$$V(x,y)=\lim_{T\rightarrow 0}\frac{D(x,y)}T=\begin{bmatrix}u(x,y)\\ v(x,y)\end{bmatrix}$$
+Finally the OF equation is:
+$$uf_x+vf_y+f_t=0$$
+with $u,v$ components of the velocity field, $f_x,f_y$ the space derivatives and $f_t$ the time derivative.
+
+This formula states that, the intensity change I see in a point depends only on the movement of the pixels.
+
+---
+
+>[!hypothesis] Constant Illumination
+>We consider a continuous representation of the video signal. The Constant Illumination Hypothesis (CIH) states that the luminance does not change along the motion trajectory:
+>$$f(x,y,t+T)=f(x-c,y-d,t)\longrightarrow \frac{df}{dt}=0$$
+>But in practice due to sampling, aliasing and noise this is not true.
+
+We can use this hypothesis to derive the OF equation. 
+Apply taylor to CIH:
+$$f(p,t+T)=f(p,t)-c(p)f_x(p,t)-d(p)f_y(p,t)+o(\abs{D(p)})=f(p,t)-D\nabla f+o(\abs{D(p)})$$
+And now find the partial time derivative:
+$$f_t\stackrel{T\rightarrow 0}=\frac{f(p,t+T)-f(p,t)}{T}=\frac{-D\cdot \nabla f}T+\frac{o(\abs {D(p)})}T=-V\nabla f+\frac{o(\abs {D(p)})}T$$
+From here the OF equation becomes:
+$$f_t=-V\nabla f\rightarrow V\nabla f+f_t=0\rightarrow uf_x+vf_y+f_t=0$$
+---
+
+However the OF equation has 2 unknowns. We need an additional constraint to solve the problem. Also CIH isn't true in practice.
+
+<div style="text-align: center;">
+  Solution: Minimize the energy of OF equation under suitable constraints.
+</div>
+
+**Horn and Schunk** introduced a constrain on the total variation of $V$ over a region $\mathscr R$:
+$$\begin{cases}
+\int\int_\mathscr R(uf_x+vf_y+f_t)^2dxdy=\min\\
+\int\int_\mathscr R\abs{\nabla u}^2+\abs{\nabla v}^2dxdy\leq\tau
+\end{cases}\rightarrow \begin{cases}
+u=\overline u-f_x\frac{\overline u f_x+\overline v f_y+f_t}{\lambda \abs{\nabla f}^2}\\
+v=\overline v-f_y\frac{\overline u f_x+\overline v f_y+f_t}{\lambda \abs{\nabla f}^2}
+\end{cases}$$
+where $\hat \cdot$ is the temporal average
+
+---
+The result is obtained via Lagrange multiplier with minimization on $u$ and $v$;
+$$J=\int\int_\mathscr R(uf_x+vf_y+f_t)^2+\lambda (\abs{\nabla u}^2+\abs{\nabla v}^2)dxdy$$
+this is done 
+
+TODO
+
+
+## 6.2) Block Matching Method
+This method allows to use discrete signals and having as a support a block of pixels rather than a single one.
+
+This technique is very popular as it gives good results at a low computational cost.
+
+Consider a $P\times Q$ block of pixels inside the image:
+$$B_{p,q}=\curly{p,p+1,...,p+P-1}\times\curly{q,q+1,...,q+Q-1}$$
+And the luminance vector at time $k$:
+$$f_k(B_{p,q})=[f(p,q,k),...]^T$$
+The block matching method consists in computing the dissimilarity between blocks and selecting those with minimum dissimilarity. That is
+$$(\hat i,\hat j)=\arg\min_{i,j}d[f_k(B_{p,q}),f_h(B_{p-i,j-q})]$$
+In general we have a **forward motion**, that is $h=k-1$ with $h$ the current frame and $k$ the reference frame. Therefore the OF field at frame $h$ will show the direction in which the blocks will be at frame $k$.
+$$\forall(n, m) \in B_{p,q}, (u_{h\rightarrow k}, v_{h\rightarrow k}) = \arg \min_{(i,j) \in \mathcal{W}} d [f_k(B_{p,q}), f_h(B_{p-i, q-j})]$$
+#### Quality Measure
+One valid quality measure is the **energy of the prediction error**, that is the MSE of the predicted block and the real block. That is:
+$$e(n,m)=f_k(n,m)-\tilde f_k(n,m)\rightarrow \mathscr E=\frac1{NM}\sum_{n,m}e^2(n,m)\rightarrow PSNR=10\logt\frac{255^2}{\mathscr E}$$
+where $\tilde f_k(n,m)=f_h(n+u_{h\rightarrow k},m+v_{h\rightarrow k})$
+
+#### Performance Factors
+The three computing performance factors are:
+- Block size $P,Q$
+- Number of candidate vectors ($i,j\in\mathcal W$)
+- Cost function $d$
+
+A **large block size** reduces complexity (less blocks), less coding cost, increased MSE. The ideal block size is $16\times16$.
+
+The **cost function** is based on $\mathcal L_1$ norm (SAD) or $\mathcal L_2$ norm (SSD). With SSD the one with smallest MSE but more computing cost
+
+But a regularization term is also added, so the minimization is on $J$:
+$$J(\text v)=d(\text v)+\lambda_{ME}r(\text v)$$
+where $\lambda_{ME}$ affects the importance of the regularization term.
+Possible regularization terms are:
+- Cost function: choose not best MSE, but best coding option.
+- Distance: prioritize vectors with length same as mean of adjacent blocks
+
+
+| Cost Function      | Pro                                   | Con                    |
+| ------------------ | ------------------------------------- | ---------------------- |
+| SSD                | Optimizes PSNR                        | Larger rate (outliers) |
+| SAD                | Better rate (implicit regularization) | Worse PSNR             |
+| SAD+regularization | Best option                           |                        |
+
+---
+
+The **number of candidates** can also be reduced by using some research strategies:
+- Naive: test every vector $i,j$
+- Less naive: test every vector in a $2A+1\times 2B+1$ window center in $i,j$ 
+- Three Steps Search (3SS): Assumption that error function is unimodal (single global minimum and no local minimum) Test 4-8 points and choose minimum error, now divide window and search 4-8 with window centered in previous minimum repeat
+![[Pasted image 20260425165247.png|Example|350]]
+- Diamond Search: search in 9 point diamond pattern, then extend pattern in direction of minima
+- Hexagon Search: same as diamond but with hexagon (more modern)
+- TZSearch: new technique that adaptively changes. Start with big block, if error is too big split it, repeat.
+
+It is also possible to test sub-pixel positions by interpolation:
+$$f(n+a,m+b)=(1-a)(1-b)x+a(1-b)y+(1-a)bz+abw$$
+![[Pasted image 20260425165822.png|Example|150]]
+
+
+
+| Fixed Search              | Unbound Search                |
+| ------------------------- | ----------------------------- |
+| Fixed number of steps     | Iterative, faster             |
+| Guarantees global minimum | Can get stuck in local minima |
+
+---
+
+## 6.3) Parametric Methods
+A parametric model shows the motion field as a closed form function of the pixel position. The dof are the parameters of the function. It can be global or region based (local).
+Block Matching is a special case of parametric methods with 2 parameters per bock (u,v translations), that is the **translational**:
+$$v(p)=\begin{bmatrix}v_x\\ v_y\end{bmatrix}=\begin{bmatrix}b_1\\ b_2\end{bmatrix}$$
+The affine model is
+$$v(p)=b+Bp=\begin{bmatrix}b_1\\ b_2\end{bmatrix}+\begin{bmatrix}b_3 & b_4\\ b_5 & b_6\end{bmatrix}p$$
+This has only 6 dof but can represent many complex fields: rotation, zoom, translation
+
+How are the parameters of the model estimated?
+First dense field, then find global motion by least squares
+## 6.4) Deep Learning Methods TODO
+
+
+# 7) Video Compression Principles
+Video compression uses the spatial redundancy (seen in jpeg) but also time redundancy via motion fields
+
+![[Pasted image 20260515171702.png|General Scheme|350]]
+The temporal compression works by dividing the image in blocks $B_k\iter p$ and finding the most similar block $B_h\iter{p+v}$ in the ref image. The resulting displacements form the motion field.
+
+The resulting vector fields are similar to the geometry of the scene, so the signal is NOT sparse. Therefore Exp-Golomb should **not** be used (not centered in 0).
+
+We can still use predictors:
+To reduce the bitrate we exploit the correlation between adjacent vectors. We define a Motion Vector Predictor (MVP) and encode only the Difference (MVD)
+$$MVD=MV-MVP$$
+One useful predictor is the median amongst 3 adjacent blocks:
+![[Pasted image 20260515172404.png|Median Blocks|250]]
+This reduces substantially the number of bits needed.
+
+#### Motion Compensation
+We can predict the entire new image by copying the blocks in the new position:
+$$\hat I_k(p)=I_h(p+v^*(p))$$
+
+![[Pasted image 20260515172715.png|Example|400]]
+But not all blocks should be replaced so they are signaled as intra (use og block) or inter frame blocks (use predictor). 
+
+For each $B_k\iter p$ do:
+- Perform Motion Estimation (ME) with ref image $h$:
+$$J(v)=d(B_k\iter p,B_h\iter{p+v})+\lambda_{ME}r(v)\rightarrow v^*=\arg\min_v J(v)$$
+- **Mode select**: decide if inter or intra (see [[#7.3) Mode Selection]])
+	- If intra use jpeg
+	- If inter encode $v^*$ and $E(p)=B_k\iter p-B_h\iter{p+v}$
+
+A variable block size is more effective although it is more complex to implement.
+
+## 7.2) Group of Pictures (GOP)
+Each frame can be one of the following three:
+- I Frame: Intra coded, no prediction
+- P Frame: Predictive coded, Inter frame
+- B Frame: Bi directional prediction
+
+The frames are organized into a periodical structure called Group of Pictures (GOP). This structure shows **how frames can be predicted from other frames**. In older standards I,P frames are called Anchor Frames (AF).
+
+**In MPEG-1, MPEG-2:**
+- First frame of GOP is **always** I frame
+- Between two AF there are some B frames (possibly also zero)
+
+I Frames are JPEG like coed:
+- Low complexity and rate
+- Can be decoded independently from other frames
+- I frames are used for fast forward
+- Stop error propagation
+- Must have high quality as GOP depends on this frame
+
+P Frames are predicted from previous AF. They have therefore a higher complexity but a higher compression rate per same block
+
+B Frames have very high complexity (double ME) but also very high compression ratio.
+
+## 7.3) Mode Selection
+The mode selection problem is to decide how to encode each block or frame. Until H.264 the blocks were called macroblocks (MB), now they are coding units (CU).
+
+4 Types of coding modes for each CU (mode selection problem)
+- **Intra:** No temporal prediction, available for all frames
+- **Inter:** ME/MC prediction. Not on I frames
+- **Direct:** Motion vector from last frame, no additional coding. Not on I frames
+- **Lossless:** available for all frames
+
+Moreover since CUs can be of varying sizes we also have a **block partition problem.**
+
+The solution is very much a brute force one:
+Suppose fixed block size. The aim is to find the coding mode $i_k$ that minimizes $D$ while having rate $R$. Quantization step is given
+$$D=\sum_{k=1}^KD_k(i_k,Q)\qquad R=\sum_{k=1}^KR_k(i_k,Q)$$
+Therefore we must minimize
+$$J(i,Q,\lambda)=\sum_{k=1}^KD_k(i_k,Q)+\lambda\sum_{k=1}^KR_k(i_k,Q)=D+\lambda R$$
+Too complex, therefore we just minimize
+$$J_k(i_k,Q,\lambda)=D_k(i_k,Q)+\lambda R_k(i_k,Q)$$
+The parameter $\lambda$ is determined empirically for each coded and also $\lambda_{ME}=\sqrt\lambda$
+The $J_k$ equation can be seen as a line in the R-D plane and the solution is the first point that is touched by the line. 
+- High $\lambda$: Lower bit budget, will choose points with less rate and more distortion (direct)
+- Low $\lambda$: Higher bit budget, will choose points with less distortion and more rate (lossless)
+![[Pasted image 20260516121055.png|Example|300]]
+## 7.4) Hybrid Video Codec
+This is the full video encoder:
+![[Pasted image 20260516141302.png|Video Encoder|450]]
+The block $B_k$ is encoded as follows:
+- 🔵 The residual error $e_k=B_k-\hat B_k$ is found and encoded in a jpeg like format. Also the mode is encoded.
+- 💚 Local decoder: find $\tilde B_k=\tilde e_k + \hat B_k$. This is how the block will be decoded and it is saved in frame buffer (if inter).
+- 🧡 Predictors: ME/MC predictors (based on $B_k$+buffer) or Intra predictors. This predicts
+- ⚪ Control: Final generated bits are saved in channel buffer. If the rate is too high, the control block expands the quantization step. The buffer is written at speed $R_C$ and read at speed $R_T$.
+	- If $R_C>R_T$: the buffer grows, if it surpasses a threshold the controller increases the quantization step $\longrightarrow R_C\nearrow$ 
+	- If $R_C<R_T$: the buffer empties, if it decreases below a threshold the controller reduces the quantization step $\longrightarrow R_C\searrow$ 
+
+The decoder is a subset of the encoder!
+![[Pasted image 20260516145213.png|Decoder Is Subset After Lossless Decoding|350]]
+The decoder is a simplified version without ME, mode decision, partition, control.
+Each block is decoded based on the mode, however the modes are not standardized, just their syntax. The encoder could take a suboptimal approach, the decoder doesn't care.
+
+# 8) Modern Video Compression Standards
+The decoder is the only part defined in the standard:
+Standards exclusively define the bitstream syntax and the decoding process. Encoder architecture and optimization strategies remain open problems for industrial competition.
+
+The improvements come from how many ways the encoder can encode the images. This is mainly related to how the image can be partitioned in blocks.
+
+**H.264/AVC** has $16\times16$ MB or $8\times8$ and $4\times4$ MB which are inefficient for 1080p or 4K videos.
+
+**H.265/HEVC** has a Coding Tree Unit (CTU) where a MB of $64\times 64$ can be divided into other squares until $4\times 4$
+
+
+
+# 9) Proofs
+**Kraft Inequality:**
+Proof of Necessity ($\implies$): 
+Codewords are already given. Set $L_\max=\max_i(l_i)$ ^3d4d31
+
+Build binary tree with depth $=L_\max\rightarrow 2^L_\max$ number of leaves.
+
+Each codeword with prefix property occupies an entire subtree (since no other codeword must start with same bits). So a codeword with length $l_i$ occupies $2^{L_\max-l_i}$ leaves $\rightarrow$ No codeword is a descendant of another, thus these sets of leaves are disjoint.
+
+From here notice that The total number of blocked leaves cannot exceed the available leaves, formally:
+$$\sum_{i=1}^N2^{L_\max-l_i}\leq2^{L_\max}\rightarrow \sum_{i=1}^N2^{-l_i}\leq 1$$
+Proof of Sufficiency ($\impliedby$):
+We have given $\curly{l_i}$ such that $\sum 2^{-l_i}\leq 1$
+Again build a binary tree:
+The codes can be built as follows:
+1. Sort all lengths $l_1\leq....\leq l_N$
+2. At each step $k=\curly{1,...,N}$ pick an available position at depth $l_k$ (decreasing order)
+3. Mark descendants of $l_k$ as forbidden. $2^{-l_i}$ nodes are blocked.
+
+At each step the unavailable nodes are $\displaystyle\sum_{i=1}^{k-1}2^{-l_i}$. Therefore we have $\displaystyle1-\sum_{i=1}^{k-1}2^{-l_i}$ available nodes and by Kraft’s Inequality we have 
+$$\sum_{i=1}^N2^{-l_i}=\sum_{i=1}^{k-1}2^{-l_i}+2^{-l_k}\leq 1\rightarrow 1-\sum_{i=1}^{k-1}2^{-l_i}\geq2^{-l_k}$$
+Since the remaining free capacity is at least $2^{-l_k}$, there must exist at least one free node at depth $l_k$ where the k-th codeword can be placed.
+$$\endproof$$
