@@ -85,10 +85,21 @@ Only quantizer with analytical solution for RD curve
 First recall the definition of uniform RV:
 $$X\sim\mathcal U(a,b)\iff f_X(x)=\begin{cases}\frac1{b-a}&a\leq x\leq b\\ 0\end{cases}\qquad \begin{aligned}
 &\E[X]=\frac{a+b}2\\
-&\var(X)=\frac{(b-1)^2}{12}
+&\var(X)=\frac{(b-a)^2}{12}
 \end{aligned}$$
 and also the Law of the Unconscious Statistician (LOTUS):
 $$E[g(x)]=\int g(x)f_X(x)dx$$
 #### Uniform RV with UQ
 Hypothesis: $X\sim\mathcal U(-\frac A2,\frac A2)$ quantized with UQ of $L$ levels.
-Goeal: find 
+Goal: Since the rate is known ($R=\log_2 L$) we must only find the distortion: $\sigma_Q^2=\E\sq{\abs{X-\hat X}^2}$.
+
+
+Notice that since $\E\sq{\abs{X-\hat X}^2}=\E[g(X)]$ we can use LOTUS:
+$$\begin{align}
+\sigma^2_Q=\E[g(X)]&=\int_{-\frac A2}^{\frac A2} g(u)\frac1Adu=\sum_{i=1}^L\int_{\Theta_i}\frac1A[u-Q(u)]^2du\\
+&=\frac1A\sum_{i=1}^L\int_{\hat x_i-\Delta/2}^{\hat x_i+\Delta/2}[u-\hat x_i]^2du\\
+&=\frac 1A\sum_{i=1}^L\int_{-\Delta/2}^{\Delta /2}t^2dt\\
+&=\frac AL\frac{\Delta^3}{12}
+\end{align}$$
+finally recall that in UQ we have $\Delta=A/L$ and that $\var(X)=A^2/12$ then:
+$$\sigma_Q^2=\frac AL\frac{\Delta^3}{12}=\frac{\Delta^2}{12}=\frac1{12}\par{\frac{A}{L}}^2=\frac1L$$
