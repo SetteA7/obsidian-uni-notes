@@ -14,9 +14,28 @@ with:
 
 ![[Pasted image 20260618145043.png|Quantizer|250]]
 Moreover we define:
-- 
+- Thresholds $(t_1,t_n)$
+- Levels: $L=n-1$
+- Region $\Theta_i$: Two subsequent thresholds define a region $\Theta_i=(t_i,t_{i+1})=\curly{x:Q(x)\hat x_i}$ these are a partition (non intersecting intervals)
+- Quantization error: $e=x-Q(x)$. The smaller the regions, the better the error.
 
+Quantization can be seen as an encoding/decoding process:
+take signal $x(n)$: the encoding step assigns each sample of $x(n)$ to a quantization level $i(n)$. The decoder associates to each quantization level $i(n)$ the corresponding code word (value).
+![[Pasted image 20260618145354.png|Encode/Decode|250]]
+We will refer to these steps also as quantization and inverse quantization.
 
+**Rate $R$:**
+The rate is the avg amount of bits used to store the quantization indexes $i(n)$. This is saved via lossless coding:
+$$R=\log_2L$$
+- quantized data has uniform (pessimistic) distribution (since $H\leq R\iff$ signal uniform)
+- binary data of $i(n)$ is the best (entropy coded)
 
-A quantizer is determined by the thresholds $(t_1,t_n)$ that define $L=n-1$ levels. Two subsequent thresholds define a region $\Theta_i=(t_i,t_{i+1})=\curly{x:Q(x)\hat x_i}$ these are a partition. The quantization error is $e(x)=x-Q(x)$. The smaller the regions, the better the error.
-
+**Distortion $D$:**
+On a single sample we use
+$$d[x,Q(x)]=\abs{e}^2=\abs{x-Q(x)}^2$$
+For a signal of duration $N$ we use the MSE:
+$$D=\frac1N\sum_{n=0}^{N-1}d[x(n),Q\big(x(n)\big)]$$
+for a random signal this can be done via an expected value:
+$$D=\E\sq{\abs{X(n)-Q(X(n))}^2}=\E\sq{\abs{E(n)}^2}=\sigma^2_{E}$$
+## 2.1) Uniform Quantizer (UQ)
+Input signal $\in(0,A) is divided into $L$ equal sized cells of size $\Delta=A/L$
