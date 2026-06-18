@@ -71,12 +71,17 @@ The central cell is larger than the others, it is zero if $\abs x<\tau$
 $$i=\begin{cases}sign(x)\floor{\frac{\abs x+\frac{\tau\Delta}2}\Delta} & \abs x\geq\tau\\0&\abs x<\tau\end{cases}$$
 
 #### High Resolution (HR) UQ
-For HR we mean a quantizer with $L\rightarrow \infty$. Due to this $p_X$ is constant in each $\Theta_i$ 
+For HR we mean a quantizer with $L\rightarrow \infty$. Therefore we get $\Delta=A/L\rightarrow 0$ and therefore $\Theta_i$ as $\Theta_i=(\hat x_i-\Delta/2,\hat x_i+\Delta/2)\rightarrow (\hat x_i,\hat x_i)$. Now we can approximate $p_X$ as a constant in each $\Theta_i$. 
+
+Therefore in a single region:
+$$E|X\in\Theta_i=X-Q(X)=X-\hat x\sim\mathcal U(-\frac\Delta2,\frac\Delta2)$$
+Due to total probability law we have:
+$$E\sim\mathcal U\par{-\frac\Delta2,\frac\Delta2}$$
 
 
 ### 2.1.2) RD Curve
 
-#### Probability Theory Recap
+##### Probability Theory Recap
 First recall the definition of uniform RV:
 $$X\sim\mathcal U(a,b)\iff f_X(x)=\begin{cases}\frac1{b-a}&a\leq x\leq b\\ 0\end{cases}\qquad \begin{aligned}
 &\E[X]=\frac{a+b}2\\
@@ -86,8 +91,8 @@ and also the Law of the Unconscious Statistician (LOTUS):
 $$E[g(x)]=\int g(x)f_X(x)dx$$
 #### Uniform RV with UQ
 Hypothesis: $X\sim\mathcal U(-\frac A2,\frac A2)$ quantized with UQ of $L$ levels.
-Goal: Since the rate is known ($R=\log_2 L$) we must only find the distortion: $\sigma_Q^2=\E\sq{\abs{X-\hat X}^2}$.
-Result: $D(R)=\sigma_Q^2=\sigma_X^22^{-2R}$
+Goal: Since the rate is known ($R=\log_2 L$) we must only find the distortion: $D=\sigma_Q^2=\E[\abs{E}^2]=\E\sq{\abs{X-\hat X}^2}$.
+Result: $$\boxed{D(R)=\sigma_Q^2=\sigma_X^22^{-2R}}$$
 
 Proof:
 Notice that since $\E\sq{\abs{X-\hat X}^2}=\E[g(X)]$ we can use LOTUS:
@@ -102,16 +107,23 @@ $$\sigma_Q^2=\frac AL\frac{\Delta^3}{12}=\frac{\Delta^2}{12}=\frac1{12}\par{\fra
 and the SNR becomes:
 $$SNR=10\logt\frac{\E[X^2]}D=10\logt\frac{\sigma_X^2}{\sigma_X^22^{-2R}}=10\logt2^{2R}\approx 6R$$
 $$\endproof$$
+#### HRUQ RD Curve
+In this case we know $E\sim\mathcal U\par{-\frac\Delta2,\frac\Delta2}$ and thus
+$$D=\E[\abs{E}^2]=\frac{\Delta^2}{12}=\frac1{12}\par{\frac{A}{L}}^2=\frac{A^2}{12}2^{-2R}$$
+The SNR becomes:
+$$SNR=10\logt\frac{\E(X^2)}{D}=10\logt\frac{\sigma_X^22^{-2R}}{A^2/12}\approx 6R-10\logt\frac{\gamma^2}2$$
+where $\gamma^2$ is the **load factor**, that is, the ratio between peak power and avg power: 
+$$\gamma^2=\frac{X^2_\max}{\sigma_X^2}=\frac{A^2/4}{\sigma_X^2}$$
 ### 2.1.3) Recap:
 Here is a tabe:
 
-|                        | Signed                                             | Unsigned                                         | Deadzone  | High Resolution |
-| ---------------------- | -------------------------------------------------- | ------------------------------------------------ | --------- | --------------- |
-| Type                   | Mid-rise                                           | Mid-tread                                        | Mid-tread |                 |
-| Implementation: $Q(x)$ | $$\Delta\cdot\floor{\frac x\Delta}+\frac \Delta2$$ | $$\Delta \cdot \text{round}\par{\frac x\Delta}$$ |           |                 |
+|                        | Signed                                           | Unsigned                                           | Deadzone (Signed) | High Resolution |
+| ---------------------- | ------------------------------------------------ | -------------------------------------------------- | ----------------- | --------------- |
+| Type                   | Mid-tread                                        | Mid-rise                                           | Mid-tread         |                 |
+| Implementation: $Q(x)$ | $$\Delta \cdot \text{round}\par{\frac x\Delta}$$ | $$\Delta\cdot\floor{\frac x\Delta}+\frac \Delta2$$ |                   |                 |
 Given range and levels, UQ has the **smalles maximum error** (optimal minimax quantizer) of $e_\max=\frac{\Delta_i} 2=\frac A{2L}$
 
 Only quantizer with analytical solution for RD curve with uniform input distrbution (see [[#Uniform RV with UQ]]):
 $$D(R)=\sigma_X^22^{-2R}$$
-in the general case:
+in the general case (no knowledge on input distribution):
 $$D(R)=\frac{A^2}{12}2^{-2R}$$
