@@ -5,7 +5,7 @@ where
 - $C$ is the Dictionary a subset of $\mathbb R$
 - $\hat x_i$ quantization level (code-word)
 - $e=x-Q(x)$: The quantization noise (error)
-- $\Theta_i=\curly{x:Q(x)=\hat x_i}$ the decision region. Defined as non intersecting intervals
+- $\Theta_i=\curly{x:Q(x)=\hat x_i}$ the decision region. Defined as partitions (non intersecting intervals)
 
 Quantization can be seen as an encoding/decoding process:
 take signal $x(n)$: the encoding step assigns each sample of $x(n)$ to a quantization level $i(n)$. The decoder associates to each quantization level $i(n)$ the corresponding code word (value).

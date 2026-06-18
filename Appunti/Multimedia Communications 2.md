@@ -12,5 +12,11 @@ with:
 - $C$: dictionary (subset of R)
 - $\hat x_i$: quantization level, codeword
 
+![[Pasted image 20260618145043.png|Quantizer|250]]
+Moreover we define:
+- 
+
+
+
 A quantizer is determined by the thresholds $(t_1,t_n)$ that define $L=n-1$ levels. Two subsequent thresholds define a region $\Theta_i=(t_i,t_{i+1})=\curly{x:Q(x)\hat x_i}$ these are a partition. The quantization error is $e(x)=x-Q(x)$. The smaller the regions, the better the error.
 
