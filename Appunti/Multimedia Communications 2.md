@@ -271,14 +271,14 @@ The codes can be built as follows:
 2. At each step $k=\curly{1,...,N}$ pick an available position at depth $l_k$ (increasing order)
 3. Mark descendants of $l_k$ as forbidden. $2^{L_\max-l_i}$ leaves are blocked.
 
-At each step the unavailable leaves are $\displaystyle\sum_{i=1}^{k}2^{L_\max-l_i}$. Therefore we have $\displaystyle2^{L_\max}-\sum_{i=1}^{k}2^{L_\max-l_i}$ available leaves. 
-Since the summation is always increasing we have that $\sum_{i=1}^{k}2^{L_\max-l_i}\leq \sum_{i=1}^{N}2^{L_\max-l_i}$ and therefore
-$$\begin{align}\displaystyle2^{L_\max}-\sum_{i=1}^{k}2^{L_\max-l_i}&\leq \displaystyle2^{L_\max}-\sum_{i=1}^{N}2^{L_\max-l_i}\\
-1-\sum_{i=1}^k2^{-l_i}&\leq1-\sum_{i=1}^N2^{-l_i}\\
+The code can be built if at step $k$ there is an available codeword of length $l_k$.
+At each step the unavailable leaves (before adding $c_k$) are $\displaystyle\sum_{i=1}^{k-1}2^{L_\max-l_i}$. Therefore we have $\displaystyle2^{L_\max}-\sum_{i=1}^{k-1}2^{L_\max-l_i}$ available leaves. 
+
+Since the summation is always increasing we have that $\sum_{i=1}^{k-1}2^{L_\max-l_i}\leq \sum_{i=1}^{N}2^{L_\max-l_i}$ and therefore
+$$\begin{align}\displaystyle2^{L_\max}-\sum_{i=1}^{k-1}2^{L_\max-l_i}&\geq \displaystyle2^{L_\max}-\sum_{i=1}^{N}2^{L_\max-l_i}\\
+1-\sum_{i=1}^{k-1}2^{-l_i}&\geq1-\sum_{i=1}^N2^{-l_i}\\
 \sum_{i=k}^N2^{-l_i}&\geq0
 \end{align}$$
 
-By Kraft’s Inequality we have 
-$$\sum_{i=1}^N2^{-l_i}=\sum_{i=1}^{k-1}2^{-l_i}+2^{-l_k}\leq 1\rightarrow 1-\sum_{i=1}^{k-1}2^{-l_i}\geq2^{-l_k}$$
 Since the remaining free capacity is at least $2^{-l_k}$, there must exist at least one free node at depth $l_k$ where the k-th codeword can be placed.
 $$\endproof$$
