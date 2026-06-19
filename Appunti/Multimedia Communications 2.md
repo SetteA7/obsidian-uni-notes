@@ -444,3 +444,6 @@ However the complexity is exponential with $K$ and the joint entropy is very cos
 
 #### Arithmetic Coding
 Arithmetic coding allows to perform block coding or context-based coding with linear complexity. This coder is suboptimal but asymptotically optimal. Since it has linear complexity, it can be easier scaled.
+$$\mathcal L\leq H(X^K)+2\rightarrow \mathcal L_s=\frac {\mathcal L}K\stackrel{K\rightarrow\infty}\longrightarrow\mathcal H(X)$$
+The code is built by determining an interval in $[0,1]$ according to its probability. Needs only 2 sums and 2 multiplications per interval (linear complexity!).
+
