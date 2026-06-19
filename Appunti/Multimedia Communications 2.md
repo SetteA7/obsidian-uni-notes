@@ -389,3 +389,30 @@ p_il_i<p_i-p_i\log_2pi\\
 #### Huffman Code
 Huffman discovered how to build the **optimal lossless coder for any source with known probabilities.**
 
+Algorithm:
+1. Create leaf nodes for each symbol, weighted by $p_i$
+2. While there is more than one node:
+	- Select two nodes with lowest weights
+	- Create a new internal node as their parent
+	- Set new node’s weight as sum of children’s weights
+3. Assign ’0’ to left (upper) edges, ’1’ to right (lower) edges
+4. Read code for each symbol from root to leaf
+
+![[Pasted image 20260313110534.png|Example|250]]
+This code has avg length $L^*=2.3$ and entropy $H(X)=2.246$
+
+However now consider the following example:
+
+>[!example|*]
+>Let there be a BW text image. Clearly there are many more white pixels, therefore:
+>$$P(X=B)=p\ll 1\quad P(X=W)=1-p$$
+>The entropy now becomes
+>$$H(X)\ll1$$
+>However the avg length is exactly 1. 
+
+Here the entropy is very small but the coding has high rate. This is due to a too small alphabet. It is possible to expand the alphabet by considering blocks of K symbols: $X^K=X_1X_2...X_K$
+The entropy is
+$$H(X^K)\leq\sum_{i=1}^KH(X_i)$$
+we will yield these results:
+- Symbols not independent: $\frac{H(X^K)}K\leq H(X_i)$
+- 
