@@ -253,4 +253,24 @@ Therefore, **we can focus only on instantaneous codes**
 >$$\sum_i2^{-l_i}\leq 1$$
 
 Proof:
-$\$
+Proof of Necessity ($\implies$): Codewords are already given, we must show the formula
+Set $L_\max=\max_{i}\curly{l_i}$.
+Then, by building a binary tree of the possible codes, the number of leaves (at level $L_\max$) is $2^{L_\max}$.
+![[Pasted image 20260619125710.png|Binary Tree Example|250]]
+Each code $c_i$ has $2^{L_\max-l_i}$ leaves and due to **prefix property** no codeword is a descendant of another: leaves are disjoint. The tree can be truncated at the position of each codeword
+![[Pasted image 20260619130207.png|Example Tree Truncated at Codewords|250]]
+Therefore we have that the number of leaves (codewords) are necessarily less than the maximum leaves:
+$$\begin{align}
+\sum_{i=1}^N2^{L_\max-l_i}&\leq 2^{L_\max}\\
+\sum_{i=1}^N 2^{-l_i}&\leq 1
+\end{align}$$
+Proof of Sufficiency ($\impliedby$): We have the formula, we must build the code
+The codes can be built as follows:
+1. Sort all lengths $l_1\leq....\leq l_N$
+2. At each step $k=\curly{1,...,N}$ pick an available position at depth $l_k$ (decreasing order)
+3. Mark descendants of $l_k$ as forbidden. $2^{-l_i}$ nodes are blocked.
+
+At each step the unavailable nodes are $\displaystyle\sum_{i=1}^{k-1}2^{-l_i}$. Therefore we have $\displaystyle1-\sum_{i=1}^{k-1}2^{-l_i}$ available nodes and by Kraft’s Inequality we have 
+$$\sum_{i=1}^N2^{-l_i}=\sum_{i=1}^{k-1}2^{-l_i}+2^{-l_k}\leq 1\rightarrow 1-\sum_{i=1}^{k-1}2^{-l_i}\geq2^{-l_k}$$
+Since the remaining free capacity is at least $2^{-l_k}$, there must exist at least one free node at depth $l_k$ where the k-th codeword can be placed.
+$$\endproof$$
