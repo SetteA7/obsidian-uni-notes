@@ -502,7 +502,13 @@ $$n=-3\rightarrow m(n)=6\rightarrow 00111$$
 $$n=-6\rightarrow m(n)=12\rightarrow \begin{cases}n+1=13_{10}=1101_{2}\rightarrow 1_2\\
 b=\floor{\log_27}+1=4\\
 b-1=3\end{cases}\longrightarrow 0001011$$
-## 3.5) Standards
+## 3.5) Standards (TODO)
 #### JBIG
 
-#### 
+#### JPEG-LS
+
+#### PNG
+
+## 3.6) Neural Lossless Coding (TODO)
+
+# 4) Transform Coding
