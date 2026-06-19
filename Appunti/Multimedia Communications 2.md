@@ -168,19 +168,20 @@ $$SNR=10\logt\frac{\sigma_X^2}D=10\logt\frac{\sigma_X^2}{\sigma_Y^2}+10\logt\fra
 Linear predictors are used: simple and optimal for gaussian rvs.
 
 A linear predictor is a linear combination of the $P$ previous values
-$$v(n)=-\sum_{i=1}^Pa_ix_{n-i}\rightarrow y(n)=x(n)-v(n)=\sum_{\mathbf{i=0}}^Pa_ix_{n-i},\quad a_0=0$$
+$$v(n)=-\sum_{i=1}^Pa_ix_{n-i}\rightarrow y(n)=x(n)-v(n)=\sum_{\mathbf{i=0}}^Pa_ix_{n-i},\quad a_0=1$$
 It turns out that the optimal variance is:
 $$\sigma_Y^2=\sigma_X^2+r^Ta^*=\sigma_X^2-r^TR_X^{-1}r$$
 where $a^*=-R_X^{-1}r$
 
-The order of the filter yields good result for small values (up to order 4), but including distant pixels leads to more white noise inclusion and has higher complexity for negligible PSNR increases.
+The order of the filter yields good result for small values (up to order 4), but including distant pixels (less correlation) leads to more white noise inclusion and has higher complexity for negligible PSNR increases.
 
 Clearly now $v_n$ must use $\hat x$ since otherwise the decoder wouldn't be able to use know $v$.
 ![[Pasted image 20260619121436.png|Block Sceme|450]]
 The use of $\hat x$ instead of $x$ comes with some heavy performance penalty, it performs worse than direct quantization. This can be fixed via entropy coding.
 
 Finally, a **local adaptation with block wise approach** can be used. Divide image into $M\times M$ blocks and find the optimal filter for each block. The rate augments by $\frac{NB}{M^2}$:
-- Small block: good local statistichs, bad quantizer info overhead
+- Small block: good local statistichs, bad quantizer info overhead (high rate)
+- Large block: bad local statistics (bad PSNR), good quantizer overhead
 
 >[!example|*]
 >Let $X(n)\sim\mathcal N(0,\sigma^2), \E[X(n)X(m)]=\sigma^2\rho^{|n-m|}$ and $V(n)=X(n-1)$. Find $\rho$ such that $G_p>0$.
@@ -216,3 +217,13 @@ $$\frac{\partial\sigma_Y^2}{\partial a}=2r+2R_Xa=0\rightarrow a^*=-R_X^{-1}r$$
 Then the optimal variance becomes:
 $$\sigma_Y^2=\sigma_X^2+r^Ta^*=\sigma_X^2-r^TR_X^{-1}r$$
 
+# 3) Lossless Coding
+Lossless coding means to decrease the number of bits needed to encode the data without losing any information: the process is reversible.
+
+This is used in the quantization part: remap the indices $i(n)$ in order to optimize bitstream.
+
+Lets start with some notation:
+- **Alphabet:** $\mathcal X=\curly{x_1,...,x_M}$ set of symbols to encode
+- **Code:** application between $\mathcal X$ and $\curly{0,1}$ (set of finite length bit strings)
+#### Fixed Length Coding (FLC)
+FLC assumes equiprobable alphabet
