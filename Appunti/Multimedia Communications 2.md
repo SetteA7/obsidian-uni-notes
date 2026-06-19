@@ -347,7 +347,12 @@ The optimal solution drops the first assumption ($l_i\in\mathbb R$) and obtains:
 $$l_i^*=-\log_2p_i=I(x_i)\rightarrow \mathcal L^*=\sum_i-p_i\log_2p_i=H(X)$$
 Since real codes cannot have fractional length, thsi bound is achieved only if the distribution is dyadic, that is every symbol's probability is a negative power of 2:
 $$\forall i \in \{1,\dots,M\}, \;\exists k \in \mathbb{N} \;\;|\;\; p_i = 2^{-k}$$
-therefore in the general case $\mathcal L^*\geq H(X)
+therefore in the general case $\mathcal L^*\geq H(X)$ but by how much?
+
+>[!thm] Shannon Source Coding Theorem
+>For any random source $X$, the minimum average length $\mathcal L^*$ achievable by an instantaneous (prefix) code satisfies:
+>$$\mathcal L^* \geq H(X)$$
+>with equality if and only if the distribution of $X$ is **dyadic**.
 ##### Proof:
 This is a constrained optimization problem:
 $$l^*=\arg\min_l\sum p_il_i\qquad \sum_i 2^{-l_i}=1$$
@@ -367,3 +372,20 @@ The equality for Kraft was used because we represent a **complete code**. One wh
 #### Entropy Code
 To keep the first assumption we have **Entropy Coding**
 $$l_i=\ceil{-\log_2p_i}\rightarrow H(X)\leq \mathcal L^*<H(X)+1$$
+Proof:
+The choice of the ceil is set a priori, therefore we must first check if Kraft holds:
+$$\begin{align}\begin{aligned}
+l_i=-\log_2p_i+\delta_i&\qquad0\leq\delta<1\\
+2^{-l_i}=p_i\cdot2^{-\delta_i}=\epsilon_i p_i&\qquad\frac12<\epsilon_i\leq1
+\end{aligned}\\ \\
+\sum_i2^{-l_i}=\sum_i\epsilon_ip_i\leq\sum_ip_i=1
+\end{align}$$
+Now the lower bound on the avg length comes directly from Shannon, while the upper bound is easily verifiable:
+$$\begin{gather}
+l_i=\ceil{-\log_2p_i}<-\log_2p_i+1\\
+p_il_i<p_i-p_i\log_2pi\\
+\mathcal L=\sum p_il_i<\sum p_i-p_i\log_2p_i=1+H(X)
+\end{gather}$$
+#### Huffman Code
+Huffman discovered how to build the **optimal lossless coder for any source with known probabilities.**
+
