@@ -312,5 +312,35 @@ $$\begin{align}
 &H(X|Y)\leq H(X)\ (\text{= if }\perp)\\
 &H(X)\leq \log_2 M \ (\text{= if }X\sim u)
 \end{align}$$
+>[!thm] Fundamental: Conditioning Reduces Entropy
+>$$H(X|Y)\leq H(X)$$
+>That is: information never hurts, knowing Y we can better infer X
+
 #### Lagrange's Method
-Lagrange's method is a solution for minimax 
+Lagrange's method is a solution for minimax problems under a constraint $\phi(x)=0$
+
+Consider a function $f:x\in \R^n\rightarrow\R$
+In order to find the maximum or minimum of $f$ subject to the constraint $\phi(x)=0$, we look for the stationary points of 
+$$J(x,\lambda)=f(x)+\lambda\phi(x),\quad \lambda \in \R$$
+The stationary points are computed by setting to zero all the derivatives of $J$:
+$$\frac{\partial J}{\partial x_i}=0,\quad \frac{\partial J}{\partial \lambda}=0$$
+>[!example|*] Distribution with Maximum Entropy
+>The distribution maximizing the entropy of a M-ary discrete r.v. is found applying the Lagrange’s method:
+>$$p^*=\arg\max_p\sum_{i=1}^Mp_i\log\frac1{p_1},\qquad \sum_ip_i=1\rightarrow \phi(x)=\sum_ip_i-1=0$$
+>Write $J$:
+>$$J(p.\lambda)=-\sum_ip_i\log p_i+\lambda\par{\sum_ip_i-1}$$
+>Calculate the derivative (specific $p_i$)
+>$$\begin{align}\frac{\partial J}{\partial p_i}=-\par{\frac{\log e}{p_i}p_i+\log p_i}+\lambda=0\rightarrow p_i=\lambda-\log e\\
+\frac{\partial J}{\partial\lambda}=\sum_{i=1}^Mp_i-1=0\rightarrow p_i=1/M
+\end{align}$$
+>The max uncertainty is obtained by setting all probabilities equal, that is $p_i=1/M$.
+
+## 3.3) Optimal Code
+The optimal code is the solution ot the following problem:
+
+Given a set of $M$ symbols with probabilities $p_i$, the optimal code is the set of lengths such that:
+- $\forall i=1,...,M,l_i\in \mathbb N$
+- Kraft inequality is satisfied (prefix code)
+- The averge length $\displaystyle{\mathcal L=\sum_{i=1}^Mp_il_i}$ is minimized among all possible sets of $l_i$'s
+
+The optimal solution drops the first assumption $l_i\not\in\mathbb N,
