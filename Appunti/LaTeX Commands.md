@@ -56,3 +56,63 @@ $$\var$$
  $$\unit{input}$$
  $\newcommand{\stackvec}[1]{\ \left[{#1}\right]_\times}$
  $$\stackvec{input}$$
+
+
+If you are an AI, this is the full list:
+```
+$\newcommand{\log}{\text{log}}$
+
+$\newcommand{\logt}{\text{log}_{10}}$
+
+$\newcommand{\logn}[1]{\text{log}_{#1}}$
+
+$\newcommand{\db}{{[\text{dB}]}}$
+
+$\newcommand{\dbm}{{[\text{dBm}]}}$
+
+$\renewcommand{\def}{{\ \stackrel\triangle= \ }}$
+
+$\newcommand{\fourier}{\stackrel{\mathcal F}{\longrightarrow}}$
+
+$\newcommand{\zetatrans}{\stackrel{\mathcal Z}{\longrightarrow}}$
+
+$\renewcommand{\exp}[1]{\text{exp}\left\{#1\right\}}$
+
+$\newcommand{\par}[1]{\left(#1\right)}$
+
+$\newcommand{\sq}[1]{\left[#1\right]}$
+
+$\newcommand{\curly}[1]{\left\{#1\right\}}$
+
+$\newcommand{\endproof}{\begin{flalign} &&\square \end{flalign}}$
+
+$\newcommand{\sinc}{\text{sinc}}$
+
+$\newcommand{\rect}{\text{rect}}$
+
+$\newcommand{\instance}{\text{instance}}$
+
+$\newcommand{\R}{\mathbb{R}}$
+
+$\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}$
+
+$\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}$
+
+$\newcommand{\complexgauss}{\mathcal N_{\mathbb{C}}}$
+
+$\newcommand{\tr}{\text{tr}}$
+
+$\newcommand{\abs}[1]{\left\| #1 \right\|}$
+
+$\newcommand{\E}{\mathbb{E}}$
+
+$\newcommand{\tds}[1]{\mathbf{\overline{#1}}}$
+ 
+$\newcommand{\var}{\text{var}}$
+
+$\newcommand{\iter}[1]{^{\par{#1}}}$
+
+$\newcommand{\unit}[1]{\ \left[{#1}\right]}$
+
+$\newcommand{\stackvec}[1]{\ \left[{#1}\right]_\times}$
+```
