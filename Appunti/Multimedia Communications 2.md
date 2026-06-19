@@ -512,3 +512,7 @@ b-1=3\end{cases}\longrightarrow 0001011$$
 ## 3.6) Neural Lossless Coding (TODO)
 
 # 4) Transform Coding
+Until now we have seen the following pipeline:
+$$\text{Data}\stackrel{\text{lossy}}\longrightarrow\text{Quantized data at fixed rate}\stackrel{\text{lossless}}\longrightarrow\text{Entropy Coded Data}$$
+The real pipeline however adds some steps before the quantization itself:
+- Transform coding: reversible sparsification 
