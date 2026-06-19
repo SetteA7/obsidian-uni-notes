@@ -417,15 +417,22 @@ Instead of mapping one symbol into one codeword, we can map many subsequent symb
 $$X^K=X_1X_2...X_K$$
 The entropy is
 $$H(X^K)\leq\sum_{i=1}^KH(X_i)$$
-we will yield these results:
-- Symbols not independent: $\frac{H(X^K)}K< H(X_i)$
-- Then the avg length (per block) and avg (og) symbol length are: $$\mathcal L<H(X^K)+1\iff \mathcal L_S<\frac{H(X^K)}K+\frac1K$$
-- If the symbols are independent:
-$$\mathcal L_S<\frac{H(X^K)}K+\frac1K\leq\frac{H(X_i)}K+\frac1K$$
 >[!thm] Entropic Rate
->We define the Entropy Rate as the 
-> 
+>We define the Entropy Rate as 
+>$$\mathcal H(X)=\lim_{K\rightarrow\infty}\frac{H(X^K)}{K}$$
+>For stationary processes it can be shown that
+>$$\mathcal H(X)\leq H(X)$$
 
+Then the avg length is 
+$$\begin{gather}
+H(X^K)\leq \mathcal L^*<H(X^K)+1\\
+\frac{H(X^K)}K\leq \frac{\mathcal L^*}K<\frac{H(X^K)}K+\frac1K\\
+\mathcal L^*_S\rightarrow \mathcal H(X)\leq H(X)
+\end{gather}$$
+
+This improves the **1bit penalty for non dyadic distributions**
+
+However the complexity is exponential with $K$ and the joint entropy is very costly.
 
 >[!example|*]
 >This example will cover the different results (calculations not shown) for the following image:
@@ -435,3 +442,5 @@ $$\mathcal L_S<\frac{H(X^K)}K+\frac1K\leq\frac{H(X_i)}K+\frac1K$$
 >Block size 4: $H(\prod X_i)=1.533\rightarrow H/4=0.383$, $L^*=1.733\rightarrow\mathcal L_S=0.433$ bpp
 
 
+#### Arithmetic Coding
+Arithmetic coding allows to perform block coding or context-based coding with linear complexity. This coder is suboptimal but asymptotically optimal. Since it has linear complexity, it can be easier scaled.
