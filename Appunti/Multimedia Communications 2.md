@@ -175,6 +175,13 @@ where $a^*=-R_X^{-1}r$
 
 The order of the filter yields good result for small values (up to order 4), but including distant pixels leads to more white noise inclusion and has higher complexity for negligible PSNR increases.
 
+Clearly now $v_n$ must use $\hat x$ since otherwise the decoder wouldn't be able to use know $v$.
+![[Pasted image 20260619121436.png|Block Sceme|450]]
+The use of $\hat x$ instead of $x$ comes with some heavy performance penalty, it performs worse than direct quantization. This can be fixed via entropy coding.
+
+Finally, a **local adaptation with block wise approach** can be used. Divide image into $M\times M$ blocks and find the optimal filter for each block. The rate augments by $\frac{NB}{M^2}$:
+- Small block: good local statistichs, bad quantizer info overhead
+
 >[!example|*]
 >Let $X(n)\sim\mathcal N(0,\sigma^2), \E[X(n)X(m)]=\sigma^2\rho^{|n-m|}$ and $V(n)=X(n-1)$. Find $\rho$ such that $G_p>0$.
 >
@@ -191,7 +198,7 @@ The order of the filter yields good result for small values (up to order 4), but
 \sigma_Y^2&=2\sigma^2(1-\rho)>\sigma^2\iff \rho>\frac12\iff G_p>0
 \end{align}$$
 
-Proof:
+Proof of optimal filter:
 Notice that the predicted output is
 $$y(n)=(a*x)(n)\zetatrans Y(z)=A(z)X(z)$$
 where the transfer function is
@@ -208,6 +215,4 @@ The minimization can be computed:
 $$\frac{\partial\sigma_Y^2}{\partial a}=2r+2R_Xa=0\rightarrow a^*=-R_X^{-1}r$$
 Then the optimal variance becomes:
 $$\sigma_Y^2=\sigma_X^2+r^Ta^*=\sigma_X^2-r^TR_X^{-1}r$$
-
-#### Local Optimization
 
