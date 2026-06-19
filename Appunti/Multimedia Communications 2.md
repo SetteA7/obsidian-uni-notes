@@ -514,5 +514,15 @@ b-1=3\end{cases}\longrightarrow 0001011$$
 # 4) Transform Coding
 Until now we have seen the following pipeline:
 $$\text{Data}\stackrel{\text{lossy}}\longrightarrow\text{Quantized data at fixed rate}\stackrel{\text{lossless}}\longrightarrow\text{Entropy Coded Data}$$
-The real pipeline however adds some steps before the quantization itself:
-- Transform coding: reversible sparsification 
+The real pipeline inserts two stages before quantization:
+- **Transform coding:** a reversible transform that sparsifies the block and gives each sample position a stationary meaning (e.g. DCT coefficient 0 = mean energy, the rest = increasing frequencies).
+- **Block coding:** find the optimal rate per sample, that is, how sensible should be the quantizer for each sample.
+- **Quantize:** apply those quantizers, this exploits unequal variances (high variance, many bits in quantizer, low variance only a few bits)
+- **Entropy code:** pack the resulting bitstream exploiting the many resulting zeros to approach the entropy.
+
+We start with **block coding**, because it defines _what we want from a transform and why_. But it must be clear from the start that block coding alone is useless on raw natural images, for two distinct reasons:
+- **No variable rate:** all pixels have (approximately) equal variance, so we revert to UQ
+- **Too many quantizers:** even with unequal variances, one fixed quantizer can serve every block only if each position's variance is stationary across blocks (a constant per-sample meaning, as the transform provides, is one way to guarantee this).
+
+The transform is precisely what supplies both: variance disparity (gain) and cross-block stationarity (one shared quantizer).
+
