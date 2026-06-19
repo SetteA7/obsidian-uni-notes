@@ -156,7 +156,26 @@ Quantization is **not effective for non sparse data**. Predictive SQ **exploits 
 >- Natural signal are not sparse but can easily be transformed into one
 
 ![[Pasted image 20260619093322.png|Example non sparse vs sparse representation of sinusoidal|250]]
+
 Since in predictive SQ the **prediction error=signal error**
 $$q(n)=y(n)-\hat y(n)=x(n)-v(n)-(\hat x(n)-v(n))=x(n)-\hat x(n)=\overline q(n)$$
 ![[Pasted image 20260320160934.png|Quantizer process|350]]
-it is possible to focus only on optimizing $\sigma_y^2$:
+it is possible to focus only on optimizing $\sigma_y^2$ as the prediction is effective **if and only if the pred error has smaller variance than og signal**
+$$SNR=10\logt\frac{\sigma_X^2}D=10\logt\frac{\sigma_X^2}{\sigma_Y^2}+10\logt\frac{\sigma_Y^2}D=G_P+G_Q$$
+
+
+>[!example|*]
+>Let $X(n)\sim\mathcal N(0,\sigma^2), \E[X(n)X(m)]=\sigma^2\rho^{|n-m|}$ and $V(n)=X(n-1)$. Find $\rho$ such that $G_p>0$
+>
+>Since we need $G_p>0$ we actually need $\sigma_Y^2>\sigma^2$. 
+>Find $Y$
+>$$Y(n)=X(n)-V(n)=X(n)-X(n-1)$$
+>since this is a sum of gaussians this remains a zero mean gaussian rv, find variance:
+>$$\begin{align}
+\sigma_Y^2 &=\E[(X(n)-X(n-1))^2]=\E[X(n)^2]+E[X(n-1)^2]-2\E[X(n)X(n-1)]\\ 
+&=2\sigma^2-2\sigma^2\rho\\
+&=2\sigma^2(1-\rho)
+\\
+\\
+\sigma_Y^2&=2\sigma^2(1-\rho)>\sigma^2\iff \rho>\frac12\iff G_p>0
+\end{align}$$
