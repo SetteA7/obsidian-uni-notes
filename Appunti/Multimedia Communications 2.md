@@ -466,17 +466,17 @@ This approach consists in looking at  $N_s$ previous symbols to recognize the co
 ### 3.3.2) Recap
 Here is a brief recap
 
-| Scheme                    | Length rule                                     | Average-length bound                                                                | Complexity                             | Key idea / limitation                                                                    |
-| ------------------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------- |
-| **Optimal (theoretical)** | $l_i^*=-\log_2p_i$ (real-valued)                | $\mathcal L^*=H(X)$                                                                 | —                                      | Only achievable exactly if pip_i pi​ is dyadic                                           |
-| **Entropy code**          | $l_i^*=-\ceil{\log_2p_i}$                       | H(X)≤L∗≤L<H(X)+1H(X)\le\mathcal L^*\le\mathcal L<H(X)+1 H(X)≤L∗≤L<H(X)+1            | low                                    | Simple rounding; up to 1-bit/symbol penalty                                              |
-| **Huffman**               | Greedy bottom-up tree merge                     | H(X)≤L∗<H(X)+1H(X)\le\mathcal L^*<H(X)+1 H(X)≤L∗<H(X)+1                             | O(Mlog⁡M)O(M\log M) O(MlogM)           | Provably optimal among integer-length codes; small-alphabet penalty (e.g. binary source) |
-| **Block coding**          | Code $K$ symbols jointly                        | LS→H(X)≤H(X)\mathcal L_S\to\mathcal H(X)\le H(X) LS​→H(X)≤H(X) as K→∞K\to\infty K→∞ | exponential in KK K (MKM^K MK symbols) | Removes 1-bit penalty asymptotically; explodes in cost                                   |
-| **Arithmetic coding**     | Whole sequence $\rightarrow$ one interval/point | LS<H(X)+2n→H(X)\mathcal L_S< H(X)+\tfrac2n \to H(X) LS​<H(X)+n2​→H(X)               | linear, O(n)O(n) O(n)                  | Sub-optimal for finite nn n, asymptotically optimal; scales where block coding can't     |
-| **Context-based coding**  | Condition on $N_s$​ previous symbols            | lowers effective entropy rate further                                               | depends on Nc=MNsN_c=M^{N_s} Nc​=MNs​  | Exploits memory/correlation; right context model is the engineering challenge            |
+| Scheme                    | Length rule                                     | Average-length bound                          | Complexity                         | Key idea / limitation                                                                    |
+| ------------------------- | ----------------------------------------------- | --------------------------------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------- |
+| **Optimal (theoretical)** | $l_i^*=-\log_2p_i$ (real-valued)                | $\mathcal L^*=H(X)$                           | —                                  | Only achievable exactly if $p_i$ is dyadic                                               |
+| **Entropy code**          | $l_i^*=-\ceil{\log_2p_i}$                       | $H(X)\leq\mathcal L\leq H(X)+1$               | low                                | Simple rounding; up to 1-bit/symbol penalty                                              |
+| **Huffman**               | Greedy bottom-up tree merge                     | $H(X)\leq\mathcal L\leq H(X)+1$               | $O(M\log M)$                       | Provably optimal among integer-length codes; small-alphabet penalty (e.g. binary source) |
+| **Block coding**          | Code $K$ symbols jointly                        | $L_S\to\mathcal H(X)\le H(X)$ as $K\to\infty$ | exponential in $K$ ($M^K$ symbols) | Removes 1-bit penalty asymptotically; explodes in cost                                   |
+| **Arithmetic coding**     | Whole sequence $\rightarrow$ one interval/point | $\mathcal L_S< H(X)+\tfrac2n \to H(X)$        | linear, $O(n)$                     | Sub-optimal for finite $n$, asymptotically optimal; scales where block coding can't      |
+| **Context-based coding**  | Condition on $N_s$​ previous symbols            | lowers effective entropy rate further         | depends on $N_c=M^{N_x}$​          | Exploits memory/correlation; right context model is the engineering challenge            |
 
 ---
-## 3.4) Other Techniques
+## 3.4) Other Techniques (TODO)
 ### 3.4.1) Exp-Golomb Coding
 Universal coding for integer numbers, size (bits) proportional to magnitude
 #### Unisgned Integer
@@ -502,3 +502,7 @@ $$n=-3\rightarrow m(n)=6\rightarrow 00111$$
 $$n=-6\rightarrow m(n)=12\rightarrow \begin{cases}n+1=13_{10}=1101_{2}\rightarrow 1_2\\
 b=\floor{\log_27}+1=4\\
 b-1=3\end{cases}\longrightarrow 0001011$$
+## 3.5) Standards
+#### JBIG
+
+#### 
