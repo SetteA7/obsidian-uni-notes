@@ -345,18 +345,24 @@ Given a set of $M$ symbols with probabilities $p_i$, the optimal code is the set
 
 The optimal solution drops the first assumption ($l_i\in\mathbb R$) and obtains:
 $$l_i^*=-\log_2p_i=I(x_i)\rightarrow \mathcal L^*=\sum_i-p_i\log_2p_i=H(X)$$
+Since real codes cannot have fractional length, thsi bound is achieved only if the distribution is dyadic, that is every symbol's probability is a negative power of 2:
+$$\forall i \in \{1,\dots,M\}, \;\exists k \in \mathbb{N} \;\;|\;\; p_i = 2^{-k}$$
+therefore in the general case $\mathcal L^*\geq H(X)
 ##### Proof:
 This is a constrained optimization problem:
 $$l^*=\arg\min_l\sum p_il_i\qquad \sum_i 2^{-l_i}=1$$
-$$\begin{align}J=\sum p_il_i+\lambda(\sum2^{-l_i}-1)\rightarrow \frac{\partial J}{\partial l_i}&=p_i-\lambda\cdot2^{-l_i}\ln2=0\\
-\sum_ip_i&=\lambda\ln 2\sum2^{-l_i}\\
-1&=\lambda\ln 2
+$$\begin{align}J=\sum p_il_i+\lambda(\sum2^{-l_i}-1)\rightarrow \frac{\partial J}{\partial l_i}&=p_i-\lambda\cdot2^{-l_i}\ln2=0\rightarrow p_i=\lambda\ln2\cdot 2^{-l_i}
 \end{align}$$
+Sum all $p_i$:
+$$\begin{gather}
+\sum_ip_i=\lambda\ln 2\sum2^{-l_i}\\
+1=\lambda\ln 2
+\end{gather}$$
 by placing this result in the initial derivative
 $$\frac{\partial J}{\partial l_i}=p_i-\lambda\cdot2^{-l_i}\ln2=p_i-2^{-l_i}=0\rightarrow p_i=2^{-l_i}\rightarrow l_i^*=-\log_2p_i$$
 And the avg length is then just the definition of entropy
 $$\endproof$$
-
+The equality for Kraft was used because we represent a **complete code**. One where no possible empty branch is left
 
 #### Entropy Code
 To keep the first assumption we have **Entropy Coding**
