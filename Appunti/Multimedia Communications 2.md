@@ -222,8 +222,35 @@ Lossless coding means to decrease the number of bits needed to encode the data w
 
 This is used in the quantization part: remap the indices $i(n)$ in order to optimize bitstream.
 
+We must understand:
+- **Theoretical Bound:** Source entropy
+- **Practical Implementation:** algorithm efficiency and scalability
+- **Possible without known statistics?** 
+
 Lets start with some notation:
 - **Alphabet:** $\mathcal X=\curly{x_1,...,x_M}$ set of symbols to encode
 - **Code:** application between $\mathcal X$ and $\curly{0,1}$ (set of finite length bit strings)
 #### Fixed Length Coding (FLC)
-FLC assumes equiprobable alphabet
+FLC assumes equiprobable alphabet: all codewords ave the same length, that is $M$ symbols $\rightarrow$ $L=\ceil{\log M}$ bits to encode each symbol (bpS) and a rate of $R=\log_2 L$
+
+>[!example|*] FLC Text Compression
+>An alphabet with 26 symbols is encoded with $\ceil{\log 26}=\ceil{4.7}=5$ bits per codeword. This has a compression ratio of 1.
+
+#### Variable Length Code (VLC)
+Exploit input distribution to assign less bits to more probable symbols. 
+**Parsing problem:** create code where symbol is perfectly distinguishable in the bitstream
+
+## 3.2) Principles of Information Theory
+It is clear that there is a preferred code. VLC has a **prefix condition** where a instantaneous (prefix) code has no codeword is a prefix of another codeword. 
+
+>[!thm] McMillan's Theorem
+>Decodable codes do not improve performance with respect to instantaneous codes
+
+Therefore, **we can focus only on instantaneous codes**
+
+>[!thm] Kraft’s Inequality
+>There exists a instantaneous code with lengths $\curly{l_1,...,l_M}$ iff
+>$$\sum_i2^{-l_i}\leq 1$$
+
+Proof:
+$\$
