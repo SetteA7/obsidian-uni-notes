@@ -410,9 +410,28 @@ However now consider the following example:
 >$$H(X)\ll1$$
 >However the avg length is exactly 1. 
 
-Here the entropy is very small but the coding has high rate. This is due to a too small alphabet. It is possible to expand the alphabet by considering blocks of K symbols: $X^K=X_1X_2...X_K$
+Here the entropy is very small but the coding has high rate. This is due to a too small alphabet. It is possible to expand the alphabet by considering blocks of K symbols: 
+
+#### Block Coding
+Instead of mapping one symbol into one codeword, we can map many subsequent symbols into a single codeword. 
+$$X^K=X_1X_2...X_K$$
 The entropy is
 $$H(X^K)\leq\sum_{i=1}^KH(X_i)$$
 we will yield these results:
-- Symbols not independent: $\frac{H(X^K)}K\leq H(X_i)$
-- 
+- Symbols not independent: $\frac{H(X^K)}K< H(X_i)$
+- Then the avg length (per block) and avg (og) symbol length are: $$\mathcal L<H(X^K)+1\iff \mathcal L_S<\frac{H(X^K)}K+\frac1K$$
+- If the symbols are independent:
+$$\mathcal L_S<\frac{H(X^K)}K+\frac1K\leq\frac{H(X_i)}K+\frac1K$$
+>[!thm] Entropic Rate
+>We define the Entropy Rate as the 
+> 
+
+
+>[!example|*]
+>This example will cover the different results (calculations not shown) for the following image:
+>![[Pasted image 20260619163407.png|T|250]]
+>Block size 1: $H(X)=0.586$, $\mathcal L^*=1$
+>Block size 2: $H(X_1X_2)=1.022\rightarrow H/2=0.511$, $\mathcal L^*=1.3\rightarrow\mathcal L_S=0.65$ bpp
+>Block size 4: $H(\prod X_i)=1.533\rightarrow H/4=0.383$, $L^*=1.733\rightarrow\mathcal L_S=0.433$ bpp
+
+
