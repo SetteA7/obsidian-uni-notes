@@ -143,6 +143,20 @@ some common shape factors are:
 - Uniform: $c_X=1$
 - Gaussian $c_X=\frac{\sqrt 3}2\pi\approx 2.72$
 
-#### Non-HR Optimal Quantization
+#### Non-HR Optimal Quantization (TODO)
 There is **no analytical formula** for low rate optimal quantizers, but it is possible to find **necessary conditions** that allow to defining the **Lloyd-Max algorithm** to find local optimum points
 
+## 2.3) Predictive SQ
+Quantization is **not effective for non sparse data**. Predictive SQ **exploits correlation among samples**.
+
+>[!def] Sparse Signal
+>A signal is sparse if most of its components are zero or close to zero
+>- The variance of a sparse signal is low
+>- Zero (or close to zero) samples can be neglected (quantized to 0) without introducing distortion
+>- Natural signal are not sparse but can easily be transformed into one
+
+![[Pasted image 20260619093322.png|Example non sparse vs sparse representation of sinusoidal|250]]
+Since in predictive SQ the **prediction error=signal error**
+$$q(n)=y(n)-\hat y(n)=x(n)-v(n)-(\hat x(n)-v(n))=x(n)-\hat x(n)=\overline q(n)$$
+![[Pasted image 20260320160934.png|Quantizer process|350]]
+it is possible to focus only on optimizing $\sigma_y^2$:
