@@ -343,4 +343,21 @@ Given a set of $M$ symbols with probabilities $p_i$, the optimal code is the set
 - Kraft inequality is satisfied (prefix code)
 - The averge length $\displaystyle{\mathcal L=\sum_{i=1}^Mp_il_i}$ is minimized among all possible sets of $l_i$'s
 
-The optimal solution drops the first assumption $l_i\not\in\mathbb N,
+The optimal solution drops the first assumption ($l_i\in\mathbb R$) and obtains:
+$$l_i^*=-\log_2p_i=I(x_i)\rightarrow \mathcal L^*=\sum_i-p_i\log_2p_i=H(X)$$
+##### Proof:
+This is a constrained optimization problem:
+$$l^*=\arg\min_l\sum p_il_i\qquad \sum_i 2^{-l_i}=1$$
+$$\begin{align}J=\sum p_il_i+\lambda(\sum2^{-l_i}-1)\rightarrow \frac{\partial J}{\partial l_i}&=p_i-\lambda\cdot2^{-l_i}\ln2=0\\
+\sum_ip_i&=\lambda\ln 2\sum2^{-l_i}\\
+1&=\lambda\ln 2
+\end{align}$$
+by placing this result in the initial derivative
+$$\frac{\partial J}{\partial l_i}=p_i-\lambda\cdot2^{-l_i}\ln2=p_i-2^{-l_i}=0\rightarrow p_i=2^{-l_i}\rightarrow l_i^*=-\log_2p_i$$
+And the avg length is then just the definition of entropy
+$$\endproof$$
+
+
+#### Entropy Code
+To keep the first assumption we have **Entropy Coding**
+$$l_i=\ceil{-\log_2p_i}\rightarrow H(X)\leq \mathcal L^*<H(X)+1$$
