@@ -273,12 +273,44 @@ The codes can be built as follows:
 
 The code can be built if at step $k$ there is an available codeword of length $l_k$.
 At each step the unavailable leaves (before adding $c_k$) are $\displaystyle\sum_{i=1}^{k-1}2^{L_\max-l_i}$. Therefore we have $\displaystyle2^{L_\max}-\sum_{i=1}^{k-1}2^{L_\max-l_i}$ available leaves. 
+This can be normalized wrt the number of leaves $1-\sum_{i=1}^{k-1}2^{-l_i}$ available leaves.
 
-Since the summation is always increasing we have that $\sum_{i=1}^{k-1}2^{L_\max-l_i}\leq \sum_{i=1}^{N}2^{L_\max-l_i}$ and therefore
-$$\begin{align}\displaystyle2^{L_\max}-\sum_{i=1}^{k-1}2^{L_\max-l_i}&\geq \displaystyle2^{L_\max}-\sum_{i=1}^{N}2^{L_\max-l_i}\\
-1-\sum_{i=1}^{k-1}2^{-l_i}&\geq1-\sum_{i=1}^N2^{-l_i}\\
-\sum_{i=k}^N2^{-l_i}&\geq0
+By Kraft we have
+$$\begin{align}
+\sum_{i=1}^N2^{-l_i}=\sum_{i=1}^{k-1}2^{-l_i}&+\sum_{i=k}^N2^{-l_i}\leq 1\\
+\sum_{i=1}^{k-1}2^{-l_i}&\leq 1-\sum_{i=k}^{N}2^{-l_i}\\
+1-\sum_{i=1}^{k-1}2^{-l_i}&\geq \sum_{i=k}^{N}2^{-l_i}\geq2^{-l_k}>0\\
 \end{align}$$
 
 Since the remaining free capacity is at least $2^{-l_k}$, there must exist at least one free node at depth $l_k$ where the k-th codeword can be placed.
 $$\endproof$$
+#### Information and Entropy Recap
+Suppose symbols $\curly{x_i}$ with probabilities $p_i$.
+- The information of a symbol is 
+$$I(x_i)=-\log_2 p_i=\log_2 \frac1{p_i}$$
+- Properties:
+$$\begin{gather}
+I(x_i)>0\\
+\text{if }p_i=1\rightarrow I=0\\
+\text{if }x_i\text{ indep }x_j\rightarrow I(x_i,x_j)=I(x_i)+I(x_j)
+\end{gather}$$
+
+
+- The source entropy of $X=\curly{x_i}$ is
+$$H(X)=-\sum_ip_i\log_2p_i=-\E[\log_2(p_X(x))]$$
+this is the avg uncertainty of $X$.
+
+- Joint Entropy:
+$$H(X,Y)=-\sum_{i,j}p_{i,j}\log p_{i,j}$$
+- Conditional Entropy
+$$\begin{align}H(X|Y)=\sum_jp_jH(X|Y=y_j)\rightarrow H(X,Y)&=H(Y)+H(X|Y)\\ &=H(Y)+H(Y|X)\end{align}$$
+- Properties:
+$$\begin{align}
+&H(X)>0\\
+&H(X,Y)=H(X)+H(Y|X)=H(Y)+H(X|Y)\\
+&H(X,Y)\leq H(X)+H(Y) \ (\text{= if }\perp)\\
+&H(X|Y)\leq H(X)\ (\text{= if }\perp)\\
+&H(X)\leq \log_2 M \ (\text{= if }X\sim u)
+\end{align}$$
+#### Lagrange's Method
+Lagrange's method is a solution for minimax 
