@@ -129,5 +129,20 @@ Only quantizer with analytical solution for RD curve with uniform input distrbut
 $$D(R)=\sigma_X^22^{-2R}$$
 in the general case (no knowledge on input distribution):
 $$D(R)=\frac{A^2}{12}2^{-2R}$$
-this is used for HRUQ also. Recall $\gamma^2$ is max power over avg power
+this is used for HRUQ also. Recall $\gamma^2$ is max power over avg power and $c_X=\frac{\gamma^2}3$.
 ## 2.2) Optimal Scalar Quantization (SQ)
+Let the input density $p_X$ be known. We want to find the quantizer minimizing the distortion (for a given rate).
+#### Optimal HR Quantizer
+Recall the HR hypothesis:
+$$L\rightarrow \infty\quad \max_i\Delta_i\rightarrow 0\quad \forall i,u\ \in\Theta^i, \ p_X(x)\approx P_i$$
+It can be shown that the optimal quantizer is:
+$$\sigma^2_Q=c_X\sigma^2_X2^{-2R}\qquad\text{ with }c_X=\frac1{12}\sq{\int p_U^{1/3}(t)dt}^3\text{ and }U=\frac X{\sigma_X}$$
+
+The term $c_X$ is called **shape factor** since it only depends on the PDF shape and not variance ($U$ and $X$ have same shape)
+some common shape factors are:
+- Uniform: $c_X=1$
+- Gaussian $c_X=\frac{\sqrt 3}2\pi\approx 2.72$
+
+#### Non-HR Optimal Quantization
+There is **no analytical formula** for low rate optimal quantizers, but it is possible to find **necessary conditions** that allow to defining the **Lloyd-Max algorithm** to find local optimum points
+
