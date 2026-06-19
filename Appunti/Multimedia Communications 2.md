@@ -447,3 +447,14 @@ Arithmetic coding allows to perform block coding or context-based coding with li
 $$\mathcal L\leq H(X^K)+2\rightarrow \mathcal L_s=\frac {\mathcal L}K\stackrel{K\rightarrow\infty}\longrightarrow\mathcal H(X)$$
 The code is built by determining an interval in $[0,1]$ according to its probability. Needs only 2 sums and 2 multiplications per interval (linear complexity!).
 
+This is done achieved by **encoding a sequence as the center interval** with arbitrary precision $q\in[0,1]$ a fractional number. The arithmetic code can encode blocks of any size, even the entirety of the message.
+
+![[Pasted image 20260323135724.png|Example|350]]
+Proof of length:
+From he above image the length of a message results:
+$$L(n)=1-\ceil{\sum\log_2p_i}<2-\sum\log_2p_i$$
+The average message length is
+$$\overline L(n)<\frac{2-\sum\log_2p_i}n$$
+and by taking the expected value the avg length can be found:
+$$\mathcal L=\E[\overline L(n)]<\frac{2-\sum\E[\log_2p_i]}n=H(X)+\frac n2\rightarrow \mathcal L< H(X)$$
+
