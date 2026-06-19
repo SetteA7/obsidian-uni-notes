@@ -456,5 +456,49 @@ $$L(n)=1-\ceil{\sum\log_2p_i}<2-\sum\log_2p_i$$
 The average message length is
 $$\overline L(n)<\frac{2-\sum\log_2p_i}n$$
 and by taking the expected value the avg length can be found:
-$$\mathcal L=\E[\overline L(n)]<\frac{2-\sum\E[\log_2p_i]}n=H(X)+\frac n2\rightarrow \mathcal L< H(X)$$
+$$\mathcal L=\E[\overline L(n)]<\frac{2-\sum\E[\log_2p_i]}n=H(X)+\frac 2n\rightarrow \mathcal L< H(X)$$
 
+#### Context Based Coding (TODO)
+This approach consists in looking at  $N_s$ previous symbols to recognize the context (max $N_c=M^{N_s}$ with $M$ the alphabet) and changes the encoder based on the context. This conditioning reduces the entropy of the source.
+
+**Engineering Challenge:** with the right context a shorter number of samples manages to better reach the entropy rate.
+
+### 3.3.2) Recap
+Here is a brief recap
+
+| Scheme                    | Length rule                                     | Average-length bound                                                                | Complexity                             | Key idea / limitation                                                                    |
+| ------------------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------- |
+| **Optimal (theoretical)** | $l_i^*=-\log_2p_i$ (real-valued)                | $\mathcal L^*=H(X)$                                                                 | —                                      | Only achievable exactly if pip_i pi​ is dyadic                                           |
+| **Entropy code**          | $l_i^*=-\ceil{\log_2p_i}$                       | H(X)≤L∗≤L<H(X)+1H(X)\le\mathcal L^*\le\mathcal L<H(X)+1 H(X)≤L∗≤L<H(X)+1            | low                                    | Simple rounding; up to 1-bit/symbol penalty                                              |
+| **Huffman**               | Greedy bottom-up tree merge                     | H(X)≤L∗<H(X)+1H(X)\le\mathcal L^*<H(X)+1 H(X)≤L∗<H(X)+1                             | O(Mlog⁡M)O(M\log M) O(MlogM)           | Provably optimal among integer-length codes; small-alphabet penalty (e.g. binary source) |
+| **Block coding**          | Code $K$ symbols jointly                        | LS→H(X)≤H(X)\mathcal L_S\to\mathcal H(X)\le H(X) LS​→H(X)≤H(X) as K→∞K\to\infty K→∞ | exponential in KK K (MKM^K MK symbols) | Removes 1-bit penalty asymptotically; explodes in cost                                   |
+| **Arithmetic coding**     | Whole sequence $\rightarrow$ one interval/point | LS<H(X)+2n→H(X)\mathcal L_S< H(X)+\tfrac2n \to H(X) LS​<H(X)+n2​→H(X)               | linear, O(n)O(n) O(n)                  | Sub-optimal for finite nn n, asymptotically optimal; scales where block coding can't     |
+| **Context-based coding**  | Condition on $N_s$​ previous symbols            | lowers effective entropy rate further                                               | depends on Nc=MNsN_c=M^{N_s} Nc​=MNs​  | Exploits memory/correlation; right context model is the engineering challenge            |
+
+---
+## 3.4) Other Techniques
+### 3.4.1) Exp-Golomb Coding
+Universal coding for integer numbers, size (bits) proportional to magnitude
+#### Unisgned Integer
+Given int $n\in\mathbb N$ the representation consists in
+- write $n+1$ in binary
+- use min number of bits: $b=\floor{\log_2(n+1)}+1$
+- place $b-1$ leading zeroes
+
+Example:
+$$n=0\rightarrow \begin{cases}n+1=1_{10}\rightarrow 1_2\\
+b=\floor{\log_21}+1=1\\
+b-1=0\end{cases}\longrightarrow 1$$
+$$n=6\rightarrow \begin{cases}n+1=7_{10}=111_{2}\rightarrow 1_2\\
+b=\floor{\log_27}+1=3\\
+b-1=2\end{cases}\longrightarrow 00111$$
+#### Signed Integer
+Given int $n\in\mathbb Z$ the representation consists in
+- Map $\mathbb Z\rightarrow \mathbb N$ using $m(n)=\begin{cases}2n-1 &n>0\\-2n &n\leq0\end{cases}$
+- Use Exp-Golomb for unsigned integer
+
+Example:
+$$n=-3\rightarrow m(n)=6\rightarrow 00111$$
+$$n=-6\rightarrow m(n)=12\rightarrow \begin{cases}n+1=13_{10}=1101_{2}\rightarrow 1_2\\
+b=\floor{\log_27}+1=4\\
+b-1=3\end{cases}\longrightarrow 0001011$$
