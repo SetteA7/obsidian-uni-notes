@@ -156,7 +156,7 @@ Quantization is **not effective for non sparse data**. Predictive SQ **exploits 
 >- Natural signal are not sparse but can easily be transformed into one
 
 ![[Pasted image 20260619093322.png|Example non sparse vs sparse representation of sinusoidal|250]]
-##### **Optimization Paradigm:** 
+#### Optimization Paradigm
 Since prediction error = signal error, then performance increase depends only by predictor variance, that is **if and only if the pred error has smaller variance than og signal**
 
 Proof prediction error=signal error:
@@ -164,23 +164,19 @@ $$q(n)=y(n)-\hat y(n)=x(n)-v(n)-(\hat x(n)-v(n))=x(n)-\hat x(n)=\overline q(n)$$
 ![[Pasted image 20260320160934.png|Quantizer process|350]]
 Proof SNR quality depends on $\sigma_Y^2$
 $$SNR=10\logt\frac{\sigma_X^2}D=10\logt\frac{\sigma_X^2}{\sigma_Y^2}+10\logt\frac{\sigma_Y^2}D=G_P+G_Q$$
-##### **Predictors:**
+#### Predictors
 Linear predictors are used: simple and optimal for gaussian rvs.
 
 A linear predictor is a linear combination of the $P$ previous values
 $$v(n)=-\sum_{i=1}^Pa_ix_{n-i}\rightarrow y(n)=x(n)-v(n)=\sum_{\mathbf{i=0}}^Pa_ix_{n-i},\quad a_0=0$$
-This can be written as:
-$$y(n)=(a*x)(n)\zetatrans Y(z)=A(z)X(z)$$
-where the transfer function is
-$$A(z)=\sum_{i=0}^Pa_iz^{-i}=1+a_1z^{-1}+...+a_{P}z^{-P}$$
-It is clear that the minimization problem only acts on finding $a$ that minimizes the variance.
+It turns out that the optimal variance is:
+$$\sigma_Y^2=\sigma_X^2+r^Ta^*=\sigma_X^2-r^TR_X^{-1}r$$
+where $a^*=-R_X^{-1}r$
 
-In general the variance can be written as:
-$$\sigma_Y^2=\sigma_X^2+2r^ta+a^tR_Xa$$
-
+The order of the filter yields good result for small values (up to order 4), but including distant pixels leads to more white noise inclusion and has higher complexity for negligible PSNR increases.
 
 >[!example|*]
->Let $X(n)\sim\mathcal N(0,\sigma^2), \E[X(n)X(m)]=\sigma^2\rho^{|n-m|}$ and $V(n)=X(n-1)$. Find $\rho$ such that $G_p>0$
+>Let $X(n)\sim\mathcal N(0,\sigma^2), \E[X(n)X(m)]=\sigma^2\rho^{|n-m|}$ and $V(n)=X(n-1)$. Find $\rho$ such that $G_p>0$.
 >
 >Since we need $G_p>0$ we actually need $\sigma_Y^2>\sigma^2$. 
 >Find $Y$
@@ -194,3 +190,24 @@ $$\sigma_Y^2=\sigma_X^2+2r^ta+a^tR_Xa$$
 \\
 \sigma_Y^2&=2\sigma^2(1-\rho)>\sigma^2\iff \rho>\frac12\iff G_p>0
 \end{align}$$
+
+Proof:
+Notice that the predicted output is
+$$y(n)=(a*x)(n)\zetatrans Y(z)=A(z)X(z)$$
+where the transfer function is
+$$A(z)=\sum_{i=0}^Pa_iz^{-i}=1+a_1z^{-1}+...+a_{P}z^{-P}$$
+It is clear that the minimization problem only acts on finding $a$ that minimizes the variance.
+
+In general the variance can be written as:
+$$\sigma_Y^2=\sigma_X^2+2r^Ta+a^TR_Xa$$
+where:
+- $r$ is the autocorrelation vector
+- $R_X$ the autocorrelation matrix
+
+The minimization can be computed:
+$$\frac{\partial\sigma_Y^2}{\partial a}=2r+2R_Xa=0\rightarrow a^*=-R_X^{-1}r$$
+Then the optimal variance becomes:
+$$\sigma_Y^2=\sigma_X^2+r^Ta^*=\sigma_X^2-r^TR_X^{-1}r$$
+
+#### Local Optimization
+
