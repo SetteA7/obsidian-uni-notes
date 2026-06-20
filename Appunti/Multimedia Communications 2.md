@@ -606,6 +606,10 @@ We consider $Y=\mathcal TX$ where $\mathcal T$ is an invertible matrix
 - Inverse exists by definition
 - This acts as a basis change: basis is set of signals to reconstruct intended signal
 - If $\mathcal T$ is orthogonal the quantization is the same
+- We want $\mathcal T$ that minimizes GM of $Y$
 
 So the paradigm becomes:
 $$x\rightarrow y=\mathcal Tx\rightarrow \hat y=Q(y)\rightarrow\hat x=\mathcal T^{-1}\hat y$$
+For OT we have:
+- $\mathcal T^{-1}=\mathcal T^T$
+- 
