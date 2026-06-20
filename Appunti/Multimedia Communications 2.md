@@ -628,7 +628,7 @@ We define the **coding gain** as the ratio:
 $$G_{\mathcal T}=\frac{D_{PCM}}{D_{\mathcal T}}=\frac{c\,\sigma_{AM}^2\,2^{-2\overline R}}{c\,\sigma_{GM,Y}^2\,2^{-2\overline R}}=\frac{\sigma_{AM,Y}^2}{\sigma_{GM,Y}^2}\geq 1$$
 
 **PCM distortion** (input is id $\rightarrow$ equal variances $\rightarrow$ $\sigma_{GM}^2=\sigma_{AM}^2$ $\rightarrow$ trivial allocation, same rate $\overline R$):
-$$D_{PCM}=c\,\sigma_{AM}^2\,2^{-2\overline R}$$
+$$D_{PCM}=c_{X}\sigma_{X}^2=c\,\sigma_{AM}^2\,2^{-2\overline R}$$
 **Transform distortion** (isometry fixes $\sigma_{AM}^2$; equal shape factors is a direct consequence of $D_X=D_Y$ when rate and variances are fixed):
-$$D_{\mathcal T}=c_{GM,Y}\,\sigma_{GM,Y}^2\,2^{-2\overline R}=c\,\sigma_{GM,Y}^2\,2^{-2\overline R}$$
+$$D_{\mathcal T}=c_{GM,X}\,\sigma_{GM,X}^2\,2^{-2\overline R}=c\,\sigma_{GM,Y}^2\,2^{-2\overline R}$$
 
