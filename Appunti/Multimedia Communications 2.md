@@ -584,8 +584,28 @@ $$J(R,\lambda)=\frac1M\sum_{k=0}^{M-1}c_k\sigma_k^22^{-2R_k}+\lambda\par{\sum_{k
 The derivatives become:
 $$\frac{\partial J}{\partial R_k}=-\frac{2\ln 2}Mc_k\sigma_k^22^{-2R_k}+\lambda=0\qquad\frac{\partial J}{\partial \lambda}=\sum_{k=0}^{M-1}R_k- R_{tot}=0$$
 from the first we get:
-$$R_k=\frac12\log_2(c_k\sigma_k^2)+\frac12\log_2\frac{2\ln 2}{M\lambda}=\frac12\log_2(c_k\sigma_k^2)+\lambda'$$
+$$R_k=\frac12\log_2(c_k\sigma_k^2)+\underbrace{\frac12\log_2\frac{2\ln 2}{M\lambda}}_{\text{constant: }\lambda'}$$
 Plugging it into the second we have:
 $$\begin{align}
-R_{tot}=M\lambda'+\sum\frac12\log_2(c_k\sigma_k^2)\rightarrow\lambda'&=\frac{R_{tot}}M+\frac1{2M}\su
+R_{tot}=M\lambda'+\sum\frac12\log_2(c_k\sigma_k^2)\rightarrow\lambda'&=\frac{R_{tot}}M-\frac1{2M}\sum\log_2(c_k\sigma_k^2)\\
+&=\overline R-\frac12\log_2\prod(c_k\sigma_k^2)^{1/M}\\
+&=\overline R-\frac12\log_2(c_{GM}\sigma_{GM}^2)
 \end{align}$$
+plug it again in the initial formula:
+$$R_k^*=\frac12\log_2(c_k\sigma_k^2)+\lambda'=\overline R+\frac12\log_2\frac{c_{k}\sigma_{k}^2}{c_{GM}\sigma_{GM}^2}$$
+$$\endproof$$
+## 4.3) Transform Coding
+We have just seen that a non sparse signal performs badly. This chapter aims to find a transform to sparsify the signal (few large, many small)
+
+We need a transform with following properties:
+- Reversible: $Y=T(X)\iff X=T^{-1}(Y)$
+- Input in $\R^M$: for example an image is $\R^2$
+- Non sparse input but sparse output with same quantization error
+
+We consider $Y=\mathcal TX$ where $\mathcal T$ is an invertible matrix
+- Inverse exists by definition
+- This acts as a basis change: basis is set of signals to reconstruct intended signal
+- If $\mathcal T$ is orthogonal the quantization is the same
+
+So the paradigm becomes:
+$$x\rightarrow y=\mathcal Tx\rightarrow \hat y=Q(y)\rightarrow\hat x=\mathcal T^{-1}\hat y$$
