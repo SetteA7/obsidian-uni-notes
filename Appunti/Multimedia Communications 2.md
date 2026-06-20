@@ -528,14 +528,20 @@ The transform is precisely what supplies both: variance disparity (gain) and cro
 
 #### Digression: Arithmetic Mean (AM) vs Geometric Mean (GM)
 First we must clarify the difference between AM and GM:
-The arithmetic mean is defined as:
-$$z_{AM}=\frac1M\sum_{k=1}^Mz_k$$
-The geometric mean as:
-$$z_{GM}=\sqrt[M]{\prod_{k=1}^M z_k}$$
+$$z_{AM}=\frac1M\sum_{k=1}^Mz_k\qquad z_{GM}=\sqrt[M]{\prod_{k=1}^M z_k}$$
+We will see that in orthonormal transforms
+- AM is unchanged ($\propto\mathcal L^2$ norm)
+- GM can be reduced (energy concentration)
 
+By **Jensen's inequality:**
+$$z_{GM}\leq z_{AM}$$
+Proof
+Jensens inquality states that:
+$$\sum_{k=1}^M\frac1Mf(z_k)\leq f\par{\sum_{k=1}^M\frac1Mz_k}=f(z_{AM})$$
 
-
-z_{AM}=\frac1M\sum_{k=1}^Mz_k\geq z_{GM}=\sqrt[M]{\prod_{k=1}^M z_k}
+with $f$ the log function:
+$$\sum\frac1M\log z_k=\log\par{\prod z_k^\frac1M}=\log(z_{GM})\leq \log (z_{AM})$$
+$$\endproof$$
 
 
 ## 4.2) Block Coding
