@@ -567,12 +567,15 @@ Here are two examples:
 >Recall that for a gaussian rv the shape factor is constant and has this relation: $c_{GM}=x_k=c_\mathcal N$, then clearly:
 >$$\mathcal D^*=c_{\mathcal N}\sigma_{GM}^22^{-2\overline R}$$
 
->[!example|*] Pulse Code Modulation (PCM)
+>[!example|*] IID signals (PCM)
 >When the k rvs are iid we have that shape factor and vatiance are cnstant, therefore:
 >$$c_k=c_X=c_{GM}\qquad \sigma^2_k=\sigma^2_X=\sigma^2_{GM}$$
 >Then
 >$$R_k^*=\overline R+\frac12\log\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}=\overline R\quad \mathcal D^*=c_X\sigma_X^22^{-2\overline R}$$
->the signal si not sparse at all, so block coding does not work
+>the signal is not sparse at all, so block coding does not work
+>
+>If the IID signals are zero mean gaussian rvs, then we call it PCM 
+>$$\mathcal D_{PCM}=c_{\mathcal N}\sigma_X^22^{-2\overline R}$$
 
 ^370f58
 
@@ -595,21 +598,25 @@ plug it again in the initial formula:
 $$R_k^*=\frac12\log_2(c_k\sigma_k^2)+\lambda'=\overline R+\frac12\log_2\frac{c_{k}\sigma_{k}^2}{c_{GM}\sigma_{GM}^2}$$
 $$\endproof$$
 ## 4.3) Transform Coding
-We have just seen that a non sparse signal performs badly. This chapter aims to find a transform to sparsify the signal (few large, many small)
+A non-sparse signal codes badly. This chapter looks for a **transform that sparsifies** the signal (few large coefficients, many small ones).
 
-We need a transform with following properties:
-- Reversible: $Y=T(X)\iff X=T^{-1}(Y)$
-- Input in $\R^M$: for example an image is $\R^2$
-- Non sparse input but sparse output with same quantization error
+We want a transform with the following properties:
+- **Invertible:** $Y=T(X)\iff X=T^{-1}(Y)$
+- **Input in $\R^M$** (e.g. an image lives in $\R^2$)
+- **Non-sparse input → sparse output, at the same quantization error**
 
-We consider $Y=\mathcal TX$ where $\mathcal T$ is an invertible matrix
-- Inverse exists by definition
-- This acts as a basis change: basis is set of signals to reconstruct intended signal
-- If $\mathcal T$ is orthogonal the quantization is the same
-- We want $\mathcal T$ that minimizes GM of $Y$
+We restrict to a **linear** transform $Y=\mathcal T X$, with $\mathcal T$ an invertible matrix:
+- inverse exists by definition;
+- it acts as a **change of basis** (the columns of $\mathcal T^{-1}$ are the signals we reconstruct with);
+- if $\mathcal T$ is **orthonormal**, quantization error is preserved (energy is conserved);
+- we then seek the $\mathcal T$ that **minimizes the GM** of $Y$ (maximal energy concentration).
 
-So the paradigm becomes:
-$$x\rightarrow y=\mathcal Tx\rightarrow \hat y=Q(y)\rightarrow\hat x=\mathcal T^{-1}\hat y$$
+**Paradigm:**
+$$x \;\to\; y=\mathcal T x \;\to\; \hat y = Q(y) \;\to\; \hat x = \mathcal T^{-1}\hat y$$
+#### Orthogonal Transform
 For OT we have:
-- $\mathcal T^{-1}=\mathcal T^T$
-- 
+- Inverse is immediate: $\mathcal T^{-1}=\mathcal T^T$
+- They are isometries (keep $\mathcal L^2$ norm): $\abs{\mathcal TX}^2=\abs{X}^2$
+
+Since it is an isometry, the distortion is the same:
+$$MD_Y=\E[\abs{Y-\hat Y}^2]=\E[\abs{\mathcal TX-\mathcal T\hat X}^2]=\E[\abs{\mathcal T(X-\hat X)}^2]=\E[\abs{X-\hat X}^2]=MD_X$$
