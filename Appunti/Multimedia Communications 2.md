@@ -526,3 +526,11 @@ We start with **block coding**, because it defines _what we want from a transfor
 
 The transform is precisely what supplies both: variance disparity (gain) and cross-block stationarity (one shared quantizer).
 
+## 4.1) Block Coding
+Block coding aims to solve the **resource allocation problem**, that is, find the rate vector $R=[R_1,...,R_M]$ that minimizes global distortion on block $X=[X_1,...,X_M]$. That is a different quantizer per sample
+
+Recall that an optimal HR quantizer has a distortion for a sample of $D_k=c_k\sigma_k^22^{-2R_k}$. The global distortion is
+$$\begin{align}
+\mathcal D&=\frac1M\E[\abs{X_Q(X)}^2]=\frac1M\E[(X-Q(X))^T(X-Q(X))]=\frac1M\E[\sum_k(X_k-QX_k)^2]\\
+&=\frac1M\sum_k\E[(X_k-Q(X_k))^2]=\frac1M\su
+\end{align}$$
