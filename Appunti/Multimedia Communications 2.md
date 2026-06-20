@@ -624,24 +624,20 @@ The **Modified HS algorithm** is very simple:
 > The total distortion is:
 > $$D=\sum D_i=\sum\sigma_k^22^{-2R_k}=0.98+1.56+3.13+1=6.67$$
 > With equal rate it was:
-> $$$$
-> 
+> $$D=\sum\sigma_k^22^{-2\cdot 2.5}=35.97$$
 
 The **greedy algorithm** returns the same allocation but is faster:
 - Initialization. $R_k=0\ \forall k\in\curly{0,...,M-1}\qquad D_k=\sigma_k^2\forall k\in\curly{0,...,M-1}$
 - While $\sum R_k\leq R_{tot}$
 	- $l=\arg\max_k D_k$
 	- $R_l\leftarrow R_l+1$
-	- $D_l\leftarrow D_l/4$
+	- $D_l\leftarrow D_l/4$ (since ($D(R+1)=\sigma_k^22^{-2(R+1)}=\frac14\sigma_k^22^{-2R}=D(R)/4$))
 This takes $R_{tot}$ iterations
-
 
 >[!example|*]
 >Consider the same data as before:
 >![[Pasted image 20260330184338.png|Iterations 1-5|350]]
 >![[Pasted image 20260330184430.png|Iterations 6-10|350]]
-
-
 ## 4.3) Transform Coding
 A non-sparse signal codes badly. This chapter looks for a **transform that sparsifies** the signal (few large coefficients, many small ones).
 
@@ -676,4 +672,7 @@ $$G_{\mathcal T}=\frac{D_{PCM}}{D_{\mathcal T}}=\frac{c\,\sigma_{AM}^2\,2^{-2\ov
 $$D_{PCM}=c_{X}\sigma_{X}^2=c\,\sigma_{AM}^2\,2^{-2\overline R}$$
 **Transform distortion** (isometry fixes $\sigma_{AM}^2$; equal shape factors on avg):
 $$D_{\mathcal T}=c\,\sigma_{GM,Y}^2\,2^{-2\overline R}$$
+
+#### Optimal Transforms
+An optimal transform is the the transform that, given a random vector $X$ with known statistical properties, has a mathematically optimal guarantee to decorellate the components and maximizes energy compaction.
 
