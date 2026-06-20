@@ -621,6 +621,11 @@ For OT we have:
 Since it is an isometry, the distortion is the same:
 $$MD_Y=\E[\abs{Y-\hat Y}^2]=\E[\abs{\mathcal TX-\mathcal T\hat X}^2]=\E[\abs{\mathcal T(X-\hat X)}^2]=\E[\abs{X-\hat X}^2]=MD_X$$
 And also the AM (avg of variances):
-$$\sigma^2_{AM,Y}=\frac1M\sum\E[Y_k^2]=\frac1M\E[\sum Y_k^2]=\frac1M\E[\abs Y^2]=\frac1M\E[\abs X^2]=\sigma_{AM,X}$$
+$$\sigma^2_{AM,Y}=\frac1M\sum\E[Y_k^2]=\frac1M\E[\sum Y_k^2]=\frac1M\E[\abs Y^2]=\frac1M\E[\abs X^2]=\sigma^2_{AM,X}$$
+
+
+
+
+
 We define the **Coding gain** as the distortion ratio between og data and coding distortion
 $$G_T=\frac{D_X}{D_Y}$$
