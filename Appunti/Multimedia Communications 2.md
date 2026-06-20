@@ -679,3 +679,8 @@ An optimal transform is the the transform that, given a random vector $X$ with k
 The answer is the **Karhunen-Loève Transform (KLT)**
 The rows of this matrix are the eigenvectors of the correlation matrix $R_X=\E[XX^T]$. This allows the transform to be oriented along the maximum variance direction
 
+Properties:
+- Orthogonality: $T_{KLT}^{-1}=T_{KLT}^T$
+- Decorrelating transform: $\E[Y_iY_j]=\lambda_i\delta_{ij}$
+- Best energy concentration (sparsity): $\sum\E[Y_i^2]\geq\sum\E[(TX)^2]$ where $T$ is any other transform
+- Optimal for gaussian RV: $\sigma_{GM,Y}^2\leq\sigma_{GM,TX}^2$
