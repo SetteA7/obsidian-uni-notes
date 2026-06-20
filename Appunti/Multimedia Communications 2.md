@@ -574,8 +574,8 @@ Here are two examples:
 >$$R_k^*=\overline R+\frac12\log\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}=\overline R\quad \mathcal D^*=c_X\sigma_X^22^{-2\overline R}$$
 >the signal is not sparse at all, so block coding does not work
 >
->If the ID signals are zero mean gaussian rvs, then we call it PCM 
->$$\mathcal D_{PCM}=c_{\mathcal N}\sigma_{GM}^22^{-2\overline R}$$
+>If the ID signals are zero mean gaussian rvs, then we call it PCM, the coding distortion becomes
+>$$\mathcal D_{X}=c_{\mathcal N}\sigma_{GM}^22^{-2\overline R}$$
 
 ^370f58
 
@@ -624,10 +624,11 @@ And also the AM (avg of variances):
 $$\sigma^2_{AM,Y}=\frac1M\sum\E[Y_k^2]=\frac1M\E[\sum Y_k^2]=\frac1M\E[\abs Y^2]=\frac1M\E[\abs X^2]=\sigma^2_{AM,X}$$
 Where logically, the quantizers used are the ones that block code optimized for $Y$, so we can call this distortion the **transform distortion** $D_{\mathcal T}$ ($D_{\mathcal T}=D_X=D_Y$), while the **uniform rate (PCM)** distortion is $D_{PCM}$.
 
-The PCM distortion with optimal quantizer is:
-$$D_{PCM}=c_{GM}\sigma_{GM}^22^{-2\overline R}$$
-The coding distortion is:
-$$D_{\mathcal T}=c_{GM,Y}\sigma^2_{}$$
+We define the **coding gain** as the ratio:
+$$G_{\mathcal T}=\frac{D_{PCM}}{D_{\mathcal T}}=\frac{c\,\sigma_{AM}^2\,2^{-2\overline R}}{c\,\sigma_{GM,Y}^2\,2^{-2\overline R}}=\frac{\sigma_{AM,Y}^2}{\sigma_{GM,Y}^2}\geq 1$$
 
-We define the **Coding gain** as the distortion ratio between og data and coding distortion
-$$G_T=\frac{D_{PCM}}{D_T}$$
+**PCM distortion** (input is id $\rightarrow$ equal variances $\rightarrow$ $\sigma_{GM}^2=\sigma_{AM}^2$ $\rightarrow$ trivial allocation, same rate $\overline R$):
+$$D_{PCM}=c\,\sigma_{AM}^2\,2^{-2\overline R}$$
+**Transform distortion** (isometry fixes $\sigma_{AM}^2$; equal shape factors is a direct consequence of $D_X=D_Y$ when rate and variances are fixed):
+$$D_{\mathcal T}=c_{GM,Y}\,\sigma_{GM,Y}^2\,2^{-2\overline R}=c\,\sigma_{GM,Y}^2\,2^{-2\overline R}$$
+
