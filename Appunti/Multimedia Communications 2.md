@@ -526,11 +526,33 @@ We start with **block coding**, because it defines _what we want from a transfor
 
 The transform is precisely what supplies both: variance disparity (gain) and cross-block stationarity (one shared quantizer).
 
-## 4.1) Block Coding
-Block coding aims to solve the **resource allocation problem**, that is, find the rate vector $R=[R_1,...,R_M]$ that minimizes global distortion on block $X=[X_1,...,X_M]$. That is a different quantizer per sample
+#### Digression: Arithmetic Mean (AM) vs Geometric Mean (GM)
+First we must clarify the difference between AM and GM:
+The arithmetic mean is defined as:
+$$z_{AM}=\frac1M\sum_{k=1}^Mz_k$$
+The geometric mean as:
+$$z_{GM}=\sqrt[M]{\prod_{k=1}^M z_k}$$
 
-Recall that an optimal HR quantizer has a distortion for a sample of $D_k=c_k\sigma_k^22^{-2R_k}$. The global distortion is
+
+
+z_{AM}=\frac1M\sum_{k=1}^Mz_k\geq z_{GM}=\sqrt[M]{\prod_{k=1}^M z_k}
+
+
+## 4.2) Block Coding
+Block coding aims to solve the **resource allocation problem**, that is, find the rate vector $R=[R_1,...,R_M]$ that minimizes global distortion on block $X=[X_1,...,X_M]$ under the constraint $\sum R_k=R_{tot}$. That is a different quantizer per sample
+
+Recall that an optimal HR quantizer has a distortion for a sample of $D_k=c_k\sigma_k^22^{-2R_k}$. The **global distortion** is:
 $$\begin{align}
-\mathcal D&=\frac1M\E[\abs{X_Q(X)}^2]=\frac1M\E[(X-Q(X))^T(X-Q(X))]=\frac1M\E[\sum_k(X_k-QX_k)^2]\\
-&=\frac1M\sum_k\E[(X_k-Q(X_k))^2]=\frac1M\su
+\mathcal D&=\frac1M\E[\abs{X_Q(X)}^2]=\frac1M\E[(X-Q(X))^T(X-Q(X))]\\
+&=\frac1M\E[\sum_k(X_k-QX_k)^2]
+=\frac1M\sum_k\E[(X_k-Q(X_k))^2]=\frac1M\sum_kD_k\\
+&=\frac1M\sum_{k=1}^Mc_k\sigma_k^22^{-2R_k}
 \end{align}$$
+The solution is the **Huang-Schulteiss formula:**
+$$R_k^*=\frac{R_{tot}}{M}+\frac12\log_2\sq{\frac{c_k\sigma_k^2}{c_{GM}\sigma^2_{GM}}}$$
+That is, the rate is a refinement of a uniform resource allocation $\overline R=R_{tot}/M$. 
+
+The per sample distortion becomes:
+$$D_k^*=c_k\sigma_k^22^{-2\overline R-\log_2(\cdot)}=c_k\sigma_k^22^{-2\overline R}\cdot \frac{c_{GM}\sigma^2_{GM}}{c_k\sigma_k^2}=c_{GM}\sigma^2_{GM}2^{-2\overline R}$$
+And the global distortion only depends on the geometric mean:
+$$\mathcal D^*=\frac1M\sum_k D^*_k=c_{GM}\sigma^2_{GM}2^{-2\overline R}$$
