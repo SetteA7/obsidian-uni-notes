@@ -563,19 +563,19 @@ $$D_k^*=c_k\sigma_k^22^{-2\overline R-\log_2(\cdot)}=c_k\sigma_k^22^{-2\overline
 And the global distortion only depends on the geometric mean:
 $$\mathcal D^*=\frac1M\sum_k D^*_k=c_{GM}\sigma^2_{GM}2^{-2\overline R}$$
 Here are two examples:
->[!example|^*] Gaussian Optimal Rate
+>[!example|*] Gaussian Optimal Rate
 >Recall that for a gaussian rv the shape factor is constant and has this relation: $c_{GM}=x_k=c_\mathcal N$, then clearly:
 >$$\mathcal D^*=c_{\mathcal N}\sigma_{GM}^22^{-2\overline R}$$
 
->[!example|*] IID signals (PCM)
->When the k rvs are iid we have that shape factor and vatiance are cnstant, therefore:
+>[!example|*] ID RVs (PCM)
+>When the k rvs are id we have that shape factor and vatiance are cnstant, therefore:
 >$$c_k=c_X=c_{GM}\qquad \sigma^2_k=\sigma^2_X=\sigma^2_{GM}$$
 >Then
 >$$R_k^*=\overline R+\frac12\log\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}=\overline R\quad \mathcal D^*=c_X\sigma_X^22^{-2\overline R}$$
 >the signal is not sparse at all, so block coding does not work
 >
->If the IID signals are zero mean gaussian rvs, then we call it PCM 
->$$\mathcal D_{PCM}=c_{\mathcal N}\sigma_X^22^{-2\overline R}$$
+>If the ID signals are zero mean gaussian rvs, then we call it PCM 
+>$$\mathcal D_{PCM}=c_{\mathcal N}\sigma_{GM}^22^{-2\overline R}$$
 
 ^370f58
 
@@ -622,10 +622,12 @@ Since it is an isometry, the distortion is the same:
 $$MD_Y=\E[\abs{Y-\hat Y}^2]=\E[\abs{\mathcal TX-\mathcal T\hat X}^2]=\E[\abs{\mathcal T(X-\hat X)}^2]=\E[\abs{X-\hat X}^2]=MD_X$$
 And also the AM (avg of variances):
 $$\sigma^2_{AM,Y}=\frac1M\sum\E[Y_k^2]=\frac1M\E[\sum Y_k^2]=\frac1M\E[\abs Y^2]=\frac1M\E[\abs X^2]=\sigma^2_{AM,X}$$
+Where logically, the quantizers used are the ones that block code optimized for $Y$, so we can call this distortion the **transform distortion** $D_{\mathcal T}$ ($D_{\mathcal T}=D_X=D_Y$), while the **uniform rate (PCM)** distortion is $D_{PCM}$.
 
-
-
-
+The PCM distortion with optimal quantizer is:
+$$D_{PCM}=c_{GM}\sigma_{GM}^22^{-2\overline R}$$
+The coding distortion is:
+$$D_{\mathcal T}=c_{GM,Y}\sigma^2_{}$$
 
 We define the **Coding gain** as the distortion ratio between og data and coding distortion
-$$G_T=\frac{D_X}{D_Y}$$
+$$G_T=\frac{D_{PCM}}{D_T}$$
