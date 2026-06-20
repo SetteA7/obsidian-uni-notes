@@ -520,7 +520,7 @@ The real pipeline inserts two stages before quantization:
 - **Quantize:** apply those quantizers, this exploits unequal variances (high variance, many bits in quantizer, low variance only a few bits)
 - **Entropy code:** pack the resulting bitstream exploiting the many resulting zeros to approach the entropy.
 
-We start with **block coding**, because it defines _what we want from a transform and why_. But it must be clear from the start that block coding alone is useless on raw natural images, for two distinct reasons:
+We start with **block coding**, because it defines _what we want from a transform and why_. But it must be clear from the start that block coding alone is useless on raw natural images (see [[#^370f58]]), for two distinct reasons:
 - **No variable rate:** all pixels have (approximately) equal variance, so we revert to UQ
 - **Too many quantizers:** even with unequal variances, one fixed quantizer can serve every block only if each position's variance is stationary across blocks (a constant per-sample meaning, as the transform provides, is one way to guarantee this).
 
@@ -562,3 +562,30 @@ The per sample distortion becomes:
 $$D_k^*=c_k\sigma_k^22^{-2\overline R-\log_2(\cdot)}=c_k\sigma_k^22^{-2\overline R}\cdot \frac{c_{GM}\sigma^2_{GM}}{c_k\sigma_k^2}=c_{GM}\sigma^2_{GM}2^{-2\overline R}$$
 And the global distortion only depends on the geometric mean:
 $$\mathcal D^*=\frac1M\sum_k D^*_k=c_{GM}\sigma^2_{GM}2^{-2\overline R}$$
+Here are two examples:
+>[!example|^*] Gaussian Optimal Rate
+>Recall that for a gaussian rv the shape factor is constant and has this relation: $c_{GM}=x_k=c_\mathcal N$, then clearly:
+>$$\mathcal D^*=c_{\mathcal N}\sigma_{GM}^22^{-2\overline R}$$
+
+>[!example|*] Pulse Code Modulation (PCM)
+>When the k rvs are iid we have that shape factor and vatiance are cnstant, therefore:
+>$$c_k=c_X=c_{GM}\qquad \sigma^2_k=\sigma^2_X=\sigma^2_{GM}$$
+>Then
+>$$R_k^*=\overline R+\frac12\log\frac{c_k\sigma^2_k}{c_{GM}\sigma^2_{GM}}=\overline R\quad \mathcal D^*=c_X\sigma_X^22^{-2\overline R}$$
+>the signal si not sparse at all, so block coding does not work
+
+^370f58
+
+##### Proof (TODO)
+The function to minimize and the constraint are:
+$$\mathcal D=\frac1M\sum_{k=0}^{M-1}c_k\sigma_k^22^{-2R_k}\qquad \sum_{k=0}^{M-1}R_k\leq R_{tot}$$
+By lagrange method we must minimize:
+$$J(R,\lambda)=\frac1M\sum_{k=0}^{M-1}c_k\sigma_k^22^{-2R_k}+\lambda\par{\sum_{k=0}^{M-1}R_k- R_{tot}}$$
+The derivatives become:
+$$\frac{\partial J}{\partial R_k}=-\frac{2\ln 2}Mc_k\sigma_k^22^{-2R_k}+\lambda=0\qquad\frac{\partial J}{\partial \lambda}=\sum_{k=0}^{M-1}R_k- R_{tot}=0$$
+from the first we get:
+$$R_k=\frac12\log_2(c_k\sigma_k^2)+\frac12\log_2\frac{2\ln 2}{M\lambda}=\frac12\log_2(c_k\sigma_k^2)+\lambda'$$
+Plugging it into the second we have:
+$$\begin{align}
+R_{tot}=M\lambda'+\sum\frac12\log_2(c_k\sigma_k^2)\rightarrow\lambda'&=\frac{R_{tot}}M+\frac1{2M}\su
+\end{align}$$
