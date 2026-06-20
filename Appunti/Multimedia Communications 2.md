@@ -673,6 +673,9 @@ $$D_{PCM}=c_{X}\sigma_{X}^2=c\,\sigma_{AM}^2\,2^{-2\overline R}$$
 **Transform distortion** (isometry fixes $\sigma_{AM}^2$; equal shape factors on avg):
 $$D_{\mathcal T}=c\,\sigma_{GM,Y}^2\,2^{-2\overline R}$$
 
-#### Optimal Transforms
+#### Optimal Transform (KLT)
 An optimal transform is the the transform that, given a random vector $X$ with known statistical properties, has a mathematically optimal guarantee to decorellate the components and maximizes energy compaction.
+
+The answer is the **Karhunen-Loève Transform (KLT)**
+The rows of this matrix are the eigenvectors of the correlation matrix $R_X=\E[XX^T]$. This allows the transform to be oriented along the maximum variance direction
 
