@@ -761,9 +761,12 @@ Small blocks: correlation
 JPEG is an image compression standard defined in 1991 that defines **only the decoder** for interoperability and implementation competition
 
 ![[Pasted image 20260331111153.png|JPEG Scheme|450]]
+
+Thsi is the encoder:
 **Step 0; Preprocessing:** includes $8\times8$ block creation and centering ($-128$ on each sample). 
-**Step 1; DCT:** is applied on $8\times8$ blocks of centered samples
-**Step 2; Quantization:** uses a **mid tread** (round). The quantization table $q$ is not defined by the standard, therefore it must be encoded
+**Step 1; DCT:** 2D DCT is applied on $8\times8$ blocks of centered samples (find $y_{ij}$)
+**Step 2; Quantization:** uses a **mid tread** quantizer. The quantization table $q$ is not defined by the standard, therefore it must be encoded. Notice that $q$ is the step size. A bigger $q$ means fewer bits and therefore less quality (as an idea think of it like this $q=255/2^R$)
+$$\hat c_{ij}=\text{round}(\frac{y_{ij}}{q_{ij}})$$
 **Step 2.5; Quality Factor:** The **quality factor** $Q\in[1,100]$ that controls the scaling factor (used during quanization):
 $$S_F=\begin{cases}
 \frac{5000}Q&1\leq Q\leq 50\\
@@ -783,6 +786,14 @@ $$S_F=\begin{cases}
 
 ![[Pasted image 20260401191026.png|Zig-Zag scan|200]]
 
+Now the decoder:
+**Step 1; De-Quantization:** multiply quantized coefficients by q.
+$$\hat y_{ij}=\hat c_{ij}\cdot q_{ij}$$
+**Step 2; Inverse DCT:** apply the IDCT on each dequantized block and reconstruct the signal
+
+
+#### Zig Zag Scan:
+The zigzag scan 
 
 ---
 Each value follows the form
@@ -800,3 +811,37 @@ Take a $8\times8$ block:
 - This returns 64 coefficients (can be used to reconstruct og signal)
 - The value at $(0,0)$ is the mean intensity called **DC** value 
 - The other values are called AC values
+
+
+## 4.5) JPEG Encoder
+
+
+**Step 1 — DCT:** 2-D DCT on each centered $8\times8$ block → coefficients $y_{ij}$.
+
+**Step 2 — Build quantization table (quality factor):** $q$ is *not* fixed by the standard (so it must be stored). Start from a base table, scale by quality $Q\in[1,100]$:
+$$S_F=\begin{cases}\dfrac{5000}{Q}&1\le Q<50\\200-2Q&50\le Q\le 99\\ \text{force }q_{ij}=1&Q=100\end{cases}
+\qquad q_{ij}\leftarrow\max\!\Big(1,\ \text{round}\!\big(\tfrac{S_F\,q_{ij}}{100}\big)\Big)$$
+Intuition: $q$ is the **step size** — bigger $q$ ⇒ coarser ⇒ fewer bits (roughly $q\sim \text{range}/2^{R}$).
+
+**Step 3 — Quantization (mid-tread, zero is a level):**
+$$\ell_{ij}=\text{round}\!\left(\frac{y_{ij}}{q_{ij}}\right)$$
+
+**Step 4 — Zig-zag + RLE symbols:** scan the $8\times8$ levels in zig-zag into one string:
+- **DC:** differential, $DC_n-DC_{n-1}$;
+- **AC:** pairs (run of zeros, size/value of next nonzero); max run 15, use **ZRL $(15,0)$** for 16 zeros;
+- **EOB $(0,0)$** terminates the block.
+
+| $DC_n-DC_{n-1}$ | (#zeros, nonzero val) | ... | EOB $(0,0)$ |
+|---|---|---|---|
+
+**Step 5 — Entropy coding:** Huffman-code (or arithmetic-code) the DC differences and AC (run,size) symbols → bitstream. Huffman tables stored in the file (also not fixed by the standard).
+
+## 4.6) JPEG Decoder
+
+**Step 0 — Entropy decode:** bitstream → symbols → levels $\ell_{ij}$.
+
+**Step 1 — De-quantization:** $\hat y_{ij}=\ell_{ij}\cdot q_{ij}$.
+
+**Step 2 — Inverse DCT:** IDCT each block → centered pixels.
+
+**Step 3 — Inverse level-shift:** add $+128$, clamp to $[0,255]$ → reconstructed image.
