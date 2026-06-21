@@ -748,6 +748,20 @@ The DCT is also separable:
 $$Y=\mathcal T_{DCT}X\mathcal T_{DCT}^T$$
 A large-size, non-stationary image is more conveniently represented by dividing it into small blocks. 
 
+Example: 8 × 8 block-based DCT. Each 8 × 8 block of pixels from the image is projected onto the 64 basis vectors: The corresponding scalar product is the DCT coefficient telling how much the block is similar to the basis vector
+![[Pasted image 20260331110618.png|Block DCT|450]]
+![[Pasted image 20260331110634.png|8x8 Basis|250]]
+The sparsification allows to give higher bits to many small valued coefficients and lower bits to less frequent bigger values. How are the quantization coefficients computed?
+- HS formula (practical implementation)
+- Fixed steps (JPEG)
+
+
+## 4.4) JPEG standard
+JPEG is an image compression standard defined in 1991 that defines **only the decoder** for interoperability and implementation competition
+
+![[Pasted image 20260331111153.png|JPEG Scheme|450]]
+
+
 ---
 Each value follows the form
 $$C(i, j) = \frac{1}{4} \alpha(i) \alpha(j) \sum_{x=0}^{7} \sum_{y=0}^{7} f(x, y) \cos \left[ \frac{(2x+1)i\pi}{16} \right] \cos \left[ \frac{(2y+1)j\pi}{16} \right]$$
@@ -756,12 +770,7 @@ with $\alpha$ a normalization factor $\alpha(u) = \begin{cases} \frac{1}{\sqrt{2
 Reason on the DC component: $C(0,0)=\frac14\frac12\sum\sum f(x,y)\cdot1\cdot1=\frac18\sum\sum f(x,y)$
 After centering the signal, the dc component is $\in[-1024,1016]$.
 
-Example: 8 × 8 block-based DCT. Each 8 × 8 block of pixels from the image is projected onto the 64 basis vectors: The corresponding scalar product is the DCT coefficient telling how much the block is similar to the basis vector
-![[Pasted image 20260331110618.png|Block DCT|450]]
-![[Pasted image 20260331110634.png|8x8 Basis|250]]
-The sparsification allows to give higher bits to many small valued coefficients and lower bits to less frequent bigger values. How are the quantization coefficients computed?
-- HS formula (practical implementation)
-- Fixed steps (JPEG)
+
 
 Take a $8\times8$ block:
 - Center the signal (subtract 128)
