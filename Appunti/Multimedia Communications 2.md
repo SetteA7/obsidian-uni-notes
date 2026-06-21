@@ -701,3 +701,66 @@ However:
 
 #### Frequency Transforms (DFT, DCT)
 For a markov process with correlation $\rho\rightarrow 1$ frequency transforms offer near optimal performance (with fixed basis functions ad FFT algorithms $O(n\log n)$).
+
+##### Discrete Fourier Transform (DFT)
+The 1D case is the following:
+$$y[k]=\frac1{\sqrt M}\sum_{n=1}^Mx[n]e^{-j\frac{2\pi}Mkn}$$
+Or in matrix form:
+$$\mathcal T_{DFT}=\frac1{\sqrt M}\begin{bmatrix}
+1&1&1&...&1\\
+1&W_M&W_M^2&...&W_M^{M-1}\\
+1&W_M^2&W_M^4&...&W_M^{2(M-1)}\\
+\vdots & \vdots&\vdots&\ddots&\vdots\\
+1&W_M^{M-1}&W_M^{2(M-1)}&...&W_M^{(M-1)(M-1)}
+\end{bmatrix}$$
+Where $W_M=e^{-j2\pi/M}$ is the M-th primitive root of unity
+Each row is therefore the conjugate of a basis vector.
+the total energy is preserved: $\|y\|^2=\|x\|^2$
+
+In 2D, the DFT is a separable transform:
+$$Y=\mathcal T X\mathcal T^T$$
+this computes the rows and then the columns (horizontal and vertical frequency analysis)
+This transform decomposes the image into a weighted sum of $N^2$ orthogonal basis patterns:
+$$B_{k,l}(n,m)=\frac1Ne^{j\frac{2\pi}N(kn+lm)}$$
+each coefficient $Y[k,l]$ represents the frequency component of horizontal and vertical frequency combination
+Most energy is concentrated in the low frequencies.
+
+This is still not ideal since the DFT suposes a periodic signal. We compress finite signals and therefore on the image edges we have spectral leakage (low frequencies leak into high ones) making the signal less sparse
+
+##### Discrete Cosine Transform (DCT)
+A general approach is used **Discrete Cosine Transform (DCT)**
+Each entry follows the form:
+$$(\mathcal T_{DCT})_{k,n}=\begin{cases}
+\frac1{\sqrt N} & k=0\\
+\sqrt{\frac{2}{N}}\cos(\frac{(2n+1)k\pi}{2N}) &k>0
+\end{cases}$$
+DFT is not used since DFT has high frequency components near the signal edges. The DCT is a way to mirror the signal before the periodicity. It has only positive frequencies
+
+Applying the DCT to a signal ( a sequence of N real numbers) produces N real coefficients and has a better sparsification property than DFT thanks to the symmetric periodization.
+
+![[Pasted image 20260330185522.png|Example With Mirroring|450]]
+The DCT is also separable:
+$$Y=\mathcal T_{DCT}X\mathcal T_{DCT}^T$$
+A large-size, non-stationary image is more conveniently represented by dividing it into small blocks. 
+
+---
+Each value follows the form
+$$C(i, j) = \frac{1}{4} \alpha(i) \alpha(j) \sum_{x=0}^{7} \sum_{y=0}^{7} f(x, y) \cos \left[ \frac{(2x+1)i\pi}{16} \right] \cos \left[ \frac{(2y+1)j\pi}{16} \right]$$
+with $\alpha$ a normalization factor $\alpha(u) = \begin{cases} \frac{1}{\sqrt{2}} & \text{if } u = 0 \\ 1 & \text{if } u > 0 \end{cases}$. 
+
+Reason on the DC component: $C(0,0)=\frac14\frac12\sum\sum f(x,y)\cdot1\cdot1=\frac18\sum\sum f(x,y)$
+After centering the signal, the dc component is $\in[-1024,1016]$.
+
+Example: 8 × 8 block-based DCT. Each 8 × 8 block of pixels from the image is projected onto the 64 basis vectors: The corresponding scalar product is the DCT coefficient telling how much the block is similar to the basis vector
+![[Pasted image 20260331110618.png|Block DCT|450]]
+![[Pasted image 20260331110634.png|8x8 Basis|250]]
+The sparsification allows to give higher bits to many small valued coefficients and lower bits to less frequent bigger values. How are the quantization coefficients computed?
+- HS formula (practical implementation)
+- Fixed steps (JPEG)
+
+Take a $8\times8$ block:
+- Center the signal (subtract 128)
+- Calculate the DCT coefficients
+- This returns 64 coefficients (can be used to reconstruct og signal)
+- The value at $(0,0)$ is the mean intensity called **DC** value 
+- The other values are called AC values
