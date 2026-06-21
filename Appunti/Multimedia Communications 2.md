@@ -654,6 +654,8 @@ We restrict to a **linear** transform $Y=\mathcal T X$, with $\mathcal T$ an inv
 
 **Paradigm:**
 $$x \;\to\; y=\mathcal T x \;\to\; \hat y = Q(y) \;\to\; \hat x = \mathcal T^{-1}\hat y$$
+A coding quality is determined by the coding gain:
+$$G_{\mathcal T}=\frac{\sigma^2_{AM,Y}}{\sigma_{GM,Y}^2}$$
 #### Orthogonal Transform
 For OT we have:
 - Inverse is immediate: $\mathcal T^{-1}=\mathcal T^T$
@@ -679,8 +681,23 @@ An optimal transform is the the transform that, given a random vector $X$ with k
 The answer is the **Karhunen-Loève Transform (KLT)**
 The rows of this matrix are the eigenvectors of the correlation matrix $R_X=\E[XX^T]$. This allows the transform to be oriented along the maximum variance direction
 
+Intuition: In the $Y$ domain, knowing the value of $Y_1$ provides zero linear information about $Y_2$. The redundancy present in the "diagonal" alignment is removed
+
 Properties:
 - Orthogonality: $T_{KLT}^{-1}=T_{KLT}^T$
 - Decorrelating transform: $\E[Y_iY_j]=\lambda_i\delta_{ij}$
 - Best energy concentration (sparsity): $\sum\E[Y_i^2]\geq\sum\E[(TX)^2]$ where $T$ is any other transform
 - Optimal for gaussian RV: $\sigma_{GM,Y}^2\leq\sigma_{GM,TX}^2$
+
+![[Pasted image 20260621173122.png|Example|300]]
+Most coefficients will have near zero variance, so these can be discarded or coarsely quantized since the don't impact the MSE much.
+
+It maximizes the coding gain as gaussians will be id:
+$$G_{\mathcal T}=\frac{\sigma^2_{AM,Y}}{\sigma_{GM,Y}^2}=\frac{\frac1M\sum\sigma_i^2}{\par{\prod\sigma_i^2}^{1/M}}$$
+However:
+- Requires $O(n^3)$ to find eigenvectors, $O(n^2)$ for the multiplication
+- Since data dependent, it must be sent to the decoder as metadata
+- Model is often not stationary!
+
+#### Frequency Transforms (DFT, DCT)
+For a markov process with correlation $\rho\rightarrow 1$ frequency transforms offer near optimal performance (with fixed basis functions ad FFT algorithms $O(n\log n)$).
