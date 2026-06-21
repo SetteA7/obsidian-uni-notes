@@ -762,10 +762,10 @@ JPEG is an image compression standard defined in 1991 that defines **only the de
 
 ![[Pasted image 20260331111153.png|JPEG Scheme|450]]
 
-Thsi is the encoder:
+This is the encoder:
 **Step 0; Preprocessing:** includes $8\times8$ block creation and centering ($-128$ on each sample). 
 **Step 1; DCT:** 2D DCT is applied on $8\times8$ blocks of centered samples (find $y_{ij}$)
-**Step 2; Quantization:** uses a **mid tread** quantizer. The quantization table $q$ is not defined by the standard, therefore it must be encoded. Notice that $q$ is the step size. A bigger $q$ means fewer bits and therefore less quality (as an idea think of it like this $q=255/2^R$)
+**Step 2; Quantization:** uses a **mid tread** quantizer. The quantization table $q_{ij}$ is not defined by the standard, therefore it must be encoded. Notice that $q$ is the step size. A bigger $q$ means fewer bits and therefore less quality (as an idea think of it like this $q=255/2^R$)
 $$\hat c_{ij}=\text{round}(\frac{y_{ij}}{q_{ij}})$$
 **Step 2.5; Quality Factor:** The **quality factor** $Q\in[1,100]$ that controls the scaling factor (used during quanization):
 $$S_F=\begin{cases}
@@ -774,7 +774,17 @@ $$S_F=\begin{cases}
 1 &Q=100
 \end{cases} \ \rightarrow q\leftarrow\frac{S_F}{100}q$$
 
-**Step 3; Zig-Zag Scan:** A zig-zag scan is performed on the quantized values in order to encode them in a single string, where
+**Step 3; Zig-Zag Scan + Entropy coding:** see later
+
+Now the decoder:
+**Step 0; Entropy Decode:** from zigzag + entropy decode it to find quantized blocks.
+**Step 1; De-Quantization:** multiply quantized coefficients by q.
+$$\hat y_{ij}=\hat c_{ij}\cdot q_{ij}$$
+**Step 2; Inverse DCT:** apply the IDCT on each dequantized block and reconstruct the signal by uncentering ($+128$ on each sample)
+
+
+#### Zig Zag Scan:
+A zig-zag scan is performed on the quantized values in order to encode them in a single string, where
 - the first value is the Difference of the DC component of this block and the previous block
 - the next values are a pair of numbers representing (# of zeroes in scan, value of first non zero)
 - final EOB special symbol is added to end the string  it is $(0,0)$
@@ -783,18 +793,38 @@ $$S_F=\begin{cases}
 | $DC_n-DC_{n-1}$ | $(\text{\# of zeroes},\text{non zero coeff value})$ | ... | EOB $(0,0)$ |
 | --------------- | --------------------------------------------------- | --- | ----------- |
 
+![[Pasted image 20260401191026.png|Zig-Zag scan|100]]
 
-![[Pasted image 20260401191026.png|Zig-Zag scan|200]]
+![[Pasted image 20260621193012.png|Example|350]]
 
-Now the decoder:
-**Step 1; De-Quantization:** multiply quantized coefficients by q.
-$$\hat y_{ij}=\hat c_{ij}\cdot q_{ij}$$
-**Step 2; Inverse DCT:** apply the IDCT on each dequantized block and reconstruct the signal
+##### Entropy Coding of DC Coefficients
 
+>[!col]
+JPEG encodes the DC difference with a pseudo-huffman code.
+There are $k\in\curly{0,...,11}$ categories, each of them holding $2^k$ values using 2's complement. Each category is assigned a codeword (see table).
+> $$ $$
+>Call $DC_p$ the DC difference, the category is chosen $k=\ceil{\log_2(|DC_P|+1)}$
+>To the category the binary value of $DC_P$ is added as a suffix. If it is negative each value is complemented. 
+>
+>![[Pasted image 20260401193857.png|Category Code|250]]
 
-#### Zig Zag Scan:
-The zigzag scan 
+For example suppose $DC_P=-5_{10}=101_2$ that must be complemented to $010$. The category is $k=3\rightarrow100$ and thus the codeword is $100\ 010$.
 
+DC values have a range  $\in[-1024,1060]$ a difference of two DC signals is $\in[-2040,2040]$ and thus with cardinality $4081$. Since there are 11 categories we have $\sum_{k=0}^{11}2^k=2^{12}=1096>4081$ values.
+
+##### Entropy Coding of AC Coefficients
+Recall that these coefficients are previously encoded as $(a,b)$. These values are used to find the pseudo huffman entropy encoded codeword which is prefix+:
+$$[(a,k)\text{ in RC table prefix\ }|\ b \text{ pseudo huffman}]$$
+That is: First compute $k=\ceil{\log_2|b|+1}$
+
+Example: Encode (3,16):
+- Encode 16: $k=5$ and $16_{10}=10000_2$
+- $(L,C)=(0,5)\stackrel{\text{table}}\rightarrow11010$
+The codeword is $11010\ 10000$
+
+Two custom codewords are described:
+- End Of Block (EOB) $= (0,0) \rightarrow 1010$
+- Zero Run (ZR) $=(15,0)\rightarrow 11111111001$
 ---
 Each value follows the form
 $$C(i, j) = \frac{1}{4} \alpha(i) \alpha(j) \sum_{x=0}^{7} \sum_{y=0}^{7} f(x, y) \cos \left[ \frac{(2x+1)i\pi}{16} \right] \cos \left[ \frac{(2y+1)j\pi}{16} \right]$$
@@ -812,36 +842,3 @@ Take a $8\times8$ block:
 - The value at $(0,0)$ is the mean intensity called **DC** value 
 - The other values are called AC values
 
-
-## 4.5) JPEG Encoder
-
-
-**Step 1 — DCT:** 2-D DCT on each centered $8\times8$ block → coefficients $y_{ij}$.
-
-**Step 2 — Build quantization table (quality factor):** $q$ is *not* fixed by the standard (so it must be stored). Start from a base table, scale by quality $Q\in[1,100]$:
-$$S_F=\begin{cases}\dfrac{5000}{Q}&1\le Q<50\\200-2Q&50\le Q\le 99\\ \text{force }q_{ij}=1&Q=100\end{cases}
-\qquad q_{ij}\leftarrow\max\!\Big(1,\ \text{round}\!\big(\tfrac{S_F\,q_{ij}}{100}\big)\Big)$$
-Intuition: $q$ is the **step size** — bigger $q$ ⇒ coarser ⇒ fewer bits (roughly $q\sim \text{range}/2^{R}$).
-
-**Step 3 — Quantization (mid-tread, zero is a level):**
-$$\ell_{ij}=\text{round}\!\left(\frac{y_{ij}}{q_{ij}}\right)$$
-
-**Step 4 — Zig-zag + RLE symbols:** scan the $8\times8$ levels in zig-zag into one string:
-- **DC:** differential, $DC_n-DC_{n-1}$;
-- **AC:** pairs (run of zeros, size/value of next nonzero); max run 15, use **ZRL $(15,0)$** for 16 zeros;
-- **EOB $(0,0)$** terminates the block.
-
-| $DC_n-DC_{n-1}$ | (#zeros, nonzero val) | ... | EOB $(0,0)$ |
-|---|---|---|---|
-
-**Step 5 — Entropy coding:** Huffman-code (or arithmetic-code) the DC differences and AC (run,size) symbols → bitstream. Huffman tables stored in the file (also not fixed by the standard).
-
-## 4.6) JPEG Decoder
-
-**Step 0 — Entropy decode:** bitstream → symbols → levels $\ell_{ij}$.
-
-**Step 1 — De-quantization:** $\hat y_{ij}=\ell_{ij}\cdot q_{ij}$.
-
-**Step 2 — Inverse DCT:** IDCT each block → centered pixels.
-
-**Step 3 — Inverse level-shift:** add $+128$, clamp to $[0,255]$ → reconstructed image.
