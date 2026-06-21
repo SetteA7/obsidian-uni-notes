@@ -755,11 +755,33 @@ The sparsification allows to give higher bits to many small valued coefficients 
 - HS formula (practical implementation)
 - Fixed steps (JPEG)
 
-
+Large blocks: stationarity
+Small blocks: correlation
 ## 4.4) JPEG standard
 JPEG is an image compression standard defined in 1991 that defines **only the decoder** for interoperability and implementation competition
 
 ![[Pasted image 20260331111153.png|JPEG Scheme|450]]
+**Step 0; Preprocessing:** includes $8\times8$ block creation and centering ($-128$ on each sample). 
+**Step 1; DCT:** is applied on $8\times8$ blocks of centered samples
+**Step 2; Quantization:** uses a **mid tread** (round). The quantization table $q$ is not defined by the standard, therefore it must be encoded
+**Step 2.5; Quality Factor:** The **quality factor** $Q\in[1,100]$ that controls the scaling factor (used during quanization):
+$$S_F=\begin{cases}
+\frac{5000}Q&1\leq Q\leq 50\\
+200-2Q&50<Q\leq 99\\
+1 &Q=100
+\end{cases} \ \rightarrow q\leftarrow\frac{S_F}{100}q$$
+
+**Step 3; Zig-Zag Scan:** A zig-zag scan is performed on the quantized values in order to encode them in a single string, where
+- the first value is the Difference of the DC component of this block and the previous block
+- the next values are a pair of numbers representing (# of zeroes in scan, value of first non zero)
+- final EOB special symbol is added to end the string  it is $(0,0)$
+
+
+| $DC_n-DC_{n-1}$ | $(\text{\# of zeroes},\text{non zero coeff value})$ | ... | EOB $(0,0)$ |
+| --------------- | --------------------------------------------------- | --- | ----------- |
+
+
+![[Pasted image 20260401191026.png|Zig-Zag scan|200]]
 
 
 ---
