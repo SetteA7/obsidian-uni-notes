@@ -729,14 +729,19 @@ This is still not ideal since the DFT suposes a periodic signal. We compress fin
 
 ##### Discrete Cosine Transform (DCT)
 A general approach is used **Discrete Cosine Transform (DCT)**
-Each entry follows the form:
+- Create mirrored-periodic version of the signal
+- Compute DFT of signal+mirror
+- Apply frequency domain modulation to obtain symmetrical and real valued oceffieicnts
+- Keep only $M$ coefficients (og signal length)
+
+Which can be rewritten in a signle transform where each entry follows the form:
 $$(\mathcal T_{DCT})_{k,n}=\begin{cases}
 \frac1{\sqrt N} & k=0\\
 \sqrt{\frac{2}{N}}\cos(\frac{(2n+1)k\pi}{2N}) &k>0
 \end{cases}$$
 DFT is not used since DFT has high frequency components near the signal edges. The DCT is a way to mirror the signal before the periodicity. It has only positive frequencies
 
-Applying the DCT to a signal ( a sequence of N real numbers) produces N real coefficients and has a better sparsification property than DFT thanks to the symmetric periodization.
+Applying the DCT to a signal ( a sequence of $M$ real numbers) produces $M$ real coefficients and has a better sparsification property than DFT thanks to the symmetric periodization.
 
 ![[Pasted image 20260330185522.png|Example With Mirroring|450]]
 The DCT is also separable:
