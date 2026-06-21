@@ -814,31 +814,82 @@ DC values have a range  $\in[-1024,1060]$ a difference of two DC signals is $\in
 
 ##### Entropy Coding of AC Coefficients
 Recall that these coefficients are previously encoded as $(a,b)$. These values are used to find the pseudo huffman entropy encoded codeword which is prefix+:
-$$[(a,k)\text{ in RC table prefix\ }|\ b \text{ pseudo huffman}]$$
-That is: First compute $k=\ceil{\log_2|b|+1}$
+$$[(a,k)\text{ in RC table prefix\ }|\ b \text{ DC pseudo huffman}]$$
+That is: 
+- First compute $k=\ceil{\log_2(|b|+1)}$ and $b$ in binary
+- Then find the prefix code corresponding to $(a,k)$ (table)
+- Put prefix + $b$ together
 
 Example: Encode (3,16):
-- Encode 16: $k=5$ and $16_{10}=10000_2$
-- $(L,C)=(0,5)\stackrel{\text{table}}\rightarrow11010$
-The codeword is $11010\ 10000$
+- $k=\ceil{\log_217}=5$ and $b=10000_2$
+- In tabe see that $(3,5)=1111111110010000$
+The codeword is: $1111111110010000\ 10000$
+
 
 Two custom codewords are described:
 - End Of Block (EOB) $= (0,0) \rightarrow 1010$
 - Zero Run (ZR) $=(15,0)\rightarrow 11111111001$
----
-Each value follows the form
-$$C(i, j) = \frac{1}{4} \alpha(i) \alpha(j) \sum_{x=0}^{7} \sum_{y=0}^{7} f(x, y) \cos \left[ \frac{(2x+1)i\pi}{16} \right] \cos \left[ \frac{(2y+1)j\pi}{16} \right]$$
-with $\alpha$ a normalization factor $\alpha(u) = \begin{cases} \frac{1}{\sqrt{2}} & \text{if } u = 0 \\ 1 & \text{if } u > 0 \end{cases}$. 
 
-Reason on the DC component: $C(0,0)=\frac14\frac12\sum\sum f(x,y)\cdot1\cdot1=\frac18\sum\sum f(x,y)$
-After centering the signal, the dc component is $\in[-1024,1016]$.
+#### Frame Building
+The standard frame follows this logic:
+![[Pasted image 20260401200043.png|Frame|350]]
+- Frame header contains static info (size, color space, digitalization format)
+- Image is stored in a frame as various scans
 
+- Scan header contains quantization table (luminance and chrominance)
+- A single scan contains various segments, each segment is a concatenation of blocks
+- Segment header contains huffman tables
 
+JFIF (JPEG File Interchange Format) is the standard format for metadata in JPEG files 
 
-Take a $8\times8$ block:
-- Center the signal (subtract 128)
-- Calculate the DCT coefficients
-- This returns 64 coefficients (can be used to reconstruct og signal)
-- The value at $(0,0)$ is the mean intensity called **DC** value 
-- The other values are called AC values
+## 4.5) Chapter Recap
+**Block coding (resource allocation problem)**
+Minimize $\mathcal D=\frac1M\sum_k c_k\sigma_k^2 2^{-2R_k}$ subject to $\sum_k R_k=R_{tot}$.
+- Optimal rate (Huang–Schultheiss):
+$$R_k^*=\overline R+\frac12\log_2\frac{c_k\sigma_k^2}{c_{GM}\sigma^2_{GM}},\qquad \overline R=\frac{R_{tot}}{M}$$
+- Optimum **equalizes** per-sample distortion, so the global distortion depends only on the GM:
+$$\mathcal D^*=c_{GM}\,\sigma^2_{GM}\,2^{-2\overline R}$$
 
+**AM vs GM.** $\;z_{GM}\le z_{AM}$ (Jensen, $\log$ concave), equality $\iff$ all $z_k$ equal.
+
+**Coding gain.** Orthonormal transform conserves energy ($\sigma^2_{AM}$ fixed by isometry, $D_X=D_Y$) but lowers $\sigma^2_{GM}$ (energy concentration):
+$$G_{\mathcal T}=\frac{D_{PCM}}{D_{\mathcal T}}=\frac{\sigma^2_{AM,Y}}{\sigma^2_{GM,Y}}\ge 1,\qquad =1 \iff \text{all }\sigma_k^2\text{ equal}$$
+$$D_{PCM}=c\,\sigma^2_{AM}\,2^{-2\overline R},\qquad D_{\mathcal T}=c\,\sigma^2_{GM,Y}\,2^{-2\overline R}$$
+⇒ block coding helps **only with variance disparity**; the transform exists to create it.
+
+**KLT.** Rows = eigenvectors of $R_X=\E[XX^T]$. Decorrelates ($\E[Y_iY_j]=\lambda_i\delta_{ij}$); optimal energy compaction (top-$p$ partial energy maximal $\forall p$); minimizes $\sigma^2_{GM,Y}$ ⇒ maximizes $G_{\mathcal T}$. For Gaussian $X$: decorrelation ⇒ **independence** ⇒ rate–distortion optimal. Cost: $O(n^3)$, data-dependent (basis must be transmitted), assumes stationarity.
+
+**DCT.** Fixed basis, $O(n\log n)$, no basis to transmit; near-optimal for Markov sources with $\rho\to1$. Symmetric periodization avoids DFT edge leakage → real, sparser coefficients.
+
+**Modified Huang–Schultheiss** (fixes negative / non-integer rates)
+1. Run HS on all $M$ components.
+2. Any $R_k<0$ → set $R_k=0$, drop that component, re-run HS on the rest.
+3. Repeat until all rates $\ge 0$; then **floor** them.
+4. Distribute leftover bits ($R_{tot}-\sum\lfloor R_k\rfloor$) to the components rounded down the most.
+
+**Greedy bit allocation** (same result, $O(R_{tot})$)
+- Init: $R_k=0$, $D_k=\sigma_k^2\ \forall k$.
+- Repeat $R_{tot}$ times:
+  - $l=\arg\max_k D_k$
+  - $R_l \mathrel{+}= 1$, then $D_l \mathrel{/}= 4$ (since one extra bit quarters distortion).
+
+**KLT construction**
+1. Estimate $R_X=\E[XX^T]$.
+2. Eigendecompose: $R_X=U\Lambda U^T$.
+3. Transform $Y=U^T X$ (rows of $\mathcal T_{KLT}=U^T$ are the eigenvectors).
+4. Coefficient $Y_i$ has variance $\lambda_i$; keep / finely quantize large $\lambda_i$, discard small ones.
+
+**JPEG encoder**
+0. **Preprocess:** 8×8 blocks, level-shift $-128$.
+1. **DCT:** 2-D DCT per block → $y_{ij}$.
+2. **Quantize:** build table (base × quality $Q$, clamp $\max(1,\cdot)$); mid-tread round $\ell_{ij}=\text{round}(y_{ij}/q_{ij})$ → small coeffs become 0.
+3. **Zig-zag + RLE:** DC differential ($DC_n-DC_{n-1}$); AC as (run-of-zeros, value); EOB $(0,0)$, ZRL $(15,0)$.
+4. **Entropy code:** pseudo-Huffman (category $k=\lceil\log_2(|v|+1)\rceil$ + magnitude bits) → bitstream. Quant + Huffman tables go in the header.
+
+**JPEG decoder** (reverse)
+0. **Entropy decode** bitstream → levels $\ell_{ij}$.
+1. **De-quantize:** $\hat y_{ij}=\ell_{ij}\,q_{ij}$.
+2. **IDCT** per block.
+3. **Uncenter** $+128$, clamp to $[0,255]$.
+
+Block coding defines *what a good transform must do* (maximize $\sigma^2_{AM}/\sigma^2_{GM}$) → KLT does it **optimally** → DCT does it **cheaply** → JPEG **packages** it. Transform creates redundancy as variance disparity, allocation spends bits on it, entropy coding harvests the resulting zeros.
