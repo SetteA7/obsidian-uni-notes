@@ -1014,10 +1014,12 @@ F_i\text{ is the synthesiys filter: }&v_i[n]=(f_i*\hat c_i)[n]&&V_i(z)=F_i(Z)\ha
 
 Filter banks have these properties:
 - **Perect Reconstruction (PR):** see later
+- **Invertible Modulation Matrix:** see later
 - **Finite Impulse Response**
 - **Orthogonality**
 - **Vanishing Moments**
 - **Symmetric**
+
 
 ##### Perfect Reconstruction
 Let $x[k]$ be the original signal and $\tilde x[k]$ the signal after passing through the filter bank. **Perfect reconstruction** is achieved if $\tilde x[k]$ is a delayed copy of $x[k]$, that is:
@@ -1025,6 +1027,7 @@ $$\tilde x_k=x_{k+l}\iff\tilde X(z)=z^{-l}X(z)$$
 **Perfect reconstruction analysis** of a 2-channel filter bank is:
 
 $$\tilde{X}(z) = \frac{1}{2}\underbrace{\bigl[F_0 H_0(z) + F_1 H_1(z)\bigr]}_{T(z)}\,X(z) \;+\; \frac{1}{2}\underbrace{\bigl[F_0 H_0(-z) + F_1 H_1(-z)\bigr]}_{A(z)}X(-z)$$
+
 By recalling the definition of perfect reconstruction we can build a system by defining:
 - Non distortion (ND) conditions: $T(z)=2z^{-l}$
 - Aliasing Cancellation (AC): $A(z)=0$
@@ -1042,5 +1045,16 @@ F_0(z)\\ F_1(z)
 2z^{-l}\\0
 \end{bmatrix}X(z)=z^{-l}X(z)
 \end{gather}$$
+The modulation matrix needs to be invertible:
+$$\forall z\in\mathbb C: |z|=1, \ \Delta(z)=H_0(z)H_1(-z)-H_1(z)H_0(-z)\not =0$$
+
 Proof of reconstruction:
-$\begin{aling}\tilde X=v_1+v_2$
+$$\begin{align}\tilde X&=v_0+v_1\\
+&=F_0\hat C_0+F_1\hat C_1\\
+&=F_0C_0(z^2)+F_1C_1(z^2)\\
+&=\frac12F_0[\tilde C_0(z^{1/2})+\tilde C_0(-z^{1/2})]+\frac12F_1[\tilde C_1(z^{1/2})+\tilde C_1(-z^{1/2})]\\
+&=\frac12F_0(H_0(z)X(z)+H_0(-z)X(-z))+\frac12F_1(H_1(z)X(z)+H_1(-z)X(-z))\\
+&= \frac{1}{2}{\bigl[F_0 H_0(z) + F_1 H_1(z)\bigr]}\,X(z) \;+\; \frac{1}{2}{\bigl[F_0 H_0(-z) + F_1 H_1(-z)\bigr]}X(-z)
+\end{align}$$
+
+---
