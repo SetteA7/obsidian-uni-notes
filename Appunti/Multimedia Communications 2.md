@@ -996,11 +996,27 @@ This works with the
 >$$c_k=<x(t),\phi_k(t)>=\int x(t)\phi_k^*(t)dt$$
 
 ## 5.1) Discrete Wavelet Transform
-Discrete Wavelet Transform starts with the filter bank
+Discrete Wavelet Transform starts with the filter bank, collections of filter that divide the signal in different subbands:
 
-**Filter Bank**
+#### Filter Bank
 The idea is to divide the signal in two parts: high and low frequency. These will have their bandwidth halved and so they get decimated and interpolated with a factor of 2. These get recombined to get a delayed copy of the original signal.
 ![[Pasted image 20260402131450.png|Filter Bank Scheme|350]]
+
+$$x[n] \;\xrightarrow{H_i}\; \tilde c_i[n] \;\xrightarrow{\downarrow 2}\; c_i[k] \;\xrightarrow{\uparrow 2}\; \hat{c}_i[n] \;\xrightarrow{F_i}\; v_i[n] \;\xrightarrow{\sum}\; \tilde{x}[n]$$
+where these steps are followied:
+- $H_i$ is the band pass filter: $y_i=(h_i*x)[n]\qquad Y_i=H_i(z)X(z)$
+- 
+
+
+
 Filter banks have these properties:
 - **Perect Reconstruction (PR):** see later
-- 
+- **Finite Impulse Response**
+- **Orthogonality**
+- **Vanishing Moments**
+- **Symmetric**
+
+##### Perfect Reconstruction
+Let $x[k]$ be the original signal and $\tilde x[k]$ the signal after passing through the filter bank. **Perfect reconstruction** is achieved if $\tilde x[k]$ is a delayed copy of $x[k]$, that is:
+$$\tilde x_k=x_{k+l}\iff\tilde X(z)=z^{-l}X(z)$$
+**Perfect reconstruction analysis** of a 2-channel filter bank:
