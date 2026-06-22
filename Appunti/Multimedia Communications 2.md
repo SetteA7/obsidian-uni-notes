@@ -1082,3 +1082,13 @@ A filter with VM of $p$:
 - Has $2p$ taps 
 
 The HP filter looses infomation as it has a finite tap, but it's information remains in 
+
+#### Border problems
+What we have seen works for 1D infinite signal, but images are 2D (no problem since filters are separable) and with **finite support.** We have 3 approaches:
+
+- **Standard approach:** zero padding and DTFT. This produces **coefficient expansion,** the output signal has $N+M-1$ coefficients (N input size and M filter size). 
+- **Circular Convolution:** This is obtained via periodicization of the signal. This however introduces boundary artifacts (aliasing in frequency) because of the implicit periodicization of the circular convolution (DFT)
+![[Pasted image 20260402141513.png|Example Of Boundary Artifacts|350]]
+- **Symmetrization:** We create a new signal by adding a mirror image of the original signal to the period. Let $x$ have period $N$ then $x_s$ has period $2N$. The circular convolution (with periodic filter) will return a periodic and symmetrical signal and thus only the first $N$ samples have to be computed. This does not create artifacts.
+![[Pasted image 20260402141526.png|Example of Symmetric signal (in black the N not calculated coefficients)|350]]
+However this doubles the filter coefficients unless the filter is symmetric!
