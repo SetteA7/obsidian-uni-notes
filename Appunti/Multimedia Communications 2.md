@@ -893,3 +893,22 @@ $$D_{PCM}=c\,\sigma^2_{AM}\,2^{-2\overline R},\qquad D_{\mathcal T}=c\,\sigma^2_
 3. **Uncenter** $+128$, clamp to $[0,255]$.
 
 Block coding defines *what a good transform must do* (maximize $\sigma^2_{AM}/\sigma^2_{GM}$) → KLT does it **optimally** → DCT does it **cheaply** → JPEG **packages** it. Transform creates redundancy as variance disparity, allocation spends bits on it, entropy coding harvests the resulting zeros.
+
+# 5) Wavelet Transform
+Recall the principle of a spectrum analyzer (short time fourier transform) ([[DSP 2]]). Frequency and time resolutions are inversely proportional to each other
+$$\text{Heisenberg-like Uncertainty principle: }\Delta t\cdot \Delta f\geq \frac1{4\pi}$$
+Wavelet is the tool that allows the block of the JPEG to scale dynamically based on frequency (high frequency, smaller blocks. Low frequency, large blocks). In fact an image is made of two parts:
+- Anomalies: High frequency content (edges, contours). This needs a good time resolution to see where they are located
+- Trends: low frequency content (smooth areas, textures). This needs good frequency resolution to better capture subtle shifts in the image
+
+To achieve this we use a **mother wavelet** $\psi(t)$ and generate the basis through scaling and translation:
+$$\psi_{a,b}(t)=\frac1{\sqrt a}\psi\par{\frac{t-b}{a}}$$
+This works with the
+
+>[!thm] Universal Principle
+>The linear transforms used in signal processing and compression are defined by projection of the input signal onto an appropriate set of basis functions.
+>
+>Given an orthonormal basis $\curly{\phi_k(t)}$ any signal can be perfectly represented as 
+>$$x(t)=\sum_kc_k\phi_k(t)$$
+>and the coefficient is obtained by
+>$$c_k=<x(t),\phi_k(t)>=\int x(t)\phi_k^*(t)dt$$
