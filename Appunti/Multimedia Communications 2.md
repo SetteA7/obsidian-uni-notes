@@ -217,6 +217,88 @@ $$\frac{\partial\sigma_Y^2}{\partial a}=2r+2R_Xa=0\rightarrow a^*=-R_X^{-1}r$$
 Then the optimal variance becomes:
 $$\sigma_Y^2=\sigma_X^2+r^Ta^*=\sigma_X^2-r^TR_X^{-1}r$$
 
+$\newcommand{\log}{\text{log}}$ $\newcommand{\logt}{\text{log}_{10}}$ $\newcommand{\logn}[1]{\text{log}_{#1}}$ $\newcommand{\db}{{[\text{dB}]}}$ $\newcommand{\dbm}{{[\text{dBm}]}}$ $\renewcommand{\def}{{\ \stackrel\triangle= \ }}$ $\newcommand{\fourier}{\stackrel{\mathcal F}{\longrightarrow}}$
+
+## 2.4) Chapter Recap
+**Fundamentals:**
+Quantizer: map $Q:x\in\mathbb R\rightarrow\hat x_i\in C=\curly{\hat x_1,\hat x_2,\dots}$. Defined by thresholds $t_i$, regions $\Theta_i=(t_i,t_{i+1})=\curly{x:Q(x)=\hat x_i}$, levels $\hat x_i$. $L=$ #levels. Error $e=x-Q(x)$.
+
+Seen as encode ($x\to i$) / decode ($i\to\hat x_i$, = inverse quantization).
+
+- **Rate:** $R=\log_2 L$. Assumes index distribution uniform (pessimistic, since $H\leq R$ with equality iff uniform) and binarization is entropy-coded.
+- **Distortion (MSE):** $D=\E\sq{\abs{X-Q(X)}^2}=\sigma_E^2$.
+- **Mid-tread** has a $0$ level $\Rightarrow$ suppresses near-zero noise; needs **odd $L$**. **Mid-rise** has no $0$ level $\Rightarrow$ amplifies noise; **even $L$**.
+
+---
+**Uniform Quantizer (UQ)**
+$\Delta=A/L$ constant $\forall i$. Levels = cell midpoints, $\Theta_i=\par{\hat x_i-\tfrac\Delta2,\hat x_i+\tfrac\Delta2}$.
+
+| Unsigned | Signed                                       | Deadzone (signed)                         | High Resolution                       |                                           |
+| -------- | -------------------------------------------- | ----------------------------------------- | ------------------------------------- | ----------------------------------------- |
+| Range    | $(0,A)$                                      | $(-\tfrac A2,\tfrac A2)$                  | $(-\tfrac A2,\tfrac A2)$              | any                                       |
+| Type     | Mid-rise                                     | Mid-tread                                 | Mid-tread (large center)              | any, $L\to\infty$                         |
+| $L$      | even                                         | odd                                       | odd                                   | $\to\infty$                               |
+| $Q(x)$   | $\Delta\floor{\tfrac x\Delta}+\tfrac\Delta2$ | $\Delta,\text{round}\par{\tfrac x\Delta}$ | enc/dec with threshold $\tau$ (below) | $\Delta,\text{round}\par{\tfrac x\Delta}$ |
+| $D(R)$   | —                                            | $\sigma_X^22^{-2R}$ (uniform input)       | —                                     | $\tfrac{\gamma^2}3\sigma_X^22^{-2R}$      |
+
+
+**Deadzone (DZQ):** central cell wider, $\hat x=0$ for $\abs x<\tau$. Common in compression. $$i=\begin{cases}\text{sign}(x)\floor{\dfrac{\abs x+\frac{\tau\Delta}2}\Delta} & \abs x\geq\tau\[2pt]0&\abs x<\tau\end{cases}\qquad\hat x=\begin{cases}\text{sign}(i),\Delta\par{\abs i+\tfrac{1-\tau}2}&i\neq0\0&i=0\end{cases}$$
+
+**Key results**
+- **Minimax optimal:** given range and $L$, UQ has the smallest max error $e_\max=\tfrac{\Delta}2=\tfrac A{2L}$.
+- Only quantizer with **analytical RD** under uniform input: $\boxed{D(R)=\sigma_X^22^{-2R}}$, with $\text{SNR}\approx6R$.
+- General case (HR, no input knowledge): $\boxed{D(R)=\tfrac{A^2}{12}2^{-2R}=\tfrac{\gamma^2}3\sigma_X^22^{-2R}=K_X\sigma_X^22^{-2R}}$ $$\text{SNR}=10\logt\frac{\sigma_X^2}{A^2/12}2^{2R}\approx6R-10\logt\frac{\gamma^2}3,\qquad \gamma^2\def\frac{X_\max^2}{\sigma_X^2}=\frac{A^2/4}{\sigma_X^2}$$ where $\gamma^2$ = **load factor** (peak power / avg power) and $K_X=\gamma^2/3$.
+
+> [!def] HR hypothesis $L\to\infty\ \Rightarrow\ \Delta\to0\ \Rightarrow\ p_X(x)\approx P_i$ const on each $\Theta_i$. Then $E\mid X\in\Theta_i\sim\mathcal U(-\tfrac\Delta2,\tfrac\Delta2)$, and by total probability $E\sim\mathcal U(-\tfrac\Delta2,\tfrac\Delta2)\Rightarrow D=\tfrac{\Delta^2}{12}$.
+
+---
+**Optimal Scalar Quantization**
+
+Input density $p_X$ known $\Rightarrow$ minimize $D$ at fixed $R$.
+
+**Optimal HR quantizer**
+$$\sigma_Q^2=c_X,\sigma_X^2,2^{-2R},\qquad c_X=\frac1{12}\sq{\int p_U^{1/3}(t),dt}^3,\quad U=\tfrac X{\sigma_X}$$ $c_X$ = **shape factor**: depends only on the PDF _shape_, not variance ($U,X$ same shape).
+
+- Uniform: $c_X=1$.
+- Gaussian: $c_X=\tfrac{\sqrt3}2\pi\approx2.72$.
+
+**Non-HR (low rate)**
+No analytical formula. Necessary optimality conditions $\Rightarrow$ **Lloyd–Max** algorithm $\to$ local optimum.
+
+---
+**Predictive SQ**
+
+Quantization is ineffective for non-sparse data. Predictive SQ exploits **inter-sample correlation**.
+
+> [!def] Sparse Signal Most components zero or near zero.
+> 
+> - Low variance.
+> - Near-zero samples quantized to $0$ with negligible distortion.
+> - Natural signals aren't sparse, but can be sparsified (prediction, linear transform).
+
+**Optimization paradigm**
+Prediction error and signal error coincide $\Rightarrow$ performance gain depends only on predictor variance: prediction helps **iff $\sigma_Y^2<\sigma_X^2$**.
+
+Proof (prediction error = signal error), valid in **closed loop** ($v$ built from $\hat x$ at both ends): $$q(n)=y(n)-\hat y(n)=\big(x(n)-v(n)\big)-\big(\hat x(n)-v(n)\big)=x(n)-\hat x(n)=\overline q(n)$$
+
+SNR splits into prediction gain + quantizer gain: $$\text{SNR}=10\logt\frac{\sigma_X^2}D=\underbrace{10\logt\frac{\sigma_X^2}{\sigma_Y^2}}_{G_P}+\underbrace{10\logt\frac{\sigma_Y^2}D}_{G_Q}$$
+ **Linear predictor**
+Simple, optimal for Gaussian rv. Combination of $P$ past values: $$v(n)=-\sum_{i=1}^Pa_ix_{n-i}\ \Rightarrow\ y(n)=x(n)-v(n)=\sum_{i=0}^Pa_ix_{n-i},\quad a_0=1$$ As a filter: $y(n)=(a*x)(n)\ \zetatrans\ Y(z)=A(z)X(z)$, with $A(z)=\sum_{i=0}^Pa_iz^{-i}=1+a_1z^{-1}+\dots+a_Pz^{-P}$. Minimization acts only on $a$.
+
+**Optimal filter (Yule–Walker):** the variance is a quadratic form $$\sigma_Y^2=\sigma_X^2+2r^Ta+a^TR_Xa,\qquad r=\text{autocorr. vector},\ R_X=\text{autocorr. matrix}$$ $$\frac{\partial\sigma_Y^2}{\partial a}=2r+2R_Xa=0\ \Rightarrow\ \boxed{a^*=-R_X^{-1}r}\ \Rightarrow\ \boxed{\sigma_{Y,\min}^2=\sigma_X^2+r^Ta^*=\sigma_X^2-r^TR_X^{-1}r}$$
+
+**Practical points**
+- **Order:** good up to $\approx4$. Distant pixels add little (screening effect: their correlation is already captured by closer neighbors) at higher complexity, negligible PSNR gain.
+- **Closed loop mandatory:** predictor must use $\hat x$, else $v_{enc}\neq v_{dec}$, the cancellation $q=\overline q$ breaks, and error accumulates (**drift**).
+- **Penalty:** predicting from $\hat x$ (not $x$) performs worse than direct quantization; recovered via **entropy coding**.
+- **Local (block-wise) adaptation:** split image into $M\times M$ blocks, optimal filter per block. Rate overhead $+\tfrac{NB}{M^2}$ ($N$=order, $B$=bits/coeff).
+    - Small block: good local stats, high overhead.
+    - Large block: low overhead, poor local adaptation.
+
+> [!example|*] Prediction gain for AR(1) $X(n)\sim\mathcal N(0,\sigma^2)$, $\E[X(n)X(m)]=\sigma^2\rho^{\abs{n-m}}$, fixed predictor $V(n)=X(n-1)$. Find $\rho$ s.t. $G_P>0$.
+> 
+> Need $G_P>0\db\iff\sigma_Y^2<\sigma_X^2=\sigma^2$. With $Y(n)=X(n)-X(n-1)$ (zero-mean Gaussian): $$\sigma_Y^2=\E[(X(n)-X(n-1))^2]=2\sigma^2-2\sigma^2\rho=2\sigma^2(1-\rho)$$ $$\sigma_Y^2<\sigma^2\iff2(1-\rho)<1\iff\boxed{\rho>\tfrac12}\iff G_P>0$$
+
 # 3) Lossless Coding
 Lossless coding means to decrease the number of bits needed to encode the data without losing any information: the process is reversible.
 
@@ -898,8 +980,8 @@ Block coding defines *what a good transform must do* (maximize $\sigma^2_{AM}/\s
 Recall the principle of a spectrum analyzer (short time fourier transform) ([[DSP 2]]). Frequency and time resolutions are inversely proportional to each other
 $$\text{Heisenberg-like Uncertainty principle: }\Delta t\cdot \Delta f\geq \frac1{4\pi}$$
 Wavelet is the tool that allows the block of the JPEG to scale dynamically based on frequency (high frequency, smaller blocks. Low frequency, large blocks). In fact an image is made of two parts:
-- Anomalies: High frequency content (edges, contours). This needs a good time resolution to see where they are located
-- Trends: low frequency content (smooth areas, textures). This needs good frequency resolution to better capture subtle shifts in the image
+- **Anomalies:** High frequency content (edges, contours). This needs a good time resolution to see where they are located
+- **Trends:** low frequency content (smooth areas, textures). This needs good frequency resolution to better capture subtle shifts in the image
 
 To achieve this we use a **mother wavelet** $\psi(t)$ and generate the basis through scaling and translation:
 $$\psi_{a,b}(t)=\frac1{\sqrt a}\psi\par{\frac{t-b}{a}}$$
@@ -912,3 +994,13 @@ This works with the
 >$$x(t)=\sum_kc_k\phi_k(t)$$
 >and the coefficient is obtained by
 >$$c_k=<x(t),\phi_k(t)>=\int x(t)\phi_k^*(t)dt$$
+
+## 5.1) Discrete Wavelet Transform
+Discrete Wavelet Transform starts with the filter bank
+
+**Filter Bank**
+The idea is to divide the signal in two parts: high and low frequency. These will have their bandwidth halved and so they get decimated and interpolated with a factor of 2. These get recombined to get a delayed copy of the original signal.
+![[Pasted image 20260402131450.png|Filter Bank Scheme|350]]
+Filter banks have these properties:
+- **Perect Reconstruction (PR):** see later
+- 
