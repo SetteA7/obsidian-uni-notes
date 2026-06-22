@@ -1020,6 +1020,12 @@ Filter banks have these properties:
 - **Vanishing Moments**
 - **Symmetric**
 
+Only 2 filters have these properties:
+- **Quadrature Mirror Filters (QMF):** 
+$$H_0(z)=H_1(-z) \text{ and } F_0(z)=H_0(z), \ F_1(z)=-H_1(z)$$
+- **Conjugate Quadrature Filters (CQF):** 
+$$H_0(z)=H_1(-z) \text{ and } F_0(z)=H_0(z^{-1}), \ F_1(z)=-H_1(z^{-1})$$
+Both are Orthogonal and energy conserving. A special case is the **Haar filter**, which is both A QMF and CQF at the same time (see later).
 
 ##### Perfect Reconstruction
 Let $x[k]$ be the original signal and $\tilde x[k]$ the signal after passing through the filter bank. **Perfect reconstruction** is achieved if $\tilde x[k]$ is a delayed copy of $x[k]$, that is:
@@ -1045,8 +1051,6 @@ F_0(z)\\ F_1(z)
 2z^{-l}\\0
 \end{bmatrix}X(z)=z^{-l}X(z)
 \end{gather}$$
-The modulation matrix needs to be invertible:
-$$\forall z\in\mathbb C: |z|=1, \ \Delta(z)=H_0(z)H_1(-z)-H_1(z)H_0(-z)\not =0$$
 
 Proof of reconstruction:
 $$\begin{align}\tilde X&=v_0+v_1\\
@@ -1058,3 +1062,23 @@ $$\begin{align}\tilde X&=v_0+v_1\\
 \end{align}$$
 
 ---
+##### Modulation Matrix Invertibility
+The modulation matrix needs to be invertible:
+$$\tilde X(z)=\frac12\underbrace{\begin{bmatrix}
+H_0(z)&H_1(z)\\
+H_0(-z)&H_1(-z)
+\end{bmatrix}}_{\text{modulation matrix}}\cdot
+\begin{bmatrix}
+F_0(z)\\ F_1(z)
+\end{bmatrix}X(z)$$
+$$\forall z\in\mathbb C: |z|=1, \ \Delta(z)=H_0(z)H_1(-z)-H_1(z)H_0(-z)\not =0$$
+##### Orthogonality
+QMF and CQF are orthonogal to **ensure energy conservation:**
+$$\sum (x_k)^2=\sum(c_k)^2+\sum(d_k)^2$$
+##### Vanishing Moments
+VM represents the ability of a filter to reproduce polynomials: 
+A filter with VM of $p$:
+- Can represnet polynomial of degree up to $p$
+- Has $2p$ taps 
+
+The HP filter looses infomation as it has a finite tap, but it's information remains in 
