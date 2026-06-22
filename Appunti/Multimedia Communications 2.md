@@ -1003,11 +1003,14 @@ The idea is to divide the signal in two parts: high and low frequency. These wil
 ![[Pasted image 20260402131450.png|Filter Bank Scheme|350]]
 
 $$x[n] \;\xrightarrow{H_i}\; \tilde c_i[n] \;\xrightarrow{\downarrow 2}\; c_i[k] \;\xrightarrow{\uparrow 2}\; \hat{c}_i[n] \;\xrightarrow{F_i}\; v_i[n] \;\xrightarrow{\sum}\; \tilde{x}[n]$$
-where these steps are followied:
-- $H_i$ is the band pass filter: $y_i=(h_i*x)[n]\qquad Y_i=H_i(z)X(z)$
-- 
-
-
+where these steps are followed:
+$$\begin{align}
+H_i\text{ is the bandpass filter: }&\tilde c_i[n]=(h_i*x)[n] &&\tilde C_i(z)=H_i(z)X(z)\\
+\text{Downsampling is done as: }&c_i[n]=\tilde c_i[2n] &&C_i(z)=\frac12[\tilde C_i(z^{1/2})+\tilde C_i(-z^{1/2})]\\
+\text{Upsampling isdone as: } &\hat c_i[n]=\begin{cases}c_i[n/2]&n\text{ even}\\0&n\text{ odd}\end{cases} &&\hat C_i(z)=C_i(z^2)\\
+F_i\text{ is the synthesiys filter: }&v_i[n]=(f_i*\hat c_i)[n]&&V_i(z)=F_i(Z)\hat C_i(z)\\
+\text{Final output: }&\tilde x[n]=\sum v_i[n]&&\tilde X(z)=\sum V_i
+\end{align}$$
 
 Filter banks have these properties:
 - **Perect Reconstruction (PR):** see later
@@ -1019,4 +1022,7 @@ Filter banks have these properties:
 ##### Perfect Reconstruction
 Let $x[k]$ be the original signal and $\tilde x[k]$ the signal after passing through the filter bank. **Perfect reconstruction** is achieved if $\tilde x[k]$ is a delayed copy of $x[k]$, that is:
 $$\tilde x_k=x_{k+l}\iff\tilde X(z)=z^{-l}X(z)$$
-**Perfect reconstruction analysis** of a 2-channel filter bank:
+**Perfect reconstruction analysis** of a 2-channel filter bank is:
+
+$$\tilde{X}(z) = \underbrace{\frac{1}{2}\bigl[F_0 H_0(z) + F_1 H_1(z)\bigr]}_{T(z)}\,X(z) \;+\; \underbrace{\frac{1}{2}\bigl[F_0 H_0(-z) + F_1 H_1(-z)\bigr]}_{A(z)}X(-z)$$
+By recalling the definition of perfect reconstru
