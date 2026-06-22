@@ -1024,5 +1024,23 @@ Let $x[k]$ be the original signal and $\tilde x[k]$ the signal after passing thr
 $$\tilde x_k=x_{k+l}\iff\tilde X(z)=z^{-l}X(z)$$
 **Perfect reconstruction analysis** of a 2-channel filter bank is:
 
-$$\tilde{X}(z) = \underbrace{\frac{1}{2}\bigl[F_0 H_0(z) + F_1 H_1(z)\bigr]}_{T(z)}\,X(z) \;+\; \underbrace{\frac{1}{2}\bigl[F_0 H_0(-z) + F_1 H_1(-z)\bigr]}_{A(z)}X(-z)$$
-By recalling the definition of perfect reconstru
+$$\tilde{X}(z) = \frac{1}{2}\underbrace{\bigl[F_0 H_0(z) + F_1 H_1(z)\bigr]}_{T(z)}\,X(z) \;+\; \frac{1}{2}\underbrace{\bigl[F_0 H_0(-z) + F_1 H_1(-z)\bigr]}_{A(z)}X(-z)$$
+By recalling the definition of perfect reconstruction we can build a system by defining:
+- Non distortion (ND) conditions: $T(z)=2z^{-l}$
+- Aliasing Cancellation (AC): $A(z)=0$
+
+$$\begin{gather}
+
+\tilde X(z)=\frac12\underbrace{\begin{bmatrix}
+H_0(z)&H_1(z)\\
+H_0(-z)&H_1(-z)
+\end{bmatrix}}_{\text{modulation matrix}}\cdot
+\begin{bmatrix}
+F_0(z)\\ F_1(z)
+\end{bmatrix}X(z)
+=\frac12\begin{bmatrix}
+2z^{-l}\\0
+\end{bmatrix}X(z)=z^{-l}X(z)
+\end{gather}$$
+Proof of reconstruction:
+$\begin{aling}\tilde X=v_1+v_2$
