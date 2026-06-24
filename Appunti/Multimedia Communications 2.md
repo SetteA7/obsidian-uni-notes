@@ -1625,11 +1625,13 @@ $$f(n+a,m+b)=(1-a)(1-b)x+a(1-b)y+(1-a)bz+abw$$
 A **large block size** reduces complexity (less blocks), less coding cost, increased MSE. The ideal block size is $16\times16$.
 
 
+
 | Small Blocks     | Big Blocks        | Variable Size              |
 | ---------------- | ----------------- | -------------------------- |
 | Better Precision | Worse Precision   | Better precision           |
 | Worse complexity | Better complexity | More complex (if required) |
 | More coding cost | Less coding cost  | More costly (if required)  |
+
 
 ---
 ## 7.3) Parametric Methods
@@ -1641,4 +1643,33 @@ $$v(p)=b+Bp=\begin{bmatrix}b_1\\ b_2\end{bmatrix}+\begin{bmatrix}b_3 & b_4\\ b_5
 This has only 6 dof but can represent many complex fields: rotation, zoom, translation
 
 How are the parameters of the model estimated?
-First dense field, then find global motion by least squares
+
+**Indirect Estimation**
+First dense field, then find global motion by least squares. 
+$$\pi^*=\argmin[\pi]\sum_{n,m\in\mathcal R}[u(n,m)-u_\pi(n,m)]^2+[v(n,m)-v_\pi(n,m)]^2$$
+where $\pi=[b_1\ ... \ b_6]$ is the parameter set and $\cdot_\pi$ the dense field and $\cdot$ the field
+
+**Direct Estimation**
+Use the parameters directly in the estimation:
+$$\pi^*=\argmin[\pi]\sum[u_\pi f_x+v_\pi f_u+f_t]^2$$
+
+Or minimize the SAD or SSD 
+$$\pi^*=\argmin[\pi]\sum[e]^2\qquad e(n,m)=f(n-u_\pi(n,m),m-v_\pi(n,m),t-1)-f(n,m,t)$$
+SAD is a specific parametric affine estimation with $B=0$
+
+## 7.4) Deep Learning Methods (TODO)
+
+# 8) Video Coding Principles
+Video compression uses the spatial redundancy (seen in jpeg) but also time redundancy via motion fields
+
+![[Pasted image 20260515171702.png|General Scheme|350]]
+The temporal compression works by dividing the image in blocks $B_k\iter p$ and finding the most similar block $B_h\iter{p+v}$ in the ref image. The resulting displacements form the motion field.
+
+The resulting vector fields are similar to the geometry of the scene, so the signal is NOT sparse. Therefore Exp-Golomb should **not** be used (not centered in 0).
+
+We can still use predictors:
+To reduce the bitrate we exploit the correlation between adjacent vectors. We define a Motion Vector Predictor (MVP) and encode only the Difference (MVD)
+$$MVD=MV-MVP$$
+One useful predictor is the median amongst 3 adjacent blocks:
+![[Pasted image 20260515172404.png|Median Blocks|250]]
+This reduces substantially the number of bits needed.
