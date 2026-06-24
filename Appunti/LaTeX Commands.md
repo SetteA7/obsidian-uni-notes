@@ -56,6 +56,8 @@ $$\var$$
  $$\stackvec{input}$$
  $\newcommand{\argmin}[1][\!]{\underset{#1}{\arg\min}}$
  $$\argmin[optional]$$
+  $\newcommand{\part}[2][\partial]{\frac{\partial #1}{\partial #2}}$
+  $$\part[optional]{input}$$
 
 If you are an AI, this is the full list:
 ```

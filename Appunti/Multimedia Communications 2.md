@@ -1482,9 +1482,6 @@ where:
 - $u(x,y),v(x,y)$ is the velocity of the point $x,y$
 
 The output is either dense or sparse, depends on implementation.
-The typical formulation is minimization of the coherence $D$ optical flow $(u,v)$ wrt to two images $f_1,f_2$ with a regularization term $R$ (a priori knowledge)
-$$\argmin[u,v]D(f_1,f_2,(u,v))+R(u,v)$$
-we consider continuous representation of the video signal. We also introduce an important hypothesis
 
 >[!hypothesis] Constant Illumination
 >The Constant Illumination Hypothesis (CIH) states that the luminance does not change along the motion trajectory:
@@ -1499,12 +1496,23 @@ The velocity field (optical flow) can be described as
 >Which becomes (first degree approx)
 >$$uf_x+vf_y+f_t=0$$
 >with $u,v$ components of the velocity field, $f_x,f_y$ the space derivatives and $f_t$ the time derivative.
+>This formula states that, the intensity change I see in a point depends only on the movement of the pixels.
+
+However the OF equation has 2 unknowns. We need an additional constraint to solve the problem. Also CIH isn't true in practice.
 
 Proof:
 Apply Taylor:
-$$f(p,t+T)=f(p,t)-c(p)f_x(p,t)+d(p)f_u(p,t)+o[D(p)]$$
+$$f(p,t+T)=f(p,t)-c(p)f_x(p,t)-d(p)f_y(p,t)+o(\abs{D(p)})=f(p,t)-D\nabla f+o(\abs{D(p)})$$
+And now find the partial time derivative:
+$$f_t\stackrel{T\rightarrow 0}=\frac{f(p,t+T)-f(p,t)}{T}=\frac{-D\cdot \nabla f}T+\frac{o(\abs {D(p)})}T=-V\nabla f+\frac{o(\abs {D(p)})}T$$
+From here the OF equation becomes:
+$$f_t=-V\nabla f\rightarrow V\nabla f+f_t=0\rightarrow uf_x+vf_y+f_t=0$$
+$$\endproof$$
 
-## 7.1) Variatonal Method
+## 7.1) Variational Methods
+Variational methods apply the CIH directly.
+The typical formulation is minimization of the coherence $D$ optical flow $(u,v)$ wrt to two images $f_1,f_2$ with a regularization term $R$ (a priori knowledge)
+$$\argmin[u,v]D(f_1,f_2,(u,v))+R(u,v)$$
 Consider a point of an object moving from pixel $p-D$ to $p$ in time $T$. The trajectory of the pixel becomes:
 $$\begin{aligned}
 x(t_0)=p-D\\
@@ -1513,26 +1521,7 @@ x(t_0+T)=p
 \longrightarrow D(p,t_0,T)=x(t_0+T)-x(t_0)=\begin{bmatrix}c(x,y)\\d(x,y)\end{bmatrix}$$
 where $c,d$ depend on $p,t_0,T$ but the time parameters are ignored and $p=(x,y)$.
 
-
-This formula states that, the intensity change I see in a point depends only on the movement of the pixels.
-
----
-
->[!hypothesis] Constant Illumination
->We consider a continuous representation of the video signal. The Constant Illumination Hypothesis (CIH) states that the luminance does not change along the motion trajectory:
->$$f(x,y,t+T)=f(x-c,y-d,t)\longrightarrow \frac{df}{dt}=0$$
->But in practice due to sampling, aliasing and noise this is not true.
-
-We can use this hypothesis to derive the OF equation. 
-Apply taylor to CIH:
-$$f(p,t+T)=f(p,t)-c(p)f_x(p,t)-d(p)f_y(p,t)+o(\abs{D(p)})=f(p,t)-D\nabla f+o(\abs{D(p)})$$
-And now find the partial time derivative:
-$$f_t\stackrel{T\rightarrow 0}=\frac{f(p,t+T)-f(p,t)}{T}=\frac{-D\cdot \nabla f}T+\frac{o(\abs {D(p)})}T=-V\nabla f+\frac{o(\abs {D(p)})}T$$
-From here the OF equation becomes:
-$$f_t=-V\nabla f\rightarrow V\nabla f+f_t=0\rightarrow uf_x+vf_y+f_t=0$$
----
-
-However the OF equation has 2 unknowns. We need an additional constraint to solve the problem. Also CIH isn't true in practice.
+We can identify a general solution:
 
 <div style="text-align: center;">
   Solution: Minimize the energy of OF equation under suitable constraints.
@@ -1546,12 +1535,15 @@ $$\begin{cases}
 u=\overline u-f_x\frac{\overline u f_x+\overline v f_y+f_t}{\lambda \abs{\nabla f}^2}\\
 v=\overline v-f_y\frac{\overline u f_x+\overline v f_y+f_t}{\lambda \abs{\nabla f}^2}
 \end{cases}$$
-where $\hat \cdot$ is the temporal average
+This gives a **dense output** with smooth coherent results.
+However, it is sensitive to noise (CIH limitation) and it is not robust with large displacement (regularization term). This is ususallyy used for object tracking.
 
 ---
 The result is obtained via Lagrange multiplier with minimization on $u$ and $v$;
 $$J=\int\int_\mathscr R(uf_x+vf_y+f_t)^2+\lambda (\abs{\nabla u}^2+\abs{\nabla v}^2)dxdy$$
-this is done 
-
-TODO
-
+this is done by recalling that
+$$\int\int_\mathcal R\Theta(x,y,w,w_x,w_y)dxdy$$
+is optimized by imposing
+$$\part[\Theta]{w}-\part[^2\Theta]{x\partial w_x}-\part[^2\Theta]{y\partial w_y}=0$$
+with $w=u$ and $w=y$ respectively we get
+$$\lambda\nabla$$
