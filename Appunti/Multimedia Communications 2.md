@@ -1717,4 +1717,75 @@ A variable block size is more effective although it is more complex to implement
 
 Recap of the design parameters:
 - **Block Size/Shape:** Small block: high PSNR, higher rate and time. Variable most effective
-- **Cost function $d$:** SSD optimizes PSNR but higher rate (outliers), SAD better rate (impli)
+- **Cost function $d$:** SSD optimizes PSNR but higher rate (outliers), SAD better rate (implicit regularizaton)., SAD+regularization best option
+- **Search:** full best vector but very high complexity, fast close to optimal but much less complex
+- **Motion:** translational 2 parameters, affine 6 parametes, more complex some times better RD
+
+## 8.2) Group of Pictures (GOP)
+Each frame can be one of the following three:
+- I Frame: Intra coded, no prediction
+- P Frame: Predictive coded, Inter frame
+- B Frame: Bi directional prediction
+
+The frames are organized into a periodical structure called Group of Pictures (GOP). This structure shows **how frames can be predicted from other frames**. In older standards I,P frames are called Anchor Frames (AF).
+
+![[Pasted image 20260624152737.png|Example|350]]
+
+#### MPEG-1, MPEG-2
+- First frame of GOP is **always** I frame
+- Between two AF there are some B frames (possibly also zero)
+GOP structure defined by I frames (GOP period) and number of B frames
+
+I Frames are JPEG like coded:
+- Low complexity and rate
+- Can be decoded independently from other frames
+- I frames are used for fast forward
+- Stop error propagation
+- Must have high quality as GOP depends on this frame
+
+P Frames are predicted from previous AF. They have therefore a higher complexity but a higher compression rate per same block
+
+B Frames have very high complexity (double ME) but also very high compression ratio.
+
+## 8.3) Mode Selection
+The mode selection problem is to decide how to encode each block or frame. Until H.264 the blocks were called macroblocks (MB), now they are coding units (CU).
+
+4 Types of coding modes for each CU (mode selection problem)
+- **Intra:** No temporal prediction, available for all frames
+- **Inter:** ME/MC prediction. Not on I frames
+- **Direct:** Motion vector from last frame, no additional coding. Not on I frames
+- **Lossless:** available for all frames
+
+Moreover since CUs can be of varying sizes we also have a **block partition problem.**
+
+The solution is very much a brute force one:
+Suppose fixed block size. The aim is to find the coding mode $i_k$ that minimizes $D$ while having rate $R$. Quantization step is given
+$$D=\sum_{k=1}^KD_k(i_k,Q)\qquad R=\sum_{k=1}^KR_k(i_k,Q)$$
+Therefore we must minimize
+$$J(i,Q,\lambda)=\sum_{k=1}^KD_k(i_k,Q)+\lambda\sum_{k=1}^KR_k(i_k,Q)=D+\lambda R$$
+Too complex, therefore we just minimize each block independently
+$$J_k(i_k,Q,\lambda)=D_k(i_k,Q)+\lambda R_k(i_k,Q)$$
+The parameter $\lambda$ is determined empirically for each coded and also $\lambda_{ME}=\sqrt\lambda$
+The $J_k$ equation can be seen as a line in the R-D plane and the solution is the first point that is touched by the line. 
+- High $\lambda$: Lower bit budget, will choose points with less rate and more distortion (direct)
+- Low $\lambda$: Higher bit budget, will choose points with less distortion and more rate (lossless)
+![[Pasted image 20260516121055.png|Example|300]]
+For a quantization step $Q$ an optimal $\lambda$ exists, it is measured empirircally:
+- MPEG-2: $\lambda = aQ^2+b$
+- H.264: $\lambda = c2^{dQ+e}$
+
+## 8.4) Hybrid Video Codec
+This is the full video encoder:
+![[Pasted image 20260516141302.png|Video Encoder|450]]
+The block $B_k$ is encoded as follows:
+- 🔵 The residual error $e_k=B_k-\hat B_k$ is found and encoded in a jpeg like format. Also the mode is encoded.
+- 💚 Local decoder: find $\tilde B_k=\tilde e_k + \hat B_k$. This is how the block will be decoded and it is saved in frame buffer (if inter).
+- 🧡 Predictors: ME/MC predictors (based on $B_k$+buffer) or Intra predictors. This predicts
+- ⚪ Control: Final generated bits are saved in channel buffer. If the rate is too high, the control block expands the quantization step. The buffer is written at speed $R_C$ and read at speed $R_T$.
+	- If $R_C>R_T$: the buffer grows, if it surpasses a threshold the controller increases the quantization step $\longrightarrow R_C\nearrow$ 
+	- If $R_C<R_T$: the buffer empties, if it decreases below a threshold the controller reduces the quantization step $\longrightarrow R_C\searrow$ 
+
+The decoder is a subset of the encoder!
+![[Pasted image 20260516145213.png|Decoder Is Subset After Lossless Decoding|350]]
+The decoder is a simplified version without ME, mode decision, partition, control.
+Each block is decoded based on the mode, however the modes are not standardized, just their syntax. The encoder could take a suboptimal approach, the decoder doesn't care.
