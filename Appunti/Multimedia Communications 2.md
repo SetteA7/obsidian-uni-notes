@@ -1774,7 +1774,14 @@ For a quantization step $Q$ an optimal $\lambda$ exists, it is measured empirirc
 - MPEG-2: $\lambda = aQ^2+b$
 - H.264: $\lambda = c2^{dQ+e}$
 
+Also the **lock partition problem**, that is selecting the best variable block size.
+We start with largest block, we divide into sub blocks if $J_{split}=\sum J_{subblock,i}<J_B$. When we achieve a better performance we block the search so to reduce complexity (suboptimal but reasonable results)
 ## 8.4) Hybrid Video Codec
+The video coder implements mode selection only in encoder:
+- **Null predictor:** compress entire frame (DCT+Q)
+- **Temporal Prediction:** via MC/ME
+- **Space or Intra:** predict entirely from encoded blocks in the same frame
+
 This is the full video encoder:
 ![[Pasted image 20260516141302.png|Video Encoder|450]]
 The block $B_k$ is encoded as follows:
