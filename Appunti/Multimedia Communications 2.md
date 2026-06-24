@@ -1721,6 +1721,10 @@ Recap of the design parameters:
 - **Search:** full best vector but very high complexity, fast close to optimal but much less complex
 - **Motion:** translational 2 parameters, affine 6 parametes, more complex some times better RD
 
+**Advanced motion compensation:**
+A fram can be predicted from many different frames together
+- Multiple Reference Frames: Slices can maintain one (P) or two (B) lists of reference images kept in the Decoded Picture Buffer (DPB)
+- Generalized B slices: The encoder can flexibly select predictors from these lists and combine them using weighted averages
 ## 8.2) Group of Pictures (GOP)
 Each frame can be one of the following three:
 - I Frame: Intra coded, no prediction
@@ -1803,30 +1807,44 @@ Standards exclusively define the bitstream syntax and the decoding process. Enco
 
 The improvements come from how many ways the encoder can encode the images. This is mainly related to how the image can be partitioned in blocks.
 
-**H.264/AVC** has $16\times16$ MB or $8\times8$ and $4\times4$ MB which are inefficient for 1080p or 4K videos.
+**H.264/AVC** has $16\times16$ MB or $8\times8$ and $4\times4$ MB which are inefficient for 1080p or 4K videos
+
+Motion Vectors are predicted using spatial neighbor. If median is correct, 0 bits are used
+
+uses DCT for $4\times4$ blocks
+
+Lossless coding is done via Context Adaptive Binary Arithmetic Coding (CABAC)
+
+Deblocking is used: Analyzes edges between 4 × 4 blocks. Filtering strength adapts dynamically to the coding mode, motion vectors, and quantization step of neighboring blocks
 
 **H.265/HEVC** has a Coding Tree Unit (CTU) where a MB of $64\times 64$ can be divided into other squares until $4\times 4$
 
 HEVC uses Coding Tree Unit (CTU) with quad tree split. Each CTU gets recursively split into CUs (divide by 4) and each CU can be divided into Predictions Units (PU) or Transform Units (TU). These (PU,TU) are independently created from eachother since a block that works great fro PU might not work for TU
 
+HEVC also introduces quarter pixel fractional precision. Uses 6-tap filter to interpolate sub pixels
+
+MV is predicted via **Merge Modes** use dynamic candidate list: aggregates 5 spatial (adjacent blocks) and 1 temporal candidates, shares MV of best candidate and ref frame index. Also in VVC
+
+uses DST for $4\times4$ blocks
+
+the quantization step size doubles for every increment of 6 in the Quantization Parameter (QP)
+
+Uses deblocking + Sample Adaptive Offset (SAO): categorizes pixels (edges, bands) and adds offsets to correct ringing artifacts
+
 ![[Pasted image 20260624165257.png|Example|250]]
 ![[Pasted image 20260624165317.png|Example|250]]
 
-H.266/VVC has blocks of up to $128\times128$. New splits are defined (binary 1:1 or ternary 1:2:1  splits)
+**H.266/VVC** has blocks of up to $128\times128$. New splits are defined (binary 1:1 or ternary 1:2:1  splits). The sub pixel prediction is increased to $1/8$. From here also the blocks are not rigid, they can rotate, zoom, shear. uses 4 or 6 parameters. Uses **Multiple Transform Selection (MTS)** for rectangular blocks
+
+Adds the Adaptive Loop Filter (ALF) and Luma Mapping with Chroma Scaling (LMCS) specifically designed to preserve details in HDR (High Dynamic Range) video
 
 ![[Pasted image 20260624165339.png|Example|300]]
 
-AV1 can create up to 10 different splits. 
+**AV1** can create up to 10 different splits. Allows to combine inter with intra predictions in same block
+
+Many post processing effects: 
 
 ![[Pasted image 20260624165355.png|Example|350]]
-
-
-| H264 | H265 | H266 |
-| ---- | ---- | ---- |
-|      |      |      |
-
-
-
 Trying every combination is computationally unfeasable:
 **Depth First Search (DFS)** is used to explore efficiently block geometry:
 - Top Down Exploration: try as a whole, then split
@@ -1839,3 +1857,15 @@ fats algorithms and ML based ones can prune the tree faster
 - Temporal correlation: search space by exploiting the partition depth of the co-located CU in the reference frame.
 - ML Classifiers: lightweight predict splits from pixel features
 
+#### Cost Of Freedom
+Recall this
+
+| H264                                                                           | H265                                | H266                                                          |
+| ------------------------------------------------------------------------------ | ----------------------------------- | ------------------------------------------------------------- |
+| 4 predictors for $16\times16$ blocks. 9 types (8 directions+DC) for $4\times4$ | 33 modes (33 directions +DC+planar) | 65 directional modes + wide angle modes for non square blocks |
+
+Notice that the bits needed to encode a block depends on the generators $P$:
+$$P\propto2^B$$
+VVC needs 7 bits for 67 modes. Sending 7 bits per block is inefficient since the rate explodes when there are small blocks!
+
+Use **Most probable Mode (MPM)**, the encoder predicts mode using spatial context. List of MPMs s built (HEVC has 3, VVC has 6). So these are encoded with small codewords
