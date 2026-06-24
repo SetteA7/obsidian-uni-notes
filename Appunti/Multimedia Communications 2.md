@@ -1107,6 +1107,48 @@ We consider the **Cohen-Daubechies-Fauveau (CDF)** biorthogonal filter:
 - Maximize VM
 - close to orthogonal ($\omega_i\approx 1$)
 
-They work by decomposing the signal into three wavelets
+Here is a 3 level wavelet decomposition
 ![[Pasted image 20260403162823.png|Three wavelet decomposition|350]]
 and then reconstructing the signal in order.
+
+#### 2D Wavelet Decomposition
+For 2D signals it is possible to use this schema:
+![[Pasted image 20260403163646.png|2D|350]]
+and for multi level decomposition just the output $c_i$ is used.
+The 4 outpust are:
+- $c$ (A): approximation coefficients (low res version of og image by LP filter in both directions)
+- $d^H$ (H): horizontal HP (HP on rows, LP on cols)
+- $d^V$ (V): vertical HP (HP on cols, LP on rows)
+- $d^D$: diagonal details
+
+Here you can see the various outputs after one level of decomposition
+![[Pasted image 20260624103446.png|Example|200]]
+
+Applying this sparsifies the signal:
+![[Pasted image 20260403164118.png|One Level|350]]
+![[Pasted image 20260403164140.png|5 Levels|350]]
+the optimal levels are between 4-6.
+
+
+## 5.2) Image Compression with Wavelets
+
+We will study two approaches:
+- Inter Scale Dependency (EZW): Tree based representation, low complexity with inter scale dependency, not resolution scalable
+- Inter Scale Dependency (JPEG 200): Explicit bit rate allocation + entropy coding. Reslution scalable and allows for random access, no intra scale dependency.
+
+#### Embedded Zerotrees of Wavelet Coefficients (EZW)
+Here are the properties:
+- Quality scalable: progressive representation
+- Lossles to lossy
+- Small complexity
+- RD better than JPEG
+
+Exploits **auto similarity:** when a coeff is small, also its descendants are, then we can save with just 1 symbol
+
+Each new bit should convey max information: send first big coefficients, but has **localization overhead**: subband scan+ zero tree
+
+One (partial solution) is the **subband scan:** scan in order C,H,V,D from smallest to highest subband
+
+We also need a way to find biggest coeff first without sending localization info. Exploit inter-band correlation to predict position of non significant coeff.
+One pixel in the subband has 4 times as more coeff in the next band. **If a coeff is small, also its descendants are**. A (sub-)tree of below-the-threshold coefficients is called a zero-tree. it is encoded with only one symbol.
+#### JPEG 2000
