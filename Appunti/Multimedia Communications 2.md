@@ -1572,7 +1572,33 @@ In general we have a **forward motion**, that is $h=k-1$ with $h$ the current fr
 $$\forall(n, m) \in B_{p,q}, (u_{h\rightarrow k}, v_{h\rightarrow k}) = \arg \min_{(i,j) \in \mathcal{W}} d [f_k(B_{p,q}), f_h(B_{p-i, q-j})]=\argmin[(i,j)\in\mathcal W]\ J(i,j)$$
 where $d$ or $J$ is the minimization criterion and $\mathcal W$ is the set of candidate pixels.
 
-#### Quality Measure
-One valid quality measure is the **energy of the prediction error**, that is the MSE of the predicted block and the real block. That is:
+#### Measures
+One valid **quality** measure is the **energy of the prediction error** (to PSNR), that is the MSE of the predicted block and the real block. That is:
 $$e(n,m)=f_k(n,m)-\tilde f_k(n,m)\rightarrow \mathscr E=\frac1{NM}\sum_{n,m}e^2(n,m)\rightarrow PSNR=10\logt\frac{255^2}{\mathscr E}$$
 where $\tilde f_k(n,m)=f_h(n+u_{h\rightarrow k},m+v_{h\rightarrow k})$ is the predicted image from the motion vector field
+
+A **cost** measure is the **coding cost**, that is, the number of bits to losslessly encode the motion vector field, since it depends on the implementation, the general empirical entropy is used.
+
+Finally the **performance** measure is the **computational complexity**. The following choices impact the performance:
+- **Block size:** determines the number of blocks: 
+- Number of candidate vectors ($i,j\in\mathcal W$)
+- Cost function $d$
+
+A **large block size** reduces complexity (less blocks), less coding cost, increased MSE. The ideal block size is $16\times16$.
+
+The **cost function** is based on $\mathcal L_1$ norm (SAD) or $\mathcal L_2$ norm (SSD). With SSD the one with smallest MSE but more computing cost
+
+But a regularization term is also added, so the minimization is on $J$:
+$$J(\text v)=d(\text v)+\lambda_{ME}r(\text v)$$
+where $\lambda_{ME}$ affects the importance of the regularization term.
+Possible regularization terms are:
+- Cost function: choose not best MSE, but best coding option.
+- Distance: prioritize vectors with length same as mean of adjacent blocks
+
+
+| Cost Function      | Pro                                   | Con                    |
+| ------------------ | ------------------------------------- | ---------------------- |
+| SSD                | Optimizes PSNR                        | Larger rate (outliers) |
+| SAD                | Better rate (implicit regularization) | Worse PSNR             |
+| SAD+regularization | Best option                           |                        |
+
