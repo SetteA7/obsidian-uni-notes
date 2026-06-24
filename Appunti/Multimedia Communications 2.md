@@ -1658,6 +1658,29 @@ $$\pi^*=\argmin[\pi]\sum[e]^2\qquad e(n,m)=f(n-u_\pi(n,m),m-v_\pi(n,m),t-1)-f(n,
 SAD is a specific parametric affine estimation with $B=0$
 
 ## 7.4) Deep Learning Methods (TODO)
+**Paradigm shift:** classical (variational / block-based) use hand-crafted models; DL treats ME as a **supervised or unsupervised** learning problem, usually via **CNNs**. Needs specialized architectures for pixel-level correspondence, large datasets, and GPUs.
+
+**Ground-truth challenge:** dense OF labels are hard to get for real video ⇒
+
+- **synthetic datasets** (FlyingChairs, Sintel) for perfect labels,
+- **data augmentation** (geometric + photometric),
+- **unsupervised** training: minimize the **photometric error** between current frame and warped reference.
+
+|Architecture|Year|Key idea|Note|
+|---|---|---|---|
+|**FlowNet**|2015|first end-to-end CNN for OF (FlowNetS simple, FlowNetC correlation layer)|weak on small displacements / repetitive texture; ~10–100 FPS|
+|**FlowNet 2.0**|—|stacked FlowNets + warping|big accuracy gain, higher complexity|
+|**PWC-Net**|2018|**P**yramid + **W**arping + **C**ost-volume|efficient, hardware-friendly|
+|**RAFT**|2020|**recurrent GRU** updates on a high-res flow field; all-pairs **correlation pyramid**|SOTA; strong zero-shot generalization; iterations tunable (speed vs. quality)|
+
+DL **dominates analysis** (optical flow); integration into **real-time video coding** still trades accuracy against practical constraints. Strengths: robustness to occlusions and large displacements, high precision. Open issue: **generalization** drops on data far from the training distribution.
+## 7.5) Wrap-up
+
+- ME extracts motion from video; it targets **optical flow**, not physical motion (other sensors handle the latter).
+- **Variational / H&S:** dense, smooth, physical; noise-sensitive, weak on large displacements.
+- **Block matching:** conceptually simple, the workhorse of **video compression**; criterion (SSD/SAD/reg.) × search strategy (FS/3SS/diamond/hexagon/TZ) × block size.
+- **Parametric:** compact (translational 2 / affine 6 params); BM = translational special case ($B=0$).
+- **Deep learning:** emerging, very effective for analysis tasks (FlowNet → RAFT).
 
 # 8) Video Coding Principles
 Video compression uses the spatial redundancy (seen in jpeg) but also time redundancy via motion fields
@@ -1673,3 +1696,25 @@ $$MVD=MV-MVP$$
 One useful predictor is the median amongst 3 adjacent blocks:
 ![[Pasted image 20260515172404.png|Median Blocks|250]]
 This reduces substantially the number of bits needed.
+
+By also doing prediction (median) before entropy encoding we can further increase the compression. 
+
+#### Motion Compensation
+We can predict the entire new image by copying the blocks in the new position:
+$$\hat I_k(p)=I_h(p+v^*(p))$$
+
+![[Pasted image 20260515172715.png|Example|400]]
+But not all blocks should be replaced so they are signaled as intra (use og block) or inter frame blocks (use predictor). 
+
+For each $B_k\iter p$ do:
+- Perform Motion Estimation (ME) with ref image $h$:
+$$J(v)=d(B_k\iter p,B_h\iter{p+v})+\lambda_{ME}r(v)\rightarrow v^*=\arg\min_v J(v)$$
+- **Mode select**: decide if inter or intra (see [[#7.3) Mode Selection]])
+	- If intra use jpeg
+	- If inter encode $v^*$ and $E(p)=B_k\iter p-B_h\iter{p+v}$
+
+A variable block size is more effective although it is more complex to implement.
+
+Recap of the design parameters:
+- **Block Size/Shape:** Small block: high PSNR, higher rate and time. Variable most effective
+- **Cost function $d$:** SSD optimizes PSNR but higher rate (outliers), SAD better rate (impli)
