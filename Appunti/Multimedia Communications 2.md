@@ -1145,10 +1145,56 @@ Here are the properties:
 
 Exploits **auto similarity:** when a coeff is small, also its descendants are, then we can save with just 1 symbol
 
+##### Construction of Auto Similarity Principle:
 Each new bit should convey max information: send first big coefficients, but has **localization overhead**: subband scan+ zero tree
 
 One (partial solution) is the **subband scan:** scan in order C,H,V,D from smallest to highest subband
 
 We also need a way to find biggest coeff first without sending localization info. Exploit inter-band correlation to predict position of non significant coeff.
 One pixel in the subband has 4 times as more coeff in the next band. **If a coeff is small, also its descendants are**. A (sub-)tree of below-the-threshold coefficients is called a zero-tree. it is encoded with only one symbol.
+
+##### EZW Algorithm
+This allows to encode the bitplane $\log_2 T_k$ at the $k$-th pass where each new bitplae refines the coeff quantization. Significant symbols are losslessly encoded
+
+Heuristic:
+Walk the tree coarse-to-fine. If you find a big coefficient, announce it (SP/SN) and move it to SS S. If you find a small coefficient whose whole subtree is also small, prune it (ZR). If you find a small coefficient with a significant descendant somewhere below, mark it IZ and keep scanning. Then halve the threshold and do it again, but first refine everything already in SS S by one more bit.
+
+It is done in these steps:
+1. Set $k=0$, $n=\floor{\log_2|c_\max|}$, $T_k=2^n$
+2. Let $\mathcal L$ be the list of coeff in SB scan.Let $S=0$ be the list of significant coeff 
+3. while (rate<available rate)
+	1. Dominant pass
+	2. Refining pass
+	3. $T_{k+1}\leftarrow T_k/2$
+	4. $k\leftarrow k+1$
+4. end
+
+**Dominant pass:**
+1. Until $\mathcal L$ is not empty:
+	1. Let $c$ be the first coeff in the list
+	2. If $c>T_k$ encode $c$ as Significant Positive (SP) and put in $S$
+	3. elif $c<-T_k$ ancode as Significant Negative (SN) and put in $S$
+	4. elif no desc bigger than $T_k$ (in abs), then
+		1. Encode $c$ as ZR (zero tree root)
+		2. remove desc from $\mathcal L$
+	5. Else encode $c$ as isolated zero (IZ)
+2. Remove $c$ from $\mathcal L$
+
+**Refining Pass:**
+1. Let $b=\log:2T_k$ the currwnt bit plane index
+2. For all $c$ in $S$ encothe the $b$-th bit of binary representation
+
+##### Example
+Consider this image:
+![[Pasted image 20260624105813.png|Example|250]]
+Notice $T=2^4$
+**Bitplane 1:**
+**Dominant pass**
+Since $26\geq 16$ it is SP
+Then $6\leq 16$ and also its descendants ($-12,10,6,4$) so ZR
+Same for $-7,3$
+At the end of dominant pass at bitlplane 1 we have:
+$$\text{ZP,ZR,ZR,ZR}$$
+**Refinement Pass**
+One SP, find it's $\log_2T=4$ 
 #### JPEG 2000
