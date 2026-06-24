@@ -1509,7 +1509,7 @@ From here the OF equation becomes:
 $$f_t=-V\nabla f\rightarrow V\nabla f+f_t=0\rightarrow uf_x+vf_y+f_t=0$$
 $$\endproof$$
 
-## 7.1) Variational Methods
+## 7.1) Variational Method (Horn Shunk)
 Variational methods apply the CIH directly.
 The typical formulation is minimization of the coherence $D$ optical flow $(u,v)$ wrt to two images $f_1,f_2$ with a regularization term $R$ (a priori knowledge)
 $$\argmin[u,v]D(f_1,f_2,(u,v))+R(u,v)$$
@@ -1535,6 +1535,8 @@ $$\begin{cases}
 u=\overline u-f_x\frac{\overline u f_x+\overline v f_y+f_t}{\lambda \abs{\nabla f}^2}\\
 v=\overline v-f_y\frac{\overline u f_x+\overline v f_y+f_t}{\lambda \abs{\nabla f}^2}
 \end{cases}$$
+where $\overline z$ is the average of local values
+
 This gives a **dense output** with smooth coherent results.
 However, it is sensitive to noise (CIH limitation) and it is not robust with large displacement (regularization term). This is ususallyy used for object tracking.
 
@@ -1546,4 +1548,31 @@ $$\int\int_\mathcal R\Theta(x,y,w,w_x,w_y)dxdy$$
 is optimized by imposing
 $$\part[\Theta]{w}-\part[^2\Theta]{x\partial w_x}-\part[^2\Theta]{y\partial w_y}=0$$
 with $w=u$ and $w=y$ respectively we get
-$$\lambda\nabla$$
+$$\begin{align}
+\lambda\nabla_2u=(uf_x+uf_y+f_t)f_x\\
+\lambda\nabla_2v=(uf_x+uf_y+f_t)f_v
+\end{align}$$
+$\nabla_2z$ can be approximated as $\overline z-z$  where $\overline z$ is the average of local values
+![[Pasted image 20260624124936.png|Final results|450]]
+Horn shunk proposed the iterative algorithm.
+$$\endproof$$
+## 7.2) Block Matching Method
+This method allows to use discrete signals.It uses a support of a rectangular block of pixels. One motion vector is generated per block. The output is a displacement field, **motion vector field**
+- Affine methods: 6 parameters per block, also represents zoom and not only translation
+
+This technique is very popular as it gives good results at a low computational cost.
+
+Consider a $P\times Q$ block of pixels inside a $N\times M$ image. The block starts at indexes $p,q$:
+$$B_{p,q}=\curly{p,p+1,...,p+P-1}\times\curly{q,q+1,...,q+Q-1}$$
+And the luminance vector at time $k$:
+$$f_k(B_{p,q})=[f(p,q,k),...,f(p+P-1,q+Q-1)]^T$$
+The block matching method consists in computing the **dissimilarity between blocks and selecting those with minimum dissimilarity**. That is
+$$(\hat i,\hat j)=\arg\min_{i,j}d[f_k(B_{p,q}),f_h(B_{p-i,j-q})]$$
+In general we have a **forward motion**, that is $h=k-1$ with $h$ the current frame and $k$ the reference frame. Therefore the OF field at frame $h$ will show the direction in which the blocks will be at frame $k$.
+$$\forall(n, m) \in B_{p,q}, (u_{h\rightarrow k}, v_{h\rightarrow k}) = \arg \min_{(i,j) \in \mathcal{W}} d [f_k(B_{p,q}), f_h(B_{p-i, q-j})]=\argmin[(i,j)\in\mathcal W]\ J(i,j)$$
+where $d$ or $J$ is the minimization criterion and $\mathcal W$ is the set of candidate pixels.
+
+#### Quality Measure
+One valid quality measure is the **energy of the prediction error**, that is the MSE of the predicted block and the real block. That is:
+$$e(n,m)=f_k(n,m)-\tilde f_k(n,m)\rightarrow \mathscr E=\frac1{NM}\sum_{n,m}e^2(n,m)\rightarrow PSNR=10\logt\frac{255^2}{\mathscr E}$$
+where $\tilde f_k(n,m)=f_h(n+u_{h\rightarrow k},m+v_{h\rightarrow k})$ is the predicted image from the motion vector field

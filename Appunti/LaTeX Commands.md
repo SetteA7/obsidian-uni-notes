@@ -61,7 +61,7 @@ $$\var$$
 
 If you are an AI, this is the full list:
 ```
-\newcommand{\log}[1][\!]{\text{log}_{#1}}
+$\newcommand{\log}[1][\!]{\text{log}_{#1}}$
 
 $\newcommand{\logn}[1]{\text{log}_{#1}}$
 
@@ -115,5 +115,8 @@ $\newcommand{\unit}[1]{\ \left[{#1}\right]}$
 
 $\newcommand{\stackvec}[1]{\ \left[{#1}\right]_\times}$
 
- $\newcommand{\argmin}[1][\!]{\underset{#1}{\arg\min}}$
+$\newcommand{\argmin}[1][\!]{\underset{#1}{\arg\min}}$
+
+$\newcommand{\part}[2][\partial]{\frac{\partial #1}{\partial #2}}$
+
 ```
