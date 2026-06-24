@@ -1796,3 +1796,46 @@ The decoder is a subset of the encoder!
 ![[Pasted image 20260516145213.png|Decoder Is Subset After Lossless Decoding|350]]
 The decoder is a simplified version without ME, mode decision, partition, control.
 Each block is decoded based on the mode, however the modes are not standardized, just their syntax. The encoder could take a suboptimal approach, the decoder doesn't care.
+
+# 9) Modern Video Compression Standards
+The decoder is the only part defined in the standard:
+Standards exclusively define the bitstream syntax and the decoding process. Encoder architecture and optimization strategies remain open problems for industrial competition.
+
+The improvements come from how many ways the encoder can encode the images. This is mainly related to how the image can be partitioned in blocks.
+
+**H.264/AVC** has $16\times16$ MB or $8\times8$ and $4\times4$ MB which are inefficient for 1080p or 4K videos.
+
+**H.265/HEVC** has a Coding Tree Unit (CTU) where a MB of $64\times 64$ can be divided into other squares until $4\times 4$
+
+HEVC uses Coding Tree Unit (CTU) with quad tree split. Each CTU gets recursively split into CUs (divide by 4) and each CU can be divided into Predictions Units (PU) or Transform Units (TU). These (PU,TU) are independently created from eachother since a block that works great fro PU might not work for TU
+
+![[Pasted image 20260624165257.png|Example|250]]
+![[Pasted image 20260624165317.png|Example|250]]
+
+H.266/VVC has blocks of up to $128\times128$. New splits are defined (binary 1:1 or ternary 1:2:1  splits)
+
+![[Pasted image 20260624165339.png|Example|300]]
+
+AV1 can create up to 10 different splits. 
+
+![[Pasted image 20260624165355.png|Example|350]]
+
+
+| H264 | H265 | H266 |
+| ---- | ---- | ---- |
+|      |      |      |
+
+
+
+Trying every combination is computationally unfeasable:
+**Depth First Search (DFS)** is used to explore efficiently block geometry:
+- Top Down Exploration: try as a whole, then split
+- Causal Dependency: Z scan order for subblocks, blocks cannot be predicted until top and left are reconstructed
+- Inner Loop (prediction): for each block test inter/intra modes to find local minimum
+- Bottom up: compare costs $\sum J_{children}<J_{parent}$
+
+fats algorithms and ML based ones can prune the tree faster
+- Texture analysys: if a texture has low variance (smooth surface) then small blocks are bypassed
+- Temporal correlation: search space by exploiting the partition depth of the co-located CU in the reference frame.
+- ML Classifiers: lightweight predict splits from pixel features
+
