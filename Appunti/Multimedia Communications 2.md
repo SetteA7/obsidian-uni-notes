@@ -1184,11 +1184,12 @@ It is done in these steps:
 1. Let $b=\log:2T_k$ the currwnt bit plane index
 2. For all $c$ in $S$ encothe the $b$-th bit of binary representation
 
-##### Example
+##### Example (SEE BETTER)
 Consider this image:
 ![[Pasted image 20260624105813.png|Example|250]]
+
+- **Bitplane 1:**
 Notice $T=2^4$
-**Bitplane 1:**
 **Dominant pass**
 Since $26\geq 16$ it is SP
 Then $6\leq 16$ and also its descendants ($-12,10,6,4$) so ZR
@@ -1196,5 +1197,42 @@ Same for $-7,3$
 At the end of dominant pass at bitlplane 1 we have:
 $$\text{ZP,ZR,ZR,ZR}$$
 **Refinement Pass**
-One SP, find it's $\log_2T=4$ 
+One SP, find it's $\log_2T=4$ bit: $26_{10}=11010_2\rightarrow$ select $1$
+$$\text{ZP,ZR,ZR,ZR,1}$$
+- **Bitplane 2:**
+Notice $T=2^3$
+**Dominant Pass:**
+Since $6<8$ but has descendant $|-13|>8$ it is IZ
+Next  $-7,3$ are ZR
+- Now scan subband 2:
+$|-13|\geq8$ set SN
+$10\geq 8$ SP
+Next two $6,4$ are ZR
+Dominant pass sets
+$$\text{IZ,ZR,ZR,SN,SP,ZR,ZR}$$
+**Refinement Pass**
+We have 3 significant coeff $n=3$: $26=11010\rightarrow 0\ 13=1101\rightarrow1\ 10=1010\rightarrow 0$
+$$\text{IZ,ZR,ZR,SN,SP,ZR,ZR,}0,1,0$$
+- **Bitplane 3**
+Notice $T=2^2$
+**Dominant pass:**
+$6\geq 4$ SP
+$-7\leq -4$ SN
+$3<4$ ZR
+- Level 2 scan
+$6\geq 4$ SP
+$4\geq 4$ SP
+$4\geq 4$ SP
+The remaining 3 $-3,2,-2$ are ZR
+Dominant pass sets
+$$\text{SP,SP,SP,ZR,ZR,ZR}$$
+**Refinement Pass:**
+We have 8 significant coeff ($26,13,10,6,7,6,4,4$)
+$$\text{SP,SP,SP,ZR,ZR,ZR},1,0,1,1,1,1,0,0$$
+Final bitstream:
+$$\text{ZP,ZR,ZR,ZR,}1,|\text{IZ,ZR,ZR,SN,SP,ZR,ZR,}0,1,0,|\text{SP,SP,SP,ZR,ZR,ZR},1,0,1,1,1,1,0,0$$
+**Decoding:**
+Initial state all coeff unknown
+Receive SP at $[1,1]$, we know $1xxxx$ so we choose midway $11000=24$
+Then all ZR so see ref pass: get bit 1
 #### JPEG 2000
