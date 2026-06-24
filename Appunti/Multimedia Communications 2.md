@@ -1285,3 +1285,14 @@ One single bit error can introduce to many wrong decoding steps
 - Markers: increased rate insert into bitstream to stop propagation errors
 
 JPEG200 has implicit markers (codeblock independently coded)
+
+# 6) Learned Image Coding (TODO)
+
+# 7) Motion Estimation
+Videos are different from images as they implement temporal information. This information is mostly found in the movement. The study of **optical flow** consists in defining the movement of a pixel between two subsequent images into a **vector field**. 
+
+Optical flow consists in finding a 2D vector field $V(x,y)$:
+$$V:(x,y)\in \mathscr I\subset\R^2\rightarrow (u,v)$$
+where:
+- $x,y$ are the points on the image
+- $u(x,y),v(x,y)$ is the velocity of the point $x,y$
