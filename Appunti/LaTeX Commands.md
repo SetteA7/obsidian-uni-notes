@@ -56,7 +56,8 @@ $$\var$$
  $$\unit{input}$$
  $\newcommand{\stackvec}[1]{\ \left[{#1}\right]_\times}$
  $$\stackvec{input}$$
-
+ $\newcommand{\argmin}[1][\!]{\underset{#1}{\arg\min}}$
+ $$\argmin[input]$$
 
 If you are an AI, this is the full list:
 ```
@@ -115,4 +116,6 @@ $\newcommand{\iter}[1]{^{\par{#1}}}$
 $\newcommand{\unit}[1]{\ \left[{#1}\right]}$
 
 $\newcommand{\stackvec}[1]{\ \left[{#1}\right]_\times}$
+
+$\newcommand{\argmin}[1]{\arg\min_{#1}}$
 ```
