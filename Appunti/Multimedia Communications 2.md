@@ -1580,13 +1580,11 @@ where $\tilde f_k(n,m)=f_h(n+u_{h\rightarrow k},m+v_{h\rightarrow k})$ is the pr
 A **cost** measure is the **coding cost**, that is, the number of bits to losslessly encode the motion vector field, since it depends on the implementation, the general empirical entropy is used.
 
 Finally the **performance** measure is the **computational complexity**. The following choices impact the performance:
-- **Block size:** determines the number of blocks: 
+- Block size: determines the number of blocks: 
 - Number of candidate vectors ($i,j\in\mathcal W$)
 - Cost function $d$
-
-A **large block size** reduces complexity (less blocks), less coding cost, increased MSE. The ideal block size is $16\times16$.
-
-The **cost function** is based on $\mathcal L_1$ norm (SAD) or $\mathcal L_2$ norm (SSD). With SSD the one with smallest MSE but more computing cost
+##### Cost Function
+The **cost function** of $d()$ is based on $\mathcal L_1$ norm (SAD) or $\mathcal L_2$ norm (SSD). With SSD the one with smallest MSE but more computing cost
 
 But a regularization term is also added, so the minimization is on $J$:
 $$J(\text v)=d(\text v)+\lambda_{ME}r(\text v)$$
@@ -1596,9 +1594,51 @@ Possible regularization terms are:
 - Distance: prioritize vectors with length same as mean of adjacent blocks
 
 
-| Cost Function      | Pro                                   | Con                    |
-| ------------------ | ------------------------------------- | ---------------------- |
-| SSD                | Optimizes PSNR                        | Larger rate (outliers) |
-| SAD                | Better rate (implicit regularization) | Worse PSNR             |
-| SAD+regularization | Best option                           |                        |
+| Cost Function      | Pro                                                         | Con                                       |
+| ------------------ | ----------------------------------------------------------- | ----------------------------------------- |
+| SSD                | Optimizes PSNR by minimizing energy in error                | Larger rate (outliers), harder to compute |
+| SAD                | Better rate (implicit regularization), stronger to outliers | Worse PSNR                                |
+| SAD+regularization | Best option $J_{reg}=\mathcal L_p+\lambda R$                |                                           |
+##### Candidates
+The **number of candidates** can also be reduced by using some research strategies:
+- Naive: test every vector $i,j$
+- Less naive: test every vector in a $2A+1\times 2B+1$ window center in $i,j$ 
+- Three Steps Search (3SS): Assumption that error function is unimodal (single global minimum and no local minimum) Test 4-8 points and choose minimum error, now divide window and search 4-8 with window centered in previous minimum repeat
+![[Pasted image 20260425165247.png|Example|350]]
+- Diamond Search: search in 9 point diamond pattern, then extend pattern in direction of minima
+- Hexagon Search: same as diamond but with hexagon (more modern)
+- TZSearch: new technique that adaptively changes. Start with big block, if error is too big split it, repeat.
 
+It is also possible to test sub-pixel positions by interpolation:
+$$f(n+a,m+b)=(1-a)(1-b)x+a(1-b)y+(1-a)bz+abw$$
+![[Pasted image 20260425165822.png|Example|150]]
+
+
+
+| Fixed Search              | Unbound Search                |
+| ------------------------- | ----------------------------- |
+| Fixed number of steps     | Iterative, faster             |
+| Guarantees global minimum | Can get stuck in local minima |
+
+---
+##### Block Size
+A **large block size** reduces complexity (less blocks), less coding cost, increased MSE. The ideal block size is $16\times16$.
+
+
+| Small Blocks     | Big Blocks        | Variable Size              |
+| ---------------- | ----------------- | -------------------------- |
+| Better Precision | Worse Precision   | Better precision           |
+| Worse complexity | Better complexity | More complex (if required) |
+| More coding cost | Less coding cost  | More costly (if required)  |
+
+---
+## 7.3) Parametric Methods
+A parametric model shows the motion field as a closed form function of the pixel position. The dof are the parameters of the function. It can be global or region based (local).
+Block Matching is a special case of parametric methods with 2 parameters per bock (u,v translations), that is the **translational**:
+$$v(p)=\begin{bmatrix}v_x\\ v_y\end{bmatrix}=\begin{bmatrix}b_1\\ b_2\end{bmatrix}$$
+The affine model is
+$$v(p)=b+Bp=\begin{bmatrix}b_1\\ b_2\end{bmatrix}+\begin{bmatrix}b_3 & b_4\\ b_5 & b_6\end{bmatrix}p$$
+This has only 6 dof but can represent many complex fields: rotation, zoom, translation
+
+How are the parameters of the model estimated?
+First dense field, then find global motion by least squares
