@@ -1241,9 +1241,47 @@ The SP at $[1,4]$ we know $01xxx\rightarrow 01100=12$
 Then all ZR so see ref pass: get 0,1,0 so we know: 
 $$110\rightarrow 11010=26,\ -011xx\rightarrow -01110=-14,\ 010xx\rightarrow 01010=10$$
 
-For SP,SN,ZR at level 1 we have $\pm 001xx\rightarrow \pm 00110=\pm6$ These are saved $6,-6,0$
-For the level 2 SP we have $6$ save ($6,6,6$)
+For SP,SN,ZR at level 1 we have $\pm 001xx\rightarrow \pm 00110=\pm6$ and ZR is 0
+For the level 2 SP we have $6$ again
 Then only ZR so see ref pass:
-$$1101x\rightarrow26,\ 0110x\rightarrow 12,\ 0101x\rightarrow10, $$
+$$1101x\rightarrow27,\ -0110x\rightarrow -13,\ 0101x\rightarrow11$$
+Now the SP,SN at level 1:
+$$0011x\rightarrow 7,1 -0011x\rightarrow -7$$
+At level 2:
+$$0011x\rightarrow 7,\ 0010x\rightarrow 5,\ 0010x\rightarrow 5$$
+so we have
+$$27,7,-7,0|-13,11,7,5|5,0,0,0|0,0,0,0$$
+![[Pasted image 20260624113756.png|Final result|350]]
 
 #### JPEG 2000
+Here are the properties:
+- ROI coding
+- Quality and resolution scalable
+- Tiling
+- Exact coding rate
+- Lossless to lossy
+
+##### Algorithm
+Made of 2 tiers:
+1. DWT + quantization and lossless coding of codeblocks
+2. EmBedded Block Coding with optimized Truncation (EBCOT) and Scalability + ROI 
+
+DWT is encoded with fine quantization steps
+For lossless coding, DWT are ints and are not quantized
+No loss in DWT, we have loss in tier 2
+
+##### EBCOT
+Each subband split in equally sized blocks (codeblocks) losslessly and independently coded via arithmetic: we get as many bitstreams as blocks
+
+![[Pasted image 20260624114247.png|Example|300]]
+These get truncated:
+$$\min \sum D_i\qquad \sum R_i\leq R_{tot}$$
+Solution:
+Optimal truncation when slope of $D_i(R_i)$ are equal
+
+## 5.3) Error Robustness
+One single bit error can introduce to many wrong decoding steps
+- Correction code: increase rate used only on small sensitive data
+- Markers: increased rate insert into bitstream to stop propagation errors
+
+JPEG200 has implicit markers (codeblock independently coded)
