@@ -1807,6 +1807,26 @@ Standards exclusively define the bitstream syntax and the decoding process. Enco
 
 The improvements come from how many ways the encoder can encode the images. This is mainly related to how the image can be partitioned in blocks.
 
+| Feature                  | H.264/AVC                                                    | H.265/HEVC                                             | H.266/VVC                                                           | AV1                                                                   |
+| ------------------------ | ------------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| **Base unit**            | Macroblock $16\times16$                                      | CTU up to $64\times64$                                 | CTU up to $128\times128$                                            | Superblock up to $128\times128$                                       |
+| **Partitioning**         | VBS: $16\times8$, $8\times16$, $8\times8$, $4\times4$ sub-MB | Quad-tree only (CU → PU + TU, independent trees)       | QT + MTT: binary (1:1) and ternary (1:2:1) splits; CU/PU/TU unified | 10-way split incl. 4:1 and 1:4 rectangular; recursive                 |
+| **Intra prediction**     | $16\times16$: 4 modes; $4\times4$: 9 modes (8 dir + DC)      | 35 modes (33 dir + DC + Planar)                        | 65 dir + wide-angle for non-square blocks                           | Similar to VVC                                                        |
+| **Intra mode signaling** | —                                                            | MPM list: 3 candidates                                 | MPM list: 6 candidates                                              | —                                                                     |
+| **Inter MV precision**   | Integer pel (+ H.264 uses $1/2$ pel)                         | $1/4$ pel, 6-tap interpolation filter                  | $1/4$ pel (same as HEVC)                                            | $1/8$ pel, selectable filters (sharp/smooth)                          |
+| **MV prediction**        | Skip/Direct: median of spatial neighbors; 0 bits if correct  | Merge mode: 5 spatial + 1 temporal candidates          | Merge mode (same as HEVC); affine (4- or 6-param)                   | Affine; compound (inter + intra in same block)                        |
+| **Motion model**         | Translational only                                           | Translational only                                     | Affine: rotate, zoom, shear                                         | Affine; compound inter+intra                                          |
+| **Reference frames**     | P-slices (1 list), B-slices (2 lists)                        | P-slices, B-slices; generalized B                      | Same + flexible DPB management                                      | Multiple refs                                                         |
+| **Transform**            | DCT $4\times4$ (integer approx.)                             | DCT up to $32\times32$; DST for $4\times4$ intra       | Multiple Transform Selection (MTS); non-square transforms           | —                                                                     |
+| **Quantization**         | QP: step doubles every $\Delta\text{QP}=6$                   | Same                                                   | Same                                                                | Same                                                                  |
+| **Entropy coding**       | CABAC (or CAVLC)                                             | CABAC only                                             | CABAC only                                                          | — (own arithmetic coder)                                              |
+| **In-loop filters**      | Deblocking on $4\times4$ grid; adaptive strength             | Deblocking on $8\times8$ grid + SAO (edge/band offset) | Deblocking + SAO + ALF + LMCS (HDR)                                 | CDEF (directional) + Loop Restoration (Wiener) + Film Grain Synthesis |
+| **Bitstream format**     | Annex-B or Packetized NALUs; 1-byte header                   | Same; 2-byte header (Temporal ID, Layer ID)            | Same as HEVC                                                        | OBUs (no start codes); length-prefixed only                           |
+| **Random access**        | IDR only                                                     | IDR + CRA (RASL) + BLA                                 | Same                                                                | Keyframe-based                                                        |
+| **Parallelism**          | Slices                                                       | Tiles + WPP                                            | Tiles + WPP + subpictures                                           | Tiles                                                                 |
+
+---
+
 **H.264/AVC** has $16\times16$ MB or $8\times8$ and $4\times4$ MB which are inefficient for 1080p or 4K videos
 
 Motion Vectors are predicted using spatial neighbor. If median is correct, 0 bits are used
@@ -1842,7 +1862,7 @@ Adds the Adaptive Loop Filter (ALF) and Luma Mapping with Chroma Scaling (LMCS) 
 
 **AV1** can create up to 10 different splits. Allows to combine inter with intra predictions in same block
 
-Many post processing effects: 
+Many post processing effects: Directional filters for smooth edges, Loop restoration filters for large windows, Film grain synthesis
 
 ![[Pasted image 20260624165355.png|Example|350]]
 Trying every combination is computationally unfeasable:
@@ -1869,3 +1889,5 @@ $$P\propto2^B$$
 VVC needs 7 bits for 67 modes. Sending 7 bits per block is inefficient since the rate explodes when there are small blocks!
 
 Use **Most probable Mode (MPM)**, the encoder predicts mode using spatial context. List of MPMs s built (HEVC has 3, VVC has 6). So these are encoded with small codewords
+
+## 9.2) Network Abstraction and Parallelism
