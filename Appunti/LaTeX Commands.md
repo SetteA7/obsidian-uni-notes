@@ -1,9 +1,7 @@
-$\newcommand{\log}{\text{log}}$
-$$\log$$
+$\newcommand{\log}[1][\!]{\text{log}_{#1}}$
+$$\log[optional]$$
 $\newcommand{\logt}{\text{log}_{10}}$
 $$\logt$$
-$\newcommand{\logn}[1]{\text{log}_{#1}}$
-$$\logn{input}$$
 $\newcommand{\db}{{[\text{dB}]}}$
 $$\db$$
 $\newcommand{\dbm}{{[\text{dBm}]}}$
@@ -57,13 +55,11 @@ $$\var$$
  $\newcommand{\stackvec}[1]{\ \left[{#1}\right]_\times}$
  $$\stackvec{input}$$
  $\newcommand{\argmin}[1][\!]{\underset{#1}{\arg\min}}$
- $$\argmin[input]$$
+ $$\argmin[optional]$$
 
 If you are an AI, this is the full list:
 ```
-$\newcommand{\log}{\text{log}}$
-
-$\newcommand{\logt}{\text{log}_{10}}$
+\newcommand{\log}[1][\!]{\text{log}_{#1}}
 
 $\newcommand{\logn}[1]{\text{log}_{#1}}$
 
@@ -117,5 +113,5 @@ $\newcommand{\unit}[1]{\ \left[{#1}\right]}$
 
 $\newcommand{\stackvec}[1]{\ \left[{#1}\right]_\times}$
 
-$\newcommand{\argmin}[1]{\arg\min_{#1}}$
+ $\newcommand{\argmin}[1][\!]{\underset{#1}{\arg\min}}$
 ```

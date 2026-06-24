@@ -1483,21 +1483,36 @@ where:
 
 The output is either dense or sparse, depends on implementation.
 The typical formulation is minimization of the coherence $D$ optical flow $(u,v)$ wrt to two images $f_1,f_2$ with a regularization term $R$ (a priori knowledge)
-$$\arg\min_{u,v}D(f_1,f_2,(u,v))+R(u,v)$$
+$$\argmin[u,v]D(f_1,f_2,(u,v))+R(u,v)$$
+we consider continuous representation of the video signal. We also introduce an important hypothesis
+
+>[!hypothesis] Constant Illumination
+>The Constant Illumination Hypothesis (CIH) states that the luminance does not change along the motion trajectory:
+>$$f(x,y,t+T)=f(x-c,y-d,t)\longrightarrow \frac{df}{dt}=0$$
+>But in practice due to sampling, aliasing and noise this is not true.
+
+The velocity field (optical flow) can be described as
+
+>[!def] Velocity Field
+>We can define the vector field as:
+>$$V(x,y)=\lim_{T\rightarrow 0}\frac{D(x,y)}T=\begin{bmatrix}u(x,y)\\ v(x,y)\end{bmatrix}$$
+>Which becomes (first degree approx)
+>$$uf_x+vf_y+f_t=0$$
+>with $u,v$ components of the velocity field, $f_x,f_y$ the space derivatives and $f_t$ the time derivative.
+
+Proof:
+Apply Taylor:
+$$f(p,t+T)=f(p,t)-c(p)f_x(p,t)+d(p)f_u(p,t)+o[D(p)]$$
+
 ## 7.1) Variatonal Method
 Consider a point of an object moving from pixel $p-D$ to $p$ in time $T$. The trajectory of the pixel becomes:
 $$\begin{aligned}
 x(t_0)=p-D\\
 x(t_0+T)=p
 \end{aligned}
-\longrightarrow D(p.t_0,T)=x(t_0+T)-x(t_0)=\begin{bmatrix}c(x,y)\\d(x,y)\end{bmatrix}$$
+\longrightarrow D(p,t_0,T)=x(t_0+T)-x(t_0)=\begin{bmatrix}c(x,y)\\d(x,y)\end{bmatrix}$$
 where $c,d$ depend on $p,t_0,T$ but the time parameters are ignored and $p=(x,y)$.
 
-We can find it's derivative and find the velocity field:
-$$V(x,y)=\lim_{T\rightarrow 0}\frac{D(x,y)}T=\begin{bmatrix}u(x,y)\\ v(x,y)\end{bmatrix}$$
-Finally the OF equation is:
-$$uf_x+vf_y+f_t=0$$
-with $u,v$ components of the velocity field, $f_x,f_y$ the space derivatives and $f_t$ the time derivative.
 
 This formula states that, the intensity change I see in a point depends only on the movement of the pixels.
 
