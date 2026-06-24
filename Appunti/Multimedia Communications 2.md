@@ -1195,10 +1195,10 @@ Since $26\geq 16$ it is SP
 Then $6\leq 16$ and also its descendants ($-12,10,6,4$) so ZR
 Same for $-7,3$
 At the end of dominant pass at bitlplane 1 we have:
-$$\text{ZP,ZR,ZR,ZR}$$
+$$\text{SP,ZR,ZR,ZR}$$
 **Refinement Pass**
 One SP, find it's $\log_2T=4$ bit: $26_{10}=11010_2\rightarrow$ select $1$
-$$\text{ZP,ZR,ZR,ZR,1}$$
+$$\text{SP,ZR,ZR,ZR,1}$$
 - **Bitplane 2:**
 Notice $T=2^3$
 **Dominant Pass:**
@@ -1225,14 +1225,25 @@ $4\geq 4$ SP
 $4\geq 4$ SP
 The remaining 3 $-3,2,-2$ are ZR
 Dominant pass sets
-$$\text{SP,SP,SP,ZR,ZR,ZR}$$
+$$\text{SP,SN,ZR,SP,SP,SP,ZR,ZR,ZR}$$
 **Refinement Pass:**
 We have 8 significant coeff ($26,13,10,6,7,6,4,4$)
-$$\text{SP,SP,SP,ZR,ZR,ZR},1,0,1,1,1,1,0,0$$
+$$\text{SP,SN,ZR,SP,SP,SP,ZR,ZR,ZR},1,0,1,1,1,1,0,0$$
 Final bitstream:
-$$\text{ZP,ZR,ZR,ZR,}1,|\text{IZ,ZR,ZR,SN,SP,ZR,ZR,}0,1,0,|\text{SP,SP,SP,ZR,ZR,ZR},1,0,1,1,1,1,0,0$$
+$$\text{SP,ZR,ZR,ZR,}1,|\text{IZ,ZR,ZR,SN,SP,ZR,ZR,}0,1,0,|\text{SP,SN,ZR,SP,SP,SP,ZR,ZR,ZR},1,0,1,1,1,1,0,0$$
 **Decoding:**
 Initial state all coeff unknown
 Receive SP at $[1,1]$, we know $1xxxx$ so we choose midway $11000=24$
-Then all ZR so see ref pass: get bit 1
+Then all ZR so see ref pass: get bit 1, choose $11xxx\rightarrow11100=28$
+
+Receive SN at $[1,3]$ we know $-01xxx$ choose $-01100=-12$
+The SP at $[1,4]$ we know $01xxx\rightarrow 01100=12$
+Then all ZR so see ref pass: get 0,1,0 so we know: 
+$$110\rightarrow 11010=26,\ -011xx\rightarrow -01110=-14,\ 010xx\rightarrow 01010=10$$
+
+For SP,SN,ZR at level 1 we have $\pm 001xx\rightarrow \pm 00110=\pm6$ These are saved $6,-6,0$
+For the level 2 SP we have $6$ save ($6,6,6$)
+Then only ZR so see ref pass:
+$$1101x\rightarrow26,\ 0110x\rightarrow 12,\ 0101x\rightarrow10, $$
+
 #### JPEG 2000
