@@ -1092,3 +1092,21 @@ What we have seen works for 1D infinite signal, but images are 2D (no problem si
 - **Symmetrization:** We create a new signal by adding a mirror image of the original signal to the period. Let $x$ have period $N$ then $x_s$ has period $2N$. The circular convolution (with periodic filter) will return a periodic and symmetrical signal and thus only the first $N$ samples have to be computed. This does not create artifacts.
 ![[Pasted image 20260402141526.png|Example of Symmetric signal (in black the N not calculated coefficients)|350]]
 However this doubles the filter coefficients unless the filter is symmetric!
+
+#### Haar and Biorthogonal Filters
+The only symmetric FIR orthogonal filter is the Haar filter
+$$\begin{align}
+h_0[k]=[1,1]&\quad f_0[k]=[1,1]\\
+h_1[k]=[1,-1]&\quad f_1[k]=[-1,1]
+\end{align}$$
+Unfortunately this is a filter with Vanishing moment (VM) of $p=1$. The high pass filter will not respond to polynomials with degree $<p$. We need at least $2p$ taps. 
+
+Haar has $p=1$ and can only represent piecewise linear functions.
+We consider the **Cohen-Daubechies-Fauveau (CDF)** biorthogonal filter:
+- Symmetric
+- Maximize VM
+- close to orthogonal ($\omega_i\approx 1$)
+
+They work by decomposing the signal into three wavelets
+![[Pasted image 20260403162823.png|Three wavelet decomposition|350]]
+and then reconstructing the signal in order.
