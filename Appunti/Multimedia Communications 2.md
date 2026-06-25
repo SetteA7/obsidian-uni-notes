@@ -1943,6 +1943,7 @@ Slices can also be divided into Wavefront Parallel Processing (WPP).
 
 Good for cost-benefit analysis: rate is objective but does not necessarily reflect quality of experience
 
+![[Pasted image 20260625104052.png|taxonomy|350]]
 ## 11.1) Subjective Quality Assessment
 Most reliable way to measure quality of experience, however it is costly and time consuming and requires many users to provide reliable results
 - **Laboratory equipment,** including screen and viewing distance, illumination and reverberation characteristics of the room. 
@@ -1950,9 +1951,20 @@ Most reliable way to measure quality of experience, however it is costly and tim
 - **Test methodology,** including the rating target (quality, comparison, or impairment), the scale (categorical or continuous) and the type of stimuli (single or double). 
 - **Score processing,** including score normalization, outlier detection, mean score and confidence intervals computation, and significance tests.
 
-Prior to a test a  screening for visual acuity or normal color vision is performed. Then fixed viewing angles and monitors and resolutions are selected.
+Fixed viewing angles and monitors and resolutions are selected.
 
-The tye of stimuli depends on the goal, video stimuli are used to compare spatial (Spatial Information SI, textures) and temporal predictions (Temporal Information TI)
+Prior to a test a  screening for visual acuity or normal color vision is performed. They should also be informed of the methodology. A session should not last more than 30 min as they might chaneg sensitivity or opinions too much in that time frame: run train with all possible types of stimuli to inform participants, keep session short, pay them and randomize stimuli
 
+The type of stimuli depends on the goal, video stimuli are used to compare spatial (Spatial Information SI, textures) and temporal predictions (Temporal Information TI, action)
 
+**Spatial Information (𝑆𝐼):** A measure that indicates the amount of spatial detail in a picture. It is usually higher for more spatially complex scenes. Each image is fintered with **sobel filter** that highlights contours. The STD is computed and max value is chosen
+
+**Temporal information (𝑇𝐼):** a measure that indicates the amount of temporal changes of a video sequence. It is usually large for high-motion sequences. Measured as difference of pixel values at same position between two frames. The STD is computed and the max is selected
+
+**Single Stimulus (SS) or Absolute Category Rating (ACR):** single image or video shown (also possible with reference). During the data analysis, a differential mean opinion score (DMOS) of quality will be computed between each test sequence and its corresponding (hidden) reference.
+
+In **Double Stimulus Impairment Scale (DSIS)** users rate the degradation. See og, then watch compressed and grade
+
+in **Pair wise Comparison (PC)** the user must choose between og or compressed without nowing which is which. Results stored in comparison matrix
+$$C=\begin{bmatrix}c_{00}&c_{01}&c_{02}&...\\ c_{10}&c_{11}&c_{12}&...\\c_{20}&c_{21}&c_{22}&...\\\vdots& & \ddots\end{bmatrix}$$
 # 12) Adaptive Streaming
