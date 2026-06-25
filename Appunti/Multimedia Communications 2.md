@@ -2156,4 +2156,8 @@ For live streaming video generation is simultaneos and conetxtual to TX, segment
 
 Since performance is related to segment length, Common Media Application Format (CMAF) breaks segments into chunks that do not require IDR frames that can be sent with just 1-3 s delay
 
-The performance on fluidness is jitter: inter frame difference (variance). To absorb jitter there is a buffer that allows streaming to go for $B(t)$ seconds uninterrupted. It is created before playback (added latency) and gets drained or filled as the stream arrives. If it is emptied the playback stops until it is not full until threshold level
+The performance on fluidness is jitter: inter frame difference (variance). To absorb jitter there is a buffer that allows streaming to go for $B(t)$ seconds uninterrupted. It is created before playback (added latency) and gets drained or filled as the stream arrives. If it is emptied the playback stops until it is not full until threshold level. This can also have a max size
+
+Let $\overline S$ be the avg throughput, we receive $\overline ST$ bits in time $T$, and the playout duration of $R_CT$, the avg input flow rate is $$\frac{D(T)}{T}=\frac{\overline S}{R_C}$$
+## 12.2) Video Streaming QoE
+Streaming aims to request the rate at which the QoE is maximized
