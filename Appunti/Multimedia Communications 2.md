@@ -1891,3 +1891,18 @@ VVC needs 7 bits for 67 modes. Sending 7 bits per block is inefficient since the
 Use **Most probable Mode (MPM)**, the encoder predicts mode using spatial context. List of MPMs s built (HEVC has 3, VVC has 6). So these are encoded with small codewords
 
 ## 9.2) Network Abstraction and Parallelism
+In network transmission, the data is subject to possible bit errors and packet losses. One bit error can propagate for various frames and packet losses can block the video stream.
+
+Picture is divided into slices so that CABAC is reset for each slice
+![[Pasted image 20260625095836.png|Example|250]]
+From h.264 the video standard for compression and transport is created:
+- **Video Coding Layer (VCL):** video codec+slices generation
+- **Network Abstraction Layer (NAL):** Encapsulates VCL, adds metadata and transports
+
+Works both for RTP/IP communications and also ISO or diffusion
+
+The slices are encapsulated into **VCL NAL Units (NALU)** or Non-VCL NALU 
+- **VCL NALU:** Modes, MV, quant coeff
+- **Sequence Parameter Set (SPS):** important encoding params: size, color, etc
+- **Picture Parameter Set (PPS):** per picture coding optons
+- **Supplemental Enhanced Info (SEI):** 
