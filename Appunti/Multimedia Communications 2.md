@@ -2160,4 +2160,6 @@ The performance on fluidness is jitter: inter frame difference (variance). To ab
 
 Let $\overline S$ be the avg throughput, we receive $\overline ST$ bits in time $T$, and the playout duration of $R_CT$, the avg input flow rate is $$\frac{D(T)}{T}=\frac{\overline S}{R_C}$$
 ## 12.2) Video Streaming QoE
-Streaming aims to request the rate at which the QoE is maximized
+Streaming aims to request the rate at which the QoE is maximized.
+- Per segment video quality should be maximized but not fluctuate too much (distracting)
+- Rebuffering should be as few as possible with minimum length
