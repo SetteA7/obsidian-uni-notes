@@ -1956,15 +1956,34 @@ Fixed viewing angles and monitors and resolutions are selected.
 Prior to a test a  screening for visual acuity or normal color vision is performed. They should also be informed of the methodology. A session should not last more than 30 min as they might chaneg sensitivity or opinions too much in that time frame: run train with all possible types of stimuli to inform participants, keep session short, pay them and randomize stimuli
 
 The type of stimuli depends on the goal, video stimuli are used to compare spatial (Spatial Information SI, textures) and temporal predictions (Temporal Information TI, action)
-
-**Spatial Information (𝑆𝐼):** A measure that indicates the amount of spatial detail in a picture. It is usually higher for more spatially complex scenes. Each image is fintered with **sobel filter** that highlights contours. The STD is computed and max value is chosen
-
-**Temporal information (𝑇𝐼):** a measure that indicates the amount of temporal changes of a video sequence. It is usually large for high-motion sequences. Measured as difference of pixel values at same position between two frames. The STD is computed and the max is selected
+- **Spatial Information (𝑆𝐼):** A measure that indicates the amount of spatial detail in a picture. It is usually higher for more spatially complex scenes. Each image is fintered with **sobel filter** that highlights contours. The STD is computed and max value is chosen
+- **Temporal information (𝑇𝐼):** a measure that indicates the amount of temporal changes of a video sequence. It is usually large for high-motion sequences. Measured as difference of pixel values at same position between two frames. The STD is computed and the max is selected
 
 **Single Stimulus (SS) or Absolute Category Rating (ACR):** single image or video shown (also possible with reference). During the data analysis, a differential mean opinion score (DMOS) of quality will be computed between each test sequence and its corresponding (hidden) reference.
 
 In **Double Stimulus Impairment Scale (DSIS)** users rate the degradation. See og, then watch compressed and grade
 
-in **Pair wise Comparison (PC)** the user must choose between og or compressed without nowing which is which. Results stored in comparison matrix
-$$C=\begin{bmatrix}c_{00}&c_{01}&c_{02}&...\\ c_{10}&c_{11}&c_{12}&...\\c_{20}&c_{21}&c_{22}&...\\\vdots& & \ddots\end{bmatrix}$$
+in **Pair wise Comparison (PC)** the user must choose between og or compressed without nowing which is which. Results stored in comparison matrix where $c_ij=n$ is the amount of times that $c_j$ was preferred over $c_i$
+$$C=\begin{bmatrix}c_{00}&c_{01}&c_{02}&...\\ c_{10}&c_{11}&c_{12}&\\c_{20}&c_{21}&c_{22}&\\\vdots& & &\ddots\end{bmatrix}$$
+
+Finally it results that PSNR is not sufficient. Also vieweing condition and smoothness impact performance
+
+**Reliable Score:**
+Define votes as random process: estimate mean and variance (small= mostly agree on mean value). Then a confidence interval around the mean is computed so to have 95% confidence to contain the true mean. This is 
+$$ci=[-1.96\cdot SE,1.96\cdot SE]\text{ with }SE=\sigma^2/\sqrt N$$
+
+
+| **Method**                              | **Reference Visible?** | **Speed** | **Accuracy** | **Typical Use Cases**            |
+| --------------------------------------- | ---------------------- | --------- | ------------ | -------------------------------- |
+| ACR (Absolute Category Rating)          | No                     | High      | Medium       | Large-scale streaming evaluation |
+| ACR-HR                                  | Hidden reference       | High      | High         | Compression quality studies      |
+| DSIS (Double Stimulus Impairment Scale) | Yes                    | Medium    | Very High    | Codec validation                 |
+| PC (Pairwise Comparison)                | Relative comparison    | Low       | Excellent    | Fine perceptual ranking          |
+
+---
+It is possible to crowdsource this, but with no controlled viewing conditions
+
+## 11.2) Objective Quality Assessment
+
+
 # 12) Adaptive Streaming
