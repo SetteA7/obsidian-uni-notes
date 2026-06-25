@@ -2144,3 +2144,16 @@ QUIC uses HTTP/3 and UDP, with independent streams for each part of the video (a
 ISPs allow to use CDN for optimized services with better caching (at edge) routing and server consolidation
 
 ## 12.1) Adaptive Bitrate Streaming
+DASH-MPEG was the first  standard for adaptive bitrate streaming. It adapts on the fy with client driven logic over HTTP. Each segment has a constant rate resolution and framerate, but there are different levels.
+
+A period is a high level temporal unit, it contains adaptionsets which are the components of the stream (video, sub, audio) and these are linked to a representation, which links to the segments (precise urls)
+
+Each segment must have the same length at each level, starts with closed GOP and begins IDR. Open GOPS can be used and begin with CRA segment. All segments can reference only frames inside of them
+
+For stored media it is asynchronous. Generation, encoding, segmentation, caching is done in advance
+
+For live streaming video generation is simultaneos and conetxtual to TX, segments and encoding done on the fly. DASH fits live streaming as 10-20 sec of delay is tolerable and supoorted by DASH.
+
+Since performance is related to segment length, Common Media Application Format (CMAF) breaks segments into chunks that do not require IDR frames that can be sent with just 1-3 s delay
+
+The performance on fluidness is jitter: inter frame difference (variance). To absorb jitter there is a buffer that allows streaming to go for $B(t)$ seconds uninterrupted. It is created before playback (added latency) and gets drained or filled as the stream arrives. If it is emptied the playback stops until it is not full until threshold level
