@@ -1969,7 +1969,7 @@ $$C=\begin{bmatrix}c_{00}&c_{01}&c_{02}&...\\ c_{10}&c_{11}&c_{12}&\\c_{20}&c_{2
 Finally it results that PSNR is not sufficient. Also vieweing condition and smoothness impact performance
 
 **Reliable Score:**
-Define votes as random process: estimate mean and variance (small= mostly agree on mean value). Then a confidence interval around the mean is computed so to have 95% confidence to contain the true mean. This is 
+Define votes as random process: estimate mean ($m=\frac1N\sum x_i$) and variance ($\sigma=\sqrt{\frac1N\sum (x_i-m)^2}$) (small= mostly agree on mean value). Then a confidence interval around the mean is computed so to have 95% confidence to contain the true mean. This is 
 $$ci=[-1.96\cdot SE,1.96\cdot SE]\text{ with }SE=\sigma^2/\sqrt N$$
 
 
@@ -1984,6 +1984,28 @@ $$ci=[-1.96\cdot SE,1.96\cdot SE]\text{ with }SE=\sigma^2/\sqrt N$$
 It is possible to crowdsource this, but with no controlled viewing conditions
 
 ## 11.2) Objective Quality Assessment
+Quality assessment algorithms usually predict visual quality by comparing a distorted signal against a reference, typically by modeling the human visual system. It is based on mathematical models that try to replicate human perception
+- Full reference metrics: PSNR, SSIM, VMAF
+- No-reference metrics: NIQE, BRISQUE, CLIP-IQA 
+- Reduced reference metrics: RRED
+
+Signal is $I(n,m,c,t)$ and processed signal si $\hat I(n,m,c,t)$. That is component $c$ at position $n,m$ at time $t$.
+
+$$\begin{gather}
+MSE(t)=\frac1{NM}\sum_{n,m}\par{I(n,m,1,t)-\hat I(n,m,1,t)}^2\\
+PSNR(t)=10\logt\frac{255^2}{MSE(t)}\approx 48 dB-10\logt MSE(t)\\
+\end{gather}$$
+PSNR only measures pixel difference, not visual quality
+Structural Similarity Index (SSIM) is closer to human quality evaluation (more sensitive to structures, edges, contrast)
+$$SSIM(x,y)=l(x,y)^\alpha c(x,y)^\beta s(x,y)^\gamma$$
+where
+- $l$ is luminance change
+- $c$ is contrast change
+- $s$ is structure comparison
+
+Video distortion produces RD curves: **Bjontegaard metrics** can be used to compare these curves
+- Delta Rate: it is the average rate difference at the same quality, expressed as %
+- Delta PSNR: it is the average PSNR difference at the same rate 
 
 
 # 12) Adaptive Streaming
