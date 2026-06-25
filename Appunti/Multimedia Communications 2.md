@@ -1471,6 +1471,95 @@ A single bit error in a variable-length / embedded stream can corrupt **many** s
 - **Resync markers:** extra rate inserted into the bitstream to **stop error propagation**.
 - **JPEG 2000:** independently-coded codeblocks act as **implicit markers** — an error is contained to its block.
 # 6) Learned Image Coding (TODO)
+This is the state of the art of compression techniques:
+
+>[!def] Learned Image Compression (LIC)
+>Learned Image Compression (LIC) or Neural Image Compression (NIC) refers yo the application of neural networks and machine learning to data compression tasks
+
+This is the state of the art since they don't use hand crafted rules but LIC algorithms are learned and outperform traditional algorithms.
+- Classic: It uses linear transforms to de-correlate pixels based on statistical assumptions
+- Neural: Learned non-linear transforms optimized directly for the data
+
+NN can be used twofold:
+- **Combinatorial Selection (Classic):** hand crafted tools and ai optimizes their parameters
+- **Continuous Learning (Neural):** the filter is found via gradient descent
+
+#### DL Basics
+Recall how the perceptron works:
+$$y=f(w^Tx+b)=f\par{\sum_iw_ix_i+b}$$
+![[Pasted image 20260408130508.png|Example|250]]
+##### FFNN
+**Multi-Layer Perceptron (FFNN)**
+The output of a neuron is based on all the outputs of previous layer.
+- The input layer gives as output the input
+- The hidden layers give as output the output of their perceptrons
+- The output layer is same as hidden layer but with different activation function
+
+The learning follows the gradient descent rule:
+$$\theta\iter {i+1}=\theta \iter i-\eta\nabla_\theta\mathcal L(\theta\iter i)$$
+which can be easily computed by backpropagation.
+
+This is not good for images:
+- High dimension/Parameter Explosion: only 1D vector, so images are straightened and spatial correlations are lost
+- No translation invariance
+- Training difficulty
+![[Pasted image 20260408130753.png|Example|250]]
+##### CNN
+ **Convolutional Neural Networks (CNN)**
+Instead of relying on all the previous outputs, CNNs use a subset of outputs but **share the same weight**. 
+This allows for:
+- Local connectivity and weight sharing: this brings to translation invariance and reduces parameter count
+- Analysis: Convolutions compact information 
+- Synthesis: Transposed convolutions reconstruct the full-resolution image
+
+however, multiple filters are needed as each filter learns a specific detector (edges, textures, ...). Multiple kernels work in parallel and therefore the 2D input becomes a 3D tensor
+
+##### Activation Function
+The activation function is different than the standard ones (relo, sigmoid, ...). Instead for compression the **Generalized Divisive Normalization (DGN):** 
+$$w_i=\frac{v_i}{\sqrt{\beta_i+\sum_j\gamma_{ij}v_j^2}}$$
+where $\beta_i$ and $\gamma_{ij}$ are learned parameters.
+This allows for:
+- Lateral inhibition: the denominator measures local energy, if neighbors are big, this feature is suppressed
+- This works similar to the human visual system
+- decorrelates the signal making the distribution roughly normal
+#### Neural Paradigm
+Instead of transforming fixed blocks, neural compression transforms the entire image into a deep 3D Latent Tensor As explained before, this allows for spatial reduction and channel expansion (parallel features extraction)
+
+The traditional encoding is replaced by an autoencoder:
+- Analysis Transform ($g_a$) (encoder): Uses CNN to map image $x$ to the tensor $y$
+- Bottleneck (compression): latents $y$ are quantized to $\hat y$ to be entropy encoded
+- Synthesis transform ($g_s$) (decoder): learns to reconstruct image from the quantized latents $\hat y$
+
+The optimization objective now becomes the minimization of the lagrangian:
+$$\mathcal L=R+\lambda D=\underbracket{ D_{KL}[q(\hat y|x)\|p(\hat y)]}_{\text{Rate}}+\underbracket{\lambda \E[\rho(x,\hat x)]}_{\text{Distortion}}$$
+
+In Neural Compression, instead of compressing the image, the output of the Analysis Transform ($y=g_a(x)$) is quantized.
+
+
+| Pixel Space                                     | Latent Space                                                |
+| ----------------------------------------------- | ----------------------------------------------------------- |
+| High Redundancy                                 | Features are decorrelated                                   |
+| Probabilities are hard to model                 | More predictable distributions (gaussian/Laplace)           |
+| Visible quantization errors (blocking, ringing) | Network hides noise in less perceptually important channels |
+
+There is a problem with gradient descent in the quantizer step. The quantization function is a staricase function, that is $Q'(z)=\sum \delta_i$ which is zero almost everywhere so backpropagation cancels out.
+To fix this n additive uniform noise is added 
+$$\hat z=Q(z)+u,\text{ where } u=\mathcal U(-0.5,0.5)$$
+This allows the quantization function to be differentuable and the noise is independend white noise at higher resolutions
+
+##### Hyperprior
+The base compression can be improved by sending some additional information bits called **hyperprior**
+- **Hyper-Encoder:** takes latent tensors $y$ and extracts statistical natures $z$
+- **Hyper-Decoder:** decodes $\hat z$ to predict the standard deviation of the conditional propri probability
+
+#### JPEG-AI
+JPEG AI uses a **scale hyperprior autoencoder**
+![[Pasted image 20260411153005.png|JPEG AI Architecture|350]]
+It has a innovative feature called **dual-use bitstream**. This can decode the file in two useful ways:
+- Human Vision Decoder: reconstructs standard pixels for visual consumption
+- Computer Vision Task Decoder: extracts features directly form the latent space without full pixel reconstruction
+
+
 
 # 7) Motion Estimation
 Videos are different from images as they implement temporal information. This information is mostly found in the movement. The study of **optical flow** consists in defining the movement of a pixel between two subsequent images into a **vector field**. 
@@ -2014,4 +2103,17 @@ Netflix proposed **Video Multi Method Assessment Fusion (VMAF)** that incorporat
 ML models are also sued LPIPS or DISTS
 
 ![[Pasted image 20260625131408.png|Reduced Reference Approach|450]]
+
+| Type                 | Metric                                     | Key idea / Formula                                                                                                                                       | Range         | HVS-aware?                          | Strengths                                                   | Limitations                                  | Typical use                           |
+| -------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ----------------------------------- | ----------------------------------------------------------- | -------------------------------------------- | ------------------------------------- |
+| **FR**               | **MSE**                                    | $\frac{1}{NM}\sum_{n,m}(I-\hat{I})^2$                                                                                                                    | $[0,+\infty)$ | No                                  | Simple, universal                                           | All pixels equal; ignores perception         | Baseline                              |
+| **FR**               | **PSNR**                                   | 10\logt2552MSE(t)≈48\db−10\logtMSE(t)10\logt\frac{255^2}{\mathrm{MSE}(t)}\approx 48\db-10\logt\mathrm{MSE}(t) 10\logtMSE(t)2552​≈48\db−10\logtMSE(t)     | dB ↑          | No                                  | Universal; easy codec comparison                            | Same PSNR ≠ same perceived quality           | Codec benchmarking                    |
+| **FR**               | **Bjøntegaard Δ\Delta ΔR / Δ\Delta ΔPSNR** | Area between two R–D curves ÷ common PSNR (or rate) interval                                                                                             | % / dB        | No                                  | Single-number R–D curve comparison                          | Needs 4–5 operating points; cubic fit        | Codec comparison                      |
+| **FR**               | **SSIM**                                   | $[l(x,y)]^\alpha[c(x,y)]^\beta[s(x,y)]^\gamma$ — compares luminance ll l, contrast cc c, structure ss s                                                  | $[0,1]$ ↑     | Yes (Weber's law, contrast masking) | Sensitive to edges, structure, contrast                     | Fails on geometric distortions               | Image/video QA                        |
+| **FR**               | **VMAF**                                   | SVM fusion of VIF + DLM + TI trained on subjective data (Netflix)                                                                                        | $[0,100]$ ↑   | Yes (learned)                       | Strong MOS correlation for streaming; ${\geq}90$ looks good | Netflix-domain training                      | Streaming QoE                         |
+| **FR — AI**          | **LPIPS**                                  | $\mathcal L^2$  distance in deep (AlexNet/VGG) feature space trained on perceptual judgements                                                            | $[0,1]$ ↓     | Yes (learned)                       | Generalises across distortion types                         | Needs reference; heavier compute             | Perceptual similarity                 |
+| **FR — AI**          | **DISTS**                                  | Texture + structure similarity in deep feature space; invariant to mild geometric distortions                                                            | $[0,1]$ ↓     | Yes (learned)                       | Robust to texture synthesis / SR artefacts                  | Needs reference                              | SR, generative QA                     |
+| **RR**               | **RRED & similar**                         | Compact features (edge stats, freq. coefficients, texture descriptors, motion info) extracted from reference and sent as side info; compared at receiver | varies        | Partial                             | Low bandwidth; scalable; suitable for network monitoring    | Less accurate than FR; requires side-channel | IPTV, adaptive streaming, network QoE |
+| **NR — statistical** | **BRISQUE / NIQE / PIQE**                  | Deviations from natural scene statistics (NSS); block-wise distortion estimation                                                                         | varies ↓      | Partial                             | No subjective training data needed; fast                    | Tuned to specific distortions; poor on UGC   | Blind IQA                             |
+| **NR — AI**          | **Deep NR (CNN / Transformer / CLIP-IQA)** | End-to-end network trained to predict MOS; perceptual embeddings; multimodal learning                                                                    |               |                                     |                                                             |                                              |                                       |
 # 12) Adaptive Streaming
