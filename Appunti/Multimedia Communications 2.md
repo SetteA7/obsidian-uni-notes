@@ -1905,4 +1905,25 @@ The slices are encapsulated into **VCL NAL Units (NALU)** or Non-VCL NALU
 - **VCL NALU:** Modes, MV, quant coeff
 - **Sequence Parameter Set (SPS):** important encoding params: size, color, etc
 - **Picture Parameter Set (PPS):** per picture coding optons
-- **Supplemental Enhanced Info (SEI):** 
+- **Supplemental Enhanced Info (SEI):** subtitles, HDR, user data
+- **Access Unit Delimiter (AUD):** optional NALU signaling
+
+The (logical) group of all NALUs to decode a frame is called **Access unit (AU)**. Delivered either via bitstream or packets
+- **Byte Stream h.264:** Inject start code before NALU, use emulation prevention to avoid bitstream to have start code. Good for continuous streaming, adds cpu overhead
+- **Packets h.265, h.266:** A length field (+ temporal ID and Layer D) is written before every NALU, $O(1)$ memory jump but if there is a corruption fails
+
+AV1 uses Open Bitstream Units (OBU)
+
+Intermediate nodes, called Media Aware Network Elements (MANE), read the header (deep packet inspection) and can decide to drop B frames without touching important parameters if necessary. Moreover CRC is added to SPS to check for bit errors
+
+If a NALU exceeds MTU, RTP layer slices the NALU into Fragmentation Units (FU) that will be reassembled
+
+**Resynchronization:**
+Decoding may restart at a Random Access Point (RAP) signaled by an Instantaneous Decoding Refresh (IDR), no pictures after IDR are referenced from pictures preceding it. This however reduces the compression efficiency
+
+HEVC introduced Clean Random Access (CRA): 
+
+**Tiles:**
+Tling is used to create self contained slices with many CTUs. These allow for parallelization in encoding/decoding
+
+Slices can also be divided into Wavefront Paralle Processing 
