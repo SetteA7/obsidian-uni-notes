@@ -2117,3 +2117,21 @@ ML models are also sued LPIPS or DISTS
 | **NR — statistical** | **BRISQUE / NIQE / PIQE**                  | Deviations from natural scene statistics (NSS); block-wise distortion estimation                                                                         | varies ↓      | Partial                             | No subjective training data needed; fast                    | Tuned to specific distortions; poor on UGC   | Blind IQA                             |
 | **NR — AI**          | **Deep NR (CNN / Transformer / CLIP-IQA)** | End-to-end network trained to predict MOS; perceptual embeddings; multimodal learning                                                                    |               |                                     |                                                             |                                              |                                       |
 # 12) Adaptive Streaming
+Multimedia services need different types of data integrity and latency requirements.
+
+In general a server must be able to send the same content at different rates with possibly low latency
+The bitrate must be below the channel capacity:
+$$R_C\leq C_k$$
+But each client has a different channel capacity, so a static $R_C$ doesn't suffice.
+If $R_C$ is too high, then the packets get dropped and a big delay arrived. If too small, it has suboptimal quality
+
+IP routers drop packets blindly, with no regards to CABAC context. Specialized middleboxes MANE can inspect NAL and smartly drop packets
+
+**Real Time Push paradigm:** sub 150ms latency, data sent as soon as it is available
+**Adaptive Streaming Pull paradigm:** large scale concurrency with quality maximization
+
+UDP is used to optimize latency at data integrity cost. RTP adds sequence number and timestamps to frames. RTCP adds QoS metrics for dynamic $R_C$, WebRTX wraps into browser for NAT/Firewall traversal
+
+**Scalable Video Coding:** Encode once decode many.
+- Base layer has worse quality so to work with any client
+- Enhanced Layers (EL) are multiple progressive refinement layers
