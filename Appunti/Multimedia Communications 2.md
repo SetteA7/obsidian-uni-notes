@@ -2134,4 +2134,13 @@ UDP is used to optimize latency at data integrity cost. RTP adds sequence number
 
 **Scalable Video Coding:** Encode once decode many.
 - Base layer has worse quality so to work with any client
-- Enhanced Layers (EL) are multiple progressive refinement layers
+- Enhanced Layers (EL) are multiple progressive refinement layers. These just encode the quantization error wrt to previous levels, so only few additional info is required
+MANE can decide what levels to prune, this only works for middle scale (one to few)
+
+HTTPS is used as it is stateless and encapsulating the video into HTTP packets is easy to integrate with default internet CDN stack but uses TCP
+
+QUIC uses HTTP/3 and UDP, with independent streams for each part of the video (audi, sub image) has a 0-RTT handshake and handles connection migrations
+
+ISPs allow to use CDN for optimized services with better caching (at edge) routing and server consolidation
+
+## 12.1) Adaptive Bitrate Streaming
