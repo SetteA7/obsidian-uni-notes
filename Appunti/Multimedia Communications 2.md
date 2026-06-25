@@ -1989,6 +1989,8 @@ Quality assessment algorithms usually predict visual quality by comparing a dist
 - No-reference metrics: NIQE, BRISQUE, CLIP-IQA 
 - Reduced reference metrics: RRED
 
+![[Pasted image 20260625131346.png|Full Reference Approach|450]]
+
 Signal is $I(n,m,c,t)$ and processed signal si $\hat I(n,m,c,t)$. That is component $c$ at position $n,m$ at time $t$.
 
 $$\begin{gather}
@@ -2007,5 +2009,9 @@ Video distortion produces RD curves: **Bjontegaard metrics** can be used to comp
 - Delta Rate: it is the average rate difference at the same quality, expressed as %
 - Delta PSNR: it is the average PSNR difference at the same rate 
 
+Netflix proposed **Video Multi Method Assessment Fusion (VMAF)** that incorporates detail preservation, structural similarity, motion information and perceptual learning into one 1-100 score
 
+ML models are also sued LPIPS or DISTS
+
+![[Pasted image 20260625131408.png|Reduced Reference Approach|450]]
 # 12) Adaptive Streaming
