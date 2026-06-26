@@ -2163,3 +2163,13 @@ Let $\overline S$ be the avg throughput, we receive $\overline ST$ bits in time 
 Streaming aims to request the rate at which the QoE is maximized.
 - Per segment video quality should be maximized but not fluctuate too much (distracting)
 - Rebuffering should be as few as possible with minimum length
+
+For the segment video quality an easy monotonic function is chosen $Q=k_n$ where $k_n$ is the level
+
+For the buffering we define the buffering time as $\Delta_n$ the reduction of QoE is defined as
+$$\phi(\Delta)=\begin{cases}
+0&\text{ if }\Delta =0\\
+a\Delta+b&\text{ if }\Delta >0
+\end{cases}\qquad\text{ where }a\text{ is small and } b\text{ big} $$
+The QoE for a single segment is then:
+$$J(n)=\lambda_1k_n-\lambda_2\abs{k_n-k_{n-1}}-$$
