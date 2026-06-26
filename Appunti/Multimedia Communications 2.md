@@ -2157,8 +2157,35 @@ Windows overlap by a bit. 512 samples for 32 coded samples, and a large buffer. 
 
 We use the **Modiefied DCT (MDCT)**:
 - Has overlapping widnows to remove blocking artifacts
-- Time Domain Aliasing Cancellation (TDAC): mathematical stru 
-- 
+- Time Domain Aliasing Cancellation (TDAC): mathematical structure to allow to cancel aliasing of one block from the next during reconstruction 
+- No redundancy $N=2M$ samples but $M$ spectral coefficients
+
+The encoder therefore:
+1. MDCT to do freqeucny transform ($M$ coefficients)
+2. Psychoacoustic analysis
+3. Dynamic bit allocation (most complex part uses SMR)
+4. Quantization + Huffman
+
+![[Pasted image 20260626165509.png|Encoder|350]]
+
+The decoder just takes bitstream, inverse quantization and IMDCT to obtain signal.
+
+>[!def] Signal to Mask Ratio (SMR)
+>or a given band $k$, the SMR is the ratio between signal power $S_k$ and masking threshold $\phi_k$
+>$$SMR\db=S_k\db-\phi_k\db$$
+>The bits are assigned so that SMR exceeds SNR, then quantization noise is masked
+
+MPEG Layer 3 (MP3) calculates $\phi_k$ via psychoacoustic procedure:
+1. Spectral analysis for energy distribution
+2. Identify tonal and noise like components (different maskers)
+3. For each masker the masking tent (spreading function) is calculated based on intensity and frequency
+4. Combined with Absolute Hearing Threshold to form Global Masking Threshold $\phi(f)$
+
+AAC is te MP3 successor it has more bands, flexible resolution, dynamic tables and better quality overall. It uses a scale factor. uses the Scale Factor (g) to surgically place the noise floor for each Scale Factor Band (SFB), ensuring that quantization noise SQ is always hidden under the masking threshold Φ.
+
+![[Pasted image 20260626170129.png|Recap|450]]
+
+## 10.5) Neural Codecs (TODO)
 # 11) Quality Assessment and Quality of Experience for Multimedia Services
 **Quality assessment** tries to give quantitative feedback by a signal perceived by a human.
 - **Qualitative:** subjective quality assessment
