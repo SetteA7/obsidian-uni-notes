@@ -2060,9 +2060,7 @@ The z-domain synthesis is:
 $$Y(z)=A(z)X(z)\rightarrow X(z)=A^{-1}(z)Y(z)$$
 in time:
 $$x(n)=y(n)-\sum_{i=1}^Pa_ix(n-i)$$
-Due to how $A^{-1}(z)$ determines shape of $X$, 
-
-
+ $A^{-1}(z)$ determines shape of $X$, since $Y$ is either flat or Dirac comb, it performs better in peaks than valleys (spectrum). Since $A$ is FIR, $A^{-1}$ is IIR 
 
 The optimal coefficients are those that minimize the variance: $\sigma^2_y=\E[y^2(n)]$. This ws already solved in [[#2.3) Predictive SQ]]. 
 $$R_xa=-r_x$$
@@ -2078,6 +2076,38 @@ The LPC encoder segments the signal (20 ms windows) and extracts:
 ![[Pasted image 20260626151136.png|Example|150]]
 $R_x$ is estimated $R_x(k)=x_w*x_w(k)=\sum_{n=0}^{N-1-k}x_w(n)x_w(n+k)$, then the $0,..,P$ values are chosen to build $R_X$ and $r_x$, these are used to find peak at $k>P$
 
+#### Quantization
+Quantization of $a_i$ is dangerous:
+- High dynamic range: $a_i$ can vary drastically in magnitude
+- Quantization can alter roots of $A(z)$, one coeff outside of UC, huge distortion
+
+**Line Spectrum Frequencies (LSF)** maps the LPC $A$ polynomial into symmetric and antisymmetric polynomials:
+$$\begin{align}
+P(z)=A(z)+z^{-(P+1)}A(z^{-1})\\
+Q(z)=A(z)-z^{-(P+1)}A(z^{-1})
+\end{align}$$
+All roots are on unit circle, so frequencies represented only by angles! (no need for magnitude)
+Moreover **$1/A(z)$ **is stable if and only if P and Q interlace, that is:**
+$$0<w_1^P<w_q^Q<...<w_i^P<w_i^Q<...<\pi$$
+Quantize $w_i$ and if they swap places it can be detected immediately and can be re sorted
+
+Finally $A$ can be reconstructed as:
+$$\begin{aligned}
+P(z)=(1+z^{-1})\prod_{i\textbf{ odd}}^{P-1}(1-2\cos)w_i)z^{-1}+z^{-2})\\
+Q(z)=(1-z^{-1})\prod_{i\textbf{ even}}^{P-1}(1-2\cos)w_i)z^{-1}+z^{-2})
+\end{aligned}\qquad A(z)=\frac{P(z)+Q(z)}2$$
+When two $P,Q$ roots are close, there are frequency peaks in $A$
+![[Pasted image 20260626152929.png|Example|350]]
+**Vector quantization** is used to encode $w_i$ instead of doing so independently
+$P$ angles of LSF considered as single vector. Encoder and decoder share a "dictionary" of representative LSF vectors, trained on human speech. The encoder finds the vector in the codebook that minimizes distortion and transmits only its Index.
+
+LSFs are highly correlated because the vocal tract can only take certain physical shapes. VQ exploits this to encode the whole 10th-order filter with just 20-30 bits per frame.
+
+Constant bitrate of 2.4 kbps, that is 54 bits/frame at 22.5 ms per frame. Voiced sounds use 10 bits for LPC, unvoiced only 4, but unvoiced has higher error protection bits
+
+![[Pasted image 20260626153430.png|Table|350]]
+
+## 10.3) Source Based Codecs
 
 
 # 11) Quality Assessment and Quality of Experience for Multimedia Services
