@@ -2108,6 +2108,13 @@ Constant bitrate of 2.4 kbps, that is 54 bits/frame at 22.5 ms per frame. Voiced
 ![[Pasted image 20260626153430.png|Table|350]]
 
 ## 10.3) Source Based Codecs
+LPC 10 bit is limited due to simplicity of model. We study **Code Exited Linear Prediction (CELP)** that introduces
+- Vector Excitation: residual $y(n)$ is no longer pulse or noise, but a vector chosen from a codebook
+- Analysis by Synthesis (AbS): encoder acts as mini decoder, tries different vectors and gains and compares to original
+- Closed Loop Search: best result is chosen
+
+![[Pasted image 20260626160708.png|Example|250]]
+The error is not the pysicial error $\psilon=x-\hat x$ 
 
 
 # 11) Quality Assessment and Quality of Experience for Multimedia Services
