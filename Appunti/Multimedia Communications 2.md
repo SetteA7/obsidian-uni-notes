@@ -2144,9 +2144,21 @@ Wideband allows for more bandwidth. **AMR-WB** is the standard used which includ
 - Discontinuous Transmission (DTX): Optimized Silence Insertion Descriptors (SID) and comfort noise
 
 ## 10.4) Perceptual Audio Coding (Sink Baased)
+Notice that we perceive different frequencies differently, for example we are most sensitive to 1-4 kHz (core humans speech frequencies)
+![[Pasted image 20260626164649.png|Hearable Pressure|450]]
+Moreover iniside the **critical bands** we cannot distinguish sound, only more power (implicit quantization)
 
+Finally masking happens when two near frequencies have a certain dB difference. Masking also occurs in time
+- pre masking: just before loud sound 2-5ms we are blinded to it
+- post masking: lasts longer 100-200ms, correct sensitivity is recovered afterwards
 
+MPEG Audio exploits these to compress the audio by adding information loss on these imperceptible components
+Windows overlap by a bit. 512 samples for 32 coded samples, and a large buffer. window sized are dynamically switched based on steady state or transient periods
 
+We use the **Modiefied DCT (MDCT)**:
+- Has overlapping widnows to remove blocking artifacts
+- Time Domain Aliasing Cancellation (TDAC): mathematical stru 
+- 
 # 11) Quality Assessment and Quality of Experience for Multimedia Services
 **Quality assessment** tries to give quantitative feedback by a signal perceived by a human.
 - **Qualitative:** subjective quality assessment
