@@ -2044,6 +2044,40 @@ So it is possibel to model $H$ analytically (IIR) filter and just transmit $E(f)
 Music doesn't have these properties, lot of high frequency and non harmonic components, cannot predict
 
 ## 10.2) Linear Predictive Coding (LPC)
+We assume that sample $x(n)$ can be estimated by $P$ past values:
+$$\hat x(n)=-\sum_{i=1}^Pa_ix(n-i)$$
+then the prediction error is:
+$$y(n)=x(n)-\hat x(n)=\sum_{i=0}^Pa_ix(n-i)\text{ with }a_0=1$$
+This is the output of a FIR filter $A(z)=\sum a_iz^{-1}$ applied to $x$. If it is optimal then white-noise-like signal or a periodic impulse train.
+
+$y(n)$ has: 
+- sharp periodic spikes for voiced segments
+- zero mean white noise for unvoiced segments
+
+By tx-ing $A(z)$ and $y(n)$ we increase $G$ as $y$ has lower variance and flatter spectrum
+
+The z-domain synthesis is:
+$$Y(z)=A(z)X(z)\rightarrow X(z)=A^{-1}(z)Y(z)$$
+in time:
+$$x(n)=y(n)-\sum_{i=1}^Pa_ix(n-i)$$
+Due to how $A^{-1}(z)$ determines shape of $X$, 
+
+
+
+The optimal coefficients are those that minimize the variance: $\sigma^2_y=\E[y^2(n)]$. This ws already solved in [[#2.3) Predictive SQ]]. 
+$$R_xa=-r_x$$
+- $R_x$ is symmetric Toeplitz matrix of autocorrelations
+- $r_x$ is autocorrelation vector
+- $a$ is vector of LP coefficients
+
+The LPC encoder segments the signal (20 ms windows) and extracts:
+- LP coefficients $a_i$: for vocal tract, $H$ modeling
+- Gain $G$: to represent energy
+- V/UV Decision: source type
+- Pitch Period $T_0$: fundamental frequency
+![[Pasted image 20260626151136.png|Example|150]]
+$R_x$ is estimated $R_x(k)=x_w*x_w(k)=\sum_{n=0}^{N-1-k}x_w(n)x_w(n+k)$, then the $0,..,P$ values are chosen to build $R_X$ and $r_x$, these are used to find peak at $k>P$
+
 
 
 # 11) Quality Assessment and Quality of Experience for Multimedia Services
