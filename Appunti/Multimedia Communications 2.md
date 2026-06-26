@@ -2028,8 +2028,22 @@ Audio communication must have low latency and small jitter. The dynamic range sp
 
 ## 10.1) Speech and Audio Fundations
 Audio is only locally stationary: voice in 20ms and audio a bit more $\rightarrow$ dynamic window length
-- Source Based Modeling: studying how vocal tract emits sound, we can use resonance filters: bad for non vocal sounds: high intelligibility low latency
-- Sink Based Modeling: study receiver (human auditory system) 
+- Source Based Modeling: studying how vocal tract emits sound, we can use resonance filters: bad for non vocal sounds: high intelligibility low latency. **Exploits statistical redundancy (prediction)**
+- Sink Based Modeling: study receiver (human auditory system): priority for perceptual transparency. **Removes perceptual irrelevancy (maskin)**
+
+**Sparsity:** laplacian like PDF, centered at 0
+**Dynamic range:** 16-20 bit precision for music, 8 for speech (non uniform quantization)
+
+![[Pasted image 20260626145411.png|Laplacian Distribution|250]]
+
+Human speech (in wovels) has high redundancy. It has a lot of fundamental frequency and harmonic content, In spectrogram (STFT) we see locality with clear intensity at harmonics.
+Moreover we can distinguish between vowels and nasal sounds (soft) which have a clear period and pitch or fricatives (hard) which are moire noise like.It is possibel to describe them in frequency as impulses or noise $E(f)$. Our vocal tract acts as a filter, so in frequency we have
+$$S(f)=E(f)H(f)$$
+So it is possibel to model $H$ analytically (IIR) filter and just transmit $E(f)$
+
+Music doesn't have these properties, lot of high frequency and non harmonic components, cannot predict
+
+## 10.2) Linear Predictive Coding (LPC)
 
 
 # 11) Quality Assessment and Quality of Experience for Multimedia Services
