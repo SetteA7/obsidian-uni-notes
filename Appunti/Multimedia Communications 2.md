@@ -2134,7 +2134,16 @@ We define $\hat p_0$ as the ZIR, this is subtracted from the weighted signals be
 ![[Pasted image 20260626161323.png|CELP Architecture|450]]
 Here we can clearly see the following:
 - The signal $x(n)$ is used to compute the **perceptually weighted input** (filter through $W(z)$, where the ZIR $\hat p_0(n)$ is removed
-- 
+- Two of $L$ codewords are selected for the innovation part of the signal. To these is summed the LPT (filter with $bz^{-Q}$, delayed sample by $Q$). All gains are also selected. This is then filtered by the perceptual weighting filter ($1/A(z/\gamma)$) to obtain the **perceptually weighted predictor**. Also from here ZIR is removed
+- Finally the Perceptual Weighted Error is computed and this s repeated a with different vectors and gains to select the best final predictor $y(n)$ (best MSE of $\epsilon$)
+
+Wideband allows for more bandwidth. **AMR-WB** is the standard used which includes ACELP (different weights and more vectors), and adaptive bitrate
+**EVS** is the 5G/VoLTE standard, it uses a different codec for music and audio and has better rates, includes AMR-WB for compatibility:
+- Jitter Buffer Management: New algorithms to smooth out the arrival of IP packets. 
+- Frame Erasure Concealment (FEC): Advanced techniques to hide packet loss by predicting speech from past parameters. 
+- Discontinuous Transmission (DTX): Optimized Silence Insertion Descriptors (SID) and comfort noise
+
+## 10.4) Perceptual Audio Coding (Sink Baased)
 
 
 
