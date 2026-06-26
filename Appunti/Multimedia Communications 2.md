@@ -2114,7 +2114,28 @@ LPC 10 bit is limited due to simplicity of model. We study **Code Exited Linear 
 - Closed Loop Search: best result is chosen
 
 ![[Pasted image 20260626160708.png|Example|250]]
-The error is not the pysicial error $\psilon=x-\hat x$ 
+The error is not the physical error $\epsilon=x-\hat x$ but a **Perceptual Weighted Error:**
+- Exploits Masking
+- Uses a filter $W$ to exploit error $W=\frac{A(z)}{A(z/\gamma)}$ where $A(z)$ is the analysisi filter and $A(z/\gamma)$ is the perceptual weighting filter
+- Shifts pole to origin: broadens the formants
+
+
+The periodicity is modeled by recycling previous frames. A buffer of $y(n)$ is used, a leg of $Q$ samples is used $y_{adapt}=y(n-Q)$ and a gain is selected to match current energy. This is a form of **Long Term Predictor (LTP)**
+
+The past cannot predict everything,  fixed codebook adds new information via two shape vectors $v_i$
+$$y(n)=g_py_{adapt}(n)+\sum_{i=1}^2g_{ci}v_i(n)$$
+
+The perceptual weighting filter $A(z/\gamma)$ is a sum of two responses:
+- Zero Input Response (ZIR): ringing due to past memory. This alone is what the filter produces with no new codebooks
+- Zero State Response (ZSR): reposne to new excitations
+
+We define $\hat p_0$ as the ZIR, this is subtracted from the weighted signals before computing the error
+
+![[Pasted image 20260626161323.png|CELP Architecture|450]]
+Here we can clearly see the following:
+- The signal $x(n)$ is used to compute the **perceptually weighted input** (filter through $W(z)$, where the ZIR $\hat p_0(n)$ is removed
+- 
+
 
 
 # 11) Quality Assessment and Quality of Experience for Multimedia Services
