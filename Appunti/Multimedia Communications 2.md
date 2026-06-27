@@ -804,7 +804,7 @@ Where $W_M=e^{-j2\pi/M}$ is the M-th primitive root of unity
 Each row is therefore the conjugate of a basis vector.
 the total energy is preserved: $\|y\|^2=\|x\|^2$
 
-In 2D, the DFT is a separable transform:
+In 2D, the DFT is a **separable transform:**
 $$Y=\mathcal T X\mathcal T^T$$
 this computes the rows and then the columns (horizontal and vertical frequency analysis)
 This transform decomposes the image into a weighted sum of $N^2$ orthogonal basis patterns:
@@ -812,7 +812,7 @@ $$B_{k,l}(n,m)=\frac1Ne^{j\frac{2\pi}N(kn+lm)}$$
 each coefficient $Y[k,l]$ represents the frequency component of horizontal and vertical frequency combination
 Most energy is concentrated in the low frequencies.
 
-This is still not ideal since the DFT suposes a periodic signal. We compress finite signals and therefore on the image edges we have spectral leakage (low frequencies leak into high ones) making the signal less sparse
+This is still not ideal since the DFT suposes a periodic signal. We compress finite signals and therefore on the image edges we have **spectral leakage** (low frequencies leak into high ones) making the signal less sparse
 
 ##### Discrete Cosine Transform (DCT)
 A general approach is used **Discrete Cosine Transform (DCT)**
