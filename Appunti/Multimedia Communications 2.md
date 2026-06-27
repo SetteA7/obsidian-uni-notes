@@ -144,7 +144,12 @@ some common shape factors are:
 - Gaussian $c_X=\frac{\sqrt 3}2\pi\approx 2.72$
 
 #### Non-HR Optimal Quantization (TODO)
-There is **no analytical formula** for low rate optimal quantizers, but it is possible to find **necessary conditions** that allow to defining the **Lloyd-Max algorithm** to find local optimum points
+There is **no analytical formula** for low rate optimal quantizers, but it is possible to find **necessary conditions** that allow to defining the **Lloyd-Max (k-mean) algorithm** to find local optimum points
+
+1. Set dictionary
+2. Find best thresholds for dictionary
+3. Find best dictionary for threshold
+4. repeat until convergence
 
 ## 2.3) Predictive SQ
 Quantization is **not effective for non sparse data**. Predictive SQ **exploits correlation among samples**.
