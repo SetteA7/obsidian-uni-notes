@@ -1632,7 +1632,7 @@ v=\overline v-f_y\frac{\overline u f_x+\overline v f_y+f_t}{\lambda \abs{\nabla 
 where $\overline z$ is the average of local values
 
 This gives a **dense output** with smooth coherent results.
-However, it is sensitive to noise (CIH limitation) and it is not robust with large displacement (regularization term). This is ususallyy used for object tracking.
+However, it is sensitive to noise (CIH limitation) and it is not robust with large displacement (regularization term). This is ususally used for object tracking.
 
 ---
 The result is obtained via Lagrange multiplier with minimization on $u$ and $v$;
