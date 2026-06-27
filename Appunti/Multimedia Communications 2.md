@@ -1023,7 +1023,7 @@ Filter banks have these properties:
 - **Finite Impulse Response**
 - **Orthogonality**
 - **Vanishing Moments**
-- **Symmetric** for border problems
+- **Symmetric** for border problems (not QMF or CQF)
 
 Only 2 filters have these properties:
 - **Quadrature Mirror Filters (QMF):** 
@@ -1109,7 +1109,7 @@ Unfortunately this is a filter with Vanishing moment (VM) of $p=1$. The high pas
 Haar has $p=1$ and can only represent piecewise linear functions.
 We consider the **Cohen-Daubechies-Fauveau (CDF)** biorthogonal filter:
 - Symmetric
-- Maximize VM
+- Maximize VM (4)
 - close to orthogonal ($\omega_i\approx 1$)
 
 Here is a 3 level wavelet decomposition
@@ -1289,7 +1289,7 @@ One single bit error can introduce to many wrong decoding steps
 - Correction code: increase rate used only on small sensitive data
 - Markers: increased rate insert into bitstream to stop propagation errors
 
-JPEG200 has implicit markers (codeblock independently coded)
+JPEG2000 has implicit markers (codeblock independently coded)
 
 $\newcommand{\log}{\text{log}}$ $\newcommand{\logt}{\text{log}_{10}}$ $\newcommand{\logn}[1]{\text{log}_{#1}}$ $\newcommand{\db}{{[\text{dB}]}}$ $\newcommand{\dbm}{{[\text{dBm}]}}$ $\renewcommand{\def}{{\ \stackrel\triangle= \ }}$ $\newcommand{\fourier}{\stackrel{\mathcal F}{\longrightarrow}}$
 
