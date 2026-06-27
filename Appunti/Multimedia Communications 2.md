@@ -1018,12 +1018,12 @@ F_i\text{ is the synthesiys filter: }&v_i[n]=(f_i*\hat c_i)[n]&&V_i(z)=F_i(Z)\ha
 \end{align}$$
 
 Filter banks have these properties:
-- **Perect Reconstruction (PR):** see later
+- **Perfect Reconstruction (PR):** see later
 - **Invertible Modulation Matrix:** see later
 - **Finite Impulse Response**
 - **Orthogonality**
 - **Vanishing Moments**
-- **Symmetric**
+- **Symmetric** for border problems
 
 Only 2 filters have these properties:
 - **Quadrature Mirror Filters (QMF):** 
