@@ -2042,7 +2042,7 @@ Audio is only locally stationary: voice in 20ms and audio a bit more $\rightarro
 ![[Pasted image 20260626145411.png|Laplacian Distribution|250]]
 
 Human speech (in wovels) has high redundancy. It has a lot of fundamental frequency and harmonic content, In spectrogram (STFT) we see locality with clear intensity at harmonics.
-Moreover we can distinguish between vowels and nasal sounds (soft) which have a clear period and pitch or fricatives (hard) which are moire noise like.It is possibel to describe them in frequency as impulses or noise $E(f)$. Our vocal tract acts as a filter, so in frequency we have
+Moreover we can distinguish between vowels and nasal sounds (soft) which have a clear period and pitch or fricatives (hard) which are moire noise like. It is possibel to describe them in frequency as impulses or noise $E(f)$. Our vocal tract acts as a filter, so in frequency we have
 $$S(f)=E(f)H(f)$$
 So it is possibel to model $H$ analytically (IIR) filter and just transmit $E(f)$
 
@@ -2092,7 +2092,7 @@ P(z)=A(z)+z^{-(P+1)}A(z^{-1})\\
 Q(z)=A(z)-z^{-(P+1)}A(z^{-1})
 \end{align}$$
 All roots are on unit circle, so frequencies represented only by angles! (no need for magnitude)
-Moreover **$1/A(z)$ **is stable if and only if P and Q interlace, that is:**
+Moreover **$1/A(z)$ is stable if and only if P and Q interlace, that is:**
 $$0<w_1^P<w_q^Q<...<w_i^P<w_i^Q<...<\pi$$
 Quantize $w_i$ and if they swap places it can be detected immediately and can be re sorted
 
