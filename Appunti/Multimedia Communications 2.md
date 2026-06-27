@@ -54,16 +54,16 @@ $$\begin{align}
 &\text{Thresholds: }t_i=(i-1)\Delta\\
 
 \\
-&\text{Encoder: }i=\ceil{\frac x2}\\
+&\text{Encoder: }i=\ceil{\frac x\Delta}\\
 &\text{Decoder: }\hat x^i=i\Delta-\frac \Delta 2\\
-&\implies Q(x)=\Delta\ceil{\frac x2}-\frac\Delta2
+&\implies Q(x)=\Delta\ceil{\frac x\Delta}-\frac\Delta2
 \end{align}$$
 #### Signed Data
 Since values are unsigned a mid thread quantizer is necessary, therefore we need an **odd number of levels**. The threshold at $t^{N/2}$ will have $\hat x^{N/2}=0$.
 $$\begin{align}
-&\text{Encoder: }i=\text{round}\par{\frac x2}\\
+&\text{Encoder: }i=\text{round}\par{\frac x\Delta}\\
 &\text{Decoder: }\hat x^i=i\Delta\\
-&\implies Q(x)=\Delta\text{round}\par{\frac x2}
+&\implies Q(x)=\Delta\text{round}\par{\frac x\Delta}
 \end{align}$$
 From here we can define **deadzone quantization**:
 The central cell is larger than the others, it is zero if $\abs x<\tau$
@@ -100,7 +100,7 @@ $$\begin{align}
 \sigma^2_Q=\E[g(X)]&=\int_{-\frac A2}^{\frac A2} g(u)\frac1Adu=\sum_{i=1}^L\int_{\Theta_i}\frac1A[u-Q(u)]^2du\\
 &=\frac1A\sum_{i=1}^L\int_{\hat x_i-\Delta/2}^{\hat x_i+\Delta/2}[u-\hat x_i]^2du\\
 &=\frac 1A\sum_{i=1}^L\int_{-\Delta/2}^{\Delta /2}t^2dt\\
-&=\frac AL\frac{\Delta^3}{12}
+&=\frac LA\frac{\Delta^3}{12}
 \end{align}$$
 finally recall that in UQ we have $\Delta=A/L$ , that $L=2^{R}$ and that $\var(X)=A^2/12$ then:
 $$\sigma_Q^2=\frac AL\frac{\Delta^3}{12}=\frac{\Delta^2}{12}=\frac1{12}\par{\frac{A}{L}}^2=\frac{A^2}{12}\frac 1{L^2}=\sigma_X^22^{-2R}$$
