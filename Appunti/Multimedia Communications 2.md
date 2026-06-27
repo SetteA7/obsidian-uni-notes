@@ -2236,6 +2236,7 @@ $$ci=[-1.96\cdot SE,1.96\cdot SE]\text{ with }SE=\sigma^2/\sqrt N$$
 | PC (Pairwise Comparison)                | Relative comparison    | Low       | Excellent    | Fine perceptual ranking          |
 
 ---
+
 It is possible to crowdsource this, but with no controlled viewing conditions
 
 ## 11.2) Objective Quality Assessment
@@ -2293,21 +2294,22 @@ If $R_C$ is too high, then the packets get dropped and a big delay arrived. If t
 
 IP routers drop packets blindly, with no regards to CABAC context. Specialized middleboxes MANE can inspect NAL and smartly drop packets
 
-**Real Time Push paradigm:** sub 150ms latency, data sent as soon as it is available
-**Adaptive Streaming Pull paradigm:** large scale concurrency with quality maximization
+**Real Time Push paradigm:** sub 150ms latency, data sent as soon as it is available. Server driven
+UDP is used to optimize latency at data integrity cost. RTP adds sequence number and timestamps to frames. RTCP adds QoS metrics for dynamic $R_C$, WebRTC wraps into browser for NAT/Firewall traversal
 
-UDP is used to optimize latency at data integrity cost. RTP adds sequence number and timestamps to frames. RTCP adds QoS metrics for dynamic $R_C$, WebRTX wraps into browser for NAT/Firewall traversal
+**Adaptive Streaming Pull paradigm:** large scale concurrency with quality maximization
+HTTPS is used as it is stateless and encapsulating the video into HTTP packets is easy to integrate with default internet CDN stack but uses TCP
+
+QUIC uses HTTP/3 and UDP, with independent streams for each part of the video (audi, sub image) has a 0-RTT handshake and handles connection migrations
+
+ISPs allow to use CDN for optimized services with better caching (at edge) routing and server consolidation
 
 **Scalable Video Coding:** Encode once decode many.
 - Base layer has worse quality so to work with any client
 - Enhanced Layers (EL) are multiple progressive refinement layers. These just encode the quantization error wrt to previous levels, so only few additional info is required
 MANE can decide what levels to prune, this only works for middle scale (one to few)
 
-HTTPS is used as it is stateless and encapsulating the video into HTTP packets is easy to integrate with default internet CDN stack but uses TCP
 
-QUIC uses HTTP/3 and UDP, with independent streams for each part of the video (audi, sub image) has a 0-RTT handshake and handles connection migrations
-
-ISPs allow to use CDN for optimized services with better caching (at edge) routing and server consolidation
 
 ## 12.1) Adaptive Bitrate Streaming
 DASH-MPEG was the first  standard for adaptive bitrate streaming. It adapts on the fy with client driven logic over HTTP. Each segment has a constant rate resolution and framerate, but there are different levels.
