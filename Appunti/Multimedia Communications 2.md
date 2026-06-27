@@ -417,7 +417,7 @@ $$\frac{\partial J}{\partial x_i}=0,\quad \frac{\partial J}{\partial \lambda}=0$
 >Write $J$:
 >$$J(p.\lambda)=-\sum_ip_i\log p_i+\lambda\par{\sum_ip_i-1}$$
 >Calculate the derivative (specific $p_i$)
->$$\begin{align}\frac{\partial J}{\partial p_i}=-\par{\frac{\log e}{p_i}p_i+\log p_i}+\lambda=0\rightarrow p_i=\lambda-\log e\\
+>$$\begin{align}\frac{\partial J}{\partial p_i}=-\par{\frac{\log e}{p_i}p_i+\log p_i}+\lambda=0\rightarrow \log p_i=\lambda-\log e\\
 \frac{\partial J}{\partial\lambda}=\sum_{i=1}^Mp_i-1=0\rightarrow p_i=1/M
 \end{align}$$
 >The max uncertainty is obtained by setting all probabilities equal, that is $p_i=1/M$.
