@@ -201,7 +201,7 @@ Finally, a **local adaptation with block wise approach** can be used. Divide ima
 &=2\sigma^2(1-\rho)
 \\
 \\
-\sigma_Y^2&=2\sigma^2(1-\rho)>\sigma^2\iff \rho>\frac12\iff G_p>0
+\sigma_Y^2&=2\sigma^2(1-\rho)<\sigma^2\iff \rho>\frac12\iff G_p>0
 \end{align}$$
 
 Proof of optimal filter:
