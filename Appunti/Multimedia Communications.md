@@ -709,7 +709,7 @@ Take a $8\times8$ block:
 - The value at $(0,0)$ is the mean intensity called **DC** value 
 - The other values are called AC values
 
-## 3.5) JPEG Standard (TODO)
+## 3.5) JPEG Standard 
 
 JPEG is an image compression standard defined in 1991 that defines **only the decoder** for interoperability and implementation competition
 
