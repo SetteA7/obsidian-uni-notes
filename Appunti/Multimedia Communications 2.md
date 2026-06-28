@@ -168,7 +168,7 @@ Proof prediction error=signal error:
 $$q(n)=y(n)-\hat y(n)=x(n)-v(n)-(\hat x(n)-v(n))=x(n)-\hat x(n)=\overline q(n)$$
 ![[Pasted image 20260320160934.png|Quantizer process|350]]
 Proof SNR quality depends on $\sigma_Y^2$
-$$SNR=10\logt\frac{\sigma_X^2}D=10\logt\frac{\sigma_X^2}{\sigma_Y^2}+10\logt\frac{\sigma_Y^2}D=G_P+G_Q$$
+$$SNR=10\logt\frac{\sigma_X^2}D=10\logt\frac{\sigma_X^2}{\sigma_Y^2}+10\logt\frac{\sigma_Y^2}D=G_P+G_Q\approx\logt\frac{\sigma_X^2}{\sigma_Y^2}+6R$$
 #### Predictors
 Linear predictors are used: simple and optimal for gaussian rvs.
 
