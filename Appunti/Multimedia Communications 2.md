@@ -2314,7 +2314,7 @@ ISPs allow to use CDN for optimized services with better caching (at edge) routi
 DASH-MPEG was the first  standard for adaptive bitrate streaming. It adapts on the fy with client driven logic over HTTP. Each segment has a constant rate resolution and framerate, but there are different levels.
 
 **Media Presentation Description**
-A period is a high level temporal unit, it contains adaptionsets which are the components of the stream (video, sub, audio) and these are linked to a representation (quality), which links to the segments (precise urls)
+A period is a high level temporal unit, it contains **adaption sets** which are the components of the stream (video, sub, audio) and these are linked to a **representation** (quality), which links to the **segments** (precise urls)
 
 Each segment must have the same length at each level, starts with closed GOP and begins IDR. Open GOPS can be used and begin with CRA segment. All segments can reference only frames inside of them
 
