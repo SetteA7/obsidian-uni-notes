@@ -1677,6 +1677,8 @@ Finally the **performance** measure is the **computational complexity**. The fol
 - Block size: determines the number of blocks: 
 - Number of candidate vectors ($i,j\in\mathcal W$)
 - Cost function $d$
+
+also regularization, motion model and vector precision (subpixel)
 ##### Cost Function
 The **cost function** of $d()$ is based on $\mathcal L_1$ norm (SAD) or $\mathcal L_2$ norm (SSD). With SSD the one with smallest MSE but more computing cost
 
