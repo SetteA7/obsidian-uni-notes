@@ -2033,7 +2033,7 @@ Slices can also be divided into Wavefront Parallel Processing (WPP).
 # 10) Audio and Speech Compression (TODO)
 Audio communication must have low latency and small jitter. The dynamic range spans 100dB and must work at minimal bitrates with high quality. The use of psicoacustic tricks is required.
 
-## 10.1) Speech and Audio Fundations
+## 10.1) Speech and Audio Foundations
 Audio is only locally stationary: voice in 20ms and audio a bit more $\rightarrow$ dynamic window length
 - Source Based Modeling: studying how vocal tract emits sound, we can use resonance filters: bad for non vocal sounds: high intelligibility low latency. **Exploits statistical redundancy (prediction)**
 - Sink Based Modeling: study receiver (human auditory system): priority for perceptual transparency. **Removes perceptual irrelevancy (maskin)**
@@ -2132,7 +2132,7 @@ The periodicity is modeled by recycling previous frames. A buffer of $y(n)$ is u
 The past cannot predict everything,  fixed codebook adds new information via two shape vectors $v_i$
 $$y(n)=g_py_{adapt}(n)+\sum_{i=1}^2g_{ci}v_i(n)$$
 
-The perceptual weighting filter $A(z/\gamma)$ is a sum of two responses:
+The perceptual weighting filter $1/A(z/\gamma)$ is a sum of two responses:
 - Zero Input Response (ZIR): ringing due to past memory. This alone is what the filter produces with no new codebooks
 - Zero State Response (ZSR): reposne to new excitations
 
