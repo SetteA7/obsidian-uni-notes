@@ -2345,7 +2345,7 @@ And the full sequence QoE is
 $$J=\sum_{n\in S}(J(n))-\lambda_3T_{ST}$$
 ## 12.3) Adaptive Bitrate (ABR)
 Only at client side, so not standardized
-The thorughput is estimated as data received over time for each packet n:
+The **thorughput** is estimated as data received over time for each packet n:
 $$S(n)=\frac{D(n)}{T_D(n)}$$
 An exponential moving average is used to filter out high frequencies from this estimation:
 $$\hat S(n)=\alpha S(n)+(1-\alpha)\hat S(n-1)$$
