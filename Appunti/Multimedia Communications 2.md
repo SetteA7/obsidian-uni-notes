@@ -247,7 +247,7 @@ $\Delta=A/L$ constant $\forall i$. Levels = cell midpoints, $\Theta_i=\par{\hat 
 | $D(R)$   | —                                            | $\sigma_X^22^{-2R}$ (uniform input)       | —                                     | $\tfrac{\gamma^2}3\sigma_X^22^{-2R}$      |
 
 
-**Deadzone (DZQ):** central cell wider, $\hat x=0$ for $\abs x<\tau$. Common in compression. $$i=\begin{cases}\text{sign}(x)\floor{\dfrac{\abs x+\frac{\tau\Delta}2}\Delta} & \abs x\geq\tau\[2pt]0&\abs x<\tau\end{cases}\qquad\hat x=\begin{cases}\text{sign}(i),\Delta\par{\abs i+\tfrac{1-\tau}2}&i\neq0\0&i=0\end{cases}$$
+**Deadzone (DZQ):** central cell wider, $\hat x=0$ for $\abs x<\tau$. Common in compression. $$i=\begin{cases}\text{sign}(x)\floor{\dfrac{\abs x+\frac{\tau\Delta}2}\Delta} & \abs x\geq\tau\ [2pt]0&\abs x<\tau\end{cases}\qquad\hat x=\begin{cases}\text{sign}(i),\Delta\par{\abs i+\tfrac{1-\tau}2}&i\neq0\0&i=0\end{cases}$$
 
 **Key results**
 - **Minimax optimal:** given range and $L$, UQ has the smallest max error $e_\max=\tfrac{\Delta}2=\tfrac A{2L}$.
