@@ -248,3 +248,4 @@ q_1 & r_1& p_1 & 0&...&0&...\\
 \vdots&&&&&\ddots&...
 \end{bmatrix}$$
 $$P_{i,i+1}=p_i\quad P_{i,i-1}=q_i\quad P_{ii}=r_i$$
+# 4) Proofs to know
