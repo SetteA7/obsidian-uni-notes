@@ -477,7 +477,7 @@ _(where $1/\mu$ is interpreted as $0$ if $\mu = \infty$)._
 ## 4.9) Proof 9: Period is a Class Property
 Prove that in a Markov Chain the period is a class property, see [Proof 5](#^0524e9).
 
-## 4.10) Proof 10: 
+## 4.10) Proof 10: Random Walk Analysis
 Consider a random walk over non-negative integers with the following transition probabilities:
 $$P_{01}=1,\ P_{i,i+1}=p, \ P_{i,i-1}=q,\quad i>0$$
 with $p+q=1$
@@ -494,8 +494,24 @@ Now study recurrency/transiance:
 Let $h_i$ denote the probability of eventually reaching state 0 from state $i$. Clearly $h_0=1$
 $$h_i=ph_{i+1}+qh_{i-1}$$
 Multiply lhs by $p+q=1$
-$$ph_i+qh_i=ph_{i+1}+qh_{i-1}\rightarrow p(h_i-h_{i+1})=q(h_{i-1}-h_i)\rightarrow \Delta_i=h_i-h_{i+1}=\frac qp(h_{i-1}-h_i)$$
-Notice that
-$$\Delta_{i+1}=\frac qp\Delta_i$$
+$$\begin{align}
+ph_i+qh_i&=ph_{i+1}+qh_{i-1}\\ 
+p(h_i-h_{i+1})&=q(h_{i-1}-h_i)\\ \\
+\Delta_{i+1}=h_i-h_{i+1}&=\frac qp(h_{i-1}-h_i)=\frac qp\Delta_i
+\end{align}$$
+Let's see how $\Delta_i$ behaves
+$$\begin{align}
+&\Delta_1=h_0-h_1=1-h_1\\
+&\Delta_2=\frac qp\Delta_1\\
+&\Delta_3=\frac qp\Delta_2=\par{\frac qp}^2\Delta_1\\
+&...\\
+&\Delta_i=\par{\frac qp}^{i-1}\Delta_1
+\end{align}$$
+
 and thus
-$$h_0-h_n=(h_0-\underbraceh_1)+(h_1-h_2)+...+(h_{n-1}-h_n)=\sum_{i=1}^n\Delta_i=\Delta_1\sum_{k=0}^{n-1}\par{\frac qp}^k$$
+$$h_0-h_n=(h_0-\underbrace{h_1)+(h_1}_{=0}-h_2)+...+(h_{n-1}-h_n)=\sum_{i=1}^n\Delta_i=\Delta_1\sum_{k=0}^{n-1}\par{\frac qp}^k$$
+Since $h_0=1$ is known we have
+$$h_n=1-\Delta_1\sum_{k=0}^{n-1}\par{\frac qp}^k$$
+
+This has 2 cases:
+- The series diverges for $p\leq q$ 
