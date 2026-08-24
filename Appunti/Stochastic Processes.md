@@ -485,4 +485,17 @@ Study its behavior, in particular characterize its recurrence or transiency and 
 
 ---
 
-We start in 0.
+Let's start from the classification. 
+The chain is **irreducible** since all states are communicating, so all states share the same classification.
+
+Moreover the **period is 2** since it requires always an even number of steps to return to state $i$.
+
+Now study recurrency/transiance:
+Let $h_i$ denote the probability of eventually reaching state 0 from state $i$. Clearly $h_0=1$
+$$h_i=ph_{i+1}+qh_{i-1}$$
+Multiply lhs by $p+q=1$
+$$ph_i+qh_i=ph_{i+1}+qh_{i-1}\rightarrow p(h_i-h_{i+1})=q(h_{i-1}-h_i)\rightarrow \Delta_i=h_i-h_{i+1}=\frac qp(h_{i-1}-h_i)$$
+Notice that
+$$\Delta_{i+1}=\frac qp\Delta_i$$
+and thus
+$$h_0-h_n=(h_0-\underbraceh_1)+(h_1-h_2)+...+(h_{n-1}-h_n)=\sum_{i=1}^n\Delta_i=\Delta_1\sum_{k=0}^{n-1}\par{\frac qp}^k$$
