@@ -340,8 +340,8 @@ For a Poisson process $X(t)$ of rate $\lambda$, state and derive the expression 
 ---
 
 Answer:
-- $X(u)|X(t)=n\sim\text{Binomial} (n,\frac ut)\rightarrow P[X(u)=k|X(t)=n]=\binom nk\par{\frac ut}^k\par{1-\frac ut}^{n-k}$
-- $X(u)|X(t)=X(u)-X(t)\sim\text{Poisson}(\lambda(u-t))\rightarrow P[X(u)=k|X(t)=n]=\frac{(\lambda(u-t))^{k-n}e^{-\lambda(u-t)}}{(k-n)!}$
+- $X(u)|X(t)=n\sim\text{Binomial} (n,\frac ut)\rightarrow P[...]=\binom nk\par{\frac ut}^k\par{1-\frac ut}^{n-k}$
+- $X(u)|X(t)=n\sim\text{Poisson}(\lambda(u-t))\rightarrow P[...]=\frac{(\lambda(u-t))^{k-n}e^{-\lambda(u-t)}}{(k-n)!}$
 
 Proof:
 From the conditional probability definition we have:
@@ -362,6 +362,7 @@ $$\begin{align}
 P[X(u)=k|X(t)=n]&=\frac{(\lambda u)^ke^{-\lambda u}}{k!}\frac{(\lambda(t - u))^{n - k} e^{-\lambda (t - u)}}{(n - k)!}\frac{n!}{(\lambda t)^ne^{-\lambda t}}\\
 &=\frac{n!}{k!(n-k)!}\frac{\lambda^ku^k\lambda^{n-k}(t-u)^{n-k}}{\lambda^nt^n}\frac{e^{-\lambda(u+t-u)}}{e^{-\lambda t}}\\
 &=\binom nk\frac{u^k(t-u)^{n-k}}{t^n}\\
+&=\binom nk\frac{u^k}{t^k}\frac{(t-u)^{n-k}}{t^{n-k}}\\
 &=\binom nk\par{\frac ut}^k\par{1-\frac ut}^{n-k}
 \end{align}$$
 
@@ -372,3 +373,4 @@ Notice that the first term is the denominator of the expression of the condition
 $$P[X(u)=k|X(t)=n]=P[X(u)-X(t)=k-n]$$
 As before from the stationary increments we have that this is distributed as a Poisson random variable
 $$X(u)-X(t)\sim\text{Poisson}(\lambda(u-t))\rightarrow P[X(u)=k|X(t)=n]=\frac{(\lambda(u-t))^{k-n}e^{-\lambda(u-t)}}{(k-n)!}$$
+$\endproof$
