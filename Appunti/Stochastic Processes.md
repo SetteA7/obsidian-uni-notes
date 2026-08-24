@@ -376,6 +376,9 @@ $$X(u)-X(t)\sim\text{Poisson}(\lambda(u-t))\rightarrow P[X(u)=k|X(t)=n]=\frac{(\
 $\endproof$
 
 ## 4.5) Proof 5: Period is a Class Property
+
+^0524e9
+
 State precisely  and prove formally the result that establishes that in a Markov chain the period is a class property
 
 
@@ -460,5 +463,26 @@ $\endproof$
 ## 4.7) Proof 7: Rehash of Proof 6
 
 See [Proof 6](#^9bd3b6).
-## 4.8) Proof 8: Elementary Renewal Theorem
+## 4.8) Proof 8: Elementary Renewal Theorem TODO
 State and Prove the Elementary Renewal Theorem
+
+Let $\{N(t), t \ge 0\}$ be a renewal process with independent and identically distributed inter-arrival times $\{X_n\}_{n \ge 1}$ having mean $\mu = \mathbb{E}[X_1]$.
+
+Let $M(t) = \mathbb{E}[N(t)]$ be the renewal function. Then:
+
+$$\lim_{t \to \infty} \frac{M(t)}{t} = \frac{1}{\mu}$$
+
+_(where $1/\mu$ is interpreted as $0$ if $\mu = \infty$)._
+
+## 4.9) Proof 9: Period is a Class Property
+Prove that in a Markov Chain the period is a class property, see [Proof 5](#^0524e9).
+
+## 4.10) Proof 10: 
+Consider a random walk over non-negative integers with the following transition probabilities:
+$$P_{01}=1,\ P_{i,i+1}=p, \ P_{i,i-1}=q,\quad i>0$$
+with $p+q=1$
+Study its behavior, in particular characterize its recurrence or transiency and derive the steady state distribution.
+
+---
+
+We start in 0.
