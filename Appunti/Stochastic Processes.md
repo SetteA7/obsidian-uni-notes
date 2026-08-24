@@ -426,3 +426,14 @@ For renewal processes, give an expression for $\E[S_{N(t)+1}]$ also providing a 
 
 Answer:
 $$\E[S_{N(t)+1}]=\E[X](M(t)+1)$$
+
+Proof:
+
+Using the renewal argument (first step analysis) we have
+$$\E[S_{N(t)+1}|X_1=x]=\begin{cases}
+x & \text{if } x>t \\
+x+A(t-x) & \text{if } x\leq t
+\end{cases}$$
+
+and $\E[S_{N(t)+1}]=A(t)$
+
