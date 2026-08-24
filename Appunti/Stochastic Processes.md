@@ -250,9 +250,12 @@ q_1 & r_1& p_1 & 0&...&0&...\\
 $$P_{i,i+1}=p_i\quad P_{i,i-1}=q_i\quad P_{ii}=r_i$$
 # 4) Proofs to know
 
-## 4.1) Proof 1
+## 4.1) Proof 1: Long-run Arrival Rate
 For a renewal process, state precisely (also providing a formal proof) what is the value of:
 $$\lim_{t\rightarrow\infty}\frac{N(t)}t$$
+
+---
+
 Answer:
 $$\lim_{t\rightarrow\infty}\frac{N(t)}t=\frac1\mu\text{ with probability }1$$
 Proof:
@@ -274,3 +277,21 @@ $$\lim_{t\rightarrow\infty}\frac{S_{N(t)+1}}{N(t)}=\lim_{t\rightarrow\infty}\fra
 And thus by the squeeze theorem (two policemen) we have
 $$\lim_{t\rightarrow\infty}\frac t{N(t)}=\mu\text{ w.p. }1\longrightarrow \lim_{t\rightarrow\infty}\frac{N(t)}t=\frac1\mu$$
 $\endproof$
+## 4.2) Proof 2:
+Prove that if states $i$ and $j$ of a Markov chain communicate and $i$ is recurrent, then $j$ is also recurrent.
+
+---
+
+Proof:
+Since $i,j$ communicate ($i\rightarrow j, j\rightarrow i\implies i\leftrightarrow j$), we have by definition 
+$$\exists m,n\geq 0 \ s.t. \ P_{ji}\iter n>0, \ P_{ij}\iter m>0$$
+And by definition of recurrent state (the probability that the chain eventually returns to state $i$ in a finite number of steps is $1$) we have
+$$\sum_{k=0}^\infty P_{ii}\iter k=\infty$$
+To prove that $j$ is recurrent, we need to show that $\sum_{k=0}^\infty P_{jj}\iter k=0$.
+
+Consider the following path: from $j$ to $i$ in $n$ steps, then goes to $i$ back to $i$ in $k$ steps and then goes back from $i$ to $j$ in $m$ steps
+$$P_{jj}^{(n + k + m)} = \sum_{r, s} P_{jr}^{(n)} P_{rs}^{(k)} P_{sj}^{(m)} \ge P_{ji}^{(n)} P_{ii}^{(k)} P_{ij}^{(m)}$$
+
+Now 
+$$\sum_{k=0}^{\infty} P_{jj}^{(n + k + m)} \ge \sum_{k=0}^{\infty} P_{ji}^{(n)} P_{ii}^{(k)} P_{ij}^{(m)}$$
+Since $i
