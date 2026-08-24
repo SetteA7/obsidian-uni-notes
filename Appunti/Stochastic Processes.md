@@ -333,4 +333,15 @@ $$\E[T]=\int_0^\infty P[T>t]dt=\int_0^\infty e^{-\lambda t}dt =-\frac{e^{-\lambd
 $\endproof$
 
 ## 4.4) Proof 4:
-For a Poisson process $X(t)$ if rate $\
+For a Poisson process $X(t)$ of rate $\lambda$, state and derive the expression of $P[X(u)=k|X(t)=n]$ for the two cases:
+- $0<u<t,\ 0\leq k\leq n$
+- $0<t<u,\ 0\leq n\leq k$
+
+Proof:
+From the conditional probability definition we have:
+$$P[X(u)=k|X(t)=n]=\frac{P[X(u)=k\cap X(t)=n]}{P[X(t)=n]}=P[X(u)=k\cap X(t)=n]\cdot \frac{n!}{(\lambda t)^ne^{-\lambda t}}$$
+since $t, n$ are known, only the joint probability needs to be computed.
+
+Case 1: Infer past from future
+We can rewrite the joint probability as a disjoint one:
+$$$$
