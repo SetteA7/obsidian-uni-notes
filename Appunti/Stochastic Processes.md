@@ -514,4 +514,5 @@ Since $h_0=1$ is known we have
 $$h_n=1-\Delta_1\sum_{k=0}^{n-1}\par{\frac qp}^k$$
 
 This has 2 cases:
-- The series diverges for $p\leq q$ 
+- The series diverges for $p\leq q$, then $\lim_{n\rightarrow\infty} h_n=-\infty$ which violates $h_n\geq 0$. To fix this then $h_1$ must be equal to 1 so to have $\Delta_1=0$ and $h_n=1$ and the chain is recurrent
+- The series converges for $p>q$ and thus $\lim_{n\rightarrow\infty} h_n=1-\Delta_1\frac p{p-q}$. Since 
