@@ -375,7 +375,7 @@ As before from the stationary increments we have that this is distributed as a P
 $$X(u)-X(t)\sim\text{Poisson}(\lambda(u-t))\rightarrow P[X(u)=k|X(t)=n]=\frac{(\lambda(u-t))^{k-n}e^{-\lambda(u-t)}}{(k-n)!}$$
 $\endproof$
 
-## 4.5) Proof 5:
+## 4.5) Proof 5: Period is a Class Property
 State precisely  and prove formally the result that establishes that in a Markov chain the period is a class property
 
 
@@ -395,5 +395,34 @@ If two states $i, j \in S$ communicate ($i \leftrightarrow j$), then $d(i) = d(j
 Proof: 
 Since $i \leftrightarrow j$ then $\exists m,n : P_{ij}\iter m>0, P_{ji}\iter n>0$ and therefore 
 $$P_{jj}\iter {m+n}\geq P_{ji}\iter nP_{ij}\iter m>0$$
-Let $s\in\curly{s\geq 1:P_{ii}\iter s>0}$ then
+and clearly $\delta(j)$ must divide $m+n$:
+$$\delta (j)|(m+n)$$
+
+Let $s\in\curly{s\geq 1:P_{ii}\iter s>0}$, that is, any step length such that $P_{ii}\iter s>0$, then
 $$P_{jj}\iter{m+s+n}\geq P_{ji}\iter nP_{ii}\iter sP_{ij}\iter m>0$$
+now it is clear that $\delta(j)$ must also divide $m+s+n$:
+$$\delta (j)|(m+s+n)$$
+
+
+Now focus on $\delta (j)$. If it divides $m+n$ and also $m+s+n$ it must divide their difference, that is $\delta (j)$ also divides $s$. 
+$$\delta (j)|\par{(m+s+n)-(m+n)}=s\rightarrow \delta(j)|s$$
+
+Then, $\delta (j)$ is a common divisor of the set $\curly{s\geq 1 : P_{ii}\iter s>0}$ whose greatest common divisor is $\delta(i)$ it yields that 
+$$\delta(j)\leq \delta(i)$$
+
+By symmetry the roles of $i$ and $j$ can be reversed and the result becomes $\delta(i)\leq \delta(j)$
+
+By combining both inequalities we get 
+$$\begin{cases}
+\delta(j)\leq \delta(i)\\
+\delta(i)\leq \delta(j)
+\end{cases}\implies \delta(j)= \delta(i)$$
+$\endproof$
+
+## 4.6) Proof 6: 
+For renewal processes, give an expression for $\E[S_{N(t)+1}]$ also providing a formal proof
+
+---
+
+Answer:
+$$\E[S_{N(t)+1}]=\E[X](M(t)+1)$$
