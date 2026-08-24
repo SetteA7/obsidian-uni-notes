@@ -420,6 +420,9 @@ $$\begin{cases}
 $\endproof$
 
 ## 4.6) Proof 6: Derivation of $\mathbb{E}[S_{N(t)+1}]$ Using Renewal Theory
+
+^9bd3b6
+
 For renewal processes, give an expression for $\E[S_{N(t)+1}]$ also providing a formal proof
 
 ---
@@ -454,6 +457,8 @@ By the general theorem for renewal equations, the unique bounded solution is giv
 $$A(t) = a(t) + \int_0^t a(t-x) \, dM(x)=\E[X_1]+\int_0^t\E[X_1]dM(x)=\E[X_1]+\E[X_1]M(t)$$
 where $a(t-x)=\E[X_1]$ and since it is constant it is removed from the integral.
 $\endproof$
+## 4.7) Proof 7: Rehash of Proof 6
 
-## 4.7) Proof 8: Elementary Renewal Theorem
+See [Proof 6](#^9bd3b6).
+## 4.8) Proof 8: Elementary Renewal Theorem
 State and Prove the Elementary Renewal Theorem
