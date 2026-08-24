@@ -249,3 +249,16 @@ q_1 & r_1& p_1 & 0&...&0&...\\
 \end{bmatrix}$$
 $$P_{i,i+1}=p_i\quad P_{i,i-1}=q_i\quad P_{ii}=r_i$$
 # 4) Proofs to know
+
+## 4.1) Proof 1
+For a renewal process, state precisely (also providing a formal proof) what is the value of:
+$$\lim_{t\rightarrow\infty}\frac{N(t)}t$$
+Answer:
+$$\lim_{t\rightarrow\infty}\frac{N(t)}t=\frac1N\text{ with probability }1$$
+Proof:
+Let $\curly{X_n}_{n=1}^\infty$ be a sequence of id rvs representing inter-arrival times between successive events with $\E[X_i]=\mu\in(0,\infty)$
+
+
+Let the arrival time be $S_n=\sum_{i=0}^n X_i$ and the renewal counting process $N(t)$ count the number of renewals up to time t, then 
+$$N(t)\geq n\iff S_n\leq t$$
+Let the 
