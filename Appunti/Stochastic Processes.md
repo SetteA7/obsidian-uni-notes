@@ -337,11 +337,28 @@ For a Poisson process $X(t)$ of rate $\lambda$, state and derive the expression 
 - $0<u<t,\ 0\leq k\leq n$
 - $0<t<u,\ 0\leq n\leq k$
 
+---
+
+Answer:
+- $X(u)|X(t)=n\sim\text{Binomial} (n,\frac ut),\ P[X(u)=k|X(t)=n]=\binom nk\par{\frac ut}^k\par{1-\frac ut}^{n-k}$
+- 
+
 Proof:
 From the conditional probability definition we have:
 $$P[X(u)=k|X(t)=n]=\frac{P[X(u)=k\cap X(t)=n]}{P[X(t)=n]}=P[X(u)=k\cap X(t)=n]\cdot \frac{n!}{(\lambda t)^ne^{-\lambda t}}$$
 since $t, n$ are known, only the joint probability needs to be computed.
 
 Case 1: Infer past from future
-We can rewrite the joint probability as a disjoint one:
-$$$$
+We can rewrite the joint probability as two disjoint events $[0,u],\ [u,t]$:
+$$P[X(u)=k\cap X(t)=n]=P[X(u)=k]\cdot P[X(t)-X(u)=n-k]$$
+The first term is directly given by the Poisson distribution:
+$$P[X(u)=k]=\frac{(\lambda u)^ke^{-\lambda u}}{k!}$$
+While the second term is given from the stationary increments:
+$$P[X(t)-X(u)=n-k]=P[X(t-u)=n-k] = \frac{(\lambda(t - u))^{n - k} e^{-\lambda (t - u)}}{(n - k)!}$$
+Now 
+$$\begin{align}
+P(X(u)=k|X(t)=n)&=\frac{(\lambda u)^ke^{-\lambda u}}{k!}\frac{(\lambda(t - u))^{n - k} e^{-\lambda (t - u)}}{(n - k)!}\frac{n!}{(\lambda t)^ne^{-\lambda t}}\\
+&=\frac{n!}{k!(n-k)!}\frac{\lambda^ku^k}{}
+\end{align}$$
+
+$$\begin{aligned} \mathbb{P}(X(u) = k \mid X(t) = n) &= \frac{\frac{(\lambda u)^k e^{-\lambda u}}{k!} \cdot \frac{(\lambda (t - u))^{n - k} e^{-\lambda (t - u)}}{(n - k)!}}{\frac{(\lambda t)^n e^{-\lambda t}}{n!}} \\ &= \frac{n!}{k!(n - k)!} \cdot \frac{\lambda^k u^k \cdot \lambda^{n - k} (t - u)^{n - k}}{\lambda^n t^n} \cdot \frac{e^{-\lambda(u + t - u)}}{e^{-\lambda t}} \\ &= \binom{n}{k} \frac{u^k (t - u)^{n - k}}{t^n} \cdot \frac{e^{-\lambda t}}{e^{-\lambda t}} \\ &= \binom{n}{k} \left(\frac{u}{t}\right)^k \left(\frac{t - u}{t}\right)^{n - k} \\ &= \binom{n}{k} \left(\frac{u}{t}\right)^k \left(1 - \frac{u}{t}\right)^{n - k} \end{aligned}$$
