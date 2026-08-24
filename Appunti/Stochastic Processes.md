@@ -254,11 +254,23 @@ $$P_{i,i+1}=p_i\quad P_{i,i-1}=q_i\quad P_{ii}=r_i$$
 For a renewal process, state precisely (also providing a formal proof) what is the value of:
 $$\lim_{t\rightarrow\infty}\frac{N(t)}t$$
 Answer:
-$$\lim_{t\rightarrow\infty}\frac{N(t)}t=\frac1N\text{ with probability }1$$
+$$\lim_{t\rightarrow\infty}\frac{N(t)}t=\frac1\mu\text{ with probability }1$$
 Proof:
-Let $\curly{X_n}_{n=1}^\infty$ be a sequence of id rvs representing inter-arrival times between successive events with $\E[X_i]=\mu\in(0,\infty)$
+Let $\curly{X_n}_{n=1}^\infty$ be a sequence of iid rvs representing inter-arrival times between successive events with $\E[X_i]=\mu\in(0,\infty)$
 
 
 Let the arrival time be $S_n=\sum_{i=0}^n X_i$ and the renewal counting process $N(t)$ count the number of renewals up to time t, then 
 $$N(t)\geq n\iff S_n\leq t$$
-Let the 
+Let the renewal $N(t)$ occur at or before $t$ by definition, then renewal $N(t)+1$ occurs strictly after $t$:
+$$S_{N(t)}\leq t<S_{N(t)+1}$$
+For $N(t)\geq 1$ we have
+$$\frac{S_{N(t)}}{N(t)}\leq\frac{ t}{N(t)}<\frac{S_{N(t)+1}}{N(t)}$$
+To evaluate these bounds, recall the strong law of large numbers:
+$$\lim_{n\rightarrow\infty}\frac{S_n}n=\mu\text{ w.p. }1$$
+Since $\lim_{t\rightarrow\infty}N(t)=\infty$ it is possible to asymptotically substitute $n=N(t)$ and get 
+$$\lim_{t\rightarrow\infty}\frac{S_{N(t)}}{N(t)}=\mu$$
+For the upper bound we have
+$$\lim_{t\rightarrow\infty}\frac{S_{N(t)+1}}{N(t)}=\lim_{t\rightarrow\infty}\frac{S_{N(t)+1}}{N(t)+1}\cdot\frac{N(t)+1}{N(t)}=\mu\cdot 1=\mu$$
+And thus by the squeeze theorem (two policemen) we have
+$$\lim_{t\rightarrow\infty}\frac t{N(t)}=\mu\text{ w.p. }1\longrightarrow \lim_{t\rightarrow\infty}\frac{N(t)}t=\frac1\mu$$
+$\endproof$
