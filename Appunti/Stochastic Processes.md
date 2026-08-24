@@ -306,17 +306,27 @@ For a Poisson process of rate $\lambda$, prove that the inter-arrival times are 
 ---
 
 Proof:
+By definition of a Poisson process, we have
+- $N(0)=0$
+- Independent increments: for any $0\leq t_1<...<t_k$ the rvs $N(t_i)-N(t_{i-1})$ are independent
+- Stationary Poisson increments: for any $t\geq 0$ and $s>0$, the increment $N(t + s) - N(t) \sim \text{Poisson}(\lambda s)$, meaning:
+$$\mathbb{P}(N(s+t) - N(s) = k) =P(N(t)=k)= \frac{(\lambda t)^k e^{-\lambda t}}{k!}$$
+
 First we need to show that the interarrival times are iid:
-For the first arrival time we have
-$$P[s_0>t]=P[0 \text{ arrivals in } [0,t]]=P[N(t)=0]=\frac{(\lambda t)^0e^{-\lambda t}}{0!}=e^{-\lambda t}\rightarrow s_0\sim \text{Exp}(\lambda)$$
-In general $s_n=\sum_{i=1}^n t_i$, that is:
+
+For the first arrival time $T_1$ we have
+$$P[T_1>t]=P[0 \text{ arrivals in } [0,t]]=P[N(t)=0]=\frac{(\lambda t)^0e^{-\lambda t}}{0!}=e^{-\lambda t}\rightarrow T_1\sim \text{Exp}(\lambda)$$
+In general, the joint distribution becomes:
 $$\begin{align}
-P[s_{n+1}>t|s_0=t_0,...,s_n=t_n]&=P[0 \text{ arrivals in }[s_n,s_n+t]|\text{ history up to }s_{n}]\\
-&=P[N(s_n+t)-N(s_n)=0|s_i=t_i]\\
+P[T_{n+1}>t|T_1=t_1,...,T_n=t_n]&=P[0 \text{ arrivals in }[s_n,s_n+t]|\text{ history up to }s_{n}]\\
+&=P[N(s_n+t)-N(s_n)=0|T_i=t_i]\\
 &=P[N(s_n+t)-N(s_n)=0]\\
-&=P[N(t)=0]=e^{-\lambda t}
+&=P[N(t)=0]=e^{-\lambda t}\\ &\downarrow\\
+T_{n+1}&\sim\text{Exp}(\lambda)
 \end{align}$$
 Where the history could be removed due to the independence nature of the increments and the last step is due to the stationarity.
+
+This shows both the independence as it does not depend on $t_1,...,t_n$ (no history) and also the exponential distribution
 
 The mean of an exponential distribution $T$ with rate $\lambda$ is given by
 $$\E[T]=\int_0^\infty P[T>t]dt=\int_0^\infty e^{-\lambda t}dt =-\frac{e^{-\lambda t}}{\lambda}|_0^\infty=\frac 1\lambda$$
