@@ -381,7 +381,7 @@ State precisely  and prove formally the result that establishes that in a Markov
 
 For study purposes I include also the definition of period:
 $$\delta(i)=\gcd\curly{n\geq 1:P_{ii}\iter n>0}$$
-if it is 1 it is aperiodic
+if it is $1$ it is aperiodic.
 
 ---
 
