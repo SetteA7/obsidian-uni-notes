@@ -332,7 +332,7 @@ The mean of an exponential distribution $T$ with rate $\lambda$ is given by
 $$\E[T]=\int_0^\infty P[T>t]dt=\int_0^\infty e^{-\lambda t}dt =-\frac{e^{-\lambda t}}{\lambda}|_0^\infty=\frac 1\lambda$$
 $\endproof$
 
-## 4.4) Proof 4:
+## 4.4) Proof 4: Inference from Past to Future and Vice Versa
 For a Poisson process $X(t)$ of rate $\lambda$, state and derive the expression of $P[X(u)=k|X(t)=n]$ for the two cases:
 - $0<u<t,\ 0\leq k\leq n$
 - $0<t<u,\ 0\leq n\leq k$
@@ -374,3 +374,17 @@ $$P[X(u)=k|X(t)=n]=P[X(u)-X(t)=k-n]$$
 As before from the stationary increments we have that this is distributed as a Poisson random variable
 $$X(u)-X(t)\sim\text{Poisson}(\lambda(u-t))\rightarrow P[X(u)=k|X(t)=n]=\frac{(\lambda(u-t))^{k-n}e^{-\lambda(u-t)}}{(k-n)!}$$
 $\endproof$
+
+## 4.5) Proof 5:
+State precisely  and prove formally the result that establishes that in a Markov chain the period is a class property
+
+---
+
+Proposition:
+If $i\leftrightarrow j$ (communicate), then $\delta(i)=\delta(j)$, meaning that all the states in the same class have the same period.
+
+Proof: 
+Since $i \leftrightarrow j$ then $\exists m,n : P_{ij}\iter m>0, P_{ji}\iter n>0$ and therefore 
+$$P_{jj}\iter {m+n}\geq P_{ji}\iter nP_{ij}\iter m>0$$
+Let $s\in\curly{s\geq 1:P_{ii}\iter s>0}$ then
+$$P_{jj}\iter{m+s+n}\geq P_{ji}\iter nP_{ii}\iter sP_{ij}\iter m>0$$
