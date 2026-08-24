@@ -378,10 +378,19 @@ $\endproof$
 ## 4.5) Proof 5:
 State precisely  and prove formally the result that establishes that in a Markov chain the period is a class property
 
+
+For study purposes I include also the definition of period:
+$$\delta(i)=\gcd\curly{n\geq 1:P_{ii}\iter n>0}$$
+if it is 1 it is aperiodic
+
 ---
 
 Proposition:
-If $i\leftrightarrow j$ (communicate), then $\delta(i)=\delta(j)$, meaning that all the states in the same class have the same period.
+Let $\{X_k\}_{k \ge 0}$ be a discrete-time Markov chain on a countable state space $S$ with transition matrix $P$. For any state $i \in S$, the period $d(i)$ (or $\delta(i)$) is defined as:
+
+$$d(i) = \gcd \{ n \ge 1 : P_{ii}^{(n)} > 0 \}$$
+
+If two states $i, j \in S$ communicate ($i \leftrightarrow j$), then $d(i) = d(j)$.
 
 Proof: 
 Since $i \leftrightarrow j$ then $\exists m,n : P_{ij}\iter m>0, P_{ji}\iter n>0$ and therefore 
