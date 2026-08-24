@@ -426,6 +426,7 @@ For renewal processes, give an expression for $\E[S_{N(t)+1}]$ also providing a 
 
 Answer:
 $$\E[S_{N(t)+1}]=\E[X](M(t)+1)$$
+where $M(t)$ is the renewal function.
 
 Proof:
 
@@ -437,3 +438,17 @@ x+A(t-x) & \text{if } x\leq t
 
 and $\E[S_{N(t)+1}]=A(t)$
 
+We can apply the law of total expectation:
+$$\begin{align}
+\E[S_{N(t)+1}]=A(t)&=\int_0^\infty\E[S_{N(t)+1}|X_1=x]dF(x)\\
+&=\int_0^tx+A(t-x)dF(x)+\int_t^\infty xdF(x)\\
+&=\int_0^\infty xdF(x)+\int_0^tA(t-x)dF(x)\\
+&=\E[X]+\int_0^tA(t-x)dF(x)
+\end{align}$$
+By recalling the general renewal equation:
+$$A(t) = a(t) + \int_0^t A(t-x) \, dF(x), \quad t \ge 0$$
+from before we get $a(t)=E[X_1]$
+
+By the standard renewal theorem we have a unique solution of form
+$$A(t) = a(t) + \int_0^t a(t-x) \, dM(x)=\E[X_1]+\int_0^t\E[X_1]dM(x)=\E[X_1]+\E[X_1]M(t)$$
+where $a(t-x)=\E[X_1]$ by 
