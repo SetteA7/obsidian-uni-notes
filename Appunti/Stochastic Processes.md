@@ -419,7 +419,7 @@ $$\begin{cases}
 \end{cases}\implies \delta(j)= \delta(i)$$
 $\endproof$
 
-## 4.6) Proof 6: 
+## 4.6) Proof 6: Derivation of $\mathbb{E}[S_{N(t)+1}]$ Using Renewal Theory
 For renewal processes, give an expression for $\E[S_{N(t)+1}]$ also providing a formal proof
 
 ---
@@ -429,7 +429,6 @@ $$\E[S_{N(t)+1}]=\E[X](M(t)+1)$$
 where $M(t)$ is the renewal function.
 
 Proof:
-
 Using the renewal argument (first step analysis) we have
 $$\E[S_{N(t)+1}|X_1=x]=\begin{cases}
 x & \text{if } x>t \\
@@ -445,10 +444,16 @@ $$\begin{align}
 &=\int_0^\infty xdF(x)+\int_0^tA(t-x)dF(x)\\
 &=\E[X]+\int_0^tA(t-x)dF(x)
 \end{align}$$
-By recalling the general renewal equation:
-$$A(t) = a(t) + \int_0^t A(t-x) \, dF(x), \quad t \ge 0$$
-from before we get $a(t)=E[X_1]$
+This is a standard renewal integral equation of the form:
 
-By the standard renewal theorem we have a unique solution of form
+$$A(t) = a(t) + \int_0^t A(t - x) \, dF(x), \quad t \ge 0$$
+
+where $a(t) = \mathbb{E}[X]$ is constant with respect to $t$.
+
+By the general theorem for renewal equations, the unique bounded solution is given by:
 $$A(t) = a(t) + \int_0^t a(t-x) \, dM(x)=\E[X_1]+\int_0^t\E[X_1]dM(x)=\E[X_1]+\E[X_1]M(t)$$
-where $a(t-x)=\E[X_1]$ by 
+where $a(t-x)=\E[X_1]$ and since it is constant it is removed from the integral.
+$\endproof$
+
+## 4.7) Proof 8: Elementary Renewal Theorem
+State and Prove the Elementary Renewal Theorem
