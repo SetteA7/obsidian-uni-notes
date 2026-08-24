@@ -300,7 +300,7 @@ and thus $j$ is recurrent
 $$\sum_{t=0}^{\infty} P_{jj}^{(t)} \ge \sum_{k=0}^{\infty} P_{jj}^{(n + k + m)} = \infty$$
 $\endproof$
 
-## 4.3) Proof 3: 
+## 4.3) Proof 3: Proof of i.i.d. Exponential Inter-Arrival Times for Poisson Processes
 For a Poisson process of rate $\lambda$, prove that the inter-arrival times are iid exponential with mean $1/\lambda$.
 
 ---
@@ -309,7 +309,7 @@ Proof:
 By definition of a Poisson process, we have
 - $N(0)=0$
 - Independent increments: for any $0\leq t_1<...<t_k$ the rvs $N(t_i)-N(t_{i-1})$ are independent
-- Stationary Poisson increments: for any $t\geq 0$ and $s>0$, the increment $N(t + s) - N(t) \sim \text{Poisson}(\lambda s)$, meaning:
+- Stationary Poisson increments: for any $s\geq 0$ and $t>0$, the increment $N(s + t) - N(s) \sim \text{Poisson}(\lambda t)$, meaning:
 $$\mathbb{P}(N(s+t) - N(s) = k) =P(N(t)=k)= \frac{(\lambda t)^k e^{-\lambda t}}{k!}$$
 
 First we need to show that the interarrival times are iid:
@@ -330,3 +330,7 @@ This shows both the independence as it does not depend on $t_1,...,t_n$ (no hist
 
 The mean of an exponential distribution $T$ with rate $\lambda$ is given by
 $$\E[T]=\int_0^\infty P[T>t]dt=\int_0^\infty e^{-\lambda t}dt =-\frac{e^{-\lambda t}}{\lambda}|_0^\infty=\frac 1\lambda$$
+$\endproof$
+
+## 4.4) Proof 4:
+For a Poisson process $X(t)$ if rate $\
