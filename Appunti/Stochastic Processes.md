@@ -617,16 +617,25 @@ where $T_i = \min\{n \ge 1 : X_n = i\}$ is the first return time to state $i$.
 Proof:
 Let $M_i$ be the total number of visits to state $i$ over $n$ steps:
 $$M_i=\sum_{n=1}^\infty u_{X_n=i}$$
-where $u_{X_n=i}$ is a counter switch (1 if $X_n=1$)
+where $u_{X_n=i}$ is a counter switch (1 if $X_n=i$)
 
 The expectance of $M_i$ starting from $i$ is then
 $$\E[M_i|X_0=i]=\E[\sum_{n=1}^\infty u_{X_n=i}|X_0=i]=\sum_{n=1}^\infty \E[u_{X_n=i}|X_0=i]=\sum_{n=1}^\infty P_{ii}\iter n$$
 The last step is done with the following reasoning:
-
+Notice that
+$$\begin{gather}\E[u_{X_n=i}]=1\cdot P[X_n=i]+0\cdot P[x_n\not =i]=P[X_n=i]\\  \\
+\E[u_{X_n=i}|X_0=i]=P[X_n=i|X_0=i]\longrightarrow P_{ii}\iter n
+\end{gather}$$
+so the term becomes the definition of $P_{ii}\iter n$
 
 
 Using the tail sum formula ($\E[X]=\sum_{n=1}^\infty P(X\geq n)$) we also have
 $$\E[M_i|X_0=i]=\sum_{k=1}^\infty P[M_i\geq k|X_0=i]=\sum_{k=1}^\infty (f_{ii})^k=\infty$$
+Where the last step is done with the strong markov property:
+For $k=1$
+$$\mathbb{P}(M_i \ge 1 \mid X_0 = i) = \mathbb{P}(\text{chain returns to } i \text{ at least } 1 \text{ time} \mid X_0 = i) = f_{ii}$$
+General case
+$$\mathbb{P}(M_i \ge k \mid X_0 = i) = \mathbb{P}(M_i \ge k-1 \mid X_0 = i) \cdot f_{ii} = (f_{ii})^{k-1} \cdot f_{ii} = (f_{ii})^k$$
 
 These expressions are equal, so we have
 $$\sum_{n=1}^\infty P_{ii}\iter n=\sum_{k=1}^\infty (f_{ii})^k=\infty$$
@@ -638,8 +647,15 @@ $$\sum_{n=1}^\infty P_{ii}\iter n<\infty$$
 ---
 
 Answer:
+A state $i$ is **transient** if the probability of ever returning to state $i$, given that the chain started in state $i$, is strictly less than $1$:
 
+$$f_{ii} = \mathbb{P}(T_i < \infty \mid X_0 = i) < 1$$
+
+where $T_i = \min\{n \ge 1 : X_n = i\}$ is the first return time to state $i$.
+
+Equivalently, there is a strictly positive probability $(1 - f_{ii}) > 0$ that the chain leaves state $i$ and **never returns**.
 
 Proof:
 Same as before, but now since $f_{ii}<1$ we have
-$$\sum_{k=1}^\infty (f_{ii})^k=\frac{f_{ii}}{1-f_{ii}}<\infty$$
+$$\sum_{n=1}^\infty P_{ii}\iter n=\sum_{k=1}^\infty (f_{ii})^k=\frac{f_{ii}}{1-f_{ii}}<\infty$$
+# 5) Exercises
