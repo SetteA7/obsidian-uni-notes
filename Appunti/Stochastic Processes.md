@@ -614,3 +614,7 @@ A state $i$ is **recurrent** if the probability of eventually returning to state
 $$f_{ii} = \mathbb{P}(T_i < \infty \mid X_0 = i) = 1$$
 where $T_i = \min\{n \ge 1 : X_n = i\}$ is the first return time to state $i$.
 
+Proof:
+Let $M_i$ be the total number of visits to state $i$ over $n$ steps:
+$$M_i=\sum_{n=1}^\infty u_{X_n=i}$$
+where 
