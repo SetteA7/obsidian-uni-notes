@@ -550,6 +550,7 @@ $$\mu_j=\E[T_j|X_0=j]=\infty$$
 
 These pose a contradiction. The last property results to 1 on the lhs and 0 on the rhs.
 
+$\endproof$
 
 ### 4.11.1) Proof Bonus:
 Prove that in a MC with a finite number of states, there must be at least one recurrent state
@@ -565,6 +566,8 @@ But the chain must be in some state so $\sum_{j \in S} P_{ij}^{(n)} = 1$
 The limit again contradicts itself since
 $$\lim_{n \to \infty} \sum_{j \in S} P_{ij}^{(n)} = \sum_{j \in S} \left( \lim_{n \to \infty} P_{ij}^{(n)} \right)\longleftrightarrow1=0$$
 
+$\endproof$
+
 ## 4.12) Proof 12: Rehash of Proof  4, only  infer past from future knowledge
 Prove that for a Poisson process $X(t)$ the statistics of $X(s)$ conditioned on $X(t)$, $s<t$, is binomial and provide the expression of $P[X(s)=k|X(t)=n]$
 
@@ -573,4 +576,27 @@ Prove that for a Poisson process $X(t)$ the statistics of $X(s)$ conditioned on 
 Answer
 By the total probability formula we have that:
 $$P[X(s)=k|X(t)=n]=\frac{P[X(s)=k\cap X(t)=n]}{P[X(t)=n]}$$
-Where 
+Where $P[X(t)=n]=(\lambda t)^ne^{-\lambda t}/n!$ 
+
+The joint probability can be rewritten as two disjoint events:
+$$P[X(s)=k\cap X(t)=n]=P[X(s)=k]\cdot P[X(t)-X(s)=n-k]$$
+The first is straightforward as $P[X(s)=k]=(\lambda s)^ke^{-\lambda s}/k!$
+The second is distributed as $\text{Poisson}(\lambda(n-k))$ so $P[X(t)-X(s)=n-k]=(\lambda(n-k))^{t-s}e^{-\lambda(n-k)}/(t-s)!$
+
+Finally put everything together, do some algebraic manipulations and you get
+$$X(s)|X(t)=n\sim\text{Binomial}(n,\frac st)\qquad p=\binom nk\par{\frac st}^k\par{1-\frac st}^{n-k}$$
+$\endproof$
+## 4.13) Proof 13:
+Prove that for a Markov chain the n-step transition probabilities $P_{ij}\iter n$ satisfy the relationship
+$$P_{ij}\iter n=\sum_{m}P_{im}\iter kP_{mj}\iter{n-k}$$
+
+---
+
+Proof:
+From the definition:
+$$\begin{align}
+P_{ij}\iter n&=P[X_n=j|X_0=i]\\
+&=\sum_m P[X_n=j,X_k=m|X_0=i]\quad \text{ with }0<k\leq n\\
+&=\sum_m P[X_k=m|X_0=i]P[X_n=j|X_k=m,X_0=i]\\
+&=\sum_m P_{im}\iter k
+\end{align}$$
