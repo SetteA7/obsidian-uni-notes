@@ -527,9 +527,18 @@ $$\pi_0=\pi_1P_{10}=q\pi_1\rightarrow \pi_1=\frac1q\pi_0$$
 State 1:
 $$\pi_1=\pi_0P_{01}+\pi_2P_{21}=\pi_0+q\pi_2\rightarrow \pi_2=\frac{p}{q^2}\pi_0$$
 Generic state $j$:
-$$\pi_j=p\pi_{j-1}+q\pi_{j+1}$$
-With the same $p+q=1$ trick as before we get:
-$$(p+q)\pi_j = p\pi_{j-1} + q\pi_{j+1} \implies q(\pi_{j+1} - \pi_j) = p(\pi_j - \pi_{j-1})$$
+$$\pi_j=p\pi_{j-1}+q\pi_{j+1}\rightarrow \pi_n=\frac{\pi_0}{q}\par{\frac{p}{q}}^{n-1}$$
+Now normalize:
+$$\pi_0+\frac{\pi_0}q\sum_{i=0}^\infty \par{\frac pq}^i=1\rightarrow \pi_0 \left(\frac{q - p + 1}{q - p}\right) = 1\rightarrow\pi_0=\frac{q-p}{2q}$$
+And finally 
+$$\pi_n=...$$
 
 ## 4.11) Proof 11:
 Prove that a Markov chain with a finite number of states cannot have any null recurrent state
+
+---
+
+Proof:
+
+### 4.11.1) Proof Bonus:
+Prove that in a MC with a finite number of states, there must be at least one recurrent state
