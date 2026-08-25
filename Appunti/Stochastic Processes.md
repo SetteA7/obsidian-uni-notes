@@ -568,7 +568,7 @@ $$\lim_{n \to \infty} \sum_{j \in S} P_{ij}^{(n)} = \sum_{j \in S} \left( \lim_{
 
 $\endproof$
 
-## 4.12) Proof 12: Rehash of Proof  4, only  infer past from future knowledge
+## 4.12) Proof 12: Rehash of Proof  4, only infer past from future knowledge
 Prove that for a Poisson process $X(t)$ the statistics of $X(s)$ conditioned on $X(t)$, $s<t$, is binomial and provide the expression of $P[X(s)=k|X(t)=n]$
 
 ---
@@ -586,7 +586,7 @@ The second is distributed as $\text{Poisson}(\lambda(n-k))$ so $P[X(t)-X(s)=n-k]
 Finally put everything together, do some algebraic manipulations and you get
 $$X(s)|X(t)=n\sim\text{Binomial}(n,\frac st)\qquad p=\binom nk\par{\frac st}^k\par{1-\frac st}^{n-k}$$
 $\endproof$
-## 4.13) Proof 13:
+## 4.13) Proof 13: N-Step Probability Expression
 Prove that for a Markov chain the n-step transition probabilities $P_{ij}\iter n$ satisfy the relationship
 $$P_{ij}\iter n=\sum_{m}P_{im}\iter kP_{mj}\iter{n-k}$$
 
@@ -598,5 +598,21 @@ $$\begin{align}
 P_{ij}\iter n&=P[X_n=j|X_0=i]\\
 &=\sum_m P[X_n=j,X_k=m|X_0=i]\quad \text{ with }0<k\leq n\\
 &=\sum_m P[X_k=m|X_0=i]P[X_n=j|X_k=m,X_0=i]\\
-&=\sum_m P_{im}\iter k
+&=\sum_m P_{im}\iter kP_{mj}\iter {n-k}\quad \text{ recalll markov property: } P[X_n=j|X_k=m,X_0=i]=P[X_n=j|X_k=m]
 \end{align}$$
+
+$\endproof$
+
+## 4.14) Proof 14: Define Recurrent States
+Give the definition of a recurrent state and show that a state is recurrent if and only if
+$$\sum_{n=1}^\infty P_{ii}\iter n=\infty$$
+
+
+---
+
+Definition:
+A state $i$ is **recurrent** if the probability of eventually returning to state $i$, given that the chain starts in $i$, is equal to $1$:
+
+$$f_{ii} = \mathbb{P}(T_i < \infty \mid X_0 = i) = 1$$
+
+where $T_i = \min\{n \ge 1 : X_n = i\}$ is the first return time to state $i$.
