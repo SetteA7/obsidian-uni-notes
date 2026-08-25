@@ -477,7 +477,7 @@ _(where $1/\mu$ is interpreted as $0$ if $\mu = \infty$)._
 ## 4.9) Proof 9: Period is a Class Property
 Prove that in a Markov Chain the period is a class property, see [Proof 5](#^0524e9).
 
-## 4.10) Proof 10: Random Walk Analysis
+## 4.10) Proof 10: Random Walk Analysis TODO IMPORTANT
 Consider a random walk over non-negative integers with the following transition probabilities:
 $$P_{01}=1,\ P_{i,i+1}=p, \ P_{i,i-1}=q,\quad i>0$$
 with $p+q=1$
@@ -518,3 +518,18 @@ This has 2 cases:
 - The series converges for $p>q$ and thus $\lim_{n\rightarrow\infty} h_n=1-\Delta_1\frac p{p-q}$. Since every step is independent we also have $h_n=(h_1)^n\rightarrow\lim_{n\rightarrow\infty} h_n=0$. Now it is clear that $0=1-(1-h_1)\frac p{p-q}\rightarrow h_1=\frac qp$ and thus $h_n=\par{\frac qp}^n$ and the chain is transient
 
 The steady state distribution must only be studied in the recurrent case, so for $p\leq q\rightarrow p<1/2$.
+To find the stationary distribution $\pi = (\pi_0, \pi_1, \pi_2, \dots)$, we solve the system:
+$$\pi = \pi P \quad \text{subject to} \quad \sum_{n=0}^{\infty} \pi_n = 1 \quad \text{and} \quad \pi_n \ge 0$$
+Which is
+$$\pi_j=\sum \pi_{i}P_{ij}$$
+State 0:
+$$\pi_0=\pi_1P_{10}=q\pi_1\rightarrow \pi_1=\frac1q\pi_0$$
+State 1:
+$$\pi_1=\pi_0P_{01}+\pi_2P_{21}=\pi_0+q\pi_2\rightarrow \pi_2=\frac{p}{q^2}\pi_0$$
+Generic state $j$:
+$$\pi_j=p\pi_{j-1}+q\pi_{j+1}$$
+With the same $p+q=1$ trick as before we get:
+$$(p+q)\pi_j = p\pi_{j-1} + q\pi_{j+1} \implies q(\pi_{j+1} - \pi_j) = p(\pi_j - \pi_{j-1})$$
+
+## 4.11) Proof 11:
+Prove that a Markov chain with a finite number of states cannot have any null recurrent state
