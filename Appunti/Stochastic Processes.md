@@ -695,5 +695,21 @@ $$P(\text{absorbed in }C_i)\cdot\pi_n\qquad\text{ for all entries}$$
 For aperiodic class same procedure as standard limit for pos recurrent aperiodic class
 For transitions from transient class $C_t$ to recurrent periodic class $C_i$ same as transition into recurrent aperiodic
 
+|**Transition Type (i→j)**|**Class of i**|**Class of j**|**Limit limn→∞​Pijn​**|
+|---|---|---|---|
+|**To Transient**|Any|Transient|**$0$**|
+|**Across Recurrent**|Recurrent $C_1$|Recurrent $C_2$ ($C_1 \neq C_2$)|**$0$**|
+|**Within Aperiodic Recurrent**|Recurrent $C_i$|Same $C_i$ (Aperiodic)|**$\pi_j$** (from $\pi_{C_i} P_{C_i} = \pi_{C_i}$, $\sum \pi = 1$)|
+|**Within Periodic Recurrent**|Recurrent $C_i$|Same $C_i$ (Periodic)|**Does not exist (X)**|
+|**Transient $\to$ Aperiodic Recurrent**|Transient|Recurrent $C_i$ (Aperiodic)|**$P(\text{absorbed in } C_i \mid X_0 = i) \cdot \pi_j$**|
+|**Transient $\to$ Periodic Recurrent**|Transient|Recurrent $C_i$ (Periodic)|**$0$** if unreachable; **Does not exist (X)** if reachable and oscillating|
+
 **Mean recurrence time (avg return times)**
 For pos recurrent state $\mu_i=1/\pi_i$
+For transient states $\mu_i=\infty$
+
+|**State Type**|**Stationary Probability πi​**|**Mean Recurrence Time μi​**|
+|---|---|---|
+|**Positive Recurrent**|$\pi_i > 0$ (within its closed class)|**$\mu_i = \dfrac{1}{\pi_i}$**|
+|**Transient**|$0$ (globally)|**$\mu_i = \infty$**|
+|**Null Recurrent** _(infinite MCs only)_|$0$|**$\mu_i = \infty$**|
