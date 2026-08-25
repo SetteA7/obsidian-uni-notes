@@ -673,3 +673,7 @@ Analysis of MC:
 
 Probability absorption: P(go to class)/P(leave)
 
+Computing $\lim_{n\rightarrow\infty}P^n$:
+- Doesn't exist for periodic classes
+- Doesn't exist for transitions into transient states
+
