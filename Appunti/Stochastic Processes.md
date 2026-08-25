@@ -539,6 +539,13 @@ Prove that a Markov chain with a finite number of states cannot have any null re
 ---
 
 Proof:
+A null recurrent state is a state where the expected return time is infinite:
+$$\mu_j=\E[T_j|X_0=j]=\infty$$
+**By contradiction** suppose that a null recurrent state is present:
+- Recurrency is a class property
+- Recu
 
+
+First, recall that a recurrent class is a closed class. So if **by contradiction** we suppose a null recurrent state is present, all the finite connected states must also be null recurrent.
 ### 4.11.1) Proof Bonus:
 Prove that in a MC with a finite number of states, there must be at least one recurrent state
