@@ -675,5 +675,15 @@ Probability absorption: P(go to class)/P(leave)
 
 Computing $\lim_{n\rightarrow\infty}P^n$:
 - Doesn't exist for periodic classes
-- Doesn't exist for transitions into transient states
+- Is null for transitions into transient states
+- Doesn't exist for transitions into periodic classes
 
+In general for a submatrix $P_{C_i}$ where $C_i$ is a pos. recurrent aperiodic class this must be solved:
+$$\begin{cases}
+\pi_{C_i}P_{C_i}=\pi_{C_i}\\
+\displaystyle{\sum_{\pi_n\in\pi_{C_i}}} \pi_n=1
+\end{cases}$$
+
+For transitions from transient class $C_t$ to recurrent aperiodic class $C_i$:
+First find the absorption probability for all $C_t\rightarrow C_i$. Then multiply this with the steady state:
+$$P(\text{absorbed in }C_i)\cdot\pi_n\qquad\text{ for all entries}$$
