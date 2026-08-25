@@ -659,3 +659,5 @@ Proof:
 Same as before, but now since $f_{ii}<1$ we have
 $$\sum_{n=1}^\infty P_{ii}\iter n=\sum_{k=1}^\infty (f_{ii})^k=\frac{f_{ii}}{1-f_{ii}}<\infty$$
 # 5) Exercises
+A fundamental property of a Poisson process is that the number of events occurring in non-overlapping intervals are independent.
+$$P[A|B]=P[A]\iff A\cap B=\emptyset$$
