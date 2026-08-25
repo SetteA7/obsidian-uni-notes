@@ -665,15 +665,15 @@ A fundamental property of a Poisson process is that the number of events occurri
 $$P[A|B]=P[A]\iff A\cap B=\emptyset$$
 
 ## 5.2) MC
-Analysis of MC:
+**Analysis of MC:**
 - Diagram
 - Classes
 - Recurrence/transience
 - Periodicity
 
-Probability absorption: P(go to class)/P(leave)
+**Probability absorption:** P(go to class)/P(leave)
 
-Computing $\lim_{n\rightarrow\infty}P^n$:
+**Computing $\lim_{n\rightarrow\infty}P^n$:**
 - Doesn't exist for periodic classes
 - Is null for transitions into transient states
 - Doesn't exist for transitions into periodic classes
@@ -687,3 +687,13 @@ $$\begin{cases}
 For transitions from transient class $C_t$ to recurrent aperiodic class $C_i$:
 First find the absorption probability for all $C_t\rightarrow C_i$. Then multiply this with the steady state:
 $$P(\text{absorbed in }C_i)\cdot\pi_n\qquad\text{ for all entries}$$
+
+**Computing $\lim_{n\rightarrow\infty}\frac1n\sum_{k=1}^nP^k$:**
+- Exists _always_
+- If standard limit exists, it is equal to it
+
+For aperiodic class same procedure as standard limit for pos recurrent aperiodic class
+For transitions from transient class $C_t$ to recurrent periodic class $C_i$ same as transition into recurrent aperiodic
+
+**Mean recurrence time (avg return times)**
+For pos recurrent state $\mu_i=1/\pi_i$
