@@ -607,12 +607,10 @@ $\endproof$
 Give the definition of a recurrent state and show that a state is recurrent if and only if
 $$\sum_{n=1}^\infty P_{ii}\iter n=\infty$$
 
-
 ---
 
 Definition:
 A state $i$ is **recurrent** if the probability of eventually returning to state $i$, given that the chain starts in $i$, is equal to $1$:
-
 $$f_{ii} = \mathbb{P}(T_i < \infty \mid X_0 = i) = 1$$
-
 where $T_i = \min\{n \ge 1 : X_n = i\}$ is the first return time to state $i$.
+
