@@ -474,7 +474,7 @@ $$\lim_{t \to \infty} \frac{M(t)}{t} = \frac{1}{\mu}$$
 
 _(where $1/\mu$ is interpreted as $0$ if $\mu = \infty$)._
 
-## 4.9) Proof 9: Period is a Class Property
+## 4.9) Proof 9: Rehash of Proof 5
 Prove that in a Markov Chain the period is a class property, see [Proof 5](#^0524e9).
 
 ## 4.10) Proof 10: Random Walk Analysis TODO IMPORTANT
@@ -533,7 +533,7 @@ $$\pi_0+\frac{\pi_0}q\sum_{i=0}^\infty \par{\frac pq}^i=1\rightarrow \pi_0 \left
 And finally 
 $$\pi_n=\ ...$$
 
-## 4.11) Proof 11:
+## 4.11) Proof 11: Finite MC existence conditions of states
 Prove that a Markov chain with a finite number of states cannot have any null recurrent state
 
 ---
@@ -553,3 +553,24 @@ These pose a contradiction. The last property results to 1 on the lhs and 0 on t
 
 ### 4.11.1) Proof Bonus:
 Prove that in a MC with a finite number of states, there must be at least one recurrent state
+
+---
+
+Proof:
+We have already shown that in a finite MC there cannot be any null recurrent states.
+By contradiction suppose the chain does NOT have a (positive) recurrent state, then the chain will be solely made of transient states.
+
+A transient state has long run transition probability 0: $\lim_{n\rightarrow\infty}P_{ij}\iter n=0$
+But the chain must be in some state so $\sum_{j \in S} P_{ij}^{(n)} = 1$
+The limit again contradicts itself since
+$$\lim_{n \to \infty} \sum_{j \in S} P_{ij}^{(n)} = \sum_{j \in S} \left( \lim_{n \to \infty} P_{ij}^{(n)} \right)\longleftrightarrow1=0$$
+
+## 4.12) Proof 12: Rehash of Proof  4, only  infer past from future knowledge
+Prove that for a Poisson process $X(t)$ the statistics of $X(s)$ conditioned on $X(t)$, $s<t$, is binomial and provide the expression of $P[X(s)=k|X(t)=n]$
+
+---
+
+Answer
+By the total probability formula we have that:
+$$P[X(s)=k|X(t)=n]=\frac{P[X(s)=k\cap X(t)=n]}{P[X(t)=n]}$$
+Where 
