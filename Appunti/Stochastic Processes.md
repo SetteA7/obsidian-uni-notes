@@ -531,7 +531,7 @@ $$\pi_j=p\pi_{j-1}+q\pi_{j+1}\rightarrow \pi_n=\frac{\pi_0}{q}\par{\frac{p}{q}}^
 Now normalize:
 $$\pi_0+\frac{\pi_0}q\sum_{i=0}^\infty \par{\frac pq}^i=1\rightarrow \pi_0 \left(\frac{q - p + 1}{q - p}\right) = 1\rightarrow\pi_0=\frac{q-p}{2q}$$
 And finally 
-$$\pi_n=...$$
+$$\pi_n=\ ...$$
 
 ## 4.11) Proof 11:
 Prove that a Markov chain with a finite number of states cannot have any null recurrent state
