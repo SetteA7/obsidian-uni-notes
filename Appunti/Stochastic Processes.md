@@ -617,4 +617,29 @@ where $T_i = \min\{n \ge 1 : X_n = i\}$ is the first return time to state $i$.
 Proof:
 Let $M_i$ be the total number of visits to state $i$ over $n$ steps:
 $$M_i=\sum_{n=1}^\infty u_{X_n=i}$$
-where 
+where $u_{X_n=i}$ is a counter switch (1 if $X_n=1$)
+
+The expectance of $M_i$ starting from $i$ is then
+$$\E[M_i|X_0=i]=\E[\sum_{n=1}^\infty u_{X_n=i}|X_0=i]=\sum_{n=1}^\infty \E[u_{X_n=i}|X_0=i]=\sum_{n=1}^\infty P_{ii}\iter n$$
+The last step is done with the following reasoning:
+
+
+
+Using the tail sum formula ($\E[X]=\sum_{n=1}^\infty P(X\geq n)$) we also have
+$$\E[M_i|X_0=i]=\sum_{k=1}^\infty P[M_i\geq k|X_0=i]=\sum_{k=1}^\infty (f_{ii})^k=\infty$$
+
+These expressions are equal, so we have
+$$\sum_{n=1}^\infty P_{ii}\iter n=\sum_{k=1}^\infty (f_{ii})^k=\infty$$
+
+## 4.15) Proof 15: Define Transient States
+Give the definition of a transient state and show that a state is recurrent if and only if
+$$\sum_{n=1}^\infty P_{ii}\iter n<\infty$$
+
+---
+
+Answer:
+
+
+Proof:
+Same as before, but now since $f_{ii}<1$ we have
+$$\sum_{k=1}^\infty (f_{ii})^k=\frac{f_{ii}}{1-f_{ii}}<\infty$$
