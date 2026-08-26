@@ -700,11 +700,14 @@ For each irreducible transient or negative recurrent class it is $\infty$.
 ---
 
 **Avg Number of Visits to State $j$**
-$j$ is pos recurrent $\lim_{n\rightarrow\infty}W_{ij}\iter n=\infty$
+$j$ is recurrent (and reachable) $\lim_{n\rightarrow\infty}W_{ij}\iter n=\infty$
 
 For transient state $j$ (suppose start in $0$):
 $$\begin{cases}
-W_{0j}=1+\sum_{k}
+W_{0j}=\mathbb{I}\{0 = j\}+\displaystyle\sum_{k}P_{0k}W_{kj}\\
+\vdots\\
+\\
+\displaystyle W_{ij} =  \mathbb{I}\{i = j\} +\sum_{\text{ } k} P_{ik} W_{kj}
 \end{cases}$$
 
 ---
@@ -766,3 +769,9 @@ For transient states $\mu_i=\infty$
 |**Positive Recurrent**|$\pi_i > 0$ (within its closed class)|**$\mu_i = \dfrac{1}{\pi_i}$**|
 |**Transient**|$0$ (globally)|**$\mu_i = \infty$**|
 |**Null Recurrent** _(infinite MCs only)_|$0$|**$\mu_i = \infty$**|
+## 5.3) First Step Analysis
+General formula:
+$$W_{\textcolor{yellow}i\textcolor{red}j} = \mathbb{I}\{\textcolor{yellow}i = \textcolor{red}j\} + \sum_\textcolor{blue}k P_{\textcolor{yellow}i\textcolor{blue}k} W_{\textcolor{blue}k\textcolor{red}j}$$
+This is used for
+- avg visits
+- passage times
