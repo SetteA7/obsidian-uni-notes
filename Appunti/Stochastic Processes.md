@@ -692,8 +692,15 @@ $$m_i=\frac1{\pi_i}$$
 For each irreducible transient or negative recurrent class it is $\infty$. 
 
 **Compute Mean and Variance of the first passage time to state $a$ to state $b$**
-Define $T_{ij}$
-
+Define first passage time:
+$$T_{ib} = \min\{n \ge 1 : X_n = b \mid X_0 = i\}$$
+Define mean first passage time:
+$$\E[T_{ib}]=\mu_i=1+\sum_{j\not =b}P_{ij}\mu_j$$
+Define second moment of first passage time:
+$$\E[T_{ib}^2]=\alpha_i=1+\sum_{j\not = b}P_{ij}(2\mu_j+\alpha_j)$$
+Solve the systems for $\mu_i,\ \alpha_i$
+$\mu_a$ is the mean
+$\alpha_a-\mu_a^2$ the variance
 
 **Computing $\lim_{n\rightarrow\infty}P^n$:**
 - Doesn't exist for periodic classes
