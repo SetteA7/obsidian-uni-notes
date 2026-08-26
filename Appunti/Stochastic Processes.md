@@ -679,17 +679,25 @@ Total distribution is used
 - Recurrence/transience
 - Periodicity
 
+---
+
 **Probability absorption:** P(go to class)/P(leave)
+
+---
 
 **Compute Steady State Probabilities:**
 For each irreducible**positive** recurrent class solve:
 $$\begin{cases}\pi_CP_C=\pi_C \\ \displaystyle\sum_{\pi_i\in\pi_C}\pi_i=1\end{cases}$$
 For each irreducible transient or negative recurrent class it is 0.
 
+---
+
 **Compute Avg Recurrence Times:**
 For each irreducible **positive** recurrent class solve:
 $$m_i=\frac1{\pi_i}$$
 For each irreducible transient or negative recurrent class it is $\infty$. 
+
+--
 
 **Compute Mean and Variance of the first passage time to state $a$ to state $b$**
 Define first passage time:
@@ -701,6 +709,8 @@ $$\E[T_{ib}^2]=\alpha_i=1+\sum_{j\not = b}P_{ij}(2\mu_j+\alpha_j)$$
 Solve the systems for $\mu_i,\ \alpha_i$
 $\mu_a$ is the mean
 $\alpha_a-\mu_a^2$ the variance
+
+---
 
 **Computing $\lim_{n\rightarrow\infty}P^n$:**
 - Doesn't exist for periodic classes
@@ -717,6 +727,8 @@ For transitions from transient class $C_t$ to recurrent aperiodic class $C_i$:
 First find the absorption probability for all $C_t\rightarrow C_i$. Then multiply this with the steady state:
 $$P(\text{absorbed in }C_i)\cdot\pi_n\qquad\text{ for all entries}$$
 
+---
+
 **Computing $\lim_{n\rightarrow\infty}\frac1n\sum_{k=1}^nP^k$:**
 - Exists _always_
 - If standard limit exists, it is equal to it
@@ -732,6 +744,8 @@ For transitions from transient class $C_t$ to recurrent periodic class $C_i$ sam
 |**Within Periodic Recurrent**|Recurrent $C_i$|Same $C_i$ (Periodic)|**Does not exist (X)**|
 |**Transient $\to$ Aperiodic Recurrent**|Transient|Recurrent $C_i$ (Aperiodic)|**$P(\text{absorbed in } C_i \mid X_0 = i) \cdot \pi_j$**|
 |**Transient $\to$ Periodic Recurrent**|Transient|Recurrent $C_i$ (Periodic)|**$0$** if unreachable; **Does not exist (X)** if reachable and oscillating|
+
+---
 
 **Mean recurrence time (avg return times)**
 For pos recurrent state $\mu_i=1/\pi_i$
