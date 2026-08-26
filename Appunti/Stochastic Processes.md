@@ -681,6 +681,20 @@ Total distribution is used
 
 **Probability absorption:** P(go to class)/P(leave)
 
+**Compute Steady State Probabilities:**
+For each irreducible**positive** recurrent class solve:
+$$\begin{cases}\pi_CP_C=\pi_C \\ \displaystyle\sum_{\pi_i\in\pi_C}\pi_i=1\end{cases}$$
+For each irreducible transient or negative recurrent class it is 0.
+
+**Compute Avg Recurrence Times:**
+For each irreducible **positive** recurrent class solve:
+$$m_i=\frac1{\pi_i}$$
+For each irreducible transient or negative recurrent class it is $\infty$. 
+
+**Compute Mean and Variance of the first passage time to state $a$ to state $b$**
+Define $T_{ij}$
+
+
 **Computing $\lim_{n\rightarrow\infty}P^n$:**
 - Doesn't exist for periodic classes
 - Is null for transitions into transient states
