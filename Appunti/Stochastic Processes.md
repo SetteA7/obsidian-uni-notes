@@ -663,7 +663,8 @@ $$\sum_{n=1}^\infty P_{ii}\iter n=\sum_{k=1}^\infty (f_{ii})^k=\frac{f_{ii}}{1-f
 ## 5.1) Poisson Process
 A fundamental property of a Poisson process is that the number of events occurring in non-overlapping intervals are independent.
 $$P[A|B]=P[A]\iff A\cap B=\emptyset$$
-
+Moreover recall:
+$$P[A|B]=\frac{P[A,B]}{P[B]}$$
 
 
 
