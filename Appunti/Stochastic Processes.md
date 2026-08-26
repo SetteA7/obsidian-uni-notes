@@ -697,7 +697,17 @@ For each irreducible **positive** recurrent class solve:
 $$m_i=\frac1{\pi_i}$$
 For each irreducible transient or negative recurrent class it is $\infty$. 
 
---
+---
+
+**Avg Number of Visits to State $j$**
+$j$ is pos recurrent $\lim_{n\rightarrow\infty}W_{ij}\iter n=\infty$
+
+For transient state $j$ (suppose start in $0$):
+$$\begin{cases}
+W_{0j}=1+\sum_{k}
+\end{cases}$$
+
+---
 
 **Compute Mean and Variance of the first passage time to state $a$ to state $b$**
 Define first passage time:
