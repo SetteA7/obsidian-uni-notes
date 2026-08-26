@@ -666,7 +666,11 @@ $$P[A|B]=P[A]\iff A\cap B=\emptyset$$
 Moreover recall:
 $$P[A|B]=\frac{P[A,B]}{P[B]}$$
 
+This is used only when one of the two is deterministic, that it, only one possible thing happened on both events, that is
+- One PP conditioned on one past or future event = One PP with max 2 sampled points
 
+Total distribution is used
+- One PP with at least 3 sampled points
 
 ## 5.2) MC
 **Analysis of MC:**
