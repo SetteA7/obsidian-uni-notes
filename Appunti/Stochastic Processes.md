@@ -785,9 +785,13 @@ This is used for
 ## 5.4) GBN
 A GBN on a two state MC works as follows. It has RTT of $m$ slots
 Error Free feedback throughput:
-$$\eta=\frac{P_{10}\iter m}{P_{10}\iter m+mP_{01}}$$
+$$\eta=\frac{P_{10}\iter m}{P_{10}\iter m+mP_{01}}=\frac{P_{BG}\iter m}{P_{10}\iter m+mP_{01}}$$
 Feedback channel with iid error $\delta$:
 $$\eta=\frac{(1-\delta)P_{10}\iter m}{(1+(m-1)\delta)P_{10}\iter m+m((1-\delta)P_{01}+\delta P_{01}\iter m)}$$
+
+Suppose $\pi_B$ is known and the av duration of $G$ is known.
+The other steady state is easily obtainable: $\pi_G=1-\pi_B$
+Then the thorughput (no protocol) is $\eta=\pi_GP[success|G]+\pi_BP[success|B]$
 
 ## 5.5) Poisson Processes
 In a PP, the number of active calls has rate
