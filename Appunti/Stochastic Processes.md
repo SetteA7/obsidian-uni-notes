@@ -779,6 +779,6 @@ This is used for
 ## 5.4) GBN
 A GBN on a two state MC works as follows. It has RTT of $m$ slots
 Error Free feedback throughput:
-$$\eta=\frac{P_{10}\iter m}{P_{10}\iter m+mP_{01}\iter m}$$
+$$\eta=\frac{P_{10}\iter m}{P_{10}\iter m+mP_{01}}$$
 Feedback channel with iid error $\delta$:
 $$\eta=\frac{(1-\delta)P_{10}\iter m}{(1+(m-1)\delta)P_{10}\iter m+m((1-\delta)P_{01}+\delta P_{01}\iter m)}$$
