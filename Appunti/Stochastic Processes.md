@@ -782,3 +782,10 @@ Error Free feedback throughput:
 $$\eta=\frac{P_{10}\iter m}{P_{10}\iter m+mP_{01}}$$
 Feedback channel with iid error $\delta$:
 $$\eta=\frac{(1-\delta)P_{10}\iter m}{(1+(m-1)\delta)P_{10}\iter m+m((1-\delta)P_{01}+\delta P_{01}\iter m)}$$
+
+## 5.5) Poisson Processes
+In a PP, the number of active calls has rate
+$$\lambda_p(t)=\lambda\int_0^t1-G(z)dz=\frac\lambda\mu(1-e^{-\mu t})$$
+So we can say that $X(t)\sim\text{Poi}(\lambda_p(t))$
+But notice that
+$$P[X(t)=k]=\frac{\lambda_p(t)^ke^{-\lambda_p(t)}}{k!}$$
