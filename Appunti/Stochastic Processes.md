@@ -53,10 +53,16 @@ g''(s)=\E[x(x-1)s^{x-2}]\stackrel{s=1}=\E[x^2]-\E[x]
 \end{align}$$
 then 
 $$\E[x^2]=g''(1)-g'(1)$$
+
+## 1.1) Distributions
+
 **Bernoulli:**
 $$x\in\curly{0,1}$$
 $$p=P[x=1]=1-P[x=0]$$
 $$\E[x]=p\quad \E[x^2]=p\quad \var(x)=p(p-1)$$
+
+
+
 **Binomial:**
 sum of N iid Bernoulli rv
 $$y=\sum_{i=1}^nx_i\quad x_i\sim bern(p)$$
