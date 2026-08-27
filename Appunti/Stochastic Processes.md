@@ -678,6 +678,12 @@ This is used only when one of the two is deterministic, that it, only one possib
 Total distribution is used
 - One PP with at least 3 sampled points
 
+This total probability formula is useful:
+$$P(E \mid C) = \sum_{k \in \mathcal{K}} P(E \mid B_k \cap C) \cdot P(B_k \mid C)$$
+Practical example:
+$$\begin{gather}P[X_1(3) = 2 \mid X_1(2) + X_2(2) = 1] =\\= \sum_{k=0}^{1} P[X_1(3) = 2 \mid X_1(2) = k, \, X_1(2) + X_2(2) = 1] \cdot P[X_1(2) = k \mid X_1(2) + X_2(2) = 1]\end{gather}$$
+
+
 ## 5.2) MC
 **Analysis of MC:**
 - Diagram
