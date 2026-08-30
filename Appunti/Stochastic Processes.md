@@ -712,9 +712,12 @@ For each irreducible transient or negative recurrent class it is $\infty$.
 ---
 
 **Avg Number of Visits to State $j$**
-$j$ is recurrent (and reachable) $\lim_{n\rightarrow\infty}W_{ij}\iter n=\infty$
+$j$ is recurrent (and reachable) 
+$$
+W_{ij}\iter n = \sum_{k=0}^{n-1}[P^k]_{ij}\stackrel{n\rightarrow\infty}\approx n\pi_j$$
 
-For transient state $j$ (suppose start in $0$):
+
+For transient state $j$ (suppose start in $0$) the limit becomes:
 $$\begin{cases}
 W_{0j}=\mathbb{I}\{0 = j\}+\displaystyle\sum_{k}P_{0k}W_{kj}\\
 \vdots\\
@@ -729,7 +732,7 @@ if $a=b$ then $\mu_i=1/\pi_i$
 
 Define first passage time:
 $$T_{ib} = \min\{n \ge 1 : X_n = b \mid X_0 = i\}$$
-Define mean first passage time:
+Define mean first passage time ($j=b$ is the abs condition):
 $$\E[T_{ib}]=\mu_i=1+\sum_{j\not =b}P_{ij}\mu_j$$
 Define second moment of first passage time:
 $$\E[T_{ib}^2]=\alpha_i=1+\sum_{j\not = b}P_{ij}(2\mu_j+\alpha_j)$$
