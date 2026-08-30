@@ -725,6 +725,8 @@ W_{0j}=\mathbb{I}\{0 = j\}+\displaystyle\sum_{k}P_{0k}W_{kj}\\
 ---
 
 **Compute Mean and Variance of the first passage time to state $a$ to state $b$**
+if $a=b$ then $\mu_i=1/\pi_i$
+
 Define first passage time:
 $$T_{ib} = \min\{n \ge 1 : X_n = b \mid X_0 = i\}$$
 Define mean first passage time:
