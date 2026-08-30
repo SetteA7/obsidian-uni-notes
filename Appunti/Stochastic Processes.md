@@ -799,6 +799,7 @@ Suppose $\pi_B$ is known and the av duration of $G$ is known.
 The other steady state is easily obtainable: $\pi_G=1-\pi_B$
 Then the thorughput (no protocol) is $\eta=\pi_GP[success|G]+\pi_BP[success|B]$
 
+Notice that $\E[L_{GB}]=1/P_{GB}$
 ## 5.5) Poisson Processes
 In a PP, the number of active calls has rate
 $$\lambda_p(t)=\lambda\int_0^t1-G(z)dz$$
