@@ -789,6 +789,9 @@ This is used for
 - passage times
 
 ## 5.4) GBN
+Normal GBN with iid error $\epsilon$ on forward channel and $m$ slots to return
+$$\eta=\frac{1-\epsilon}{1-\epsilon+m\epsilon}$$
+
 A GBN on a two state MC works as follows. It has RTT of $m$ slots
 Error Free feedback throughput:
 $$\eta=\frac{P_{10}\iter m}{P_{10}\iter m+mP_{01}}=\frac{P_{BG}\iter m}{P_{BG}\iter m+mP_{GB}}$$
