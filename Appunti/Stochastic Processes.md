@@ -810,7 +810,7 @@ Then the thorughput (no protocol) is $\eta=\pi_GP[success|G]+\pi_BP[success|B]$
 Notice that $\E[L_{GB}]=1/P_{GB}$
 ## 5.5) Poisson Processes
 In a PP, the number of active calls has rate
-$$\lambda_p(t)=\lambda\int_0^t1-G(z)dz$$
+$$\lambda_p(t)=\lambda\int_0^t1-G(z)dz\stackrel{t\rightarrow\infty}\longrightarrow\lambda E[S]$$
 So we can say that $X(t)\sim\text{Poi}(\lambda_p(t))$
 But notice that
 $$P[X(t)=k]=\frac{\lambda_p(t)^ke^{-\lambda_p(t)}}{k!}$$
