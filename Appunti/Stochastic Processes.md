@@ -747,15 +747,11 @@ $\alpha_a-\mu_a^2$ the variance
 - Is null for transitions (from transient) into transient states
 - Doesn't exist for transitions (from transient) into periodic classes "X"
 
-For Positi
-In general for a submatrix $P_{C_i}$ where $C_i$ is a pos. recurrent aperiodic class this must be solved:
-$$\begin{cases}
-\pi_{C_i}P_{C_i}=\pi_{C_i}\\
-\displaystyle{\sum_{\pi_n\in\pi_{C_i}}} \pi_n=1
-\end{cases}$$
+For Positive Recurrent Aperiodic Class it is just the steady state probability:
+For a submatrix $P_{C_i}$ where $C_i$ is a pos. recurrent aperiodic class the rows will be
+$$\text{row i: }(\pi_1\quad \pi_2\quad ...\quad \pi_n)$$
 
-For transitions from transient class $C_t$ to recurrent aperiodic class $C_i$:
-First find the absorption probability for all $C_t\rightarrow C_i$. Then multiply this with the steady state:
+For transitions (from transient) to pos recurrent aperiodic it is the abs probability times steady state of the state it transitions into
 $$P(\text{absorbed in }C_i)\cdot\pi_n\qquad\text{ for all entries}$$
 
 ---
@@ -764,8 +760,10 @@ $$P(\text{absorbed in }C_i)\cdot\pi_n\qquad\text{ for all entries}$$
 - Exists _always_
 - If standard limit exists, it is equal to it
 
-For aperiodic class same procedure as standard limit for pos recurrent aperiodic class
-For transitions from transient class $C_t$ to recurrent periodic class $C_i$ same as transition into recurrent aperiodic
+For Positive Recurrent Periodic Class it is just the steady state probability (same as before for aperiodic)
+
+For For transitions (from transient) to pos recurrent periodic it is the abs probability times steady state of the state it transitions into (same as before fro transient $\rightarrow$ aperiodic)
+
 
 |**Transition Type (i→j)**|**Class of i**|**Class of j**|**Limit limn→∞​Pijn​**|
 |---|---|---|---|
