@@ -732,12 +732,11 @@ Let $k^a_i=\text{mean time to reach } a \text{ from }i$
 Do one system of this form for each required $a$
 Clearly $k_a^a=0$ however, for the final result consider $k^a_a=1/\pi_a$ 
 $$k_i^a=1+\sum_{j\not=a}P_{ij}k^a_j$$
-
-Define second moment of first passage time:
-$$\E[T_{ib}^2]=\alpha_i=1+\sum_{j\not = b}P_{ij}(2\mu_j+\alpha_j)$$
-Solve the systems for $\mu_i,\ \alpha_i$
-$\mu_a$ is the mean
-$\alpha_a-\mu_a^2$ the variance
+Let $\alpha^a_i=\text{secon moment of time to reach } a\text{ from }i$ 
+Once the means $k^a_i$ are known just build the following system
+$$\alpha_i=1+\sum_{j\not=a}P_{ij}(2k_j+\alpha_j)$$
+Finally the variance is
+$$\alpha_i-k_i^2$$
 
 ---
 
