@@ -727,7 +727,15 @@ W_{0j}=\mathbb{I}\{0 = j\}+\displaystyle\sum_{k}P_{0k}W_{kj}\\
 
 ---
 
-**Compute Mean and Variance of the first passage time from state $i$ to state $j$**
+**Compute Mean and Variance of the first passage time to state $b$**
+Let $k=\text{mean time to reach } b \text{ from }i$
+Clearly $k_b=0$
+Then setup this system:
+$$k_i=1+\sum_{j\not=b}P_{ij}k_j$$
+
+
+
+
 if $i=j$ then $\mu_i=0$
 The mean first passage time is the following system:
 $$k_i=1+\sum_jP_{ij}k_j$$
