@@ -727,24 +727,12 @@ W_{0j}=\mathbb{I}\{0 = j\}+\displaystyle\sum_{k}P_{0k}W_{kj}\\
 
 ---
 
-**Compute Mean and Variance of the first passage time to state $b$**
-Let $k=\text{mean time to reach } b \text{ from }i$
-Clearly $k_b=0$
-Then setup this system:
-$$k_i=1+\sum_{j\not=b}P_{ij}k_j$$
+**Compute Mean and Variance of the first passage time to state $a$**
+Let $k^a_i=\text{mean time to reach } a \text{ from }i$
+Do one system of this form for each required $a$
+Clearly $k_a^a=0$ however, for the final result consider $k^a_a=1/\pi_a$ 
+$$k_i^a=1+\sum_{j\not=a}P_{ij}k^a_j$$
 
-
-
-
-if $i=j$ then $\mu_i=0$
-The mean first passage time is the following system:
-$$k_i=1+\sum_jP_{ij}k_j$$
-
-
-Define first passage time:
-$$T_{ib} = \min\{n \ge 1 : X_n = b \mid X_0 = i\}$$
-Define mean first passage time ($j=b$ is the abs condition):
-$$\E[T_{ib}]=\mu_i=1+\sum_{j\not =b}P_{ij}\mu_j$$
 Define second moment of first passage time:
 $$\E[T_{ib}^2]=\alpha_i=1+\sum_{j\not = b}P_{ij}(2\mu_j+\alpha_j)$$
 Solve the systems for $\mu_i,\ \alpha_i$
