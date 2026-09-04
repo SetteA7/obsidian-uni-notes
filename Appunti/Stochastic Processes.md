@@ -806,10 +806,16 @@ Then the thorughput (no protocol) is $\eta=\pi_GP[success|G]+\pi_BP[success|B]$
 
 Notice that $\E[L_{GB}]=1/P_{GB}$
 ## 5.5) Poisson Processes
-In a PP, the number of active calls has rate
+In a queue we have the arrival distribution $A$ and service time $S$.
+Usually we have $A(t)\sim\text{Poi}(\lambda t)$ and $S$ either uniform, constant or exponentially distributed.
+
+From here we define the number of customers in the system at time $t$ as $N(t)$. 
+This has rate
 $$\lambda_p(t)=\lambda\int_0^t1-G(z)dz\stackrel{t\rightarrow\infty}\longrightarrow\lambda E[S]$$
 Where $G(z)$ is the CDF of the Service time.
 
-So we can say that $X(t)\sim\text{Poi}(\lambda_p(t))$
+So we can say that $N(t)\sim\text{Poi}(\lambda_p(t))$
 But notice that
-$$P[X(t)=k]=\frac{\lambda_p(t)^ke^{-\lambda_p(t)}}{k!}$$
+$$P[X(t)=k]=\frac{[\lambda_p(t)]^ke^{-\lambda_p(t)}}{k!}$$
+It is possible to find the probability of having $n$ arrivals at $t$ with $k$ arrivals before using this:
+$$P[N(t)=n|A(t)=k]=\frac{P[N(t)=n,A(t)=k]}{P[A(t)=k]}$$
