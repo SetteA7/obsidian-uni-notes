@@ -810,12 +810,20 @@ In a queue we have the arrival distribution $A$ and service time $S$.
 Usually we have $A(t)\sim\text{Poi}(\lambda t)$ and $S$ either uniform, constant or exponentially distributed.
 
 From here we define the number of customers in the system at time $t$ as $N(t)$. 
-This has rate
+If there are infinite queues/capacity, then $N(t)\sim\text{Poi}(\lambda_p(t))$ with rate
 $$\lambda_p(t)=\lambda\int_0^t1-G(z)dz\stackrel{t\rightarrow\infty}\longrightarrow\lambda E[S]$$
-Where $G(z)$ is the CDF of the Service time.
-
-So we can say that $N(t)\sim\text{Poi}(\lambda_p(t))$
+Where $G(z)$ is the CDF of the Service time. Notice that $t\rightarrow\infty$ doesn't need to be the limit, just $t>$ then when the service time CDF converges to $1$.
 But notice that
-$$P[X(t)=k]=\frac{[\lambda_p(t)]^ke^{-\lambda_p(t)}}{k!}$$
-It is possible to find the probability of having $n$ arrivals at $t$ with $k$ arrivals before using this:
-$$P[N(t)=n|A(t)=k]=\frac{P[N(t)=n,A(t)=k]}{P[A(t)=k]}$$
+$$P[N(t)=k]=\frac{[\lambda_p(t)]^ke^{-\lambda_p(t)}}{k!}$$
+
+It is possible to find the probability of having $n$ customers in service at $t$ with $k$ arrivals before using this:
+- Constant service time $\beta$:
+$$\begin{align}P[N(t)=n|A(t)=k]&=\frac{P[N(t)=n,A(t)=k]}{P[A(t)=k]}=\frac{P[A(t-\beta)=k-n]P[A(\beta)=n]}{P[A(t)=k]}\\
+&=\binom{k}{n} \left(\frac{\beta}{t}\right)^n \left(\frac{t - \beta}{t}\right)^{k - n}\\
+&\sim\text{Binomial}\par{k,\frac \beta t}
+\end{align}$$
+- Random service time:
+$$\begin{align}P[N(t) &= n \mid A(t) = k] = \binom{k}{n} \sq{\frac{\lambda_p(t)}{\lambda t}}^n \sq{1 - \frac{\lambda_p(t)}{\lambda t}}^{k - n}, \quad 0 \le n \le k\\
+&\sim\text{Binomial}\par{p,\frac{\lambda_p(t)}{\lambda t}}
+\end{align}$$
+Most importantly, the constant service time case is a special case of the random service time.
