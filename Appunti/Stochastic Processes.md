@@ -763,18 +763,13 @@ $$X_k = X_{k-1} P = X_0 P^k = [P^k]_{a\bullet}$$
 Then the $W_{a\bullet}^{(n)}$ matrix is just the sum, to find $j$ just select the $j$-th entry 
 $$W_{a\bullet}^{(n)}=\sum_{k=0}^{n-1}X_k\stackrel{n\rightarrow\infty}\longrightarrow n\pi_\bullet$$
 
-Starting from $a$ inside transient state:
+Starting from $a$ inside transient state $\mathcal T$:
 Same as before for finite $n$
-
-
-
-For transient state $j$ (suppose start in $0$) the limit becomes:
-$$\begin{cases}
-W_{0j}=\mathbb{I}\{0 = j\}+\displaystyle\sum_{k}P_{0k}W_{kj}\\
-\vdots\\
-\\
-\displaystyle W_{ij} =  \mathbb{I}\{i = j\} +\sum_{\text{ } k} P_{ik} W_{kj}
-\end{cases}$$
+The limit is a bit different:
+- If the target state is transient
+$$W_{ij}^{(\infty)} = \delta_{ij} + \sum_{k \in \mathcal{T}} P_{ik} W_{kj}^{(\infty)} \quad \text{for every } i \in \mathcal{T}$$
+where $\delta_{ij} = 1$ if $i = j$ and $0$ otherwise.
+- If the target is in recurrent state then as before
 
 ---
 
