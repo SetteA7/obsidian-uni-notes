@@ -667,13 +667,24 @@ $$\sum_{n=1}^\infty P_{ii}\iter n=\sum_{k=1}^\infty (f_{ii})^k=\frac{f_{ii}}{1-f
 # 5) Exercises
 
 ## 5.1) Poisson Process
+Definition of Poisson Process PP:
+$$X(t)\sim\text{Poi}(\lambda t)\implies\begin{align}
+&P[X(t)=k]=\frac{(\lambda t)^ke^{-\lambda t}}{k!}, \ k\geq 0\\
+&\E[X(t)]=\lambda t\\
+&\var(X(t))=\lambda t
+\end{align}$$
+Moreover
+$$X(t_1)-X(t_2)\sim\text{Poi}((t_1-t_2)\lambda),\quad t_1>t_2$$
+
+
 A fundamental property of a Poisson process is that the number of events occurring in non-overlapping intervals are independent.
-$$P[A|B]=P[A]\iff A\cap B=\emptyset$$
-Moreover recall:
+$$P[A|B]=P[A]\iff A\perp B$$
+
+Recall:
 $$P[A|B]=\frac{P[A,B]}{P[B]}$$
 
-This is used only when one of the two is deterministic, that it, only one possible thing happened on both events, that is
-- One PP conditioned on one past or future event = One PP with max 2 sampled points
+In the exercises, this is used only when:
+- one PP conditioned on one past or future event = One PP with max 2 sampled points
 
 Total distribution is used
 - One PP with at least 3 sampled points
@@ -683,8 +694,29 @@ $$P(E \mid C) = \sum_{k \in \mathcal{K}} P(E \mid B_k \cap C) \cdot P(B_k \mid C
 Practical example:
 $$\begin{gather}P[X_1(3) = 2 \mid X_1(2) + X_2(2) = 1] =\\= \sum_{k=0}^{1} P[X_1(3) = 2 \mid X_1(2) = k, \, X_1(2) + X_2(2) = 1] \cdot P[X_1(2) = k \mid X_1(2) + X_2(2) = 1]\end{gather}$$
 
+## 5.2) Poisson Process Queues
+In a queue we have the arrival distribution $A$ and service time $S$.
+Usually we have $A(t)\sim\text{Poi}(\lambda t)$ and $S$ either uniform, constant or exponentially distributed.
 
-## 5.2) MC
+From here we define the number of customers in the system at time $t$ as $N(t)$. 
+If there are infinite queues/capacity, then $N(t)\sim\text{Poi}(\lambda_p(t))$ with rate
+$$\lambda_p(t)=\lambda\int_0^t1-G(z)dz\stackrel{t\rightarrow\infty}\longrightarrow\lambda E[S]$$
+Where $G(z)$ is the CDF of the Service time. Notice that $t\rightarrow\infty$ doesn't need to be the limit, just $t>$ then when the service time CDF converges to $1$.
+But notice that
+$$P[N(t)=k]=\frac{[\lambda_p(t)]^ke^{-\lambda_p(t)}}{k!}$$
+
+It is possible to find the probability of having $n$ customers in service at $t$ with $k$ arrivals before using this:
+- Constant service time $\beta$:
+$$\begin{align}P[N(t)=n|A(t)=k]&=\frac{P[N(t)=n,A(t)=k]}{P[A(t)=k]}=\frac{P[A(t-\beta)=k-n]P[A(\beta)=n]}{P[A(t)=k]}\\
+&=\binom{k}{n} \left(\frac{\beta}{t}\right)^n \left(\frac{t - \beta}{t}\right)^{k - n}\\
+&\sim\text{Binomial}\par{k,\frac \beta t}
+\end{align}$$
+- Random service time:
+$$\begin{align}P[N(t) &= n \mid A(t) = k] = \binom{k}{n} \sq{\frac{\lambda_p(t)}{\lambda t}}^n \sq{1 - \frac{\lambda_p(t)}{\lambda t}}^{k - n}, \quad 0 \le n \le k\\
+&\sim\text{Binomial}\par{p,\frac{\lambda_p(t)}{\lambda t}}
+\end{align}$$
+Most importantly, the constant service time case is a special case of the random service time.
+## 5.3) MC
 **Analysis of MC:**
 - Diagram
 - Classes
@@ -791,15 +823,14 @@ For transient states $\mu_i=\infty$
 |**Positive Recurrent**|$\pi_i > 0$ (within its closed class)|**$\mu_i = \dfrac{1}{\pi_i}$**|
 |**Transient**|$0$ (globally)|**$\mu_i = \infty$**|
 |**Null Recurrent** _(infinite MCs only)_|$0$|**$\mu_i = \infty$**|
-## 5.3) First Step Analysis
+## 5.4) First Step Analysis
 General formula:
 $$W_{\textcolor{yellow}i\textcolor{red}j} = \mathbb{I}\{\textcolor{yellow}i = \textcolor{red}j\} + \sum_\textcolor{blue}k P_{\textcolor{yellow}i\textcolor{blue}k} W_{\textcolor{blue}k\textcolor{red}j}$$
 This is used for
 - avg visits
 - passage times
-- abs probability
 
-## 5.4) GBN
+## 5.5) GBN
 Normal GBN with iid error $\epsilon$ on forward channel and $m$ slots to return
 $$\eta=\frac{1-\epsilon}{1-\epsilon+m\epsilon}$$
 
@@ -814,25 +845,3 @@ The other steady state is easily obtainable: $\pi_G=1-\pi_B$
 Then the thorughput (no protocol) is $\eta=\pi_GP[success|G]+\pi_BP[success|B]$
 
 Notice that $\E[L_{GB}]=1/P_{GB}$
-## 5.5) Poisson Processes
-In a queue we have the arrival distribution $A$ and service time $S$.
-Usually we have $A(t)\sim\text{Poi}(\lambda t)$ and $S$ either uniform, constant or exponentially distributed.
-
-From here we define the number of customers in the system at time $t$ as $N(t)$. 
-If there are infinite queues/capacity, then $N(t)\sim\text{Poi}(\lambda_p(t))$ with rate
-$$\lambda_p(t)=\lambda\int_0^t1-G(z)dz\stackrel{t\rightarrow\infty}\longrightarrow\lambda E[S]$$
-Where $G(z)$ is the CDF of the Service time. Notice that $t\rightarrow\infty$ doesn't need to be the limit, just $t>$ then when the service time CDF converges to $1$.
-But notice that
-$$P[N(t)=k]=\frac{[\lambda_p(t)]^ke^{-\lambda_p(t)}}{k!}$$
-
-It is possible to find the probability of having $n$ customers in service at $t$ with $k$ arrivals before using this:
-- Constant service time $\beta$:
-$$\begin{align}P[N(t)=n|A(t)=k]&=\frac{P[N(t)=n,A(t)=k]}{P[A(t)=k]}=\frac{P[A(t-\beta)=k-n]P[A(\beta)=n]}{P[A(t)=k]}\\
-&=\binom{k}{n} \left(\frac{\beta}{t}\right)^n \left(\frac{t - \beta}{t}\right)^{k - n}\\
-&\sim\text{Binomial}\par{k,\frac \beta t}
-\end{align}$$
-- Random service time:
-$$\begin{align}P[N(t) &= n \mid A(t) = k] = \binom{k}{n} \sq{\frac{\lambda_p(t)}{\lambda t}}^n \sq{1 - \frac{\lambda_p(t)}{\lambda t}}^{k - n}, \quad 0 \le n \le k\\
-&\sim\text{Binomial}\par{p,\frac{\lambda_p(t)}{\lambda t}}
-\end{align}$$
-Most importantly, the constant service time case is a special case of the random service time.
