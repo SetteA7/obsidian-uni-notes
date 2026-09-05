@@ -751,10 +751,21 @@ For each irreducible transient or negative recurrent class it is $\infty$.
 
 ---
 
-**Avg Number of Visits to State $j$**
-$j$ is recurrent (and reachable) 
+**Avg Number of Visits starting from $a$**
+Starting from $a$ inside a pos rec chain:
 $$
-W_{ij}\iter n = \sum_{k=0}^{n-1}[P^k]_{ij}\stackrel{n\rightarrow\infty}\approx n\pi_j$$
+W_{a\bullet}\iter n = \sum_{k=0}^{n-1}[P^k]_{a\bullet}\stackrel{n\rightarrow\infty}\approx n\pi_\bullet$$
+Notice that this can be easily computed as:
+Set $$X_0  = (0, \dots, 0, \underbrace{1}_{a\text{-th pos}}, 0, \dots, 0)$$
+Find $X_k=X_{k-1}P,\ k=1,...,n-1$ (where $X_1$ is the $a$-th row of $P$ and $X_0$ is a null row where only $a$-th entry is 1). 
+$$X_k = X_{k-1} P = X_0 P^k = [P^k]_{a\bullet}$$
+
+Then the $W_{a\bullet}^{(n)}$ matrix is just the sum, to find $j$ just select the $j$-th entry 
+$$W_{a\bullet}^{(n)}=\sum_{k=0}^{n-1}X_k\stackrel{n\rightarrow\infty}\longrightarrow n\pi_\bullet$$
+
+Starting from $a$ inside transient state:
+Same as before for finite $n$
+
 
 
 For transient state $j$ (suppose start in $0$) the limit becomes:
