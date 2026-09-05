@@ -713,7 +713,7 @@ $$\begin{align}P[N(t)=n|A(t)=k]&=\frac{P[N(t)=n,A(t)=k]}{P[A(t)=k]}=\frac{P[A(t-
 \end{align}$$
 - Random service time:
 $$\begin{align}P[N(t) &= n \mid A(t) = k] = \binom{k}{n} \sq{\frac{\lambda_p(t)}{\lambda t}}^n \sq{1 - \frac{\lambda_p(t)}{\lambda t}}^{k - n}, \quad 0 \le n \le k\\
-&\sim\text{Binomial}\par{p,\frac{\lambda_p(t)}{\lambda t}}
+&\sim\text{Binomial}\par{k,\frac{\lambda_p(t)}{\lambda t}}
 \end{align}$$
 Most importantly, the constant service time case is a special case of the random service time.
 ## 5.3) MC
