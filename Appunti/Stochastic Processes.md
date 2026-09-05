@@ -818,11 +818,11 @@ For For transitions (from transient) to pos recurrent periodic it is the abs pro
 For pos recurrent state $\mu_i=1/\pi_i$
 For transient states $\mu_i=\infty$
 
-|**State Type**|**Stationary Probability πi​**|**Mean Recurrence Time μi​**|
-|---|---|---|
-|**Positive Recurrent**|$\pi_i > 0$ (within its closed class)|**$\mu_i = \dfrac{1}{\pi_i}$**|
-|**Transient**|$0$ (globally)|**$\mu_i = \infty$**|
-|**Null Recurrent** _(infinite MCs only)_|$0$|**$\mu_i = \infty$**|
+| **State Type**                           | **Stationary Probability πi​**        | **Mean Recurrence Time μi​**   |
+| ---------------------------------------- | ------------------------------------- | ------------------------------ |
+| **Positive Recurrent**                   | $\pi_i > 0$ (within its closed class) | **$\mu_i = \dfrac{1}{\pi_i}$** |
+| **Transient**                            | $0$ (globally)                        | **$\mu_i = \infty$**           |
+| **Null Recurrent** _(infinite MCs only)_ | $0$                                   | **$\mu_i = \infty$**           |
 ## 5.4) First Step Analysis
 General formula:
 $$W_{\textcolor{yellow}i\textcolor{red}j} = \mathbb{I}\{\textcolor{yellow}i = \textcolor{red}j\} + \sum_\textcolor{blue}k P_{\textcolor{yellow}i\textcolor{blue}k} W_{\textcolor{blue}k\textcolor{red}j}$$
