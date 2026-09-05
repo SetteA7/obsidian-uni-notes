@@ -693,7 +693,11 @@ $$\begin{gather}P[X_1(3) = 2 \mid X_1(2) + X_2(2) = 1] =\\= \sum_{k=0}^{1} P[X_1
 
 ---
 
-**Probability absorption:** P(go to class)/P(leave)
+**Probability absorption into class $a$:** 
+If the transient state is only one ($|C_t|=1$): $P[\text{go to class }$a$]/P[\text{leave trans state}]$
+If the transient state is a class with $|C_t|>1$ then first step analysis is required:
+$$\mu_i=\sum_j P_{ij}\mu j$$
+with boundary condition $\mu_a=1, \mu_b=0$ with $b$ all the other abs states
 
 ---
 
