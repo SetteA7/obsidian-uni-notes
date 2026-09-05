@@ -696,8 +696,12 @@ $$\begin{gather}P[X_1(3) = 2 \mid X_1(2) + X_2(2) = 1] =\\= \sum_{k=0}^{1} P[X_1
 **Probability absorption into class $a$:** 
 If the transient state is only one ($|C_t|=1$): $P[\text{go to class }$a$]/P[\text{leave trans state}]$
 If the transient state is a class with $|C_t|>1$ then first step analysis is required:
-$$\mu_i=\sum_j P_{ij}\mu j$$
-with boundary condition $\mu_a=1, \mu_b=0$ with $b$ all the other abs states
+$$\begin{gather}
+\text{Define: }\mu_i=P[\text{go to }a\text{ starting from }i]\\
+\mu_i=\sum_j P_{ij}\mu j\\
+\text{Boundary condition: }\mu_a=1\quad \mu_b=0, \quad b\in\curly{\text{all other abs states}}
+\end{gather}$$
+where the boundary condition is a direct result of the summation.
 
 ---
 
@@ -793,6 +797,7 @@ $$W_{\textcolor{yellow}i\textcolor{red}j} = \mathbb{I}\{\textcolor{yellow}i = \t
 This is used for
 - avg visits
 - passage times
+- abs probability
 
 ## 5.4) GBN
 Normal GBN with iid error $\epsilon$ on forward channel and $m$ slots to return
