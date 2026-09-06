@@ -822,13 +822,7 @@ For For transitions (from transient) to pos recurrent periodic it is the abs pro
 
 **Mean recurrence time (avg return times)**
 For pos recurrent state $\mu_i=1/\pi_i$
-For transient states $\mu_i=\infty$
-
-| **State Type**                           | **Stationary Probability πi​**        | **Mean Recurrence Time μi​**   |
-| ---------------------------------------- | ------------------------------------- | ------------------------------ |
-| **Positive Recurrent**                   | $\pi_i > 0$ (within its closed class) | **$\mu_i = \dfrac{1}{\pi_i}$** |
-| **Transient**                            | $0$ (globally)                        | **$\mu_i = \infty$**           |
-| **Null Recurrent** _(infinite MCs only)_ | $0$                                   | **$\mu_i = \infty$**           |
+For transient or neg rec states $\mu_i=\infty$
 ## 5.4) First Step Analysis
 General formula:
 $$W_{\textcolor{yellow}i\textcolor{red}j} = \mathbb{I}\{\textcolor{yellow}i = \textcolor{red}j\} + \sum_\textcolor{blue}k P_{\textcolor{yellow}i\textcolor{blue}k} W_{\textcolor{blue}k\textcolor{red}j}$$
@@ -846,17 +840,24 @@ $$\eta=\frac{P_{10}\iter m}{P_{10}\iter m+mP_{01}}=\frac{P_{BG}\iter m}{P_{BG}\i
 Feedback channel with iid error $\delta$:
 $$\eta=\frac{(1-\delta)P_{10}\iter m}{(1+(m-1)\delta)P_{10}\iter m+m((1-\delta)P_{01}+\delta P_{01}\iter m)}$$
 
+
 Suppose $\pi_B$ is known and the av duration of $G$ is known.
 The other steady state is easily obtainable: $\pi_G=1-\pi_B$
 Then the thorughput (no protocol) is $\eta=\pi_GP[success|G]+\pi_BP[success|B]$
 
 Notice that $\E[L_{GB}]=1/P_{GB}$
 
-## 5.6) Min/Max of two distributions
 
+## 5.6) Min/Max of two distributions
 Let $A,B$ be two independent rvs
 $$\begin{gather}
-W=\min(A,B)\\ 
-\min(A,B)>t\iff A>t\ \cap\ B>t\\
+\min(A,B)>t\iff A>t\ \cap\ B>t\longrightarrow
 P[\min(A,B)>t]= P[A>t] P[B>t]\\
 \end{gather}$$
+
+Now notice that:
+$$\max(A,B)+\min(A,B)=A+B\rightarrow\max(A,B)=A+B-\min(A,B)$$
+So the distribution of max can be found by finding the distribution of min:
+$$\begin{align}
+P[\max(A,B)>t]&=P[A>t]+P[B>t]-P[\min(A,B)>t]\\
+&=P[A>t]+P[B>t]-P[A>t]P[B>t]\end{align}$$
