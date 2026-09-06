@@ -771,6 +771,10 @@ $$W_{ij}^{(\infty)} = \delta_{ij} + \sum_{k \in \mathcal{T}} P_{ik} W_{kj}^{(\in
 where $\delta_{ij} = 1$ if $i = j$ and $0$ otherwise.
 - If the target is in recurrent state then as before
 
+
+Finally notice that
+$$k_i = \sum_{j \in \mathcal{T}} W_{ij}$$
+
 ---
 
 **Compute Mean and Variance of the first passage time to state $a$**
