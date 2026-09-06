@@ -851,3 +851,12 @@ The other steady state is easily obtainable: $\pi_G=1-\pi_B$
 Then the thorughput (no protocol) is $\eta=\pi_GP[success|G]+\pi_BP[success|B]$
 
 Notice that $\E[L_{GB}]=1/P_{GB}$
+
+## 5.6) Min/Max of two distributions
+
+Let $A,B$ be two independent rvs
+$$\begin{gather}
+W=\min(A,B)\\ 
+\min(A,B)>t\iff A>t\ \cap\ B>t\\
+P[\min(A,B)>t]= P[A>t] P[B>t]\\
+\end{gather}$$
