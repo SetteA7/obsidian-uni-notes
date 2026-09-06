@@ -849,11 +849,27 @@ Notice that $\E[L_{GB}]=1/P_{GB}$
 
 
 ## 5.6) Min/Max of two distributions
-Let $A,B$ be two independent rvs
-$$\begin{gather}
-\min(A,B)>t\iff A>t\ \cap\ B>t\longrightarrow
-P[\min(A,B)>t]= P[A>t] P[B>t]\\
-\end{gather}$$
+Let $A,B$ be two independent rvs, then define $W=\min(A,B)$
+$$W=\min(A,B)>t\iff A>t\ \cap\ B>t\longrightarrow
+P[\min(A,B)>t]= P[A>t] P[B>t]$$
+
+that is:
+$$F_W(t)=1-(1-F_A(t))(F_B(t))$$
+Sometimes this is enough to know what the distribution is. 
+Calculate $\E[W]$:
+$$E[W] = \int_0^\infty P(W > t) \, dt$$
+
+
+Specific cases: 
+$$A\sim\text{Exp}(\lambda_A), \ B\sim\text{Exp}(\lambda_B)\rightarrow \min(A,B)\sim\text{Exp}(\lambda_A+\lambda_B)$$
+
+
+
+
+
+
+
+
 
 Now notice that:
 $$\max(A,B)+\min(A,B)=A+B\rightarrow\max(A,B)=A+B-\min(A,B)$$
