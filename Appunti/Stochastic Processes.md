@@ -855,31 +855,32 @@ P[W>t]= P[A>t] P[B>t]$$
 
 Sometimes this is enough to know what the distribution is. 
 Calculate $\E[W]$:
-$$E[W] = \int_0^\infty P(W > t) \, dt$$
-Recall:
+$$\E[W] = \int_0^\infty P(W > t) \, dt$$
+Recall also:
 $$\begin{align}
-\text{Continuous rv: } &P[W>t]=1-F_W(t)\\
-\text{In general: }&F_W(t)=1-(1-F_A(t))(1-F_B(t))
+F_W(t)=1-(1-F_A(t))(1-F_B(t))
 \end{align}$$
 
 
 
 
 Specific cases: 
-- $A\sim\text{Exp}(\lambda_A)$
-- 
-$$A\sim\text{Exp}(\lambda_A), \ B\sim\text{Exp}(\lambda_B)\rightarrow \min(A,B)\sim\text{Exp}(\lambda_A+\lambda_B)$$
+- $A\sim\text{Exp}(\lambda_A)\ B\sim\text{Exp}(\lambda_B)$:
+$$\begin{gather} W\sim\text{Exp}(\lambda_A+\lambda_B)\\
+\E[W]=\frac1{\lambda_A+\lambda_B}
+\end{gather}$$
+- $A\sim\text{Exp}(\lambda)\ B\sim\text{Constant}(T)$
+$$\begin{gather} W\sim\text{Truncated Exp}(\lambda)\text{ at }T\\
+\E[W]=\frac{1-e^{-\lambda T}}{\lambda}
+\end{gather}
+$$
+In general a uniform rv truncates the other rv.
 
-
-
-
-
-
-
-
-
-Now notice that:
+Now notice:
 $$\max(A,B)+\min(A,B)=A+B\rightarrow\max(A,B)=A+B-\min(A,B)$$
+Therefore the expectation of the max is very easily obtained:
+$$\E[\max(A,B)]=\E[A]+\E[B]-\E[W]$$
+
 So the distribution of max can be found by finding the distribution of min:
 $$\begin{align}
 P[\max(A,B)>t]&=P[A>t]+P[B>t]-P[\min(A,B)>t]\\
