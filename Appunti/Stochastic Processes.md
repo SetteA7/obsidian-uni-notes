@@ -767,7 +767,7 @@ Starting from $a$ inside transient state $\mathcal T$:
 Same as before for finite $n$
 The limit is a bit different:
 - If the target state is transient
-$$W_{ij}^{(\infty)} = \delta_{ij} + \sum_{k \in \mathcal{T}} P_{ik} W_{kj}^{(\infty)} \quad \text{for every } i \in \mathcal{T}$$
+$$W_{\color{blue}i\color{red} j}^{(\infty)} = \delta_{ij} + \sum_{k \in \mathcal{T}} P_{\color{blue}i\color{yellow}k} W_{\color{yellow}k\color{red}j}^{(\infty)} \quad \text{for every } i \in \mathcal{T}$$
 where $\delta_{ij} = 1$ if $i = j$ and $0$ otherwise.
 - If the target is in recurrent state then as before
 
