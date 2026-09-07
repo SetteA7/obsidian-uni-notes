@@ -730,7 +730,7 @@ If the transient state is only one ($|C_t|=1$): $P[\text{go to class }$a$]/P[\te
 If the transient state is a class with $|C_t|>1$ then first step analysis is required:
 $$\begin{gather}
 \text{Define: }\mu_i=P[\text{go to }a\text{ starting from }i]\\
-\mu_i=\sum_j P_{ij}\mu j\\
+\mu_i=\sum_j P_{ij}\mu_j\\
 \text{Boundary condition: }\mu_a=1\quad \mu_b=0, \quad b\in\curly{\text{all other abs states}}
 \end{gather}$$
 where the boundary condition is a direct result of the summation.
