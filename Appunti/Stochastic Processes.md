@@ -546,12 +546,12 @@ A state $j$ is null recurrent if it is recurrent ($\mathbb{P}(T_j < \infty \mid 
 $$\mu_j = \mathbb{E}[T_j \mid X_0 = j] = \infty$$
 
 **By contradiction** suppose that a null recurrent state is present:
-**a)** Since null recurrence is a class property and the communicating class $C$ is closed, we have:
+**a)** Since recurrence is a class property and the communicating class $C$ is closed, we have by total probability:
 $$\sum_{j \in C} P_{ij}^{(n)} = 1, \quad \forall i \in C, \, \forall n \ge 1$$
-**b)** Null recurrent classes have zero long-run transition probabilities:
+**b)** A property of null recurrence classes is to have zero long-run transition probabilities:
 $$\lim_{N \to \infty} \frac{1}{N} \sum_{n=1}^N P_{ij}^{(n)} = \frac{1}{\mu_j} = 0, \quad \forall i, j \in C$$
 
-Now, sum all the transition probabilities starting from state $i \in C$, using property **a)**:
+Now, find the fraction of time that the chain remains in C; using property **a)**:
 $$\lim_{N \to \infty} \frac{1}{N} \sum_{n=1}^N \sum_{j \in C} P_{ij}^{(n)} = \lim_{N \to \infty} \frac{1}{N} \sum_{n=1}^N 1 = 1$$
 
 Because the state space $S$ is finite, the class $C \subseteq S$ is finite ($\vert{}C\vert{} < \infty$). Therefore, the finite sum and the limit commute. Applying **b)** yields:
