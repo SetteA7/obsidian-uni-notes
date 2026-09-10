@@ -259,6 +259,16 @@ $$P_{i,i+1}=p_i\quad P_{i,i-1}=q_i\quad P_{ii}=r_i$$
 ## 4.1) Proof 1: Long-run Arrival Rate
 For a renewal process, state precisely (also providing a formal proof) what is the value of:
 $$\lim_{t\rightarrow\infty}\frac{N(t)}t$$
+This is the **strong law for renewal proesses**
+
+The **elementary renewal theorem** is:
+$$\lim_{t\rightarrow\infty}\frac{\E[N(t)]}t=\frac1\mu$$
+Where the proof for this is the same as before, just by adding that $\E\sq{\lim_{t\rightarrow\infty}\frac{N(t)}t}=\lim_{t\rightarrow\infty}\frac{\E[N(t)]}t$.
+
+Consider two poisson processes with rate $\lambda<\lambda^*$ which will have the following arrivals $N(t)\leq N^*(t)$ 
+
+The second moment is $\E[N^*(t)]=(\lambda^* t)^2+\lambda^*t$ and by normalizing it in time we get $\E[\frac{N^*(t)}t]={\lambda^*}^2-\lambda^*<\infty$
+So the second moment is bounded and it is uniformly integrable. 
 
 ---
 
