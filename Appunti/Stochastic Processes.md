@@ -327,6 +327,16 @@ First we need to show that the interarrival times are iid:
 
 For the first arrival time $T_1$ we have
 $$P[T_1>t]=P[0 \text{ arrivals in } [0,t]]=P[N(t)=0]=\frac{(\lambda t)^0e^{-\lambda t}}{0!}=e^{-\lambda t}\rightarrow T_1\sim \text{Exp}(\lambda)$$
+Now the joint distribution for $T_2$ is:
+$$P[T_2>t_2,T_1>t_1]=\int_0^\infty P[T_2>t_2|T_1=z]f_{T_1}(z)dz$$
+Now notice that:
+- $f_{T_1}(z)=\lambda e^{-\lambda z}$
+- $$P[T_2>t_2|T_1=z]=\begin{cases}0&t_2<t_1\\
+P(N(z + t_2) - N(z) = 0 \mid T_1 = z) = P(N(t_2) = 0) = e^{-\lambda t_2}\end{cases}$$
+So the integral becomes:
+$$P[T_2>t_2,T_1>t_1]=\int_{t_1}^\infty e^{-\lambda t_2}\lambda e^{-\lambda z}dz=e^{-\lambda t_2}e$$
+
+
 In general, the joint distribution becomes:
 $$\begin{align}
 P[T_{n+1}>t|T_1=t_1,...,T_n=t_n]&=P[0 \text{ arrivals in }[s_n,s_n+t]|\text{ history up to }s_{n}]\\
