@@ -263,12 +263,7 @@ This is the **strong law for renewal proesses**
 
 The **elementary renewal theorem** is:
 $$\lim_{t\rightarrow\infty}\frac{\E[N(t)]}t=\frac1\mu$$
-Where the proof for this is the same as before, just by adding that $\E\sq{\lim_{t\rightarrow\infty}\frac{N(t)}t}=\lim_{t\rightarrow\infty}\frac{\E[N(t)]}t$.
-
-Consider two poisson processes with rate $\lambda<\lambda^*$ which will have the following arrivals $N(t)\leq N^*(t)$ 
-
-The second moment is $\E[N^*(t)]=(\lambda^* t)^2+\lambda^*t$ and by normalizing it in time we get $\E[\frac{N^*(t)}t]={\lambda^*}^2-\lambda^*<\infty$
-So the second moment is bounded and it is uniformly integrable. 
+idk how to do the proof.
 
 ---
 
