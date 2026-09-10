@@ -676,14 +676,23 @@ $$\sum_{n=1}^\infty P_{ii}\iter n=\sum_{k=1}^\infty (f_{ii})^k=\frac{f_{ii}}{1-f
 State and prove the elementary renewal theorem.
 
 Answer:
-Let $\{X_n\}_{n \ge 1}$ be independent, identically distributed positive random variables with finite or infinite mean $\mu = \mathbb{E}[X_1] \in (0, \infty]$. Let $N(t)$ be the renewal counting process, that is the cumulative sum 
+Let $\{X_n\}_{n \ge 1}$ be independent, identically distributed positive random variables with finite or infinite mean $\mu = \mathbb{E}[X_1] \in (0, \infty]$. Let $N(t)$ be the renewal counting process, that is the cumulative sum of arrivals up to time $t$
 
 Then:
 
-$$\lim_{t \to \infty} \frac{m(t)}{t} = \frac{1}{\mu}$$
+$$\lim_{t \to \infty} \frac{\E[t]}{t} = \frac{1}{\mu}$$
 
 _(with $1/\mu = 0$ if $\mu = \infty$)_.
 
+Proof:
+By definition of $N(t)$, the $N(t)$-th renewal occurs on or before $t$, and the $(N(t)+1)$-th renewal occurs strictly after $t$:
+$$S_{N(t)} \le t < S_{N(t)+1}$$
+Dividing through by $N(t)$ for $t$ large enough such that $N(t) \ge 1$:
+$$\frac{S_{N(t)}}{N(t)} \le \frac{t}{N(t)} < \frac{S_{N(t)+1}}{N(t)+1} \cdot \frac{N(t)+1}{N(t)}$$
+By the SLLN, $\lim_{n \to \infty} \frac{S_n}{n} = \mu$ therefore 
+$$\lim_{t \to \infty} \frac{N(t)}{t} = \frac{1}{\mu} \quad \text{a.s.}$$
+
+Fatou's Lemma can 
 # 5) Exercises
 
 ## 5.1) Poisson Process
