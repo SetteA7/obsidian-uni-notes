@@ -323,26 +323,17 @@ By definition of a Poisson process, we have
 - Stationary Poisson increments: for any $s\geq 0$ and $t>0$, the increment $N(s + t) - N(s) \sim \text{Poisson}(\lambda t)$, meaning:
 $$\mathbb{P}(N(s+t) - N(s) = k) =P(N(t)=k)= \frac{(\lambda t)^k e^{-\lambda t}}{k!}$$
 
-First we need to show that the interarrival times are iid:
+For $n=1$:
 
-For the first arrival time $T_1$ we have
-$$P[T_1>t]=P[0 \text{ arrivals in } [0,t]]=P[N(t)=0]=\frac{(\lambda t)^0e^{-\lambda t}}{0!}=e^{-\lambda t}\rightarrow T_1\sim \text{Exp}(\lambda)$$
-Now the joint distribution for $T_2$ is:
-$$P[T_2>t_2,T_1>t_1]=\int_0^\infty P[T_2>t_2|T_1=z]f_{T_1}(z)dz$$
-Now notice that:
-- $f_{T_1}(z)=\lambda e^{-\lambda z}$
-- $P[T_2>t_2|T_1=z]=P(N(z + t_2) - N(z) = 0 \mid T_1 = z) = P(N(t_2) = 0) = e^{-\lambda t_2}$
-- The integral starts from $t_1$ because we are restricting integration over the region where $T_1 > t_1$.
+$$\mathbb{P}(T_1 > t_1) = \mathbb{P}(N(t_1) = 0) = \frac{(\lambda t_1)^0 e^{-\lambda t_1}}{0!} = e^{-\lambda t_1} \implies T_1 \sim \text{Exp}(\lambda)$$
 
-So the integral becomes:
-$$P[T_2>t_2,T_1>t_1]=\int_{t_1}^\infty e^{-\lambda t_2}\lambda e^{-\lambda z}dz=e^{-\lambda t_2}e^{-\lambda t_1}=P[T_2>t_2]P[T_1>t_1]$$
-By setting $t_1=0$ it shows that $T_2\sim\text{Exp}(\lambda)$ so they are iid.
+For $n \ge 2$, condition on the arrival history $(T_1 = t_1, \dots, T_{n-1} = t_{n-1})$ and let $S_{n-1} = \sum_{i=1}^{n-1} t_i$:
 
+$$\begin{aligned} \mathbb{P}(T_n > t_n \mid T_1 = t_1, \dots, T_{n-1} = t_{n-1}) &= \mathbb{P}(N(S_{n-1} + t_n) - N(S_{n-1}) = 0 \mid T_1 = t_1, \dots, T_{n-1} = t_{n-1}) \\ &= \mathbb{P}(N(S_{n-1} + t_n) - N(S_{n-1}) = 0) \quad \text{(by independent increments)} \\ &= \mathbb{P}(N(t_n) = 0) \quad \text{(by stationary increments)} \\ &= e^{-\lambda t_n} \end{aligned}$$
 
+Since this conditional probability is constant with respect to $(t_1, \dots, t_{n-1})$, $T_n$ is independent of $(T_1, \dots, T_{n-1})$ with unconditional distribution $T_n \sim \text{Exp}(\lambda)$.
 
-From here the generic distribution with $n$ arrivals is:
-$$P[T_n>t_n, T_{n-1}>t_{n-1},...]=\prod_{i=1}^ne^{-\lambda t_i}$$
-Where all are iid and $T_i\sim\text{Exp}(\lambda)$
+By induction, $\{T_n\}_{n=1}^\infty$ are mutually independent and identically distributed $\text{Exp}(\lambda)$.
 
 The mean of an exponential distribution $T$ with rate $\lambda$ is given by
 $$\E[T]=\int_0^\infty P[T>t]dt=\int_0^\infty e^{-\lambda t}dt =-\frac{e^{-\lambda t}}{\lambda}|_0^\infty=\frac 1\lambda$$
