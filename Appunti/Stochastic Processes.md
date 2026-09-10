@@ -259,7 +259,7 @@ $$P_{i,i+1}=p_i\quad P_{i,i-1}=q_i\quad P_{ii}=r_i$$
 ## 4.1) Proof 1: Long-run Arrival Rate
 For a renewal process, state precisely (also providing a formal proof) what is the value of:
 $$\lim_{t\rightarrow\infty}\frac{N(t)}t$$
-This is the **strong law for renewal proesses**
+This is the **strong law of large numbers for renewal proesses**
 
 The **elementary renewal theorem** is:
 $$\lim_{t\rightarrow\infty}\frac{\E[N(t)]}t=\frac1\mu$$
@@ -550,26 +550,22 @@ Prove that a Markov chain with a finite number of states cannot have any null re
 ---
 
 Proof:
-A null recurrent state is a state where the expected return time is infinite:
-$$\mu_j=\E[T_j|X_0=j]=\infty$$
+A state $j$ is null recurrent if it is recurrent ($\mathbb{P}(T_j < \infty \mid X_0 = j) = 1$) and its expected return time is infinite:
+$$\mu_j = \mathbb{E}[T_j \mid X_0 = j] = \infty$$
 
 **By contradiction** suppose that a null recurrent state is present:
-a) Since null recurrence is a class property and the class is closed we have:  $\sum_{i\in C}P_{ij}\iter n=1$
-b) Null recurrent classes have zero long run transition probabilities $\lim_{n \to \infty} P_{ij}^{(n)} =1/\mu_j= 0$
+**a)** Since null recurrence is a class property and the communicating class $C$ is closed, we have:
+$$\sum_{j \in C} P_{ij}^{(n)} = 1, \quad \forall i \in C, \, \forall n \ge 1$$
+**b)** Null recurrent classes have zero long-run transition probabilities:
+$$\lim_{N \to \infty} \frac{1}{N} \sum_{n=1}^N P_{ij}^{(n)} = \frac{1}{\mu_j} = 0, \quad \forall i, j \in C$$
 
+Now, sum all the transition probabilities starting from state $i \in C$, using property **a)**:
+$$\lim_{N \to \infty} \frac{1}{N} \sum_{n=1}^N \sum_{j \in C} P_{ij}^{(n)} = \lim_{N \to \infty} \frac{1}{N} \sum_{n=1}^N 1 = 1$$
 
-Notice that he limit and the finite sum can be swapped: $\lim_{n \to \infty} \sum_{j \in C} P_{ij}^{(n)} = \sum_{j \in C} \left( \lim_{n \to \infty} P_{ij}^{(n)} \right)$
+Because the state space $S$ is finite, the class $C \subseteq S$ is finite ($\vert{}C\vert{} < \infty$). Therefore, the finite sum and the limit commute. Applying **b)** yields:
+$$\lim_{N \to \infty} \sum_{j \in C} \left( \frac{1}{N} \sum_{n=1}^N P_{ij}^{(n)} \right) = \sum_{j \in C} \left( \lim_{N \to \infty} \frac{1}{N} \sum_{n=1}^N P_{ij}^{(n)} \right) = \sum_{j \in C} 0 = 0$$
+which is a contraddiction.
 
-
-
-
-
-- Recurrence is a class property, so we consider this class of states $C$
-- Recurrent classes are closed, so $\sum_{i\in C}P_{ij}\iter n=1$
-- Null recurrent classes have zero long run transition probabilities $\lim_{n \to \infty} P_{ij}^{(n)} =1/\mu_j= 0$
-- Because the state space is **finite**, the communicating class $C$ is finite. Therefore, the limit and the finite sum can be swapped: $\lim_{n \to \infty} \sum_{j \in C} P_{ij}^{(n)} = \sum_{j \in C} \left( \lim_{n \to \infty} P_{ij}^{(n)} \right)$
-
-These pose a contradiction. The last property results to 1 on the lhs and 0 on the rhs.
 
 $\endproof$
 
