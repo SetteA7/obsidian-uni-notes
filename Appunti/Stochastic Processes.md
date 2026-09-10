@@ -268,7 +268,7 @@ Proof:
 Let $\curly{X_n}_{n=1}^\infty$ be a sequence of iid rvs representing inter-arrival times between successive events with $\E[X_i]=\mu\in(0,\infty)$
 
 
-Let the arrival time be $S_n=\sum_{i=0}^n X_i$ and the renewal counting process $N(t)$ count the number of renewals up to time t, then 
+Let the arrival time be $S_n=\sum_{i=1}^n X_i$ and the renewal counting process $N(t)$ count the number of renewals up to time t, then 
 $$N(t)\geq n\iff S_n\leq t$$
 Let the renewal $N(t)$ occur at or before $t$ by definition, then renewal $N(t)+1$ occurs strictly after $t$:
 $$S_{N(t)}\leq t<S_{N(t)+1}$$
@@ -276,7 +276,7 @@ For $N(t)\geq 1$ we have
 $$\frac{S_{N(t)}}{N(t)}\leq\frac{ t}{N(t)}<\frac{S_{N(t)+1}}{N(t)}$$
 To evaluate these bounds, recall the strong law of large numbers:
 $$\lim_{n\rightarrow\infty}\frac{S_n}n=\mu\text{ w.p. }1$$
-Since $\lim_{t\rightarrow\infty}N(t)=\infty$ it is possible to asymptotically substitute $n=N(t)$ and get 
+Since $P\sq{\lim_{t\rightarrow\infty}N(t)=\infty}=1$ it is possible to asymptotically substitute $n=N(t)$ and get 
 $$\lim_{t\rightarrow\infty}\frac{S_{N(t)}}{N(t)}=\mu$$
 For the upper bound we have
 $$\lim_{t\rightarrow\infty}\frac{S_{N(t)+1}}{N(t)}=\lim_{t\rightarrow\infty}\frac{S_{N(t)+1}}{N(t)+1}\cdot\frac{N(t)+1}{N(t)}=\mu\cdot 1=\mu$$
