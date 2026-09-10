@@ -671,6 +671,19 @@ Equivalently, there is a strictly positive probability $(1 - f_{ii}) > 0$ that t
 Proof:
 Same as before, but now since $f_{ii}<1$ we have
 $$\sum_{n=1}^\infty P_{ii}\iter n=\sum_{k=1}^\infty (f_{ii})^k=\frac{f_{ii}}{1-f_{ii}}<\infty$$
+
+## 4.16) Elementary renewal Theorem
+State and prove the elementary renewal theorem.
+
+Answer:
+Let $\{X_n\}_{n \ge 1}$ be independent, identically distributed positive random variables with finite or infinite mean $\mu = \mathbb{E}[X_1] \in (0, \infty]$. Let $N(t)$ be the renewal counting process, that is the cumulative sum 
+
+Then:
+
+$$\lim_{t \to \infty} \frac{m(t)}{t} = \frac{1}{\mu}$$
+
+_(with $1/\mu = 0$ if $\mu = \infty$)_.
+
 # 5) Exercises
 
 ## 5.1) Poisson Process
