@@ -442,13 +442,20 @@ $$\E[S_{N(t)+1}]=\E[X](M(t)+1)$$
 where $M(t)$ is the renewal function.
 
 Proof:
+Let:
+- $(X_n)_{n \ge 1}$ be an i.i.d. sequence of positive inter-arrival times with mean $E[X_i]=\mu\in(0,\infty)$
+- $S_n = \sum_{i=1}^n X_i$ with $S_0 = 0$
+- $M(t) = \mathbb{E}[N(t)]$
+
+Define $A(t) = \mathbb{E}[S_{N(t)+1}]$. Then:
+$$A(t) = \mathbb{E}[X_1]\big(M(t) + 1\big).$$
 Using the renewal argument (first step analysis) we have
 $$\E[S_{N(t)+1}|X_1=x]=\begin{cases}
-x & \text{if } x>t \\
+x & \text{if } x>t \text{ (no renewal yet)}\\
 x+A(t-x) & \text{if } x\leq t
 \end{cases}$$
 
-and $\E[S_{N(t)+1}]=A(t)$
+
 
 We can apply the law of total expectation:
 $$\begin{align}
