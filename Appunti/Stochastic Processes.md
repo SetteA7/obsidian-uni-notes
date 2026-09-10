@@ -298,13 +298,9 @@ To prove that $j$ is recurrent, we need to show that $\sum_{k=0}^\infty P_{jj}\i
 
 Consider the following path: from $j$ to $i$ in $n$ steps, then goes to $i$ back to $i$ in $k$ steps and then goes back from $i$ to $j$ in $m$ steps
 $$P_{jj}^{(n + k + m)} = \sum_{r, s} P_{jr}^{(n)} P_{rs}^{(k)} P_{sj}^{(m)} \ge P_{ji}^{(n)} P_{ii}^{(k)} P_{ij}^{(m)}$$
-
-Now 
-$$\sum_{k=0}^{\infty} P_{jj}^{(n + k + m)} \ge \sum_{k=0}^{\infty} P_{ji}^{(n)} P_{ii}^{(k)} P_{ij}^{(m)}$$
-Since $P_{ji}\iter n,\ P_{ij}\iter m$ are independent of $k$ we can factor them out
-$$\sum_{k=0}^{\infty} P_{jj}^{(n + k + m)} \ge \underbrace{P_{ji}^{(n)} P_{ij}^{(m)}}_{\text{communicating}} \cdot \underbrace{\sum_{k=0}^{\infty} P_{ii}^{(k)}}_{\text{recurrent}}=c\cdot \infty=\infty$$
+Now sum along all $k$:
+$$\sum_{k=0}^{\infty} P_{jj}^{(n + k + m)} \ge \sum_{k=0}^{\infty} P_{ji}^{(n)} P_{ii}^{(k)} P_{ij}^{(m)}=P_{ji}\iter nP_{ij}\iter m\sum_{k=0}^\infty P_{ii}\iter k=\infty$$
 and thus $j$ is recurrent
-$$\sum_{t=0}^{\infty} P_{jj}^{(t)} \ge \sum_{k=0}^{\infty} P_{jj}^{(n + k + m)} = \infty$$
 $\endproof$
 
 ## 4.3) Proof 3: Proof of i.i.d. Exponential Inter-Arrival Times for Poisson Processes
