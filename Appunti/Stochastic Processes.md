@@ -672,7 +672,7 @@ Proof:
 Same as before, but now since $f_{ii}<1$ we have
 $$\sum_{n=1}^\infty P_{ii}\iter n=\sum_{k=1}^\infty (f_{ii})^k=\frac{f_{ii}}{1-f_{ii}}<\infty$$
 
-## 4.16) Elementary renewal Theorem
+## 4.16) Elementary renewal Theorem TODO
 State and prove the elementary renewal theorem.
 
 Answer:
@@ -692,7 +692,10 @@ $$\frac{S_{N(t)}}{N(t)} \le \frac{t}{N(t)} < \frac{S_{N(t)+1}}{N(t)+1} \cdot \fr
 By the SLLN, $\lim_{n \to \infty} \frac{S_n}{n} = \mu$ therefore 
 $$\lim_{t \to \infty} \frac{N(t)}{t} = \frac{1}{\mu} \quad \text{a.s.}$$
 
-Fatou's Lemma can 
+Fatou's Lemma can be directly applied to find the lower bound:
+$$\liminf_{t \to \infty} \frac{\E[N(t)]}{t} = \liminf_{t \to \infty} \mathbb{E}\left[\frac{N(t)}{t}\right] \ge \mathbb{E}\left[\liminf_{t \to \infty} \frac{N(t)}{t}\right]=\frac1\mu$$
+
+
 # 5) Exercises
 
 ## 5.1) Poisson Process
