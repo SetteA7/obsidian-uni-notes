@@ -454,9 +454,6 @@ $$\E[S_{N(t)+1}|X_1=x]=\begin{cases}
 x & \text{if } x>t \text{ (no renewal yet)}\\
 x+A(t-x) & \text{if } x\leq t
 \end{cases}$$
-
-
-
 We can apply the law of total expectation:
 $$\begin{align}
 \E[S_{N(t)+1}]=A(t)&=\int_0^\infty\E[S_{N(t)+1}|X_1=x]dF(x)\\
@@ -557,6 +554,16 @@ A null recurrent state is a state where the expected return time is infinite:
 $$\mu_j=\E[T_j|X_0=j]=\infty$$
 
 **By contradiction** suppose that a null recurrent state is present:
+a) Since null recurrence is a class property and the class is closed we have:  $\sum_{i\in C}P_{ij}\iter n=1$
+b) Null recurrent classes have zero long run transition probabilities $\lim_{n \to \infty} P_{ij}^{(n)} =1/\mu_j= 0$
+
+
+Notice that he limit and the finite sum can be swapped: $\lim_{n \to \infty} \sum_{j \in C} P_{ij}^{(n)} = \sum_{j \in C} \left( \lim_{n \to \infty} P_{ij}^{(n)} \right)$
+
+
+
+
+
 - Recurrence is a class property, so we consider this class of states $C$
 - Recurrent classes are closed, so $\sum_{i\in C}P_{ij}\iter n=1$
 - Null recurrent classes have zero long run transition probabilities $\lim_{n \to \infty} P_{ij}^{(n)} =1/\mu_j= 0$
