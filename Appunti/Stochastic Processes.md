@@ -261,10 +261,6 @@ For a renewal process, state precisely (also providing a formal proof) what is t
 $$\lim_{t\rightarrow\infty}\frac{N(t)}t$$
 This is the **strong law of large numbers for renewal proesses**
 
-The **elementary renewal theorem** is:
-$$\lim_{t\rightarrow\infty}\frac{\E[N(t)]}t=\frac1\mu$$
-idk how to do the proof.
-
 ---
 
 Answer:
