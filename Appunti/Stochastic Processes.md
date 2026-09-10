@@ -331,23 +331,18 @@ Now the joint distribution for $T_2$ is:
 $$P[T_2>t_2,T_1>t_1]=\int_0^\infty P[T_2>t_2|T_1=z]f_{T_1}(z)dz$$
 Now notice that:
 - $f_{T_1}(z)=\lambda e^{-\lambda z}$
-- $$P[T_2>t_2|T_1=z]=\begin{cases}0&t_2<t_1\\
-P(N(z + t_2) - N(z) = 0 \mid T_1 = z) = P(N(t_2) = 0) = e^{-\lambda t_2}\end{cases}$$
+- $P[T_2>t_2|T_1=z]=P(N(z + t_2) - N(z) = 0 \mid T_1 = z) = P(N(t_2) = 0) = e^{-\lambda t_2}$
+- The integral starts from $t_1$ because we are restricting integration over the region where $T_1 > t_1$.
+
 So the integral becomes:
-$$P[T_2>t_2,T_1>t_1]=\int_{t_1}^\infty e^{-\lambda t_2}\lambda e^{-\lambda z}dz=e^{-\lambda t_2}e$$
+$$P[T_2>t_2,T_1>t_1]=\int_{t_1}^\infty e^{-\lambda t_2}\lambda e^{-\lambda z}dz=e^{-\lambda t_2}e^{-\lambda t_1}=P[T_2>t_2]P[T_1>t_1]$$
+By setting $t_1=0$ it shows that $T_2\sim\text{Exp}(\lambda)$ so they are iid.
 
 
-In general, the joint distribution becomes:
-$$\begin{align}
-P[T_{n+1}>t|T_1=t_1,...,T_n=t_n]&=P[0 \text{ arrivals in }[s_n,s_n+t]|\text{ history up to }s_{n}]\\
-&=P[N(s_n+t)-N(s_n)=0|T_i=t_i]\\
-&=P[N(s_n+t)-N(s_n)=0]\\
-&=P[N(t)=0]=e^{-\lambda t}\\ &\downarrow\\
-T_{n+1}&\sim\text{Exp}(\lambda)
-\end{align}$$
-Where the history could be removed due to the independence nature of the increments and the last step is due to the stationarity.
 
-This shows both the independence as it does not depend on $t_1,...,t_n$ (no history) and also the exponential distribution
+From here the generic distribution with $n$ arrivals is:
+$$P[T_n>t_n, T_{n-1}>t_{n-1},...]=\prod_{i=1}^ne^{-\lambda t_i}$$
+Where all are iid and $T_i\sim\text{Exp}(\lambda)$
 
 The mean of an exponential distribution $T$ with rate $\lambda$ is given by
 $$\E[T]=\int_0^\infty P[T>t]dt=\int_0^\infty e^{-\lambda t}dt =-\frac{e^{-\lambda t}}{\lambda}|_0^\infty=\frac 1\lambda$$
