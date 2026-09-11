@@ -810,6 +810,8 @@ Let $k^a_i=\text{mean time to reach } a \text{ from }i$
 Do one system of this form for each required $a$
 Clearly $k_a^a=0$ however, for the final result consider $k^a_a=1/\pi_a$ 
 $$k_i^a=1+\sum_{j\not=a}P_{ij}k^a_j$$
+If $i \not\to a$, or if $i \to a$ but the chain can be trapped in another closed class disjoint from $a$, then $k_i^a = \infty$
+
 Let $\alpha^a_i=\text{secon moment of time to reach } a\text{ from }i$ 
 Once the means $k^a_i$ are known just build the following system
 $$\alpha_i=1+\sum_{j\not=a}P_{ij}(2k_j+\alpha_j)$$
