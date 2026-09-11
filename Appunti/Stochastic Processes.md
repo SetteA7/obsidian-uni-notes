@@ -863,6 +863,14 @@ This is used for
 - passage times
 
 ## 5.5) GBN
+If $P$ is known, then also $\pi_G,\pi_B$ are known by solving $\pi=\pi P$ with $\pi_G+\pi_B=1$.
+If $\pi_G,\pi_B$ is known $P$ cannot be calculated. If also $\E[\text{consecutive good/bad slots}]$ is known then 
+$$p_{GB}=\frac1{\E[\text{consec good}]}\qquad p_{BG}=\frac1{\E[\text{consec bad}]}$$
+From here a parametric $P$ can be defined and by solving $\pi=P\pi$ with $a+b=1$ as an additional condition the whole $P$ is found.
+
+If the throughput of no protocol is asked:
+$$\eta=\pi_GP[success|G]+\pi_BP[success|B]$$
+
 Normal GBN with iid error $\epsilon$ on forward channel and $m$ slots to return
 $$\eta=\frac{1-\epsilon}{1-\epsilon+m\epsilon}$$
 
@@ -871,13 +879,6 @@ Error Free feedback throughput:
 $$\eta=\frac{P_{10}\iter m}{P_{10}\iter m+mP_{01}}=\frac{P_{BG}\iter m}{P_{BG}\iter m+mP_{GB}}$$
 Feedback channel with iid error $\delta$:
 $$\eta=\frac{(1-\delta)P_{10}\iter m}{(1+(m-1)\delta)P_{10}\iter m+m((1-\delta)P_{01}+\delta P_{01}\iter m)}$$
-
-
-Suppose $\pi_B$ is known and the av duration of $G$ is known.
-The other steady state is easily obtainable: $\pi_G=1-\pi_B$
-Then the thorughput (no protocol) is $\eta=\pi_GP[success|G]+\pi_BP[success|B]$
-
-Notice that $\E[L_{GB}]=1/P_{GB}$
 
 
 ## 5.6) Min/Max of two distributions
