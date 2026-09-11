@@ -864,22 +864,24 @@ This is used for
 
 ## 5.5) GBN
 If $P$ is known, then also $\pi_G,\pi_B$ are known by solving $\pi=\pi P$ with $\pi_G+\pi_B=1$.
-If $\pi_G,\pi_B$ is known $P$ cannot be calculated. If also $\E[\text{consecutive good/bad slots}]$ is known then 
+If $\pi_G,\pi_B$ is known $P$ cannot be calculated. If also $\E[\text{consecutive good/bad slots}]$ is known (one of the two) then 
 $$p_{GB}=\frac1{\E[\text{consec good}]}\qquad p_{BG}=\frac1{\E[\text{consec bad}]}$$
 From here a parametric $P$ can be defined and by solving $\pi=P\pi$ with $a+b=1$ as an additional condition the whole $P$ is found.
+If both are known it is directly found by recalling that each row $=1$.
 
 If the throughput of no protocol is asked:
 $$\eta=\pi_GP[success|G]+\pi_BP[success|B]$$
 
-Normal GBN with iid error $\epsilon$ on forward channel and $m$ slots to return
-$$\eta=\frac{1-\epsilon}{1-\epsilon+m\epsilon}$$
-
 A GBN on a two state MC works as follows. It has RTT of $m$ slots
-Error Free feedback throughput:
-$$\eta=\frac{P_{10}\iter m}{P_{10}\iter m+mP_{01}}=\frac{P_{BG}\iter m}{P_{BG}\iter m+mP_{GB}}$$
-Feedback channel with iid error $\delta$:
-$$\eta=\frac{(1-\delta)P_{10}\iter m}{(1+(m-1)\delta)P_{10}\iter m+m((1-\delta)P_{01}+\delta P_{01}\iter m)}$$
+- Normal GBN with iid error $\epsilon$ on forward channel and $m$ slots to return
+$$\eta=\frac{1-\epsilon}{1-\epsilon+m\epsilon}$$
+_(where $P_{BG}\iter 2=P_{BG}=1-\epsilon$ since iid and $P_{GB}=\epsilon$)_
 
+- Error Free feedback throughput:
+$$\eta=\frac{P_{10}\iter m}{P_{10}\iter m+mP_{01}}=\frac{P_{BG}\iter m}{P_{BG}\iter m+mP_{GB}}$$
+- Feedback channel with iid error $\delta$:
+$$\eta=\frac{(1-\delta)P_{BG}\iter m}{(1+(m-1)\delta)P_{BG}\iter m+m((1-\delta)P_{GB}+\delta P_{GB}\iter m)}$$
+If iid errors on both feedback and forward then use the last provided formula by recalling $P_{BG}\iter 2=P_{BG}=1-\epsilon$ since iid and $P_{GB}=\epsilon$
 
 ## 5.6) Min/Max of two distributions
 Let $A,B$ be two non negative independent rvs, then define $W=\min(A,B)$
