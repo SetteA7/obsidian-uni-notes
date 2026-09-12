@@ -650,7 +650,7 @@ These expressions are equal, so we have
 $$\sum_{n=1}^\infty P_{ii}\iter n=\sum_{k=1}^\infty (f_{ii})^k=\infty$$
 
 ## 4.15) Proof 15: Define Transient States
-Give the definition of a transient state and show that a state is recurrent if and only if
+Give the definition of a transient state and show that a state is transient if and only if
 $$\sum_{n=1}^\infty P_{ii}\iter n<\infty$$
 
 ---
