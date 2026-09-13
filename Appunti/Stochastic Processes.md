@@ -717,16 +717,25 @@ Total distribution is used
 This total probability formula is useful:
 $$P(E \mid C) = \sum_{k \in \mathcal{K}} P(E \mid B_k \cap C) \cdot P(B_k \mid C)$$
 Practical example:
-$$\begin{align}P[X_1(3) = 2 \mid X_1(2) + X_2(2) = 1] &=
-\sum_{k=0}^1P[X_1(3)=2, X_1(2)=k|X_1(2)+X_2(2)=2]\\
-&=\sum_k \frac{P[X_1(3)=2, X_1(2)=k|X_1(2)+X_2(2)=2]}{}\\
-&= \sum_{k=0}^{1} P[X_1(3) = 2 \mid X_1(2) = k, \, X_1(2) + X_2(2) = 1] \cdot P[X_1(2) = k \mid X_1(2) + X_2(2) = 1]\end{align}$$
-
-$$\begin{gather}P[X_1(3) = 2 \mid X_1(2) + X_2(2) = 1] =\\= \sum_{k=0}^{1} P[X_1(3) = 2 \mid X_1(2) = k, \, X_1(2) + X_2(2) = 1] \cdot P[X_1(2) = k \mid X_1(2) + X_2(2) = 1]\end{gather}$$
+$$\begin{gather}
+\begin{aligned}P[X_1(3) = 2 \mid X_1(2) + X_2(2) = 1] &=
+\sum_{k=0}^1P[X_1(3)=2, X_1(2)=k|X_1(2)+X_2(2)=1]\\
+&=\sum_k \frac{P[X_1(3)=2, X_1(2)=k,X_1(2)+X_2(2)=1]}{P[X_1(2)+X_2(2)=1]}
+\end{aligned}\\
+= \sum_{k=0}^{1} P[X_1(3) = 2 | X_1(2) = k,  X_1(2) + X_2(2) = 1] P[X_1(2) = k | X_1(2) + X_2(2) = 1]
+\end{gather}
+$$
+The first part becomes:
+$$\begin{gather}P[X_1(3)-X_1(2)=2-k|X_1(2)-X_1(2)+X_2(2)=1-k]\\=P[X_1(1)=2-k|X_2(2)=1-k]=P[X_1(1)=2-k]\end{gather}$$
+The second becomes (its sum over all $k$ must be 1)
+$$\frac{P[X_1(2)=k,X_1(2)+X_2(2)=1]}{P[X_1(2)+X_2(2)=1]}=\frac{P[X_1(2)=k]P[X_2(2)=1-k]}{P[X_1(2)+X_2(2)=1]}$$
 
 ## 5.2) Poisson Process Queues
 In a queue we have the arrival distribution $A$ and service time $S$.
 Usually we have $A(t)\sim\text{Poi}(\lambda t)$ and $S$ either uniform, constant or exponentially distributed.
+
+$A(t)$ is the cumulative arrivals up to $t$
+$N(t)$ are the users in service at time t
 
 From here we define the number of customers in the system at time $t$ as $N(t)$. 
 If there are infinite queues/capacity, then $N(t)\sim\text{Poi}(\lambda_p(t))$ with rate
@@ -746,6 +755,9 @@ $$\begin{align}P[N(t) &= n \mid A(t) = k] = \binom{k}{n} \sq{\frac{\lambda_p(t)}
 &\sim\text{Binomial}\par{k,\frac{\lambda_p(t)}{\lambda t}}
 \end{align}$$
 Most importantly, the constant service time case is a special case of the random service time.
+
+Given $A(t) = k$, the arrival epochs are distributed as **order statistics of $k$ i.i.d. Uniform$(0, t)$ random variables**. The probability that an arrival at time $U \sim \text{Unif}(0, t)$ is still in service at $t$ is:
+$$p_t = \frac{1}{t} \int_0^t (1 - G(t - u)) \, du = \frac{\lambda_p(t)}{\lambda t}$$
 ## 5.3) MC
 **Analysis of MC:**
 - Diagram
