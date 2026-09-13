@@ -433,25 +433,30 @@ Answer:
 $$\E[S_{N(t)+1}]=\E[X](M(t)+1)$$
 where $M(t)$ is the renewal function.
 
-Proof:
+Proof 1:
 Let:
 - $(X_n)_{n \ge 1}$ be an i.i.d. sequence of positive inter-arrival times with mean $E[X_i]=\mu\in(0,\infty)$
 - $S_n = \sum_{i=1}^n X_i$ with $S_0 = 0$
 - $M(t) = \mathbb{E}[N(t)]$
 
 Define $A(t) = \mathbb{E}[S_{N(t)+1}]$. Then:
-$$A(t) = \mathbb{E}[X_1]\big(M(t) + 1\big).$$
-Since 
-$$\begin{aligned} \mathbb{E}[S_{N(t)+1}] &= \sum_{i=1}^\infty \mathbb{E}\big[X_i \, \mathbf{1}_{\{N(t)+1 \ge i\}}\big] \\
-&=\sum_{i=1}^\infty \E[X_i]\\
-&= \sum_{i=1}^\infty \mathbb{E}[X_i] \, \mathbb{P}(N(t) + 1 \ge i) \quad \text{(by independence)} \\ 
-&= \mathbb{E}[X_1] \sum_{i=1}^\infty \mathbb{P}(N(t) + 1 \ge i) \end{aligned}$$
+$$\begin{aligned} \mathbb{E}[S_{N(t)+1}] &=\E\sq{\sum_{i=1}^n X_i}\\
+&= \E\sq{\sum_{i=1}^\infty X_i \, \mathbf{1}_{\{n \ge i\}}}\\
+&= \sum_{i=1}^\infty \mathbb{E}\big[X_i \, \mathbf{1}_{\{N(t)+1 \ge i\}}\big] \\
+&=\sum_{i=1}^\infty \E[X_i]\E[\mathbf{1}_{\{N(t)+1 \ge i\}}]\quad \text{(by independence)} \\
+&= \sum_{i=1}^\infty \mathbb{E}[X_i] \, \mathbb{P}(N(t) + 1 \ge i) \\ 
+&= \mathbb{E}[X_1] \sum_{i=1}^\infty \mathbb{P}(N(t) + 1 \ge i) \\
+&=\E[X_1]\E[N(t)+1]\\
+&=\E[X](M(t)+1)
+\end{aligned}$$
 
+$\endproof$
 
+Proof 2:
 Using the renewal argument (first step analysis) we have
 $$\E[S_{N(t)+1}|X_1=x]=\begin{cases}
 x & \text{if } x>t \text{ (no renewal yet)}\\
-x+A(t-x) & \text{if } x\leq t
+x+A(t-x) & \text{if } x\leq t\text{ (add time from x to arrival)}
 \end{cases}$$
 We can apply the law of total expectation:
 $$\begin{align}
