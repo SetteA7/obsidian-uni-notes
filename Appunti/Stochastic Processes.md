@@ -440,15 +440,7 @@ Let:
 - $M(t) = \mathbb{E}[N(t)]$
 
 Define $A(t) = \mathbb{E}[S_{N(t)+1}]$. Then:
-$$\begin{aligned} \mathbb{E}[S_{N(t)+1}] &=\E\sq{\sum_{i=1}^n X_i}\\
-&= \E\sq{\sum_{i=1}^\infty X_i \, \mathbf{1}_{\{n \ge i\}}}\\
-&= \sum_{i=1}^\infty \mathbb{E}\big[X_i \, \mathbf{1}_{\{N(t)+1 \ge i\}}\big] \\
-&=\sum_{i=1}^\infty \E[X_i]\E[\mathbf{1}_{\{N(t)+1 \ge i\}}]\quad \text{(by independence)} \\
-&= \sum_{i=1}^\infty \mathbb{E}[X_i] \, \mathbb{P}(N(t) + 1 \ge i) \\ 
-&= \mathbb{E}[X_1] \sum_{i=1}^\infty \mathbb{P}(N(t) + 1 \ge i) \\
-&=\E[X_1]\E[N(t)+1]\\
-&=\E[X](M(t)+1)
-\end{aligned}$$
+$$\begin{aligned} \mathbb{E}[S_{N(t)+1}] &= \mathbb{E}\left[\sum_{i=1}^{N(t)+1} X_i\right] \\ &= \mathbb{E}\left[\sum_{i=1}^\infty X_i \, \mathbf{1}_{\{N(t)+1 \ge i\}}\right] \\ &= \sum_{i=1}^\infty \mathbb{E}\big[X_i \, \mathbf{1}_{\{N(t)+1 \ge i\}}\big] \quad \text{(by Tonelli's Theorem, terms are non-negative)} \\ &= \sum_{i=1}^\infty \mathbb{E}[X_i] \, \mathbb{E}\big[\mathbf{1}_{\{N(t)+1 \ge i\}}\big] \quad \text{(since } \{N(t)+1 \ge i\} = \{S_{i-1} \le t\} \text{ is independent of } X_i\text{)} \\ &= \sum_{i=1}^\infty \mathbb{E}[X_i] \, \mathbb{P}(N(t) + 1 \ge i) \\ &= \mathbb{E}[X_1] \sum_{i=1}^\infty \mathbb{P}(N(t) + 1 \ge i) \quad \text{(since } X_i \text{ are identically distributed)} \\ &= \mathbb{E}[X_1] \, \mathbb{E}[N(t) + 1] \quad \text{(tail-sum formula for non-negative integer RVs)} \\ &= \mathbb{E}[X_1]\big(M(t) + 1\big) \end{aligned}$$
 
 $\endproof$
 
