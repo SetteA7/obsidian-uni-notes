@@ -623,6 +623,8 @@ From the definition:
 $$\begin{align}
 P_{ij}\iter n&=P[X_n=j|X_0=i]\\
 &=\sum_m P[X_n=j,X_k=m|X_0=i]\quad \text{ with }0<k\leq n\\
+&=\sum_m \frac{P[X_n=j,X_k=m,X_0=i]}{P[X_0=i]}\\
+&=\sum_m \frac{{P[X_0=i]}P[X_k=m|X_0=i]P[X_n=j|X_k=m,X_0=i]}{P[X_0=i]}\\
 &=\sum_m P[X_k=m|X_0=i]P[X_n=j|X_k=m,X_0=i]\\
 &=\sum_m P_{im}\iter kP_{mj}\iter {n-k}\quad \text{ recalll markov property: } P[X_n=j|X_k=m,X_0=i]=P[X_n=j|X_k=m]
 \end{align}$$
