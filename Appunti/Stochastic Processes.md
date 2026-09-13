@@ -944,13 +944,50 @@ Let a system cycle between two phases of expected duration $T_1,T_2$ that produc
 Probability to be in state $i$
 $$p_i=\frac{\E[T_i]}{\E[T_1]+\E[T_2]}$$
 Rate:
-$$\eta=r_1p_!+r_2p_2$$
+$$\eta=r_1p_1+r_2p_2$$
 If there are multiple independent processes with ON/OFF phases then
 Find $p_i,\eta_i$ for every process
 then 
 $$\eta=\sum_i P[\text{i are woking}]\cdot r_{\text{i working}}$$
 ### 5.7.2) Semi Markov Process
 $\geq 3$ states, the _order_ of visits is random (governed by probabilities, not a fixed cycle), and/or a state has **competing exit clocks**.
+
+First find embedded matrix, then find $\pi_i$
+Then the mean times:
+- Single exit clock: 
+$$\mu_i=E[T_i]$$
+- Competing exponential clocks:
+$$P[T_1<T_2]=\frac{\lambda_1}{\lambda_1+\lambda_2}\qquad\min\sim\text{Exp}[\lambda_1+\lambda_2]$$
+
+- Exponential vs deterministic:
+$$P[\text{Exp}(\lambda)<c]=1-e^{-\lambda c},\qquad\E[\min(\text{Exp}(\lambda),c)]=\frac{1-e^{-\lambda c}}\lambda​$$
+
+Finally un normalize
+$$p_i=\frac{\pi_i\mu_i}{\sum_k \pi_k\mu_k}$$
+
+### 5.7.3) Regenerative Analysis
+you need throughput, a blocking/rejection fraction, or an average delay in a system that isn't a clean birth-death CTMC (thresholds, timeouts, synchronized departures).
+
+Find the start of cycle
+Then decompose the cycle:
+Then compute
+Throughput: 
+$$E[\text{data sent per cycle}]/E[C]$$
+Rejection fraction: 
+$$E[\#\text{rejected per cycle}]/E[\#\text{offered per cycle}] $$ both share the same $\E[C]$, so it cancels; you only need the two expected counts. Note that for a Poisson arrival process with rate $\lambda$, $\mathbb{E}[\# \text{ offered per cycle}] = \lambda \mathbb{E}[C]$.
+
+Fraction of time empty: 
+$$E[\text{idle sub-phase}]/E[C]$$
+
+The avg delay is $E[T]=L/\lambda_{eff}$ with
+$$L = \frac{\mathbb{E}[\text{Accumulated customer-time in one cycle}]}{\mathbb{E}[\text{Cycle duration } C]}$$
+
+The numerator is the total area under the queue trajectory $N(t)$ during a single renewal cycle:
+
+$$\mathbb{E}\left[\int_0^C N(t) \, dt\right]$$
+and $$\lambda_{\text{eff}} = \lambda_{\text{offered}} \cdot (1 - P_{\text{loss}})$$
+or
+$$\lambda_{\text{eff}} = \frac{\mathbb{E}[\text{Number of admitted / served packets per cycle}]}{\mathbb{E}[\text{Cycle duration } C]}$$
 
 
 ## 5.8) Other stuff
