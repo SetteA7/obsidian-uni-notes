@@ -676,7 +676,7 @@ Let $\{X_n\}_{n \ge 1}$ be independent, identically distributed positive random 
 
 Then:
 
-$$\lim_{t \to \infty} \frac{\E[t]}{t} = \frac{1}{\mu}$$
+$$\lim_{t \to \infty} \frac{\E[N(t)]}{t} = \frac{1}{\mu}$$
 
 _(with $1/\mu = 0$ if $\mu = \infty$)_.
 
