@@ -943,6 +943,8 @@ P[\max(A,B)>t]&=P[A>t]+P[B>t]-P[\min(A,B)>t]\\
 Important difference:
 **"Per visit" / "Sojourn time" / "Holding time":** Conditioned on entering the state $\implies \mu_R = \gamma T$.
 **"Per cycle":** Unconditioned over the full loop, weighting the probability of entering the state $\implies E[T_R] = \alpha \gamma T$.
+
+$$E[T_{\text{between two events } i}] = \frac{E[\text{short cycle}]}{P_i}$$
 ### 5.7.1) Two ON/OFF Phases
 Let a system cycle between two phases of expected duration $T_1,T_2$ that produce $r_i$
 Probability to be in state $i$
