@@ -571,9 +571,7 @@ $$\lim_{N \to \infty} \frac{1}{N} \sum_{n=1}^N \sum_{j \in C} P_{ij}^{(n)} = \li
 
 Because the state space $S$ is finite, the class $C \subseteq S$ is finite ($\vert{}C\vert{} < \infty$). Therefore, the finite sum and the limit commute. Applying **b)** yields:
 $$\lim_{N \to \infty} \sum_{j \in C} \left( \frac{1}{N} \sum_{n=1}^N P_{ij}^{(n)} \right) = \sum_{j \in C} \left( \lim_{N \to \infty} \frac{1}{N} \sum_{n=1}^N P_{ij}^{(n)} \right) = \sum_{j \in C} 0 = 0$$
-which is a contraddiction.
-
-
+which is a contradiction.
 $\endproof$
 
 ### 4.11.1) Proof Bonus:
@@ -583,13 +581,16 @@ Prove that in a MC with a finite number of states, there must be at least one re
 
 Proof:
 We have already shown that in a finite MC there cannot be any null recurrent states.
-By contradiction suppose the chain does NOT have a (positive) recurrent state, then the chain will be solely made of transient states.
 
-A transient state has long run transition probability 0: $\lim_{n\rightarrow\infty}P_{ij}\iter n=0$
-But the chain must be in some state so $\sum_{j \in S} P_{ij}^{(n)} = 1$
-The limit again contradicts itself since
-$$\lim_{n \to \infty} \sum_{j \in S} P_{ij}^{(n)} = \sum_{j \in S} \left( \lim_{n \to \infty} P_{ij}^{(n)} \right)\longleftrightarrow1=0$$
+Suppose by contradiction that there are no recurrent states. Then every state $i \in C$ is transient.
+a) A transient state has a finite expected number of visits, and therefore since this infinite series converges, its terms must tend to zero:
+$$\sum_{n=1}^\infty P_{ij}\iter n<\infty\rightarrow \lim_{n\rightarrow\infty}P_{ij}\iter n=0\quad \forall\ i,j\in C$$
+b) Because the chain is finite, it must be in some state at step $n$, so 
+$$\sum_{j\in C}P_{ij}\iter n=1$$
 
+Because the state space $C$ is finite, the limit as $n \to \infty$ commutes with the summation:
+$$1 = \lim_{n \to \infty} \sum_{j \in C} P_{ij}^{(n)} = \sum_{j \in C} \left( \lim_{n \to \infty} P_{ij}^{(n)} \right)=0$$
+Therefore, there must exist at least one positive recurrent state.
 $\endproof$
 
 ## 4.12) Proof 12: Rehash of Proof  4, only infer past from future knowledge
