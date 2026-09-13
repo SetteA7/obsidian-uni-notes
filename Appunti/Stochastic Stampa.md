@@ -1,5 +1,10 @@
+# 1) Poisson Process
+For a single Poisson process $X(t) \sim \text{Poi}(\lambda t)$:
+$$P(X(t) = k) = \frac{(\lambda t)^k e^{-\lambda t}}{k!}, \quad \mathbb{E}[X(t)] = \lambda t, \quad \text{Var}(X(t)) = \lambda t$$
+If $X_1(t) \sim \text{Poi}(\lambda_1 t)$ and $X_2(t) \sim \text{Poi}(\lambda_2 t)$ are independent, their sum is:
+$$S(t) = X_1(t) + X_2(t) \sim \text{Poi}((\lambda_1 + \lambda_2)t)$$
 
-## 5.1) Poisson Process
+
 Definition of Poisson Process PP:
 $$X(t)\sim\text{Poi}(\lambda t)\implies\begin{align}
 &P[X(t)=k]=\frac{(\lambda t)^ke^{-\lambda t}}{k!}, \ k\geq 0\\
@@ -38,7 +43,7 @@ $$\begin{gather}P[X_1(3)-X_1(2)=2-k|X_1(2)-X_1(2)+X_2(2)=1-k]\\=P[X_1(1)=2-k|X_2
 The second becomes (its sum over all $k$ must be 1)
 $$\frac{P[X_1(2)=k,X_1(2)+X_2(2)=1]}{P[X_1(2)+X_2(2)=1]}=\frac{P[X_1(2)=k]P[X_2(2)=1-k]}{P[X_1(2)+X_2(2)=1]}$$
 
-## 5.2) Poisson Process Queues
+# 2) Poisson Process Queues
 In a queue we have the arrival distribution $A$ and service time $S$.
 Usually we have $A(t)\sim\text{Poi}(\lambda t)$ and $S$ either uniform, constant or exponentially distributed.
 
@@ -66,8 +71,8 @@ Most importantly, the constant service time case is a special case of the random
 
 Given $A(t) = k$, the arrival epochs are distributed as **order statistics of $k$ i.i.d. Uniform$(0, t)$ random variables**. The probability that an arrival at time $U \sim \text{Unif}(0, t)$ is still in service at $t$ is:
 $$p_t = \frac{1}{t} \int_0^t (1 - G(t - u)) \, du = \frac{\lambda_p(t)}{\lambda t}$$
-## 5.3) MC
-**Analysis of MC:**
+# 3) MC
+## 3.1) **Analysis of MC:**
 - Diagram
 - Classes
 - Recurrence/transience
@@ -75,7 +80,7 @@ $$p_t = \frac{1}{t} \int_0^t (1 - G(t - u)) \, du = \frac{\lambda_p(t)}{\lambda 
 
 ---
 
-**Probability absorption into class $a$:** 
+## 3.2) **Probability absorption into class $a$:** 
 If the transient state is only one ($|C_t|=1$): $P[\text{go to class }$a$]/P[\text{leave trans state}]$
 If the transient state is a class with $|C_t|>1$ then first step analysis is required:
 $$\begin{gather}
@@ -87,21 +92,21 @@ where the boundary condition is a direct result of the summation.
 
 ---
 
-**Compute Steady State Probabilities:**
+## 3.3) **Compute Steady State Probabilities:**
 For each irreducible**positive** recurrent class solve:
 $$\begin{cases}\pi_CP_C=\pi_C \\ \displaystyle\sum_{\pi_i\in\pi_C}\pi_i=1\end{cases}$$
 For each irreducible transient or negative recurrent class it is 0.
 
 ---
 
-**Compute Avg Recurrence Times:**
+## 3.4) **Compute Avg Recurrence Times:**
 For each irreducible **positive** recurrent class solve:
 $$m_i=\frac1{\pi_i}$$
 For each irreducible transient or negative recurrent class it is $\infty$. 
 
 ---
 
-**Avg Number of Visits starting from $a$**
+## 3.5) **Avg Number of Visits starting from $a$**
 Starting from $a$ inside a pos rec chain:
 $$
 W_{a\bullet}\iter n = \sum_{k=0}^{n-1}[P^k]_{a\bullet}\stackrel{n\rightarrow\infty}\approx n\pi_\bullet$$
@@ -127,7 +132,7 @@ $$k_i = \sum_{j \in \mathcal{T}} W_{ij}$$
 
 ---
 
-**Compute Mean and Variance of the first passage time to state $a$**
+## 3.6) **Compute Mean and Variance of the first passage time to state $a$**
 Let $k^a_i=\text{mean time to reach } a \text{ from }i$
 Do one system of this form for each required $a$
 Clearly $k_a^a=0$ however, for the final result consider $k^a_a=1/\pi_a$ 
@@ -142,7 +147,7 @@ $$\alpha_i-k_i^2$$
 
 ---
 
-**Computing $\lim_{n\rightarrow\infty}P^n$:**
+## 3.7) **Computing $\lim_{n\rightarrow\infty}P^n$:**
 - Doesn't exist for periodic classes "X"
 - Is null for transitions (from transient) into transient states
 - Doesn't exist for transitions (from transient) into periodic classes "X"
@@ -156,7 +161,7 @@ $$P(\text{absorbed in }C_i)\cdot\pi_n\qquad\text{ for all entries}$$
 
 ---
 
-**Computing $\lim_{n\rightarrow\infty}\frac1n\sum_{k=1}^nP^k$:**
+## 3.8) **Computing $\lim_{n\rightarrow\infty}\frac1n\sum_{k=1}^nP^k$:**
 - Exists _always_
 - If standard limit exists, it is equal to it
 
@@ -176,17 +181,17 @@ For For transitions (from transient) to pos recurrent periodic it is the abs pro
 
 ---
 
-**Mean recurrence time (avg return times)**
+## 3.9) **Mean recurrence time (avg return times)**
 For pos recurrent state $\mu_i=1/\pi_i$
 For transient or neg rec states $\mu_i=\infty$
-## 5.4) First Step Analysis
+# 4) First Step Analysis
 General formula:
 $$W_{\textcolor{yellow}i\textcolor{red}j} = \mathbb{I}\{\textcolor{yellow}i = \textcolor{red}j\} + \sum_\textcolor{blue}k P_{\textcolor{yellow}i\textcolor{blue}k} W_{\textcolor{blue}k\textcolor{red}j}$$
 This is used for
 - avg visits
 - passage times
 
-## 5.5) GBN
+# 5) GBN
 If $P$ is known, then also $\pi_G,\pi_B$ are known by solving $\pi=\pi P$ with $\pi_G+\pi_B=1$.
 If $\pi_G,\pi_B$ is known $P$ cannot be calculated. If also $\E[\text{consecutive good/bad slots}]$ is known (one of the two) then 
 $$p_{GB}=\frac1{\E[\text{consec good}]}\qquad p_{BG}=\frac1{\E[\text{consec bad}]}$$
@@ -207,7 +212,7 @@ $$\eta=\frac{P_{10}\iter m}{P_{10}\iter m+mP_{01}}=\frac{P_{BG}\iter m}{P_{BG}\i
 $$\eta=\frac{(1-\delta)P_{BG}\iter m}{(1+(m-1)\delta)P_{BG}\iter m+m((1-\delta)P_{GB}+\delta P_{GB}\iter m)}$$
 If iid errors on both feedback and forward then use the last provided formula by recalling $P_{BG}\iter 2=P_{BG}=1-\epsilon$ since iid and $P_{GB}=\epsilon$
 
-## 5.6) Min/Max of two distributions
+# 6) Min/Max of two distributions
 Let $A,B$ be two non negative independent rvs, then define $W=\min(A,B)$
 $$W=\min(A,B)>t\iff A>t\ \cap\ B>t\longrightarrow
 P[W>t]= P[A>t] P[B>t]$$
@@ -245,14 +250,14 @@ $$\begin{align}
 P[\max(A,B)>t]&=P[A>t]+P[B>t]-P[\min(A,B)>t]\\
 &=P[A>t]+P[B>t]-P[A>t]P[B>t]\end{align}$$
 
-## 5.7) Renewal Reward
+# 7) Renewal Reward
 
 Important difference:
 **"Per visit" / "Sojourn time" / "Holding time":** Conditioned on entering the state $\implies \mu_R = \gamma T$.
 **"Per cycle":** Unconditioned over the full loop, weighting the probability of entering the state $\implies E[T_R] = \alpha \gamma T$.
 
 $$E[T_{\text{between two events } i}] = \frac{E[\text{short cycle}]}{P_i}$$
-### 5.7.1) Two ON/OFF Phases
+## 7.1) Two ON/OFF Phases
 Let a system cycle between two phases of expected duration $T_1,T_2$ that produce $r_i$
 Probability to be in state $i$
 $$p_i=\frac{\E[T_i]}{\E[T_1]+\E[T_2]}$$
@@ -262,7 +267,7 @@ If there are multiple independent processes with ON/OFF phases then
 Find $p_i,\eta_i$ for every process
 then 
 $$\eta = \sum_{k=0}^n P(k \text{ are working}) \cdot r(k)$$
-### 5.7.2) Semi Markov Process
+## 7.2) Semi Markov Process
 $\geq 3$ states, the _order_ of visits is random (governed by probabilities, not a fixed cycle), and/or a state has **competing exit clocks**.
 
 First find embedded matrix, then find $\pi_i$
@@ -279,7 +284,7 @@ $$P[\text{Exp}(\lambda)<c]=1-e^{-\lambda c},\qquad\E[\min(\text{Exp}(\lambda),c)
 Finally un normalize
 $$p_i=\frac{\pi_i\mu_i}{\sum_k \pi_k\mu_k}$$
 
-### 5.7.3) Regenerative Analysis
+## 7.3) Regenerative Analysis
 you need throughput, a blocking/rejection fraction, or an average delay in a system that isn't a clean birth-death CTMC (thresholds, timeouts, synchronized departures).
 
 Find the start of cycle
@@ -302,8 +307,8 @@ $$\lambda_{\text{eff}} = \frac{\mathbb{E}[\text{admitted packets per cycle}]}{\m
 $$\mathbb{E}[T] = \frac{L}{\lambda_{\text{eff}}} = \frac{\mathbb{E}\left[\int_0^C N(t) \, dt\right]}{\mathbb{E}[\text{admitted packets per cycle}]}$$
 
 
-## 5.8) Other stuff
-### 5.8.1) Independent and Identically Distributed (i.i.d.)
+# 8) Other stuff
+## 8.1) Independent and Identically Distributed (i.i.d.)
 If every process has the same success probability $p_i = p$, the total number of operational processes follows a standard **Binomial distribution**, $K \sim \text{Binomial}(n, p)$:
 **Probability that exactly $k$ processes are working:**
 $$P(K = k) = \binom{n}{k} p^k (1 - p)^{n - k}, \quad k \in \{0, 1, \dots, n\}$$
@@ -314,14 +319,14 @@ $$P(K = 1) = n p (1 - p)^{n - 1}$$
 **At least one is working:**
 $$P(K \ge 1) = 1 - P(K = 0) = 1 - (1 - p)^n$$
 
-### 5.8.2) CSMA/Slotted Aloha
+## 8.2) CSMA/Slotted Aloha
 If each successful transmission brings gain $G$ and each blocked/failed attempt costs $C$:
 - Total attempts rate = $\lambda_{\text{total}}$.
 - Success rate = $\lambda_{\text{succ}} = \lambda_{\text{new}}$ (if all packets eventually succeed).
 - Failure rate = $\lambda_{\text{total}} - \lambda_{\text{succ}}$.
 - Net utility rate:
 $$\text{Gain Rate} = G \cdot \lambda_{\text{succ}} - C \cdot (\lambda_{\text{total}} - \lambda_{\text{succ}})$$
-### 5.8.3) Example of Avg visits
+## 8.3) Example of Avg visits
 $$P = \begin{pmatrix} P_{00} & P_{01} & P_{02} \\ P_{10} & P_{11} & P_{12} \\ 0 & 0 & 1 \end{pmatrix}$$
 $$W_{ij}^{(\infty)} = \delta_{ij} + \sum_{k \in \mathcal{T}} P_{ik} W_{kj}^{(\infty)}$$
 $j=0$
