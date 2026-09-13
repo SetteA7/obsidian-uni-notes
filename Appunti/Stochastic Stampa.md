@@ -171,7 +171,7 @@ For transient or neg rec states $\mu_i=\infty$
 If $P$ is known, then also $\pi_G,\pi_B$ are known by solving $\pi=\pi P$ with $\pi_G+\pi_B=1$.
 If $\pi_G,\pi_B$ is known $P$ cannot be calculated. If also $\E[\text{consecutive good/bad slots}]$ is known (one of the two) then 
 $$p_{GB}=\frac1{\E[\text{consec good}]}\qquad p_{BG}=\frac1{\E[\text{consec bad}]}$$
-From here a parametric $P$ can be defined and by solving $\pi=P\pi$ with $a+b=1$ as an additional condition the whole $P$ is found.
+From here a parametric $P$ can be defined and by solving $\pi=\pi P$ with $a+b=1$ as an additional condition the whole $P$ is found.
 If both are known it is directly found by recalling that each row $=1$.
 
 If the throughput of no protocol is asked:
@@ -227,8 +227,7 @@ P[\max(A,B)>t]&=P[A>t]+P[B>t]-P[\min(A,B)>t]\\
 &=P[A>t]+P[B>t]-P[A>t]P[B>t]\end{align}$$
 
 # 6) Renewal Reward
-
-Important difference:
+Important stuff:
 **"Per visit" / "Sojourn time" / "Holding time":** Conditioned on entering the state $\implies \mu_R = \gamma T$.
 **"Per cycle":** Unconditioned over the full loop, weighting the probability of entering the state $\implies E[T_R] = \alpha \gamma T$.
 
@@ -282,7 +281,6 @@ $$\lambda_{\text{eff}} = \frac{\mathbb{E}[\text{admitted packets per cycle}]}{\m
 
 $$\mathbb{E}[T] = \frac{L}{\lambda_{\text{eff}}} = \frac{\mathbb{E}\left[\int_0^C N(t) \, dt\right]}{\mathbb{E}[\text{admitted packets per cycle}]}$$
 
-
 # 7) Other stuff
 ## 7.1) Independent and Identically Distributed (i.i.d.)
 If every process has the same success probability $p_i = p$, the total number of operational processes follows a standard **Binomial distribution**, $K \sim \text{Binomial}(n, p)$:
@@ -297,11 +295,16 @@ $$P(K \ge 1) = 1 - P(K = 0) = 1 - (1 - p)^n$$
 
 ## 7.2) CSMA/Slotted Aloha
 If each successful transmission brings gain $G$ and each blocked/failed attempt costs $C$:
+- Packet duration ($T_x$):
+
+$$T_x = \frac{\text{Packet length}}{\text{Capacity}}$$
 - Total attempts rate = $\lambda_{\text{total}}$.
 - Success rate = $\lambda_{\text{succ}} = \lambda_{\text{new}}$ (if all packets eventually succeed).
+$$\lambda_{\text{succ}} = \frac{1}{\frac{1}{\lambda_{\text{total}}} + T_x} = \frac{\lambda_{\text{total}}}{1 + \lambda_{\text{total}} T_x}$$
 - Failure rate = $\lambda_{\text{total}} - \lambda_{\text{succ}}$.
 - Net utility rate:
 $$\text{Gain Rate} = G \cdot \lambda_{\text{succ}} - C \cdot (\lambda_{\text{total}} - \lambda_{\text{succ}})$$
+$$\mathbb{E}[\text{Access Delay}] = \left(\frac{\lambda_{\text{total}}}{\lambda_{\text{succ}}} - 1\right) \cdot \mathbb{E}[T_{\text{backoff}}]$$
 ## 7.3) Example of Avg visits
 $$P = \begin{pmatrix} P_{00} & P_{01} & P_{02} \\ P_{10} & P_{11} & P_{12} \\ 0 & 0 & 1 \end{pmatrix}$$
 $$W_{ij}^{(\infty)} = \delta_{ij} + \sum_{k \in \mathcal{T}} P_{ik} W_{kj}^{(\infty)}$$
@@ -351,3 +354,14 @@ $$P(X_1 = a, X_3 = c \mid X_2 = b)  = \frac{P(X_1 = a) P_{ab} P_{bc}}{P(X_2 = b)
 To find the probability of being in an intermediate state $X_2 = b$ given known endpoints $X_1 = a$ and $X_3 = c$:
 $$P(X_2 = b \mid X_1 = a, X_3 = c) = \frac{P_{ab} P_{bc}}{[P^2]_{ac}}$$
  _(the denominator has $[P^2]_{ac} = \sum_k P_{ak} P_{kc}$ which is the entry $a,c$ of $P^2$)_
+
+## 7.6) Two Servers
+- **Single-Server Probability:**
+$$p_{\text{off}} = \frac{T}{\frac{1}{\lambda_{\text{eff}}} + T}, \quad p_{\text{on}} = 1 - p_{\text{off}} \quad (\lambda_{\text{eff}} = \lambda \cdot p_{\text{effective}})$$    
+- **System DOWN (Both Off):**
+$$P(\text{DOWN}) = p_{\text{off}}^2$$
+$$\mathbb{E}[T_{\text{DOWN}}] = \mathbb{E}[\min(\text{Exp}(1/T), \text{Exp}(1/T))] = \frac{T}{2}$$
+- **System UP (At Least One Working):**
+$$\mathbb{E}[T_{\text{UP}}] = \mathbb{E}[T_{\text{DOWN}}] \cdot \frac{1 - P(\text{DOWN})}{P(\text{DOWN})} = \frac{T}{2} \left(\frac{1 - p_{\text{off}}^2}{p_{\text{off}}^2}\right)$$
+- **Average Streaming Rate:**
+$$\mathbb{E}[\text{Rate}] = 2(1 - p_{\text{off}}) R$$
