@@ -441,6 +441,13 @@ Let:
 
 Define $A(t) = \mathbb{E}[S_{N(t)+1}]$. Then:
 $$A(t) = \mathbb{E}[X_1]\big(M(t) + 1\big).$$
+Since 
+$$\begin{aligned} \mathbb{E}[S_{N(t)+1}] &= \sum_{i=1}^\infty \mathbb{E}\big[X_i \, \mathbf{1}_{\{N(t)+1 \ge i\}}\big] \\
+&=\sum_{i=1}^\infty \E[X_i]\\
+&= \sum_{i=1}^\infty \mathbb{E}[X_i] \, \mathbb{P}(N(t) + 1 \ge i) \quad \text{(by independence)} \\ 
+&= \mathbb{E}[X_1] \sum_{i=1}^\infty \mathbb{P}(N(t) + 1 \ge i) \end{aligned}$$
+
+
 Using the renewal argument (first step analysis) we have
 $$\E[S_{N(t)+1}|X_1=x]=\begin{cases}
 x & \text{if } x>t \text{ (no renewal yet)}\\
@@ -476,6 +483,17 @@ Let $M(t) = \mathbb{E}[N(t)]$ be the renewal function. Then:
 $$\lim_{t \to \infty} \frac{M(t)}{t} = \frac{1}{\mu}$$
 
 _(where $1/\mu$ is interpreted as $0$ if $\mu = \infty$)._
+
+Proof:
+By definition of $N(t)$, the $N(t)$-th renewal occurs on or before $t$, and the $(N(t)+1)$-th renewal occurs strictly after $t$:
+$$S_{N(t)} \le t < S_{N(t)+1}$$
+Dividing through by $N(t)$ for $t$ large enough such that $N(t) \ge 1$:
+$$\frac{S_{N(t)}}{N(t)} \le \frac{t}{N(t)} < \frac{S_{N(t)+1}}{N(t)+1} \cdot \frac{N(t)+1}{N(t)}$$
+By the SLLN, $\lim_{n \to \infty} \frac{S_n}{n} = \mu$ therefore 
+$$\lim_{t \to \infty} \frac{N(t)}{t} = \frac{1}{\mu} \quad \text{a.s.}$$
+
+Fatou's Lemma can be directly applied to find the lower bound:
+$$\liminf_{t \to \infty} \frac{\E[N(t)]}{t} = \liminf_{t \to \infty} \mathbb{E}\left[\frac{N(t)}{t}\right] \ge \mathbb{E}\left[\liminf_{t \to \infty} \frac{N(t)}{t}\right]=\frac1\mu$$
 
 ## 4.9) Proof 9: Rehash of Proof 5
 Prove that in a Markov Chain the period is a class property, see [Proof 5](#^0524e9).
@@ -595,6 +613,7 @@ The second is distributed as $\text{Poisson}(\lambda(n-k))$ so $P[X(t)-X(s)=n-k]
 Finally put everything together, do some algebraic manipulations and you get
 $$X(s)|X(t)=n\sim\text{Binomial}(n,\frac st)\qquad p=\binom nk\par{\frac st}^k\par{1-\frac st}^{n-k}$$
 $\endproof$
+
 ## 4.13) Proof 13: N-Step Probability Expression
 Prove that for a Markov chain the n-step transition probabilities $P_{ij}\iter n$ satisfy the relationship
 $$P_{ij}\iter n=\sum_{m}P_{im}\iter kP_{mj}\iter{n-k}$$
@@ -612,7 +631,7 @@ P_{ij}\iter n&=P[X_n=j|X_0=i]\\
 
 $\endproof$
 
-## 4.14) Proof 14: Define Recurrent States
+## 4.14) ! Proof 14: Define Recurrent States
 Give the definition of a recurrent state and show that a state is recurrent if and only if
 $$\sum_{n=1}^\infty P_{ii}\iter n=\infty$$
 
@@ -667,29 +686,6 @@ Equivalently, there is a strictly positive probability $(1 - f_{ii}) > 0$ that t
 Proof:
 Same as before, but now since $f_{ii}<1$ we have
 $$\sum_{n=1}^\infty P_{ii}\iter n=\sum_{k=1}^\infty (f_{ii})^k=\frac{f_{ii}}{1-f_{ii}}<\infty$$
-
-## 4.16) Elementary renewal Theorem TODO
-State and prove the elementary renewal theorem.
-
-Answer:
-Let $\{X_n\}_{n \ge 1}$ be independent, identically distributed positive random variables with finite or infinite mean $\mu = \mathbb{E}[X_1] \in (0, \infty]$. Let $N(t)$ be the renewal counting process, that is the cumulative sum of arrivals up to time $t$
-
-Then:
-
-$$\lim_{t \to \infty} \frac{\E[N(t)]}{t} = \frac{1}{\mu}$$
-
-_(with $1/\mu = 0$ if $\mu = \infty$)_.
-
-Proof:
-By definition of $N(t)$, the $N(t)$-th renewal occurs on or before $t$, and the $(N(t)+1)$-th renewal occurs strictly after $t$:
-$$S_{N(t)} \le t < S_{N(t)+1}$$
-Dividing through by $N(t)$ for $t$ large enough such that $N(t) \ge 1$:
-$$\frac{S_{N(t)}}{N(t)} \le \frac{t}{N(t)} < \frac{S_{N(t)+1}}{N(t)+1} \cdot \frac{N(t)+1}{N(t)}$$
-By the SLLN, $\lim_{n \to \infty} \frac{S_n}{n} = \mu$ therefore 
-$$\lim_{t \to \infty} \frac{N(t)}{t} = \frac{1}{\mu} \quad \text{a.s.}$$
-
-Fatou's Lemma can be directly applied to find the lower bound:
-$$\liminf_{t \to \infty} \frac{\E[N(t)]}{t} = \liminf_{t \to \infty} \mathbb{E}\left[\frac{N(t)}{t}\right] \ge \mathbb{E}\left[\liminf_{t \to \infty} \frac{N(t)}{t}\right]=\frac1\mu$$
 
 
 # 5) Exercises
