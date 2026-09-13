@@ -939,6 +939,10 @@ P[\max(A,B)>t]&=P[A>t]+P[B>t]-P[\min(A,B)>t]\\
 &=P[A>t]+P[B>t]-P[A>t]P[B>t]\end{align}$$
 
 ## 5.7) Renewal Reward
+
+Important difference:
+**"Per visit" / "Sojourn time" / "Holding time":** Conditioned on entering the state $\implies \mu_R = \gamma T$.
+**"Per cycle":** Unconditioned over the full loop, weighting the probability of entering the state $\implies E[T_R] = \alpha \gamma T$.
 ### 5.7.1) Two ON/OFF Phases
 Let a system cycle between two phases of expected duration $T_1,T_2$ that produce $r_i$
 Probability to be in state $i$
@@ -948,14 +952,15 @@ $$\eta=r_1p_1+r_2p_2$$
 If there are multiple independent processes with ON/OFF phases then
 Find $p_i,\eta_i$ for every process
 then 
-$$\eta=\sum_i P[\text{i are woking}]\cdot r_{\text{i working}}$$
+$$\eta = \sum_{k=0}^n P(k \text{ are working}) \cdot r(k)$$
 ### 5.7.2) Semi Markov Process
 $\geq 3$ states, the _order_ of visits is random (governed by probabilities, not a fixed cycle), and/or a state has **competing exit clocks**.
 
 First find embedded matrix, then find $\pi_i$
 Then the mean times:
 - Single exit clock: 
-$$\mu_i=E[T_i]$$
+$$\mu_i=E[T_i]=\sum_j P_{ij} \tau_{ij}$$
+where $\tau_{ij} = \mathbb{E}[\text{time in state } i \mid \text{next state is } j]$.
 - Competing exponential clocks:
 $$P[T_1<T_2]=\frac{\lambda_1}{\lambda_1+\lambda_2}\qquad\min\sim\text{Exp}[\lambda_1+\lambda_2]$$
 
@@ -979,15 +984,13 @@ $$E[\#\text{rejected per cycle}]/E[\#\text{offered per cycle}] $$ both share the
 Fraction of time empty: 
 $$E[\text{idle sub-phase}]/E[C]$$
 
-The avg delay is $E[T]=L/\lambda_{eff}$ with
-$$L = \frac{\mathbb{E}[\text{Accumulated customer-time in one cycle}]}{\mathbb{E}[\text{Cycle duration } C]}$$
+**Average Delay ($\mathbb{E}[T]$):**
 
-The numerator is the total area under the queue trajectory $N(t)$ during a single renewal cycle:
+$$L = \frac{\mathbb{E}\left[\int_0^C N(t) \, dt\right]}{\mathbb{E}[C]}$$
 
-$$\mathbb{E}\left[\int_0^C N(t) \, dt\right]$$
-and $$\lambda_{\text{eff}} = \lambda_{\text{offered}} \cdot (1 - P_{\text{loss}})$$
-or
-$$\lambda_{\text{eff}} = \frac{\mathbb{E}[\text{Number of admitted / served packets per cycle}]}{\mathbb{E}[\text{Cycle duration } C]}$$
+$$\lambda_{\text{eff}} = \frac{\mathbb{E}[\text{admitted packets per cycle}]}{\mathbb{E}[C]}$$
+
+$$\mathbb{E}[T] = \frac{L}{\lambda_{\text{eff}}} = \frac{\mathbb{E}\left[\int_0^C N(t) \, dt\right]}{\mathbb{E}[\text{admitted packets per cycle}]}$$
 
 
 ## 5.8) Other stuff
@@ -1001,3 +1004,18 @@ $$P(K = 0) = (1 - p)^n$$
 $$P(K = 1) = n p (1 - p)^{n - 1}$$
 **At least one is working:**
 $$P(K \ge 1) = 1 - P(K = 0) = 1 - (1 - p)^n$$
+
+### 5.8.2) CSMA/Slotted Aloha
+If each successful transmission brings gain $G$ and each blocked/failed attempt costs $C$:
+- Total attempts rate = $\lambda_{\text{total}}$.
+- Success rate = $\lambda_{\text{succ}} = \lambda_{\text{new}}$ (if all packets eventually succeed).
+- Failure rate = $\lambda_{\text{total}} - \lambda_{\text{succ}}$.
+- Net utility rate:
+$$\text{Gain Rate} = G \cdot \lambda_{\text{succ}} - C \cdot (\lambda_{\text{total}} - \lambda_{\text{succ}})$$
+### 5.8.3) Example of Avg visits
+$$P = \begin{pmatrix} P_{00} & P_{01} & P_{02} \\ P_{10} & P_{11} & P_{12} \\ 0 & 0 & 1 \end{pmatrix}$$
+$$W_{ij}^{(\infty)} = \delta_{ij} + \sum_{k \in \mathcal{T}} P_{ik} W_{kj}^{(\infty)}$$
+$j=0$
+$$\begin{cases} W_{00}^{(\infty)} = 1 + P_{00} W_{00}^{(\infty)} + P_{01} W_{10}^{(\infty)} \\ W_{10}^{(\infty)} = 0 + P_{10} W_{00}^{(\infty)} + P_{11} W_{10}^{(\infty)} \end{cases}$$
+$j=1$
+$$\begin{cases} W_{01}^{(\infty)} = 0 + P_{00} W_{01}^{(\infty)} + P_{01} W_{11}^{(\infty)} \\ W_{11}^{(\infty)} = 1 + P_{10} W_{01}^{(\infty)} + P_{11} W_{11}^{(\infty)} \end{cases}$$
