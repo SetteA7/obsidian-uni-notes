@@ -669,6 +669,7 @@ But this can also be rewritten using the tail sum formula ($\E[X]=\sum_{n=1}^\in
 $$\E[M_i|X_0=i]=\sum_{k=1}^\infty P[M_i\geq k|X_0=i]=\sum_{k=1}^\infty (f_{ii})^k$$
 These expressions are equal, so we have
 $$\sum_{n=1}^\infty P_{ii}\iter n=\sum_{k=1}^\infty (f_{ii})^k=\infty$$
+
 ## 4.15) Proof 15: Define Transient States
 Give the definition of a transient state and show that a state is transient if and only if
 $$\sum_{n=1}^\infty P_{ii}\iter n<\infty$$
@@ -936,3 +937,30 @@ So the distribution of max can be found by finding the distribution of min:
 $$\begin{align}
 P[\max(A,B)>t]&=P[A>t]+P[B>t]-P[\min(A,B)>t]\\
 &=P[A>t]+P[B>t]-P[A>t]P[B>t]\end{align}$$
+
+## 5.7) Renewal Reward
+### 5.7.1) Two ON/OFF Phases
+Let a system cycle between two phases of expected duration $T_1,T_2$ that produce $r_i$
+Probability to be in state $i$
+$$p_i=\frac{\E[T_i]}{\E[T_1]+\E[T_2]}$$
+Rate:
+$$\eta=r_1p_!+r_2p_2$$
+If there are multiple independent processes with ON/OFF phases then
+Find $p_i,\eta_i$ for every process
+then 
+$$\eta=\sum_i P[\text{i are woking}]\cdot r_{\text{i working}}$$
+### 5.7.2) Semi Markov Process
+$\geq 3$ states, the _order_ of visits is random (governed by probabilities, not a fixed cycle), and/or a state has **competing exit clocks**.
+
+
+## 5.8) Other stuff
+### 5.8.1) Independent and Identically Distributed (i.i.d.)
+If every process has the same success probability $p_i = p$, the total number of operational processes follows a standard **Binomial distribution**, $K \sim \text{Binomial}(n, p)$:
+**Probability that exactly $k$ processes are working:**
+$$P(K = k) = \binom{n}{k} p^k (1 - p)^{n - k}, \quad k \in \{0, 1, \dots, n\}$$
+**All $n$ are working ($k = n$):**   $$P(K = n) = p^n$$**All $n$ are off ($k = 0$):**
+$$P(K = 0) = (1 - p)^n$$
+**Exactly one is working ($k = 1$):**   
+$$P(K = 1) = n p (1 - p)^{n - 1}$$
+**At least one is working:**
+$$P(K \ge 1) = 1 - P(K = 0) = 1 - (1 - p)^n$$
