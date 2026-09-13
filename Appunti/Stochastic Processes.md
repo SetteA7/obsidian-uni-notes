@@ -647,26 +647,28 @@ Let $M_i$ be the total number of returns to state $i$ over $n$ steps:
 $$M_i=\sum_{n=1}^\infty u_{X_n=i}$$
 where $u_{X_n=i}$ is a counter switch (1 if $X_n=i$)
 
-Now consider the following
+First consider these two preliminary results:
+a) 
 $$\begin{gather}\E[u_{X_n=i}]=1\cdot P[X_n=i]+0\cdot P[x_n\not =i]=P[X_n=i]\\  \\
 \E[u_{X_n=i}|X_0=i]=P[X_n=i|X_0=i]\longrightarrow P_{ii}\iter n
 \end{gather}$$
+b) For $k=1$ by definition:
+$$\begin{align}
+\mathbb{P}(M_i \ge 1 \mid X_0 = i) &= \mathbb{P}(\text{chain returns to } i \text{ at least } 1 \text{ time} \mid X_0 = i) \\
+&= \mathbb{P}(T_i^{(1)} < \infty \mid X_0 = i) \\
+&= f_{ii}
+\end{align}$$
+General case by induction
+$$\begin{aligned} \mathbb{P}(M_i \ge k \mid X_0 = i) &= \mathbb{P}(M_i \ge k-1 \mid X_0 = i) \cdot \mathbb{P}(M_i \ge k \mid M_i \ge k-1, X_0 = i) \\
+&= \mathbb{P}(M_i \ge k-1 \mid X_0 = i) \cdot \mathbb{P}(M_i \ge 1 \mid  X_0 = i) \\
+&= \mathbb{P}(M_i \ge k-1 \mid X_0 = i) \cdot f_{ii}\\ &= (f_{ii})^{k-1} \cdot f_{ii} \\ &= (f_{ii})^k \end{aligned}$$
 
-The expectance of $M_i$ starting from $i$ is then
+The expectance of $M_i$ starting from $i$ using a)
 $$\E[M_i|X_0=i]=\E[\sum_{n=1}^\infty u_{X_n=i}|X_0=i]=\sum_{n=1}^\infty \E[u_{X_n=i}|X_0=i]=\sum_{n=1}^\infty P_{ii}\iter n$$
-But this can also be rewritten as
-
-Using the tail sum formula ($\E[X]=\sum_{n=1}^\infty P(X\geq n)$) we also have
-$$\E[M_i|X_0=i]=\sum_{k=1}^\infty P[M_i\geq k|X_0=i]=\sum_{k=1}^\infty (f_{ii})^k=\infty$$
-Where the last step is done with the strong markov property:
-For $k=1$
-$$\mathbb{P}(M_i \ge 1 \mid X_0 = i) = \mathbb{P}(\text{chain returns to } i \text{ at least } 1 \text{ time} \mid X_0 = i) = f_{ii}$$
-General case
-$$\mathbb{P}(M_i \ge k \mid X_0 = i) = \mathbb{P}(M_i \ge k-1 \mid X_0 = i) \cdot f_{ii} = (f_{ii})^{k-1} \cdot f_{ii} = (f_{ii})^k$$
-
+But this can also be rewritten using the tail sum formula ($\E[X]=\sum_{n=1}^\infty P(X\geq n)$) using b)
+$$\E[M_i|X_0=i]=\sum_{k=1}^\infty P[M_i\geq k|X_0=i]=\sum_{k=1}^\infty (f_{ii})^k$$
 These expressions are equal, so we have
 $$\sum_{n=1}^\infty P_{ii}\iter n=\sum_{k=1}^\infty (f_{ii})^k=\infty$$
-
 ## 4.15) Proof 15: Define Transient States
 Give the definition of a transient state and show that a state is transient if and only if
 $$\sum_{n=1}^\infty P_{ii}\iter n<\infty$$
