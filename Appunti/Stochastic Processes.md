@@ -536,7 +536,7 @@ $$\pi_0+\frac{\pi_0}q\sum_{i=0}^\infty \par{\frac pq}^i=1\rightarrow \pi_0 \left
 And finally 
 $$\pi_n=\ ...$$
 
-## 4.11) Proof 11: Finite MC existence conditions of states
+## 4.11) ! Proof 11: Finite MC existence conditions of states
 Prove that a Markov chain with a finite number of states cannot have any null recurrent state
 
 ---
