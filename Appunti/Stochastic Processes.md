@@ -717,6 +717,11 @@ Total distribution is used
 This total probability formula is useful:
 $$P(E \mid C) = \sum_{k \in \mathcal{K}} P(E \mid B_k \cap C) \cdot P(B_k \mid C)$$
 Practical example:
+$$\begin{align}P[X_1(3) = 2 \mid X_1(2) + X_2(2) = 1] &=
+\sum_{k=0}^1P[X_1(3)=2, X_1(2)=k|X_1(2)+X_2(2)=2]\\
+&=\sum_k \frac{P[X_1(3)=2, X_1(2)=k|X_1(2)+X_2(2)=2]}{}\\
+&= \sum_{k=0}^{1} P[X_1(3) = 2 \mid X_1(2) = k, \, X_1(2) + X_2(2) = 1] \cdot P[X_1(2) = k \mid X_1(2) + X_2(2) = 1]\end{align}$$
+
 $$\begin{gather}P[X_1(3) = 2 \mid X_1(2) + X_2(2) = 1] =\\= \sum_{k=0}^{1} P[X_1(3) = 2 \mid X_1(2) = k, \, X_1(2) + X_2(2) = 1] \cdot P[X_1(2) = k \mid X_1(2) + X_2(2) = 1]\end{gather}$$
 
 ## 5.2) Poisson Process Queues
