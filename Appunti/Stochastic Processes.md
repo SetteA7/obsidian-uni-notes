@@ -643,19 +643,18 @@ $$f_{ii} = \mathbb{P}(T_i < \infty \mid X_0 = i) = 1$$
 where $T_i = \min\{n \ge 1 : X_n = i\}$ is the first return time to state $i$.
 
 Proof:
-Let $M_i$ be the total number of visits to state $i$ over $n$ steps:
+Let $M_i$ be the total number of returns to state $i$ over $n$ steps:
 $$M_i=\sum_{n=1}^\infty u_{X_n=i}$$
 where $u_{X_n=i}$ is a counter switch (1 if $X_n=i$)
 
-The expectance of $M_i$ starting from $i$ is then
-$$\E[M_i|X_0=i]=\E[\sum_{n=1}^\infty u_{X_n=i}|X_0=i]=\sum_{n=1}^\infty \E[u_{X_n=i}|X_0=i]=\sum_{n=1}^\infty P_{ii}\iter n$$
-The last step is done with the following reasoning:
-Notice that
+Now consider the following
 $$\begin{gather}\E[u_{X_n=i}]=1\cdot P[X_n=i]+0\cdot P[x_n\not =i]=P[X_n=i]\\  \\
 \E[u_{X_n=i}|X_0=i]=P[X_n=i|X_0=i]\longrightarrow P_{ii}\iter n
 \end{gather}$$
-so the term becomes the definition of $P_{ii}\iter n$
 
+The expectance of $M_i$ starting from $i$ is then
+$$\E[M_i|X_0=i]=\E[\sum_{n=1}^\infty u_{X_n=i}|X_0=i]=\sum_{n=1}^\infty \E[u_{X_n=i}|X_0=i]=\sum_{n=1}^\infty P_{ii}\iter n$$
+But this can also be rewritten as
 
 Using the tail sum formula ($\E[X]=\sum_{n=1}^\infty P(X\geq n)$) we also have
 $$\E[M_i|X_0=i]=\sum_{k=1}^\infty P[M_i\geq k|X_0=i]=\sum_{k=1}^\infty (f_{ii})^k=\infty$$
