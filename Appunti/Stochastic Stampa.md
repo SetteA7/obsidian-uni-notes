@@ -319,8 +319,8 @@ $$\frac{P(X(s) = k, \, X(t) - X(s) = n - k)}{P(X(t) = n)} = \frac{\frac{(\lambda
 **Single Process — Conditioning on the Past ($s < t$)**
 Conditioning on the past uses the independent increments property directly:
 $$P(X(t) = n \mid X(s) = k) = P(X(t) - X(s) = n - k) \quad (n \ge k)$$
-$$X(t) \mid \{X(s) = k\} \stackrel{d}{=} k + \text{Poi}(\lambda(t - s))$$
-$$P(X(t) = n \mid X(s) = k) = \frac{(\lambda (t - s))^{n - k} e^{-\lambda (t - s)}}{(n - k)!}, \quad n \ge k$$
+$$X(t) \mid \{X(s) = k\} \stackrel{d}{=} k + \text{Poi}(\lambda(t - s))=Y$$
+$$P(X(t) = n \mid X(s) = k) = P[Y=n-k]=\frac{(\lambda (t - s))^{n - k} e^{-\lambda (t - s)}}{(n - k)!}, \quad n \ge k$$
 _(If $n < k$, the probability is identically $0$ since Poisson counts are non-decreasing)._
 
 ---
@@ -342,3 +342,12 @@ $$X_1(t_2) \mid \{X_1(t_1) + X_2(t_1) = n\} \stackrel{d}{=} K + Y$$
    - $K \perp Y$ (due to non-overlapping time windows)    
 - **Analytical Formula (Sum over $k$):**
 $$P\big(X_1(t_2) = m \;\big\vert{}\; X_1(t_1) + X_2(t_1) = n\big) = \sum_{k=0}^{\min(m, n)} \binom{n}{k} \left(\frac{\lambda_1}{\lambda_1 + \lambda_2}\right)^k \left(\frac{\lambda_2}{\lambda_1 + \lambda_2}\right)^{n - k} \cdot \frac{(\lambda_1(t_2 - t_1))^{m - k} e^{-\lambda_1(t_2 - t_1)}}{(m - k)!}$$
+
+## 7.5) MC
+**Conditioning on the Present (Split Past & Future)**
+When conditioning on the present state $X_2 = b$, the past $X_1$ and future $X_3$ become conditionally independent:
+$$P(X_1 = a, X_3 = c \mid X_2 = b)  = \frac{P(X_1 = a) P_{ab} P_{bc}}{P(X_2 = b)}$$
+**Smoothing (Conditioned on Past & Future)**
+To find the probability of being in an intermediate state $X_2 = b$ given known endpoints $X_1 = a$ and $X_3 = c$:
+$$P(X_2 = b \mid X_1 = a, X_3 = c) = \frac{P_{ab} P_{bc}}{[P^2]_{ac}}$$
+ _(the denominator has $[P^2]_{ac} = \sum_k P_{ak} P_{kc}$ which is the entry $a,c$ of $P^2$)_
