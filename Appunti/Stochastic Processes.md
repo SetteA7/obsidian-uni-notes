@@ -344,14 +344,14 @@ Answer:
 
 Proof:
 From the conditional probability definition we have:
-$$P[X(u)=k|X(t)=n]=\frac{P[X(u)=k\cap X(t)=n]}{P[X(t)=n]}=P[X(u)=k\cap X(t)=n]\cdot \frac{n!}{(\lambda t)^ne^{-\lambda t}}$$
-since $t, n$ are known, only the joint probability needs to be computed.
+$$P[X(u)=k|X(t)=n]=\frac{P[X(u)=k, X(t)=n]}{P[X(t)=n]}$$
+We will use this a s a baseline for our proofs
 
 Notice that the joint probability can be rewritten as two disjoint events, depending on the case, either $[0,u],\ [u,t]$ or $[0,t],\ [t,u]$.
 
 Case 1: Infer past from future knowledge
 We can rewrite the joint probability as two disjoint events $[0,u],\ [u,t]$:
-$$P[X(u)=k\cap X(t)=n]=P[X(u)=k]\cdot P[X(t)-X(u)=n-k]$$
+$$P[X(u)=k, X(t)=n]=P[X(u)=k]\cdot P[X(t)-X(u)=n-k]$$
 The first term is directly given by the Poisson distribution:
 $$P[X(u)=k]=\frac{(\lambda u)^ke^{-\lambda u}}{k!}$$
 While the second term is given from the stationary increments:
@@ -367,7 +367,7 @@ P[X(u)=k|X(t)=n]&=\frac{(\lambda u)^ke^{-\lambda u}}{k!}\frac{(\lambda(t - u))^{
 
 Case 2: Predict future from past observations
 We can rewrite the joint probability as two disjoint events $[0,t],\ [t,u]$:
-$$P[X(u)=k\cap X(t)=n]=P[X(t)=n]\cdot P[X(u)-X(t)=k-n]$$
+$$P[X(u)=k, X(t)=n]=P[X(t)=n]\cdot P[X(u)-X(t)=k-n]$$
 Notice that the first term is the denominator of the expression of the conditional probability, so these two cancel out
 $$P[X(u)=k|X(t)=n]=P[X(u)-X(t)=k-n]$$
 As before from the stationary increments we have that this is distributed as a Poisson random variable
@@ -421,7 +421,7 @@ $$\begin{cases}
 \end{cases}\implies \delta(j)= \delta(i)$$
 $\endproof$
 
-## 4.6) Proof 6: Derivation of $\mathbb{E}[S_{N(t)+1}]$ Using Renewal Theory
+## 4.6) ! Proof 6: Derivation of $\mathbb{E}[S_{N(t)+1}]$ Using Renewal Theory
 
 ^9bd3b6
 
