@@ -277,7 +277,7 @@ For $N(t)\geq 1$ we have
 $$\frac{S_{N(t)}}{N(t)}\leq\frac{ t}{N(t)}<\frac{S_{N(t)+1}}{N(t)}$$
 To evaluate these bounds, recall the strong law of large numbers:
 $$\lim_{n\rightarrow\infty}\frac{S_n}n=\mu\text{ w.p. }1$$
-Since $P\sq{\lim_{t\rightarrow\infty}N(t)=\infty}=1$ it is possible to asymptotically substitute $n=N(t)$ and get 
+Since $P\sq{\lim_{t\rightarrow\infty}N(t)=\infty}=1$ it is possible to asymptotically substitute $n\rightarrow N(t)$ and get 
 $$\lim_{t\rightarrow\infty}\frac{S_{N(t)}}{N(t)}=\mu$$
 For the upper bound we have
 $$\lim_{t\rightarrow\infty}\frac{S_{N(t)+1}}{N(t)}=\lim_{t\rightarrow\infty}\frac{S_{N(t)+1}}{N(t)+1}\cdot\frac{N(t)+1}{N(t)}=\mu\cdot 1=\mu$$
@@ -291,7 +291,7 @@ Prove that if states $i$ and $j$ of a Markov chain communicate and $i$ is recurr
 
 Proof:
 Since $i,j$ communicate ($i\rightarrow j, j\rightarrow i\implies i\leftrightarrow j$), we have by definition 
-$$\exists m,n\geq 0 \ s.t. \ P_{ji}\iter n>0, \ P_{ij}\iter m>0$$
+$$\exists m,n\geq 1 \ s.t. \ P_{ji}\iter n>0, \ P_{ij}\iter m>0$$
 And by definition of recurrent state (the probability that the chain eventually returns to state $i$ in a finite number of steps is $1$) we have
 $$\sum_{k=0}^\infty P_{ii}\iter k=\infty$$
 To prove that $j$ is recurrent, we need to show that $\sum_{k=0}^\infty P_{jj}\iter k=\infty$.
