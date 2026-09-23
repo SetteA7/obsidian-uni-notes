@@ -365,3 +365,48 @@ $$\mathbb{E}[T_{\text{DOWN}}] = \mathbb{E}[\min(\text{Exp}(1/T), \text{Exp}(1/T)
 $$\mathbb{E}[T_{\text{UP}}] = \mathbb{E}[T_{\text{DOWN}}] \cdot \frac{1 - P(\text{DOWN})}{P(\text{DOWN})} = \frac{T}{2} \left(\frac{1 - p_{\text{off}}^2}{p_{\text{off}}^2}\right)$$
 - **Average Streaming Rate:**
 $$\mathbb{E}[\text{Rate}] = 2(1 - p_{\text{off}}) R$$
+
+
+
+# 8) God help me
+
+| **Plugin**                | **Status**         |
+| ------------------------- | ------------------ |
+| AudioDB                   | JF                 |
+| Chapter Segments Provider | JF                 |
+| Collection Sections       | Still needs update |
+| Custom Tabs               | unused             |
+| DLNA                      | JF                 |
+| EditorsChoice             | OK                 |
+| FileTransformation        |                    |
+| HomeScreenSections        |                    |
+| IntroSkipper              |                    |
+| JavaScriptInjector        |                    |
+| Jellyfin Enhanced         |                    |
+| Jellyfin Tweaks           |                    |
+| Jellyscribe               |                    |
+| JellySleep                |                    |
+| LanguageTags              |                    |
+| JellyfinMediaBarEnhanced  |                    |
+| MusicBrainz               |                    |
+| Newsletter                |                    |
+| OMDb                      |                    |
+| OpenSubtitles             |                    |
+| PlaybackReporting         |                    |
+| PluginPages               |                    |
+| Reports                   |                    |
+| SessionCleaner            |                    |
+| SmartLists                |                    |
+| StudioImages              |                    |
+| TheTVDB                   |                    |
+| TMDb                      |                    |
+| TMDbBoxSets               |                    |
+| TopTen                    |                    |
+| WatchStateSync            |                    |
+| Webhook                   |                    |
+| Webhooks                  |                    |
+| KefinTweaks               |                    |
+
+Legend:
+JF: Jellyfin Main
+OK: update exists
