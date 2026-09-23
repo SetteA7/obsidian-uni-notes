@@ -370,43 +370,45 @@ $$\mathbb{E}[\text{Rate}] = 2(1 - p_{\text{off}}) R$$
 
 # 8) God help me
 
-| **Plugin**                | **Status**         |
-| ------------------------- | ------------------ |
-| AudioDB                   | JF                 |
-| Chapter Segments Provider | JF                 |
-| Collection Sections       | Still needs update |
-| Custom Tabs               | unused             |
-| DLNA                      | JF                 |
-| EditorsChoice             | OK                 |
-| FileTransformation        |                    |
-| HomeScreenSections        |                    |
-| IntroSkipper              |                    |
-| JavaScriptInjector        |                    |
-| Jellyfin Enhanced         |                    |
-| Jellyfin Tweaks           |                    |
-| Jellyscribe               |                    |
-| JellySleep                |                    |
-| LanguageTags              |                    |
-| JellyfinMediaBarEnhanced  |                    |
-| MusicBrainz               |                    |
-| Newsletter                |                    |
-| OMDb                      |                    |
-| OpenSubtitles             |                    |
-| PlaybackReporting         |                    |
-| PluginPages               |                    |
-| Reports                   |                    |
-| SessionCleaner            |                    |
-| SmartLists                |                    |
-| StudioImages              |                    |
-| TheTVDB                   |                    |
-| TMDb                      |                    |
-| TMDbBoxSets               |                    |
-| TopTen                    |                    |
-| WatchStateSync            |                    |
-| Webhook                   |                    |
-| Webhooks                  |                    |
-| KefinTweaks               |                    |
+| **Plugin**                | **Status**                                                                                         |
+| ------------------------- | -------------------------------------------------------------------------------------------------- |
+| AudioDB                   | JF                                                                                                 |
+| Chapter Segments Provider | JF                                                                                                 |
+| Collection Sections       | NO                                                                                                 |
+| Custom Tabs               | Unused                                                                                             |
+| DLNA                      | JF                                                                                                 |
+| EditorsChoice             | OK                                                                                                 |
+| FileTransformation        | OK                                                                                                 |
+| HomeScreenSections        | OK                                                                                                 |
+| IntroSkipper              | OK                                                                                                 |
+| JavaScriptInjector        | OK, new manifest https://raw.githubusercontent.com/n00bcodr/jellyfin-plugins/main/12/manifest.json |
+| Jellyfin Enhanced         | OK                                                                                                 |
+| Jellyfin Tweaks           | OK                                                                                                 |
+| Jellyscribe               | OK                                                                                                 |
+| JellySleep                | unused                                                                                             |
+| LanguageTags              | NO but Unused                                                                                      |
+| JellyfinMediaBarEnhanced  | OK kinda                                                                                           |
+| MusicBrainz               | JF                                                                                                 |
+| Newsletter                | NO but Unused                                                                                      |
+| OMDb                      | JF                                                                                                 |
+| OpenSubtitles             | JF                                                                                                 |
+| PlaybackReporting         | NO ?                                                                                               |
+| PluginPages               | OK                                                                                                 |
+| Reports                   | JF                                                                                                 |
+| SessionCleaner            | JF                                                                                                 |
+| SmartLists                | OK                                                                                                 |
+| StudioImages              | JF                                                                                                 |
+| TheTVDB                   | JF                                                                                                 |
+| TMDb                      | JF                                                                                                 |
+| TMDbBoxSets               | JF                                                                                                 |
+| TopTen                    | OK                                                                                                 |
+| WatchStateSync            | OK                                                                                                 |
+| Webhook                   | JF                                                                                                 |
+| Webhooks                  | JF                                                                                                 |
+| KefinTweaks               | NO                                                                                                 |
 
 Legend:
 JF: Jellyfin Main
 OK: update exists
+NO: not updated yet
+Unused: Plugin is enabled but not actively use
