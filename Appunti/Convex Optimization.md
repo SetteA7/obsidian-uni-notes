@@ -1,7 +1,7 @@
 Informal definition of optimization
 $$\text{Choose the best decision whose outcome can be measured}$$
 That is
-$$\begin{cases}\min\max f(x)\\
+$$P=\begin{cases}\min\max f(x)\\
 S\\
 x\in D
 \end{cases}$$
