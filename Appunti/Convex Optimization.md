@@ -17,6 +17,12 @@ $$\begin{cases}\min e^{-x}\\ x\geq 0 \end{cases}\rightarrow\text{no optimal solu
 # 1) Linear Programming
 Example
 $$LP=\begin{cases}\min\max c^Tx\\
-a_i^Tx-b_i\leq 0\\
-l_j\leq x_j\leq u_j, \ j=1,...,n
+a_i^Tx-b_i\leq 0, & i=1,...,m\\
+l_j\leq x_j\leq u_j& j=1,...,n
+\end{cases}$$
+
+# 2) MIP Modeling
+$$MIP=\begin{cases}\min\max c^Tx\\
+a_i^Tx-b_i\leq 0, & i=1,...,m\\
+x_j\in \mathbb Z& j=1,...,n
 \end{cases}$$
