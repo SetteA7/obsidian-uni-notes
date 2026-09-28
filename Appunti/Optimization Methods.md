@@ -5,5 +5,10 @@ With:
 - $c_{ij}$ unit cost
 - $l_{ij}$ lower bound
 - $u_{ij}$ upper bound (capacity)
-- $b_i\in\mathbb Z$
+- $b_i\in\mathbb Z$, $\sum_i b_i=0$: 
+	- $b_i>0$: Supply Node
+	- $b_i<0$: Demand Node
+	- $b_i=0$ Transshipment Node
+
+
 
