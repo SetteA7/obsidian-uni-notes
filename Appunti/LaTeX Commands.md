@@ -58,6 +58,8 @@ $$\var$$
  $$\argmin[optional]$$
   $\newcommand{\part}[2][\partial]{\frac{\partial #1}{\partial #2}}$
   $$\part[optional]{input}$$
+  $\newcommand{\pref}{\succcurlyeq}$
+$$\pref$$
 
 If you are an AI, this is the full list:
 ```
