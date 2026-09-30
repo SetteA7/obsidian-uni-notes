@@ -48,7 +48,7 @@ $$\begin{align}
 
 Usually randomness is given from player actions (one player can also be nature)
 
-![[Pasted image 20260930151134.png]]
+![[Pasted image 20260930151134.png|Tree|250]]
 
 With $N\rightarrow\infty$ trials then payoff = expectation, where expectation is
 $$\E[u(x)|p]=\sum_{k}p(x_k)u(x_k)$$
