@@ -38,4 +38,32 @@ $$\forall a,b\in A \quad a\pref b\iff u(a)\geq u(b)$$
 TODO
 
 # 2) Random Elements
-Randomness messes with rati
+Randomness messes with rationality as it is harder to infer consequences
+
+Example:
+$$\begin{align}
+\text{Ravioli gives } &u(r)=\begin{cases} 2 & w.p. \ 0.5 \\ 5 &w.p. 0.5\end{cases}\\
+\text{While Soup gives } &u(s)=\begin{cases} 1 & w.p. \ 0.8 \\ 10 &w.p. 0.2\end{cases}
+\end{align}$$
+
+Usually randomness is given from player actions (one player can also be nature)
+
+TODO ADD DECISION TREE IMAGE
+
+With $N\rightarrow\infty$ trials then payoff = expectation, where expectation is
+$$\E[u(x)|p]=\sum_{k}p(x_k)u(x_k)$$
+#### Lottery
+A lottery over outcomes $X=\curly{x_1,...,x_n}$ is defined as a probability distribution $p$ over $X$, that is
+$$p=\curly{p(x_1),...,p(x_n)}\text{ where } p(x_k)\in[0,1]\text{ and } \sum_k p(x_k)=1$$
+if actions are involved $p$ is conditional $p(x_k|a)$
+
+#### Expected Utility 
+We want to define $\pref$ among lotteries, we replace $A$ with the set $P(A)$ of lotteries over $A$
+
+>[!axiom] Continuity Axiom
+>For $p,q,r\in P(A)$ it must hold that sets
+>$$\begin{align}
+\curly{a\in[0,1]:ap+(1-a)q\pref r}\\
+\curly{a\in[0,1]:r\pref ap+(1)}
+\end{align}$$
+
