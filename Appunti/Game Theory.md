@@ -48,7 +48,7 @@ $$\begin{align}
 
 Usually randomness is given from player actions (one player can also be nature)
 
-TODO ADD DECISION TREE IMAGE
+![[Pasted image 20260930151134.png]]
 
 With $N\rightarrow\infty$ trials then payoff = expectation, where expectation is
 $$\E[u(x)|p]=\sum_{k}p(x_k)u(x_k)$$
@@ -61,9 +61,18 @@ if actions are involved $p$ is conditional $p(x_k|a)$
 We want to define $\pref$ among lotteries, we replace $A$ with the set $P(A)$ of lotteries over $A$
 
 >[!axiom] Continuity Axiom
->For $p,q,r\in P(A)$ it must hold that sets
+>For $p,q,r\in P(A)$ it must hold that the following sets are closed
 >$$\begin{align}
 \curly{a\in[0,1]:ap+(1-a)q\pref r}\\
-\curly{a\in[0,1]:r\pref ap+(1)}
+\curly{a\in[0,1]:r\pref ap+(1-a)q}
 \end{align}$$
+>That is, arbitrarily small variations in gamble does not change preferred lotteries
 
+>[!axiom] Independence Axiom
+>For $p,q,r\in P(A)$ it holds that $\forall a \in[0,1]$ if $p\pref q$ then $ap+(1-a)\pref aq+(1-a)r$
+>That is, when mixing gambles we prefer the TODO
+
+
+vN-M does not state to compare expectations but to use affine transformations of $u$
+
+#### Continuous Case
