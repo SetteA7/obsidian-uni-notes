@@ -68,6 +68,8 @@ We want to define $\pref$ among lotteries, we replace $A$ with the set $P(A)$ of
 \end{align}$$
 >That is, arbitrarily small variations in gamble does not change preferred lotteries
 
+If you mix the best outcome ($p$) and the worst outcome ($q$) with a probability $a$, as long as $a$ is high enough, you will prefer that gamble to the sure thing ($r$).
+
 >[!axiom] Independence Axiom
 >For $p,q,r\in P(A)$ it holds that $\forall a \in[0,1]$ if $p\pref q$ then $ap+(1-a)\pref aq+(1-a)r$
 >That is, when mixing gambles we prefer the TODO
