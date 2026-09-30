@@ -27,7 +27,7 @@ A preference $\pref$ can be put in a relationship with $u:A\rightarrow\R$
 $u$ **represents** $\pref$ if 
 $$\forall a,b\in A \quad a\pref b\iff u(a)\geq u(b)$$
 
->[!thm]
+>[!thm] Representation of $\pref$ and $u(\cdot)$
 >On a finite set $A$, $\pref$ can be represented by $u$ $\iff$ $\pref$ is rational
 >
 >Quick Proof
@@ -36,3 +36,6 @@ $$\forall a,b\in A \quad a\pref b\iff u(a)\geq u(b)$$
 
 #### Decision Trees
 TODO
+
+# 2) Random Elements
+Randomness messes with rati
