@@ -22,19 +22,26 @@ Any $x\in D$ is a solution of $P$ and can be classified as:
 A problem can be feasible and bounded but it might not have an optimal solution
 $$\begin{cases}\min e^{-x}\\ x\geq 0 \end{cases}\rightarrow\text{no optimal solution } (x\rightarrow \infty)$$
 
-# 2) Linear Programming (LP)
+## 1.1) Linear Programming (LP)
 A linear program consists in the minimization of a linear function subject to a finite list of linear constraints. In general we have the form:
 $$LP=\begin{cases}\min c^Tx\\
 a_i^Tx\sim b_i, & i=1,...,m\\
 l_j\leq x_j\leq u_j& j=1,...,n
 \end{cases}$$
-That is $D_j$ is an interval in $\R$. Notice that the constraint
+That is $D_j$ is an interval in $\R$. Notice that the constraint $a_i^Tx\sim b_i$ is the same as $a_i^Tx- b_i\leq 0$
 
 #### Integer Linear Programming (MIP)
 This allows only for discrete decisions ($x_j\in\mathcal Z$) by adding an additional constraint.
-
-# 3) MIP Modeling
 $$MIP=\begin{cases}\min c^Tx\\
 a_i^Tx\sim b_i, & i=1,...,m\\
-x_j\in \mathbb Z& j=1,...,n
+x_j\in \mathbb Z& j=1,...,n\\
 \end{cases}$$
+## 1.2) Convex Optimization
+Adds non-linearity, for convex functions it keeps the LP properties. In general it has the form
+$$\begin{cases}\min f(x)\\
+g_i(x)\leq b_i, & i=1,...,m\\
+l_j\leq x_j\leq u_j& j=1,...,n
+\end{cases}$$
+where $f(x),g_i(x)$ are required to be convex.
+
+## 1.3) Linear Quadratic Regulator (TODO)
