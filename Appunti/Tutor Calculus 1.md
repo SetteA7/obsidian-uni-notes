@@ -101,16 +101,11 @@ So recap:
 - solution always exists for $x\leq 0$
 - for positive $x$ the solution is $x\in [-\sqrt 2,\sqrt 2]$
 - All this with $x\in[-2,2]$ from the initial system
-This can be drawn like this
+Here it is clear that the union results in $x\in[-2,\sqrt 2]$.
 
-![[Pasted image 20261005153314.png|Union Example|450]]
-Here it is clear that the union results in $x\in[0,\sqrt 2)$.
-
-The result is therefore the union of bo$x\leq \sqrt 2$
-
-
-
-
+The result is therefore the union of both cases which yields:
+$$\boxed{S=x\leq -2\cup -2< x\leq\sqrt 2\rightarrow S=x\leq \sqrt 2}$$
+---
 ## 1.2) Subsets of $\mathbb R$
 #### **Ex a)**
 Describe the following set:
@@ -240,3 +235,5 @@ Now consider the union, so:
 
 - $\cup$: Union; or
 - $\cap$: Intersection; and
+
+- $\exists$: there exists
