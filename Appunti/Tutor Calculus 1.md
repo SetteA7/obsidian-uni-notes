@@ -9,6 +9,14 @@ In general:
 4) Final sign analysis
 
 From bolzano weierstrass theorem (you will see this later) we have that every intersection at 0, that is, at every zero of the function. there is a change of sign.
+
+3 main cases:
+$$\begin{align}
+&\frac{A(x)}{B(x)}\geq 0 &&\text{Study sign of both}\\
+&\sqrt{A(x)}\geq B(x) &&\text{Add condition: } B(x)\geq 0\\
+&|A(x)|\geq 0 &&\text{Divide using abs. value definition: }\begin{cases}A(x)&A(x)\geq 0\\-A(x)&A(x)<0\end{cases}
+\end{align}$$
+
 ####  **Ex c)**
 Solve the following inequality:
 $$\frac{x - 1}{x - 2} > \frac{2x - 3}{x - 3}$$
@@ -72,7 +80,7 @@ In this case $f(x)=x^2-4=(x+2)(x-2)$ so $f(x)\geq0\rightarrow x\leq-2\cup x\geq2
 
 Now we can rewrite the inequality as a system of two inequalities:
 $$\sqrt{|x^2-4|}-x\geq0\rightarrow\begin{cases}
-\sqrt{x^2-4}-x\geq 0 & x\leq2\cup x\geq 4\\
+\sqrt{x^2-4}-x\geq 0 & x\leq-2\cup x\geq 2\\
 \sqrt{4-x^2}-x\geq 0 & -2<x<2
 \end{cases}$$
 Each system can be solved independently from the other, just the result must be intersected ($\cap$) with the condition of the system.
@@ -80,19 +88,25 @@ Each system can be solved independently from the other, just the result must be 
 **Solve first equation:**
 Here we have a problem, since $x$ can be negative:
 $$\sqrt{x^2-4}\geq x$$
-clearly if it is negative then there is no solution, so we must further restrict the domain to $0\leq x\leq 2\cup x\geq 4$.
+clearly if it is negative then then it is always true, so we have already found some solutions $x\leq -2$
 
-Now since we are sure that both sides are $\geq0$ we can square both sides:
-$$x^2-4\geq x^2\rightarrow -4\geq 0$$ not possible so this part does not allow for any solution.
+Now study in the interval $x\geq 2$: since we are sure that both sides are $\geq0$ we can square both sides:
+$$x^2-4\geq x^2\rightarrow -4\geq 0$$
+Not possible, so the only solution to this part is $x\leq -2$
 
 **Solve the second equation:**
-As before a solution only exists for $x\geq 0$
+As before a solution always exists for $x\geq 0$. Now consider only the positive values ($x\geq 0$) in order to be able to square both sides:
 $$\sqrt{4-x^2}\geq x\rightarrow 4-x^2\geq x^2\rightarrow 4-2x^2\geq 0\rightarrow -\sqrt 2<x<\sqrt 2$$
-Finally we must intersect the result with $-2<x<2$ and $x\geq 0$ so
+So recap:
+- solution always exists for $x\leq 0$
+- for positive $x$ the solution is $x\in [-\sqrt 2,\sqrt 2]$
+- All this with $x\in[-2,2]$ from the initial system
+This can be drawn like this
 
-![[Pasted image 20261005151819.png|Union|450]]
-Here it is clear that the union results in $x\in[0,2)$.
+![[Pasted image 20261005153314.png|Union Example|450]]
+Here it is clear that the union results in $x\in[0,\sqrt 2)$.
 
+The result is therefore the union of bo$x\leq \sqrt 2$
 
 
 
