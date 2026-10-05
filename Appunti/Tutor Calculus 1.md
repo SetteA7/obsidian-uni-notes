@@ -58,11 +58,30 @@ $$\boxed{2<x<3}$$
 
 ---
 
-#### Ex d)
+#### Ex i)
 Solve the following inequality:
 $$\sqrt{|x^2-4|}-x\geq0$$
-Domain: 
+Domain: $|x^2-4|\geq 0\rightarrow D=\mathbb R$
 
+Now recall the abs value definition:
+$$|f(x)|=\begin{cases}
+f(x) & f(x)\geq 0\\
+-f(x)& f(x)<0
+\end{cases}$$
+In this case $f(x)=x^2-4=(x+2)(x-2)$ so $f(x)\geq0\rightarrow x\leq2\cup x\geq4$
+
+Now we can rewrite the inequality as a system of two inequalities:
+$$\sqrt{|x^2-4|}-x\geq0\rightarrow\begin{cases}
+\sqrt{x^2-4}-x\geq 0 & x\leq2\cup x\geq 4\\
+\sqrt{4-x^2}-x\geq 0 & 2<x<4
+\end{cases}$$
+Each system can be solved independently from the other, just the result must be intersected ($\cap$) with the condition of the system.
+
+Solve the second equation:
+$$\sqrt{4-x^2}\geq x\rightarrow 4-x^2\geq x^2\rightarrow 4-2x^2\geq 0\rightarrow -\sqrt 2<x<\sqrt 2$$
+
+Now we can rewrite the inequality as two inequalities:
+$$\sqrt{|x^2-4|}\geq x\rightarrow |x^2-4|\geq x^2$$
 
 ## 1.2) Subsets of $\mathbb R$
 #### **Ex a)**
