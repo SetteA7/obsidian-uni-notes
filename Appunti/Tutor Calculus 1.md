@@ -135,8 +135,37 @@ Finish the example: we know $\overline m=0\in A$ so this is both minimum and inf
 #### Ex a)
 Tell wether this subsets is bounded and the sup/inf and if it allow for maximum/minimum.
 $$A=\curly{x\in\mathbb R: x=n\text{ or } x=\frac1{n^2},n\in N\setminus\curly 0}$$
-Bounds:
-Clearly no upper bound since 
+First get an idea of what this set is. It is the union of two sets, mainly
+$$S_1=\curly{x\in R:x=n, n\in N\setminus \curly 0}=\curly{\mathbb N\setminus \curly 0}$$
+$$S_2=\curly{x\in\mathbb R: x=\frac1{n^2},n\in N\setminus\curly 0}$$
+
+Find the bounds on both sets individually (not required but the result is clearer)
+$S_1$: This is just the natural numbers without $0$:
+Lower bounded: yes; $m_1\leq 1$
+Upper bounded: no $\not \exists M_1$
+
+Minimum: $\overline m_1=\max m_1\geq 1=1\in S_1$ (it is also inf)
+Maximum: no
+
+Inf: $\text{inf } S_1=1$
+Sup: no
+
+$S_2$:
+Intuitively we know that the function describing the set is monotonically decreasing: we can express it by saying:
+
+Call $x_n$ the value of x for any chosen $n$, then $x_{n+1}<x_n$.
+This is easily shown as the following inequality is true for $n\in \mathbb N\setminus \curly 0$ (check at home):
+$$\frac{1}{(n+1)^2}<\frac1{n^2}$$
+Therefore for every number $x_n>0$ we can find a smaller number such that $0<x_{n+1}<x_n$
+
+With this digression aside, we also know that $0\not \in S_2$. Now we say:
+Lower bounded: yes; $m_1\leq 0$
+Upper bounded: yes, just see value of $x_1$ $\not \exists M_1$
+
+
+Minimum: $\overline m_1=\max m_1\geq 1=1\in S_1$ (it is also inf)
+Maximum: no
+
 # 2) Symbols
 - $\implies$: implies, necessary condition
 - $\impliedby$: implied by, sufficient condition
