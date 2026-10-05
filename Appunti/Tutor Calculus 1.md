@@ -1,5 +1,5 @@
 # 1) Lesson 1
-
+## 1.1) Inequalities
 In general:
 1) Find domain $D$
 2) Rewrite so that it is function bigger/smaller than 0
@@ -7,16 +7,18 @@ In general:
 	1) find zeroes
 	2) study sign
 4) Final sign analysis
-## 1.1) Inequalities
+
+From bolzano weierstrass theorem (you will see this later) we have that every intersection at 0, that is, at every zero of the function. there is a change of sign.
 ####  **Ex c)**
-Solve the following inqueality:
+Solve the following inequality:
 $$\frac{x - 1}{x - 2} > \frac{2x - 3}{x - 3}$$
 
 First find the domain:
 $$D=x\in\mathbb R\setminus\curly{2,3}$$
 Now compute
 $$\frac{x - 1}{x - 2} - \frac{2x - 3}{x - 3} > 0 \implies \frac{(x-1)(x-3) - (2x-3)(x-2)}{(x-2)(x-3)} > 0$$
-This is $>0$ if numerator and denominator share the same sign, that is, where the function is positive:
+This is $>0$ if numerator and denominator share the same sign, that is, where the function is positive.
+
 **Numerator:**
 First we find the zeroes of the numerator function:
 $$\begin{align}
@@ -31,13 +33,13 @@ Where the discriminant $\Delta=b^2-4ac$ determines the types of solution:
 - $\Delta=0$: two real (identical) solutions
 - $\Delta<0$: no real solution
 
-In this case since $\Delta = 9 - 12 = -3 < 0$ we have that since $a<0$, then the whole numerator is negative.
-
-The sign analysis of the numerator is therefore also complete:
+In this case since $\Delta = 9 - 12 = -3 < 0$ we don't have any solutions, hence since $a<0$ the whole numerator is negative.
 
 **Denominator:**
 Here the function already shows the zeroes, so we can plot the graph to see the regions:
- TODO DRAWING
+
+![[Pasted image 20261005144306.png|Curve|250]]
+
  
  So we have 
  $$D>0\iff x<2\ \cup\ x>3$$
@@ -56,8 +58,10 @@ $$\boxed{2<x<3}$$
 
 ---
 
-
-Consider the following:
+#### Ex d)
+Solve the following inequality:
+$$\sqrt{|x^2-4|}-x\geq0$$
+Domain: 
 
 
 ## 1.2) Subsets of $\mathbb R$
