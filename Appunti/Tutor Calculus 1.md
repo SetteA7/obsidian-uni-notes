@@ -106,12 +106,23 @@ $$\boxed{C=(-3,1)\cup(3,4)\cup \curly9}$$
 ---
 
 ## 1.3) Max/Min, Sup/Inf
+Recall the theory
 
->[!def|*] Upper Bound
->$M\in \mathbb Q$ is called **upper bound** for $A$ if $M\geq a$
+>[!def|*] Upper/Lower Bound
+>$M\in \mathbb Q$ is called **upper bound** for $A$ if $M\geq a, \forall a\in A$.
+>
+>Reespectively it is called **lower bound** if $M\leq a,\forall a\in A$
 
+Notice $M$ does not need to be in $A$
+Example: consider set $A=[0,1)$ any $m\leq0$ is a lower lower bound and any $M\geq 1$ is upper bound
 
+>[!def|*] Maximum/Minimum of $A$
+>If $\overline M$ is an upper bound for $A$ and $\overline M\in A$, if $\overline M$ is the *minimum* possible *upper* bound, then it is the **maximum** of $A$.
+>
+>If $\overline M$ is an upper bound for $A$ and $\overline M\in A$, if $\overline M$ is the *minimum* possible *lower* bound, then it is the **minimum** of $A$.
 
+In this case $\overline M\in A$ by definition. 
+From the previous example: $\overline m =\max\curly{m\leq 0}=0\in A$ is the correct minimum of $A$, however $\overline M =\min\curly{M\geq 1}=1\not\in A$ means that we don't have a maximum
 # 2) Symbols
 - $\implies$: implies, necessary condition
 - $\impliedby$: implied by, sufficient condition
