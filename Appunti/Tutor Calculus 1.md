@@ -8,7 +8,8 @@ In general:
 	2) study sign
 4) Final sign analysis
 ## 1.1) Inequalities
-- **c)**
+####  **Ex c)**
+Consider the following inqueality:
 $$\frac{x - 1}{x - 2} > \frac{2x - 3}{x - 3}$$
 First find the domain:
 $$D=x\in\mathbb R\setminus\curly{2,3}$$
@@ -49,32 +50,66 @@ x & (-\infty,2) & (2,3) & (3,+\infty) \\ \hline
 \text{Fraction} & - & + & -
 \end{array}
 $$
-$$2<x<3$$
+Finally we have:
+$$\boxed{2<x<3}$$
+
+---
+
+
+Consider the following:
+
 
 ## 1.2) Subsets of $\mathbb R$
-- **a)**
+#### **Ex a)**
+Consider the following:
 $$A=S_1\cap S_2=\curly{x\in\mathbb R: x^2+4x+13<0}\cap\curly{x\in\mathbb R: 3x^2+5>0}$$
 Subset 1:
 $$x^2+4x+13<0\rightarrow \Delta=-36 \implies S_1=\emptyset $$
 any intersection with an empty set is an empty set:
-$$A=\emptyset\ \cap\ S_2=\emptyset$$
+$$\boxed{A=\emptyset\ \cap\ S_2=\emptyset}$$
 
 In general recall:
 $$\emptyset\cap S=\emptyset\qquad \emptyset\cup S=S$$
-- **c)**
+
+----
+
+#### **Ex c)**
+Consider the following:
 $$C=\curly{x\in\mathbb R: \frac{x^2-5x+4}{x^2-9}<0}\cup\curly{x\in\mathbb R:x+\sqrt{7x+1}=17}$$
-Subset 1:
+**Subset 1:**
 Numerator:
 $$x^2-5x+4=0\rightarrow x_{1,2}=1, \ 4\rightarrow N>0\iff x<1\cup x>4$$
 Denominator:
-$$x^2-9=(x+3)(x-3)=0\rightarrow D>0$$
+$$x^2-9=(x+3)(x-3)=0\rightarrow D>0\iff x<-3\cup x>3$$
 
 $$\begin{array}{c|ccc}
-x & (-\infty,2) & (2,3) & (3,+\infty) \\ \hline
-\text{Numerator} & - & - & - \\
-\text{Denominator} & + & - & + \\ \hline
-\text{Fraction} & - & + & -
+x & (-\infty,-3) & (-3,1) & (1,3) & (3,4) & (4,+\infty)\\ \hline
+\text{Numerator} & + & + & - & - & + \\
+\text{Denominator} & + & - & - & + & + \\ \hline
+\text{Fraction} & + & - & + & - & +
 \end{array}$$
+so $S_1=(-3,1)\cup (3,4)$
+
+**Subset 2:**
+This is just an equality:
+$$\sqrt{7x + 1} = 17 - x$$
+The domain is $7x+1\geq 0\rightarrow D=\curly{x\leq 17}$
+Square both sides:
+$$7x+1=(17-x)^2\rightarrow 7x+1=x^2-34x+17^2\rightarrow x^2-41x+288=0$$
+$$x_{1,2}=9, \ 32$$
+But only 9 is acceptable as $32\not \in D$
+
+Finally:
+$$\boxed{C=(-3,1)\cup(3,4)\cup \curly9}$$
+
+
+---
+
+## 1.3) Max/Min, Sup/Inf
+
+>[!def|*] Upper Bound
+>$M\in \mathbb Q$ is called **upper bound** for $A$ if $M\geq a$
+
 
 
 # 2) Symbols
@@ -89,3 +124,5 @@ x & (-\infty,2) & (2,3) & (3,+\infty) \\ \hline
 - $\mathbb R$: real numbers
 - $\mathbb C$: complex numbers
 
+- $\cup$: Union; and
+- $\cap$: Intersection; or  
