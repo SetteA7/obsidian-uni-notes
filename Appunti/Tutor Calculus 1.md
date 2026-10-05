@@ -68,20 +68,34 @@ $$|f(x)|=\begin{cases}
 f(x) & f(x)\geq 0\\
 -f(x)& f(x)<0
 \end{cases}$$
-In this case $f(x)=x^2-4=(x+2)(x-2)$ so $f(x)\geq0\rightarrow x\leq2\cup x\geq4$
+In this case $f(x)=x^2-4=(x+2)(x-2)$ so $f(x)\geq0\rightarrow x\leq-2\cup x\geq2$
 
 Now we can rewrite the inequality as a system of two inequalities:
 $$\sqrt{|x^2-4|}-x\geq0\rightarrow\begin{cases}
 \sqrt{x^2-4}-x\geq 0 & x\leq2\cup x\geq 4\\
-\sqrt{4-x^2}-x\geq 0 & 2<x<4
+\sqrt{4-x^2}-x\geq 0 & -2<x<2
 \end{cases}$$
 Each system can be solved independently from the other, just the result must be intersected ($\cap$) with the condition of the system.
 
-Solve the second equation:
-$$\sqrt{4-x^2}\geq x\rightarrow 4-x^2\geq x^2\rightarrow 4-2x^2\geq 0\rightarrow -\sqrt 2<x<\sqrt 2$$
+**Solve first equation:**
+Here we have a problem, since $x$ can be negative:
+$$\sqrt{x^2-4}\geq x$$
+clearly if it is negative then there is no solution, so we must further restrict the domain to $0\leq x\leq 2\cup x\geq 4$.
 
-Now we can rewrite the inequality as two inequalities:
-$$\sqrt{|x^2-4|}\geq x\rightarrow |x^2-4|\geq x^2$$
+Now since we are sure that both sides are $\geq0$ we can square both sides:
+$$x^2-4\geq x^2\rightarrow -4\geq 0$$ not possible so this part does not allow for any solution.
+
+**Solve the second equation:**
+As before a solution only exists for $x\geq 0$
+$$\sqrt{4-x^2}\geq x\rightarrow 4-x^2\geq x^2\rightarrow 4-2x^2\geq 0\rightarrow -\sqrt 2<x<\sqrt 2$$
+Finally we must intersect the result with $-2<x<2$ and $x\geq 0$ so
+
+![[Pasted image 20261005151819.png|Union|450]]
+Here it is clear that the union results in $x\in[0,2)$.
+
+
+
+
 
 ## 1.2) Subsets of $\mathbb R$
 #### **Ex a)**
