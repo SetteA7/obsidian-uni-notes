@@ -135,36 +135,58 @@ Finish the example: we know $\overline m=0\in A$ so this is both minimum and inf
 #### Ex a)
 Tell wether this subsets is bounded and the sup/inf and if it allow for maximum/minimum.
 $$A=\curly{x\in\mathbb R: x=n\text{ or } x=\frac1{n^2},n\in N\setminus\curly 0}$$
-First get an idea of what this set is. It is the union of two sets, mainly
-$$S_1=\curly{x\in R:x=n, n\in N\setminus \curly 0}=\curly{\mathbb N\setminus \curly 0}$$
-$$S_2=\curly{x\in\mathbb R: x=\frac1{n^2},n\in N\setminus\curly 0}$$
 
-Find the bounds on both sets individually (not required but the result is clearer)
-$S_1$: This is just the natural numbers without $0$:
-Lower bounded: yes; $m_1\leq 1$
-Upper bounded: no $\not \exists M_1$
+It is immediately clear that $A$ is the union of two sets, mainly
+$$A=S_1\cup S_2\text{ where } \quad \begin{align}
+&S_1 = \{n \in \mathbb{N} \setminus \{0\}\} = \{1, 2, 3, 4, \dots\}\\
+&S_2 = \left\{\frac{1}{n^2} \mid n \in \mathbb{N} \setminus \{0\}\right\} = \left\{1, \frac{1}{4}, \frac{1}{9}, \frac{1}{16}, \dots\right\}
+\end{align}$$
 
-Minimum: $\overline m_1=\max m_1\geq 1=1\in S_1$ (it is also inf)
-Maximum: no
+Find the bounds on both sets individually (not required but the result is clearer).
 
-Inf: $\text{inf } S_1=1$
-Sup: no
+**Study the first subset $S_1$:** notice that it is just the natural numbers with zero excluded, so its properties are already known.
 
-$S_2$:
-Intuitively we know that the function describing the set is monotonically decreasing: we can express it by saying:
+
+
+| Lower Bound | Upper Bound            | Infimum            | Minimum                               |
+| ----------- | ---------------------- | ------------------ | ------------------------------------- |
+| $m_1\leq 1$ | no, so now max and inf | $\text{inf }S_1=1$ | $\overline m_1=\max m_1\leq 1=1\in S$ |
+
+
+
+**Study the second subset $S_2$:** Intuitively we know that the function describing the set is monotonically decreasing: we can express it by saying:
 
 Call $x_n$ the value of x for any chosen $n$, then $x_{n+1}<x_n$.
 This is easily shown as the following inequality is true for $n\in \mathbb N\setminus \curly 0$ (check at home):
 $$\frac{1}{(n+1)^2}<\frac1{n^2}$$
 Therefore for every number $x_n>0$ we can find a smaller number such that $0<x_{n+1}<x_n$
 
-With this digression aside, we also know that $0\not \in S_2$. Now we say:
-Lower bounded: yes; $m_1\leq 0$
-Upper bounded: yes, just see value of $x_1$ $\not \exists M_1$
+With this digression aside, we also know that $0\not \in S_2$.
 
 
-Minimum: $\overline m_1=\max m_1\geq 1=1\in S_1$ (it is also inf)
-Maximum: no
+
+| Lower Bound | Upper Bound | Infimum            | Supremum           | Minimum                                     | Maximum |
+| ----------- | ----------- | ------------------ | ------------------ | ------------------------------------------- | ------- |
+| $m_2\leq 0$ | $M_2\geq 1$ | $\text{inf }S_2=0$ | $\text{sup }S_2=1$ | no since $\overline m_2=\max\min m_2\leq 0= |         |
+
+
+
+Lower bounded: yes; $m_2\leq 0$
+Upper bounded: yes, just see value of $x_1$ due to monotonicity; $M_2\geq 1$
+
+Minimum: no; $\overline m_2=\max m_2\leq 0=0\not\in S_2$ 
+Maximum: yes: $\overline M_2=\min M_2\geq 1=1\in S_2$
+
+Inf: yes: $\text{inf }S_2=0$
+Sup: yes; $\text{sup } S_2=1$
+
+Putting all together:
+Lower bound: both are lower bounded, so chose the lowest bound: $m=0$
+Upper bound: since $S_1$ is unbounded no upper bound
+
+Therefore there is no max and supremum.
+
+Finally since the lowest of the infimums is 0, then $\text{inf }A=0$ we don't have a minimum.
 
 # 2) Symbols
 - $\implies$: implies, necessary condition
