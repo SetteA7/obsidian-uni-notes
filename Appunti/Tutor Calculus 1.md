@@ -9,8 +9,9 @@ In general:
 4) Final sign analysis
 ## 1.1) Inequalities
 ####  **Ex c)**
-Consider the following inqueality:
+Solve the following inqueality:
 $$\frac{x - 1}{x - 2} > \frac{2x - 3}{x - 3}$$
+
 First find the domain:
 $$D=x\in\mathbb R\setminus\curly{2,3}$$
 Now compute
@@ -61,7 +62,7 @@ Consider the following:
 
 ## 1.2) Subsets of $\mathbb R$
 #### **Ex a)**
-Consider the following:
+Describe the following set:
 $$A=S_1\cap S_2=\curly{x\in\mathbb R: x^2+4x+13<0}\cap\curly{x\in\mathbb R: 3x^2+5>0}$$
 Subset 1:
 $$x^2+4x+13<0\rightarrow \Delta=-36 \implies S_1=\emptyset $$
@@ -74,7 +75,7 @@ $$\emptyset\cap S=\emptyset\qquad \emptyset\cup S=S$$
 ----
 
 #### **Ex c)**
-Consider the following:
+Describe the following set:
 $$C=\curly{x\in\mathbb R: \frac{x^2-5x+4}{x^2-9}<0}\cup\curly{x\in\mathbb R:x+\sqrt{7x+1}=17}$$
 **Subset 1:**
 Numerator:
@@ -114,15 +115,28 @@ Recall the theory
 >Reespectively it is called **lower bound** if $M\leq a,\forall a\in A$
 
 Notice $M$ does not need to be in $A$
-Example: consider set $A=[0,1)$ any $m\leq0$ is a lower lower bound and any $M\geq 1$ is upper bound
+Example: consider set $A=[0,1)$ any $m\leq0$ is a lower bound and any $M\geq 1$ is upper bound
 
 >[!def|*] Maximum/Minimum of $A$
 >If $\overline M$ is an upper bound for $A$ and $\overline M\in A$, if $\overline M$ is the *minimum* possible *upper* bound, then it is the **maximum** of $A$.
 >
->If $\overline M$ is an upper bound for $A$ and $\overline M\in A$, if $\overline M$ is the *minimum* possible *lower* bound, then it is the **minimum** of $A$.
+>If $\overline M$ is an upper bound for $A$ and $\overline M\in A$, if $\overline M$ is the *maximum* possible *lower* bound, then it is the **minimum** of $A$.
 
 In this case $\overline M\in A$ by definition. 
 From the previous example: $\overline m =\max\curly{m\leq 0}=0\in A$ is the correct minimum of $A$, however $\overline M =\min\curly{M\geq 1}=1\not\in A$ means that we don't have a maximum
+
+>[!def|*] Supremum/Infimum
+>The **supremum of $A$** $\text{sup } A$ is the minimum of the upper bounds of $A$. If a set allows for a maximum, then it is also the supremum
+>
+>The **infumum of $A$** $\text{inf } A$ is the maximum of the lower bounds of $A$. If a set allows for a minimum, then it is also the infimum.
+
+Finish the example: we know $\overline m=0\in A$ so this is both minimum and infimum of $A$. We know also $\overline M=1\not \in A$, therefore $\text{sup A}=1$ but it is not the maximum.
+
+#### Ex a)
+Tell wether this subsets is bounded and the sup/inf and if it allow for maximum/minimum.
+$$A=\curly{x\in\mathbb R: x=n\text{ or } x=\frac1{n^2},n\in N\setminus\curly 0}$$
+Bounds:
+Clearly no upper bound since 
 # 2) Symbols
 - $\implies$: implies, necessary condition
 - $\impliedby$: implied by, sufficient condition
@@ -135,5 +149,5 @@ From the previous example: $\overline m =\max\curly{m\leq 0}=0\in A$ is the corr
 - $\mathbb R$: real numbers
 - $\mathbb C$: complex numbers
 
-- $\cup$: Union; and
-- $\cap$: Intersection; or  
+- $\cup$: Union; or
+- $\cap$: Intersection; and
