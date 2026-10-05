@@ -145,14 +145,9 @@ $$A=S_1\cup S_2\text{ where } \quad \begin{align}
 Find the bounds on both sets individually (not required but the result is clearer).
 
 **Study the first subset $S_1$:** notice that it is just the natural numbers with zero excluded, so its properties are already known.
-
-
-
-| Lower Bound | Upper Bound            | Infimum            | Minimum                               |
-| ----------- | ---------------------- | ------------------ | ------------------------------------- |
-| $m_1\leq 1$ | no, so now max and inf | $\text{inf }S_1=1$ | $\overline m_1=\max m_1\leq 1=1\in S$ |
-
-
+- No upper bound, so also no max or sup
+- Lower bound: $m_1\leq 1$
+	- $\overline m_1=\max m_1\leq 1=1\in S$ which is also the infimum!
 
 **Study the second subset $S_2$:** Intuitively we know that the function describing the set is monotonically decreasing: we can express it by saying:
 
@@ -162,31 +157,23 @@ $$\frac{1}{(n+1)^2}<\frac1{n^2}$$
 Therefore for every number $x_n>0$ we can find a smaller number such that $0<x_{n+1}<x_n$
 
 With this digression aside, we also know that $0\not \in S_2$.
+As before analyze:
+- Lower bound: $m_2\leq 0$
+	- No minimum: $\overline m_2=\max m_2\leq 0=0\not \in S_2$
+	- Infimum is $\text{inf }S_2=0$
+- Upper bound: $M_2\geq 1$
+	- $\overline M_2=\min M_2\geq 1=1\in S_2$ which is also supremum!
 
 
+**Putting all together:**
+Now consider the union, so:
+- No upper bound since $S_1$ is unbounded
+	- therefore no max and sup
+- Lower bound: the minimum of the two lower bounds is $m\leq 0$
+	- no minimum since $0\not in A$
+	- Infimum is $\text{inf }A=0$
 
-| Lower Bound | Upper Bound | Infimum            | Supremum           | Minimum                                     | Maximum |
-| ----------- | ----------- | ------------------ | ------------------ | ------------------------------------------- | ------- |
-| $m_2\leq 0$ | $M_2\geq 1$ | $\text{inf }S_2=0$ | $\text{sup }S_2=1$ | no since $\overline m_2=\max\min m_2\leq 0= |         |
 
-
-
-Lower bounded: yes; $m_2\leq 0$
-Upper bounded: yes, just see value of $x_1$ due to monotonicity; $M_2\geq 1$
-
-Minimum: no; $\overline m_2=\max m_2\leq 0=0\not\in S_2$ 
-Maximum: yes: $\overline M_2=\min M_2\geq 1=1\in S_2$
-
-Inf: yes: $\text{inf }S_2=0$
-Sup: yes; $\text{sup } S_2=1$
-
-Putting all together:
-Lower bound: both are lower bounded, so chose the lowest bound: $m=0$
-Upper bound: since $S_1$ is unbounded no upper bound
-
-Therefore there is no max and supremum.
-
-Finally since the lowest of the infimums is 0, then $\text{inf }A=0$ we don't have a minimum.
 
 # 2) Symbols
 - $\implies$: implies, necessary condition
