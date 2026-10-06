@@ -896,7 +896,7 @@ E(\theta)&=W(D-\overline H)=W(\theta)(D(\theta)-Q(\theta)P(\theta))\\
 So the theorem holds with a normalized weighing function and amplitude function
 
 In any case the **filter order** is approximately:
-$$N\approx\frac{-10\log_{10}(\delta_p\delta_s)-13}{14.6\frac{\theta_s-\theta_p}{2\pi}}$$
+$$N\approx\frac{-10\text{log}_{10}(\delta_p\delta_s)-13}{14.6\frac{\theta_s-\theta_p}{2\pi}}$$
 >[!rmk|*]
 >The filter order $N$ is inversely proportional to the transition bandwidth
 >
@@ -1258,8 +1258,8 @@ $\begin{flalign} &&\square \end{flalign}$
 ## 8.3) Analog Filter Solutions
 We will design a *passive* analog low pass filter in which $\max_\omega|H_a(j\omega)|=1$. From here we can redefine
 $$\begin{align}
-&1-\delta_p=\frac1{\sqrt{1+\epsilon^2}}&&\rightarrow PBR_{dB}=20\log_{10}\sqrt{1+\epsilon^2}\\
-&\delta_s=\frac1A&&\rightarrow A_{dB}=20\log_{10}A
+&1-\delta_p=\frac1{\sqrt{1+\epsilon^2}}&&\rightarrow PBR_{dB}=20 \text{log}_{10}\sqrt{1+\epsilon^2}\\
+&\delta_s=\frac1A&&\rightarrow A_{dB}=20 \text{log}_{10}A
 \end{align}$$
 ![[Pasted image 20250827123249.png|Example|300]]
 Moreover let's define two classes of filters:

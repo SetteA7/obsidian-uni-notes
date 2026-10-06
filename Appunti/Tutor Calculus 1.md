@@ -1,6 +1,6 @@
 # 1) Lesson 1
 ## 1.1) Inequalities
-In general:
+In general: $\log_2$
 1) Find domain $D$
 2) Rewrite so that it is function bigger/smaller than 0
 3) Divide in different products and analyze them individually
