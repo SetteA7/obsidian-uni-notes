@@ -1,5 +1,3 @@
-$\newcommand{\log}[1][\!]{\text{log}_{#1}}$
-$$\log[optional]$$
 $\newcommand{\logt}{\text{log}_{10}}$
 $$\logt$$
 $\newcommand{\db}{{[\text{dB}]}}$
