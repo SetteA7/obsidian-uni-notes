@@ -8,24 +8,24 @@ In general:
 	2) study sign
 4) Final sign analysis
 
-From bolzano weierstrass theorem (you will see this later) we have that every intersection at 0, that is, at every zero of the function. there is a change of sign.
+There can happen 3 main cases: fractions, square roots or absolute values
 
-3 main cases:
+We will 3 main cases:
 $$\begin{align}
 &\frac{A(x)}{B(x)}\geq 0 &&\text{Study sign of both}\\
 &\sqrt{A(x)}\geq B(x) &&\text{Add condition: } B(x)\geq 0\\
 &|A(x)|\geq 0 &&\text{Divide using abs. value definition: }\begin{cases}A(x)&A(x)\geq 0\\-A(x)&A(x)<0\end{cases}
 \end{align}$$
 
-####  **Ex c)**
+####  **Ex c)** Fraction
 Solve the following inequality:
 $$\frac{x - 1}{x - 2} > \frac{2x - 3}{x - 3}$$
 
 First find the domain:
 $$D=x\in\mathbb R\setminus\curly{2,3}$$
-Now compute
+Now simplify the expression
 $$\frac{x - 1}{x - 2} - \frac{2x - 3}{x - 3} > 0 \implies \frac{(x-1)(x-3) - (2x-3)(x-2)}{(x-2)(x-3)} > 0$$
-This is $>0$ if numerator and denominator share the same sign, that is, where the function is positive.
+This is of form $A(x)/B(x)$ so the study of the numerator and denominator needs to be done independently
 
 **Numerator:**
 First we find the zeroes of the numerator function:
@@ -42,6 +42,8 @@ Where the discriminant $\Delta=b^2-4ac$ determines the types of solution:
 - $\Delta<0$: no real solution
 
 In this case since $\Delta = 9 - 12 = -3 < 0$ we don't have any solutions, hence since $a<0$ the whole numerator is negative.
+
+$$N>0\ \forall x\in D$$
 
 **Denominator:**
 Here the function already shows the zeroes, so we can plot the graph to see the regions:
@@ -124,6 +126,8 @@ $$\emptyset\cap S=\emptyset\qquad \emptyset\cup S=S$$
 Describe the following set:
 $$C=\curly{x\in\mathbb R: \frac{x^2-5x+4}{x^2-9}<0}\cup\curly{x\in\mathbb R:x+\sqrt{7x+1}=17}$$
 **Subset 1:**
+First notice that the domain is $x\not=\pm 3$
+
 Numerator:
 $$x^2-5x+4=0\rightarrow x_{1,2}=1, \ 4\rightarrow N>0\iff x<1\cup x>4$$
 Denominator:
