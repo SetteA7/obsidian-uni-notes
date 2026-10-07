@@ -9,14 +9,6 @@ In general:
 4) Final sign analysis
 
 There can happen 3 main cases: fractions, square roots or absolute values
-
-We will 3 main cases:
-$$\begin{align}
-&\frac{A(x)}{B(x)}\geq 0 &&\text{Study sign of both}\\
-&\sqrt{A(x)}\geq B(x) &&\text{Add condition: } B(x)\geq 0\\
-&|A(x)|\geq 0 &&\text{Divide using abs. value definition: }\begin{cases}A(x)&A(x)\geq 0\\-A(x)&A(x)<0\end{cases}
-\end{align}$$
-
 ####  **Ex c)** Fraction
 Solve the following inequality:
 $$\frac{x - 1}{x - 2} > \frac{2x - 3}{x - 3}$$
@@ -139,16 +131,23 @@ $$\boxed{S = \left(\frac{1-\sqrt{13}}{6}, \frac{1}{2}\right) \cup (1, +\infty)}$
 Solve the following inequality:
 $$\sqrt{x^2-6x}>x+2$$
 First notice that the domain is
-$$x^2-6x\geq 0\rightarrow D=\curly{-\infty, 0}\cup\curly{6,+\infty}$$
+$$x^2-6x\geq 0\rightarrow D=(-\infty, 0]\cup[6,+\infty)$$
 Now notice that the sqrt is always positive, so when $x+2<0\rightarrow x<-2$ the disequality is satisfied.
+That is, our first part of the result includes the part of the domain less than $-2$
+$$S_1=D\cap\curly{x<-2}=\curly{x<-2}$$
 
-Now for $x>-2$ take the sqrt of both sides:
+
+Now for $x\geq-2$ square of both sides:
 $$x^2-6x>x^2+4x+4\rightarrow 0>10x+4\rightarrow x<-\frac25$$
+This clearly for the values bigger than $-2$ in the domain, that is
+$$S_2=D\cap\curly{\curly{x\geq -2}\cap\curly{x<-\frac25}}=D\cap\curly{-2\leq x<-\frac25}=\curly{-2\leq x<-\frac25}$$
+
+
 So the result is:
-$$S=\curly{\curly{x<-2}\cup\curly{x<-\frac25}
-}\cap\curly{\curly{-\infty, 0}\cup\curly{6,+\infty}}=\curly{-\infty, -\frac25}$$
+$$S=S_1\cup S_2=\curly{x<-2}\cup\curly{-2\leq x<-\frac25}=x<-\frac25$$
 
 
+---
 
 #### **Ex i)** Mixed Together
 Solve the following inequality:
@@ -294,6 +293,14 @@ Call $x_n$ the value of x for any chosen $n$, then $x_{n+1}<x_n$.
 This is easily shown as the following inequality is true for $n\in \mathbb N\setminus \curly 0$ (check at home):
 $$\frac{1}{(n+1)^2}<\frac1{n^2}$$
 Therefore for every number $x_n>0$ we can find a smaller number such that $0<x_{n+1}<x_n$
+
+Is $0$ the maximum lower bound?
+By contradiction suppose there exists a lower bound $\delta>0$ then if 0 is the maximum lower bound we have
+$$\exists n \in \mathbb{N} \setminus \{0\} \quad \text{such that} \quad \frac{1}{n^2} < \delta$$
+Now compute
+$$\frac{1}{n^2} < \delta \rightarrow n^2 > \frac{1}{\delta} \rightarrow n > \frac{1}{\sqrt{\delta}}$$
+Because $\delta > 0$, the number $\frac{1}{\sqrt{\delta}}$ is just a fixed positive real number and an appropriate $n$ exists.
+
 
 With this digression aside, we also know that $0\not \in S_2$.
 As before analyze:
