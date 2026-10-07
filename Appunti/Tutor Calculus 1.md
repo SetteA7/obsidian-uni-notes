@@ -255,18 +255,21 @@ Example: consider set $A=[0,1)$ any $m\leq0$ is a lower bound and any $M\geq 1$ 
 >[!def|*] Maximum/Minimum of $A$
 >If $\overline M$ is an upper bound for $A$ and $\overline M\in A$, then $\overline M$ is the *minimum* possible *upper* bound and is the **maximum** (of $A$).
 >
->If $\overline M$ is an upper bound for $A$ and $\overline M\in A$, then $\overline M$ is the *maximum* possible *lower* bound, then it is the **minimum** (of $A$).
+>If $\overline M$ is an upper bound for $A$ and $\overline M\in A$, then $\overline M$ is the *maximum* possible *lower* bound and the **minimum** (of $A$).
 
 In this case $\overline M\in A$ by definition. 
 From the previous example: $\overline m =\max\curly{m\leq 0}=0\in A$ is the correct minimum of $A$, however $\overline M =\min\curly{M\geq 1}=1\not\in A$ means that we don't have a maximum
 
 >[!def|*] Supremum/Infimum
->The **supremum of $A$** $\text{sup } A$ is the minimum of the upper bounds of $A$. If a set allows for a maximum, then it is also the supremum
+>The **supremum of $A$** $\text{sup } A$ is the minimum of the upper bounds of $A$.
 >
->The **infumum of $A$** $\text{inf } A$ is the maximum of the lower bounds of $A$. If a set allows for a minimum, then it is also the infimum.
+>The **infimum of $A$** $\text{inf } A$ is the maximum of the lower bounds of $A$. 
 
 Finish the example: we know $\overline m=0\in A$ so this is both minimum and infimum of $A$. We know also $\overline M=1\not \in A$, therefore $\text{sup A}=1$ but it is not the maximum.
 
+Recall that if a set is unbounded, then
+$$\sup A = +\infty \quad \text{if } A \text{ is unbounded from above}$$
+$$\inf A = -\infty \quad \text{if } A \text{ is unbounded from below}$$
 #### Ex a)
 Tell wether this subsets is bounded and the sup/inf and if it allow for maximum/minimum.
 $$A=\curly{x\in\mathbb R: x=n\text{ or } x=\frac1{n^2},n\in N\setminus\curly 0}$$
@@ -280,9 +283,10 @@ $$A=S_1\cup S_2\text{ where } \quad \begin{align}
 Find the bounds on both sets individually (not required but the result is clearer).
 
 **Study the first subset $S_1$:** notice that it is just the natural numbers with zero excluded, so its properties are already known.
-- No upper bound, so also no max or sup
+- No upper bound, so also no max
+	- Supremum: since unbounded; $\text{sup }S_1=+\infty$
 - Lower bound: $m_1\leq 1$
-	- $\overline m_1=\max m_1\leq 1=1\in S$ which is also the infimum!
+	- Minimum: $\overline m_1=\max m_1\leq 1=1\in S$
 
 **Study the second subset $S_2$:** Intuitively we know that the function describing the set is monotonically decreasing: we can express it by saying:
 
@@ -297,15 +301,15 @@ As before analyze:
 	- No minimum: $\overline m_2=\max m_2\leq 0=0\not \in S_2$
 	- Infimum is $\text{inf }S_2=0$
 - Upper bound: $M_2\geq 1$
-	- $\overline M_2=\min M_2\geq 1=1\in S_2$ which is also supremum!
+	- $\overline M_2=\min M_2\geq 1=1\in S_2$
 
 
 **Putting all together:**
 Now consider the union, so:
 - No upper bound since $S_1$ is unbounded
-	- therefore no max and sup
+	- therefore $\text{sup }S=+\infty$
 - Lower bound: the minimum of the two lower bounds is $m\leq 0$
-	- no minimum since $0\not in A$
+	- no minimum since $0\not \in S$
 	- Infimum is $\text{inf }A=0$
 
 
