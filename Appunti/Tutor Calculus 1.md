@@ -169,23 +169,20 @@ $$\sqrt{|x^2-4|}-x\geq0\rightarrow\begin{cases}
 Each system can be solved independently from the other.
 
 **Solve first equation:**
-Recall that when LHS (x) is negative there is always a solution.
+Recall that when RHS (x) is negative there is always a solution.
 $$\sqrt{x^2-4}\geq x$$
-Therefore one part of the solution includes $x<0$ when 
+Therefore one part of the solution includes $x<0$
 
-
-Now study in the interval $x\geq 2$: since we are sure that both sides are $\geq0$ we can square both sides:
+Now study in the interval $x\geq 2$ (already accounted for domain): since we are sure that both sides are $\geq0$ we can square both sides:
 $$x^2-4\geq x^2\rightarrow -4\geq 0$$
-Not possible, so the only solution to this part is $x\leq -2$
+Not possible, so the only solution to this part is $S_1=x\leq 0\cap D_1=x\leq -2$
 
 **Solve the second equation:**
-As before a solution always exists for $x\geq 0$. Now consider only the positive values ($x\geq 0$) in order to be able to square both sides:
-$$\sqrt{4-x^2}\geq x\rightarrow 4-x^2\geq x^2\rightarrow 4-2x^2\geq 0\rightarrow -\sqrt 2<x<\sqrt 2$$
-So recap:
-- solution always exists for $x\leq 0$
-- for positive $x$ the solution is $x\in [-\sqrt 2,\sqrt 2]$
-- All this with $x\in[-2,2]$ from the initial system
-Here it is clear that the union results in $x\in[-2,\sqrt 2]$.
+As before a solution always exists for $x< 0$. Now consider only the positive values ($x\geq 0$) in order to be able to square both sides:
+$$\sqrt{4-x^2}\geq x\rightarrow 4-x^2\geq x^2\rightarrow 4-2x^2\geq 0\rightarrow -\sqrt 2\leq x\leq\sqrt 2$$
+So we have $S_2=D_2\cap\curly{ x<0\cup-\sqrt 2\leq x\leq \sqrt 2}=D_2\cap x\leq\sqrt 2=-2<x\leq\sqrt 2$
+
+
 
 The result is therefore the union of both cases which yields:
 $$\boxed{S=x\leq -2\cup -2< x\leq\sqrt 2\rightarrow S=x\leq \sqrt 2}$$
