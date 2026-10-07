@@ -139,7 +139,15 @@ $$\boxed{S = \left(\frac{1-\sqrt{13}}{6}, \frac{1}{2}\right) \cup (1, +\infty)}$
 Solve the following inequality:
 $$\sqrt{x^2-6x}>x+2$$
 First notice that the domain is
-$$x^2-6x\geq 0$$
+$$x^2-6x\geq 0\rightarrow D=\curly{-\infty, 0}\cup\curly{6,+\infty}$$
+Now notice that the sqrt is always positive, so when $x+2<0\rightarrow x<-2$ the disequality is satisfied.
+
+Now for $x>-2$ take the sqrt of both sides:
+$$x^2-6x>x^2+4x+4\rightarrow 0>10x+4\rightarrow x<-\frac25$$
+So the result is:
+$$S=\curly{\curly{x<-2}\cup\curly{x<-\frac25}
+}\cap\curly{\curly{-\infty, 0}\cup\curly{6,+\infty}}=\curly{-\infty, -\frac25}$$
+
 
 
 #### **Ex i)** Mixed Together
@@ -218,7 +226,10 @@ so $S_1=(-3,1)\cup (3,4)$
 **Subset 2:**
 This is just an equality:
 $$\sqrt{7x + 1} = 17 - x$$
-The domain is $7x+1\geq 0\rightarrow D=\curly{x\leq 17}$
+The domain is $7x+1\geq 0\rightarrow D=\curly{x\geq -\frac17}$
+Moreover as before, both sides must have the same sign when squaring and since the sqrt is always $\geq0$ we must have that also $17-x\geq0\rightarrow x\leq 17$ so we can further reduce the domain to 
+$$D=\sq{-\frac17,17}$$
+
 Square both sides:
 $$7x+1=(17-x)^2\rightarrow 7x+1=x^2-34x+17^2\rightarrow x^2-41x+288=0$$
 $$x_{1,2}=9, \ 32$$
@@ -242,9 +253,9 @@ Notice $M$ does not need to be in $A$
 Example: consider set $A=[0,1)$ any $m\leq0$ is a lower bound and any $M\geq 1$ is upper bound
 
 >[!def|*] Maximum/Minimum of $A$
->If $\overline M$ is an upper bound for $A$ and $\overline M\in A$, if $\overline M$ is the *minimum* possible *upper* bound, then it is the **maximum** of $A$.
+>If $\overline M$ is an upper bound for $A$ and $\overline M\in A$, then $\overline M$ is the *minimum* possible *upper* bound and is the **maximum** (of $A$).
 >
->If $\overline M$ is an upper bound for $A$ and $\overline M\in A$, if $\overline M$ is the *maximum* possible *lower* bound, then it is the **minimum** of $A$.
+>If $\overline M$ is an upper bound for $A$ and $\overline M\in A$, then $\overline M$ is the *maximum* possible *lower* bound, then it is the **minimum** (of $A$).
 
 In this case $\overline M\in A$ by definition. 
 From the previous example: $\overline m =\max\curly{m\leq 0}=0\in A$ is the correct minimum of $A$, however $\overline M =\min\curly{M\geq 1}=1\not\in A$ means that we don't have a maximum
