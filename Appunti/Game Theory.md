@@ -88,3 +88,9 @@ $\mathscr p$
 
 **Nash Equilibrium**
 Loop of dominant decisions from multiple players: x dominates y, so I play x, my opponent knows I'll do that and if y dominates x he'll play y.
+
+Everybody happy!
+
+Motivation
+If this is not in a nash equilibrium then there exists some player $i$ such that $s_i'$ is not the best response
+So there is an incentive for player $i$ to change form $s_i'$
