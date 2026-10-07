@@ -83,3 +83,8 @@ vN-M does not state to compare expectations but to use affine transformations of
 
 # 4) Rationalizing Solutions
 Strategy $s_i\in S_i$ is the best response to $s_{-i}\in S_{-i}$  if $u(s_i,s_{-i})\geq u(s_i',s_{-i})$ $\forall s_i'\in S_i$
+
+$\mathscr p$ 
+
+**Nash Equilibrium**
+Loop of dominant decisions from multiple players: x dominates y, so I play x, my opponent knows I'll do that and if y dominates x he'll play y.
