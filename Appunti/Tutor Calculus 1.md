@@ -1,26 +1,26 @@
 # 1) Lesson 1
 ## 1.1) Inequalities
-In general:
-1) Find domain $D$
-2) Rewrite so that it is function bigger/smaller than 0
-3) Divide in different products and analyze them individually
-	1) find zeroes
-	2) study sign
-4) Final sign analysis
+**General Procedure:**
+1. Determine the domain $D$.
+2. Bring all terms to one side: $f(x) \gtrless 0$.
+3. Factor into products or fractions: $\frac{A(x)}{B(x)} \gtrless 0$.
+	1. Find the roots of each factor.
+	2. Construct a sign chart.
+4. Intersect the resulting intervals with the domain $D$.
 
 There can happen 3 main cases: fractions, square roots or absolute values
 ####  **Ex c)** Fraction
 Solve the following inequality:
 $$\frac{x - 1}{x - 2} > \frac{2x - 3}{x - 3}$$
 
-First find the domain:
+Domain:
 $$D=x\in\mathbb R\setminus\curly{2,3}$$
-Now simplify the expression
+Simplify:
 $$\frac{x - 1}{x - 2} - \frac{2x - 3}{x - 3} > 0 \implies \frac{(x-1)(x-3) - (2x-3)(x-2)}{(x-2)(x-3)} > 0$$
 This is of form $A(x)/B(x)$ so the study of the numerator and denominator needs to be done independently
 
 **Numerator:**
-First we find the zeroes of the numerator function:
+Find zeroes:
 $$\begin{align}
 (x-1)(x-3) - (2x-3)(x-2)&=(x^2 - 4x + 3) - (2x^2 - 7x + 6) \\
 &= -x^2 + 3x - 3
@@ -60,7 +60,7 @@ $$\boxed{2<x<3}$$
 #### **Ex d)** Absolute value
 Solve the following inequality:
 $$\frac{|x|}{x-1}>\frac{x+1}{2x-1}$$
-First find the domain:
+Domain:
 $$D = x \in \mathbb{R} \setminus \left\{\frac{1}{2}, 1\right\}$$
 Now recall the abs value definition:
 $$|f(x)|=\begin{cases}
@@ -166,12 +166,13 @@ $$\sqrt{|x^2-4|}-x\geq0\rightarrow\begin{cases}
 \sqrt{x^2-4}-x\geq 0 & x\leq-2\cup x\geq 2\\
 \sqrt{4-x^2}-x\geq 0 & -2<x<2
 \end{cases}$$
-Each system can be solved independently from the other, just the result must be intersected ($\cap$) with the condition of the system.
+Each system can be solved independently from the other.
 
 **Solve first equation:**
-Here we have a problem, since $x$ can be negative:
+Recall that when LHS (x) is negative there is always a solution.
 $$\sqrt{x^2-4}\geq x$$
-clearly if it is negative then then it is always true, so we have already found some solutions $x\leq -2$
+Therefore one part of the solution includes $x<0$ when 
+
 
 Now study in the interval $x\geq 2$: since we are sure that both sides are $\geq0$ we can square both sides:
 $$x^2-4\geq x^2\rightarrow -4\geq 0$$
@@ -246,7 +247,7 @@ Recall the theory
 >[!def|*] Upper/Lower Bound
 >$M\in \mathbb Q$ is called **upper bound** for $A$ if $M\geq a, \forall a\in A$.
 >
->Reespectively it is called **lower bound** if $M\leq a,\forall a\in A$
+>Respectively it is called **lower bound** if $M\leq a,\forall a\in A$
 
 Notice $M$ does not need to be in $A$
 Example: consider set $A=[0,1)$ any $m\leq0$ is a lower bound and any $M\geq 1$ is upper bound
@@ -254,7 +255,7 @@ Example: consider set $A=[0,1)$ any $m\leq0$ is a lower bound and any $M\geq 1$ 
 >[!def|*] Maximum/Minimum of $A$
 >If $\overline M$ is an upper bound for $A$ and $\overline M\in A$, then $\overline M$ is the *minimum* possible *upper* bound and is the **maximum** (of $A$).
 >
->If $\overline M$ is an upper bound for $A$ and $\overline M\in A$, then $\overline M$ is the *maximum* possible *lower* bound and the **minimum** (of $A$).
+>If $\overline m$ is an lower bound for $A$ and $\overline m\in A$, then $\overline m$ is the *maximum* possible *lower* bound and the **minimum** (of $A$).
 
 In this case $\overline M\in A$ by definition. 
 From the previous example: $\overline m =\max\curly{m\leq 0}=0\in A$ is the correct minimum of $A$, however $\overline M =\min\curly{M\geq 1}=1\not\in A$ means that we don't have a maximum
@@ -314,21 +315,19 @@ As before analyze:
 **Putting all together:**
 Now consider the union, so:
 - No upper bound since $S_1$ is unbounded
-	- therefore $\text{sup }S=+\infty$
-- Lower bound: the minimum of the two lower bounds is $m\leq 0$
-	- no minimum since $0\not \in S$
-	- Infimum is $\text{inf }A=0$
+	- therefore $\text{sup }A=+\infty$
+- Lower bound: The infimum is the **maximum** of all lower bounds: $\inf A = \min(\inf S_1, \inf S_2) = \min(1, 0) = 0$. Since $0 \notin A$, $\min A$ does not exist.
 
 
 
 # 2) Symbols
-- $\implies$: implies, necessary condition
-- $\impliedby$: implied by, sufficient condition
+- $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
+- $\impliedby$: implied by, necessary condition
 - $\iff$: necessary + sufficient, if and only if "iff"
 
 - $\emptyset$: empty set
 - $\mathbb N$: natural numbers; $\curly{0,1,2,...}$
-- $\mathbb Z$: integer numbers; $\curly{,...,-2,-1,0,1,2,...,}$
+- $\mathbb Z$: integer numbers; $\curly{...,-2,-1,0,1,2,...}$
 - $\mathbb Q$: rational numbers; $\curly{\frac mn\ m,n\in\mathbb Z, n\not = 0}$
 - $\mathbb R$: real numbers
 - $\mathbb C$: complex numbers
