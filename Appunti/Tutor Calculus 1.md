@@ -43,16 +43,13 @@ Where the discriminant $\Delta=b^2-4ac$ determines the types of solution:
 
 In this case since $\Delta = 9 - 12 = -3 < 0$ we don't have any solutions, hence since $a<0$ the whole numerator is negative.
 
-$$N>0\ \forall x\in D$$
-
 **Denominator:**
 Here the function already shows the zeroes, so we can plot the graph to see the regions:
 
 ![[Pasted image 20261005144306.png|Curve|250]]
 
  
- So we have 
- $$D>0\iff x<2\ \cup\ x>3$$
+ So we have positive denominator for $x<2\ \cup\ x>3$.
 
 By noticing the interval where they have the same sign:
 $$
@@ -68,7 +65,84 @@ $$\boxed{2<x<3}$$
 
 ---
 
-#### Ex i)
+#### **Ex d)** Absolute value
+Solve the following inequality:
+$$\frac{|x|}{x-1}>\frac{x+1}{2x-1}$$
+First find the domain:
+$$D = x \in \mathbb{R} \setminus \left\{\frac{1}{2}, 1\right\}$$
+Now recall the abs value definition:
+$$|f(x)|=\begin{cases}
+f(x) & f(x)\geq 0\\
+-f(x)& f(x)<0
+\end{cases}$$
+In this case $f(x)=x$ so we have:
+$$\begin{cases}
+\displaystyle \frac{x}{x-1}>\frac{x+1}{2x-1} & x\geq 0\\
+\displaystyle \frac{-x}{x-1}>\frac{x+1}{2x-1} & x<0
+\end{cases}$$
+**Start with case 1:**
+Rewrite so that it is a single fraction:
+$$\frac{x}{x-1} - \frac{x+1}{2x-1} > 0 \implies \frac{x(2x-1) - (x+1)(x-1)}{(x-1)(2x-1)} > 0$$
+- Numerator:
+
+$$x(2x-1) - (x^2-1) = 2x^2 - x - x^2 + 1 = x^2 - x + 1$$
+
+Find the zeroes of the numerator:
+
+$$x^2 - x + 1 = 0 \rightarrow \Delta = -3$$
+
+Since $\Delta < 0$ and $a = 1 > 0$, the numerator is strictly positive.
+
+- Denominator:
+
+$$(x-1)(2x-1) > 0 \iff x < \frac{1}{2} \ \cup \ x > 1$$
+
+Sign analysis for Case 1:
+
+$$\begin{array}{c\|ccc} x & \left(-\infty, \frac{1}{2}\right) & \left(\frac{1}{2}, 1\right) & (1, +\infty) \\ \hline \text{Numerator} & + & + & + \\ \text{Denominator} & + & - & + \\ \hline \text{Fraction} & + & - & + \end{array}$$
+
+So the fraction is $>0$ on $\left(-\infty, \frac{1}{2}\right) \cup (1, +\infty)$.
+
+Intersecting with the case condition $x \geq 0$:
+$$S_1 = \left[0, \frac{1}{2}\right) \cup (1, +\infty)$$
+**Case 2:**
+Same procedure as case 1:
+$$\frac{-x}{x-1} - \frac{x+1}{2x-1} > 0 \implies \frac{-x(2x-1) - (x+1)(x-1)}{(x-1)(2x-1)} > 0$$
+
+- Numerator:
+$$-2x^2 + x - (x^2-1) = -3x^2 + x + 1$$
+Find the zeroes of the numerator:
+$$x_{1,2} = \frac{-1 \pm \sqrt{13}}{-6} = \frac{1 \mp \sqrt{13}}{6}$$
+Since $a = -3 < 0$, the parabola opens downward:
+$$N > 0 \iff x_1=\frac{1-\sqrt{13}}{6} < x < \frac{1+\sqrt{13}}{6}=x_2$$
+Denominator:
+The denominator roots are $\frac{1}{2} = 0.5$ and $1$.
+
+Sign analysis for the factors:
+
+$$\begin{array}{c\|ccccc} x & \left(-\infty, x_1\right) & (x_1, 1/2) & (1/2, x_2) & (x_2, 1) & (1, +\infty) \\ \hline \text{Numerator} & - & + & + & - & - \\ \text{Denominator} & + & + & - & - & + \\ \hline \text{Fraction} & - & + & - & + & - \end{array}$$
+
+The fraction is $>0$ on $\left(x_1, \frac{1}{2}\right) \cup (x_2, 1)$.
+
+Intersecting with the case condition $x < 0$:
+$$S_2 = \left(\frac{1-\sqrt{13}}{6}, 0\right)$$
+Taking the union of both cases $S = S_1 \cup S_2$:
+$$S = \left(\frac{1-\sqrt{13}}{6}, 0\right) \cup \left[0, \frac{1}{2}\right) \cup (1, +\infty)$$
+Notice that $0$ is included in the solution set, so the first two intervals join together:
+$$\boxed{S = \left(\frac{1-\sqrt{13}}{6}, \frac{1}{2}\right) \cup (1, +\infty)}$$
+
+
+---
+
+
+#### **Ex f)** Square Root
+Solve the following inequality:
+$$\sqrt{x^2-6x}>x+2$$
+First notice that the domain is
+$$x^2-6x\geq 0$$
+
+
+#### **Ex i)** Mixed Together
 Solve the following inequality:
 $$\sqrt{|x^2-4|}-x\geq0$$
 Domain: $|x^2-4|\geq 0\rightarrow D=\mathbb R$
