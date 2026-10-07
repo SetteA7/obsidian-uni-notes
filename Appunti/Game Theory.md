@@ -78,3 +78,8 @@ If you mix the best outcome ($p$) and the worst outcome ($q$) with a probability
 vN-M does not state to compare expectations but to use affine transformations of $u$
 
 #### Continuous Case
+
+# 3) Multiple Players TODO
+
+# 4) Rationalizing Solutions
+Strategy $s_i\in S_i$ is the best response to $s_{-i}\in S_{-i}$  if $u(s_i,s_{-i})\geq u(s_i',s_{-i})$ $\forall s_i'\in S_i$
