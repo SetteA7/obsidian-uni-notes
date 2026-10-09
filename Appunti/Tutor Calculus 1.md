@@ -169,17 +169,17 @@ $$\sqrt{|x^2-4|}-x\geq0\rightarrow\begin{cases}
 \sqrt{4-x^2}-x\geq 0 & -2<x<2
 \end{cases}$$
 Each system can be solved independently from the other.
+Call the conditions of the cases $D_1$ and $D_2$ respectively.
 
-Remember: The solutions of a system are 
-
-**Solve first equation:**
+**Solve first case:**
 Recall that when RHS (x) is negative there is always a solution.
 $$\sqrt{x^2-4}\geq x$$
 Therefore one part of the solution includes $x<0$
 
-Now study in the interval $x\geq 2$ (already accounted for domain): since we are sure that both sides are $\geq0$ we can square both sides:
+Now study in the interval $x\geq 0$: since we are sure that both sides are $\geq0$ we can square both sides:
 $$x^2-4\geq x^2\rightarrow -4\geq 0$$
-Not possible, so the only solution to this part is $S_1=x\leq 0\cap D_1=x\leq -2$
+Not possible, so the only solution to this part is when $x$ is negative:
+$$S_1=x\leq 0\cap D_1=x\leq -2$$
 
 **Solve the second equation:**
 As before a solution always exists for $x< 0$. Now consider only the positive values ($x\geq 0$) in order to be able to square both sides:
