@@ -72,6 +72,10 @@ $$\begin{cases}
 \displaystyle \frac{x}{x-1}>\frac{x+1}{2x-1} & x\geq 0\\
 \displaystyle \frac{-x}{x-1}>\frac{x+1}{2x-1} & x<0
 \end{cases}$$
+Remeber:
+- The solution to each part of the system must be put in intersection with the condition
+- The solutions of the parts of a system are in union with each other
+
 **Start with case 1:**
 Rewrite so that it is a single fraction:
 $$\frac{x}{x-1} - \frac{x+1}{2x-1} > 0 \implies \frac{x(2x-1) - (x+1)(x-1)}{(x-1)(2x-1)} > 0$$
@@ -132,12 +136,10 @@ Solve the following inequality:
 $$\sqrt{x^2-6x}>x+2$$
 First notice that the domain is
 $$x^2-6x\geq 0\rightarrow D=(-\infty, 0]\cup[6,+\infty)$$
-Now notice that the sqrt is always positive, so when $x+2<0\rightarrow x<-2$ the disequality is satisfied.
-That is, our first part of the result includes the part of the domain less than $-2$
+First notice that when $x+2<0$ the solution inequality holds (in the domain). So one part of the solution is:
 $$S_1=D\cap\curly{x<-2}=\curly{x<-2}$$
 
-
-Now for $x\geq-2$ square of both sides:
+Now for $x+2\geq0$ of both sides can be squared:
 $$x^2-6x>x^2+4x+4\rightarrow 0>10x+4\rightarrow x<-\frac25$$
 This clearly for the values bigger than $-2$ in the domain, that is
 $$S_2=D\cap\curly{\curly{x\geq -2}\cap\curly{x<-\frac25}}=D\cap\curly{-2\leq x<-\frac25}=\curly{-2\leq x<-\frac25}$$
@@ -167,6 +169,8 @@ $$\sqrt{|x^2-4|}-x\geq0\rightarrow\begin{cases}
 \sqrt{4-x^2}-x\geq 0 & -2<x<2
 \end{cases}$$
 Each system can be solved independently from the other.
+
+Remember: The solutions of a system are 
 
 **Solve first equation:**
 Recall that when RHS (x) is negative there is always a solution.
