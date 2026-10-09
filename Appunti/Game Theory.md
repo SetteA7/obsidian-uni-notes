@@ -37,7 +37,7 @@ $$\forall a,b\in A \quad a\pref b\iff u(a)\geq u(b)$$
 #### Decision Trees
 TODO
 
-# 2) Random Elements
+# 2) Lotteries
 Randomness messes with rationality as it is harder to infer consequences
 
 Example:
@@ -79,7 +79,7 @@ vN-M does not state to compare expectations but to use affine transformations of
 
 #### Continuous Case
 
-# 3) Multiple Players TODO
+# 3) Static Games of Complete Infromation
 
 # 4) Rationalizing Solutions
 Strategy $s_i\in S_i$ is the best response to $s_{-i}\in S_{-i}$  if $u(s_i,s_{-i})\geq u(s_i',s_{-i})$ $\forall s_i'\in S_i$
