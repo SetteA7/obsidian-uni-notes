@@ -407,7 +407,18 @@ The final sketch can be done by sampling points only between $[0,1]$ since then 
 Sketch the graph of the following functions indicating the possible symmetries and/or periodicity:
 $$f(x)=1+\cos(2x)$$
 There is no restriction in the domain, so start with the symmetries. Again since $cos(z)\in[-1,1]$ the function returns only positive values, so an odd symmetry is excluded, moreover since $cos(z)$ is an even function, we can guess that the function is even, let's prove it:
-$$f(-x)=1+\cos(-2x)=$$
+$$f(-x)=1+\cos(-2x)=1+\cos(2x)=f(x)$$
+Periodicity:
+$T_1$: 1 is a constant function so it doesn't change the period
+$T_2$: $\cos(\theta)$ has period $2\pi$,that is $\cos(\theta+2\pi)=\cos(\theta)$, but what about $g(x)=\cos(2x)$? Let's try the generic case $\cos(ax)$, $a>0$
+
+By the definition of period, we must find 
+$$\min_T\curly{g(x+T)=g(x)}=\min_T\curly{\cos(a(x+T))=\cos(ax)}$$
+Recall that $\cos(\theta+2\pi)=\cos(\theta)$ and by comparing it with the argument of the minimum we get
+$$aT=2\pi\rightarrow T_2=\frac{2\pi}{a}$$
+And in our case $T=\pi$
+
+Now for the final period, recall that **the sum of two periodic functions is periodic if and only if the ratio of their periods is a rational number.**
 
 
 # 3) Symbols
