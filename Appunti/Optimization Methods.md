@@ -27,3 +27,13 @@ $$\text{Dual}=\begin{cases}
 \displaystyle s.t. \sum_{i=1}^pa_{ij}\pi_i\leq c_j\ &\forall j=1,...,q\\
 \pi_i\in\mathbb R_+\ &\forall i=1,..,p
 \end{cases}$$
+
+
+Example:
+$$\begin{cases}
+\min &\displaystyle\sum_{i\in O}\sum_{j\in D}c_{ij}x_{ij}\\
+s.t. &\displaystyle\sum_{j\in D}x_{ij}\leq s_i\ &\forall i\in O\\
+&\displaystyle\sum_{i\in O}x_{ij}=d_j&\forall j\in D\\\\
+&x_{ij}\in\mathbb R_+\ &\forall i\in O,\ \forall j\in D
+\end{cases}$$
+This has 12 variables and 2 _sets_ of constraints (7 constraints)
