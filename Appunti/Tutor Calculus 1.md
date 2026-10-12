@@ -324,10 +324,40 @@ Now consider the union, so:
 
 # 2) Lesson 16/10/26
 ## 2.1) Domains
-#### a) Logarithm
+$\newcommand{\dom}{\text{dom }}$
+
+#### a) Fraction and Sqrt
 Determine the domains of the following function:
-$$\log(x^2-x)$$
-The domain is $$
+$$f(x)=\frac{\sqrt{x^2-3x-4}}{x+5}$$
+Here the domain is given by two solutions that must hold simultaneously.
+
+Fraction:
+Here $D_1$
+
+#### b) Logarithm
+Determine the domains of the following function:
+$$f(x)=\log(x^2-x)$$
+The domain is given by $x^2-x>0$, so solve the inequality:
+$$x^2-x=x(x-1)>0$$
+The first term is positive for $x>0$, the second for $x>1$, so 
+$$\dom f=\curly{x<0\cup x>1}$$
+#### c) System
+Determine the domains of the following function:
+$$f(x)=\begin{cases}
+\displaystyle\frac1{2x+1}&x\geq 0\\
+e^{\sqrt{x+1}}&x<0
+\end{cases}$$
+Here the domain is given by the union of the two cases. 
+
+Case 1:
+Here the domain is given by $D_1^*=\curly{2x+1\not=0}=\curly{ x\not =-\frac12}$. However since this is a system, this must hold only inside the specified case, so $D_1=D_1^*\cap\curly{x\geq 0}=\curly{x\geq 0}$
+notice that $-\frac12\not\in\curly{x\geq0}$, so this part of the map is always valid
+
+Case 2:
+Here the domain is given by $x+1\geq 0\rightarrow x\geq -1$ which combined with the system is $x\in [-1,0)$
+
+The final domain becomes the union of the two cases, so
+$$\dom f=\curly{x\geq 0}\cup\curly{-1\leq x<0}=\curly{x\geq -1}$$
 # 3) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
