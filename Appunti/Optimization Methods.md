@@ -46,7 +46,7 @@ s.t. &\displaystyle u_i+v_j\leq c_{ij} &\forall i\in O,\ \forall j\in D\\
 & v_j\in \mathbb R& \forall j\in D\\
 \end{cases}
 $$
-This has 12 variables and 2 _sets_ of constraints (7 constraints total). I have called vectors $u,v$ the sets of constraints to define the 7 dual variables. 
+This has 12 variables and 2 _sets_ of constraints (7 constraints total). I have defined vectors $u,v$ as the the associated dual variables to the primal constraints. 
 
 The first part ($\min\leftrightarrow\max$) is done as we convert from from 12 primal variables ($O\cdot D$) to 7 dual variables ($O+D$).
 
@@ -70,13 +70,19 @@ Here are some values. The proofs are NOT needed for the exam (?)
 >[!thm|*] Weak Duality (Exam)
 >If $x$ is any feasible solution of the primal and $\pi$ is any feasible solution of the dual problem, then
 >$$\sum_{i=1}^p b_i\pi_i\leq\sum_{j=1}^qc_jx_j$$
->That is, the cost of the dual (feasible) solution cannot exceed the primal (feasible) solutions cost
+>That is, the cost of the dual (feasible) solution cannot exceed the primal (feasible) solutions cost.
 >
 >This has some important consequences:
 >>[!lemma|*] Lower/Upper Bound
 >>The objective function value of any feasible dual solution is a Lower Bound on the objective function of every feasible primal solution.
 >>
 >>The objective function value of any feasible primal solution is a Upper Bound on the objective function of every feasible dual solution.
+>
+>>[!lemma|*] Unbounded Solutions
+>>If the primal (dual. respectively) has an unbounded solution, the dual (primal, respectively) is infeasible.
+>>
+>>[!lemma|*] Optimal Solution
+>>If the theorem holds as an equality, then $x,\pi$ are optimal primal/dual solutions.
 
 Proof:
 Multiply $i$-th constraint by $\pi_i$ and adding them all:
@@ -86,3 +92,13 @@ $$\sum_{i=1}^p a_{ij}\pi_j\leq c_j\ \forall j=1,...,q,\ [x_j]\longrightarrow \su
 Where the RHS of the first is = to the LHS of the second, so:
 $$\sum_{i=1}^p b_i\pi_i\leq\sum_{j=1}^qc_jx_j$$
 $\endproof$
+For the second lemma:
+If the primal is unbounded, its cost drops toward $-\infty$. If a dual solution existed, its fixed cost would have to be less than or equal to all those arbitrarily small numbers, which is impossible. Thus, no dual solution can exist.
+
+>[!thm|*] Strong Duality
+>If the primal problem and dual problems are feasible, there exists an optimal primal solution $x^*$ and an optimal solution $\pi$ and $\sum_i b_i\pi_i^*=\sum_j=c_jx_j^*$
+
+>[!property|*] Complementary Slackness (Exam)
+>A pair $(x,\pi)$ of the primal and dual feasible solutions satisfies the complementary slackness if
+>$$\pi_i\par{\sum_{j=1}^q a_{ij}x_j-b_i}=0\ \forall i=1,...,p\text{ and }x_j\par{\sum_{i=1}^p a_{ij}\pi_i}=0\ \forall j=1,...,q$$
+
