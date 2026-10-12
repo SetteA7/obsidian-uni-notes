@@ -1,4 +1,4 @@
-# 1) Lesson 1
+# 1) Lesson 9/10/26
 ## 1.1) Inequalities
 **General Procedure:**
 1. Determine the domain $D$.
@@ -321,7 +321,14 @@ Now consider the union, so:
 
 
 
-# 2) Symbols
+
+# 2) Lesson 16/10/26
+## 2.1) Domains
+#### a) Logarithm
+Determine the domains of the following function:
+$$\log(x^2-x)$$
+The domain is $$
+# 3) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
 - $\iff$: necessary + sufficient, if and only if "iff"
