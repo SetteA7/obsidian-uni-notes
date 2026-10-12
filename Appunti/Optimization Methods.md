@@ -1,3 +1,5 @@
+Domande Teoriche che ha fatto:
+Weal duality, complementary slackness, minimax proble
 # 1) Intro
 $$\underbracket G_{\text{Graph}}=(\underbracket N_{\text{Node Set}}, \underbracket A_{\text{Arc Set}})$$
 With:
@@ -49,15 +51,27 @@ This has 12 variables and 2 _sets_ of constraints (7 constraints total). I have 
 The first part ($\min\leftrightarrow\max$) is done as we convert from from 12 primal variables ($O\cdot D$) to 7 dual variables ($O+D$).
 
 $$\begin{cases}
-\min &c_{11}x_{11}&+c_{12}x_{12}&+c_{13}x_{13}&+c_{14}x_{14}+c_{21}x_{21}+c_{22}x_{22}+c_{23}x_{23}+c_{24}x_{24}+c_{31}x_{31}+c_{32}x_{32}+c_{33}x_{33}+c_{34}x_{34}\\
-s.t. &x_{11}&+x_{12}+&x_{13}&+x_{14}\leq s_1\\
-x_{21}+x_{22}+x_{23}+x_{24}\leq s_2\\
-x_{31}+x_{32}+x_{33}+x_{34}\leq s_3\\
-s.t. x_{11}+x_{21}+x_{31}=d_1\\
-x_{12}+x_{22}+x_{32}=d_2\\
-x_{13}+x_{23}+x_{33}=d_3\\
-x_{14}+x_{24}+x_{34}=d_4
+\min &c_{11}x_{11}&+c_{12}x_{12}&+c_{13}x_{13}&+c_{14}x_{14}&+c_{21}x_{21}&+c_{22}x_{22}&+c_{23}x_{23}&+c_{24}x_{24}\\
+s.t. &x_{11}&+x_{12}&+x_{13}&+x_{14}&&&&&\leq s_1\\
+&&&&&\quad x_{21}&+x_{22}&+x_{23}&+x_{24}&\leq s_2\\
+s.t. &x_{11}&&&&+x_{21}&&&&=d_1\\
+&&\quad x_{12}&&&&+x_{22}&&&=d_2\\
+&&&\quad x_{13}&&&&+x_{23}&&=d_3\\
+&&&&\quad x_{14}&&&&+x_{24}&=d_4
 \end{cases}$$
 
-look one column at a time: chose $c_{ij}$, see the coefficients of associated constraints and multiply by $u,v$
-For example $c_{11}$
+look one column at a time (i have removed one item from $O$): chose $c_{ij}$, see the coefficients of associated constraints and multiply by $u,v$ and 
+For example for $c_{11}$ both coeff are $1$, so $u_1+v_1\leq c_{11}$. For TODO
+
+
+#### Theory
+Here are some values. The proofs are NOT needed for the exam (?)
+
+>[!thm|*] Weak Duality (Exam)
+>If $x$ is any feasible solution of the primal and $\pi$ is any feasible solution of the dual problem, then
+>$$\sum_{i=1}^p b_i\pi_i\leq\sum_{j=1}^qc_jx_j$$
+>That is, the cost of the dual solution cannot exceed the primal solutions cost
+
+Proof:
+Multiply $i$-th constraint by $\pi_i$ and adding them all:
+$$\sum_ib$$
