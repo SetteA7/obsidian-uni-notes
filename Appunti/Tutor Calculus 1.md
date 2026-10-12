@@ -411,7 +411,7 @@ $$f(x)=1+\cos(2x)$$
 There is no restriction in the domain, so start with the symmetries. Again since $cos(z)\in[-1,1]$ the function returns only positive values, so an odd symmetry is excluded, moreover since $cos(z)$ is an even function, we can guess that the function is even, let's prove it:
 $$f(-x)=1+\cos(-2x)=1+\cos(2x)=f(x)$$
 Periodicity:
-$T_1$: 1 is a constant function so it doesn't have a period but it is also not aperiodic
+$T_1$: 1 is a constant function so it doesn't have a defined period
 $T_2$: $\cos(\theta)$ has period $2\pi$,that is $\cos(\theta+2\pi)=\cos(\theta)$, but what about $g(x)=\cos(2x)$? Let's try the generic case $\cos(ax)$, $a>0$
 
 By the definition of period, we must find a $T>0$ such that
@@ -489,6 +489,7 @@ $$\begin{align}2&=e^x\\
 x&=\log 2
 \end{align}$$
 so the domain is just $\dom f=\mathbb R\setminus\curly {\log2}=(-\infty,\log2)\cup(\log2,+\infty)$
+Since domain is not symmetric wrt to origin, we don't have any symmetry.
 
 Sign:
 Recall $\log(z)\geq 0\iff z\geq1$, so $$y^2-4y+4\geq 1\rightarrow y^2-4y+3\geq 0$$
@@ -498,7 +499,13 @@ The inequality holds for $x\leq 0\cup x\geq \log3$
 So $f(x)\geq 0\iff x\leq 0\text{ or }x\geq \log3$
 And the roots are at $x=0,\ x=\log3$
 
-Finally since the log is not periodic, 
+Finally since the log is not periodic, so neither is $f(x)$
+
+#### 7) Hyperbolic Cosine
+Determine domain, sign and possible symmetries and periodicity of the following function:
+$$f(x)=\frac1{\cosh(\sin(x))}$$
+What is the hyperbolic cosine?
+
 # 3) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
