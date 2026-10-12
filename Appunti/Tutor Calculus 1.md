@@ -506,16 +506,45 @@ Determine domain, sign and possible symmetries and periodicity of the following 
 $$f(x)=\frac1{\cosh(\sin(x))}$$
 What is the hyperbolic cosine?
 $$\cosh(t)=\frac{e^t+e^{-t}}2$$
-So this is always defined and is always positive.
-
-We can rewrite the function as:
-$$f(a)=\frac1{\cosh(a)}\quad a=\sin(x)\in[-1,1]$$
+So this is always defined and is always positive. This is also an even function:
+$$\cosh(-t)=\frac{e^{-t}+e^t}2=\cosh(t)$$
 
 Domain:
+First define $a=\sin(x)\in[-1,1]$
 The denominator cannot be 0 so
 $$\cosh(a)=\frac{e^a+e^{-a}}2\not = 0$$
 Which is valid $\forall a$ as $e^k>0\quad\forall k\in\mathbb R$.
-$$e^a+e^{-a}=e^a\par{}$$
+$$\begin{align}
+e^a+e^{-a}&\not = 2\cdot0=0\\
+e^a(e^a+e^{-a})&\not = e^a\cdot 0=0\\
+\par{e^a}^2+1&\not =0\\
+\par{e^a}^2&\not =-1
+\end{align}$$
+So 
+$$\dom f=\mathbb R$$
+Sign:
+Hyperbolic cosine is always positive so also this function is always positive with no zero
+
+Symmetry:
+Cosh is even $\cosh(x)=\cosh(-x)$, sin is odd $\sin(-x)=-\sin(x)$.
+Try even:
+$$f(-x)=\frac1{\cosh(\sin(-x))}=\frac1{\cosh(-\sin(x))}=\frac1{\cosh(\sin(x))}=f(x)$$
+So it is even!
+
+Is it periodic?
+As before impose
+$$f(x + T) = f(x) \quad \text{for all } x \in \mathbb{R}$$
+Substituting
+$$\frac{1}{\cosh(\sin(x + T))} = \frac{1}{\cosh(\sin(x))}\rightarrow\cosh(\sin(x + T)) = \cosh(\sin(x))$$
+
+
+$$\vert{}\sin(x + T)\vert{} = \vert{}\sin(x)\vert{} \quad \forall x \in \mathbb{R}$$
+Squaring both sides:
+$$\sin^2(x + T) = \sin^2(x)$$
+Using the identity $\sin^2(\theta) = \frac{1 - \cos(2\theta)}{2}$:
+$$\frac{1 - \cos(2x + 2T)}{2} = \frac{1 - \cos(2x)}{2} \iff \cos(2x + 2T) = \cos(2x) \quad \forall x \in \mathbb{R}$$
+Because the fundamental period of $\cos(\theta)$ is $2\pi$:
+
 
 # 3) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
