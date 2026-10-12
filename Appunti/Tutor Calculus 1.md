@@ -514,14 +514,12 @@ The inequality holds for $x\leq 0\cup x\geq \log3$
 So $f(x)\geq 0\iff x\leq 0\text{ or }x\geq \log3$
 And the roots are at $x=0,\ x=\log3$
 
-Finally since the log is not periodic, so neither is $f(x)$
-
 #### 7) Hyperbolic Cosine
 Determine domain, sign and possible symmetries and periodicity of the following function:
 $$f(x)=\frac1{\cosh(\sin(x))}$$
 What is the hyperbolic cosine?
 $$\cosh(t)=\frac{e^t+e^{-t}}2$$
-So this is always defined and is always positive and strictly increasing (prove at home). 
+So this is always defined and is always positive. 
 This is also an even function:
 $$\cosh(-t)=\frac{e^{-t}+e^t}2=\cosh(t)$$
 
@@ -530,12 +528,7 @@ First define $a=\sin(x)\in[-1,1]$
 The denominator cannot be 0 so
 $$\cosh(a)=\frac{e^a+e^{-a}}2\not = 0$$
 Which is valid $\forall a$ as $e^k>0\quad\forall k\in\mathbb R$.
-$$\begin{align}
-e^a+e^{-a}&\not = 2\cdot0=0\\
-e^a(e^a+e^{-a})&\not = e^a\cdot 0=0\\
-\par{e^a}^2+1&\not =0\\
-\par{e^a}^2&\not =-1
-\end{align}$$
+
 So 
 $$\dom f=\mathbb R$$
 Sign:
@@ -578,8 +571,23 @@ Determine domain, sign and possible symmetries and periodicity of the following 
 $$f(x)=\frac{\log(\sin(x))}{\sin(x)-1}$$
 Domain:
 Denominator forces $\sin(x)\not=1$ which holds for $x\not=\frac\pi2+2k\pi \quad k\in\mathbb Z$
-The log forces $\sin(x)>0$ which is true for $x\in(2k\pi,\frac\pi+2k\pi)\quad k\in\mathbb Z$ and this it naturally excludes also the values  
+The log forces $\sin(x)>0$ which is true for $x\in(2k\pi,\pi+2k\pi)\quad k\in\mathbb Z$
+so the generic $k$-th interval is $(2k\pi,\frac\pi2+2k\pi)\cup(\frac\pi2+2k\pi,\pi+2k\pi)$
+The domain is the union of all these intervals:
+$$\dom f=\bigcup_{k\in\mathbb Z}(2k\pi,\frac\pi2+2k\pi)\cup(\frac\pi2+2k\pi,\pi+2k\pi)$$
+which is not symmetric wrt the origin and thus there is no symmetry
 
+Sign:
+The denominator is always negative since $\max \sin(x)=1$ and thus $\max\sin(x)-1=0$ (which is excluded by domain)
+The numerator is also always negative:
+$$\log(\sin(x))\geq0\iff\sin(x)\geq 1\iff \sin(x)=1$$
+which is excluded from the domain
+
+Therefore this function is always positive
+
+Periodicity:
+Notice that the domain itself needs to be periodic (or to be $\mathbb R$). In this case the domain is given by intervals given by $\sin(x)$ and it can be shifted only by $2k\pi$ to hold correctly. Therefore we can directly try with $T=2\pi$:
+$$f(x + 2\pi) = \frac{\log(\sin(x + 2\pi))}{\sin(x + 2\pi) - 1} = \frac{\log(\sin(x))}{\sin(x) - 1} = f(x)$$
 
 # 3) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
