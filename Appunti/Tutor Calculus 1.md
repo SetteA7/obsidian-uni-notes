@@ -506,7 +506,8 @@ Determine domain, sign and possible symmetries and periodicity of the following 
 $$f(x)=\frac1{\cosh(\sin(x))}$$
 What is the hyperbolic cosine?
 $$\cosh(t)=\frac{e^t+e^{-t}}2$$
-So this is always defined and is always positive. This is also an even function:
+So this is always defined and is always positive and strictly increasing (prove at home). 
+This is also an even function:
 $$\cosh(-t)=\frac{e^{-t}+e^t}2=\cosh(t)$$
 
 Domain:
@@ -538,12 +539,26 @@ Substituting
 $$\frac{1}{\cosh(\sin(x + T))} = \frac{1}{\cosh(\sin(x))}\rightarrow\cosh(\sin(x + T)) = \cosh(\sin(x))$$
 
 
+
+Easy way: Try period of $\sin(x)$ ($2\pi$):
+$$\begin{align}
+\cosh(\sin(x+2\pi))=\cosh(\sin(x))
+\end{align}$$
+
+
+
+Since cosh has even symmetry:
+$$\cosh(t) = \cosh(-t) \implies \cosh(t) = \cosh(\vert{}t\vert{}) \quad \forall t \in \mathbb{R}$$
+And therefore (prove at home):
+$$\cosh(\vert{}u\vert{}) = \cosh(\vert{}v\vert{}) \iff \vert{}u\vert{} = \vert{}v\vert{}$$
+And thus:
 $$\vert{}\sin(x + T)\vert{} = \vert{}\sin(x)\vert{} \quad \forall x \in \mathbb{R}$$
 Squaring both sides:
 $$\sin^2(x + T) = \sin^2(x)$$
 Using the identity $\sin^2(\theta) = \frac{1 - \cos(2\theta)}{2}$:
 $$\frac{1 - \cos(2x + 2T)}{2} = \frac{1 - \cos(2x)}{2} \iff \cos(2x + 2T) = \cos(2x) \quad \forall x \in \mathbb{R}$$
-Because the fundamental period of $\cos(\theta)$ is $2\pi$:
+Therefore the period is the same as $\cos(2x)$ which is $T=\pi$ and thus $2\pi$ is not the fundamental period (it is a period nonetheless).
+
 
 
 # 3) Symbols
