@@ -338,7 +338,7 @@ Sqrt:
 Here $D_2=\curly{x^2-3x-4\geq 0}$. The zeroes of thsi function are $x_{1,2}=-1,4$ so the inequality holds for $D_2=\curly{x\leq-1\cup x\geq 4}$
 
 Finally
-$$\dom f=D_1\cap D_2=\curly{x\leq-1\cup x\geq 4}\setminus\curly{-5}=(-\infty, -5)\cup(-5,1]\cup[4,+\infty)$$
+$$\dom f=D_1\cap D_2=\curly{x\leq-1\cup x\geq 4}\setminus\curly{-5}=(-\infty, -5)\cup(-5,-1]\cup[4,+\infty)$$
 where the last part is the correct formal way to write the result.
 #### b) Logarithm
 Determine the domains of the following function:
@@ -371,7 +371,7 @@ Determine domain and sign of the following function:
 $$f(x)=-\log(x-1)$$
 The domain is given by $x-1>0\rightarrow \dom f=\curly{x>1}$
 
-Log is a known function, so we know it's sign:
+Log is a known function, so we know its sign:
 $$\log(z)\rightarrow \begin{cases}\log(z)\in[0,+\infty) &z\in[1,+\infty)\\
 \log(z)\in(-\infty,0) & z\in(0,1)
 \end{cases}$$
@@ -396,7 +396,7 @@ Sketch the graph of the following function indicating the possible symmetries an
 $$f(x)=\sqrt{1-|x|}$$
 Domain:
 $$D=\curly{1-|x|\geq0}=\curly{|x|\leq 1}=\curly{x\in[-1,1]}$$
-So clearly the function cannot be periodic.
+So clearly the function cannot be periodic. By definition of period
 
 Symmetry:
 Since $f$ is the result of a sqrt, it can only be positive, therefore an odd symmetry is not possible. Try the even symmetry:
@@ -436,6 +436,13 @@ so the function is aperiodic
 #### 1) Arcsin
 Determine domain, sign and possible symmetries and periodicity of the following function:
 $$f(x) = \arcsin\left(\left\vert{}x^3 - \frac{1}{2}\right\vert{}\right)$$
+Properties of $\arcsin(t)$
+The $\sin$ function is not bijective as the map is $\mathbb R\rightarrow[-1,1]$. So the arcsin is defined on the restriction in which this function is strictly increasing and bijective, that is
+$$\sin\Big\vert{}_{[-\frac{\pi}{2}, \, \frac{\pi}{2}]}: \left[-\frac{\pi}{2}, \, \frac{\pi}{2}\right] \longrightarrow [-1, 1] \implies \arcsin: [-1, 1] \longrightarrow \left[-\frac{\pi}{2}, \, \frac{\pi}{2}\right]$$
+The domain is therefore 
+$$\dom\arcsin=[-1,1]$$
+The sign coincides with the sign of the argument.
+
 Domain:
 Recall that $\arcsin(t)$ is defined for $t\in[-1,1]$, so we must impose this as the domain:
 $$-1 \le \left\vert{}x^3 - \frac{1}{2}\right\vert{} \le 1$$
@@ -446,8 +453,9 @@ $$\dom f=\sq{-\frac{1}{\sqrt[3]2},\sqrt[3]{\frac32}}$$
 Here we can notice that since the domain is not symmetric wrt the origin, the function does not have any symmetries. Moreover, since it has a finite domain it cannot be periodic.
 
 Sign:
-The $\sin$ function is not bijective as $[-1]$
-
+In our case since we have only positive values, the function will always be positive
+$$\arcsin(t) \in \left[0, \, \frac{\pi}{2}\right] \implies \arcsin(t) \ge 0$$
+The function is $0$ for $\left\vert{}x^3 - \frac{1}{2}\right\vert{}=0\rightarrow x=\sqrt[3]\frac12$
 
 # 3) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
