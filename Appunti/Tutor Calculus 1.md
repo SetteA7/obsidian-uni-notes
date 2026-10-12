@@ -325,7 +325,12 @@ Now consider the union, so:
 # 2) Lesson 16/10/26
 ## 2.1) Domains
 $\newcommand{\dom}{\text{dom }}$
-
+Recall:
+$$\begin{align}
+\frac{a(x)}{f(x)}&\qquad\dom f=\curly{f(x)\not=0}\\
+\sqrt{f(x)}&\qquad\dom f=\curly{f(x)\geq 0}\\
+\log(f(x))&\qquad\dom f=\curly{f(x)>0}\\
+\end{align}$$
 #### a) Fraction and Sqrt
 Determine the domains of the following function:
 $$f(x)=\frac{\sqrt{x^2-3x-4}}{x+5}$$
@@ -366,11 +371,19 @@ $$\dom f=\curly{x\geq 0}\cup\curly{-1\leq x<0}=\curly{x\geq -1}$$
 
 ## 2.2) Sign
 
+Recall:
+$$\begin{align}
+f(x)=\frac{a(x)}{b(x)}&\qquad f(x)>\iff\text{sign}(a(x))=\text{sign}(b(x))\\
+\sqrt{a(x)}&\qquad f(x)>0\ \forall x\in \dom f\\
+\log(a(x))&\qquad f(x)>\iff a(x)>1\\
+
+\end{align}$$
 #### a) Log
 Determine domain and sign of the following function:
 $$f(x)=-\log(x-1)$$
 The domain is given by $x-1>0\rightarrow \dom f=\curly{x>1}$
 
+In depth:
 Log is a known function, so we know its sign:
 $$\log(z)\rightarrow \begin{cases}\log(z)\in[0,+\infty) &z\in[1,+\infty)\\
 \log(z)\in(-\infty,0) & z\in(0,1)
@@ -408,11 +421,11 @@ The final sketch can be done by sampling points only between $[0,1]$ since then 
 #### b) Cosine
 Sketch the graph of the following function indicating the possible symmetries and/or periodicity:
 $$f(x)=1+\cos(2x)$$
-There is no restriction in the domain, so start with the symmetries. Again since $cos(z)\in[-1,1]$ the function returns only positive values, so an odd symmetry is excluded, moreover since $cos(z)$ is an even function, we can guess that the function is even, let's prove it:
+There is no restriction in the domain, so start with the symmetries. Again since $\cos(z)\in[-1,1]$ the function returns only positive values, so an odd symmetry is excluded, moreover since $\cos(z)$ is an even function, we can guess that the function is even, let's prove it:
 $$f(-x)=1+\cos(-2x)=1+\cos(2x)=f(x)$$
 Periodicity:
 $T_1$: 1 is a constant function so it doesn't have a defined period
-$T_2$: $\cos(\theta)$ has period $2\pi$,that is $\cos(\theta+2\pi)=\cos(\theta)$, but what about $g(x)=\cos(2x)$? Let's try the generic case $\cos(ax)$, $a>0$
+$T_2$: $\cos(\theta)$ has period $2\pi$, that is $\cos(\theta+2\pi)=\cos(\theta)$, but what about $g(x)=\cos(2x)$? Let's try the generic case $\cos(ax)$, $a>0$
 
 By the definition of period, we must find a $T>0$ such that
 $$\min_T\curly{g(x+T)=g(x)}=\min_T\curly{\cos(a(x+T))=\cos(ax)}$$
@@ -437,6 +450,8 @@ Now for the final period, recall that **the sum of two periodic functions is per
 Check the ratio:
 $$\frac{T_1}{T_2}=\frac\pi2\not\in \mathbb Q$$
 so the function is aperiodic.
+
+---
 
 Now consider
 $$f(x) = \sin(2x) + \cos(3 x)$$
@@ -542,16 +557,15 @@ $$\frac{1}{\cosh(\sin(x + T))} = \frac{1}{\cosh(\sin(x))}\rightarrow\cosh(\sin(x
 
 Easy way: Try period of $\sin(x)$ ($2\pi$):
 $$\begin{align}
-\cosh(\sin(x+2\pi))=\cosh(\sin(x))
+\cosh(\sin(x+2\pi))=\cosh(\sin(x))\\
+\cosh(\sin(x))=\cosh(\sin(x))\\
 \end{align}$$
-
-
-
+Harder way:
 Since cosh has even symmetry:
 $$\cosh(t) = \cosh(-t) \implies \cosh(t) = \cosh(\vert{}t\vert{}) \quad \forall t \in \mathbb{R}$$
 And therefore (prove at home):
 $$\cosh(\vert{}u\vert{}) = \cosh(\vert{}v\vert{}) \iff \vert{}u\vert{} = \vert{}v\vert{}$$
-And thus:
+And thus impose:
 $$\vert{}\sin(x + T)\vert{} = \vert{}\sin(x)\vert{} \quad \forall x \in \mathbb{R}$$
 Squaring both sides:
 $$\sin^2(x + T) = \sin^2(x)$$
@@ -559,6 +573,12 @@ Using the identity $\sin^2(\theta) = \frac{1 - \cos(2\theta)}{2}$:
 $$\frac{1 - \cos(2x + 2T)}{2} = \frac{1 - \cos(2x)}{2} \iff \cos(2x + 2T) = \cos(2x) \quad \forall x \in \mathbb{R}$$
 Therefore the period is the same as $\cos(2x)$ which is $T=\pi$ and thus $2\pi$ is not the fundamental period (it is a period nonetheless).
 
+#### 10) 
+Determine domain, sign and possible symmetries and periodicity of the following function:
+$$f(x)=\frac{\log(\sin(x))}{\sin(x)-1}$$
+Domain:
+Denominator forces $\sin(x)\not=1$ which holds for $x\not=\frac\pi2+2k\pi \quad k\in\mathbb Z$
+The log forces $\sin(x)>0$ which is true for $x\in(2k\pi,\frac\pi+2k\pi)\quad k\in\mathbb Z$ and this it naturally excludes also the values  
 
 
 # 3) Symbols
