@@ -386,7 +386,7 @@ Finally since it's $-\log(x-1)$ just switch the sign:
 $$\begin{cases}f(x)> 0 & 1<x<2 \\
 f(x)\leq0 & x\geq 2
 \end{cases}$$
-
+The root is at $x-1=1\rightarrow x=2$
 ## 2.3) Symmetries and Periodicity
 If a function is symmetric, it can have either even or odd symmetry:
 - Even Symmetry: mirrored along y axis: $f(x)=f(-x)$
@@ -396,10 +396,10 @@ Sketch the graph of the following function indicating the possible symmetries an
 $$f(x)=\sqrt{1-|x|}$$
 Domain:
 $$D=\curly{1-|x|\geq0}=\curly{|x|\leq 1}=\curly{x\in[-1,1]}$$
-So clearly the function cannot be periodic. By definition of period
+So clearly the function cannot be periodic. By definition, a periodic function requires $x \in \text{dom } f \implies x + T \in \text{dom } f$ for all $x$, which cannot hold on a bounded interval
 
 Symmetry:
-Since $f$ is the result of a sqrt, it can only be positive, therefore an odd symmetry is not possible. Try the even symmetry:
+Since $f$ is the result of a sqrt, it can only be positive (roots at $x=\pm1$), therefore an odd symmetry is not possible (only possible if $f$ is constant 0). Try the even symmetry:
 $$f(-x)=\sqrt{1-|-x|}=\sqrt{1-|-1|\cdot|x|}=\sqrt{1-1\cdot|x|}=f(x)$$
 The final sketch can be done by sampling points only between $[0,1]$ since then it can be mirrored.
 ![[Pasted image 20261012120934.png|Sketch|450]]
@@ -409,35 +409,52 @@ $$f(x)=1+\cos(2x)$$
 There is no restriction in the domain, so start with the symmetries. Again since $cos(z)\in[-1,1]$ the function returns only positive values, so an odd symmetry is excluded, moreover since $cos(z)$ is an even function, we can guess that the function is even, let's prove it:
 $$f(-x)=1+\cos(-2x)=1+\cos(2x)=f(x)$$
 Periodicity:
-$T_1$: 1 is a constant function so it doesn't change the period, therefore $T_1\in\mathbb R$
+$T_1$: 1 is a constant function so it doesn't have a period but it is also not aperiodic
 $T_2$: $\cos(\theta)$ has period $2\pi$,that is $\cos(\theta+2\pi)=\cos(\theta)$, but what about $g(x)=\cos(2x)$? Let's try the generic case $\cos(ax)$, $a>0$
 
-By the definition of period, we must find 
+By the definition of period, we must find a $T>0$ such that
 $$\min_T\curly{g(x+T)=g(x)}=\min_T\curly{\cos(a(x+T))=\cos(ax)}$$
 Recall that $\cos(\theta+2\pi)=\cos(\theta)$ and by comparing it with the argument of the minimum we get
 $$aT=2\pi\rightarrow T=\frac{2\pi}{a}$$
 And in our case $T_2=\pi$
 
-Now for the final period, recall that **the sum of two periodic functions is periodic if and only if the ratio of their periods is a rational number.**
-Since we have $T_1$ as an arbitrary number, we set it to $\pi$ and therefore the ratio is $1\in\mathbb Q$. 
-Then since we know the period exists, we must take the Least Common Multiple (LCM). Since $T_1=T_2$ then $T=T_2=\pi$
+Adding a constant is merely a vertical translation and leaves the periodic properties unchanged:
+$$f(x+T) = f(x) \iff 1 + \cos(2(x+T)) = 1 + \cos(2x) \iff \cos(2(x+T)) = \cos(2x)$$
+Therefore, the fundamental period of $f(x)$ is simply the fundamental period of $\cos(2x)$:
+$$T = \frac{2\pi}{2} = \pi$$
 ![[Pasted image 20261012144511.png|Sketch|450]]
 #### Two sinusoids
 Determine the period of the following function:
 $$f(x) = \sin(2x) + \cos(\pi x)$$
-From the previous exercise we know that a sinusoidal has period is
+From the previous exercise we know that a sinusoidal has period
 $$T=\frac{2\pi}a$$
 So we know the two periods:
 $$T_1=\frac{2\pi}{2}=\pi\qquad T_2=\frac{2\pi}\pi=2$$
+
+Now for the final period, recall that **the sum of two periodic functions is periodic if and only if the ratio of their periods is a rational number.**
 Check the ratio:
 $$\frac{T_1}{T_2}=\frac\pi2\not\in \mathbb Q$$
-so the function is aperiodic
+so the function is aperiodic.
 
+Now consider
+$$f(x) = \sin(2x) + \cos(3 x)$$
+therefore
+$$\begin{align}
+&T_1=\pi\\
+&T_2=\frac{2\pi}3
+\end{align}\qquad \frac{T_1}{T_2}=\frac32\in\mathbb Q$$
+We know the function is periodic! But how is the period found? 
+To find the fundamental period $T$, any common period must satisfy $f(x + T) = f(x)$ for all $x$. For the sum of two independent sinusoids, this requires $T$ to be a simultaneous integer multiple of both individual periods $T_1$ and $T_2$:
+$$T = k_1 T_1 = k_2 T_2 \quad \text{for some } k_1, k_2 \in \mathbb{Z}^+$$
+That is:
+$$k_1 \pi = k_2 \left(\frac{2\pi}{3}\right) \implies k_1 = \frac{2}{3}k_2 \implies \frac{k_1}{k_2} = \frac{2}{3}\qquad k_1=2, k_2=3$$
+and thus the period is
+$$T=2\pi=3\cdot\frac{2\pi}3$$
 #### 1) Arcsin
 Determine domain, sign and possible symmetries and periodicity of the following function:
 $$f(x) = \arcsin\left(\left\vert{}x^3 - \frac{1}{2}\right\vert{}\right)$$
 Properties of $\arcsin(t)$
-The $\sin$ function is not bijective as the map is $\mathbb R\rightarrow[-1,1]$. So the arcsin is defined on the restriction in which this function is strictly increasing and bijective, that is
+The $\sin$ function is not bijective (surjective but not injective) the map is $\mathbb R\rightarrow[-1,1]$. So the arcsin is defined on the restriction in which this function is strictly increasing and bijective, that is
 $$\sin\Big\vert{}_{[-\frac{\pi}{2}, \, \frac{\pi}{2}]}: \left[-\frac{\pi}{2}, \, \frac{\pi}{2}\right] \longrightarrow [-1, 1] \implies \arcsin: [-1, 1] \longrightarrow \left[-\frac{\pi}{2}, \, \frac{\pi}{2}\right]$$
 The domain is therefore 
 $$\dom\arcsin=[-1,1]$$
