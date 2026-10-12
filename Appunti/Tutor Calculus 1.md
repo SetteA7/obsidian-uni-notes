@@ -332,8 +332,14 @@ $$f(x)=\frac{\sqrt{x^2-3x-4}}{x+5}$$
 Here the domain is given by two solutions that must hold simultaneously.
 
 Fraction:
-Here $D_1$
+Here $D_1=\curly{x+5\not = 0}=\curly{x\not = -5}$
 
+Sqrt:
+Here $D_2=\curly{x^2-3x-4\geq 0}$. The zeroes of thsi function are $x_{1,2}=-1,4$ so the inequality holds for $D_2=\curly{x\leq-1\cup x\geq 4}$
+
+Finally
+$$\dom f=D_1\cap D_2=\curly{x\leq-1\cup x\geq 4}\setminus\curly{-5}=(-\infty, -5)\cup(-5,1]\cup[4,+\infty)$$
+where the last part is the correct formal way to write the result.
 #### b) Logarithm
 Determine the domains of the following function:
 $$f(x)=\log(x^2-x)$$
@@ -350,14 +356,36 @@ e^{\sqrt{x+1}}&x<0
 Here the domain is given by the union of the two cases. 
 
 Case 1:
-Here the domain is given by $D_1^*=\curly{2x+1\not=0}=\curly{ x\not =-\frac12}$. However since this is a system, this must hold only inside the specified case, so $D_1=D_1^*\cap\curly{x\geq 0}=\curly{x\geq 0}$
-notice that $-\frac12\not\in\curly{x\geq0}$, so this part of the map is always valid
+Here the domain is given by $D_1^*=\curly{2x+1\not=0}=\curly{ x\not =-\frac12}$. However since this is a system, this must hold only inside the specified case, so $D_1=D_1^*\cap\curly{x\geq 0}=\curly{x\geq 0}$ since $-\frac12\not\in\curly{x\geq0}$, so this part of the map is always valid.
 
 Case 2:
 Here the domain is given by $x+1\geq 0\rightarrow x\geq -1$ which combined with the system is $x\in [-1,0)$
 
 The final domain becomes the union of the two cases, so
 $$\dom f=\curly{x\geq 0}\cup\curly{-1\leq x<0}=\curly{x\geq -1}$$
+
+## 2.2) Sign
+
+#### a) Log
+Determine domain and sign of the following function:
+$$f(x)=-\log(x-1)$$
+The domain is given by $x-1>0\rightarrow \dom f=\curly{x>1}$
+
+Log is a known function, so we know it's sign:
+$$\log(z)\rightarrow \begin{cases}\log(z)\in[0,+\infty) &z\in[1,+\infty)\\
+\log(z)\in(-\infty,0) & z\in(0,1)
+\end{cases}$$
+To study the sign of $\log(x-1)$ just replace the argument: $z=x-1$ and therefore
+$$\log(x-1)\rightarrow \begin{cases}\log(x-1)\geq 0 &x-1\geq 1\\
+\log(x-1)<0 & 0<x-1<1
+\end{cases}=
+\begin{cases}\log(x-1)\geq 0 &x\geq 2\\
+\log(x-1)<0 & 1<x<2
+\end{cases}$$
+Finally since it's $-\log(x-1)$ just switch the sign:
+$$\begin{cases}f(x)> 0 & 1<x<2 \\
+f(x)\leq0 & x\geq 2
+\end{cases}$$
 # 3) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
