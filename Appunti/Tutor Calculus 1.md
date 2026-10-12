@@ -433,7 +433,22 @@ Check the ratio:
 $$\frac{T_1}{T_2}=\frac\pi2\not\in \mathbb Q$$
 so the function is aperiodic
 
-#### 1) 
+#### 1) Arcsin
+Determine domain, sign and possible symmetries and periodicity of the following function:
+$$f(x) = \arcsin\left(\left\vert{}x^3 - \frac{1}{2}\right\vert{}\right)$$
+Domain:
+Recall that $\arcsin(t)$ is defined for $t\in[-1,1]$, so we must impose this as the domain:
+$$-1 \le \left\vert{}x^3 - \frac{1}{2}\right\vert{} \le 1$$
+Since the absolute value is always positive we have
+$$\left\vert{}x^3 - \frac{1}{2}\right\vert{} \le 1\rightarrow-1 \le x^3 - \frac{1}{2} \le 1\rightarrow-\frac{1}{\sqrt[3]{2}} \le x \le \sqrt[3]{\frac{3}{2}}$$
+So we have 
+$$\dom f=\sq{-\frac{1}{\sqrt[3]2},\sqrt[3]{\frac32}}$$
+Here we can notice that since the domain is not symmetric wrt the origin, the function does not have any symmetries. Moreover, since it has a finite domain it cannot be periodic.
+
+Sign:
+The $\sin$ function is not bijective as $[-1]$
+
+
 # 3) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
