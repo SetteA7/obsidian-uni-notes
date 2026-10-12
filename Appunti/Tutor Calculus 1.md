@@ -505,6 +505,17 @@ Finally since the log is not periodic, so neither is $f(x)$
 Determine domain, sign and possible symmetries and periodicity of the following function:
 $$f(x)=\frac1{\cosh(\sin(x))}$$
 What is the hyperbolic cosine?
+$$\cosh(t)=\frac{e^t+e^{-t}}2$$
+So this is always defined and is always positive.
+
+We can rewrite the function as:
+$$f(a)=\frac1{\cosh(a)}\quad a=\sin(x)\in[-1,1]$$
+
+Domain:
+The denominator cannot be 0 so
+$$\cosh(a)=\frac{e^a+e^{-a}}2\not = 0$$
+Which is valid $\forall a$ as $e^k>0\quad\forall k\in\mathbb R$.
+$$e^a+e^{-a}=e^a\par{}$$
 
 # 3) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
