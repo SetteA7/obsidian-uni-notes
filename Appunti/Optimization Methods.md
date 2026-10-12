@@ -70,8 +70,19 @@ Here are some values. The proofs are NOT needed for the exam (?)
 >[!thm|*] Weak Duality (Exam)
 >If $x$ is any feasible solution of the primal and $\pi$ is any feasible solution of the dual problem, then
 >$$\sum_{i=1}^p b_i\pi_i\leq\sum_{j=1}^qc_jx_j$$
->That is, the cost of the dual solution cannot exceed the primal solutions cost
+>That is, the cost of the dual (feasible) solution cannot exceed the primal (feasible) solutions cost
+>
+>This has some important consequences:
+>>[!lemma|*] Lower/Upper Bound
+>>The objective function value of any feasible dual solution is a Lower Bound on the objective function of every feasible primal solution.
+>>
+>>The objective function value of any feasible primal solution is a Upper Bound on the objective function of every feasible dual solution.
 
 Proof:
 Multiply $i$-th constraint by $\pi_i$ and adding them all:
-$$\sum_ib$$
+$$\sum_{j=1}^qa_{ij}x_j\geq b_i\ \forall i=1,...,p, \ [\pi_i]\longrightarrow \sum_{i=1}^pb_i\pi_i\leq\sum _{i=1}^p\pi_i\par{\sum_{j=1}^qa_{ij}x_j}$$
+also multiply $j$-th constraint by $x_j$ and add them all:
+$$\sum_{i=1}^p a_{ij}\pi_j\leq c_j\ \forall j=1,...,q,\ [x_j]\longrightarrow \sum_{j=1}^qx_j\par{\sum_{i=1}^p a_{ij}\pi_j}\leq \sum_{j=1}^q x_jc_j$$
+Where the RHS of the first is = to the LHS of the second, so:
+$$\sum_{i=1}^p b_i\pi_i\leq\sum_{j=1}^qc_jx_j$$
+$\endproof$
