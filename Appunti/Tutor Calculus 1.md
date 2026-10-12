@@ -387,6 +387,8 @@ $$\begin{cases}f(x)> 0 & 1<x<2 \\
 f(x)\leq0 & x\geq 2
 \end{cases}$$
 The root is at $x-1=1\rightarrow x=2$
+
+In general: $\log(z)\geq 0\iff z\geq1$
 ## 2.3) Symmetries and Periodicity
 If a function is symmetric, it can have either even or odd symmetry:
 - Even Symmetry: mirrored along y axis: $f(x)=f(-x)$
@@ -472,8 +474,31 @@ Here we can notice that since the domain is not symmetric wrt the origin, the fu
 Sign:
 In our case since we have only positive values, the function will always be positive
 $$\arcsin(t) \in \left[0, \, \frac{\pi}{2}\right] \implies \arcsin(t) \ge 0$$
-The function is $0$ for $\left\vert{}x^3 - \frac{1}{2}\right\vert{}=0\rightarrow x=\sqrt[3]\frac12$
+The  root is at $\left\vert{}x^3 - \frac{1}{2}\right\vert{}=0\rightarrow x=\sqrt[3]\frac12$
 
+#### 3) Exponential
+Determine domain, sign and possible symmetries and periodicity of the following function:
+$$f(x)=\log(e^{2x}-4e^x+4)$$
+First we do a substitution, $y\def e^x$ and therefore
+$$f(y)=\log(y^2-4y+4)$$
+Domain:
+From the log we impose $y^2-4y+4>0$
+The roots are $y_{1,2}=2$ which for x becomes: 
+$$\begin{align}2&=e^x\\
+\log 2&=\log e^x\\
+x&=\log 2
+\end{align}$$
+so the domain is just $\dom f=\mathbb R\setminus\curly {\log2}=(-\infty,\log2)\cup(\log2,+\infty)$
+
+Sign:
+Recall $\log(z)\geq 0\iff z\geq1$, so $$y^2-4y+4\geq 1\rightarrow y^2-4y+3\geq 0$$
+The roots are $y_{1,2}=1,3\rightarrow x_{1,2}=0,\log 3$ 
+The inequality holds for $x\leq 0\cup x\geq \log3$
+
+So $f(x)\geq 0\iff x\leq 0\text{ or }x\geq \log3$
+And the roots are at $x=0,\ x=\log3$
+
+Finally since the log is not periodic, 
 # 3) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
