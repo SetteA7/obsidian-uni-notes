@@ -368,41 +368,7 @@ Here the domain is given by $x+1\geq 0\rightarrow x\geq -1$ which combined with 
 
 The final domain becomes the union of the two cases, so
 $$\dom f=\curly{x\geq 0}\cup\curly{-1\leq x<0}=\curly{x\geq -1}$$
-
-## 2.2) Sign
-
-Recall:
-$$\begin{align}
-f(x)=\frac{a(x)}{b(x)}&\qquad f(x)>\iff\text{sign}(a(x))=\text{sign}(b(x))\\
-\sqrt{a(x)}&\qquad f(x)>0\ \forall x\in \dom f\\
-\log(a(x))&\qquad f(x)>\iff a(x)>1\\
-
-\end{align}$$
-#### a) Log
-Determine domain and sign of the following function:
-$$f(x)=-\log(x-1)$$
-The domain is given by $x-1>0\rightarrow \dom f=\curly{x>1}$
-
-In depth:
-Log is a known function, so we know its sign:
-$$\log(z)\rightarrow \begin{cases}\log(z)\in[0,+\infty) &z\in[1,+\infty)\\
-\log(z)\in(-\infty,0) & z\in(0,1)
-\end{cases}$$
-To study the sign of $\log(x-1)$ just replace the argument: $z=x-1$ and therefore
-$$\log(x-1)\rightarrow \begin{cases}\log(x-1)\geq 0 &x-1\geq 1\\
-\log(x-1)<0 & 0<x-1<1
-\end{cases}=
-\begin{cases}\log(x-1)\geq 0 &x\geq 2\\
-\log(x-1)<0 & 1<x<2
-\end{cases}$$
-Finally since it's $-\log(x-1)$ just switch the sign:
-$$\begin{cases}f(x)> 0 & 1<x<2 \\
-f(x)\leq0 & x\geq 2
-\end{cases}$$
-The root is at $x-1=1\rightarrow x=2$
-
-In general: $\log(z)\geq 0\iff z\geq1$
-## 2.3) Symmetries and Periodicity
+## 2.2) Symmetries and Periodicity
 If a function is symmetric, it can have either even or odd symmetry:
 - Even Symmetry: mirrored along y axis: $f(x)=f(-x)$
 - Odd Symmetry: mirrored along x and y axis: $f(x)=-f(-x)$
@@ -424,7 +390,7 @@ $$f(x)=1+\cos(2x)$$
 There is no restriction in the domain, so start with the symmetries. Again since $\cos(z)\in[-1,1]$ the function returns only positive values, so an odd symmetry is excluded, moreover since $\cos(z)$ is an even function, we can guess that the function is even, let's prove it:
 $$f(-x)=1+\cos(-2x)=1+\cos(2x)=f(x)$$
 Periodicity:
-$T_1$: 1 is a constant function so it doesn't have a defined period
+$T_1$: 1 is a constant function. A constant function $c(x) = c$ satisfies $c(x + T) = c(x)$ for **every** $T > 0$. Therefore, every positive real number is a period. However it does not have a fundamental period (0 cannot be period)
 $T_2$: $\cos(\theta)$ has period $2\pi$, that is $\cos(\theta+2\pi)=\cos(\theta)$, but what about $g(x)=\cos(2x)$? Let's try the generic case $\cos(ax)$, $a>0$
 
 By the definition of period, we must find a $T>0$ such that
@@ -484,7 +450,10 @@ Since the absolute value is always positive we have
 $$\left\vert{}x^3 - \frac{1}{2}\right\vert{} \le 1\rightarrow-1 \le x^3 - \frac{1}{2} \le 1\rightarrow-\frac{1}{\sqrt[3]{2}} \le x \le \sqrt[3]{\frac{3}{2}}$$
 So we have 
 $$\dom f=\sq{-\frac{1}{\sqrt[3]2},\sqrt[3]{\frac32}}$$
-Here we can notice that since the domain is not symmetric wrt the origin, the function does not have any symmetries. Moreover, since it has a finite domain it cannot be periodic.
+Here we can notice that since the domain is not symmetric wrt the origin, the function does not have any symmetries, that is: A function can have symmetry **only if** its domain is symmetric with respect to the origin
+$$x \in \text{dom } f \implies -x \in \text{dom } f$$
+
+Moreover, since it has a finite domain it cannot be periodic.
 
 Sign:
 In our case since we have only positive values, the function will always be positive
@@ -586,7 +555,8 @@ which is excluded from the domain
 Therefore this function is always positive
 
 Periodicity:
-Notice that the domain itself needs to be periodic (or to be $\mathbb R$). In this case the domain is given by intervals given by $\sin(x)$ and it can be shifted only by $2k\pi$ to hold correctly. Therefore we can directly try with $T=2\pi$:
+Notice that the domain itself needs to be
+periodic (or to be $\mathbb R$). In this case the domain is given by intervals given by $\sin(x)$ and it can be shifted only by $2k\pi$ to hold correctly. Therefore we can directly try with $T=2\pi$:
 $$f(x + 2\pi) = \frac{\log(\sin(x + 2\pi))}{\sin(x + 2\pi) - 1} = \frac{\log(\sin(x))}{\sin(x) - 1} = f(x)$$
 
 # 3) Symbols
