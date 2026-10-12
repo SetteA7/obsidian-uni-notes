@@ -392,7 +392,7 @@ If a function is symmetric, it can have either even or odd symmetry:
 - Even Symmetry: mirrored along y axis: $f(x)=f(-x)$
 - Odd Symmetry: mirrored along x and y axis: $f(x)=-f(-x)$
 #### a) Sqrt and Abs
-Sketch the graph of the following functions indicating the possible symmetries and/or periodicity:
+Sketch the graph of the following function indicating the possible symmetries and/or periodicity:
 $$f(x)=\sqrt{1-|x|}$$
 Domain:
 $$D=\curly{1-|x|\geq0}=\curly{|x|\leq 1}=\curly{x\in[-1,1]}$$
@@ -404,7 +404,7 @@ $$f(-x)=\sqrt{1-|-x|}=\sqrt{1-|-1|\cdot|x|}=\sqrt{1-1\cdot|x|}=f(x)$$
 The final sketch can be done by sampling points only between $[0,1]$ since then it can be mirrored.
 ![[Pasted image 20261012120934.png|Sketch|450]]
 #### b) Cosine
-Sketch the graph of the following functions indicating the possible symmetries and/or periodicity:
+Sketch the graph of the following function indicating the possible symmetries and/or periodicity:
 $$f(x)=1+\cos(2x)$$
 There is no restriction in the domain, so start with the symmetries. Again since $cos(z)\in[-1,1]$ the function returns only positive values, so an odd symmetry is excluded, moreover since $cos(z)$ is an even function, we can guess that the function is even, let's prove it:
 $$f(-x)=1+\cos(-2x)=1+\cos(2x)=f(x)$$
@@ -420,9 +420,20 @@ And in our case $T_2=\pi$
 
 Now for the final period, recall that **the sum of two periodic functions is periodic if and only if the ratio of their periods is a rational number.**
 Since we have $T_1$ as an arbitrary number, we set it to $\pi$ and therefore the ratio is $1\in\mathbb Q$. 
+Then since we know the period exists, we must take the Least Common Multiple (LCM). Since $T_1=T_2$ then $T=T_2=\pi$
+![[Pasted image 20261012144511.png|Sketch|450]]
+#### Two sinusoids
+Determine the period of the following function:
+$$f(x) = \sin(2x) + \cos(\pi x)$$
+From the previous exercise we know that a sinusoidal has period is
+$$T=\frac{2\pi}a$$
+So we know the two periods:
+$$T_1=\frac{2\pi}{2}=\pi\qquad T_2=\frac{2\pi}\pi=2$$
+Check the ratio:
+$$\frac{T_1}{T_2}=\frac\pi2\not\in \mathbb Q$$
+so the function is aperiodic
 
-
-
+#### 1) 
 # 3) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
