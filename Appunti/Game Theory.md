@@ -143,8 +143,35 @@ An information $E$ is common knowledge if:
 - It is known that everybody knows it
 
 #### Normal Form Representation
-Eahc player $i$ has a set of accessible pure strategies $S_i$ available to them. We call the choice of $i$the player
-Each player $i$ choses a set of pure strategies $S_i$ available to them
+Each player $i$ has a set of accessible pure strategies $S_i$ available to them. 
+We call the choice of $i$th player $s_i\in S_i$. 
+Each player has an utility $u_i$
+
+We call the strategy profile all the actions taken by all players, that is
+$$s=(s_1,...,s_i,...,s_n)$$
+We call the strategy profile that excludes $i$-th player choice as
+$$s_{-i} = (s_1, \dots, s_{i-1}, s_{i+1}, \dots, s_n)$$
+
+The normal form of the game is 
+$$G=\curly{S_1,...,S_n;u_1,...,u_n}$$
+
+If the sets are discrete, this can be written in a $n$ dimensional matrix
+![[Pasted image 20261013114733.png|2 player Example|450]]
+#### Dominance
+A joint strategy $s$ is **Pareto Dominated** by another strategy $s'$ if
+$$\begin{align}
+u_i(s')\geq u_i(s)&\quad\text{for all players }i\\
+u_i(s')>u(s)&\quad\text{for some players }i
+\end{align}$$
+$s'$ is said to be **pareto efficient**
+
+we say that $s_i$ is **strictly dominated** by $s_i'$ if the payoff of $s_i'$ is always greater than $s_i$
+$$u_i(s_{-i},s_i')>u_i(s_{-i},s_i)\quad\forall s_{-i}$$
+rational players do not play $s$
+In this example,
+- D is dominated by M (but U is not dominated by M)
+- L is dominated by R for player $B$
+![[Pasted image 20261013115455.png|Example|350]]
 
 # 4) Rationalizing Solutions
 Strategy $s_i\in S_i$ is the best response to $s_{-i}\in S_{-i}$  if $u(s_i,s_{-i})\geq u(s_i',s_{-i})$ $\forall s_i'\in S_i$
