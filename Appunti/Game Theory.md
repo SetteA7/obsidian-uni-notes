@@ -165,9 +165,22 @@ u_i(s')>u(s)&\quad\text{for some players }i
 $s'$ is said to be **pareto efficient**
 
 We say that $s_i$ is **strictly dominated** by $s_i'$ if the payoff of $s_i'$ is always greater than $s_i$
-$$u_i(s_{-i},s_i')>u_i(s_{-i},s_i)\quad\forall s_{-i}$$
-Rational players do not play $s$ and they can be removed from the table.
+$$u_i(s_{-i},s_i')>u_i(s_{-i},s_i)\quad\text{ for every } s_{-i}$$
+We say that $s_i$ is **weakly dominated** by $s_i'$ if 
+$$\begin{align}
+u_i(s_{-i},s_i')\geq u_i(s_{-i},s_i)&\quad\text{ for every } s_{-i}\\
+u_i(s_{-i},s_i')>u_i(s_{-i},s_i)&\quad\text{ for some } s_{-i}
+\end{align}$$
+We say that $s_i$ is **dominated** by $s_i'$ if 
+$$u_i(s_{-i},s_i')\geq u_i(s_{-i},s_i)\quad\text{ for every } s_{-i}$$
+
+---
+
+Rational players do not play $s_i$ if it is **strictly dominated** and they can be removed from the table.
+
 This process is called **Iterated Elimination of Strictly Dominated Strategies (IESDS)**
+
+---
 
 Strategy $s_i\in S_i$ is the **best response** to $s_{-i}\in S_{-i}$  if $u(s_i,s_{-i})\geq u(s_i',s_{-i})$ $\forall s_i'\in S_i$
 
@@ -202,6 +215,13 @@ $$\forall s_i\in S_i: u_i(s_{-i}^*,s_i^*)\geq u_i(s_{-i}^*,s_i)\qquad s_i^*=\arg
 >
 >Then $s^*$ is a Nash Equilibrium
 
+This brings two main results:
+- a NE survives IEASDS
+- IESDS is order irrelevant
+
+Therefore for a NE:
+- everyone plays best response to beliefs
+- everyone beliefs are correct
 
 ---
 
@@ -246,14 +266,3 @@ M & 4,3  \\
 rational player play $(M,R)$.
 >
 >It is also possible to notice that $(M,R)$ is in Nash Equilibrium
-
-
-# 4) Rationalizing Solutions
- 
-
-
-Everybody happy!
-
-Motivation
-If this is not in a nash equilibrium then there exists some player $i$ such that $s_i'$ is not the best response
-So there is an incentive for player $i$ to change form $s_i'$
