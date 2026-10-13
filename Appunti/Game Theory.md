@@ -129,19 +129,23 @@ Now suppose a problem is solved with optimal utility $\E[u]=k$.
 And suppose that now the nature choice is already known, then the optimal utility can increase $\E[u|\text{knowledge}]=k'\geq k$ as the uncertainties are removed. 
 The value of this information is $k'-k$
 
-# 3) Static Games of Complete Information
+# 3) Multi Player Static Games
 With multiple players things change. All players want to maximize their payoff!
-
+#### Notation
 We consider the following game:
-- static: all players move together (simultaneous and independent)
-- complete information: anybody's payoff function is known
+- **static**: all players move together (simultaneous and independent)
+- **complete information**: anybody's payoff function is known
 
-The combination of the choices determines the outcome of the game $(a_1,...,a_n)$, the utility of $i$-th player is
-$$u_i=u_i(a_1,a_2,...,a_n)$$
-An information $E$ is common knowledge if:
+An information $E$ is **common knowledge** if:
 - Everybody knows $E$
 - It is known that everybody knows it
 
+Each player $i$ can access to a set of pure strategies:
+- $S_i$ is the set accessible by player i
+- $s_i\in S_i$ is the choice taken by player $i$
+
+The combination of the choices determines the outcome of the game $(a_1,...,a_n)$, the utility of $i$-th player is
+$$u_i=u_i(a_1,a_2,...,a_n)$$
 #### Normal Form Representation
 Each player $i$ has a set of accessible pure strategies $S_i$ available to them. 
 We call the choice of $i$th player $s_i\in S_i$. 
