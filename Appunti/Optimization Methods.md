@@ -1,5 +1,5 @@
 Domande Teoriche che ha fatto:
-Weal duality, complementary slackness, minimax problem
+Weak duality, complementary slackness, minimax problem
 # 1) Intro
 $$\underbracket G_{\text{Graph}}=(\underbracket N_{\text{Node Set}}, \underbracket A_{\text{Arc Set}})$$
 With:
@@ -98,7 +98,7 @@ If the primal is unbounded, its cost drops toward $-\infty$. If a dual solution 
 >[!thm|*] Strong Duality
 >If the primal problem and dual problems are feasible, there exists an optimal primal solution $x^*$ and an optimal solution $\pi$ and $\sum_i b_i\pi_i^*=\sum_j=c_jx_j^*$
 
->[!property|*] Complementary Slackness (Exam)
+>[!thm|*] Complementary Slackness Property (Exam)
 >A pair $(x,\pi)$ of the primal and dual feasible solutions satisfies the complementary slackness if
 >$$\pi_i\par{\sum_{j=1}^q a_{ij}x_j-b_i}=0\ \forall i=1,...,p\text{ and }x_j\par{c_j-\sum_{i=1}^p a_{ij}\pi_i}=0\ \forall j=1,...,q$$
 >Notice that the term in the parenthesis cannot be negative
@@ -106,3 +106,9 @@ If the primal is unbounded, its cost drops toward $-\infty$. If a dual solution 
 >[!thm|*] Complementary Slackness Optimality Conditions
 >A feasible primal solution $x$ and a feasible dual solution $\pi$  are optimal solutions of the primal and dual problems iff they satisfy the complementary slackness property
 
+# 3) Paths, Trees, Cycles
+## 3.1) Notation and Definitions
+Directed Graph
+$N$ nodes and $A$ arcs
+Undirected Graph
+$N$ nodes and $E$ edges

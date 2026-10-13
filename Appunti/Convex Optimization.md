@@ -45,3 +45,5 @@ l_j\leq x_j\leq u_j& j=1,...,n
 where $f(x),g_i(x)$ are required to be convex.
 
 ## 1.3) Linear Quadratic Regulator (TODO)
+
+
