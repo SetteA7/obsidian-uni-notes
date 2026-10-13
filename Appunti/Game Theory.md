@@ -173,7 +173,14 @@ Strategy $s_i\in S_i$ is the **best response** to $s_{-i}\in S_{-i}$  if $u(s_i,
 
 It is possible that there are multiple best responses (with identical values of $u_i(s_i,s_{-i})$)
 
+>[!claim]
 A rational player that believes that the opponent will play $s_{-i}\in S_{-i}$ will always chose the best response to $s_{-i}$
+
+>[!thm]
+>if $s_i\in S_i$ is a strictly dominated strategy, it is no best response to any $s_{-i}\in S_{-i}$
+
+
+
 
 >[!example|IESDS]
 Consider this example:
@@ -208,7 +215,6 @@ M & 4,3  \\
 \end{array}$$
 rational player play $(M,R)$.
 # 4) Rationalizing Solutions
-Strategy $s_i\in S_i$ is the best response to $s_{-i}\in S_{-i}$  if $u(s_i,s_{-i})\geq u(s_i',s_{-i})$ $\forall s_i'\in S_i$
 
 $\mathscr p$ 
 
