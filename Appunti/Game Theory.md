@@ -180,8 +180,6 @@ A rational player that believes that the opponent will play $s_{-i}\in S_{-i}$ w
 >if $s_i\in S_i$ is a strictly dominated strategy, it is no best response to any $s_{-i}\in S_{-i}$
 
 
-
-
 >[!example|IESDS]
 Consider this example:
 >$$\begin{array}{c|c|c}
@@ -214,9 +212,13 @@ Now finally for player $A$, $M$ dominates $U$
 M & 4,3  \\ 
 \end{array}$$
 rational player play $(M,R)$.
-# 4) Rationalizing Solutions
 
-$\mathscr p$ 
+#### Belief
+Player $i$ cannot see the other players choice, so it must create a conjecture on what will be chosen.
+We define a best-response-correspondence that associates to $s_{-i}\in S_{-i}$a subset of $S_i$ such that e
+$$\text{BR: }S_{-i}\rightarrow\mathscr p(S_i)$$
+# 4) Rationalizing Solutions
+ 
 
 **Nash Equilibrium**
 Loop of dominant decisions from multiple players: x dominates y, so I play x, my opponent knows I'll do that and if y dominates x he'll play y.
