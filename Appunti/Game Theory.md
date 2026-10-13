@@ -179,6 +179,9 @@ A rational player that believes that the opponent will play $s_{-i}\in S_{-i}$ w
 >[!thm]
 >if $s_i\in S_i$ is a strictly dominated strategy, it is no best response to any $s_{-i}\in S_{-i}$
 
+**Nash Equilibrium:**
+
+
 
 >[!example|IESDS]
 Consider this example:
@@ -215,7 +218,7 @@ rational player play $(M,R)$.
 
 #### Belief
 Player $i$ cannot see the other players choice, so it must create a conjecture on what will be chosen.
-We define a best-response-correspondence that associates to $s_{-i}\in S_{-i}$a subset of $S_i$ such that e
+We define a best-response-correspondence that associates to $s_{-i}\in S_{-i}$a subset of $S_i$ such that each $s_i\in\text{BR}(s_{-i})$ is a best response to $s_{-i}$
 $$\text{BR: }S_{-i}\rightarrow\mathscr p(S_i)$$
 # 4) Rationalizing Solutions
  
