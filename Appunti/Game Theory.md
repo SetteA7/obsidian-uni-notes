@@ -59,6 +59,8 @@ A lottery over outcomes $X=\curly{x_1,...,x_n}$ is defined as a probability dist
 $$p=\curly{p(x_1),...,p(x_n)}\text{ where } p(x_k)\in[0,1]\text{ and } \sum_k p(x_k)=1$$
 if actions are involved $p$ is conditional $p(x_k|a)$
 
+That is, a lottery specifies the probability of a said outcome. It can be conditional and it becomes the probability of an outcome given the previous action.
+
 #### Expected Utility 
 We want to define $\pref$ among lotteries, we replace $A$ with the set $P(A)$ of lotteries over $A$
 
@@ -91,6 +93,40 @@ The extracted water is uniformly distributed: $W(d)\sim u[0,20d]$
 
 $$\E[u|d]=\E[W(d)-d^2]=10d-\frac{d^2}2$$
 The optimal value is therefore $d=10\rightarrow u=50$.
+
+#### Risk Attitude
+Suppose three possible outcomes:
+$$x_1=0\quad x_2=1\quad x_3=20$$
+and two lotteries
+$$p_A=(0,1,0)\qquad p_B=(0.95,0,0.05)$$
+Both expected utilities are the same, how does one player chose which one is better?
+
+**Risk Neutral:**
+A risk neutral player will see these two choices as equivalent. This is a **linear** utility
+**Risk Averse:**
+A risk averse player prefers the degenerate lottery ($A$) as it guarantees the highest minimum win. This is a **concave** utility
+**Risk Loving:**
+A risk loving player prefers the lottery that allows for the max possible win. This is a **convex** utility
+
+Therefore monotonic utilities do not change the preference, but change the risk attitude
+
+#### Backwards Induction
+Suppose that an entire tree is drawn with both player and nature choices. The solution (optimal decision) is found ia backwards induction
+
+Classify all nodes with $P$ action into groups:
+- Group 1: all nodes after which no further action is possible in any case
+- Group $k$: includes all nodes that are followed only by at least one Group $k-1$ node and no higher order node
+Start from group 1: find rational choice that maximizes utility, then go to group 2, repeat until last group is complete.
+
+![[Pasted image 20261013112031.png|Example|450]]
+Here Orange is group 1, yellow group $k=2$.
+Now find optimal decision for group 1 and remove the unused branches
+![[Pasted image 20261013112315.png|Example Continued|450]]
+In the pruned tree we notice that the optimal decision is $r$: $\E[u|r]=4\geq \E[u|s]=2.8$
+
+#### Value of Information
+Now suppose a problem is solved with optimal utility $\E[u]=k$. 
+And suppose that now the nature choice is already known, then the optimal utility can increase $\E[]=k'\geq k$ as the uncertainties are removed. 
 
 # 3) Static Games of Complete Information
 
