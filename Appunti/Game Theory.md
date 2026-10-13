@@ -167,12 +167,40 @@ $s'$ is said to be **pareto efficient**
 
 we say that $s_i$ is **strictly dominated** by $s_i'$ if the payoff of $s_i'$ is always greater than $s_i$
 $$u_i(s_{-i},s_i')>u_i(s_{-i},s_i)\quad\forall s_{-i}$$
-rational players do not play $s$
-In this example,
-- D is dominated by M (but U is not dominated by M)
-- L is dominated by R for player $B$
-![[Pasted image 20261013115455.png|Example|350]]
+rational players do not play $s$ and they can be removed from the table.
+This process is called **Iterated Elimination of Strictly Dominated Strategies (IESDS)**
 
+Consider this example:
+$$\begin{array}{c|c|c}
+  & L & R \\ \hline
+U & 6,0 & 0,5 \\ \hline
+M & 1,0 & 4,3  \\ \hline
+D & 0,7 & 2,0 & 
+\end{array}$$
+So $S_A=\curly{U,M,D},\ S_B=\curly{L,R}$
+Notice that for player $A$, $D$ is dominated by $M$ since
+$$u_A(M,L)>u_A(D,L)\quad u_A(M,R)>u_A(D,R)$$
+Now
+$$\begin{array}{c|c}
+  & L & R \\ \hline
+U & 6,0 & 0,5 \\ \hline
+M & 1,0 & 4,3  \\ 
+\end{array}$$
+Now for player $B$, $R$ dominates $L$ since
+$$u_B(U,R)>u_A(U,L)\quad u_B(M,R)>u_B(M,L)$$
+So
+$$\begin{array}{c|c}
+  & R \\ \hline
+U & 0,5 \\ \hline
+M & 4,3  \\ 
+\end{array}$$
+Now finally for player $A$, $M$ dominates $U$
+$$
+\begin{array}{c|c}
+  & R \\ \hline
+M & 4,3  \\ 
+\end{array}$$
+rational player play $(M,R)$.
 # 4) Rationalizing Solutions
 Strategy $s_i\in S_i$ is the best response to $s_{-i}\in S_{-i}$  if $u(s_i,s_{-i})\geq u(s_i',s_{-i})$ $\forall s_i'\in S_i$
 
