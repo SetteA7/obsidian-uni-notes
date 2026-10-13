@@ -108,7 +108,35 @@ If the primal is unbounded, its cost drops toward $-\infty$. If a dual solution 
 
 # 3) Paths, Trees, Cycles
 ## 3.1) Notation and Definitions
-Directed Graph
-$N$ nodes and $A$ arcs
-Undirected Graph
-$N$ nodes and $E$ edges
+**Directed Graph:** $G=(N,A)$
+consist in a set $N$ of nodes and a set $A$ of arcs, whose elements are ordered pair of distinct nodes; an arc $(i,j)$ behaves like a one-way street: permits flow from $i$ to $j$ only, not vice versa.
+
+**Undirected Graph:** $G=(N,E)$
+consist in a set $N$ of nodes and a set $E$ of edges, whose elements are unordered pair of distinct nodes; an edge $(i,j)$ behaves like a two-way street: permits flow in both directions. Indeed, we can refer to an edge using $(i,j)$ or $(j,i)$.
+
+**Tail and Head**
+In an arc $(i,j)$ there are two endpoints:
+- Tail $i$: the arc _emanates_ from $i$
+- Head $j$: the arc _terminates_ at $j$
+We say that $i$ is **adjacent** to $j$ (but not vice versa)
+
+**Degree**
+The degree of a node $i$ is the **number of connected arcs.**
+More strictly, it is the _sum of its **indegree** and **outdegree**_.
+- Indegree: # of incoming arcs
+- Outdegree: # of outgoing arcs
+
+**Adjacency List**
+We talk about adjacency list of node / of arc of each node.
+- Arc adj list: The arc adjacency list $A(i)$ of a node $i$ is the set of arcs _emanating_ from $i$.
+$$A(i)=\curly{(i,j)\in A|j\in N|}$$
+- Node adj list: The node adjacency list $A(i)$ of a node $i$ is the set of nodes adjacent to $i$.
+$$A(i)=\curly{j\in N|(i,j)\in A}$$
+
+In both cases, notice how $|A(i)|$ equals the outdegree of $i$.
+
+**Subgraph**
+A graph $G'=(N',A')$ is a subgraph of $G(N,A)$ if $N'\subseteq N$ and $A'\subseteq A$.
+$G'$ is the subgraph of $G$ induced by $N'$ if $A'$ contains every arc of $A$ and with both endpoints in $N'$.
+
+**Walk**
