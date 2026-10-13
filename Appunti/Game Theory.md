@@ -173,13 +173,42 @@ Strategy $s_i\in S_i$ is the **best response** to $s_{-i}\in S_{-i}$  if $u(s_i,
 
 It is possible that there are multiple best responses (with identical values of $u_i(s_i,s_{-i})$)
 
->[!claim]
+---
+
+>[!claim] 
 A rational player that believes that the opponent will play $s_{-i}\in S_{-i}$ will always chose the best response to $s_{-i}$
 
 >[!thm]
 >if $s_i\in S_i$ is a strictly dominated strategy, it is no best response to any $s_{-i}\in S_{-i}$
 
+---
+
+**Belief**
+Player $i$ cannot see the other players choice, so it must create a conjecture on what will be chosen.
+We define a best-response-correspondence that associates to $s_{-i}\in S_{-i}$a subset of $S_i$ such that each $s_i\in\text{BR}(s_{-i})$ is a best response to $s_{-i}$
+$$\text{BR: }S_{-i}\rightarrow\mathscr p(S_i)$$
+
+---
+
 **Nash Equilibrium:**
+Loop of dominant decisions from multiple players: x dominates y, so I play x, my opponent knows I'll do that and if y dominates x he'll play y.
+
+In a $n$-player game $G=\curly{S_1,...,S_n;u_1,...,u_n}$ strategies $(s_!^*,...,s_n^*)$ are a **Nash Equilibrium** if for any $i$, $s_i^*$ is the best response of player i to $s_{-i}^*$, that is:
+$$\forall s_i\in S_i: u_i(s_{-i}^*,s_i^*)\geq u_i(s_{-i}^*,s_i)\qquad s_i^*=\arg\max_s(u_i(s_{-i}^*,s))$$
+>[!thm]
+>In a finite game, if $s^*$ is 
+>- The only survivor of IESDS
+>- The only rationalizable profile
+>
+>Then $s^*$ is a Nash Equilibrium
+
+
+---
+
+**Motivation:**
+Take a possible combination $(s_1',...,s_n')$. If this is not in nash equilibrium then there exists a $s_i'$ that is not a best response to $s_{-i}'$, that is
+$$\exists s_i''\in S_i: u_i(s_{-i}',s_i'')>u_i(s_{-i}',s_i')$$
+and therefore there is an incentive for $i$ to deviate from $s_i'$
 
 
 
@@ -215,16 +244,13 @@ Now finally for player $A$, $M$ dominates $U$
 M & 4,3  \\ 
 \end{array}$$
 rational player play $(M,R)$.
+>
+>It is also possible to notice that $(M,R)$ is in Nash Equilibrium
 
-#### Belief
-Player $i$ cannot see the other players choice, so it must create a conjecture on what will be chosen.
-We define a best-response-correspondence that associates to $s_{-i}\in S_{-i}$a subset of $S_i$ such that each $s_i\in\text{BR}(s_{-i})$ is a best response to $s_{-i}$
-$$\text{BR: }S_{-i}\rightarrow\mathscr p(S_i)$$
+
 # 4) Rationalizing Solutions
  
 
-**Nash Equilibrium**
-Loop of dominant decisions from multiple players: x dominates y, so I play x, my opponent knows I'll do that and if y dominates x he'll play y.
 
 Everybody happy!
 
