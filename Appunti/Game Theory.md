@@ -144,24 +144,19 @@ Each player $i$ can access to a set of pure strategies:
 - $S_i$ is the set accessible by player i
 - $s_i\in S_i$ is the choice taken by player $i$
 
-The combination of the choices determines the outcome of the game $(a_1,...,a_n)$, the utility of $i$-th player is
-$$u_i=u_i(a_1,a_2,...,a_n)$$
-#### Normal Form Representation
-Each player $i$ has a set of accessible pure strategies $S_i$ available to them. 
-We call the choice of $i$th player $s_i\in S_i$. 
-Each player has an utility $u_i$
-
-We call the strategy profile all the actions taken by all players, that is
+We define the **strategy profile** all the actions taken by all players, that is
 $$s=(s_1,...,s_i,...,s_n)$$
-We call the strategy profile that excludes $i$-th player choice as
+We define the **strategy profile that excludes $i$-th player** choice as
 $$s_{-i} = (s_1, \dots, s_{i-1}, s_{i+1}, \dots, s_n)$$
 
 The normal form of the game is 
 $$G=\curly{S_1,...,S_n;u_1,...,u_n}$$
 
+The combination of the choices determines the outcome of the game $(a_1,...,a_n)$, the utility of $i$-th player is
+$$u_i=u_i(a_1,a_2,...,a_n)$$
+
 If the sets are discrete, this can be written in a $n$ dimensional matrix
-![[Pasted image 20261013114733.png|2 player Example|450]]
-#### Dominance
+#### Dominance and Best Response
 A joint strategy $s$ is **Pareto Dominated** by another strategy $s'$ if
 $$\begin{align}
 u_i(s')\geq u_i(s)&\quad\text{for all players }i\\
@@ -169,13 +164,20 @@ u_i(s')>u(s)&\quad\text{for some players }i
 \end{align}$$
 $s'$ is said to be **pareto efficient**
 
-we say that $s_i$ is **strictly dominated** by $s_i'$ if the payoff of $s_i'$ is always greater than $s_i$
+We say that $s_i$ is **strictly dominated** by $s_i'$ if the payoff of $s_i'$ is always greater than $s_i$
 $$u_i(s_{-i},s_i')>u_i(s_{-i},s_i)\quad\forall s_{-i}$$
-rational players do not play $s$ and they can be removed from the table.
+Rational players do not play $s$ and they can be removed from the table.
 This process is called **Iterated Elimination of Strictly Dominated Strategies (IESDS)**
 
+Strategy $s_i\in S_i$ is the **best response** to $s_{-i}\in S_{-i}$  if $u(s_i,s_{-i})\geq u(s_i',s_{-i})$ $\forall s_i'\in S_i$
+
+It is possible that there are multiple best responses (with identical values of $u_i(s_i,s_{-i})$)
+
+A rational player that believes that the opponent will play $s_{-i}\in S_{-i}$ will always chose the best response to $s_{-i}$
+
+>[!example|IESDS]
 Consider this example:
-$$\begin{array}{c|c|c}
+>$$\begin{array}{c|c|c}
   & L & R \\ \hline
 U & 6,0 & 0,5 \\ \hline
 M & 1,0 & 4,3  \\ \hline
@@ -185,7 +187,7 @@ So $S_A=\curly{U,M,D},\ S_B=\curly{L,R}$
 Notice that for player $A$, $D$ is dominated by $M$ since
 $$u_A(M,L)>u_A(D,L)\quad u_A(M,R)>u_A(D,R)$$
 Now
-$$\begin{array}{c|c}
+>$$\begin{array}{c|c}
   & L & R \\ \hline
 U & 6,0 & 0,5 \\ \hline
 M & 1,0 & 4,3  \\ 
@@ -193,13 +195,13 @@ M & 1,0 & 4,3  \\
 Now for player $B$, $R$ dominates $L$ since
 $$u_B(U,R)>u_A(U,L)\quad u_B(M,R)>u_B(M,L)$$
 So
-$$\begin{array}{c|c}
+>$$\begin{array}{c|c}
   & R \\ \hline
 U & 0,5 \\ \hline
 M & 4,3  \\ 
 \end{array}$$
 Now finally for player $A$, $M$ dominates $U$
-$$
+>$$
 \begin{array}{c|c}
   & R \\ \hline
 M & 4,3  \\ 
