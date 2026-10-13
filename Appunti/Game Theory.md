@@ -47,11 +47,13 @@ $$\begin{align}
 \end{align}$$
 
 Usually randomness is given from player actions (one player can also be nature)
-
+Nature is **not** a rational player, its choices are iid as seen in the picture.
 ![[Pasted image 20260930151134.png|Tree|250]]
-
 With $N\rightarrow\infty$ trials then payoff = expectation, where expectation is
 $$\E[u(x)|p]=\sum_{k}p(x_k)u(x_k)$$
+In this case we have that $r$ is rationally preferable since $\E[u|r]=3.5\geq \E[u|s]=2.8$.
+
+
 #### Lottery
 A lottery over outcomes $X=\curly{x_1,...,x_n}$ is defined as a probability distribution $p$ over $X$, that is
 $$p=\curly{p(x_1),...,p(x_n)}\text{ where } p(x_k)\in[0,1]\text{ and } \sum_k p(x_k)=1$$
@@ -72,14 +74,25 @@ If you mix the best outcome ($p$) and the worst outcome ($q$) with a probability
 
 >[!axiom] Independence Axiom
 >For $p,q,r\in P(A)$ it holds that $\forall a \in[0,1]$ if $p\pref q$ then $ap+(1-a)\pref aq+(1-a)r$
->That is, when mixing gambles we prefer the TODO
+>That is, when mixing gambles we prefer the preference order not counting other alternatives
 
+>[!thm] Von Neumann & Morgenstern
+>If $\pref$ satisfies the four axiums (complete, transitive, continuity and independence) it can be represented by:
+> $$u(\cdot) \text{ such that } \forall p,q \in P(A),\  p\pref q\implies \E[u(x)|p]\geq \E[u(x)|q]$$
+> This function is called vN-M utility
 
-vN-M does not state to compare expectations but to use affine transformations of $u$
+vN-M does not state to compare expectations but to use affine transformations of $u$. That is a combination of degenerate lotteries $p=p_1(1,0,0,...)+p_2(0,1,0,...)+...$
 
 #### Continuous Case
+For example, dig a well to extract water, what is the preferred depth?
+The depth is continuous: $0\leq d\leq \text{Eart radius}$
+The effort to dig is (imposed by problem): $d^2/2$
+The extracted water is uniformly distributed: $W(d)\sim u[0,20d]$
 
-# 3) Static Games of Complete Infromation
+$$\E[u|d]=\E[W(d)-d^2]=10d-\frac{d^2}2$$
+The optimal value is therefore $d=10\rightarrow u=50$.
+
+# 3) Static Games of Complete Information
 
 # 4) Rationalizing Solutions
 Strategy $s_i\in S_i$ is the best response to $s_{-i}\in S_{-i}$  if $u(s_i,s_{-i})\geq u(s_i',s_{-i})$ $\forall s_i'\in S_i$
