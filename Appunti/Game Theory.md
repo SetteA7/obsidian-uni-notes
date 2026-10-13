@@ -126,9 +126,25 @@ In the pruned tree we notice that the optimal decision is $r$: $\E[u|r]=4\geq \E
 
 #### Value of Information
 Now suppose a problem is solved with optimal utility $\E[u]=k$. 
-And suppose that now the nature choice is already known, then the optimal utility can increase $\E[]=k'\geq k$ as the uncertainties are removed. 
+And suppose that now the nature choice is already known, then the optimal utility can increase $\E[u|\text{knowledge}]=k'\geq k$ as the uncertainties are removed. 
+The value of this information is $k'-k$
 
 # 3) Static Games of Complete Information
+With multiple players things change. All players want to maximize their payoff!
+
+We consider the following game:
+- static: all players move together (simultaneous and independent)
+- complete information: anybody's payoff function is known
+
+The combination of the choices determines the outcome of the game $(a_1,...,a_n)$, the utility of $i$-th player is
+$$u_i=u_i(a_1,a_2,...,a_n)$$
+An information $E$ is common knowledge if:
+- Everybody knows $E$
+- It is known that everybody knows it
+
+#### Normal Form Representation
+Eahc player $i$ has a set of accessible pure strategies $S_i$ available to them. We call the choice of $i$the player
+Each player $i$ choses a set of pure strategies $S_i$ available to them
 
 # 4) Rationalizing Solutions
 Strategy $s_i\in S_i$ is the best response to $s_{-i}\in S_{-i}$  if $u(s_i,s_{-i})\geq u(s_i',s_{-i})$ $\forall s_i'\in S_i$
