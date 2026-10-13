@@ -140,3 +140,10 @@ A graph $G'=(N',A')$ is a subgraph of $G(N,A)$ if $N'\subseteq N$ and $A'\subset
 $G'$ is the subgraph of $G$ induced by $N'$ if $A'$ contains every arc of $A$ and with both endpoints in $N'$.
 
 **Walk**
+A _walk_ is a subgraph of $G = (N,A)$ consisting in a sequence of nodes _$i_1 -i_2-...-i_r$ ,_ satisfying the property that for $k=1,...,r-1$ either $(i_k, i_{k+1}) \in A$ or $(i_{k+1}, i_k) \in A$ (cioè i nodi sono collegati anche se non seguono la direzione degli archi).
+
+Instead, a _directed walk_ is a walk such that $(i_k, i_{k+1}) \in A$ (cioè stavolta devi seguire gli archi).
+
+**Path**
+A _**path**_ is a walk without any repetition of nodes.
+A _**directed path**_ is a directed walk without any repetition of nodes.
