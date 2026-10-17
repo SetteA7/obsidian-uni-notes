@@ -326,21 +326,21 @@ Now consider the union, so:
 ## 2.1) Domains
 $\newcommand{\dom}{\text{dom }}$
 Recall:
-$$\begin{align}
-\frac{a(x)}{f(x)}&\qquad\dom f=\curly{f(x)\not=0}\\
-\sqrt{f(x)}&\qquad\dom f=\curly{f(x)\geq 0}\\
-\log(f(x))&\qquad\dom f=\curly{f(x)>0}\\
+$$f(x)=\begin{align}
+\frac{a(x)}{g(x)}&\qquad\dom f=\curly{g(x)\not=0}\\
+\sqrt{g(x)}&\qquad\dom f=\curly{g(x)\geq 0}\\
+\log(g(x))&\qquad\dom f=\curly{g(x)>0}\\
 \end{align}$$
 #### a) Fraction and Sqrt
 Determine the domains of the following function:
 $$f(x)=\frac{\sqrt{x^2-3x-4}}{x+5}$$
 Here the domain is given by two solutions that must hold simultaneously.
 
-Fraction:
+**Fraction:**
 Here $D_1=\curly{x+5\not = 0}=\curly{x\not = -5}$
 
-Sqrt:
-Here $D_2=\curly{x^2-3x-4\geq 0}$. The zeroes of thsi function are $x_{1,2}=-1,4$ so the inequality holds for $D_2=\curly{x\leq-1\cup x\geq 4}$
+**Sqrt:**
+Here $D_2=\curly{x^2-3x-4\geq 0}$. The zeroes of this function are $x_{1,2}=-1,4$ so the inequality holds for $D_2=\curly{x\leq-1\cup x\geq 4}$
 
 Finally
 $$\dom f=D_1\cap D_2=\curly{x\leq-1\cup x\geq 4}\setminus\curly{-5}=(-\infty, -5)\cup(-5,-1]\cup[4,+\infty)$$
@@ -360,10 +360,10 @@ e^{\sqrt{x+1}}&x<0
 \end{cases}$$
 Here the domain is given by the union of the two cases. 
 
-Case 1:
+**Case 1:**
 Here the domain is given by $D_1^*=\curly{2x+1\not=0}=\curly{ x\not =-\frac12}$. However since this is a system, this must hold only inside the specified case, so $D_1=D_1^*\cap\curly{x\geq 0}=\curly{x\geq 0}$ since $-\frac12\not\in\curly{x\geq0}$, so this part of the map is always valid.
 
-Case 2:
+**Case 2:**
 Here the domain is given by $x+1\geq 0\rightarrow x\geq -1$ which combined with the system is $x\in [-1,0)$
 
 The final domain becomes the union of the two cases, so
@@ -375,26 +375,26 @@ If a function is symmetric, it can have either even or odd symmetry:
 #### a) Sqrt and Abs
 Sketch the graph of the following function indicating the possible symmetries and/or periodicity:
 $$f(x)=\sqrt{1-|x|}$$
-Domain:
+**Domain:**
 $$D=\curly{1-|x|\geq0}=\curly{|x|\leq 1}=\curly{x\in[-1,1]}$$
 So clearly the function cannot be periodic. By definition, a periodic function requires $x \in \text{dom } f \implies x + T \in \text{dom } f$ for all $x$, which cannot hold on a bounded interval
 
-Symmetry:
-Since $f$ is the result of a sqrt, it can only be positive (roots at $x=\pm1$), therefore an odd symmetry is not possible (only possible if $f$ is constant 0). Try the even symmetry:
+**Symmetry:**
+Since $f$ is the result of a sqrt, it can only be non negative (roots at $x=\pm1$), therefore an odd symmetry is not possible (only possible if $f$ is constant 0). Try the even symmetry:
 $$f(-x)=\sqrt{1-|-x|}=\sqrt{1-|-1|\cdot|x|}=\sqrt{1-1\cdot|x|}=f(x)$$
 The final sketch can be done by sampling points only between $[0,1]$ since then it can be mirrored.
 ![[Pasted image 20261012120934.png|Sketch|450]]
 #### b) Cosine
 Sketch the graph of the following function indicating the possible symmetries and/or periodicity:
 $$f(x)=1+\cos(2x)$$
-There is no restriction in the domain, so start with the symmetries. Again since $\cos(z)\in[-1,1]$ the function returns only positive values, so an odd symmetry is excluded, moreover since $\cos(z)$ is an even function, we can guess that the function is even, let's prove it:
+There is no restriction in the domain, so start with the symmetries. Again since $\cos(z)\in[-1,1]$ the function returns only non-negative values, so an odd symmetry is excluded, moreover since $\cos(z)$ is an even function, we can guess that the function is even, let's prove it:
 $$f(-x)=1+\cos(-2x)=1+\cos(2x)=f(x)$$
-Periodicity:
+**Periodicity:**
 $T_1$: 1 is a constant function. A constant function $c(x) = c$ satisfies $c(x + T) = c(x)$ for **every** $T > 0$. Therefore, every positive real number is a period. However it does not have a fundamental period (0 cannot be period)
 $T_2$: $\cos(\theta)$ has period $2\pi$, that is $\cos(\theta+2\pi)=\cos(\theta)$, but what about $g(x)=\cos(2x)$? Let's try the generic case $\cos(ax)$, $a>0$
 
 By the definition of period, we must find a $T>0$ such that
-$$\min_T\curly{g(x+T)=g(x)}=\min_T\curly{\cos(a(x+T))=\cos(ax)}$$
+$$\min_T\curly{T>0:g(x+T)=g(x)\ \forall x\in \mathbb R}=\min_T\curly{\cos(a(x+T))=\cos(ax)}$$
 Recall that $\cos(\theta+2\pi)=\cos(\theta)$ and by comparing it with the argument of the minimum we get
 $$aT=2\pi\rightarrow T=\frac{2\pi}{a}$$
 And in our case $T_2=\pi$
@@ -446,7 +446,7 @@ The sign coincides with the sign of the argument.
 Domain:
 Recall that $\arcsin(t)$ is defined for $t\in[-1,1]$, so we must impose this as the domain:
 $$-1 \le \left\vert{}x^3 - \frac{1}{2}\right\vert{} \le 1$$
-Since the absolute value is always positive we have
+Since the absolute value is always non-negative we have
 $$\left\vert{}x^3 - \frac{1}{2}\right\vert{} \le 1\rightarrow-1 \le x^3 - \frac{1}{2} \le 1\rightarrow-\frac{1}{\sqrt[3]{2}} \le x \le \sqrt[3]{\frac{3}{2}}$$
 So we have 
 $$\dom f=\sq{-\frac{1}{\sqrt[3]2},\sqrt[3]{\frac32}}$$
@@ -559,7 +559,10 @@ Notice that the domain itself needs to be
 periodic (or to be $\mathbb R$). In this case the domain is given by intervals given by $\sin(x)$ and it can be shifted only by $2k\pi$ to hold correctly. Therefore we can directly try with $T=2\pi$:
 $$f(x + 2\pi) = \frac{\log(\sin(x + 2\pi))}{\sin(x + 2\pi) - 1} = \frac{\log(\sin(x))}{\sin(x) - 1} = f(x)$$
 
-# 3) Symbols
+
+# 3) Lesson 24/10/26
+
+# 4) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
 - $\iff$: necessary + sufficient, if and only if "iff"
