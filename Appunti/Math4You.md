@@ -562,6 +562,9 @@ $$f(x + 2\pi) = \frac{\log(\sin(x + 2\pi))}{\sin(x + 2\pi) - 1} = \frac{\log(\si
 
 # 3) Lesson 24/10/26
 
+## 3.1) Limits
+
+
 # 4) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
