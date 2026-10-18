@@ -61,3 +61,5 @@ An image loses some information:
 - dynamics
 - depth
 
+#### 3D Display Types
+Autostereoscopic display: 3d with no glasses
