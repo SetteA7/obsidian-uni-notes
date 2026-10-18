@@ -62,4 +62,26 @@ An image loses some information:
 - depth
 
 #### 3D Display Types
-Autostereoscopic display: 3d with no glasses
+Auto stereoscopic display: 3d with no glasses
+
+**Microlens screens**
+Foil of semi cylindrical lenses on top of display
+- The surface of the panel coincides with the focal plane of the lenses
+- The lenses diffract the light and send it in the desired direction: for each microlens the eyes see two different sets of pixels.
+This has significantly lower res
+
+![[Pasted image 20261018174754.png|Example|250]]
+
+**Parallax barrier screens:**
+Add electro-optical panel with equally spaced thin vertical slits on top of display
+![[Pasted image 20261018174816.png|Example|250]]
+this however reduces brightness, less horizontal definition, specific distance and viewing angle
+
+**Passive 3D glasses:**
+- Anaglyph: red and blue filter. The image is the superimposition of red and green image, poor colour quality
+- Dolby 3D: glasses with no polarization but colour filter, poor colour info. advantage of the fact that red, green, and blue can be defined differently to isolate the image for each eye in a stereoscopic presentation.
+- Polarized Light: horizontal/vertical polarization. Also clockwise/counterclockwise circular polarization to be independent of viewing angle. Each projector is equipped with a filter that polarizes the light so that the two light signals reflected by the screen are orthogonally polarized. A special screen (silver screen) maintains the polarization of the projected images and compensates for the loss of light.
+
+**Active 3D glasses:**
+- Active shutter: shutter of r/l lens is synced with display to see only r or l view
+- Xpand3d: ir projected on audience so to synchronize dimming with no special display
