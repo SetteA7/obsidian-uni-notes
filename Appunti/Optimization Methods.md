@@ -147,3 +147,5 @@ Instead, a _directed walk_ is a walk such that $(i_k, i_{k+1}) \in A$ (cioè sta
 **Path**
 A _**path**_ is a walk without any repetition of nodes.
 A _**directed path**_ is a directed walk without any repetition of nodes.
+
+How can a graph be stored?
