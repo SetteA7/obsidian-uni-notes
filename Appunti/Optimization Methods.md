@@ -16,6 +16,8 @@ With:
 
 
 # 2) Linear Programming (LP)
+
+
 #### Dual Problem
 Let the primal problem be
 $$\text{Primal}=\begin{cases}
@@ -153,10 +155,9 @@ How can a graph be stored?
 
   
 
-$$\begin{gather}
-\min \sum_{(i,j)\in A} c_{ij} x_{ij} \qquad \\
-\qquad s.t \qquad \sum_{j\in \delta^+_s} x_{sj} \ = \ n-1 \qquad \qquad \qquad \qquad \\
-\sum_{i\in \delta_i^+}x_{ik}-\sum_{\}\\
-\qquad \qquad \qquad\sum_{i\in \delta^-_k} x_{ik} - \sum_{j\in \delta^+_k} x_{kj} \ = \ 1 \qquad \forall k \in N \setminus \{s\} \\
-\qquad \qquad\qquad x_{ij} \in \R_+ \qquad \qquad \forall (i,j) \in A
-\end{gather}$$
+$$\begin{align}
+&\min \sum_{(i,j)\in A} c_{ij} x_{ij} \\
+s.t \qquad &\sum_{j\in \delta^+_s} x_{sj} \ = \ n-1 \\
+&\sum_{i\in \delta^-_k} x_{ik} - \sum_{j\in \delta^+_k} x_{kj} \ = \ 1  &\forall k \in N \setminus \{s\} \\
+&x_{ij} \in \R_+  &\forall (i,j) \in A
+\end{align}$$
