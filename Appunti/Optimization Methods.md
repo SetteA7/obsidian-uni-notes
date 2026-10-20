@@ -20,6 +20,8 @@ A LP is a optimization problem with
 - $q$ non.negative variables
 - a _linear objective_
 - $p$ linear constraint
+- a set of _non negativity restrictions_
+
 The standard form is as follows:
 $$\text{LP}=\begin{cases}
 &\displaystyle\min\sum_{j=1}^qc_jx_j\\
@@ -34,20 +36,25 @@ Where
 - $x\in\R^q_+$
 - $b\in\R^q_+$
 
+#### Graphical Procedure
+Particularly for cases in which $q=2$ it is possible to delimit an area in $\mathbb R^q$ in which all feasible solutions exist. The optimal solution is found in one **extreme point**, that is one of the verteces of the polyhedron.
+
 
 #### Dual Problem
-Let the primal problem be
+Any LP has it's dual that follows this logic:
+$$\begin{array}{cc} \hline \text{Primal} & \text{Dual} \\ \hline \min & \max \\ q \text{ variables} & q \text{ constraints} \\ p \text{ constraints} & p \text{ variables} \\ \text{constraint } \boldsymbol{A}_i \boldsymbol{x} \le b_i & \text{variable } \pi_i \le 0 \\ \text{constraint } \boldsymbol{A}_i \boldsymbol{x} \ge b_i & \text{variable } \pi_i \ge 0 \\ \text{constraint } \boldsymbol{A}_i \boldsymbol{x} = b_i & \text{variable } \pi_i \in \mathbb{R} \\ \text{variable } x_j \ge 0 & \text{constraint } \boldsymbol{a}_j^T \boldsymbol{\pi} \le c_j \\ \text{variable } x_j \le 0 & \text{constraint } \boldsymbol{a}_j^T \boldsymbol{\pi} \ge c_j \\ \text{variable } x_j \in \mathbb{R} & \text{constraint } \boldsymbol{a}_j^T \boldsymbol{\pi} = c_j \\ \hline \end{array}$$
+From canonical primal ($q$ variables $x_j$ and $p$ parameters $a_{ij}$) to canonical dual ($p$ variables $\pi_i$ and $q$ parameters ):
 $$\text{Primal}=\begin{cases}
 \displaystyle\min\sum_{j=1}^qc_jx_j\\
 \displaystyle s.t. \sum_{j=1}^qa_{ij}x_j\geq b_i\ &\forall i=1,...,p\\
 x_j\in\mathbb R_+\ &\forall j=1,..,p
-\end{cases}$$
-Now let $\pi_i\in\mathbb R$ be a dual variable associated to i-th constraint. The dual of the primal problem is:
-$$\text{Dual}=\begin{cases}
+\end{cases}\longrightarrow\text{Dual}=\begin{cases}
 \displaystyle \max\sum_{i=1}^pb_i\pi_i\\
 \displaystyle s.t. \sum_{i=1}^pa_{ij}\pi_i\leq c_j\ &\forall j=1,...,q\\
 \pi_i\in\mathbb R_+\ &\forall i=1,..,p
 \end{cases}$$
+Now let $\pi_i\in\mathbb R$ be a dual variable associated to i-th constraint. The dual of the primal problem is:
+$$$$
 Moreover also $\forall\leftrightarrow\sum$.
 
 Example:
