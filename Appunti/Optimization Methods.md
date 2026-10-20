@@ -175,25 +175,34 @@ A _**directed path**_ is a directed walk without any repetition of nodes.
 #### Representations
 **Node-Node Adjacency Matrix**
 This is just a $n\times n$ matrix where each entry $a_{ij}$ is the value (or the index of the values array) for the arch $i\rightarrow j$
-$$
-\begin{array}{r@{\mkern 8mu} c}
-  & \begin{array}{cccccccc} 
-      (1, 2) & (1, 3) & (2, 4) & (3, 2) & (4, 3) & (4, 5) & (5, 3) & (5, 4) 
-    \end{array} \\[4pt]
-  \begin{array}{c} 1 \\ 2 \\ 3 \\ 4 \\ 5 \end{array} &
-  \left[
-    \begin{array}{rrrrrrrr}
-       1 &  1 &  0 &  0 &  0 &  0 &  0 &  0 \\
-      -1 &  0 &  1 & -1 &  0 &  0 &  0 &  0 \\
-       0 & -1 &  0 &  1 & -1 &  0 & -1 &  0 \\
-       0 &  0 & -1 &  0 &  1 &  1 &  0 & -1 \\
-       0 &  0 &  0 &  0 &  0 & -1 &  1 &  1
-    \end{array}
-  \right]
-\end{array}
-$$
 
 **Node-Arc Incidence Matrix**
+This is a $n\times m$ matrix. Each column has two non zero values, these values are $1$ for tail and $-1$ for head.
+The number of 1s in each row is outdegree, the count of $-1$ is the indegree
+
+![[Pasted image 20261020170523.png|Example|250]]
+**Adjacency List**
+Here 3 arrays are stored: 
+- Head array of size $m$
+- Tail array of size $m$. Both follow same order so that $i$ th etry on both array builds the arch $H[i]\rightarrow T[i]$
+- Cost array of size $m$. This stores the cost of arch $i$
+
+**Forward Star (Adj. w. pointer array)**
+Instead of using Head array, just create one array of size $n+1$ that points at where the arch with $i$th node starts in tail array. The $n+1$ entry has value $m+1$. If a node doesn't have outdegree it is set to 
+$$
+\begin{array}{cccc|c}
+\hline
+\textit{point} & \textit{head} & \textit{cost} & \textit{capacity} & \textit{index} \\
+\hline
+1 & 2 &  5 & \infty & 1 \\
+3 & \underline3 &  3 & \infty & 2 \\
+4 & \underline4 & -2 & 10     & 3 \\
+6 & 2 & -1 & 20     & 4 \\
+\underline6 & 5 & 10 & \infty & 5 \\
+7 & 4 &  2 & \infty & 6 \\
+\hline
+\end{array}
+$$
 
 
 How can a graph be stored?
