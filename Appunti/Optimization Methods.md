@@ -36,11 +36,11 @@ Where
 - $x\in\R^q_+$
 - $b\in\R^q_+$
 
-#### Graphical Procedure
+### 2.1.1) Graphical Procedure
 Particularly for cases in which $q=2$ it is possible to delimit an area in $\mathbb R^q$ in which all feasible solutions exist. The optimal solution is found in one **extreme point**, that is one of the verteces of the polyhedron.
 
 
-#### Dual Problem
+### 2.1.2) Dual Problem
 Any LP has it's dual that follows this logic:
 $$\begin{array}{cc} \hline \text{Primal} & \text{Dual} \\ \hline \min & \max \\ q \text{ variables} & q \text{ constraints} \\ p \text{ constraints} & p \text{ variables} \\ \text{constraint } \boldsymbol{A}_i \boldsymbol{x} \le b_i & \text{variable } \pi_i \le 0 \\ \text{constraint } \boldsymbol{A}_i \boldsymbol{x} \ge b_i & \text{variable } \pi_i \ge 0 \\ \text{constraint } \boldsymbol{A}_i \boldsymbol{x} = b_i & \text{variable } \pi_i \in \mathbb{R} \\ \text{variable } x_j \ge 0 & \text{constraint } \boldsymbol{a}_j^T \boldsymbol{\pi} \le c_j \\ \text{variable } x_j \le 0 & \text{constraint } \boldsymbol{a}_j^T \boldsymbol{\pi} \ge c_j \\ \text{variable } x_j \in \mathbb{R} & \text{constraint } \boldsymbol{a}_j^T \boldsymbol{\pi} = c_j \\ \hline \end{array}$$
 From canonical primal ($q$ variables $x_j$ and $p$ parameters $b_{i}$) to canonical dual ($p$ variables $\pi_i$ and $q$ parameters $c_i$):
@@ -88,7 +88,7 @@ $$\begin{align}
 Dual Constraints (primal variables):
 $$x_{ij}\in \mathbb R_+\quad \forall i\in O,\ \forall j\in D\longleftrightarrow u_i+v_j\leq c_{ij}\quad \forall i\in O, \ \forall j\in D$$
 
-#### Theory
+### 2.1.3) Theory
 Here are some values. The proofs are NOT needed for the exam (?)
 
 >[!thm|*] Weak Duality (Exam)
@@ -172,7 +172,7 @@ Instead, a _directed walk_ is a walk such that $(i_k, i_{k+1}) \in A$ (cioè sta
 A _**path**_ is a walk without any repetition of nodes.
 A _**directed path**_ is a directed walk without any repetition of nodes.
 
-#### Representations
+### 3.1.1) Representations
 **Node-Node Adjacency Matrix**
 This is just a $n\times n$ matrix where each entry $a_{ij}$ is the value (or the index of the values array) for the arch $i\rightarrow j$
 
@@ -192,20 +192,35 @@ Instead of using Head array, just create one array of size $n+1$ that points at 
 $$
 \begin{array}{cccc|c}
 \hline
+\textit{tail} & \textit{head} & \textit{cost} & \textit{capacity} & \textit{index} \\
+\hline
+1 & 2 &  5 & \infty & 1 \\
+1 & 3 &  3 & \infty & 2 \\
+2 & 4 & -2 & 10     & 3 \\
+3 & 2 & -1 & 20     & 4 \\
+3 & 5 & 10 & \infty & 5 \\
+5 & 4 &  2 & \infty & 6 \\
+\hline
+\end{array}
+\rightarrow
+\begin{array}{cccc|c}
+\hline
 \textit{point} & \textit{head} & \textit{cost} & \textit{capacity} & \textit{index} \\
 \hline
 1 & 2 &  5 & \infty & 1 \\
 3 & \underline3 &  3 & \infty & 2 \\
 4 & \underline4 & -2 & 10     & 3 \\
 6 & 2 & -1 & 20     & 4 \\
-\underline6 & 5 & 10 & \infty & 5 \\
+6 & \underline{\underline5} & 10 & \infty & 5 \\
 7 & 4 &  2 & \infty & 6 \\
 \hline
 \end{array}
 $$
 
+### 3.1.2) Graph Transformations TODO
 
-How can a graph be stored?
+
+# 4) Shortest Path
 
 
   
