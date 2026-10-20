@@ -149,3 +149,14 @@ A _**path**_ is a walk without any repetition of nodes.
 A _**directed path**_ is a directed walk without any repetition of nodes.
 
 How can a graph be stored?
+
+
+  
+
+$$\begin{gather}
+\min \sum_{(i,j)\in A} c_{ij} x_{ij} \qquad \\
+\qquad s.t \qquad \sum_{j\in \delta^+_s} x_{sj} \ = \ n-1 \qquad \qquad \qquad \qquad \\
+\sum_{i\in \delta_i^+}x_{ik}-\sum_{\}\\
+\qquad \qquad \qquad\sum_{i\in \delta^-_k} x_{ik} - \sum_{j\in \delta^+_k} x_{kj} \ = \ 1 \qquad \forall k \in N \setminus \{s\} \\
+\qquad \qquad\qquad x_{ij} \in \R_+ \qquad \qquad \forall (i,j) \in A
+\end{gather}$$
