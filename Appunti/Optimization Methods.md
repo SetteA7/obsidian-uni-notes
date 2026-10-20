@@ -43,7 +43,7 @@ Particularly for cases in which $q=2$ it is possible to delimit an area in $\mat
 #### Dual Problem
 Any LP has it's dual that follows this logic:
 $$\begin{array}{cc} \hline \text{Primal} & \text{Dual} \\ \hline \min & \max \\ q \text{ variables} & q \text{ constraints} \\ p \text{ constraints} & p \text{ variables} \\ \text{constraint } \boldsymbol{A}_i \boldsymbol{x} \le b_i & \text{variable } \pi_i \le 0 \\ \text{constraint } \boldsymbol{A}_i \boldsymbol{x} \ge b_i & \text{variable } \pi_i \ge 0 \\ \text{constraint } \boldsymbol{A}_i \boldsymbol{x} = b_i & \text{variable } \pi_i \in \mathbb{R} \\ \text{variable } x_j \ge 0 & \text{constraint } \boldsymbol{a}_j^T \boldsymbol{\pi} \le c_j \\ \text{variable } x_j \le 0 & \text{constraint } \boldsymbol{a}_j^T \boldsymbol{\pi} \ge c_j \\ \text{variable } x_j \in \mathbb{R} & \text{constraint } \boldsymbol{a}_j^T \boldsymbol{\pi} = c_j \\ \hline \end{array}$$
-From canonical primal ($q$ variables $x_j$ and $p$ parameters $a_{ij}$) to canonical dual ($p$ variables $\pi_i$ and $q$ parameters ):
+From canonical primal ($q$ variables $x_j$ and $p$ parameters $b_{i}$) to canonical dual ($p$ variables $\pi_i$ and $q$ parameters $c_i$):
 $$\text{Primal}=\begin{cases}
 \displaystyle\min\sum_{j=1}^qc_jx_j\\
 \displaystyle s.t. \sum_{j=1}^qa_{ij}x_j\geq b_i\ &\forall i=1,...,p\\
@@ -53,8 +53,7 @@ x_j\in\mathbb R_+\ &\forall j=1,..,p
 \displaystyle s.t. \sum_{i=1}^pa_{ij}\pi_i\leq c_j\ &\forall j=1,...,q\\
 \pi_i\in\mathbb R_+\ &\forall i=1,..,p
 \end{cases}$$
-Now let $\pi_i\in\mathbb R$ be a dual variable associated to i-th constraint. The dual of the primal problem is:
-$$$$
+
 Moreover also $\forall\leftrightarrow\sum$.
 
 Example:
@@ -72,6 +71,20 @@ s.t. &\displaystyle u_i+v_j\leq c_{ij} &\forall i\in O,\ \forall j\in D\\
 & v_j\in \mathbb R& \forall j\in D\\
 \end{cases}
 $$
+Define the two dual variables as $u_i, v_j$
+
+Dual Variables (primal constraints):
+By looking at the table
+$$\begin{align}
+\displaystyle\sum_{j\in D}x_{ij}\leq s_i\ &\forall i\in O, [u_i]\leftrightarrow  u_i\in \mathbb R_-& \forall i\in O\\
+\displaystyle\sum_{i\in O}x_{ij}=d_j&\forall j\in D, [v_j]\\
+
+ v_j\in \mathbb R& \forall j\in D\\
+\end{align}$$
+Dual Constraints (primal variables)
+
+
+
 This has 12 variables and 2 _sets_ of constraints (7 constraints total). I have defined vectors $u,v$ as the the associated dual variables to the primal constraints. 
 
 The first part ($\min\leftrightarrow\max$) is done as we convert from from 12 primal variables ($O\cdot D$) to 7 dual variables ($O+D$).
