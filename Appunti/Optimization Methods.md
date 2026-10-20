@@ -16,6 +16,23 @@ With:
 
 
 # 2) Linear Programming (LP)
+A LP is a optimization problem with
+- $q$ non.negative variables
+- a _linear objective_
+- $p$ linear constraint
+The standard form is as follows:
+$$\text{LP}=\begin{cases}
+&\displaystyle\min\sum_{j=1}^qc_jx_j\\
+s.t. &\displaystyle\sum_{j=1}^qa_{ij}x_j= b_i\ &\forall i=1,...,p\\
+&x_j\in\mathbb R_+\ &\forall j=1,..,q
+\end{cases}$$
+in matrix form:
+$$\min_{x\in\mathbb R^q_+}\curly{cx|Ax=b}$$
+Where
+- $|A|=p\times q$
+- $c\in\mathbb R^q$
+- $x\in\R^q_+$
+- $b\in\R^q_+$
 
 
 #### Dual Problem
