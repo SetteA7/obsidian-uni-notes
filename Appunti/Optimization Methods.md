@@ -73,35 +73,20 @@ s.t. &\displaystyle u_i+v_j\leq c_{ij} &\forall i\in O,\ \forall j\in D\\
 $$
 Define the two dual variables as $u_i, v_j$
 
+Now by looking at the table:
+Dual Max (primal min):
+Convert from from 12 primal variables ($O\cdot D$) to 7 dual variables ($O+D$).
+
+$$\min \sum_{i\in O}\sum_{j\in D}c_{ij}x_{ij}\longleftrightarrow \max \sum_{i \in O} s_i u_i + \sum_{j \in D} d_j v_j$$
 Dual Variables (primal constraints):
-By looking at the table
 $$\begin{align}
-\displaystyle\sum_{j\in D}x_{ij}\leq s_i\ &\forall i\in O, [u_i]\leftrightarrow  u_i\in \mathbb R_-& \forall i\in O\\
-\displaystyle\sum_{i\in O}x_{ij}=d_j&\forall j\in D, [v_j]\\
-
- v_j\in \mathbb R& \forall j\in D\\
+\displaystyle\sum_{j\in D}x_{ij}\leq s_i\quad \forall i\in O
+&\longleftrightarrow  u_i\in \mathbb R_- \quad \forall i\in O\\
+\displaystyle\sum_{i\in O}x_{ij}=d_j\quad \forall j\in D  
+&\longleftrightarrow v_j\in \mathbb R\quad \forall j\in D\\
 \end{align}$$
-Dual Constraints (primal variables)
-
-
-
-This has 12 variables and 2 _sets_ of constraints (7 constraints total). I have defined vectors $u,v$ as the the associated dual variables to the primal constraints. 
-
-The first part ($\min\leftrightarrow\max$) is done as we convert from from 12 primal variables ($O\cdot D$) to 7 dual variables ($O+D$).
-
-$$\begin{cases}
-\min &c_{11}x_{11}&+c_{12}x_{12}&+c_{13}x_{13}&+c_{14}x_{14}&+c_{21}x_{21}&+c_{22}x_{22}&+c_{23}x_{23}&+c_{24}x_{24}\\
-s.t. &x_{11}&+x_{12}&+x_{13}&+x_{14}&&&&&\leq s_1\\
-&&&&&\quad x_{21}&+x_{22}&+x_{23}&+x_{24}&\leq s_2\\
-s.t. &x_{11}&&&&+x_{21}&&&&=d_1\\
-&&\quad x_{12}&&&&+x_{22}&&&=d_2\\
-&&&\quad x_{13}&&&&+x_{23}&&=d_3\\
-&&&&\quad x_{14}&&&&+x_{24}&=d_4
-\end{cases}$$
-
-look one column at a time (i have removed one item from $O$): chose $c_{ij}$, see the coefficients of associated constraints and multiply by $u,v$ and 
-For example for $c_{11}$ both coeff are $1$, so $u_1+v_1\leq c_{11}$. For TODO
-
+Dual Constraints (primal variables):
+$$x_{ij}\in \mathbb R_+\quad \forall i\in O,\ \forall j\in D\longleftrightarrow u_i+v_j\leq c_{ij}\quad \forall i\in O, \ \forall j\in D$$
 
 #### Theory
 Here are some values. The proofs are NOT needed for the exam (?)
@@ -186,6 +171,30 @@ Instead, a _directed walk_ is a walk such that $(i_k, i_{k+1}) \in A$ (cioè sta
 **Path**
 A _**path**_ is a walk without any repetition of nodes.
 A _**directed path**_ is a directed walk without any repetition of nodes.
+
+#### Representations
+**Node-Node Adjacency Matrix**
+This is just a $n\times n$ matrix where each entry $a_{ij}$ is the value (or the index of the values array) for the arch $i\rightarrow j$
+$$
+\begin{array}{r@{\mkern 8mu} c}
+  & \begin{array}{cccccccc} 
+      (1, 2) & (1, 3) & (2, 4) & (3, 2) & (4, 3) & (4, 5) & (5, 3) & (5, 4) 
+    \end{array} \\[4pt]
+  \begin{array}{c} 1 \\ 2 \\ 3 \\ 4 \\ 5 \end{array} &
+  \left[
+    \begin{array}{rrrrrrrr}
+       1 &  1 &  0 &  0 &  0 &  0 &  0 &  0 \\
+      -1 &  0 &  1 & -1 &  0 &  0 &  0 &  0 \\
+       0 & -1 &  0 &  1 & -1 &  0 & -1 &  0 \\
+       0 &  0 & -1 &  0 &  1 &  1 &  0 & -1 \\
+       0 &  0 &  0 &  0 &  0 & -1 &  1 &  1
+    \end{array}
+  \right]
+\end{array}
+$$
+
+**Node-Arc Incidence Matrix**
+
 
 How can a graph be stored?
 
