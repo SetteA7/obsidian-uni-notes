@@ -146,3 +146,8 @@ sudo tc qdisc add dev eth0 root netem loss 10% limit 10000
 ```
 sudo tc qdisc del dev eth0 root netem
 ```
+
+
+```
+cd ~/ros2_ws_A7/src && git pull --ff-only
+```
