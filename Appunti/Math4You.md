@@ -572,15 +572,54 @@ $$D=x\in\mathbb R\setminus\curly{\pm 3}$$
 - Numerator $> 0\longrightarrow x> 5$
 - Denominator $>0\longrightarrow x\in(-\infty,-3)\cup(3,+\infty)$
 
+$$f(x)>0\iff x\in(-3,3)\cup(5,+\infty)$$
+
 **Limits at infinity:**
 - Positive Infinity:
 $$\lim_{x\rightarrow\infty}f(x)=\frac\infty\infty\quad\text{indeterminate form !}$$
 Notice that:
 $$f(x)=\frac{x(1-\frac 5x)}{x^2(1-\frac9{x^2})}=\frac{(1-\frac 5x)}{x(1-\frac9{x^2})}$$
 The fractional terms tend to zero ($\lim_{x\rightarrow \infty}c/x^n=0$) so
-$$\lim_{x\rightarrow\infty}f(x)=\lim_{x\rightarrow\infty}\frac{(1-\frac 5x)}{x(1-\frac9{x^2})}=\frac{1-0^+}{\infty(1-0^+)}=0^+$$
+$$\lim_{x\rightarrow\infty}f(x)=\lim_{x\rightarrow\infty}\frac{(1-\frac 5x)}{x(1-\frac9{x^2})}=\frac{1-0^+}{\infty(1-0^+)}=\frac{1^-}{\infty}=0^+$$
 - Negative Infinity:
-$$\lim_{x\rightarrow-\infty}f(x)=\lim_{x\rightarrow-\infty}\frac 1x=$$
+$$\lim_{x\rightarrow-\infty}f(x)=\lim_{x\rightarrow-\infty}=\frac{1-0^-}{-\infty(1-0^-)}=\frac{1^+}{-\infty}=0^-$$
+**Limits at accumulation points:**
+Here the use of the sign will be useful to determine if we have $0^+$ or $0^-$ at the denominator
+- At $+3$:
+$$\lim_{x\rightarrow 3^+}f(x)=\frac{-2}{0^+}=-\infty$$
+Notice that $\exists \lim_{x\rightarrow a}f(x)\iff \lim_{x\rightarrow a^+}f(x)=\lim_{x\rightarrow a^-}f(x), \ \forall a\in\mathbb R\cup\curly\infty$ so check also $3^-$:
+$$\lim_{x\rightarrow 3^-}f(x)=\frac{-2}{0^-}=+\infty\not = \lim_{x\rightarrow 3^+}f(x)$$
+So the limit doesn't exist.
+- At $-3$:
+$$\lim_{x\rightarrow -3^+}f(x)=\frac{-8}{0^-}=+\infty\not = \lim_{x\rightarrow -3^-}f(x)=\frac{-8}{0^+}=-\infty$$
+#### 2)
+Determine the natural domain, the sign, eventual symmetries and the limits at infinity (if any) and at the accumulation points of the domain.
+$$f(x)=\frac{x^3}{x^2-1}$$
+**Domain:**
+$$D=x\in\mathbb R\setminus\curly{\pm 1}$$
+**Sign:**
+- Numerator $> 0\longrightarrow x> 0$
+- Denominator $>0\longrightarrow x\in(-\infty,-1)\cup(1,+\infty)$
+
+$$f(x)> 0\iff x\in(-1,0)\cup (1,+\infty)$$
+
+**Limits at infinity:**
+- Positive Infinity:
+$$\lim_{x\rightarrow\infty}f(x)=\frac\infty\infty\quad\text{indeterminate form !}$$
+Notice that:
+$$f(x)=\frac{x^3}{x^2(1-\frac1{x^2})}=\frac{x}{1-\frac1{x^2}}$$
+The fractional terms tend to zero ($\lim_{x\rightarrow \infty}c/x^n=0$) so
+$$\lim_{x\rightarrow\infty}f(x)=\lim_{x\rightarrow\infty}\frac{x}{1-\frac1{x^2}}=\frac{\infty}{1-0^+}=\infty$$
+- Negative Infinity:
+$$\lim_{x\rightarrow-\infty}f(x)=\lim_{x\rightarrow-\infty}\frac{x}{1-\frac1{x^2}}=\frac{\infty}{1-0^+}=-\infty$$
+**Limits at accumulation points:**
+- At $+1$:
+$$\lim_{x\rightarrow 1^+}f(x)=\frac{1}{0^+}=\infty\not$$
+Notice that $\exists \lim_{x\rightarrow a}f(x)\iff \lim_{x\rightarrow a^+}f(x)=\lim_{x\rightarrow a^-}f(x), \ \forall a\in\mathbb R\cup\curly\infty$ so check also $3^-$:
+$$\lim_{x\rightarrow 3^-}f(x)=\frac{-2}{0^-}=+\infty\not = \lim_{x\rightarrow 3^+}f(x)$$
+So the limit doesn't exist.
+- At $-3$:
+$$\lim_{x\rightarrow -3^+}f(x)=\frac{-8}{0^-}=+\infty\not = \lim_{x\rightarrow -3^-}f(x)=\frac{-8}{0^+}=-\infty$$
 
 
 # 4) Symbols
