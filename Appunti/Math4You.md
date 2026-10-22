@@ -769,8 +769,22 @@ $$\lim_{x\rightarrow+\infty} f(x) =\lim_{x\rightarrow+\infty}2-\frac{12}{5+\sqrt
 This is not indeterminate.
 Is there an oblique asymptote?
 Find the slope $m$ (recall now since $x<0\rightarrow |x|=-x$):
-$$m = \lim_{x\rightarrow-\infty} \frac{f(x)}{x} = \lim_{x\rightarrow-\infty} {\frac2x-\frac{12x}{x^2\par{5-\sqrt{25+\frac{12}x}}}}=0^-+\frac{12}{\infty}$$
-For $x < 0$, remember that $\sqrt{x^2} = \vert{}x\vert{} = -x$, so $\frac{\sqrt{x^2}}{x} = \frac{-x}{x} = -1$:$$\frac{\sqrt{25x^2+12x}}{x} = \frac{\vert{}x\vert{}\sqrt{25+\frac{12}{x}}}{x} = -\sqrt{25+\frac{12}{x}}$$Therefore:$$m = \lim_{x\rightarrow-\infty} \left[5 + \frac{2}{x} - \left(-\sqrt{25+\frac{12}{x}}\right)\right] = 5 + 0 + \sqrt{25} = 5 + 5 = 10$$Now find the intercept $q$:$$q = \lim_{x\rightarrow-\infty} [f(x) - 10x] = \lim_{x\rightarrow-\infty} [2 - 5x - \sqrt{25x^2+12x}] = 2 - \lim_{x\rightarrow-\infty} \left(5x + \sqrt{25x^2+12x}\right)$$This is an indeterminate form $(-\infty) + (+\infty)$. Rationalize by setting $t = -x > 0$ with $t \to +\infty$:$$\lim_{t\rightarrow+\infty} \left(\sqrt{25t^2-12t} - 5t\right) = \lim_{t\rightarrow+\infty} \frac{-12t}{\sqrt{25t^2-12t} + 5t} = \lim_{t\rightarrow+\infty} \frac{-12}{\sqrt{25-\frac{12}{t}} + 5} = \frac{-12}{5+5} = -\frac{6}{5}$$Substituting back into $q$:$$q = 2 - \left(-\frac{6}{5}\right) = 2 + \frac{6}{5} = \frac{16}{5}$$We have an oblique asymptote:$$y = 10x + \frac{16}{5} \quad \text{as } x \to -\infty$$Limits at accumulation points:The finite boundary points are $x = 0$ and $x = -\frac{12}{25}$. Because both points belong to $D$, the function is continuous there and we evaluate the one-sided limits:At $0$ (only $0^+$ due to domain):$$\lim_{x\rightarrow 0^+} f(x) = f(0) = 5(0) + 2 - 0 = 2$$At $-\frac{12}{25}$ (only $\left(-\frac{12}{25}\right)^-$ due to domain):$$\lim_{x\rightarrow \left(-\frac{12}{25}\right)^-} f(x) = f\left(-\frac{12}{25}\right) = 5\left(-\frac{12}{25}\right) + 2 - 0 = -\frac{12}{5} + 2 = -\frac{2}{5}$$There are no vertical asymptotes.
+$$m = \lim_{x\rightarrow-\infty} \frac{f(x)}{x} = \lim_{x\rightarrow-\infty} \left(5 + \frac{2}{x} - \frac{\sqrt{25x^2+12x}}{x}\right)=5+\lim_{x\rightarrow-\infty}\frac{x\sqrt{25-\frac{12}x}}{x}=10$$
+Now find the intercept $q$:$$q = \lim_{x\rightarrow-\infty} [f(x) - 10x] = \lim_{x\rightarrow-\infty} [2 - 5x - \sqrt{25x^2+12x}] = 2 - \lim_{x\rightarrow-\infty} \left(5x + \sqrt{25x^2+12x}\right)$$This is an indeterminate form $(-\infty) + (+\infty)$. 
+Rationalize 
+$$\begin{align}
+5x + \sqrt{25x^2+12x}&=\par{5x + \sqrt{25x^2+12x}}\frac{5x - \sqrt{25x^2+12x}}{5x - \sqrt{25x^2+12x}}\\
+&=\frac{25x^2 - \par{25x^2+12x}}{5x - \sqrt{25x^2+12x}}\\
+&=\frac{-12x}{5x - \sqrt{25x^2+12x}}\\
+&=\frac{-12x}{5x - |x|\sqrt{25+\frac{12}x}}
+\end{align}$$
+Then
+$$q=2+\lim_{x\rightarrow -\infty}\frac{12x}{5x - |x|\sqrt{25+\frac{12}x}}=2+\lim_{x\rightarrow -\infty}\frac{12}{5+ \sqrt{25+\frac{12}x}}=2+\frac{12}{10}=\frac{16}5$$
+
+
+We have an oblique asymptote:$$y = 10x + \frac{16}{5} \quad \text{as } x \to -\infty$$**Limits at accumulation points:**
+- At $0$ (only $0^+$ due to domain):$$\lim_{x\rightarrow 0^+} f(x) = f(0) = 5(0) + 2 - 0 = 2$$
+- At $-\frac{12}{25}$ (only $\left(-\frac{12}{25}\right)^-$ due to domain):$$\lim_{x\rightarrow \left(-\frac{12}{25}\right)^-} f(x) = f\left(-\frac{12}{25}\right) = 5\left(-\frac{12}{25}\right) + 2 - 0 = -\frac{12}{5} + 2 = -\frac{2}{5}$$There are no vertical asymptotes.
 
 # 4) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
