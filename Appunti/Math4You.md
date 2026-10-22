@@ -579,7 +579,7 @@ $$m=\lim_{x\rightarrow\pm\infty}\frac{f(x)}x$$
 if $m=\pm\infty$ there is no asymptote, otherwise $q$ can be found as
 $$q=\lim{f(x)-mx}$$
 #### 1)
-Determine the natural domain, the sign, eventual symmetries and the limits at infinity (if any) and at the accumulation points of the domain.
+Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.
 $$f(x)=\frac{x-5}{x^2-9}$$
 **Domain:**
 $$D=x\in\mathbb R\setminus\curly{\pm 3}$$
@@ -610,7 +610,7 @@ $$\lim_{x\rightarrow -3^+}f(x)=\frac{-8}{0^-}=+\infty\not = \lim_{x\rightarrow -
 ![[Pasted image 20261022111654.png|Graph|250]]
 
 #### 2)
-Determine the natural domain, the sign, eventual symmetries and the limits at infinity (if any) and at the accumulation points of the domain.
+Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.
 $$f(x)=\frac{x^3}{x^2-1}$$
 **Domain:**
 $$D=x\in\mathbb R\setminus\curly{\pm 1}$$
@@ -630,19 +630,62 @@ $$\lim_{x\rightarrow\infty}f(x)=\lim_{x\rightarrow\infty}\frac{x}{1-\frac1{x^2}}
 Is there an oblique asymptote?
 $$\begin{align}
 m=\lim_{x\rightarrow\infty}\frac{f(x)}x=\lim_{x\rightarrow\infty}\frac1{1-\frac1{x^2}}=1\\
-q=\lim_{x\rightarrow\infty}f(x)-x=\lim_{x\rightarrow\infty}\frac {1}{1-\frac1{x^2}}
+q=\lim_{x\rightarrow\infty}f(x)-x=\lim_{x\rightarrow\infty}\frac {1}{x(1-\frac1{x^2})}=0^+
 \end{align}$$
 
 - Negative Infinity:
 $$\lim_{x\rightarrow-\infty}f(x)=\lim_{x\rightarrow-\infty}\frac{x}{1-\frac1{x^2}}=\frac{\infty}{1-0^+}=-\infty$$
 
-
+Is there an oblique asymptote?
+$$\begin{align}
+m=\lim_{x\rightarrow-\infty}\frac{f(x)}x=\lim_{x\rightarrow-\infty}\frac1{1-\frac1{x^2}}=1\\
+q=\lim_{x\rightarrow-\infty}f(x)-x=\lim_{x\rightarrow-\infty}\frac {1}{x(1-\frac1{x^2})}=0^-
+\end{align}$$
 
 **Limits at accumulation points:**
 - At $+1$:
 $$\lim_{x\rightarrow 1^+}f(x)=\frac{1}{0^+}=\infty\not = \lim_{x\rightarrow 1^-}f(x)=\frac{1}{0^-}=-\infty$$
 - At $-1$:
 $$\lim_{x\rightarrow -1^+}f(x)=\frac{-1}{0^-}=+\infty\not = \lim_{x\rightarrow -1^-}f(x)=\frac{-1}{0^+}=-\infty$$
+
+![[Pasted image 20261022114406.png|Asymptote in Blue|350]]
+#### 3)
+Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.
+$$f(x)=\log(e^{2x}-1)$$
+**Domain:**
+$$D=\curly{e^{2x}-1>0}=\curly{x>0}$$
+**Sign:**
+ $$f(x)> 0\iff e^{2x}-1> 1\rightarrow x>\frac{\log 2}2$$
+
+**Limits at infinity:**
+- Positive Infinity:
+$$\lim_{x\rightarrow\infty}f(x)=\log(\infty-1)=\infty$$
+Is there an oblique asymptote?
+Notice how we can rewrite the logarithm:
+$$f(x)=\log\sq{e^{2x}\par{1-\frac1{e^{2x}}}}=\log\par{e^{2x}}+\log\par{1-{e^{-2x}}}=2x+\log\par{1-{e^{-2x}}}$$
+so we don't have an oblique asymptote:
+$$\begin{align}
+m=\lim_{x\rightarrow\infty}\frac{f(x)}x=\lim_{x\rightarrow\infty}2+\frac{\log\par{1-e^{-2x}}}{x}=2+\frac{\log(1^+)}{+\infty}=2+\frac{0^+}{+\infty}=2
+\end{align}$$
+
+Alternatively the **squeeze theorem** can be used:
+$$m=\lim_{x\rightarrow\infty}\frac{f(x)}x=\lim_{x\rightarrow\infty}$$
+
+- Negative Infinity excluded by domain.
+
+Is there an oblique asymptote?
+$$\begin{align}
+m=\lim_{x\rightarrow-\infty}\frac{f(x)}x=\lim_{x\rightarrow-\infty}\frac1{1-\frac1{x^2}}=1\\
+q=\lim_{x\rightarrow-\infty}f(x)-x=\lim_{x\rightarrow-\infty}\frac {1}{x(1-\frac1{x^2})}=0^-
+\end{align}$$
+
+**Limits at accumulation points:**
+- At $+1$:
+$$\lim_{x\rightarrow 1^+}f(x)=\frac{1}{0^+}=\infty\not = \lim_{x\rightarrow 1^-}f(x)=\frac{1}{0^-}=-\infty$$
+- At $-1$:
+$$\lim_{x\rightarrow -1^+}f(x)=\frac{-1}{0^-}=+\infty\not = \lim_{x\rightarrow -1^-}f(x)=\frac{-1}{0^+}=-\infty$$
+
+
 
 
 # 4) Symbols
