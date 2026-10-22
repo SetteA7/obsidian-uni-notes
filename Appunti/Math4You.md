@@ -574,8 +574,10 @@ Limits at infinity are used to find asymptote. This has an equation of form:
 $$y=mx+q$$
 Two cases happen:
 - $\lim_{x\rightarrow\infty}f(x)=c\in \mathbb R\longrightarrow$ asymptote is $y=c$ ($m=$)
-- $\lim_{x\rightarrow\infty}f(x)=\pm\infty\longrightarrow$ here we might have an oblique asymptote ($m\not=0$) or a generic convergence. The slope
-
+- $\lim_{x\rightarrow\infty}f(x)=\pm\infty\longrightarrow$ here we might have an oblique asymptote ($m\not=0$) or a generic convergence. The slope can be found with:
+$$m=\lim_{x\rightarrow\pm\infty}\frac{f(x)}x$$
+if $m=\pm\infty$ there is no asymptote, otherwise $q$ can be found as
+$$q=\lim{f(x)-mx}$$
 #### 1)
 Determine the natural domain, the sign, eventual symmetries and the limits at infinity (if any) and at the accumulation points of the domain.
 $$f(x)=\frac{x-5}{x^2-9}$$
@@ -625,10 +627,15 @@ Notice that:
 $$f(x)=\frac{x^3}{x^2(1-\frac1{x^2})}=\frac{x}{1-\frac1{x^2}}$$
 The fractional terms tend to zero ($\lim_{x\rightarrow \infty}c/x^n=0$) so
 $$\lim_{x\rightarrow\infty}f(x)=\lim_{x\rightarrow\infty}\frac{x}{1-\frac1{x^2}}=\frac{\infty}{1-0^+}=\infty$$
+Is there an oblique asymptote?
+$$\begin{align}
+m=\lim_{x\rightarrow\infty}\frac{f(x)}x=\lim_{x\rightarrow\infty}\frac1{1-\frac1{x^2}}=1\\
+q=\lim_{x\rightarrow\infty}f(x)-x=\lim_{x\rightarrow\infty}\frac {1}{1-\frac1{x^2}}
+\end{align}$$
+
 - Negative Infinity:
 $$\lim_{x\rightarrow-\infty}f(x)=\lim_{x\rightarrow-\infty}\frac{x}{1-\frac1{x^2}}=\frac{\infty}{1-0^+}=-\infty$$
-Both these limits may be an oblique asymptote!
-In general
+
 
 
 **Limits at accumulation points:**
