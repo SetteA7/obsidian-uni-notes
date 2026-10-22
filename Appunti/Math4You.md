@@ -563,6 +563,19 @@ $$f(x + 2\pi) = \frac{\log(\sin(x + 2\pi))}{\sin(x + 2\pi) - 1} = \frac{\log(\si
 # 3) Lesson 24/10/26
 
 ## 3.1) Limits
+Recall the following indeterminate forms:
+$$\begin{gather}
+(+\infty)+(-\infty)\tag 1\\
+0^\pm\cdot(\pm\infty)\tag 2\\
+\frac{0^\pm}{0^\pm}\tag 3\\
+\frac{\pm\infty}{\pm\infty}\tag 4
+\end{gather}$$
+Limits at infinity are used to find asymptote. This has an equation of form:
+$$y=mx+q$$
+Two cases happen:
+- $\lim_{x\rightarrow\infty}f(x)=c\in \mathbb R\longrightarrow$ asymptote is $y=c$ ($m=$)
+- $\lim_{x\rightarrow\infty}f(x)=\pm\infty\longrightarrow$ here we might have an oblique asymptote ($m\not=0$) or a generic convergence. The slope
+
 #### 1)
 Determine the natural domain, the sign, eventual symmetries and the limits at infinity (if any) and at the accumulation points of the domain.
 $$f(x)=\frac{x-5}{x^2-9}$$
@@ -592,6 +605,8 @@ $$\lim_{x\rightarrow 3^-}f(x)=\frac{-2}{0^-}=+\infty\not = \lim_{x\rightarrow 3^
 So the limit doesn't exist.
 - At $-3$:
 $$\lim_{x\rightarrow -3^+}f(x)=\frac{-8}{0^-}=+\infty\not = \lim_{x\rightarrow -3^-}f(x)=\frac{-8}{0^+}=-\infty$$
+![[Pasted image 20261022111654.png|Graph|250]]
+
 #### 2)
 Determine the natural domain, the sign, eventual symmetries and the limits at infinity (if any) and at the accumulation points of the domain.
 $$f(x)=\frac{x^3}{x^2-1}$$
@@ -612,14 +627,15 @@ The fractional terms tend to zero ($\lim_{x\rightarrow \infty}c/x^n=0$) so
 $$\lim_{x\rightarrow\infty}f(x)=\lim_{x\rightarrow\infty}\frac{x}{1-\frac1{x^2}}=\frac{\infty}{1-0^+}=\infty$$
 - Negative Infinity:
 $$\lim_{x\rightarrow-\infty}f(x)=\lim_{x\rightarrow-\infty}\frac{x}{1-\frac1{x^2}}=\frac{\infty}{1-0^+}=-\infty$$
+Both these limits may be an oblique asymptote!
+In general
+
+
 **Limits at accumulation points:**
 - At $+1$:
-$$\lim_{x\rightarrow 1^+}f(x)=\frac{1}{0^+}=\infty\not$$
-Notice that $\exists \lim_{x\rightarrow a}f(x)\iff \lim_{x\rightarrow a^+}f(x)=\lim_{x\rightarrow a^-}f(x), \ \forall a\in\mathbb R\cup\curly\infty$ so check also $3^-$:
-$$\lim_{x\rightarrow 3^-}f(x)=\frac{-2}{0^-}=+\infty\not = \lim_{x\rightarrow 3^+}f(x)$$
-So the limit doesn't exist.
-- At $-3$:
-$$\lim_{x\rightarrow -3^+}f(x)=\frac{-8}{0^-}=+\infty\not = \lim_{x\rightarrow -3^-}f(x)=\frac{-8}{0^+}=-\infty$$
+$$\lim_{x\rightarrow 1^+}f(x)=\frac{1}{0^+}=\infty\not = \lim_{x\rightarrow 1^-}f(x)=\frac{1}{0^-}=-\infty$$
+- At $-1$:
+$$\lim_{x\rightarrow -1^+}f(x)=\frac{-1}{0^-}=+\infty\not = \lim_{x\rightarrow -1^-}f(x)=\frac{-1}{0^+}=-\infty$$
 
 
 # 4) Symbols
