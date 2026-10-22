@@ -570,8 +570,7 @@ $$\begin{gather}
 \frac{0^\pm}{0^\pm}\tag 3\\
 \frac{\pm\infty}{\pm\infty}\tag 4
 \end{gather}$$
-A limit exists only if
-$$\exists \lim_{x\rightarrow a}f(x)\iff \lim_{x\rightarrow a^+}f(x)=\lim_{x\rightarrow a^-}f(x), \ \forall a\in\curly{\mathbb R\cup\curly\infty}\cap D$$
+Where $D'$ is the 
 Limits at infinity are used to find asymptote. This has an equation of form:
 $$y=mx+q$$
 Two cases happen:
@@ -604,7 +603,7 @@ $$\lim_{x\rightarrow-\infty}f(x)=\frac{1-0^-}{-\infty(1-0^-)}=\frac{1^+}{-\infty
 Here the use of the sign will be useful to determine if we have $0^+$ or $0^-$ at the denominator
 - At $+3$:
 $$\lim_{x\rightarrow 3^+}f(x)=\frac{-2}{0^+}=-\infty$$
-Notice that $\exists \lim_{x\rightarrow a}f(x)\iff \lim_{x\rightarrow a^+}f(x)=\lim_{x\rightarrow a^-}f(x), \ \forall a\in\curly{\mathbb R\cup\curly\infty}\cap\curly D$ so check also $3^-$:
+check also $3^-$:
 $$\lim_{x\rightarrow 3^-}f(x)=\frac{-2}{0^-}=+\infty\not = \lim_{x\rightarrow 3^+}f(x)$$
 So the limit doesn't exist.
 - At $-3$:
@@ -667,7 +666,7 @@ Notice how we can rewrite the logarithm:
 $$f(x)=\log\sq{e^{2x}\par{1-\frac1{e^{2x}}}}=\log\par{e^{2x}}+\log\par{1-{e^{-2x}}}=2x+\log\par{1-{e^{-2x}}}$$
 so we have an oblique asymptote:
 $$\begin{align}
-m=\lim_{x\rightarrow\infty}\frac{f(x)}x=\lim_{x\rightarrow\infty}2+\frac{\log\par{1-e^{-2x}}}{x}=2+\frac{\log(1^+)}{+\infty}=2+\frac{0^+}{+\infty}=2
+m=\lim_{x\rightarrow\infty}\frac{f(x)}x=\lim_{x\rightarrow\infty}2+\frac{\log\par{1-e^{-2x}}}{x}=2+\frac{\log(1^-)}{+\infty}=2+\frac{0^-}{+\infty}=2
 \end{align}$$
 
 Alternatively the **squeeze theorem** can be used:
@@ -686,8 +685,6 @@ $$\begin{align}q=\lim_{x\rightarrow\infty} f(x)-2x&=+\infty-\infty\quad\text{ind
 \end{align}$$
 
 
-
-
 - Negative Infinity excluded by domain.
 
 
@@ -701,7 +698,7 @@ $$\lim_{x\rightarrow 0^+}f(x)=\log(1^+-1)=\log (0^+)=-\infty$$
 Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.
 $$f(x)=\log\par{\frac{x+1}{x-1}}$$
 **Domain:**
-$$D=\curly{\frac{x+1}{x-1}>0}\cap\curly{x\not = 1}=(-\infty,-1)\cup(1,+\infty)$$
+$$D = \curly{\frac{x+1}{x-1}>0} \cap \curly{x\not = 1} = (-\infty,-1) \cup (1,+\infty)$$
 **Sign:**
  $$f(x)> 0\iff \frac{x+1}{x-1}> 1\rightarrow x>1$$
  We don't have any zero.
@@ -810,7 +807,7 @@ Denominator: $1 + \log(1^+) = 1 + 0^+ = 1^+$$$\lim_{x\rightarrow 1^+} f(x) = \fr
 
 #### 8) Limited
 Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=\frac{\sqrt{1+x}-\sqrt{1-x}}{x}$$**Domain:**
-$$D =\curly{1+x\geq 0}\cup\curly{1-x\geq 0}\cup\curly{x\not = 0}= [-1, 0) \cup (0, 1] = [-1, 1] \setminus \{0\}$$**Sign:**
+$$D = \curly{1+x\geq 0}\cap\curly{1-x\geq 0}\cap\curly{x\not = 0} = [-1, 0) \cup (0, 1] = [-1, 1] \setminus \{0\}$$**Sign:**
 Two alternatives:
 1) Find numerator denominator as usual (do at home):
 Numerator $>0\iff x\in(0,1]$
@@ -835,6 +832,8 @@ There are no horizontal or oblique asymptotes.
 Using the rationalized form:$$\lim_{x\rightarrow 0} f(x) = \lim_{x\rightarrow 0} \frac{2}{\sqrt{1+x}+\sqrt{1-x}} = \frac{2}{\sqrt{1} + \sqrt{1}} = \frac{2}{2} = 1$$Notice that:$$\lim_{x\rightarrow 0^+} f(x) = \lim_{x\rightarrow 0^-} f(x) = 1$$So the two-sided limit exists! $x = 0$ is a removable discontinuity (eliminable singularity).
 - At $+1$ (only $1^-$ due to domain): Since $1 \in D$, the function is continuous from the left:$$\lim_{x\rightarrow 1^-} f(x) = f(1) = \frac{\sqrt{2} - 0}{1} = \sqrt{2}$$
 - At $-1$ (only $(-1)^+$ due to domain):Since $-1 \in D$, the function is continuous from the right:$$\lim_{x\rightarrow -1^+} f(x) = f(-1) = \frac{0 - \sqrt{2}}{-1} = \sqrt{2}$$There are no vertical asymptotes.
+
+![[Pasted image 20261022152815.png|Graph|250]]
 
 # 4) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
