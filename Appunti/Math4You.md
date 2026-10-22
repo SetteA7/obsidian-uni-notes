@@ -563,6 +563,24 @@ $$f(x + 2\pi) = \frac{\log(\sin(x + 2\pi))}{\sin(x + 2\pi) - 1} = \frac{\log(\si
 # 3) Lesson 24/10/26
 
 ## 3.1) Limits
+#### 1)
+Determine the natural domain, the sign, eventual symmetries and the limits at infinity (if any) and at the accumulation points of the domain.
+$$f(x)=\frac{x-5}{x^2-9}$$
+**Domain:**
+$$D=x\in\mathbb R\setminus\curly{\pm 3}$$
+**Sign:**
+- Numerator $> 0\longrightarrow x> 5$
+- Denominator $>0\longrightarrow x\in(-\infty,-3)\cup(3,+\infty)$
+
+**Limits at infinity:**
+- Positive Infinity:
+$$\lim_{x\rightarrow\infty}f(x)=\frac\infty\infty\quad\text{indeterminate form !}$$
+Notice that:
+$$f(x)=\frac{x(1-\frac 5x)}{x^2(1-\frac9{x^2})}=\frac{(1-\frac 5x)}{x(1-\frac9{x^2})}$$
+The fractional terms tend to zero ($\lim_{x\rightarrow \infty}c/x^n=0$) so
+$$\lim_{x\rightarrow\infty}f(x)=\lim_{x\rightarrow\infty}\frac{(1-\frac 5x)}{x(1-\frac9{x^2})}=\frac{1-0^+}{\infty(1-0^+)}=0^+$$
+- Negative Infinity:
+$$\lim_{x\rightarrow-\infty}f(x)=\lim_{x\rightarrow-\infty}\frac 1x=$$
 
 
 # 4) Symbols
