@@ -572,11 +572,6 @@ $$\begin{gather}
 \end{gather}$$
 A limit exists only if
 $$\exists \lim_{x\rightarrow a}f(x)\iff \lim_{x\rightarrow a^+}f(x)=\lim_{x\rightarrow a^-}f(x), \ \forall a\in\curly{\mathbb R\cup\curly\infty}\cap\curly D$$
-Fraction of polynomials at $\pm\infty$ can be solved 
-
-
-
-
 Limits at infinity are used to find asymptote. This has an equation of form:
 $$y=mx+q$$
 Two cases happen:
@@ -711,56 +706,29 @@ $$\lim_{x\rightarrow 0^+}f(x)=\log(1^+-1)=\log (0^+)=-\infty$$
 Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.
 $$f(x)=\log\par{\frac{x+1}{x-1}}$$
 **Domain:**
-$$D=\curly{\frac{x+1}{x-1}>0}\cup\curly{x\not = 1}=(-\infty,-1)(1,+\infty)$$
+$$D=\curly{\frac{x+1}{x-1}>0}\cup\curly{x\not = 1}=(-\infty,-1)\cup(1,+\infty)$$
 **Sign:**
  $$f(x)> 0\iff \frac{x+1}{x-1}> 1\rightarrow x>1$$
  We don't have any zero.
 
 **Limits at infinity:**
-
-
 - Positive Infinity:
-$$\lim_{x\rightarrow\infty}f(x)=\log(\infty-1)=\infty$$
-Is there an oblique asymptote?
-Notice how we can rewrite the logarithm:
-$$f(x)=\log\sq{e^{2x}\par{1-\frac1{e^{2x}}}}=\log\par{e^{2x}}+\log\par{1-{e^{-2x}}}=2x+\log\par{1-{e^{-2x}}}$$
-so we have an oblique asymptote:
-$$\begin{align}
-m=\lim_{x\rightarrow\infty}\frac{f(x)}x=\lim_{x\rightarrow\infty}2+\frac{\log\par{1-e^{-2x}}}{x}=2+\frac{\log(1^+)}{+\infty}=2+\frac{0^+}{+\infty}=2
-\end{align}$$
-
-Alternatively the **squeeze theorem** can be used:
-$$m=\lim_{x\rightarrow\infty}\frac{f(x)}x=\lim_{x\rightarrow\infty}\frac{\log(e^{2x}-1)}{x}$$
-Now find the bounds:
-- Upper bound: $e^{2x}-1<e^{2x}\rightarrow \log(e^{2x}-1)<2x$
-- Lower bound: $e^{2x}-1>\frac{e^{2x}}2\rightarrow \log(e^{2x}-1)>2x-\log (2)$ valid for large $x$ ($x>1$)
-Now divide by $x>0$
-$$2 - \frac{\log(2)}{x} < \frac{\log(e^{2x}-1)}{x} < 2$$
-Take the limit:
-$$2 < \lim_{x\rightarrow \infty}\frac{f(x)}{x} < 2$$
-The interception is:
-$$\begin{align}q=\lim_{x\rightarrow\infty} f(x)-2x&=+\infty-\infty\quad\text{indeterminate form!}\\
-&=2x-\log(1-e^{-2x})-2x\\
-&=-\log(1-e^{-2x})=-0^+=0^-
-\end{align}$$
-
-
-
-
-- Negative Infinity excluded by domain.
-
-Is there an oblique asymptote?
-$$\begin{align}
-m=\lim_{x\rightarrow-\infty}\frac{f(x)}x=\lim_{x\rightarrow-\infty}\frac1{1-\frac1{x^2}}=1\\
-q=\lim_{x\rightarrow-\infty}f(x)-x=\lim_{x\rightarrow-\infty}\frac {1}{x(1-\frac1{x^2})}=0^-
-\end{align}$$
+$$\lim_{x\rightarrow\infty}f(x)=\log\par{\frac\infty\infty}\quad\text{indeterminate form!}$$
+Notice that $\frac{x+1}{x-1}=\frac{x(1+1/x)}{x(1-1/x)}=\frac{1+\frac1x}{1-\frac1x}$ so
+$$\lim_{x\rightarrow\infty}f(x)=\log(1^+)=0^+$$
+where we know that the solution must be positive from the domain.
+In general recall that a ratio of polynomial can be solved by just looking at the max degree of numerator and denominator!
+- Negative Infinity:
+$$\lim_{x\rightarrow-\infty}f(x)=\log\par{1^-}=0^-$$
+sign is deduced from previous sign analysis!
 
 **Limits at accumulation points:**
-Here we just need to check for $0^+$ as $0^-$ is not in the domain!
-- At $0^+$:
-$$\lim_{x\rightarrow 0^+}f(x)=\log(1^+-1)=\log (0^+)=-\infty$$
-
-
+- At $1$ (only $1^+$ due to domain):
+$$\lim_{x\rightarrow 1^+}f(x)=\log\par{\frac2{0^+}}=\log (+\infty)=\infty$$
+- At $-1$ (only $-1^-$ due to domain):
+$$\lim_{x\rightarrow -1^-}f(x)=\log\par{\frac{0^-}{-2}}=\log (0^+)=-\infty$$
+![[Pasted image 20261022122003.png|Graph|250]]
+#### 5)
 
 
 # 4) Symbols
