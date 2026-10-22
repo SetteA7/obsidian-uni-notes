@@ -786,6 +786,42 @@ We have an oblique asymptote:$$y = 10x + \frac{16}{5} \quad \text{as } x \to -\i
 - At $0$ (only $0^+$ due to domain):$$\lim_{x\rightarrow 0^+} f(x) = f(0) = 5(0) + 2 - 0 = 2$$
 - At $-\frac{12}{25}$ (only $\left(-\frac{12}{25}\right)^-$ due to domain):$$\lim_{x\rightarrow \left(-\frac{12}{25}\right)^-} f(x) = f\left(-\frac{12}{25}\right) = 5\left(-\frac{12}{25}\right) + 2 - 0 = -\frac{12}{5} + 2 = -\frac{2}{5}$$There are no vertical asymptotes.
 
+![[Pasted image 20261022145406.png|Asymptote in Green|250]]
+#### 7)
+Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=\frac{\log(\log(x))}{1+\log (x)}$$**Domain:**
+We have three conditions:
+- Inner logarithm requires: $x > 0$
+- Outer logarithm in the numerator requires: $\log(x) > 0 \implies x > 1$
+- Denominator must not vanish: $1 + \log(x) \neq 0 \implies \log(x) \neq -1 \implies x \neq \frac{1}{e}$
+Since $\frac{1}{e} \approx 0.37 < 1$, the condition $x \neq \frac{1}{e}$ is automatically satisfied for $x > 1$.$$D = (1, +\infty)$$**Sign:**
+- Denominator: For all $x \in D = (1, +\infty)$, $\log(x) > 0$, so $1 + \log(x) > 1 > 0$ (always positive).
+- Numerator:$$\log(\log(x)) > 0 \iff \log(x) > 1 \iff x > e$$
+
+$$f(x) > 0 \iff x \in (e, +\infty)$$
+
+**Limits at infinity:**
+- Positive Infinity:$$\lim_{x\rightarrow+\infty} f(x) = \frac{+\infty}{+\infty} \quad \text{indeterminate form!}$$
+Substitute $t = \log(x)$. 
+As $x \to +\infty$, $t \to +\infty$:$$\lim_{t\rightarrow+\infty} \frac{\log(t)}{1+t} = \lim_{t\rightarrow+\infty} \frac{\log(t)}{t\left(1 + \frac{1}{t}\right)} = \lim_{t\rightarrow+\infty} \frac{\log(t)}{t} \cdot \frac{1}{1 + \frac{1}{t}}$$Recall the hierarchy of infinities ($\lim_{t\rightarrow+\infty} \frac{\log(t)}{t} = 0^+$):$$\lim_{x\rightarrow+\infty} f(x) = 0^+ \cdot 1 = 0^+$$
+
+- Negative Infinity: Excluded by domain.
+
+**Limits at accumulation points:**
+- At $1$ (only $1^+$ due to domain):
+Numerator: as $x \to 1^+$, $\log(x) \to 0^+ \implies \log(\log(x)) \to -\infty$
+Denominator: $1 + \log(1^+) = 1 + 0^+ = 1^+$$$\lim_{x\rightarrow 1^+} f(x) = \frac{-\infty}{1^+} = -\infty$$The line $x = 1$ is a vertical asymptote from the right.
+
+![[Pasted image 20261022150353.png|Graph|250]]
+
+#### 8)
+Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=\frac{\sqrt{1+x}-\sqrt{1-x}}{x}$$**Domain:**
+$$D =\curly{1+x\geq 0}\cup\curly{1-x\geq 0}\cup\curly{x\not = 0}= [-1, 0) \cup (0, 1] = [-1, 1] \setminus \{0\}$$**Sign:**
+Two alternatives:
+1) Find numerator denominator as usual (do at home):
+Numerator $>0\iff
+
+Notice first that $f(x)$ is an even function:$$f(-x) = \frac{\sqrt{1-x}-\sqrt{1+x}}{-x} = \frac{-(\sqrt{1+x}-\sqrt{1-x})}{-x} = f(x)$$We can rewrite $f(x)$ by rationalizing the numerator:$$f(x) = \frac{(\sqrt{1+x}-\sqrt{1-x})(\sqrt{1+x}+\sqrt{1-x})}{x(\sqrt{1+x}+\sqrt{1-x})} = \frac{(1+x) - (1-x)}{x(\sqrt{1+x}+\sqrt{1-x})} = \frac{2x}{x(\sqrt{1+x}+\sqrt{1-x})}$$For any $x \in D$ ($x \neq 0$), we can simplify $x$:$$f(x) = \frac{2}{\sqrt{1+x}+\sqrt{1-x}}$$Since $\sqrt{1+x} + \sqrt{1-x} > 0$ for all $x \in [-1, 1]$:$$f(x) > 0 \quad \forall x \in D$$We don't have any zeros.Limits at infinity:Positive and Negative Infinity are excluded by domain ($D \subset [-1, 1]$, so $\pm\infty$ are not accumulation points of $D$).There are no horizontal or oblique asymptotes.Limits at accumulation points:The accumulation points are $x = 0$ (not in $D$) and the boundary points $x = \pm 1$ (which belong to $D$).At $0$:$$\lim_{x\rightarrow 0} f(x) = \frac{0}{0} \quad \text{indeterminate form!}$$Using the rationalized form:$$\lim_{x\rightarrow 0} f(x) = \lim_{x\rightarrow 0} \frac{2}{\sqrt{1+x}+\sqrt{1-x}} = \frac{2}{\sqrt{1} + \sqrt{1}} = \frac{2}{2} = 1$$Notice that:$$\lim_{x\rightarrow 0^+} f(x) = \lim_{x\rightarrow 0^-} f(x) = 1$$So the two-sided limit exists! $x = 0$ is a removable discontinuity (eliminable singularity).At $+1$ (only $1^-$ due to domain):Since $1 \in D$, the function is continuous from the left:$$\lim_{x\rightarrow 1^-} f(x) = f(1) = \frac{\sqrt{2} - 0}{1} = \sqrt{2}$$At $-1$ (only $(-1)^+$ due to domain):Since $-1 \in D$, the function is continuous from the right:$$\lim_{x\rightarrow -1^+} f(x) = f(-1) = \frac{0 - \sqrt{2}}{-1} = \sqrt{2}$$There are no vertical asymptotes.
+
 # 4) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
