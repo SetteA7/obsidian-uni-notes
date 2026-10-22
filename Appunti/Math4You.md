@@ -571,12 +571,12 @@ $$\begin{gather}
 \frac{\pm\infty}{\pm\infty}\tag 4
 \end{gather}$$
 A limit exists only if
-$$\exists \lim_{x\rightarrow a}f(x)\iff \lim_{x\rightarrow a^+}f(x)=\lim_{x\rightarrow a^-}f(x), \ \forall a\in\curly{\mathbb R\cup\curly\infty}\cap\curly D$$
+$$\exists \lim_{x\rightarrow a}f(x)\iff \lim_{x\rightarrow a^+}f(x)=\lim_{x\rightarrow a^-}f(x), \ \forall a\in\curly{\mathbb R\cup\curly\infty}\cap D$$
 Limits at infinity are used to find asymptote. This has an equation of form:
 $$y=mx+q$$
 Two cases happen:
 - $\lim_{x\rightarrow\infty}f(x)=c\in \mathbb R\longrightarrow$ asymptote is $y=c$ ($m=0$)
-- $\lim_{x\rightarrow\infty}f(x)=\pm\infty\longrightarrow$ here we might have an oblique asymptote ($m\not=0$) or a generic convergence. The slope can be found with:
+- $\lim_{x\rightarrow\infty}f(x)=\pm\infty\longrightarrow$ here we might have an oblique asymptote ($m\not=0$) or a generic divergence. The slope can be found with:
 $$m=\lim_{x\rightarrow\pm\infty}\frac{f(x)}x$$
 if $m=\pm\infty$ there is no asymptote, otherwise $q$ can be found as
 $$q=\lim{f(x)-mx}$$
@@ -676,13 +676,13 @@ Now find the bounds:
 - Upper bound: $e^{2x}-1<e^{2x}\rightarrow \log(e^{2x}-1)<2x$
 - Lower bound: $e^{2x}-1>\frac{e^{2x}}2\rightarrow \log(e^{2x}-1)>2x-\log (2)$ valid for large $x$ ($x>1$)
 Now divide by $x>0$
-$$2 - \frac{\log(2)}{x} < \frac{\log(e^{2x}-1)}{x} < 2$$
+$$2 - \frac{\log(2)}{x} \leq \frac{\log(e^{2x}-1)}{x} \leq 2$$
 Take the limit:
-$$2 < \lim_{x\rightarrow \infty}\frac{f(x)}{x} < 2$$
+$$2 \leq \lim_{x\rightarrow \infty}\frac{f(x)}{x} \leq 2$$
 The interception is:
 $$\begin{align}q=\lim_{x\rightarrow\infty} f(x)-2x&=+\infty-\infty\quad\text{indeterminate form!}\\
-&=2x-\log(1-e^{-2x})-2x\\
-&=-\log(1-e^{-2x})=-0^+=0^-
+&=2x+\log(1-e^{-2x})-2x\\
+&=\log(1-e^{-2x})=0^+
 \end{align}$$
 
 
@@ -729,7 +729,26 @@ $$\lim_{x\rightarrow 1^+}f(x)=\log\par{\frac2{0^+}}=\log (+\infty)=\infty$$
 $$\lim_{x\rightarrow -1^-}f(x)=\log\par{\frac{0^-}{-2}}=\log (0^+)=-\infty$$
 ![[Pasted image 20261022122003.png|Graph|250]]
 #### 5)
+Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=e^{\frac{x^2-4}{x-1}}$$**Domain:**
+$$D =\curly{x-1\not = 0}= \mathbb{R}\setminus\{1\} = (-\infty, 1) \cup (1, +\infty)$$**Sign:**
+Since the exponential function satisfies $e^t > 0$ for all $t \in \mathbb{R}$:$$f(x) > 0 \quad \forall x \in D$$We don't have any zeros.
 
+**Limits at infinity:**
+- Positive Infinity: 
+$$\lim_{x\rightarrow+\infty} f(x) = e^{+\infty} = +\infty$$Is there an oblique asymptote?
+Check the slope $m$:$$m = \lim_{x\rightarrow+\infty} \frac{f(x)}{x} = \lim_{x\rightarrow+\infty} \frac{e^{\frac{x^2-4}{x-1}}}{x}$$Notice by polynomial division that $\frac{x^2-4}{x-1} = x + 1 - \frac{3}{x-1}$, so:$$\frac{f(x)}{x} = \frac{e^{x+1} \cdot e^{-\frac{3}{x-1}}}{x} = e  \cdot e^{-\frac{3}{x-1}}\cdot \frac{e^x}{x}$$
+Therefore 
+$$\lim_{x\rightarrow\infty}\frac{f(x)}x=e\cdot e^{0}\cdot\infty=\infty$$There is no horizontal or oblique asymptote as $x \to +\infty$.
+- Negative Infinity:
+$$\lim_{x\rightarrow-\infty} f(x) = e^{-\infty} = 0^+$$We have a horizontal asymptote at $y = 0$ as $x \to -\infty$.
+
+**Limits at accumulation points:**
+- At $1$
+$$\lim_{x\rightarrow 1^+} \frac{x^2-4}{x-1} = \frac{-3}{0^+} = -\infty \implies \lim_{x\rightarrow 1^+} f(x) = e^{-\infty} = 0^+$$$$\lim_{x\rightarrow 1^-} \frac{x^2-4}{x-1} = \frac{-3}{0^-} = +\infty \implies \lim_{x\rightarrow 1^-} f(x) = e^{+\infty} = +\infty$$
+![[Pasted image 20261022124121.png|Graph|250]]
+#### 6)
+Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=5x+2-\sqrt{25x^2+12x}$$**Domain:**
+The square root requires the radicand to be non-negative:$$25x^2+12x \ge 0 \iff x(25x+12) \ge 0$$The roots are $x = -\frac{12}{25}$ and $x = 0$. Taking the external intervals:$$D = \left(-\infty, -\frac{12}{25}\right] \cup [0, +\infty)$$Sign:$$f(x) > 0 \iff \sqrt{25x^2+12x} < 5x+2$$This is an irrational inequality of the form $\sqrt{A(x)} < B(x)$, equivalent to the system:$$\begin{cases} A(x) \ge 0 \\  B(x) > 0 \\  A(x) < [B(x)]^2 \end{cases} \iff \begin{cases} x \in \left(-\infty, -\frac{12}{25}\right] \cup [0, +\infty) \\  5x+2 > 0 \implies x > -\frac{2}{5} \\  25x^2+12x < 25x^2+20x+4 \implies 8x > -4 \implies x > -\frac{1}{2} \end{cases}$$Notice that $-\frac{2}{5} = -0.40 > -\frac{12}{25} = -0.48$. Therefore, intersecting $x > -\frac{2}{5}$ with the domain leaves only:$$x \in [0, +\infty)$$For the left interval $x \in \left(-\infty, -\frac{12}{25}\right]$, we have $5x+2 \le -\frac{2}{5} < 0$ and $-\sqrt{25x^2+12x} \le 0$, so the function is strictly negative.$f(x) > 0 \iff x \in [0, +\infty)$$f(x) < 0 \iff x \in \left(-\infty, -\frac{12}{25}\right]$We don't have any zeros (at $x = -\frac{1}{2}$, the candidate algebraic root is extraneous because $5(-1/2)+2 = -0.5 < 0$).Limits at infinity:Positive Infinity:$$\lim_{x\rightarrow+\infty} f(x) = (+\infty) - (+\infty) \quad \text{indeterminate form!}$$Rationalize the expression:$$f(x) = 2 + \frac{(5x - \sqrt{25x^2+12x})(5x + \sqrt{25x^2+12x})}{5x + \sqrt{25x^2+12x}} = 2 + \frac{25x^2 - (25x^2+12x)}{5x + \sqrt{25x^2+12x}} = 2 - \frac{12x}{5x + \sqrt{25x^2+12x}}$$For $x > 0$, extract $x$ from the root ($\sqrt{x^2} = x$):$$f(x) = 2 - \frac{12x}{x\left(5 + \sqrt{25 + \frac{12}{x}}\right)} = 2 - \frac{12}{5 + \sqrt{25 + \frac{12}{x}}}$$$$\lim_{x\rightarrow+\infty} f(x) = 2 - \frac{12}{5 + 5} = 2 - \frac{6}{5} = \frac{4}{5}$$Since the limit is finite ($c \in \mathbb{R}$), we have a horizontal asymptote:$$y = \frac{4}{5} \quad \text{as } x \to +\infty$$Negative Infinity:$$\lim_{x\rightarrow-\infty} f(x) = 5(-\infty) + 2 - \sqrt{+\infty} = -\infty - \infty = -\infty$$This is not indeterminate.Is there an oblique asymptote?Find the slope $m$:$$m = \lim_{x\rightarrow-\infty} \frac{f(x)}{x} = \lim_{x\rightarrow-\infty} \left(5 + \frac{2}{x} - \frac{\sqrt{25x^2+12x}}{x}\right)$$For $x < 0$, remember that $\sqrt{x^2} = \vert{}x\vert{} = -x$, so $\frac{\sqrt{x^2}}{x} = \frac{-x}{x} = -1$:$$\frac{\sqrt{25x^2+12x}}{x} = \frac{\vert{}x\vert{}\sqrt{25+\frac{12}{x}}}{x} = -\sqrt{25+\frac{12}{x}}$$Therefore:$$m = \lim_{x\rightarrow-\infty} \left[5 + \frac{2}{x} - \left(-\sqrt{25+\frac{12}{x}}\right)\right] = 5 + 0 + \sqrt{25} = 5 + 5 = 10$$Now find the intercept $q$:$$q = \lim_{x\rightarrow-\infty} [f(x) - 10x] = \lim_{x\rightarrow-\infty} [2 - 5x - \sqrt{25x^2+12x}] = 2 - \lim_{x\rightarrow-\infty} \left(5x + \sqrt{25x^2+12x}\right)$$This is an indeterminate form $(-\infty) + (+\infty)$. Rationalize by setting $t = -x > 0$ with $t \to +\infty$:$$\lim_{t\rightarrow+\infty} \left(\sqrt{25t^2-12t} - 5t\right) = \lim_{t\rightarrow+\infty} \frac{-12t}{\sqrt{25t^2-12t} + 5t} = \lim_{t\rightarrow+\infty} \frac{-12}{\sqrt{25-\frac{12}{t}} + 5} = \frac{-12}{5+5} = -\frac{6}{5}$$Substituting back into $q$:$$q = 2 - \left(-\frac{6}{5}\right) = 2 + \frac{6}{5} = \frac{16}{5}$$We have an oblique asymptote:$$y = 10x + \frac{16}{5} \quad \text{as } x \to -\infty$$Limits at accumulation points:The finite boundary points are $x = 0$ and $x = -\frac{12}{25}$. Because both points belong to $D$, the function is continuous there and we evaluate the one-sided limits:At $0$ (only $0^+$ due to domain):$$\lim_{x\rightarrow 0^+} f(x) = f(0) = 5(0) + 2 - 0 = 2$$At $-\frac{12}{25}$ (only $\left(-\frac{12}{25}\right)^-$ due to domain):$$\lim_{x\rightarrow \left(-\frac{12}{25}\right)^-} f(x) = f\left(-\frac{12}{25}\right) = 5\left(-\frac{12}{25}\right) + 2 - 0 = -\frac{12}{5} + 2 = -\frac{2}{5}$$There are no vertical asymptotes.
 
 # 4) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
