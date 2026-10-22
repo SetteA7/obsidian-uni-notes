@@ -580,7 +580,7 @@ Two cases happen:
 $$m=\lim_{x\rightarrow\pm\infty}\frac{f(x)}x$$
 if $m=\pm\infty$ there is no asymptote, otherwise $q$ can be found as
 $$q=\lim{f(x)-mx}$$
-#### 1)
+#### 1) Fraction
 Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.
 $$f(x)=\frac{x-5}{x^2-9}$$
 **Domain:**
@@ -599,7 +599,7 @@ $$f(x)=\frac{x(1-\frac 5x)}{x^2(1-\frac9{x^2})}=\frac{(1-\frac 5x)}{x(1-\frac9{x
 The fractional terms tend to zero ($\lim_{x\rightarrow \infty}c/x^n=0$) so
 $$\lim_{x\rightarrow\infty}f(x)=\lim_{x\rightarrow\infty}\frac{(1-\frac 5x)}{x(1-\frac9{x^2})}=\frac{1-0^+}{\infty(1-0^+)}=\frac{1^-}{\infty}=0^+$$
 - Negative Infinity:
-$$\lim_{x\rightarrow-\infty}f(x)=\lim_{x\rightarrow-\infty}=\frac{1-0^-}{-\infty(1-0^-)}=\frac{1^+}{-\infty}=0^-$$
+$$\lim_{x\rightarrow-\infty}f(x)=\frac{1-0^-}{-\infty(1-0^-)}=\frac{1^+}{-\infty}=0^-$$
 **Limits at accumulation points:**
 Here the use of the sign will be useful to determine if we have $0^+$ or $0^-$ at the denominator
 - At $+3$:
@@ -611,7 +611,7 @@ So the limit doesn't exist.
 $$\lim_{x\rightarrow -3^+}f(x)=\frac{-8}{0^-}=+\infty\not = \lim_{x\rightarrow -3^-}f(x)=\frac{-8}{0^+}=-\infty$$
 ![[Pasted image 20261022111654.png|Graph|250]]
 
-#### 2)
+#### 2) Oblique Asymptote
 Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.
 $$f(x)=\frac{x^3}{x^2-1}$$
 **Domain:**
@@ -651,7 +651,7 @@ $$\lim_{x\rightarrow 1^+}f(x)=\frac{1}{0^+}=\infty\not = \lim_{x\rightarrow 1^-}
 $$\lim_{x\rightarrow -1^+}f(x)=\frac{-1}{0^-}=+\infty\not = \lim_{x\rightarrow -1^-}f(x)=\frac{-1}{0^+}=-\infty$$
 
 ![[Pasted image 20261022114406.png|Asymptote in Blue|350]]
-#### 3)
+#### 3) Two Policemen (Harder!)
 Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.
 $$f(x)=\log(e^{2x}-1)$$
 **Domain:**
@@ -682,7 +682,7 @@ $$2 \leq \lim_{x\rightarrow \infty}\frac{f(x)}{x} \leq 2$$
 The interception is:
 $$\begin{align}q=\lim_{x\rightarrow\infty} f(x)-2x&=+\infty-\infty\quad\text{indeterminate form!}\\
 &=2x+\log(1-e^{-2x})-2x\\
-&=\log(1-e^{-2x})=0^+
+&=\log(1-e^{-2x})=0^-
 \end{align}$$
 
 
@@ -690,11 +690,6 @@ $$\begin{align}q=\lim_{x\rightarrow\infty} f(x)-2x&=+\infty-\infty\quad\text{ind
 
 - Negative Infinity excluded by domain.
 
-Is there an oblique asymptote?
-$$\begin{align}
-m=\lim_{x\rightarrow-\infty}\frac{f(x)}x=\lim_{x\rightarrow-\infty}\frac1{1-\frac1{x^2}}=1\\
-q=\lim_{x\rightarrow-\infty}f(x)-x=\lim_{x\rightarrow-\infty}\frac {1}{x(1-\frac1{x^2})}=0^-
-\end{align}$$
 
 **Limits at accumulation points:**
 Here we just need to check for $0^+$ as $0^-$ is not in the domain!
@@ -702,11 +697,11 @@ Here we just need to check for $0^+$ as $0^-$ is not in the domain!
 $$\lim_{x\rightarrow 0^+}f(x)=\log(1^+-1)=\log (0^+)=-\infty$$
 
 ![[Pasted image 20261022120429.png|Asymptote in Blue|350]]
-#### 4)
+#### 4) Log
 Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.
 $$f(x)=\log\par{\frac{x+1}{x-1}}$$
 **Domain:**
-$$D=\curly{\frac{x+1}{x-1}>0}\cup\curly{x\not = 1}=(-\infty,-1)\cup(1,+\infty)$$
+$$D=\curly{\frac{x+1}{x-1}>0}\cap\curly{x\not = 1}=(-\infty,-1)\cup(1,+\infty)$$
 **Sign:**
  $$f(x)> 0\iff \frac{x+1}{x-1}> 1\rightarrow x>1$$
  We don't have any zero.
@@ -728,7 +723,7 @@ $$\lim_{x\rightarrow 1^+}f(x)=\log\par{\frac2{0^+}}=\log (+\infty)=\infty$$
 - At $-1$ (only $-1^-$ due to domain):
 $$\lim_{x\rightarrow -1^-}f(x)=\log\par{\frac{0^-}{-2}}=\log (0^+)=-\infty$$
 ![[Pasted image 20261022122003.png|Graph|250]]
-#### 5)
+#### 5) Exponential (Harder)
 Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=e^{\frac{x^2-4}{x-1}}$$**Domain:**
 $$D =\curly{x-1\not = 0}= \mathbb{R}\setminus\{1\} = (-\infty, 1) \cup (1, +\infty)$$**Sign:**
 Since the exponential function satisfies $e^t > 0$ for all $t \in \mathbb{R}$:$$f(x) > 0 \quad \forall x \in D$$We don't have any zeros.
@@ -746,7 +741,7 @@ $$\lim_{x\rightarrow-\infty} f(x) = e^{-\infty} = 0^+$$We have a horizontal asym
 - At $1$
 $$\lim_{x\rightarrow 1^+} \frac{x^2-4}{x-1} = \frac{-3}{0^+} = -\infty \implies \lim_{x\rightarrow 1^+} f(x) = e^{-\infty} = 0^+$$$$\lim_{x\rightarrow 1^-} \frac{x^2-4}{x-1} = \frac{-3}{0^-} = +\infty \implies \lim_{x\rightarrow 1^-} f(x) = e^{+\infty} = +\infty$$
 ![[Pasted image 20261022124121.png|Graph|250]]
-#### 6)
+#### 6) Sqrt (Hardest)
 Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=5x+2-\sqrt{25x^2+12x}$$**Domain:**
 The roots are $x = -\frac{12}{25}$ and $x = 0$. Taking the external intervals:$$D =\curly{25x^2+12x\geq 0}= \left(-\infty, -\frac{12}{25}\right] \cup [0, +\infty)$$**Sign:**$$f(x) > 0 \iff \sqrt{25x^2+12x} < 5x+2$$As seen in first class (case $\sqrt{A(x)}<B(x)$) we have:$$\begin{cases} A(x) \ge 0 \\  B(x) > 0 \\  A(x) < [B(x)]^2 \end{cases} \iff \begin{cases} x \in \left(-\infty, -\frac{12}{25}\right] \cup [0, +\infty) \\  5x+2 > 0 \implies x > -\frac{2}{5} \\  25x^2+12x < 25x^2+20x+4 \implies x > -\frac{1}{2} \end{cases}$$
 Then:
@@ -769,7 +764,7 @@ $$\lim_{x\rightarrow+\infty} f(x) =\lim_{x\rightarrow+\infty}2-\frac{12}{5+\sqrt
 This is not indeterminate.
 Is there an oblique asymptote?
 Find the slope $m$ (recall now since $x<0\rightarrow |x|=-x$):
-$$m = \lim_{x\rightarrow-\infty} \frac{f(x)}{x} = \lim_{x\rightarrow-\infty} \left(5 + \frac{2}{x} - \frac{\sqrt{25x^2+12x}}{x}\right)=5+\lim_{x\rightarrow-\infty}\frac{x\sqrt{25-\frac{12}x}}{x}=10$$
+$$m = \lim_{x\rightarrow-\infty} \frac{f(x)}{x} = \lim_{x\rightarrow-\infty} \left(5 + \frac{2}{x} - \frac{\sqrt{25x^2+12x}}{x}\right)=5+\lim_{x\rightarrow-\infty}\frac{x\sqrt{25+\frac{12}x}}{x}=10$$
 Now find the intercept $q$:$$q = \lim_{x\rightarrow-\infty} [f(x) - 10x] = \lim_{x\rightarrow-\infty} [2 - 5x - \sqrt{25x^2+12x}] = 2 - \lim_{x\rightarrow-\infty} \left(5x + \sqrt{25x^2+12x}\right)$$This is an indeterminate form $(-\infty) + (+\infty)$. 
 Rationalize 
 $$\begin{align}
@@ -787,7 +782,7 @@ We have an oblique asymptote:$$y = 10x + \frac{16}{5} \quad \text{as } x \to -\i
 - At $-\frac{12}{25}$ (only $\left(-\frac{12}{25}\right)^-$ due to domain):$$\lim_{x\rightarrow \left(-\frac{12}{25}\right)^-} f(x) = f\left(-\frac{12}{25}\right) = 5\left(-\frac{12}{25}\right) + 2 - 0 = -\frac{12}{5} + 2 = -\frac{2}{5}$$There are no vertical asymptotes.
 
 ![[Pasted image 20261022145406.png|Asymptote in Green|250]]
-#### 7)
+#### 7) Log o Log
 Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=\frac{\log(\log(x))}{1+\log (x)}$$**Domain:**
 We have three conditions:
 - Inner logarithm requires: $x > 0$
@@ -813,14 +808,33 @@ Denominator: $1 + \log(1^+) = 1 + 0^+ = 1^+$$$\lim_{x\rightarrow 1^+} f(x) = \fr
 
 ![[Pasted image 20261022150353.png|Graph|250]]
 
-#### 8)
+#### 8) Limited
 Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=\frac{\sqrt{1+x}-\sqrt{1-x}}{x}$$**Domain:**
 $$D =\curly{1+x\geq 0}\cup\curly{1-x\geq 0}\cup\curly{x\not = 0}= [-1, 0) \cup (0, 1] = [-1, 1] \setminus \{0\}$$**Sign:**
 Two alternatives:
 1) Find numerator denominator as usual (do at home):
-Numerator $>0\iff
+Numerator $>0\iff x\in(0,1]$
+Denominator $>0\iff x>0$
+so $f(x)>0\forall x\in D$
 
-Notice first that $f(x)$ is an even function:$$f(-x) = \frac{\sqrt{1-x}-\sqrt{1+x}}{-x} = \frac{-(\sqrt{1+x}-\sqrt{1-x})}{-x} = f(x)$$We can rewrite $f(x)$ by rationalizing the numerator:$$f(x) = \frac{(\sqrt{1+x}-\sqrt{1-x})(\sqrt{1+x}+\sqrt{1-x})}{x(\sqrt{1+x}+\sqrt{1-x})} = \frac{(1+x) - (1-x)}{x(\sqrt{1+x}+\sqrt{1-x})} = \frac{2x}{x(\sqrt{1+x}+\sqrt{1-x})}$$For any $x \in D$ ($x \neq 0$), we can simplify $x$:$$f(x) = \frac{2}{\sqrt{1+x}+\sqrt{1-x}}$$Since $\sqrt{1+x} + \sqrt{1-x} > 0$ for all $x \in [-1, 1]$:$$f(x) > 0 \quad \forall x \in D$$We don't have any zeros.Limits at infinity:Positive and Negative Infinity are excluded by domain ($D \subset [-1, 1]$, so $\pm\infty$ are not accumulation points of $D$).There are no horizontal or oblique asymptotes.Limits at accumulation points:The accumulation points are $x = 0$ (not in $D$) and the boundary points $x = \pm 1$ (which belong to $D$).At $0$:$$\lim_{x\rightarrow 0} f(x) = \frac{0}{0} \quad \text{indeterminate form!}$$Using the rationalized form:$$\lim_{x\rightarrow 0} f(x) = \lim_{x\rightarrow 0} \frac{2}{\sqrt{1+x}+\sqrt{1-x}} = \frac{2}{\sqrt{1} + \sqrt{1}} = \frac{2}{2} = 1$$Notice that:$$\lim_{x\rightarrow 0^+} f(x) = \lim_{x\rightarrow 0^-} f(x) = 1$$So the two-sided limit exists! $x = 0$ is a removable discontinuity (eliminable singularity).At $+1$ (only $1^-$ due to domain):Since $1 \in D$, the function is continuous from the left:$$\lim_{x\rightarrow 1^-} f(x) = f(1) = \frac{\sqrt{2} - 0}{1} = \sqrt{2}$$At $-1$ (only $(-1)^+$ due to domain):Since $-1 \in D$, the function is continuous from the right:$$\lim_{x\rightarrow -1^+} f(x) = f(-1) = \frac{0 - \sqrt{2}}{-1} = \sqrt{2}$$There are no vertical asymptotes.
+2) Rationalize
+$$\begin{align}
+f(x) &= \frac{(\sqrt{1+x}-\sqrt{1-x})(\sqrt{1+x}+\sqrt{1-x})}{x(\sqrt{1+x}+\sqrt{1-x})} \\
+&= \frac{(1+x) - (1-x)}{x(\sqrt{1+x}+\sqrt{1-x})} \\
+&= \frac{2x}{x(\sqrt{1+x}+\sqrt{1-x})}\\
+&= \frac{2}{\sqrt{1+x}+\sqrt{1-x}} \quad\par{\text{ only since }D\text{ excludes }0}
+\end{align}$$
+Since $\sqrt{1+x} + \sqrt{1-x} > 0$ for all $x \in [-1, 1]$:$$f(x) > 0 \quad \forall x \in D$$We don't have any zeros.
+
+**Limits at infinity:**
+Positive and Negative Infinity are excluded by domain ($D \subset [-1, 1]$, so $\pm\infty$ are not accumulation points of $D$).
+There are no horizontal or oblique asymptotes.
+
+**Limits at accumulation points:**
+- At $0$:$$\lim_{x\rightarrow 0} f(x) = \frac{0}{0} \quad \text{indeterminate form!}$$
+Using the rationalized form:$$\lim_{x\rightarrow 0} f(x) = \lim_{x\rightarrow 0} \frac{2}{\sqrt{1+x}+\sqrt{1-x}} = \frac{2}{\sqrt{1} + \sqrt{1}} = \frac{2}{2} = 1$$Notice that:$$\lim_{x\rightarrow 0^+} f(x) = \lim_{x\rightarrow 0^-} f(x) = 1$$So the two-sided limit exists! $x = 0$ is a removable discontinuity (eliminable singularity).
+- At $+1$ (only $1^-$ due to domain): Since $1 \in D$, the function is continuous from the left:$$\lim_{x\rightarrow 1^-} f(x) = f(1) = \frac{\sqrt{2} - 0}{1} = \sqrt{2}$$
+- At $-1$ (only $(-1)^+$ due to domain):Since $-1 \in D$, the function is continuous from the right:$$\lim_{x\rightarrow -1^+} f(x) = f(-1) = \frac{0 - \sqrt{2}}{-1} = \sqrt{2}$$There are no vertical asymptotes.
 
 # 4) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
