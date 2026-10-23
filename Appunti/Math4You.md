@@ -560,7 +560,7 @@ periodic (or to be $\mathbb R$). In this case the domain is given by intervals g
 $$f(x + 2\pi) = \frac{\log(\sin(x + 2\pi))}{\sin(x + 2\pi) - 1} = \frac{\log(\sin(x))}{\sin(x) - 1} = f(x)$$
 
 
-# 3) Lesson 24/10/26
+# 3) Lesson 23/10/26
 
 
 $$\lim_{x\rightarrow 0^+}\frac{e^{2x}-1-\sin(2x)}{\sinh^2(x)+x^\frac92}$$
