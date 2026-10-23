@@ -47,3 +47,5 @@ where $f(x),g_i(x)$ are required to be convex.
 ## 1.3) Linear Quadratic Regulator (TODO)
 
 
+# 2) Convexity
+## 2.1) Affine Combinations
