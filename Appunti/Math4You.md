@@ -562,6 +562,9 @@ $$f(x + 2\pi) = \frac{\log(\sin(x + 2\pi))}{\sin(x + 2\pi) - 1} = \frac{\log(\si
 
 # 3) Lesson 24/10/26
 
+
+$$\lim_{x\rightarrow 0^+}\frac{e^{2x}-1-\sin(2x)}{\sinh^2(x)+x^\frac92}$$
+
 ## 3.1) Limits
 Recall the following indeterminate forms:
 $$\begin{gather}
