@@ -1018,6 +1018,25 @@ $$\begin{align}
 #### 5) Exam 12.09.22
 Compute the limit $\forall \alpha\in\mathbb R$:
 $$\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac16\alpha x^3}{\arctan(x^2+4x^3)}$$
+First recall the standard expansions:
+$$\begin{align}
+\sin(x) = x - \frac{x^3}{6} + \frac{x^5}{120} + o(x^5)\\
+\arctan(x) = x-\frac{x^3}3+\frac{x^5}5 + o(x^5)
+\end{align}$$
+Since the highest order degree is $x^3$ we expand at order $3$:
+Numerator:
+$$\sin x-\alpha x+\frac\alpha6x^3=x-\frac{x^3}6-\alpha x+\frac\alpha6x^3+o(x^3)=(1-\alpha)x+\frac{\alpha-1}6x^3+o(x^3)$$
+Denominator:
+Use the substitution $t=x^2+4x^3$ (again since both t and x tend to $0$ as they go to $0^+$) and expand only until first order since $o(t)=o(x^2+4x^3)=o(x^3)$
+$$\arctan t=t+o(t)=x^2+4x^3+o(x^3)$$
+Now rewrite the entire limit:
+$$\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac16\alpha x^3}{\arctan(x^2+4x^3)}=\lim_{x\rightarrow 0^+}\frac{(1-\alpha)x+\frac{\alpha-1}6x^3+o(x^3)}{x^2+4x^3+o(x^3)}$$
+Continue to manipulate algebrically:
+$$\frac{(1-\alpha)x+\frac{\alpha-1}6x^3+o(x^3)}{x^2+4x^3+o(x^3)}=\frac{x[(1-\alpha)+\frac{\alpha-1}6x^2+\frac{o(x^3)}x]}{x^2[1+4x+\frac{o(x^3)}{x^2}]}=\frac{(1-\alpha)+\frac{\alpha-1}6x^2+\frac{o(x^3)}x}{x[1+4x+\frac{o(x^3)}{x^2}]}$$
+- Case $\alpha=1$ (since obviously simplifies a lot)
+$$\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2+4x^3+o(x^3)}=\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2}+\frac{o(x^3)}{4x^3}+\frac{o(x^3)}{o(x^2)}=0+0+0=0$$
+- Case $\alpha\neq1$
+
 
 
 # 5) Symbols
