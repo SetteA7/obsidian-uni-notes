@@ -879,25 +879,79 @@ Therefore we can say:
 >[!thm] Little-$o$ Propeeties
 >Here are some properties of little-$o$.
 >- Constant Multiplication: 
->$$c\cdot o(x^n)\text{ for any constant }c\not =0\qquad \text{ }$$
->- Same Order Addition/subtraction
->$$o(x^n)\pm o(x^n)=o(x^n)$$
->- Different order addition (Absorption)
->$$o(x^n)+o(x^m)=o(x^{\min(n,m)})$$
+>$$c\cdot o(x^n)\text{ for any constant }c\not =0\qquad \text{The error has the same order}$$
+>- Same Order Addition/subtraction:
+>$$o(x^n)\pm o(x^n)=o(x^n)\quad \text{ Important: }o(x^n)-o(x^n)\text{ is NOT =0}$$
+>- Different order addition (Absorption):
+>$$o(x^n)+o(x^m)=o(x^{\min(n,m)})\quad\text{Ex: }o(x^2)+o(x^4)=o(x^2)\text{ since }x^4\in o(x^2)$$
+>- Absorbing Powers:
+>$$c\cdot x^m+o(x^n)=o(x^n)\text{ if }m>n\quad\text{Ex: }5x^7+o(x^3)=o(x^3)\text{ since }x^7\in o(x^3)$$
+>- Multiplication by powers:
+>$$x^m\cdot o(x^n)=o(x^{m+n})\quad\text{Ex: }x^5+o(x^3)=o(x^8)$$
+>- Product of two Little-$o$'s:
+>$$o(x^m)\cdot o(x^n)=o(x^{m+n})\quad\text{Ex: }o(x^2)+o(x^3)=o(x^5)$$
+>- Powers of Little-$o$:
+>$$[o(x^n)]^k=o(x^{n\cdot k})\quad\text{Ex: }[o(x^2)]^3=o(x^6)$$
 
+Proofs (very quick):
+1. Constant Multiplication: $c \cdot o(x^n) = o(x^n)$ ($c \neq 0$)  
+Let $f(x) \in o(x^n)$, consider $g(x) = c \cdot f(x)$:  
+$$\lim_{x \to 0} \frac{g(x)}{x^n} = \lim_{x \to 0} \frac{c \cdot f(x)}{x^n} = c \cdot \lim_{x \to 0} \frac{f(x)}{x^n} = c \cdot 0 = 0$$
+Therefore, $c \cdot f(x) \in o(x^n)$.  
+2. Same-Order Addition / Subtraction: $o(x^n) \pm o(x^n) = o(x^n)$  
+Let $f(x), g(x) \in o(x^n)$, consider $h(x) = f(x) \pm g(x)$:  
+$$\lim_{x \to 0} \frac{h(x)}{x^n} = \lim_{x \to 0} \left( \frac{f(x)}{x^n} \pm \frac{g(x)}{x^n} \right) = \lim_{x \to 0} \frac{f(x)}{x^n} \pm \lim_{x \to 0} \frac{g(x)}{x^n} = 0 \pm 0 = 0$$  
+Hence, $f(x) \pm g(x) \in o(x^n)$.  
+3. Different-Order Addition (Absorption): $o(x^n) + o(x^m) = o(x^{\min(n,m)})$  
+Assume (without loss of generality) that $n \le m$, so $\min(n, m) = n$ .  
+Let $f(x) \in o(x^n)$ and $g(x) \in o(x^m)$.  
+Examine the quotient with $x^n$:  
+$$\lim_{x \to 0} \frac{f(x) + g(x)}{x^n} = \lim_{x \to 0} \frac{f(x)}{x^n} + \lim_{x \to 0} \frac{g(x)}{x^n}$$By assumption, $\lim_{x \to 0} \frac{f(x)}{x^n} = 0$. 
+For $g(x)$, rewrite the fraction by factoring out $x^{m-n}$ (where $m - n \ge 0$):  
+$$\lim_{x \to 0} \frac{g(x)}{x^n} = \lim_{x \to 0} \left( \frac{g(x)}{x^m} \cdot x^{m-n} \right) = \left(\lim_{x \to 0} \frac{g(x)}{x^m}\right) \cdot \left(\lim_{x \to 0} x^{m-n}\right) = 0 \cdot \lim_{x \to 0} x^{m-n} = 0$$
+Thus:  
+$$\lim_{x \to 0} \frac{f(x) + g(x)}{x^n} = 0 + 0 = 0 \implies f(x) + g(x) \in o(x^n)$$
+4. Absorbing Powers: $c \cdot x^m + o(x^n) = o(x^n)$ if $m > n$  
+Let $f(x) \in o(x^n)$ and $h(x) = c x^m + f(x)$ with $m > n$.  
+Compute the limit:  
+  
 
-**Algebra of Little-o**
-Start with some properties:
-- Absorption: 
-$$c\cdot o(x^n)=o(x^n) \text{ for any constant } c\not = 0$$
-- Sum of identical orders: 
-$$o(x^n)\pm o(x^n)=o(x^n)$$
-- Dominance of lower powers:
-$$\begin{gather}&x^m+o(x^n)=o(x^m)&\quad\text{ if }n>m\\
-&o(x^n)+o(x^m)=o(x^{\min(n,m)})&
-\end{gather}$$
-that is, the slowest decaying error dominates
-- 
+$$\lim_{x \to 0} \frac{h(x)}{x^n} = \lim_{x \to 0} \left( \frac{c x^m}{x^n} + \frac{f(x)}{x^n} \right) = \lim_{x \to 0} \left( c x^{m-n} + \frac{f(x)}{x^n} \right)$$
+
+  
+Because $m - n > 0$:  
+  
+
+$$\lim_{x \to 0} c x^{m-n} = 0 \quad \text{and} \quad \lim_{x \to 0} \frac{f(x)}{x^n} = 0$$
+
+  
+Adding the limits yields $0 + 0 = 0$, confirming $c x^m + f(x) \in o(x^n)$.  
+5. Multiplication by Powers: $x^m \cdot o(x^n) = o(x^{m+n})$  
+Let $f(x) \in o(x^n)$. Consider $g(x) = x^m \cdot f(x)$:  
+$$\lim_{x \to 0} \frac{g(x)}{x^{m+n}} = \lim_{x \to 0} \frac{x^m \cdot f(x)}{x^m \cdot x^n} = \lim_{x \to 0} \frac{f(x)}{x^n} = 0$$
+Hence, $x^m \cdot f(x) \in o(x^{m+n})$.  
+(Note: In your prompt's example, $x^5 + o(x^3)$ contains a typo in the operator — it should be $x^5 \cdot o(x^3) = o(x^8)$).  
+6. Product of Two Little-$o$'s: $o(x^m) \cdot o(x^n) = o(x^{m+n})$  
+Let $f(x) \in o(x^m)$ and $g(x) \in o(x^n)$. Consider $h(x) = f(x) \cdot g(x)$:  
+
+$$\lim_{x \to 0} \frac{h(x)}{x^{m+n}} = \lim_{x \to 0} \left( \frac{f(x)}{x^m} \cdot \frac{g(x)}{x^n} \right) = \left( \lim_{x \to 0} \frac{f(x)}{x^m} \right) \cdot \left( \lim_{x \to 0} \frac{g(x)}{x^n} \right) = 0 \cdot 0 = 0$$
+
+  
+Hence, $f(x) \cdot g(x) \in o(x^{m+n})$.  
+(Note: The example in your notes also had a small typo: $o(x^2) \cdot o(x^3) = o(x^5)$, rather than $+$.)  
+7. Powers of Little-$o$: $[o(x^n)]^k = o(x^{n \cdot k})$ ($k \in \mathbb{N}_{\ge 1}$)  
+Let $f(x) \in o(x^n)$. Consider $g(x) = [f(x)]^k$:  
+
+$$\lim_{x \to 0} \frac{g(x)}{x^{n \cdot k}} = \lim_{x \to 0} \frac{[f(x)]^k}{(x^n)^k} = \lim_{x \to 0} \left( \frac{f(x)}{x^n} \right)^k$$
+
+  
+By the continuous mapping theorem (or the product rule applied $k$ times):  
+  
+
+$$\lim_{x \to 0} \left( \frac{f(x)}{x^n} \right)^k = \left( \lim_{x \to 0} \frac{f(x)}{x^n} \right)^k = 0^k = 0$$
+
+  
+Thus, $[f(x)]^k \in o(x^{n \cdot k})$.
 # 5) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
