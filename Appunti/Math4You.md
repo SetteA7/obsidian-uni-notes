@@ -899,7 +899,7 @@ Therefore we can say:
 >- Powers of Little-$o$:
 >$$[o(x^n)]^k=o(x^{n\cdot k})\quad\text{Ex: }[o(x^2)]^3=o(x^6)$$
 
-In general during the exercises the desired degree to expand to is the smallest one that where the that the terms don't cancel out due to expansion, right?
+In general during the exercises the desired degree to expand to is the smallest one where the terms don't cancel out due to expansion.
 
 
 ---
@@ -1058,6 +1058,8 @@ Recall the expansions
 $$\begin{align} \sinh(t) &= t + \frac{t^3}{6} + o(t^3)\\ e^t &= 1 + t + \frac{t^2}{2} + o(t^2) \end{align}$$
 First look at $x^{7/3}\log(x)$. This doesn't have a direct expansion so we must find at least what little o it belongs to. Since $\lim_{x \to 0^+} x^\alpha \log x = 0$ for any $\alpha > 0$, we have:
 $$\lim_{x\rightarrow 0^+}\frac{x^{7/3}\log(x)}{x^n}=\lim_{x\rightarrow0^+}x^{7/3-n}\log(x)\longrightarrow x^{7/3}\log(x)=o(x^{4/3})=o(x^2)$$
+Where the last step is valid only because $o(x^2)\subseteq o(x^{4/3})$
+
 Now expand $\sinh$
 $$\sinh(t)=t+o(t^2)=x^2+o(x^4)=x^2+o(x^2)$$
 So the denominator is just 
@@ -1084,16 +1086,16 @@ $$\begin{align} \cos(t) &= 1 - \frac{t^2}{2} + o(t^2)\\ \sin(x) &= x - \frac{x^3
 The biggest degree is $x^2$ in th denominator, however expanding until $x^2$ causes the terms to completely cancel out:
 $$x(x-\sin(x))=x(x-x+o(x^2))=o(x^3)$$
 So we must expand it further:
-$$x(x-\sin(x))=x(x-x-\frac{x^3}6+o(x^4))=-\frac{x^4}6+o(x^4)$$
+$$x(x-\sin(x))=x(x-x+\frac{x^3}6+o(x^4))=\frac{x^4}6+o(x^4)$$
 Now notice that also $x^3\sin^2(x)$ is also $o(x^4)$ since
 $$\lim_{x\rightarrow 0^+}\frac{x^3\sin(x^2)}{x^4}=\lim_{x\rightarrow 0}\frac{\sin(x)}{x}\cdot x=1\cdot 0=0$$
 Therefore the denominator becomes:
-$$-\frac{x^4}6+o(x^4)$$
+$$\frac{x^4}6+o(x^4)$$
 The numerator just requires a direct expansion:
 $$\begin{align}
-\lim_{x\to 0} \frac{1 - \cos(x^2)}{x(x - \sin x) + x^3\sin^2 x}&=\lim_{x\to 0} \frac{1 - 1+\frac{x^4}2+o(x^4)}{-\frac{x^4}6+o(x^4)}\\
-&=\lim_{x\rightarrow 0}\frac{x^4(\frac12+\frac{o(x^4)}{x^4})}{x^4(-\frac16+\frac{o(x^4)}{x^4})}\\
-&=\frac{1/2}{-1/6}=-3
+\lim_{x\to 0} \frac{1 - \cos(x^2)}{x(x - \sin x) + x^3\sin^2 x}&=\lim_{x\to 0} \frac{1 - 1+\frac{x^4}2+o(x^4)}{\frac{x^4}6+o(x^4)}\\
+&=\lim_{x\rightarrow 0}\frac{x^4(\frac12+\frac{o(x^4)}{x^4})}{x^4(\frac16+\frac{o(x^4)}{x^4})}\\
+&=\frac{1/2}{1/6}=3
 \end{align}$$
 
 
@@ -1112,7 +1114,7 @@ Numerator:
 $$\sin x-\alpha x+\frac\alpha6x^3=x-\frac{x^3}6-\alpha x+\frac\alpha6x^3+o(x^3)=(1-\alpha)x+\frac{\alpha-1}6x^3+o(x^3)$$
 Denominator:
 Use the substitution $t=x^2+4x^3$ (again since both t and x tend to $0$ as they go to $0^+$) and expand only until first order since $o(t)=o(x^2+4x^3)=o(x^3)$
-$$\arctan t=t+o(t)=x^2+4x^3+o(x^3)$$
+$$\arctan t=t+o(t)=x^2+4x^3+o(x^2)$$
 Now rewrite the entire limit:
 $$\begin{align}\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac16\alpha x^3}{\arctan(x^2+4x^3)}&=\lim_{x\rightarrow 0^+}\frac{(1-\alpha)x+\frac{\alpha-1}6x^3+o(x^3)}{x^2+4x^3+o(x^3)}\\
 &=\lim_{x \to 0^+} \frac{x \left[ (1-\alpha) + \frac{\alpha-1}{6}x^2 + \frac{o(x^3)}{x} \right]}{x \left[ x + 4x^2 + \frac{o(x^3)}{x} \right]}\\
