@@ -562,9 +562,6 @@ $$f(x + 2\pi) = \frac{\log(\sin(x + 2\pi))}{\sin(x + 2\pi) - 1} = \frac{\log(\si
 
 # 3) Lesson 23/10/26
 
-
-$$\lim_{x\rightarrow 0^+}\frac{e^{2x}-1-\sin(2x)}{\sinh^2(x)+x^\frac92}$$
-
 ## 3.1) Limits
 Recall the following indeterminate forms:
 $$\begin{gather}
@@ -1034,7 +1031,8 @@ The $\log$ of $\sinh$ is done by substituting $t=\sinh(x)$, expanding the log an
 How much do we need to expand?
 $$\begin{align}\log(1+t) = t + o(t) &= \sinh(x) + o(\sinh(x)) \\
 &= x + \frac{x^3}{6} + o(x^3) + o\left(x + \frac{x^3}{6} + o(x^3)\right)\\ 
-&= x + \frac{x^3}{6} + o(x)
+&= x + \frac{x^3}{6} + o(x)\\
+&=x+o(x)
 \end{align}$$
 So not enough, in general if order $n$ is needed, the expansion must be of order $n$
 $$\begin{align}\log(1+t) = t -\frac{t^2}2+ o(t^2) &= \sinh(x) -\frac{\sinh^2(x)}2+ o(\sinh^2(x)) \\
@@ -1050,9 +1048,27 @@ $$\begin{align}
 \end{align}$$
 
 
-#### 6) Exam
+#### 6) Exam 17.09.2019
+Compute the limit
+$$\lim_{x\to 0^+} \frac{e^{x - 2x^2} - 1 - x}{\sinh(x^2) + x^{7/3}\log x}$$
+Recall the expansions
+$$\begin{align} \sinh(t) &= t + \frac{t^3}{6} + o(t^3)\\ e^t &= 1 + t + \frac{t^2}{2} + o(t^2) \end{align}$$
+First look at $x^{7/3}\log(x)$. This doesn't have a direct expansion so we must find at least what little o it belongs to:
+$$\lim_{x\rightarrow 0^+}\frac{x^{7/3}\log(x)}{x^n}$$
 
-##
+
+
+
+Now expand $\sinh$
+$$\sinh(t)=t+o(t^2)=x^2+o(x^4)$$
+Expand $e$
+$$e^t=1+t+o(t)=$$
+
+
+#### 7) Exam 
+Compute the limit
+$$\lim_{x\to 0} \frac{1 - \cos(x^2)}{x(x - \sin x) + x^3\sin^2 x}$$
+
 
 #### 8) Exam 12.09.2022
 Compute the limit $\forall \alpha\in\mathbb R$:
