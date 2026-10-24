@@ -1021,7 +1021,52 @@ $$\begin{align}
 &=\frac{11}{24}-\infty+0\\&=-\infty
 \end{align}$$
 
-#### 5) Exam 12.09.22
+#### 5) Exam 14.09.2020
+Compute the limit:
+$$\lim_{x \to 0^+} \frac{\log(1 + \sinh x) - \sin x}{x^2}$$
+Recall the expansions:
+$$\begin{align}\sinh(x) &= x + \frac{x^3}{6} + o(x^3)\\
+\log(1 + t) &= t - \frac{t^2}{2} + o(t^2)\\
+\sin(x) &= x - \frac{x^3}{6} + o(x^3)
+\end{align}$$
+Here expansion of order two is needed. For the $\sin$ it's straight forward. 
+The $\log$ of $\sinh$ is done by substituting $t=\sinh(x)$, expanding the log and then the $\sinh(x)$
+
+Compute the limit:
+
+\lim_{x \to 0^+} \frac{\log(1 + \sinh x) - \sin x}{x^2}
+
+Recall the expansions:
+
+\begin{align}\sinh(x) &= x + \frac{x^3}{6} + o(x^3)\\
+
+\log(1 + t) &= t - \frac{t^2}{2} + o(t^2)\\
+
+\sin(x) &= x - \frac{x^3}{6} + o(x^3)
+
+\end{align}
+
+Here expansion of order two is needed. For the \sin it's straight forward.
+
+  
+
+The \log of \sinh is done by substituting t=\sinh(x), expanding the log and then the \sinh(x)
+
+  
+
+What is the difference if I do
+
+\log(1+t)=t+o(t)=\sinh(x)+o(\sinh(x))=x + \frac{x^3}{6} + o(x^3)+o(x + \frac{x^3}{6} + o(x^3))=x + \frac{x^3}{6} + o(x^3)
+
+  
+
+Or if I do
+
+\log
+
+
+
+#### 8) Exam 12.09.2022
 Compute the limit $\forall \alpha\in\mathbb R$:
 $$\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac16\alpha x^3}{\arctan(x^2+4x^3)}$$
 First recall the standard expansions:
@@ -1049,28 +1094,13 @@ $$\begin{align}
 &=0\cdot\frac1{1+0+0}=0
 \end{align}$$
 - Case $\alpha\neq1$
-$$\lim_{x\rightarrow 0^+}\frac{1-\alpha+\frac{\alpha-1}6x^2+o(x^2)}{x+4x^2+o(x^2)}=$$
-
-
-Now analyze the three parts of the limit:
-$$\begin{align}
-&\lim_{x\rightarrow 0^+}\frac{(1-\alpha)x}{x^2+4x^3+o(x^3)}=\lim_{x\rightarrow 0^+}\frac{(1-\alpha)}{x+4x^2+{o(x^2)}}=\frac{\text{constant}}{0^++0^++0^+}=
-\begin{cases}
+$$\lim_{x\rightarrow 0^+}\frac{1-\alpha+\frac{\alpha-1}6x^2+o(x^2)}{x+4x^2+o(x^2)}=\frac{1-\alpha+0^+}{0^+}=\begin{cases}
 \infty&\text{if }\alpha<1\\
 -\infty&\text{if }\alpha>1
-\end{cases}\\
-&\lim_{x\rightarrow 0^+}\frac{\frac{\alpha-1}6x^3}{x^2+4x^3+o(x^3)}=\lim_{x\rightarrow 0^+}\frac{\frac{\alpha-1}6x}{1+4x+{o(x)}}=\frac{\text{constant}\cdot0^+}{1+0^++0^+}=0^+\\
-&\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2+4x^3+o(x^3)}=0
-\end{align}$$
+\end{cases}$$
 
 So the final result is 
 $$\lim_{x \to 0^+} \frac{\sin(x) - \alpha x + \frac{1}{6}\alpha x^3}{\arctan(x^2 + 4x^3)} = \begin{cases} +\infty & \text{if } \alpha < 1 \\ 0 & \text{if } \alpha = 1 \\ -\infty & \text{if } \alpha > 1 \end{cases}$$
-
-
-Alternatively notice it can be rewritten as
-$$\lim_{x \to 0^+} \frac{x \left[ (1-\alpha) + \frac{\alpha-1}{6}x^2 + \frac{o(x^3)}{x} \right]}{x \left[ x + 4x^2 + \frac{o(x^3)}{x} \right]}=\lim_{x\rightarrow 0^+}\frac{1-\alpha+\frac{\alpha-1}6x^2+o(x^2)}{x+4x^2+o(x^2)}$$
-Which can be easily computed.
-
 
 # 5) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
@@ -1088,3 +1118,32 @@ Which can be easily computed.
 - $\cap$: Intersection; and
 
 - $\exists$: there exists
+
+# 6) Taylor Expansions
+Here is a list of some of the most frequent expansions
+$$\begin{align}
+e^x &= 1 + x + \frac{x^2}{2} + \cdots + \frac{x^k}{k!}
++ \cdots + \frac{x^n}{n!} + o(x^n) \\[1em]
+\log(1+x) &= x - \frac{x^2}{2} + \cdots
++ (-1)^{n-1}\frac{x^n}{n} + o(x^n) \\[1em]
+\sin x &= x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots
++ (-1)^m\frac{x^{2m+1}}{(2m+1)!} + o(x^{2m+2}) \\[1em]
+\cos x &= 1 - \frac{x^2}{2} + \frac{x^4}{4!} - \cdots
++ (-1)^m\frac{x^{2m}}{(2m)!} + o(x^{2m+1}) \\[1em]
+\sinh x &= x + \frac{x^3}{3!} + \frac{x^5}{5!} + \cdots
++ \frac{x^{2m+1}}{(2m+1)!} + o(x^{2m+2}) \\[1em]
+\cosh x &= 1 + \frac{x^2}{2} + \frac{x^4}{4!} + \cdots
++ \frac{x^{2m}}{(2m)!} + o(x^{2m+1}) \\[1em]
+\arcsin x &= x + \frac{x^3}{6} + \frac{3x^5}{40} + \cdots
++ \left|\binom{-\frac12}{m}\right|
+\frac{x^{2m+1}}{2m+1} + o(x^{2m+2}) \\[1em]
+\arctan x &= x - \frac{x^3}{3} + \frac{x^5}{5} - \cdots
++ (-1)^m\frac{x^{2m+1}}{2m+1} + o(x^{2m+2}) \\[1em]
+(1+x)^\alpha &= 1 + \alpha x
++ \frac{\alpha(\alpha-1)}{2}x^2 + \cdots
++ \binom{\alpha}{n}x^n + o(x^n) \\[1em]
+\frac{1}{1+x} &= 1 - x + x^2 - \cdots
++ (-1)^n x^n + o(x^n) \\[1em]
+\sqrt{1+x} &= 1 + \frac12 x - \frac18 x^2
++ \frac1{16}x^3 + o(x^3)
+\end{align}$$
