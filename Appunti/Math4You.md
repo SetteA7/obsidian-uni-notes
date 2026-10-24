@@ -1031,13 +1031,22 @@ Use the substitution $t=x^2+4x^3$ (again since both t and x tend to $0$ as they 
 $$\arctan t=t+o(t)=x^2+4x^3+o(x^3)$$
 Now rewrite the entire limit:
 $$\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac16\alpha x^3}{\arctan(x^2+4x^3)}=\lim_{x\rightarrow 0^+}\frac{(1-\alpha)x+\frac{\alpha-1}6x^3+o(x^3)}{x^2+4x^3+o(x^3)}$$
-Continue to manipulate algebrically:
-$$\frac{(1-\alpha)x+\frac{\alpha-1}6x^3+o(x^3)}{x^2+4x^3+o(x^3)}=\frac{x[(1-\alpha)+\frac{\alpha-1}6x^2+\frac{o(x^3)}x]}{x^2[1+4x+\frac{o(x^3)}{x^2}]}=\frac{(1-\alpha)+\frac{\alpha-1}6x^2+\frac{o(x^3)}x}{x[1+4x+\frac{o(x^3)}{x^2}]}$$
+
 - Case $\alpha=1$ (since obviously simplifies a lot)
 $$\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2+4x^3+o(x^3)}=\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2}+\frac{o(x^3)}{4x^3}+\frac{o(x^3)}{o(x^2)}=0+0+0=0$$
 - Case $\alpha\neq1$
-
-
+Now analyze the three parts of the limit:
+$$\begin{align}
+&\lim_{x\rightarrow 0^+}\frac{(1-\alpha)x}{x^2+4x^3+o(x^3)}=\lim_{x\rightarrow 0^+}\frac{(1-\alpha)}{x+4x^2+\frac{o(x^3)}x}=\frac{\text{constant}}{0^++0^++0^+}=
+\begin{cases}
+\infty&\text{if }\alpha<1\\
+-\infty&\text{if }\alpha>1
+\end{cases}\\
+&\lim_{x\rightarrow 0^+}\frac{\frac{\alpha-1}6x^3}{x^2+4x^3+o(x^3)}=\lim_{x\rightarrow 0^+}\frac{\frac{\alpha-1}6x}{1+4x+\frac{o(x^3)}{x^2}}=\frac{\text{constant}\cdot0^+}{1+0^++0^+}=0^+\\
+&\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2+4x^3+o(x^3)}=0
+\end{align}$$
+So the final result is 
+$$\lim_{x \to 0^+} \frac{\sin(x) - \alpha x + \frac{1}{6}\alpha x^3}{\arctan(x^2 + 4x^3)} = \begin{cases} +\infty & \text{if } \alpha < 1 \\ 0 & \text{if } \alpha = 1 \\ -\infty & \text{if } \alpha > 1 \end{cases}$$
 
 # 5) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
