@@ -957,8 +957,25 @@ $$E(x)=3x^2+o(x^2)$$
 #### 2) Classic Cancellation Limit
 Compute the limit:
 $$\lim_{x \to 0} \frac{\sin(x) - x}{x^3}$$
-This cannot be computed via the notable limit (or order 1 expansion) since:
-$$\lim_{x \to 0} \frac{\sin(x) - x}{x^3}=\lim_{x \to 0} \frac{\sin(x)}{x^3}$$
+Recall the expansion for $\sin$:
+$$\sin (x)=x-\frac{x^{3}}{3!}+\frac{x^{5}}{5!}-\frac{x^{7}}{7!}+\cdots =\sum _{n=0}^{\infty }\frac{(-1)^{n}x^{2n+1}}{(2n+1)!}$$
+
+---
+
+This cannot be computed via the notable limit since:
+$$\lim_{x \to 0} \frac{\sin(x) - x}{x^3}=\lim_{x \to 0} \frac{\sin(x)}{x^3}-\frac1{x^2}=\lim_{x\rightarrow 0}\frac{\sin(x)}{x}\cdot\frac1{x^2}-\frac1{x^2}$$
+Where it is known that $\lim_{x\rightarrow 0}\sin(x)/x=1$ therefore:
+$$\lim_{x\rightarrow 0}\frac{\sin(x)}{x}\cdot\frac1{x^2}-\frac1{x^2}=\lim_{x\rightarrow 0}\frac1{x^2}-\frac1{x^2}=0$$
+But the last step is illegal, as the limit cannot be evaluated partially (that is we cannot simplify out $\sin(x)/x$ but keep $1/x^2$)
+
+Try with order $1$ expansion:
+$$\lim_{x \to 0} \frac{\sin(x) - x}{x^3}=\lim_{x \to 0} \frac{x+o(x) - x}{x^3}=\lim_{x \to 0} \frac{o(x)}{x^3}$$
+but since $o(x)/x^3=x^{-3}o(x)=o(x^{-2})$ we cannot determine it
+
+
+Since the denominator is of order $3$, we expand until this order:
+$$\lim_{x\rightarrow 0}\frac{x-\frac{x^3}6+o(x^3)-x}{x^3}=\lim_{x\rightarrow 0}\frac{-\frac{x^3}6+o(x^3)}{x^3}=\lim_{x\rightarrow 0}-\frac16-\frac{o(x^3)}{x^3}=-\frac16-0$$
+since $o(x^3)/x^3=x^{-3}o(x^3)=o(1)=0$
 
 # 5) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
