@@ -858,14 +858,32 @@ $$\begin{array}{cccc}
 at order $3$ it is already $99.8\%$ accurate!
 ![[Pasted image 20261024144924.png|f(x) in black, 1st order expansion in orange, 3rd order expansion in red|350]]
 #### Little-$o$ Notation
-Little o is the correction term. This encapsulates the difference of $f(x)$ and $P_n(x)$
+Little o is the correction term. This encapsulates the difference of $f(x)$ and $P_n(x)$.
 
 >[!def] Little-$o$
 Given two functions $f(x)$ and $g(x)$ near $x_0$ (with $g(x) \neq 0$ in a punctured neighborhood of $x_0$), we say that **$f(x)$ is "little-o" of $g(x)$ as $x \to x_0$**, written $f(x) = o\big(g(x)\big)$, if:
 $$\lim_{x \to x_0} \frac{f(x)}{g(x)} = 0$$
 
+This is, in the Taylor expansion writing $o(x^n)$ means that all the next order terms go to zero faster than $x^n$ and can be ignored.
+
 For now let's just focus on $x\rightarrow 0$
-Intuitively, little-$o$
+
+Intuitively, little-$o$, refers to any function that shrinks faster then the specified function. Therefore we can say that $f(x)=o(g(x))$ is an abuse of notation as it should be $f(x)\in o(g(x))$ since $o(g(x))$ is a set that refers to all functions $h(x)$ where $h(x)\ll g(x)$
+
+For example consider powers. As $x\rightarrow 0$ we have 
+$$x^n\ll x^m\quad\text{ for }n> m$$
+Therefore we can say:
+- $x^3=o(x^2)$ since $\lim_{x\rightarrow 0}x^3/x^2=\lim_{x\rightarrow0}x=0$
+- But not $x^2=o(x^3)$ since $\lim_{x\rightarrow 0}x^2/x^3=\lim_{x\rightarrow0}1/x=\pm\infty$
+
+>[!thm] Little-$o$ Propeeties
+>Here are some properties of little-$o$.
+>- Constant Multiplication: 
+>$$c\cdot o(x^n)\text{ for any constant }c\not =0\qquad \text{ }$$
+>- Same Order Addition/subtraction
+>$$o(x^n)\pm o(x^n)=o(x^n)$$
+>- Different order addition (Absorption)
+>$$o(x^n)+o(x^m)=o(x^{\min(n,m)})$$
 
 
 **Algebra of Little-o**
