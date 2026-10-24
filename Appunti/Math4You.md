@@ -1070,15 +1070,16 @@ Replace the whole limit:
 $$\begin{align}
 \lim_{x\to 0^+} \frac{e^{x - 2x^2} - 1 - x}{\sinh(x^2) + x^{7/3}\log x}&=\lim_{x\to 0^+} \frac{1+x-\frac32x^2-1-x+o(x^2)}{x^2+o(x^2)}\\
 &=\lim_{x\to 0^+} \frac{-\frac32x^2+o(x^2)}{x^2+o(x^2)}\\
-&=\lim_{x\rightarrow 0^+}-\frac32+\frac{o(x^2)}{o(x^2)}=-\frac32
+&=\lim_{x\rightarrow 0^+}\frac{x^2(-\frac32+\frac{o(x^2)}{x^2})}{x^2(1+\frac{o(x^2)}{x^2})}\\
+&=\lim_{x\rightarrow 0^+}\frac{-\frac32+\frac{o(x^2)}{x^2}}{1+\frac{o(x^2)}{x^2}}=-\frac32
 \end{align}$$
-
 #### 7) Exam 
 Compute the limit
 $$\lim_{x\to 0} \frac{1 - \cos(x^2)}{x(x - \sin x) + x^3\sin^2 x}$$
 Recall the expansions
 $$\begin{align} \cos(t) &= 1 - \frac{t^2}{2} + o(t^2)\\ \sin(x) &= x - \frac{x^3}{6} + o(x^3) \end{align}$$
-$$\frac{o(x^2)}{x()}$$
+First notice that $x^3\sin^2(x)=o(x^4)$ since 
+$$\lim_{x\rightarrow 0}\frac{x^3\sin^2(x)}{x^4}=\lim_{x\rightarrow 0}x^3\par{\frac{\sin^2(x)}{x^2}}^2=0$$
 
 
 
