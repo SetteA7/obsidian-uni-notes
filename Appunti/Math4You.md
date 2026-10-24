@@ -899,6 +899,9 @@ Therefore we can say:
 >- Powers of Little-$o$:
 >$$[o(x^n)]^k=o(x^{n\cdot k})\quad\text{Ex: }[o(x^2)]^3=o(x^6)$$
 
+In general during the exercises the desired degree to expand to is the smallest one that where the that the terms don't cancel out due to expansion, right?
+
+
 ---
 
 Proofs (very quick):
@@ -1078,8 +1081,20 @@ Compute the limit
 $$\lim_{x\to 0} \frac{1 - \cos(x^2)}{x(x - \sin x) + x^3\sin^2 x}$$
 Recall the expansions
 $$\begin{align} \cos(t) &= 1 - \frac{t^2}{2} + o(t^2)\\ \sin(x) &= x - \frac{x^3}{6} + o(x^3) \end{align}$$
-First notice that $x^3\sin^2(x)=o(x^4)$ since 
-$$\lim_{x\rightarrow 0}\frac{x^3\sin^2(x)}{x^4}=\lim_{x\rightarrow 0}x^3\par{\frac{\sin^2(x)}{x^2}}^2=0$$
+The biggest degree is $x^2$ in th denominator, however expanding until $x^2$ causes the terms to completely cancel out:
+$$x(x-\sin(x))=x(x-x+o(x^2))=o(x^3)$$
+So we must expand it further:
+$$x(x-\sin(x))=x(x-x-\frac{x^3}6+o(x^4))=-\frac{x^4}6+o(x^4)$$
+Now notice that also $x^3\sin^2(x)$ is also $o(x^4)$ since
+$$\lim_{x\rightarrow 0^+}\frac{x^3\sin(x^2)}{x^4}=\lim_{x\rightarrow 0}\frac{\sin(x)}{x}\cdot x=1\cdot 0=0$$
+Therefore the denominator becomes:
+$$-\frac{x^4}6+o(x^4)$$
+The numerator just requires a direct expansion:
+$$\begin{align}
+\lim_{x\to 0} \frac{1 - \cos(x^2)}{x(x - \sin x) + x^3\sin^2 x}&=\lim_{x\to 0} \frac{1 - 1+\frac{x^4}2+o(x^4)}{-\frac{x^4}6+o(x^4)}\\
+&=\lim_{x\rightarrow 0}\frac{x^4(\frac12+\frac{o(x^4)}{x^4})}{x^4(-\frac16+\frac{o(x^4)}{x^4})}\\
+&=\frac{1/2}{-1/6}=-3
+\end{align}$$
 
 
 
