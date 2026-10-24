@@ -1030,41 +1030,29 @@ $$\begin{align}\sinh(x) &= x + \frac{x^3}{6} + o(x^3)\\
 \sin(x) &= x - \frac{x^3}{6} + o(x^3)
 \end{align}$$
 Here expansion of order two is needed. For the $\sin$ it's straight forward. 
-The $\log$ of $\sinh$ is done by substituting $t=\sinh(x)$, expanding the log and then the $\sinh(x)$
-
-Compute the limit:
-
-\lim_{x \to 0^+} \frac{\log(1 + \sinh x) - \sin x}{x^2}
-
-Recall the expansions:
-
-\begin{align}\sinh(x) &= x + \frac{x^3}{6} + o(x^3)\\
-
-\log(1 + t) &= t - \frac{t^2}{2} + o(t^2)\\
-
-\sin(x) &= x - \frac{x^3}{6} + o(x^3)
-
-\end{align}
-
-Here expansion of order two is needed. For the \sin it's straight forward.
-
-  
-
-The \log of \sinh is done by substituting t=\sinh(x), expanding the log and then the \sinh(x)
-
-  
-
-What is the difference if I do
-
-\log(1+t)=t+o(t)=\sinh(x)+o(\sinh(x))=x + \frac{x^3}{6} + o(x^3)+o(x + \frac{x^3}{6} + o(x^3))=x + \frac{x^3}{6} + o(x^3)
-
-  
-
-Or if I do
-
-\log
+The $\log$ of $\sinh$ is done by substituting $t=\sinh(x)$, expanding the log and then the $\sinh(x)$.
+How much do we need to expand?
+$$\begin{align}\log(1+t) = t + o(t) &= \sinh(x) + o(\sinh(x)) \\
+&= x + \frac{x^3}{6} + o(x^3) + o\left(x + \frac{x^3}{6} + o(x^3)\right)\\ 
+&= x + \frac{x^3}{6} + o(x)
+\end{align}$$
+So not enough, in general if order $n$ is needed, the expansion must be of order $n$
+$$\begin{align}\log(1+t) = t -\frac{t^2}2+ o(t^2) &= \sinh(x) -\frac{\sinh^2(x)}2+ o(\sinh^2(x)) \\
+&= x+o(x^2)-\frac{(x+o(x^2))^2}2+o([x+o(x^2)]^2)\\
+&=x+o(x^2)-\frac{x^2+2xo(x^2)+o(x^2)^2}2+o(x^2+o(x^3)+o(x^4))\\
+&=x-\frac{x^2}2+o(x^2)
+\end{align}$$
+Now expand the whole limit:
+$$\begin{align}
+\lim_{x \to 0^+} \frac{\log(1 + \sinh x) - \sin x}{x^2}&=\lim_{x \to 0^+} \frac{x-\frac{x^2}2+o(x^2)-x+o(x^2)}{x^2}\\
+&=\lim_{x\rightarrow 0^+}\frac{-\frac{x^2}2+o(x^2)}{x^2}\\
+&=\lim_{x\rightarrow 0^+}-\frac12+\frac{o(x^2)}{x^2}=-\frac12
+\end{align}$$
 
 
+#### 6) Exam
+
+##
 
 #### 8) Exam 12.09.2022
 Compute the limit $\forall \alpha\in\mathbb R$:
