@@ -840,7 +840,13 @@ Using the rationalized form:$$\lim_{x\rightarrow 0} f(x) = \lim_{x\rightarrow 0}
 
 
 # 4) Lesson 26/10/26
-## 4.1) Taylor 
+## 4.1) Taylor Expansion
+A **Taylor expansion** takes a smooth function $f(x)$ near a specific point $x_0$ and replaces it with a **polynomial clone** $P_n(x)$ of degree $n$, plus a tiny error term (the remainder). This is useful as it transforms complicated functions in a simple polynomial function, which are easier to manipulate
+$$f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}(x - x_0)^k + o\big((x - x_0)^n\big) \quad \text{as } x \to x_0$$
+But we will mostly limit our study cases at $x\rightarrow 0$ (for now)
+$$f(x) = \sum_{k=0}^n \frac{f^{(k)}(0)}{k!} x^k + o(x^n) \quad \text{as } x \to 0$$
+Consider $f(x)=e^x$ at $x_0=0$. It's expansion is (up to oerder 3$) $e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + o(x^3)$. Now let's consider every single order individually:
+
 
 #### Little-$o$ Notation
 Let $x\rightarrow x_0$. We say $f(x)\in o(g(x))$ if:
