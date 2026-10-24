@@ -1015,6 +1015,11 @@ $$\begin{align}
 &=\frac{11}{24}-\infty+0\\&=-\infty
 \end{align}$$
 
+#### 5) Exam 12.09.22
+Compute the limit $\forall \alpha\in\mathbb R$:
+$$\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac16\alpha x^3}{\arctan(x^2+4x^3)}$$
+
+
 # 5) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
