@@ -653,6 +653,94 @@ $$\lim_{x\rightarrow 1^+}f(x)=\frac{1}{0^+}=\infty\not = \lim_{x\rightarrow 1^-}
 $$\lim_{x\rightarrow -1^+}f(x)=\frac{-1}{0^-}=+\infty\not = \lim_{x\rightarrow -1^-}f(x)=\frac{-1}{0^+}=-\infty$$
 
 ![[Pasted image 20261022114406.png|Asymptote in Blue|350]]
+
+#### 4) Log
+Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.
+$$f(x)=\log\par{\frac{x+1}{x-1}}$$
+**Domain:**
+$$D = \curly{\frac{x+1}{x-1}>0} \cap \curly{x\not = 1} = (-\infty,-1) \cup (1,+\infty)$$
+**Sign:**
+ $$f(x)> 0\iff \frac{x+1}{x-1}> 1\rightarrow x>1$$
+ We don't have any zero.
+
+**Limits at infinity:**
+- Positive Infinity:
+$$\lim_{x\rightarrow\infty}f(x)=\log\par{\frac\infty\infty}\quad\text{indeterminate form!}$$
+Notice that $\frac{x+1}{x-1}=\frac{x(1+1/x)}{x(1-1/x)}=\frac{1+\frac1x}{1-\frac1x}$ so
+$$\lim_{x\rightarrow\infty}f(x)=\log(1^+)=0^+$$
+where we know that the solution must be positive from the domain.
+In general recall that a ratio of polynomial can be solved by just looking at the max degree of numerator and denominator!
+- Negative Infinity:
+$$\lim_{x\rightarrow-\infty}f(x)=\log\par{1^-}=0^-$$
+sign is deduced from previous sign analysis!
+
+**Limits at accumulation points:**
+- At $1$ (only $1^+$ due to domain):
+$$\lim_{x\rightarrow 1^+}f(x)=\log\par{\frac2{0^+}}=\log (+\infty)=\infty$$
+- At $-1$ (only $-1^-$ due to domain):
+$$\lim_{x\rightarrow -1^-}f(x)=\log\par{\frac{0^-}{-2}}=\log (0^+)=-\infty$$
+![[Pasted image 20261022122003.png|Graph|250]]
+
+#### 7) Log o Log
+Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=\frac{\log(\log(x))}{1+\log (x)}$$**Domain:**
+We have three conditions:
+- Inner logarithm requires: $x > 0$
+- Outer logarithm in the numerator requires: $\log(x) > 0 \implies x > 1$
+- Denominator must not vanish: $1 + \log(x) \neq 0 \implies \log(x) \neq -1 \implies x \neq \frac{1}{e}$
+Since $\frac{1}{e} \approx 0.37 < 1$, the condition $x \neq \frac{1}{e}$ is automatically satisfied for $x > 1$.$$D = (1, +\infty)$$**Sign:**
+- Denominator: For all $x \in D = (1, +\infty)$, $\log(x) > 0$, so $1 + \log(x) > 1 > 0$ (always positive).
+- Numerator:$$\log(\log(x)) > 0 \iff \log(x) > 1 \iff x > e$$
+
+$$f(x) > 0 \iff x \in (e, +\infty)$$
+
+**Limits at infinity:**
+- Positive Infinity:$$\lim_{x\rightarrow+\infty} f(x) = \frac{+\infty}{+\infty} \quad \text{indeterminate form!}$$
+Substitute $t = \log(x)$. 
+As $x \to +\infty$, $t \to +\infty$:$$\lim_{t\rightarrow+\infty} \frac{\log(t)}{1+t} = \lim_{t\rightarrow+\infty} \frac{\log(t)}{t\left(1 + \frac{1}{t}\right)} = \lim_{t\rightarrow+\infty} \frac{\log(t)}{t} \cdot \frac{1}{1 + \frac{1}{t}}$$Recall the hierarchy of infinities ($\lim_{t\rightarrow+\infty} \frac{\log(t)}{t} = 0^+$):$$\lim_{x\rightarrow+\infty} f(x) = 0^+ \cdot 1 = 0^+$$
+
+- Negative Infinity: Excluded by domain.
+
+**Limits at accumulation points:**
+- At $1$ (only $1^+$ due to domain):
+Numerator: as $x \to 1^+$, $\log(x) \to 0^+ \implies \log(\log(x)) \to -\infty$
+Denominator: $1 + \log(1^+) = 1 + 0^+ = 1^+$$$\lim_{x\rightarrow 1^+} f(x) = \frac{-\infty}{1^+} = -\infty$$The line $x = 1$ is a vertical asymptote from the right.
+
+![[Pasted image 20261022150353.png|Graph|250]]
+
+#### 8) Limited
+Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=\frac{\sqrt{1+x}-\sqrt{1-x}}{x}$$**Domain:**
+$$D = \curly{1+x\geq 0}\cap\curly{1-x\geq 0}\cap\curly{x\not = 0} = [-1, 0) \cup (0, 1] = [-1, 1] \setminus \{0\}$$**Sign:**
+Two alternatives:
+1) Find numerator denominator as usual (do at home):
+Numerator $>0\iff x\in(0,1]$
+Denominator $>0\iff x>0$
+so $f(x)>0\forall x\in D$
+
+2) Rationalize
+$$\begin{align}
+f(x) &= \frac{(\sqrt{1+x}-\sqrt{1-x})(\sqrt{1+x}+\sqrt{1-x})}{x(\sqrt{1+x}+\sqrt{1-x})} \\
+&= \frac{(1+x) - (1-x)}{x(\sqrt{1+x}+\sqrt{1-x})} \\
+&= \frac{2x}{x(\sqrt{1+x}+\sqrt{1-x})}\\
+&= \frac{2}{\sqrt{1+x}+\sqrt{1-x}} \quad\par{\text{ only since }D\text{ excludes }0}
+\end{align}$$
+Since $\sqrt{1+x} + \sqrt{1-x} > 0$ for all $x \in [-1, 1]$:$$f(x) > 0 \quad \forall x \in D$$We don't have any zeros.
+
+**Limits at infinity:**
+Positive and Negative Infinity are excluded by domain ($D \subset [-1, 1]$, so $\pm\infty$ are not accumulation points of $D$).
+There are no horizontal or oblique asymptotes.
+
+**Limits at accumulation points:**
+- At $0$:$$\lim_{x\rightarrow 0} f(x) = \frac{0}{0} \quad \text{indeterminate form!}$$
+Using the rationalized form:$$\lim_{x\rightarrow 0} f(x) = \lim_{x\rightarrow 0} \frac{2}{\sqrt{1+x}+\sqrt{1-x}} = \frac{2}{\sqrt{1} + \sqrt{1}} = \frac{2}{2} = 1$$Notice that:$$\lim_{x\rightarrow 0^+} f(x) = \lim_{x\rightarrow 0^-} f(x) = 1$$So the two-sided limit exists! $x = 0$ is a removable discontinuity (eliminable singularity).
+- At $+1$ (only $1^-$ due to domain): Since $1 \in D$, the function is continuous from the left:$$\lim_{x\rightarrow 1^-} f(x) = f(1) = \frac{\sqrt{2} - 0}{1} = \sqrt{2}$$
+- At $-1$ (only $(-1)^+$ due to domain):Since $-1 \in D$, the function is continuous from the right:$$\lim_{x\rightarrow -1^+} f(x) = f(-1) = \frac{0 - \sqrt{2}}{-1} = \sqrt{2}$$There are no vertical asymptotes.
+
+![[Pasted image 20261022152815.png|Graph|250]]
+
+
+# 4) Lesson 26/10/26
+
+## 4.1) Standard Limits Exercises
 #### 3) Two Policemen (Harder!)
 Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.
 $$f(x)=\log(e^{2x}-1)$$
@@ -696,33 +784,8 @@ Here we just need to check for $0^+$ as $0^-$ is not in the domain!
 - At $0^+$:
 $$\lim_{x\rightarrow 0^+}f(x)=\log(1^+-1)=\log (0^+)=-\infty$$
 
-![[Pasted image 20261022120429.png|Asymptote in Blue|350]]
-#### 4) Log
-Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.
-$$f(x)=\log\par{\frac{x+1}{x-1}}$$
-**Domain:**
-$$D = \curly{\frac{x+1}{x-1}>0} \cap \curly{x\not = 1} = (-\infty,-1) \cup (1,+\infty)$$
-**Sign:**
- $$f(x)> 0\iff \frac{x+1}{x-1}> 1\rightarrow x>1$$
- We don't have any zero.
+![[Pasted image 20261022120429.png|Asymptote in Blue|200]]
 
-**Limits at infinity:**
-- Positive Infinity:
-$$\lim_{x\rightarrow\infty}f(x)=\log\par{\frac\infty\infty}\quad\text{indeterminate form!}$$
-Notice that $\frac{x+1}{x-1}=\frac{x(1+1/x)}{x(1-1/x)}=\frac{1+\frac1x}{1-\frac1x}$ so
-$$\lim_{x\rightarrow\infty}f(x)=\log(1^+)=0^+$$
-where we know that the solution must be positive from the domain.
-In general recall that a ratio of polynomial can be solved by just looking at the max degree of numerator and denominator!
-- Negative Infinity:
-$$\lim_{x\rightarrow-\infty}f(x)=\log\par{1^-}=0^-$$
-sign is deduced from previous sign analysis!
-
-**Limits at accumulation points:**
-- At $1$ (only $1^+$ due to domain):
-$$\lim_{x\rightarrow 1^+}f(x)=\log\par{\frac2{0^+}}=\log (+\infty)=\infty$$
-- At $-1$ (only $-1^-$ due to domain):
-$$\lim_{x\rightarrow -1^-}f(x)=\log\par{\frac{0^-}{-2}}=\log (0^+)=-\infty$$
-![[Pasted image 20261022122003.png|Graph|250]]
 #### 5) Exponential (Harder)
 Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=e^{\frac{x^2-4}{x-1}}$$**Domain:**
 $$D =\curly{x-1\not = 0}= \mathbb{R}\setminus\{1\} = (-\infty, 1) \cup (1, +\infty)$$**Sign:**
@@ -782,65 +845,8 @@ We have an oblique asymptote:$$y = 10x + \frac{16}{5} \quad \text{as } x \to -\i
 - At $-\frac{12}{25}$ (only $\left(-\frac{12}{25}\right)^-$ due to domain):$$\lim_{x\rightarrow \left(-\frac{12}{25}\right)^-} f(x) = f\left(-\frac{12}{25}\right) = 5\left(-\frac{12}{25}\right) + 2 - 0 = -\frac{12}{5} + 2 = -\frac{2}{5}$$There are no vertical asymptotes.
 
 ![[Pasted image 20261022145406.png|Asymptote in Green|250]]
-#### 7) Log o Log
-Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=\frac{\log(\log(x))}{1+\log (x)}$$**Domain:**
-We have three conditions:
-- Inner logarithm requires: $x > 0$
-- Outer logarithm in the numerator requires: $\log(x) > 0 \implies x > 1$
-- Denominator must not vanish: $1 + \log(x) \neq 0 \implies \log(x) \neq -1 \implies x \neq \frac{1}{e}$
-Since $\frac{1}{e} \approx 0.37 < 1$, the condition $x \neq \frac{1}{e}$ is automatically satisfied for $x > 1$.$$D = (1, +\infty)$$**Sign:**
-- Denominator: For all $x \in D = (1, +\infty)$, $\log(x) > 0$, so $1 + \log(x) > 1 > 0$ (always positive).
-- Numerator:$$\log(\log(x)) > 0 \iff \log(x) > 1 \iff x > e$$
 
-$$f(x) > 0 \iff x \in (e, +\infty)$$
-
-**Limits at infinity:**
-- Positive Infinity:$$\lim_{x\rightarrow+\infty} f(x) = \frac{+\infty}{+\infty} \quad \text{indeterminate form!}$$
-Substitute $t = \log(x)$. 
-As $x \to +\infty$, $t \to +\infty$:$$\lim_{t\rightarrow+\infty} \frac{\log(t)}{1+t} = \lim_{t\rightarrow+\infty} \frac{\log(t)}{t\left(1 + \frac{1}{t}\right)} = \lim_{t\rightarrow+\infty} \frac{\log(t)}{t} \cdot \frac{1}{1 + \frac{1}{t}}$$Recall the hierarchy of infinities ($\lim_{t\rightarrow+\infty} \frac{\log(t)}{t} = 0^+$):$$\lim_{x\rightarrow+\infty} f(x) = 0^+ \cdot 1 = 0^+$$
-
-- Negative Infinity: Excluded by domain.
-
-**Limits at accumulation points:**
-- At $1$ (only $1^+$ due to domain):
-Numerator: as $x \to 1^+$, $\log(x) \to 0^+ \implies \log(\log(x)) \to -\infty$
-Denominator: $1 + \log(1^+) = 1 + 0^+ = 1^+$$$\lim_{x\rightarrow 1^+} f(x) = \frac{-\infty}{1^+} = -\infty$$The line $x = 1$ is a vertical asymptote from the right.
-
-![[Pasted image 20261022150353.png|Graph|250]]
-
-#### 8) Limited
-Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=\frac{\sqrt{1+x}-\sqrt{1-x}}{x}$$**Domain:**
-$$D = \curly{1+x\geq 0}\cap\curly{1-x\geq 0}\cap\curly{x\not = 0} = [-1, 0) \cup (0, 1] = [-1, 1] \setminus \{0\}$$**Sign:**
-Two alternatives:
-1) Find numerator denominator as usual (do at home):
-Numerator $>0\iff x\in(0,1]$
-Denominator $>0\iff x>0$
-so $f(x)>0\forall x\in D$
-
-2) Rationalize
-$$\begin{align}
-f(x) &= \frac{(\sqrt{1+x}-\sqrt{1-x})(\sqrt{1+x}+\sqrt{1-x})}{x(\sqrt{1+x}+\sqrt{1-x})} \\
-&= \frac{(1+x) - (1-x)}{x(\sqrt{1+x}+\sqrt{1-x})} \\
-&= \frac{2x}{x(\sqrt{1+x}+\sqrt{1-x})}\\
-&= \frac{2}{\sqrt{1+x}+\sqrt{1-x}} \quad\par{\text{ only since }D\text{ excludes }0}
-\end{align}$$
-Since $\sqrt{1+x} + \sqrt{1-x} > 0$ for all $x \in [-1, 1]$:$$f(x) > 0 \quad \forall x \in D$$We don't have any zeros.
-
-**Limits at infinity:**
-Positive and Negative Infinity are excluded by domain ($D \subset [-1, 1]$, so $\pm\infty$ are not accumulation points of $D$).
-There are no horizontal or oblique asymptotes.
-
-**Limits at accumulation points:**
-- At $0$:$$\lim_{x\rightarrow 0} f(x) = \frac{0}{0} \quad \text{indeterminate form!}$$
-Using the rationalized form:$$\lim_{x\rightarrow 0} f(x) = \lim_{x\rightarrow 0} \frac{2}{\sqrt{1+x}+\sqrt{1-x}} = \frac{2}{\sqrt{1} + \sqrt{1}} = \frac{2}{2} = 1$$Notice that:$$\lim_{x\rightarrow 0^+} f(x) = \lim_{x\rightarrow 0^-} f(x) = 1$$So the two-sided limit exists! $x = 0$ is a removable discontinuity (eliminable singularity).
-- At $+1$ (only $1^-$ due to domain): Since $1 \in D$, the function is continuous from the left:$$\lim_{x\rightarrow 1^-} f(x) = f(1) = \frac{\sqrt{2} - 0}{1} = \sqrt{2}$$
-- At $-1$ (only $(-1)^+$ due to domain):Since $-1 \in D$, the function is continuous from the right:$$\lim_{x\rightarrow -1^+} f(x) = f(-1) = \frac{0 - \sqrt{2}}{-1} = \sqrt{2}$$There are no vertical asymptotes.
-
-![[Pasted image 20261022152815.png|Graph|250]]
-
-
-# 4) Lesson 26/10/26
-## 4.1) Taylor Expansion
+## 4.2) Taylor Expansion
 A **Taylor expansion** takes a smooth function $f(x)$ near a specific point $x_0$ and replaces it with a **polynomial clone** $P_n(x)$ of degree $n$, plus a tiny error term (the remainder). This is useful as it transforms complicated functions in a simple polynomial function, which are easier to manipulate
 $$f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}(x - x_0)^k + o\big((x - x_0)^n\big) \quad \text{as } x \to x_0$$
 But we will mostly limit our study cases at $x\rightarrow 0$ (for now)
@@ -860,7 +866,7 @@ $$\begin{array}{cccc}
 at order $3$ it is already $99.8\%$ accurate!
 ![[Pasted image 20261024144924.png|f(x) in black, 1st order expansion in orange, 3rd order expansion in red|350]]
 
-### 4.1.1) Little-$o$ Notation
+### 4.2.1) Little-$o$ Notation
 Little o is the correction term. This encapsulates the difference of $f(x)$ and $P_n(x)$.
 
 >[!def] Little-$o$
@@ -946,7 +952,7 @@ Thus, $[f(x)]^k \in o(x^{n \cdot k})$.
 
 ---
 
-## 4.2) Exercises
+## 4.3) Exercises
 #### 1) Little-$o$ Warm Up Exercise:
 Simplify the following expression as $x\rightarrow 0$:
 $$E(x) = \left(x + 2x^2 + o(x^2)\right) - \left(x - x^2 + 4x^3 + o(x^3)\right)$$
@@ -1033,20 +1039,31 @@ Now rewrite the entire limit:
 $$\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac16\alpha x^3}{\arctan(x^2+4x^3)}=\lim_{x\rightarrow 0^+}\frac{(1-\alpha)x+\frac{\alpha-1}6x^3+o(x^3)}{x^2+4x^3+o(x^3)}$$
 
 - Case $\alpha=1$ (since obviously simplifies a lot)
-$$\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2+4x^3+o(x^3)}=\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2}+\frac{o(x^3)}{4x^3}+\frac{o(x^3)}{o(x^2)}=0+0+0=0$$
+$$\begin{align}
+\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2+4x^3+o(x^3)}&=\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2(1+4x+\frac{o(x^3)}{x^2})}\\
+&=\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2}\cdot\frac1{1+4x+\frac{o(x^3)}{x^2}}\\
+&=0\cdot\frac1{1+0+0}=0
+\end{align}$$
 - Case $\alpha\neq1$
 Now analyze the three parts of the limit:
 $$\begin{align}
-&\lim_{x\rightarrow 0^+}\frac{(1-\alpha)x}{x^2+4x^3+o(x^3)}=\lim_{x\rightarrow 0^+}\frac{(1-\alpha)}{x+4x^2+\frac{o(x^3)}x}=\frac{\text{constant}}{0^++0^++0^+}=
+&\lim_{x\rightarrow 0^+}\frac{(1-\alpha)x}{x^2+4x^3+o(x^3)}=\lim_{x\rightarrow 0^+}\frac{(1-\alpha)}{x+4x^2+{o(x^2)}}=\frac{\text{constant}}{0^++0^++0^+}=
 \begin{cases}
 \infty&\text{if }\alpha<1\\
 -\infty&\text{if }\alpha>1
 \end{cases}\\
-&\lim_{x\rightarrow 0^+}\frac{\frac{\alpha-1}6x^3}{x^2+4x^3+o(x^3)}=\lim_{x\rightarrow 0^+}\frac{\frac{\alpha-1}6x}{1+4x+\frac{o(x^3)}{x^2}}=\frac{\text{constant}\cdot0^+}{1+0^++0^+}=0^+\\
+&\lim_{x\rightarrow 0^+}\frac{\frac{\alpha-1}6x^3}{x^2+4x^3+o(x^3)}=\lim_{x\rightarrow 0^+}\frac{\frac{\alpha-1}6x}{1+4x+{o(x)}}=\frac{\text{constant}\cdot0^+}{1+0^++0^+}=0^+\\
 &\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2+4x^3+o(x^3)}=0
 \end{align}$$
+
 So the final result is 
 $$\lim_{x \to 0^+} \frac{\sin(x) - \alpha x + \frac{1}{6}\alpha x^3}{\arctan(x^2 + 4x^3)} = \begin{cases} +\infty & \text{if } \alpha < 1 \\ 0 & \text{if } \alpha = 1 \\ -\infty & \text{if } \alpha > 1 \end{cases}$$
+
+
+Alternatively notice it can be rewritten as
+$$\lim_{x \to 0^+} \frac{x \left[ (1-\alpha) + \frac{\alpha-1}{6}x^2 + \frac{o(x^3)}{x} \right]}{x \left[ x + 4x^2 + \frac{o(x^3)}{x} \right]}=\lim_{x\rightarrow 0^+}\frac{1-\alpha+\frac{\alpha-1}6x^2+o(x^2)}{x+4x^2+o(x^2)}$$
+Which can be easily computed.
+
 
 # 5) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
