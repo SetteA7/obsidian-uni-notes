@@ -878,7 +878,7 @@ Therefore we can say:
 - But not $x^2=o(x^3)$ since $\lim_{x\rightarrow 0}x^2/x^3=\lim_{x\rightarrow0}1/x=\pm\infty$
 
 >[!thm] Little-$o$ Propeeties
->Here are some properties of little-$o$.
+>Here are some properties of little-$o$. Let $n>0$:
 >- Constant Multiplication: 
 >$$c\cdot o(x^n)\text{ for any constant }c\not =0\qquad \text{The error has the same order}$$
 >- Same Order Addition/subtraction:
@@ -958,7 +958,7 @@ $$E(x)=3x^2+o(x^2)$$
 Compute the limit:
 $$\lim_{x \to 0} \frac{\sin(x) - x}{x^3}$$
 Recall the expansion for $\sin$:
-$$\sin (x)=x-\frac{x^{3}}{3!}+\frac{x^{5}}{5!}-\frac{x^{7}}{7!}+\cdots =\sum _{n=0}^{\infty }\frac{(-1)^{n}x^{2n+1}}{(2n+1)!}$$
+$$\sin(x)={\displaystyle \displaystyle \sum _{n=0}^{\infty }(-1)^{n}{\frac {x^{2n+1}}{(2n+1)!}}=x-{\frac {x^{3}}{3!}}+{\frac {x^{5}}{5!}}-\cdots }$$
 
 ---
 
@@ -970,12 +970,43 @@ But the last step is illegal, as the limit cannot be evaluated partially (that i
 
 Try with order $1$ expansion:
 $$\lim_{x \to 0} \frac{\sin(x) - x}{x^3}=\lim_{x \to 0} \frac{x+o(x) - x}{x^3}=\lim_{x \to 0} \frac{o(x)}{x^3}$$
-but since $o(x)/x^3=x^{-3}o(x)=o(x^{-2})$ we cannot determine it
-
+but since $o(x)/x^3=x^{-3}o(x)=o(x^{-2})$ we cannot determine it.
 
 Since the denominator is of order $3$, we expand until this order:
-$$\lim_{x\rightarrow 0}\frac{x-\frac{x^3}6+o(x^3)-x}{x^3}=\lim_{x\rightarrow 0}\frac{-\frac{x^3}6+o(x^3)}{x^3}=\lim_{x\rightarrow 0}-\frac16-\frac{o(x^3)}{x^3}=-\frac16-0$$
-since $o(x^3)/x^3=x^{-3}o(x^3)=o(1)=0$
+$$\lim_{x\rightarrow 0}\frac{x-\frac{x^3}6+o(x^3)-x}{x^3}=\lim_{x\rightarrow 0}\frac{-\frac{x^3}6+o(x^3)}{x^3}=\lim_{x\rightarrow 0}-\frac16-\frac{o(x^3)}{x^3}=-\frac16-0=-\frac16$$
+since $o(x^3)/x^3=x^{-3}o(x^3)=o(1)\rightarrow 0$ as $x\rightarrow 0$ and more in general $\lim_{x\rightarrow 0}o(x^n)/x^m=0$ if $m\geq n$.
+
+#### 3) Two Expansions:
+Compute the limit:
+$$\lim_{x \to 0} \frac{e^x - \cos(x) - x}{x^2}$$
+Recall both expansions:
+$$\begin{align}
+e^x&={\displaystyle \displaystyle \sum _{n=0}^{\infty }{\frac {x^{n}}{n!}}=1+x+{\frac {x^{2}}{2!}}+{\frac {x^{3}}{3!}}+\cdots }\\
+\cos(x)&={\displaystyle \displaystyle \sum _{n=0}^{\infty }(-1)^{n}{\frac {x^{2n}}{(2n)!}}=1-{\frac {x^{2}}{2!}}+{\frac {x^{4}}{4!}}-\cdots }
+\end{align}$$
+
+Apply them until order $2$
+$$\begin{align}
+e^x - \cos(x) - x &= \left(1 + x + \frac{x^2}{2} + o(x^2)\right) - \left(1 - \frac{x^2}{2} + o(x^2)\right) - x\\
+&=1-1+x-x+\frac{x^2}2+\frac{x^2}2+o(x^2)+o(x^2)\\
+&=x^2+o(x^2)
+\end{align}$$
+Then the limit becomes:
+$$\lim_{x \to 0} \frac{e^x - \cos(x) - x}{x^2}=\lim_{x \to 0}\frac{x^2+o(x^2)}{x^2} =1+0=1$$
+#### 4) Substitution
+Find the Taylor expansion of order $4$ at $x_0 = 0$ for $g(x) = e^{-x^2}$ and use it to compute:
+$$\lim_{x \to 0} \frac{e^{-x^2} - \cos(x)}{x^4}$$
+Recall both expansions:
+$$\begin{align}
+e^x&={\displaystyle \displaystyle \sum _{n=0}^{\infty }{\frac {x^{n}}{n!}}=1+x+{\frac {x^{2}}{2!}}+{\frac {x^{3}}{3!}}+\cdots }\\
+\cos(x)&={\displaystyle \displaystyle \sum _{n=0}^{\infty }(-1)^{n}{\frac {x^{2n}}{(2n)!}}=1-{\frac {x^{2}}{2!}}+{\frac {x^{4}}{4!}}-\cdots }
+\end{align}$$
+
+We need to expand up to order $4$. For cosine it is known, but $e^{-x^2}$ doesn't have the basic formula.
+Notice that with $t=-x^2$ we can expand $e^t$ up to order $2$ (since $t=2\rightarrow x=4$).
+$$e^t = 1 + t + \frac{t^2}{2} + o(t^2)\rightarrow e^{-x^2}=1-x^2+\frac{x^4}2+o(x^4)$$
+Now 
+
 
 # 5) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
