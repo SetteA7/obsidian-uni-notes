@@ -845,6 +845,8 @@ A **Taylor expansion** takes a smooth function $f(x)$ near a specific point $x_0
 $$f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}(x - x_0)^k + o\big((x - x_0)^n\big) \quad \text{as } x \to x_0$$
 But we will mostly limit our study cases at $x\rightarrow 0$ (for now)
 $$f(x) = \sum_{k=0}^n \frac{f^{(k)}(0)}{k!} x^k + o(x^n) \quad \text{as } x \to 0$$
+For now, since derivatives are not yet introduced, all the expansions will be provided.
+
 Consider $f(x)=e^x$ at $x_0=0$. It's expansion is (up to order 3) $e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + o(x^3)$. 
 Now let's consider how well the various orders approximate $e^{0.5}=1.64872$
 
@@ -880,7 +882,7 @@ Therefore we can say:
 >[!thm] Little-$o$ Propeeties
 >Here are some properties of little-$o$. Let $n>0$:
 >- Constant Multiplication: 
->$$c\cdot o(x^n)\text{ for any constant }c\not =0\qquad \text{The error has the same order}$$
+>$$c\cdot o(x^n)=o(x^n)\ \text{ for any constant }c\neq 0\qquad \text{The error has the same order}$$
 >- Same Order Addition/subtraction:
 >$$o(x^n)\pm o(x^n)=o(x^n)\quad \text{ Important: }o(x^n)-o(x^n)\text{ is NOT =0}$$
 >- Different order addition (Absorption):
@@ -890,7 +892,7 @@ Therefore we can say:
 >- Multiplication by powers:
 >$$x^m\cdot o(x^n)=o(x^{m+n})\quad\text{Ex: }x^5\cdot o(x^3)=o(x^8)$$
 >- Product of two Little-$o$'s:
->$$o(x^m)\cdot o(x^n)=o(x^{m+n})\quad\text{Ex: }o(x^2)+o(x^3)=o(x^5)$$
+>$$o(x^m)\cdot o(x^n)=o(x^{m+n})\quad\text{Ex: }o(x^2)\cdot o(x^3)=o(x^5)$$
 >- Powers of Little-$o$:
 >$$[o(x^n)]^k=o(x^{n\cdot k})\quad\text{Ex: }[o(x^2)]^3=o(x^6)$$
 
@@ -974,7 +976,7 @@ but since $o(x)/x^3=x^{-3}o(x)=o(x^{-2})$ we cannot determine it.
 
 Since the denominator is of order $3$, we expand until this order:
 $$\lim_{x\rightarrow 0}\frac{x-\frac{x^3}6+o(x^3)-x}{x^3}=\lim_{x\rightarrow 0}\frac{-\frac{x^3}6+o(x^3)}{x^3}=\lim_{x\rightarrow 0}-\frac16-\frac{o(x^3)}{x^3}=-\frac16-0=-\frac16$$
-since $o(x^3)/x^3=x^{-3}o(x^3)=o(1)\rightarrow 0$ as $x\rightarrow 0$ and more in general $\lim_{x\rightarrow 0}o(x^n)/x^m=0$ if $m\geq n$.
+since $o(x^3)/x^3=x^{-3}o(x^3)=o(1)\rightarrow 0$ as $x\rightarrow 0$ and more in general $\lim_{x\rightarrow 0}o(x^n)/x^m=0$ if $n\geq m$.
 
 #### 3) Two Expansions:
 Compute the limit:
@@ -1003,10 +1005,15 @@ e^x&={\displaystyle \displaystyle \sum _{n=0}^{\infty }{\frac {x^{n}}{n!}}=1+x+{
 \end{align}$$
 
 We need to expand up to order $4$. For cosine it is known, but $e^{-x^2}$ doesn't have the basic formula.
-Notice that with $t=-x^2$ we can expand $e^t$ up to order $2$ (since $t=2\rightarrow x=4$).
+Notice that with $t=-x^2$ we can expand $e^t$ up to order $2$ (since $o(t^2)\rightarrow o(x^{4})$). This can be done since both tend to 0 as $x\rightarrow 0$
 $$e^t = 1 + t + \frac{t^2}{2} + o(t^2)\rightarrow e^{-x^2}=1-x^2+\frac{x^4}2+o(x^4)$$
-Now 
-
+Now expand the limit:
+$$\begin{align}
+\lim_{x \to 0} \frac{e^{-x^2} - \cos(x)}{x^4}&=\lim_{x\rightarrow 0}\frac{1-x^2+\frac{x^4}2+o(x^4)-1+\frac{x^2}2-\frac{x^4}{24}-o(x^4)}{x^4}\\
+&=\lim_{x\rightarrow 0}\frac{-\frac12x^2+\frac{11}{24}x^4+o(x^4)}{x^4}\\
+&=\lim_{x\rightarrow 0}\frac{11}{24}-\frac1{2x^2}+\frac{o(x^4)}{x^4}\\
+&=\frac{11}{24}-\infty+0\\&=-\infty
+\end{align}$$
 
 # 5) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
