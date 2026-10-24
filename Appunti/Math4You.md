@@ -845,15 +845,28 @@ A **Taylor expansion** takes a smooth function $f(x)$ near a specific point $x_0
 $$f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}(x - x_0)^k + o\big((x - x_0)^n\big) \quad \text{as } x \to x_0$$
 But we will mostly limit our study cases at $x\rightarrow 0$ (for now)
 $$f(x) = \sum_{k=0}^n \frac{f^{(k)}(0)}{k!} x^k + o(x^n) \quad \text{as } x \to 0$$
-Consider $f(x)=e^x$ at $x_0=0$. It's expansion is (up to oerder 3$) $e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + o(x^3)$. Now let's consider every single order individually:
+Consider $f(x)=e^x$ at $x_0=0$. It's expansion is (up to order 3) $e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + o(x^3)$. 
+Now let's consider how well the various orders approximate $e^{0.5}=1.64872$
 
-
+$$\begin{array}{cccc}
+\text{Order } n & P_n(x) & P_n(0.5) & e^{0.5}-P_n(0.5) \\ \hline
+0 & 1 & 1 & 0.649 \\
+\color{orange}1 & 1+x & 1.5 & 0.149 \\
+2 & 1+x+\frac12x^2 & 1.625 & 0.024\\
+\color{red}{3} & 1+x+\frac12x^2+\frac16x^3 & 1.64583 & 0.0029
+\end{array}$$
+at order $3$ it is already $99.8\%$ accurate!
+![[Pasted image 20261024144924.png|f(x) in black, 1st order expansion in orange, 3rd order expansion in red|350]]
 #### Little-$o$ Notation
-Let $x\rightarrow x_0$. We say $f(x)\in o(g(x))$ if:
-$$\lim_{x\rightarrow x_0}\frac{f(x)}{g(x)}=0$$
-This is, $f(x)$ goes to zero faster than $g(x)$. Near $x_0$, $f(x)$ cancels out and is negligible wrt $g(x)$
+Little o is the correction term. This encapsulates the difference of $f(x)$ and $P_n(x)$
+
+>[!def] Little-$o$
+Given two functions $f(x)$ and $g(x)$ near $x_0$ (with $g(x) \neq 0$ in a punctured neighborhood of $x_0$), we say that **$f(x)$ is "little-o" of $g(x)$ as $x \to x_0$**, written $f(x) = o\big(g(x)\big)$, if:
+$$\lim_{x \to x_0} \frac{f(x)}{g(x)} = 0$$
 
 For now let's just focus on $x\rightarrow 0$
+Intuitively, little-$o$
+
 
 **Algebra of Little-o**
 Start with some properties:
