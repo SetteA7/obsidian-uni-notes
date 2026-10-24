@@ -1053,21 +1053,34 @@ Compute the limit
 $$\lim_{x\to 0^+} \frac{e^{x - 2x^2} - 1 - x}{\sinh(x^2) + x^{7/3}\log x}$$
 Recall the expansions
 $$\begin{align} \sinh(t) &= t + \frac{t^3}{6} + o(t^3)\\ e^t &= 1 + t + \frac{t^2}{2} + o(t^2) \end{align}$$
-First look at $x^{7/3}\log(x)$. This doesn't have a direct expansion so we must find at least what little o it belongs to:
-$$\lim_{x\rightarrow 0^+}\frac{x^{7/3}\log(x)}{x^n}$$
-
-
-
-
+First look at $x^{7/3}\log(x)$. This doesn't have a direct expansion so we must find at least what little o it belongs to. Since $\lim_{x \to 0^+} x^\alpha \log x = 0$ for any $\alpha > 0$, we have:
+$$\lim_{x\rightarrow 0^+}\frac{x^{7/3}\log(x)}{x^n}=\lim_{x\rightarrow0^+}x^{7/3-n}\log(x)\longrightarrow x^{7/3}\log(x)=o(x^{4/3})=o(x^2)$$
 Now expand $\sinh$
-$$\sinh(t)=t+o(t^2)=x^2+o(x^4)$$
-Expand $e$
-$$e^t=1+t+o(t)=$$
+$$\sinh(t)=t+o(t^2)=x^2+o(x^4)=x^2+o(x^2)$$
+So the denominator is just 
+$$x^2+o(x^2)$$
 
+Expand $e$
+$$\begin{align}
+e^t=1+t+\frac{t^2}2+o(t^2)&=1+x-2x^2+\frac{(x-2x^2)^2}2+o([x-2x^2]^2)\\
+&=1+x-2x^2+\frac{x^2-4x^3+4x^4}2+o(x^2)\\
+&=1+x-\frac32x^2+o(x^2)
+\end{align}$$
+Replace the whole limit:
+$$\begin{align}
+\lim_{x\to 0^+} \frac{e^{x - 2x^2} - 1 - x}{\sinh(x^2) + x^{7/3}\log x}&=\lim_{x\to 0^+} \frac{1+x-\frac32x^2-1-x+o(x^2)}{x^2+o(x^2)}\\
+&=\lim_{x\to 0^+} \frac{-\frac32x^2+o(x^2)}{x^2+o(x^2)}\\
+&=\lim_{x\rightarrow 0^+}-\frac32+\frac{o(x^2)}{o(x^2)}=-\frac32
+\end{align}$$
 
 #### 7) Exam 
 Compute the limit
 $$\lim_{x\to 0} \frac{1 - \cos(x^2)}{x(x - \sin x) + x^3\sin^2 x}$$
+Recall the expansions
+$$\begin{align} \cos(t) &= 1 - \frac{t^2}{2} + o(t^2)\\ \sin(x) &= x - \frac{x^3}{6} + o(x^3) \end{align}$$
+$$\frac{o(x^2)}{x()}$$
+
+
 
 
 #### 8) Exam 12.09.2022
