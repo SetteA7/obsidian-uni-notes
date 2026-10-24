@@ -838,7 +838,30 @@ Using the rationalized form:$$\lim_{x\rightarrow 0} f(x) = \lim_{x\rightarrow 0}
 
 ![[Pasted image 20261022152815.png|Graph|250]]
 
-# 4) Symbols
+
+# 4) Lesson 26/10/26
+## 4.1) Taylor 
+
+#### Little-$o$ Notation
+Let $x\rightarrow x_0$. We say $f(x)\in o(g(x))$ if:
+$$\lim_{x\rightarrow x_0}\frac{f(x)}{g(x)}=0$$
+This is, $f(x)$ goes to zero faster than $g(x)$. Near $x_0$, $f(x)$ cancels out and is negligible wrt $g(x)$
+
+For now let's just focus on $x\rightarrow 0$
+
+**Algebra of Little-o**
+Start with some properties:
+- Absorption: 
+$$c\cdot o(x^n)=o(x^n) \text{ for any constant } c\not = 0$$
+- Sum of identical orders: 
+$$o(x^n)\pm o(x^n)=o(x^n)$$
+- Dominance of lower powers:
+$$\begin{gather}&x^m+o(x^n)=o(x^m)&\quad\text{ if }n>m\\
+&o(x^n)+o(x^m)=o(x^{\min(n,m)})&
+\end{gather}$$
+that is, the slowest decaying error dominates
+- 
+# 5) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
 - $\iff$: necessary + sufficient, if and only if "iff"
