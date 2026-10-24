@@ -1036,8 +1036,12 @@ Denominator:
 Use the substitution $t=x^2+4x^3$ (again since both t and x tend to $0$ as they go to $0^+$) and expand only until first order since $o(t)=o(x^2+4x^3)=o(x^3)$
 $$\arctan t=t+o(t)=x^2+4x^3+o(x^3)$$
 Now rewrite the entire limit:
-$$\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac16\alpha x^3}{\arctan(x^2+4x^3)}=\lim_{x\rightarrow 0^+}\frac{(1-\alpha)x+\frac{\alpha-1}6x^3+o(x^3)}{x^2+4x^3+o(x^3)}$$
+$$\begin{align}\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac16\alpha x^3}{\arctan(x^2+4x^3)}&=\lim_{x\rightarrow 0^+}\frac{(1-\alpha)x+\frac{\alpha-1}6x^3+o(x^3)}{x^2+4x^3+o(x^3)}\\
+&=\lim_{x \to 0^+} \frac{x \left[ (1-\alpha) + \frac{\alpha-1}{6}x^2 + \frac{o(x^3)}{x} \right]}{x \left[ x + 4x^2 + \frac{o(x^3)}{x} \right]}\\
+&=\lim_{x\rightarrow 0^+}\frac{1-\alpha+\frac{\alpha-1}6x^2+o(x^2)}{x+4x^2+o(x^2)}
+\end{align}$$
 
+Now the limit is more easily computable:
 - Case $\alpha=1$ (since obviously simplifies a lot)
 $$\begin{align}
 \lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2+4x^3+o(x^3)}&=\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2(1+4x+\frac{o(x^3)}{x^2})}\\
@@ -1045,6 +1049,9 @@ $$\begin{align}
 &=0\cdot\frac1{1+0+0}=0
 \end{align}$$
 - Case $\alpha\neq1$
+$$\lim_{x\rightarrow 0^+}\frac{1-\alpha+\frac{\alpha-1}6x^2+o(x^2)}{x+4x^2+o(x^2)}=$$
+
+
 Now analyze the three parts of the limit:
 $$\begin{align}
 &\lim_{x\rightarrow 0^+}\frac{(1-\alpha)x}{x^2+4x^3+o(x^3)}=\lim_{x\rightarrow 0^+}\frac{(1-\alpha)}{x+4x^2+{o(x^2)}}=\frac{\text{constant}}{0^++0^++0^+}=
