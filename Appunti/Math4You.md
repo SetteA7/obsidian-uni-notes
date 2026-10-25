@@ -981,7 +981,7 @@ $$\lim_{x \to 0} \frac{\sin(x) - x}{x^3}=\lim_{x \to 0} \frac{x+o(x) - x}{x^3}=\
 but since $o(x)/x^3=x^{-3}o(x)=o(x^{-2})$ we cannot determine it.
 
 Since the denominator is of order $3$, we expand until this order:
-$$\lim_{x\rightarrow 0}\frac{x-\frac{x^3}6+o(x^3)-x}{x^3}=\lim_{x\rightarrow 0}\frac{-\frac{x^3}6+o(x^3)}{x^3}=\lim_{x\rightarrow 0}-\frac16-\frac{o(x^3)}{x^3}=-\frac16-0=-\frac16$$
+$$\lim_{x\rightarrow 0}\frac{x-\frac{x^3}6+o(x^3)-x}{x^3}=\lim_{x\rightarrow 0}\frac{-\frac{x^3}6+o(x^3)}{x^3}=\lim_{x\rightarrow 0}-\frac16+\frac{o(x^3)}{x^3}=-\frac16+0=-\frac16$$
 since $o(x^3)/x^3=x^{-3}o(x^3)=o(1)\rightarrow 0$ as $x\rightarrow 0$ and more in general $\lim_{x\rightarrow 0}o(x^n)/x^m=0$ if $n\geq m$.
 
 #### 3) Two Expansions:
@@ -1052,52 +1052,120 @@ $$\begin{align}
 
 
 #### 6) Exam 17.09.2019
-Compute the limit
+Compute the limit:
 $$\lim_{x\to 0^+} \frac{e^{x - 2x^2} - 1 - x}{\sinh(x^2) + x^{7/3}\log x}$$
-Recall the expansions
-$$\begin{align} \sinh(t) &= t + \frac{t^3}{6} + o(t^3)\\ e^t &= 1 + t + \frac{t^2}{2} + o(t^2) \end{align}$$
-First look at $x^{7/3}\log(x)$. This doesn't have a direct expansion so we must find at least what little o it belongs to. Since $\lim_{x \to 0^+} x^\alpha \log x = 0$ for any $\alpha > 0$, we have:
-$$\lim_{x\rightarrow 0^+}\frac{x^{7/3}\log(x)}{x^2}=\lim_{x\rightarrow0^+}x^{7/3-2}\log(x)\longrightarrow x^{7/3}\log(x)=o(x^2)$$
-Where the last step is valid only because $o(x^2)\subseteq o(x^{4/3})$
 
-Now expand $\sinh$
-$$\sinh(t)=t+o(t^2)=x^2+o(x^4)=x^2+o(x^2)$$
-So the denominator is just 
-$$x^2+o(x^2)$$
+Recall the expansions:
+$$\begin{align}
+\sinh(t) &= t + \frac{t^3}{6} + o(t^3)\\
+e^t &= 1 + t + \frac{t^2}{2} + o(t^2)
+\end{align}$$
 
-Expand $e$
+**Denominator:**
+First, look at $\sinh(x^2)$. Using $t = x^2$ (since $t \to 0$ as $x \to 0^+$), its leading term is of order 2:
+$$\sinh(x^2) = x^2 + o(x^4)$$
+
+Next, look at $x^{7/3}\log(x)$. Since $\log(x)$ has no Taylor expansion at $0$, we check whether this term is negligible compared to the leading $x^2$ term—that is, whether $x^{7/3}\log(x) \in o(x^2)$. Recall that $\lim_{x \to 0^+} x^\alpha \log x = 0$ for any $\alpha > 0$:
+$$\lim_{x\to 0^+}\frac{x^{7/3}\log(x)}{x^2} = \lim_{x\to 0^+}x^{1/3}\log(x) = 0 \implies x^{7/3}\log(x) = o(x^2)$$
+
+Combining both terms in the denominator and applying the absorption rule ($o(x^4) + o(x^2) = o(x^2)$):
+$$\sinh(x^2) + x^{7/3}\log x = x^2 + o(x^4) + o(x^2) = x^2 + o(x^2)$$
+
+**Numerator:**
+Since the denominator is of order 2 and the $1+x$ terms cancel out in the numerator, we expand $e^t$ with $t = x - 2x^2$ up to order 2. Notice that $o(t^2) = o([x-2x^2]^2) = o(x^2)$, which absorbs all powers $x^3$ and higher:
 $$\begin{align}
-e^t=1+t+\frac{t^2}2+o(t^2)&=1+x-2x^2+\frac{(x-2x^2)^2}2+o([x-2x^2]^2)\\
-&=1+x-2x^2+\frac{x^2-4x^3+4x^4}2+o(x^2)\\
-&=1+x-\frac32x^2+o(x^2)
+e^{x-2x^2} = 1 + t + \frac{t^2}{2} + o(t^2) &= 1 + (x - 2x^2) + \frac{(x - 2x^2)^2}{2} + o([x - 2x^2]^2)\\
+&= 1 + x - 2x^2 + \frac{x^2 - 4x^3 + 4x^4}{2} + o(x^2)\\
+&= 1 + x - 2x^2 + \frac{1}{2}x^2 + o(x^2)\\
+&= 1 + x - \frac{3}{2}x^2 + o(x^2)
 \end{align}$$
-Replace the whole limit:
+
+**Whole limit:**
 $$\begin{align}
-\lim_{x\to 0^+} \frac{e^{x - 2x^2} - 1 - x}{\sinh(x^2) + x^{7/3}\log x}&=\lim_{x\to 0^+} \frac{1+x-\frac32x^2-1-x+o(x^2)}{x^2+o(x^2)}\\
-&=\lim_{x\to 0^+} \frac{-\frac32x^2+o(x^2)}{x^2+o(x^2)}\\
-&=\lim_{x\rightarrow 0^+}\frac{x^2(-\frac32+\frac{o(x^2)}{x^2})}{x^2(1+\frac{o(x^2)}{x^2})}\\
-&=\lim_{x\rightarrow 0^+}\frac{-\frac32+\frac{o(x^2)}{x^2}}{1+\frac{o(x^2)}{x^2}}=-\frac32
+\lim_{x\to 0^+} \frac{e^{x - 2x^2} - 1 - x}{\sinh(x^2) + x^{7/3}\log x} &= \lim_{x\to 0^+} \frac{1 + x - \frac{3}{2}x^2 + o(x^2) - 1 - x}{x^2 + o(x^2)}\\
+&= \lim_{x\to 0^+} \frac{-\frac{3}{2}x^2 + o(x^2)}{x^2 + o(x^2)}\\
+&= \lim_{x\to 0^+} \frac{x^2\left(-\frac{3}{2} + \frac{o(x^2)}{x^2}\right)}{x^2\left(1 + \frac{o(x^2)}{x^2}\right)}\\
+&= \frac{-\frac{3}{2} + 0}{1 + 0} = -\frac{3}{2}
 \end{align}$$
-#### 7) Exam 
-Compute the limit
+
+#### 7) Exam
+Compute the limit:
 $$\lim_{x\to 0} \frac{1 - \cos(x^2)}{x(x - \sin x) + x^3\sin^2 x}$$
-Recall the expansions
-$$\begin{align} \cos(t) &= 1 - \frac{t^2}{2} + o(t^2)\\ \sin(x) &= x - \frac{x^3}{6} + o(x^3) \end{align}$$
-The biggest degree is $x^2$ in th denominator, however expanding until $x^2$ causes the terms to completely cancel out:
-$$x(x-\sin(x))=x(x-x+o(x^2))=o(x^3)$$
-So we must expand it further:
-$$x(x-\sin(x))=x(x-x+\frac{x^3}6+o(x^4))=\frac{x^4}6+o(x^4)$$
-Now notice that also $x^3\sin^2(x)$ is also $o(x^4)$ since
-$$\lim_{x\rightarrow 0^+}\frac{x^3\sin^2(x)}{x^4}=\lim_{x\rightarrow 0}\par{\frac{\sin(x)}{x}}^2\cdot x=1\cdot 0=0$$
-Therefore the denominator becomes:
-$$\frac{x^4}6+o(x^4)$$
-The numerator just requires a direct expansion:
+
+Recall the expansions:
 $$\begin{align}
-\lim_{x\to 0} \frac{1 - \cos(x^2)}{x(x - \sin x) + x^3\sin^2 x}&=\lim_{x\to 0} \frac{1 - 1+\frac{x^4}2+o(x^4)}{\frac{x^4}6+o(x^4)}\\
-&=\lim_{x\rightarrow 0}\frac{x^4(\frac12+\frac{o(x^4)}{x^4})}{x^4(\frac16+\frac{o(x^4)}{x^4})}\\
-&=\frac{1/2}{1/6}=3
+\cos(t) &= 1 - \frac{t^2}{2} + o(t^2)\\
+\sin(x) &= x - \frac{x^3}{6} + o(x^4)
 \end{align}$$
 
+**Denominator:**
+If we only expand $\sin(x)$ to order 1, the first term in the denominator cancels out completely and leaves us with no leading term:
+$$x(x - \sin x) = x\big(x - (x + o(x^2))\big) = x \cdot o(x^2) = o(x^3)$$
+
+So we must expand $\sin(x)$ to the next non-zero term (order 3):
+$$x(x - \sin x) = x\left(x - x + \frac{x^3}{6} + o(x^4)\right) = \frac{x^4}{6} + x \cdot o(x^4) = \frac{x^4}{6} + o(x^5) = \frac{x^4}{6} + o(x^4)$$
+
+Now check the second term, $x^3\sin^2(x)$. We can see it is $o(x^4)$ either via the notable limit:
+$$\lim_{x\to 0} \frac{x^3\sin^2(x)}{x^4} = \lim_{x\to 0} \left(\frac{\sin x}{x}\right)^2 \cdot x = 1^2 \cdot 0 = 0 \implies x^3\sin^2(x) = o(x^4)$$
+or directly via little-$o$ algebra
+$$\sin x = x + o(x)\implies x^3\sin^2 x = x^3(x+o(x))^2 = x^5 + o(x^5) = o(x^4)$$
+
+Therefore, the denominator becomes:
+$$x(x - \sin x) + x^3\sin^2 x = \frac{x^4}{6} + o(x^4)$$
+
+**Numerator:**
+Using $t = x^2$ in the cosine expansion up to order 2 in $t$ (which gives order 4 in $x$):
+$$1 - \cos(x^2) = 1 - \left(1 - \frac{(x^2)^2}{2} + o((x^2)^2)\right) = \frac{x^4}{2} + o(x^4)$$
+
+**Whole limit:**
+$$\begin{align}
+\lim_{x\to 0} \frac{1 - \cos(x^2)}{x(x - \sin x) + x^3\sin^2 x} &= \lim_{x\to 0} \frac{\frac{x^4}{2} + o(x^4)}{\frac{x^4}{6} + o(x^4)}\\
+&= \lim_{x\to 0} \frac{x^4\left(\frac{1}{2} + \frac{o(x^4)}{x^4}\right)}{x^4\left(\frac{1}{6} + \frac{o(x^4)}{x^4}\right)}\\
+&= \frac{1/2}{1/6} = 3
+\end{align}$$
+#### 8) Exam 12.09.2022
+Compute the limit $\forall \alpha\in\mathbb{R}$:
+$$\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac{1}{6}\alpha x^3}{\arctan(x^2+4x^3)}$$
+
+First recall the standard expansions:
+$$\begin{align}
+\sin(x) &= x - \frac{x^3}{6} + \frac{x^5}{120} + o(x^5)\\
+\arctan(t) &= t - \frac{t^3}{3} + \frac{t^5}{5} + o(t^5)
+\end{align}$$
+
+**Numerator:**
+Since the polynomial terms go up to $x^3$, we expand $\sin(x)$ up to order 3:
+$$\sin x - \alpha x + \frac{\alpha}{6}x^3 = x - \frac{x^3}{6} + o(x^3) - \alpha x + \frac{\alpha}{6}x^3 = (1-\alpha)x + \frac{\alpha-1}{6}x^3 + o(x^3)$$
+
+**Denominator:**
+Use the substitution $t = x^2 + 4x^3$ (since $t \to 0$ as $x \to 0^+$) and expand $\arctan(t)$ to order 1. Notice that as $x \to 0$, the lowest power dominates, so $o(t) = o(x^2 + 4x^3) = o(x^2)$, which also absorbs the $4x^3$ term:
+$$\arctan(x^2 + 4x^3) = t + o(t) = x^2 + 4x^3 + o(x^2) = x^2 + o(x^2)$$
+
+Now rewrite the entire limit:
+$$\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac{1}{6}\alpha x^3}{\arctan(x^2+4x^3)} = \lim_{x\rightarrow 0^+}\frac{(1-\alpha)x+\frac{\alpha-1}{6}x^3+o(x^3)}{x^2+o(x^2)}$$
+
+Now we split by cases depending on whether the leading terms in the numerator cancel out:
+
+- **Case $\alpha = 1$** (both the $x$ and $x^3$ terms vanish):
+$$\begin{align}
+\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2+o(x^2)} &= \lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2\left(1+\frac{o(x^2)}{x^2}\right)}\\
+&= \lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2} \cdot \frac{1}{1+\frac{o(x^2)}{x^2}}\\
+&= 0 \cdot \frac{1}{1+0} = 0
+\end{align}$$
+*(since $\frac{o(x^3)}{x^2} = o(x) \to 0$ as $x \to 0^+$)*
+
+- **Case $\alpha \neq 1$** (the order-1 term $(1-\alpha)x$ dominates the numerator):
+  Factor out $x$ from numerator and denominator:
+$$\begin{align}
+\lim_{x\rightarrow 0^+}\frac{x\left[(1-\alpha)+\frac{\alpha-1}{6}x^2+\frac{o(x^3)}{x}\right]}{x\left[x+\frac{o(x^2)}{x}\right]} &= \lim_{x\rightarrow 0^+}\frac{1-\alpha+\frac{\alpha-1}{6}x^2+o(x^2)}{x+o(x)}\\
+&= \frac{1-\alpha}{0^+} = \begin{cases}
++\infty & \text{if } \alpha < 1\\
+-\infty & \text{if } \alpha > 1
+\end{cases}
+\end{align}$$
+
+So the final result is:
+$$\lim_{x \to 0^+} \frac{\sin(x) - \alpha x + \frac{1}{6}\alpha x^3}{\arctan(x^2 + 4x^3)} = \begin{cases} +\infty & \text{if } \alpha < 1 \\ 0 & \text{if } \alpha = 1 \\ -\infty & \text{if } \alpha > 1 \end{cases}$$
 # 5) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
