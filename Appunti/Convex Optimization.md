@@ -63,3 +63,8 @@ A linear sub-space is affine, however containing the origin is too much of a res
 >[!thm|*] Affine Set
 >Any affine set $C$ can be expressed as $C=V+x_0$ where $x_0\in C$ and $V$ a vector subspace.
 
+Moreover it is possible to "attach" an affine set to any ordinary set, this is called the **hull of a set**
+
+>[!def|*] Hull
+>Given an arbitrary set $C$ (not affine), we define the affine hull $aff(C)$ as all points that can be obtained as an affine combination of elements of $C$
+
