@@ -68,3 +68,6 @@ Moreover it is possible to "attach" an affine set to any ordinary set, this is c
 >[!def|*] Hull
 >Given an arbitrary set $C$ (not affine), we define the affine hull $aff(C)$ as all points that can be obtained as an affine combination of elements of $C$
 
+## 2.2) Convex Combinations
+A convex combination is just an affine combination where $\theta_i\in\R$.
+The consequence is that now the combination is not the line passing through the points, but the segment having these points as endpoints.
