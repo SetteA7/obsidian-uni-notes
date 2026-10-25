@@ -850,7 +850,7 @@ But we will mostly limit our study cases at $x\rightarrow 0$ (for now)
 $$f(x) = \sum_{k=0}^n \frac{f^{(k)}(0)}{k!} x^k + o(x^n) \quad \text{as } x \to 0$$
 For now, since derivatives are not yet introduced, all the expansions will be provided.
 
-Consider $f(x)=e^x$ at $x_0=0$. It's expansion is (up to order 3) $e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + o(x^3)$. 
+Consider $f(x)=e^x$ at $x_0=0$. Its expansion is (up to order 3) $e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + o(x^3)$. 
 Now let's consider how well the various orders approximate $e^{0.5}=1.64872$
 
 $$\begin{array}{cccc}
@@ -882,7 +882,7 @@ Therefore we can say:
 - $x^3=o(x^2)$ since $\lim_{x\rightarrow 0}x^3/x^2=\lim_{x\rightarrow0}x=0$
 - But not $x^2=o(x^3)$ since $\lim_{x\rightarrow 0}x^2/x^3=\lim_{x\rightarrow0}1/x=\pm\infty$
 
->[!thm] Little-$o$ Propeeties
+>[!thm] Little-$o$ Properties
 >Here are some properties of little-$o$. Let $n>0$:
 >- Constant Multiplication: 
 >$$c\cdot o(x^n)=o(x^n)\ \text{ for any constant }c\neq 0\qquad \text{The error has the same order}$$
@@ -1057,7 +1057,7 @@ $$\lim_{x\to 0^+} \frac{e^{x - 2x^2} - 1 - x}{\sinh(x^2) + x^{7/3}\log x}$$
 Recall the expansions
 $$\begin{align} \sinh(t) &= t + \frac{t^3}{6} + o(t^3)\\ e^t &= 1 + t + \frac{t^2}{2} + o(t^2) \end{align}$$
 First look at $x^{7/3}\log(x)$. This doesn't have a direct expansion so we must find at least what little o it belongs to. Since $\lim_{x \to 0^+} x^\alpha \log x = 0$ for any $\alpha > 0$, we have:
-$$\lim_{x\rightarrow 0^+}\frac{x^{7/3}\log(x)}{x^n}=\lim_{x\rightarrow0^+}x^{7/3-n}\log(x)\longrightarrow x^{7/3}\log(x)=o(x^{4/3})=o(x^2)$$
+$$\lim_{x\rightarrow 0^+}\frac{x^{7/3}\log(x)}{x^2}=\lim_{x\rightarrow0^+}x^{7/3-2}\log(x)\longrightarrow x^{7/3}\log(x)=o(x^2)$$
 Where the last step is valid only because $o(x^2)\subseteq o(x^{4/3})$
 
 Now expand $\sinh$
@@ -1088,7 +1088,7 @@ $$x(x-\sin(x))=x(x-x+o(x^2))=o(x^3)$$
 So we must expand it further:
 $$x(x-\sin(x))=x(x-x+\frac{x^3}6+o(x^4))=\frac{x^4}6+o(x^4)$$
 Now notice that also $x^3\sin^2(x)$ is also $o(x^4)$ since
-$$\lim_{x\rightarrow 0^+}\frac{x^3\sin(x^2)}{x^4}=\lim_{x\rightarrow 0}\frac{\sin(x)}{x}\cdot x=1\cdot 0=0$$
+$$\lim_{x\rightarrow 0^+}\frac{x^3\sin^2(x)}{x^4}=\lim_{x\rightarrow 0}\par{\frac{\sin(x)}{x}}^2\cdot x=1\cdot 0=0$$
 Therefore the denominator becomes:
 $$\frac{x^4}6+o(x^4)$$
 The numerator just requires a direct expansion:
@@ -1097,45 +1097,6 @@ $$\begin{align}
 &=\lim_{x\rightarrow 0}\frac{x^4(\frac12+\frac{o(x^4)}{x^4})}{x^4(\frac16+\frac{o(x^4)}{x^4})}\\
 &=\frac{1/2}{1/6}=3
 \end{align}$$
-
-
-
-
-#### 8) Exam 12.09.2022
-Compute the limit $\forall \alpha\in\mathbb R$:
-$$\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac16\alpha x^3}{\arctan(x^2+4x^3)}$$
-First recall the standard expansions:
-$$\begin{align}
-\sin(x) = x - \frac{x^3}{6} + \frac{x^5}{120} + o(x^5)\\
-\arctan(x) = x-\frac{x^3}3+\frac{x^5}5 + o(x^5)
-\end{align}$$
-Since the highest order degree is $x^3$ we expand at order $3$:
-Numerator:
-$$\sin x-\alpha x+\frac\alpha6x^3=x-\frac{x^3}6-\alpha x+\frac\alpha6x^3+o(x^3)=(1-\alpha)x+\frac{\alpha-1}6x^3+o(x^3)$$
-Denominator:
-Use the substitution $t=x^2+4x^3$ (again since both t and x tend to $0$ as they go to $0^+$) and expand only until first order since $o(t)=o(x^2+4x^3)=o(x^3)$
-$$\arctan t=t+o(t)=x^2+4x^3+o(x^2)$$
-Now rewrite the entire limit:
-$$\begin{align}\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac16\alpha x^3}{\arctan(x^2+4x^3)}&=\lim_{x\rightarrow 0^+}\frac{(1-\alpha)x+\frac{\alpha-1}6x^3+o(x^3)}{x^2+4x^3+o(x^3)}\\
-&=\lim_{x \to 0^+} \frac{x \left[ (1-\alpha) + \frac{\alpha-1}{6}x^2 + \frac{o(x^3)}{x} \right]}{x \left[ x + 4x^2 + \frac{o(x^3)}{x} \right]}\\
-&=\lim_{x\rightarrow 0^+}\frac{1-\alpha+\frac{\alpha-1}6x^2+o(x^2)}{x+4x^2+o(x^2)}
-\end{align}$$
-
-Now the limit is more easily computable:
-- Case $\alpha=1$ (since obviously simplifies a lot)
-$$\begin{align}
-\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2+4x^3+o(x^3)}&=\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2(1+4x+\frac{o(x^3)}{x^2})}\\
-&=\lim_{x\rightarrow 0^+}\frac{o(x^3)}{x^2}\cdot\frac1{1+4x+\frac{o(x^3)}{x^2}}\\
-&=0\cdot\frac1{1+0+0}=0
-\end{align}$$
-- Case $\alpha\neq1$
-$$\lim_{x\rightarrow 0^+}\frac{1-\alpha+\frac{\alpha-1}6x^2+o(x^2)}{x+4x^2+o(x^2)}=\frac{1-\alpha+0^+}{0^+}=\begin{cases}
-\infty&\text{if }\alpha<1\\
--\infty&\text{if }\alpha>1
-\end{cases}$$
-
-So the final result is 
-$$\lim_{x \to 0^+} \frac{\sin(x) - \alpha x + \frac{1}{6}\alpha x^3}{\arctan(x^2 + 4x^3)} = \begin{cases} +\infty & \text{if } \alpha < 1 \\ 0 & \text{if } \alpha = 1 \\ -\infty & \text{if } \alpha > 1 \end{cases}$$
 
 # 5) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
