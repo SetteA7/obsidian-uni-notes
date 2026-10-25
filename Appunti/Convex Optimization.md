@@ -49,3 +49,17 @@ where $f(x),g_i(x)$ are required to be convex.
 
 # 2) Convexity
 ## 2.1) Affine Combinations
+Lets start with the definition of affine combination:
+
+>[!def|*] Affine Combination
+>Given two points $x_1,x_2\in\R$ we call affine combination the point obtained as $y=\theta_1x_1+\theta_2x_2$  satisfying the condition $\theta_1+\theta_2=1$
+>
+>In general for $m$ points $x_1,...,x_m\in\R$ and $m$ multipliers $\theta_1,...,\theta_m$ such that $\sum_{i=1}^m\theta_i=1$
+
+A set is affine if it contains any affine combination of its points
+
+A linear sub-space is affine, however containing the origin is too much of a restriction, so
+
+>[!thm|*] Affine Set
+>Any affine set $C$ can be expressed as $C=V+x_0$ where $x_0\in C$ and $V$ a vector subspace.
+
