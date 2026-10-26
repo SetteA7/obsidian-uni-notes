@@ -899,9 +899,6 @@ Therefore we can say:
 >- Powers of Little-$o$:
 >$$[o(x^n)]^k=o(x^{n\cdot k})\quad\text{Ex: }[o(x^2)]^3=o(x^6)$$
 
-In general during the exercises the desired degree to expand to is the smallest one where the terms don't cancel out due to expansion.
-
-
 ---
 
 Proofs (very quick):
@@ -951,6 +948,20 @@ $$\lim_{x \to 0} \left( \frac{f(x)}{x^n} \right)^k = \left( \lim_{x \to 0} \frac
 Thus, $[f(x)]^k \in o(x^{n \cdot k})$.
 
 ---
+
+Some final remarks:
+Let $m, n \in \mathbb{R}$ such that $m < n$. As $x \to 0$, then:
+$$o(x^n)\subset o(x^m)$$
+Therefore, if needed you can simplify little o to a higher degree term in an expression.
+
+In general during the exercises the desired degree to expand to is the smallest one where the terms don't cancel out due to expansion.
+
+Quick Proof:
+Inclusion ($o(x^n) \subseteq o(x^m)$):
+If $f \in o(x^n)$, then because $n - m > 0$:
+$$\lim_{x \to 0} \frac{f(x)}{x^m} = \lim_{x \to 0} \left( \frac{f(x)}{x^n} \cdot x^{n-m} \right) = 0 \cdot 0 = 0 \implies f \in o(x^m)$$
+Strictness ($o(x^n) \neq o(x^m)$):The function $h(x) = x^n$ verifies proper containment:
+$$\lim_{x \to 0} \frac{x^n}{x^m} = \lim_{x \to 0} x^{n-m} = 0 \implies x^n \in o(x^m), \quad \text{while} \quad \lim_{x \to 0} \frac{x^n}{x^n} = 1 \neq 0 \implies x^n \notin o(x^n)$$Thus, $x^n \in o(x^m) \setminus o(x^n)$.
 
 ## 4.3) Exercises
 #### 1) Little-$o$ Warm Up Exercise:
