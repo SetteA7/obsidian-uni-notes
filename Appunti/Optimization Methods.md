@@ -221,10 +221,7 @@ $$
 
 
 # 4) Shortest Path
-
-
-  
-
+LP formulation
 $$\begin{align}
 &\min \sum_{(i,j)\in A} c_{ij} x_{ij} \\
 s.t \qquad &\sum_{j\in \delta^+_s} x_{sj} \ = \ n-1 \\
