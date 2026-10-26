@@ -95,7 +95,7 @@ $$(x-1)(2x-1) > 0 \iff x < \frac{1}{2} \ \cup \ x > 1$$
 
 Sign analysis for Case 1:
 
-$$\begin{array}{c\|ccc} x & \left(-\infty, \frac{1}{2}\right) & \left(\frac{1}{2}, 1\right) & (1, +\infty) \\ \hline \text{Numerator} & + & + & + \\ \text{Denominator} & + & - & + \\ \hline \text{Fraction} & + & - & + \end{array}$$
+$$\begin{array}{c|ccc} x & \left(-\infty, \frac{1}{2}\right) & \left(\frac{1}{2}, 1\right) & (1, +\infty) \\ \hline \text{Numerator} & + & + & + \\ \text{Denominator} & + & - & + \\ \hline \text{Fraction} & + & - & + \end{array}$$
 
 So the fraction is $>0$ on $\left(-\infty, \frac{1}{2}\right) \cup (1, +\infty)$.
 
@@ -116,7 +116,7 @@ The denominator roots are $\frac{1}{2} = 0.5$ and $1$.
 
 Sign analysis for the factors:
 
-$$\begin{array}{c\|ccccc} x & \left(-\infty, x_1\right) & (x_1, 1/2) & (1/2, x_2) & (x_2, 1) & (1, +\infty) \\ \hline \text{Numerator} & - & + & + & - & - \\ \text{Denominator} & + & + & - & - & + \\ \hline \text{Fraction} & - & + & - & + & - \end{array}$$
+$$\begin{array}{c|ccccc} x & \left(-\infty, x_1\right) & (x_1, 1/2) & (1/2, x_2) & (x_2, 1) & (1, +\infty) \\ \hline \text{Numerator} & - & + & + & - & - \\ \text{Denominator} & + & + & - & - & + \\ \hline \text{Fraction} & - & + & - & + & - \end{array}$$
 
 The fraction is $>0$ on $\left(x_1, \frac{1}{2}\right) \cup (x_2, 1)$.
 
