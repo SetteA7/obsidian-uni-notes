@@ -17,7 +17,7 @@ With:
 
 # 2) Linear Programming (LP)
 A LP is a optimization problem with
-- $q$ non.negative variables
+- $q$ non negative variables
 - a _linear objective_
 - $p$ linear constraint
 - a set of _non negativity restrictions_
