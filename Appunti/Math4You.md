@@ -949,19 +949,33 @@ Thus, $[f(x)]^k \in o(x^{n \cdot k})$.
 
 ---
 
-Some final remarks:
-Let $m, n \in \mathbb{R}$ such that $m < n$. As $x \to 0$, then:
+Some final remarks (tricks for exercises):
+**Substitution**: When doing a substitution, both should go to the same value:
+$$t=f(x)\text{ valid iff }\begin{cases}
+x\stackrel{x\rightarrow x_0}\longrightarrow x_0\\
+t\stackrel{t\rightarrow x_0}\longrightarrow x_0
+\end{cases}$$
+
+
+
+
+**Lower Degree Change:** Let $m, n \in \mathbb{R}$ such that $m < n$. As $x \to 0$, then:
 $$o(x^n)\subset o(x^m)$$
-Therefore, if needed you can simplify little o to a higher degree term in an expression.
+Therefore, if needed you can simplify little o to a higher degree term in an expression, that is, for example:
+$$o(x^3)\rightarrow o(x^{2})\text{ but not }o(x^2)\rightarrow o(x^3)$$
+**Polynomial and little o inside little-o**
+Suppose to have a polynomial (or a little-o) inside a little-o the lower degree always wins
+$$o(\sum_k{a_kx^k}+$$
 
-In general during the exercises the desired degree to expand to is the smallest one where the terms don't cancel out due to expansion.
 
-Quick Proof:
-Inclusion ($o(x^n) \subseteq o(x^m)$):
-If $f \in o(x^n)$, then because $n - m > 0$:
-$$\lim_{x \to 0} \frac{f(x)}{x^m} = \lim_{x \to 0} \left( \frac{f(x)}{x^n} \cdot x^{n-m} \right) = 0 \cdot 0 = 0 \implies f \in o(x^m)$$
-Strictness ($o(x^n) \neq o(x^m)$):The function $h(x) = x^n$ verifies proper containment:
-$$\lim_{x \to 0} \frac{x^n}{x^m} = \lim_{x \to 0} x^{n-m} = 0 \implies x^n \in o(x^m), \quad \text{while} \quad \lim_{x \to 0} \frac{x^n}{x^n} = 1 \neq 0 \implies x^n \notin o(x^n)$$Thus, $x^n \in o(x^m) \setminus o(x^n)$.
+**What degree?** In general during the exercises the desired degree to expand to is the smallest one where the terms don't cancel out due to expansion. 
+Let $f,g$ be two functions to be expanded and $h$ the result of the expansion of both, a low order will result only in $o(x^n)$, so with the correct order $m>n$ not all terms cancel out.
+$$\begin{align}
+f(x)+g(x)&\neq o(x^n)\\
+&=h(x)+o(x^m)
+\end{align}$$
+**Even/Odd functions**
+Some expansions have 
 
 ## 4.3) Exercises
 #### 1) Little-$o$ Warm Up Exercise:
@@ -1190,9 +1204,6 @@ $$\sin x - \alpha x + \frac{\alpha}{6}x^3 = x - \frac{x^3}{6} + o(x^3) - \alpha 
 **Denominator:**
 Use the substitution $t = x^2 + 4x^3$ (since $t \to 0$ as $x \to 0^+$) and expand $\arctan(t)$ to order 1. 
 $$\arctan(x^2 + 4x^3) = t + o(t) = x^2 + 4x^3 + o(x^2) = x^2 + o(x^2)$$
-But this is too low! we 
-
-
 Now rewrite the entire limit:
 $$\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac{1}{6}\alpha x^3}{\arctan(x^2+4x^3)} = \lim_{x\rightarrow 0^+}\frac{(1-\alpha)x+\frac{\alpha-1}{6}x^3+o(x^3)}{x^2+o(x^2)}$$
 
@@ -1218,6 +1229,8 @@ $$\begin{align}
 
 So the final result is:
 $$\lim_{x \to 0^+} \frac{\sin(x) - \alpha x + \frac{1}{6}\alpha x^3}{\arctan(x^2 + 4x^3)} = \begin{cases} +\infty & \text{if } \alpha < 1 \\ 0 & \text{if } \alpha = 1 \\ -\infty & \text{if } \alpha > 1 \end{cases}$$
+
+In class however (see written notes) we aimed to have same order at numerator and denominator
 # 6) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
