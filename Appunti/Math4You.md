@@ -1067,35 +1067,35 @@ $$\begin{align}
 
 #### Warmup Exercise
 Compute the limit:
-$$\lim_{x \to 0} \frac{\ln(\cos(x)) + \frac{x^2}{2}}{x^4}$$
+$$\lim_{x \to 0} \frac{\log(\cos(x)) + \frac{x^2}{2}}{x^4}$$
 
 Recall the expansions:
 $$\begin{align}
 \cos(x) &= 1 - \frac{x^2}{2} + \frac{x^4}{24} + o(x^4)\\
-\ln(1 + t) &= t - \frac{t^2}{2} + o(t^2)
+\log(1 + t) &= t - \frac{t^2}{2} + o(t^2)
 \end{align}$$
 
-Since the denominator is of order 4, we must expand the numerator up to $o(x^4)$. 
-Notice that $\log(\cos(x))$ is not a standard expansion so we rewrite it as $\log(1+(\cos(x)-1))$.
-The substitution $t=\cos(x)$ is not valid as $t\stackrel{t\rightarrow0}\longrightarrow 0\neq \cos(x)\stackrel{x\rightarrow 0}\longrightarrow1$. The natural substitution, also by looking at the expression is $t=\cos(x)-1$. 
-By expanding the $\cos(x)$ to the 4th order, we get
+Since the denominator is of order 4, we must expand the numerator up to $o(x^4)$.
+
+Notice that $\log(\cos(x))$ is not a standard expansion, as the known formula is for $\log(1+t)$ as $t \to 0$. We cannot simply substitute $t = \cos(x)$ because $\cos(x) \to 1 \neq 0$ as $x \to 0$. 
+
+To fix this, we add and subtract $1$ inside the logarithm, rewriting it as $\log\big(1 + (\cos(x) - 1)\big)$. Now the natural substitution is $t = \cos(x) - 1$, which is valid since $t \to 0$ as $x \to 0$.
+
+Expanding $\cos(x)$ up to order 4 gives:
+$$t = \cos(x) - 1 = -\frac{x^2}{2} + \frac{x^4}{24} + o(x^4)$$
+
+Notice that the lowest degree in $t$ is $x^2$. Therefore, $\log(1+t)$ only needs to be expanded up to degree 2 in $t$ (since $o(t^2) = o\big((x^2)^2\big) = o(x^4)$). Substituting $t$ into $\log(1+t) = t - \frac{t^2}{2} + o(t^2)$, we get:
 $$t=\cos(x)-1\quad\rightarrow\quad t = -\frac{x^2}{2} + \frac{x^4}{24} + o(x^4)$$
-
-Use the substitution $t = \cos(x) - 1$ (which is valid since $t \to 0$ as $x \to 0$). Using the expansion of $\cos(x)$ up to order 4:
-$$t = -\frac{x^2}{2} + \frac{x^4}{24} + o(x^4)$$
-
-Notice that the lowest power in $t$ is $x^2$. Therefore, $o(t^2) = o\left(\left[-\frac{x^2}{2} + \frac{x^4}{24} + o(x^4)\right]^2\right) = o(x^4)$, which means expanding $\ln(1+t)$ up to order 2 in $t$ is sufficient to reach order 4 in $x$:
+Now notice that the lowest degree in $t$ is $x^2$, so the $\log(1+t)$ just needs to be expanded to the second degree (since $o(x^2)^2=o(x^4)$) and compute:
 $$\begin{align}
-\ln(\cos(x)) = t - \frac{t^2}{2} + o(t^2) &= \left(-\frac{x^2}{2} + \frac{x^4}{24} + o(x^4)\right) - \frac{1}{2}\left(-\frac{x^2}{2} + \frac{x^4}{24} + o(x^4)\right)^2 + o(x^4)\\
+\log(\cos(x)) = t - \frac{t^2}{2} + o(t^2) &= \left(-\frac{x^2}{2} + \frac{x^4}{24} + o(x^4)\right) - \frac{1}{2}\left(-\frac{x^2}{2} + \frac{x^4}{24} + o(x^4)\right)^2 + o(x^4)\\
 &= -\frac{x^2}{2} + \frac{x^4}{24} - \frac{1}{2}\left(\frac{x^4}{4} + o(x^4)\right) + o(x^4)\\
 &= -\frac{x^2}{2} + \frac{x^4}{24} - \frac{x^4}{8} + o(x^4)\\
 &= -\frac{x^2}{2} - \frac{x^4}{12} + o(x^4)
 \end{align}$$
-*(where all cross-terms of degree $\ge 6$ inside $t^2$, such as $-\frac{x^6}{24}$, are absorbed into $o(x^4)$).*
-
 Now replace the expansion into the whole limit:
 $$\begin{align}
-\lim_{x \to 0} \frac{\ln(\cos(x)) + \frac{x^2}{2}}{x^4} &= \lim_{x \to 0} \frac{-\frac{x^2}{2} - \frac{x^4}{12} + o(x^4) + \frac{x^2}{2}}{x^4}\\
+\lim_{x \to 0} \frac{\log(\cos(x)) + \frac{x^2}{2}}{x^4} &= \lim_{x \to 0} \frac{-\frac{x^2}{2} - \frac{x^4}{12} + o(x^4) + \frac{x^2}{2}}{x^4}\\
 &= \lim_{x \to 0} \frac{-\frac{x^4}{12} + o(x^4)}{x^4}\\
 &= \lim_{x \to 0} \left(-\frac{1}{12} + \frac{o(x^4)}{x^4}\right)\\
 &= -\frac{1}{12} + 0 = -\frac{1}{12}
