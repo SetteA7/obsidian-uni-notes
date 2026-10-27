@@ -1062,6 +1062,19 @@ $$\begin{align}
 \end{align}$$
 
 
+
+# 5) Lesson 27/10/26
+
+#### Warmup Exercise
+Compute the limit:
+$$\lim_{x \to 0} \frac{\ln(\cos(x)) + \frac{x^2}{2}}{x^4}$$
+Recall the expansions:
+$$\begin{align}
+\cos(x) = 1 - \frac{x^2}{2} + \frac{x^4}{24} + o(x^4)\\
+\ln(1 + x) = x - \frac{x^2}{2} + o(x^2)
+\end{align}$$
+
+
 #### 6) Exam 17.09.2019
 Compute the limit:
 $$\lim_{x\to 0^+} \frac{e^{x - 2x^2} - 1 - x}{\sinh(x^2) + x^{7/3}\log x}$$
@@ -1177,7 +1190,7 @@ $$\begin{align}
 
 So the final result is:
 $$\lim_{x \to 0^+} \frac{\sin(x) - \alpha x + \frac{1}{6}\alpha x^3}{\arctan(x^2 + 4x^3)} = \begin{cases} +\infty & \text{if } \alpha < 1 \\ 0 & \text{if } \alpha = 1 \\ -\infty & \text{if } \alpha > 1 \end{cases}$$
-# 5) Symbols
+# 6) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
 - $\iff$: necessary + sufficient, if and only if "iff"
@@ -1194,7 +1207,7 @@ $$\lim_{x \to 0^+} \frac{\sin(x) - \alpha x + \frac{1}{6}\alpha x^3}{\arctan(x^2
 
 - $\exists$: there exists
 
-# 6) Taylor Expansions
+# 7) Taylor Expansions
 Here is a list of some of the most frequent expansions
 $$\begin{align}
 e^x &= 1 + x + \frac{x^2}{2} + \cdots + \frac{x^k}{k!}
