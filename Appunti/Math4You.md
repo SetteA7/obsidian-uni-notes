@@ -965,8 +965,9 @@ Therefore, if needed you can simplify little o to a higher degree term in an exp
 $$o(x^3)\rightarrow o(x^{2})\text{ but not }o(x^2)\rightarrow o(x^3)$$
 **Polynomial and little o inside little-o**
 Suppose to have a polynomial (or a little-o) inside a little-o the lower degree always wins
-$$o(\sum_k{a_kx^k}+$$
-
+$$o(\sum_k{a_kx^k})=o(x^{\min_ka^k\not=0})$$
+For example:
+$$o(x^2+3x^3+o(x^4))=o(x^2)$$
 
 **What degree?** In general during the exercises the desired degree to expand to is the smallest one where the terms don't cancel out due to expansion. 
 Let $f,g$ be two functions to be expanded and $h$ the result of the expansion of both, a low order will result only in $o(x^n)$, so with the correct order $m>n$ not all terms cancel out.
@@ -974,8 +975,7 @@ $$\begin{align}
 f(x)+g(x)&\neq o(x^n)\\
 &=h(x)+o(x^m)
 \end{align}$$
-**Even/Odd functions**
-Some expansions have 
+Finally usually numerator and denominator have same degree.Most importantly **numerator must have higher or same order as denominator**
 
 ## 4.3) Exercises
 #### 1) Little-$o$ Warm Up Exercise:
@@ -1127,12 +1127,12 @@ e^t &= 1 + t + \frac{t^2}{2} + o(t^2)
 
 **Denominator:**
 First, look at $\sinh(x^2)$. Using $t = x^2$ (since $t \to 0$ as $x \to 0^+$), its leading term is of order 2:
-$$\sinh(x^2) = x^2 + o(x^4)$$
+$$\sinh(x^2) =\sinh(t)=t+o(t^2)= x^2 + o(x^4)=x^2+o(x^2)$$
 
 Next, look at $x^{7/3}\log(x)$. Since $\log(x)$ has no Taylor expansion at $0$, we check whether this term is negligible compared to the leading $x^2$ term, that is, whether $x^{7/3}\log(x) \in o(x^2)$. Recall that $\lim_{x \to 0^+} x^\alpha \log x = 0$ for any $\alpha > 0$:
 $$\lim_{x\to 0^+}\frac{x^{7/3}\log(x)}{x^2} = \lim_{x\to 0^+}x^{1/3}\log(x) = 0 \implies x^{7/3}\log(x) = o(x^2)$$
 
-Combining both terms in the denominator and applying the absorption rule ($o(x^4) + o(x^2) = o(x^2)$):
+Combining both terms in the denominator and applying the absorption rule 
 $$\sinh(x^2) + x^{7/3}\log x = x^2 + o(x^4) + o(x^2) = x^2 + o(x^2)$$
 
 **Numerator:**
@@ -1164,12 +1164,12 @@ $$\begin{align}
 
 **Denominator:**
 If we only expand $\sin(x)$ to order 1, the first term in the denominator cancels out completely and leaves us with no leading term:
-$$x(x - \sin x) = x\big(x - (x + o(x^2))\big) = x \cdot o(x^2) = o(x^3)$$
+$$x(x - \sin x) = x\big(x - (x + o(x))\big) = x \cdot o(x) = o(x^2)$$
 
 So we must expand $\sin(x)$ to the next non-zero term (order 3):
-$$x(x - \sin x) = x\left(x - x + \frac{x^3}{6} + o(x^4)\right) = \frac{x^4}{6} + x \cdot o(x^4) = \frac{x^4}{6} + o(x^5) = \frac{x^4}{6} + o(x^4)$$
+$$x(x - \sin x) = x\left(x - x + \frac{x^3}{6} + o(x^3)\right) = \frac{x^4}{6} + x \cdot o(x^3) = \frac{x^4}{6} + o(x^4) = \frac{x^4}{6} + o(x^4)$$
 
-Now check the second term, $x^3\sin^2(x)$. We can see it is $o(x^4)$ either via the notable limit:
+Now check the second term, $x^3\sin^2(x)$. We can see it is $o(x^4)$ either via the definition (using notable limit):
 $$\lim_{x\to 0} \frac{x^3\sin^2(x)}{x^4} = \lim_{x\to 0} \left(\frac{\sin x}{x}\right)^2 \cdot x = 1^2 \cdot 0 = 0 \implies x^3\sin^2(x) = o(x^4)$$
 or directly via little-$o$ algebra
 $$\sin x = x + o(x)\implies x^3\sin^2 x = x^3(x+o(x))^2 = x^5 + o(x^5) = o(x^4)$$
@@ -1230,7 +1230,7 @@ $$\begin{align}
 So the final result is:
 $$\lim_{x \to 0^+} \frac{\sin(x) - \alpha x + \frac{1}{6}\alpha x^3}{\arctan(x^2 + 4x^3)} = \begin{cases} +\infty & \text{if } \alpha < 1 \\ 0 & \text{if } \alpha = 1 \\ -\infty & \text{if } \alpha > 1 \end{cases}$$
 
-In class however (see written notes) we aimed to have same order at numerator and denominator
+In class however (see written notes) we aimed to have same order at numerator and denominator, however the result was the same if not with a bit more algebra.
 # 6) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
