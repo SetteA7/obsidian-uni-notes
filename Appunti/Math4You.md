@@ -1188,8 +1188,10 @@ Since the polynomial terms go up to $x^3$, we expand $\sin(x)$ up to order 3:
 $$\sin x - \alpha x + \frac{\alpha}{6}x^3 = x - \frac{x^3}{6} + o(x^3) - \alpha x + \frac{\alpha}{6}x^3 = (1-\alpha)x + \frac{\alpha-1}{6}x^3 + o(x^3)$$
 
 **Denominator:**
-Use the substitution $t = x^2 + 4x^3$ (since $t \to 0$ as $x \to 0^+$) and expand $\arctan(t)$ to order 1. Notice that as $x \to 0$, the lowest power dominates, so $o(t) = o(x^2 + 4x^3) = o(x^2)$, which also absorbs the $4x^3$ term:
+Use the substitution $t = x^2 + 4x^3$ (since $t \to 0$ as $x \to 0^+$) and expand $\arctan(t)$ to order 1. 
 $$\arctan(x^2 + 4x^3) = t + o(t) = x^2 + 4x^3 + o(x^2) = x^2 + o(x^2)$$
+But this is too low! we 
+
 
 Now rewrite the entire limit:
 $$\lim_{x\rightarrow 0^+}\frac{\sin x-\alpha x+\frac{1}{6}\alpha x^3}{\arctan(x^2+4x^3)} = \lim_{x\rightarrow 0^+}\frac{(1-\alpha)x+\frac{\alpha-1}{6}x^3+o(x^3)}{x^2+o(x^2)}$$
