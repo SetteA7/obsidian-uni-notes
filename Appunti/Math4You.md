@@ -1115,7 +1115,7 @@ e^t &= 1 + t + \frac{t^2}{2} + o(t^2)
 First, look at $\sinh(x^2)$. Using $t = x^2$ (since $t \to 0$ as $x \to 0^+$), its leading term is of order 2:
 $$\sinh(x^2) = x^2 + o(x^4)$$
 
-Next, look at $x^{7/3}\log(x)$. Since $\log(x)$ has no Taylor expansion at $0$, we check whether this term is negligible compared to the leading $x^2$ term—that is, whether $x^{7/3}\log(x) \in o(x^2)$. Recall that $\lim_{x \to 0^+} x^\alpha \log x = 0$ for any $\alpha > 0$:
+Next, look at $x^{7/3}\log(x)$. Since $\log(x)$ has no Taylor expansion at $0$, we check whether this term is negligible compared to the leading $x^2$ term, that is, whether $x^{7/3}\log(x) \in o(x^2)$. Recall that $\lim_{x \to 0^+} x^\alpha \log x = 0$ for any $\alpha > 0$:
 $$\lim_{x\to 0^+}\frac{x^{7/3}\log(x)}{x^2} = \lim_{x\to 0^+}x^{1/3}\log(x) = 0 \implies x^{7/3}\log(x) = o(x^2)$$
 
 Combining both terms in the denominator and applying the absorption rule ($o(x^4) + o(x^2) = o(x^2)$):
