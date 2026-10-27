@@ -1102,7 +1102,7 @@ $$\begin{align}
 \end{align}$$
 
 #### 6) Exam 17.09.2019
-Compute the limit:
+Compute the limit: 
 $$\lim_{x\to 0^+} \frac{e^{x - 2x^2} - 1 - x}{\sinh(x^2) + x^{7/3}\log x}$$
 
 Recall the expansions:
