@@ -1258,12 +1258,33 @@ Discuss differentiability at the point $x_0=0$:
 $$f(x)=\sin|x|$$
 
 Using the definition we have
-$$\lim_{x\rightarrow 0^+}\frac{\sin |x|-\sin(0)}{x-0}=\lim_{x\rightarrow 0^+}\frac{\sin x}{x}=1$$
+$$f_+'(\lim_{x\rightarrow 0^+}\frac{\sin |x|-\sin(0)}{x-0}=\lim_{x\rightarrow 0^+}\frac{\sin x}{x}=1$$
 However
 $$\lim_{x\rightarrow 0^-}\frac{\sin |x|-\sin(0)}{x-0}=\lim_{x\rightarrow 0^-}\frac{\sin -x}{x}=\lim_{x\rightarrow 0^-}\frac{-\sin x}{x}=-1$$
 Since the limit is not the same, the function is not differentiable at $x_0=0$
 
-#### c) 
+#### c) Piecewise function
+Discuss differentiability at the point $x_0=0$:
+$$f(x)=\begin{cases}
+e^{-1/x^2} & x\neq 0\\
+0&x=0
+\end{cases}$$
+Recall
+$$\text{differentiable at }x_0\implies \text{continuous at }x_0$$
+which is equivalent to
+$$\text{not continuous at }x_0\implies \text{not differemtiable at }x_0$$
+A piecewise function is not necessarily continuous, let's check the continuity at $x_0$ first:
+$$\lim_{x\rightarrow 0^+}e^{-1/{x^2}}=\lim_{x\rightarrow 0^-}e^{-1/x^2}=0=f(0)$$
+
+Since it is continuous we must check the differentiability using the definition:
+$$\lim_{x\rightarrow 0^+}\frac{e^{-1/x^2}-0}{x-0}=\lim_{x\rightarrow 0^+}\frac{e^{-1/x^2}}{x}$$
+via substitution $t=\frac 1x$ as $x\rightarrow 0^+$ and since exponential growth dominates linear growth
+$$\lim_{t\rightarrow\infty}\frac{t}{e^{t^2}}=0^+$$
+
+Now the left limit:
+$$\lim_{x\rightarrow 0^-}\frac{e^{-1/x^2}-0}{x-0}=\lim_{x\rightarrow 0^-}\frac{e^{-1/x^2}}{x}=\lim_{t\rightarrow-\infty}\frac t{e^{t^2}}=0^-$$
+Since both limits are equal the derivative at $x_0$ exists and is equal to $0$.
+
 #### d) Sqrt
 Discuss differentiability at the point $x_0=-1$:
 $$f(x)=\sqrt{1+x^3}$$
