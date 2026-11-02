@@ -1330,7 +1330,7 @@ $$
 \end{align}
 $$
 ## 6.4) Exercises on derivatives
-#### c)
+#### c) Piecewise function
 Say where the following maps are differentiable and find the derivatives
 $$f(x)=\begin{cases}
 x^2+1& x\geq 0\\
@@ -1338,11 +1338,37 @@ e^x-x&x<0
 \end{cases}$$
 
 First verify the continuity:
-Both functions are continuous, so we must just look at $0$
+Both parts of the definition are continuous, so we must just look at $0$
 $$\lim_{x\rightarrow 0^+}x^2+1=\lim_{x\rightarrow 0^-} e^x-x=1=f(0)$$
 Therefore it is continuous
 
-Now compute the derivative for both functions:
+Now compute the derivative for both definitions:
+$$\begin{align}
+x^2+1&\stackrel{x^\alpha=\alpha x^{\alpha -1}}\longrightarrow 2x\\
+e^x-x&\stackrel{a^x=\log(a)a^x}\longrightarrow\log(e)e^x-1=e^x-1
+\end{align}$$
+so we have
+$$f'(x)=\begin{cases}
+2x & x\geq 0\\
+e^x-1&x<0
+\end{cases}$$
+Where the "$\geq$" is to be verified, as differentiability at $0$ is not certain.
+Both definitions are continuous, so differentiability needs only to be checked at $x_0=0$
+Instead of using the definition, we use the theorem ($f'(x)=\lim_{x\rightarrow x_0}f'(x)$):
+$$\lim_{x\rightarrow 0^+}2x=\lim_{x\rightarrow 0^-}e^x-1=0$$
+So this function is fully differentiable.
+
+#### a) Abs value
+Say where the following maps are differentiable and find the derivatives
+$$f(x)=x\sqrt{|x|}$$
+Before starting it is important to compute as an additional exercise only
+$$g(x)=|x|=\begin{cases}x&x\geq 0\\-x& x<0\end{cases}$$
+
+Clearly this is not differentiable at 0 since 
+$$g'(x)=\begin{cases}1 & x>0\\
+-1 & x<0\end{cases}
+\quad \implies \quad\lim_{x\rightarrow 0^+}f'(x)\neq \lim_{x\rightarrow0^-}f'(x)$$
+However, notice that $g'(x)$ is exactly the definition of $\text{sign} (x)$
 
 
 ## 6.5) Final Taylor Exercise
