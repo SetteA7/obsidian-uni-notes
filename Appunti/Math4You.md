@@ -1263,6 +1263,8 @@ However
 $$f_-'(0)=\lim_{x\rightarrow 0^-}\frac{\sin |x|-\sin(0)}{x-0}=\lim_{x\rightarrow 0^-}\frac{\sin -x}{x}=\lim_{x\rightarrow 0^-}\frac{-\sin x}{x}=-1$$
 Since the limit is not the same, the function is not differentiable at $x_0=0$
 
+![[Pasted image 20261102150540.png|Plot|250]]
+
 #### c) Piecewise function
 Discuss differentiability at the point $x_0=0$:
 $$f(x)=\begin{cases}
@@ -1285,6 +1287,9 @@ Now the left limit:
 $$f_-'(0)=\lim_{x\rightarrow 0^-}\frac{e^{-1/x^2}-0}{x-0}=\lim_{x\rightarrow 0^-}\frac{e^{-1/x^2}}{x}=\lim_{t\rightarrow-\infty}\frac t{e^{t^2}}=0^-$$
 Since both limits are equal the derivative at $x_0$ exists and is equal to $0$.
 
+![[Pasted image 20261102150616.png|Plot|250]]
+
+
 #### d) Sqrt
 Discuss differentiability at the point $x_0=-1$:
 $$f(x)=\sqrt{1+x^3}$$
@@ -1299,6 +1304,9 @@ $$\begin{align}
 &=\frac{3}{0^+}=+\infty
 \end{align}$$
 Since the limit is not a finite real number, the function is not differentiable at $x_0=-1$.
+
+![[Pasted image 20261102150644.png|plot|250]]
+
 
 ## 6.3) Derivatives
 Here is a list of the various derivatives of elementary functions
@@ -1358,17 +1366,30 @@ Instead of using the definition, we use the theorem ($f'(x)=\lim_{x\rightarrow x
 $$\lim_{x\rightarrow 0^+}2x=\lim_{x\rightarrow 0^-}e^x-1=0$$
 So this function is fully differentiable.
 
+![[Pasted image 20261102151051.png|Plot|250]]
+
 #### a) Abs value
 Say where the following maps are differentiable and find the derivatives
 $$f(x)=x\sqrt{|x|}$$
-Before starting it is important to compute as an additional exercise only
+The function is clearly continuous, even at $x=0$.
+
+Before starting differentiating it is important to compute as an additional exercise only
 $$g(x)=|x|=\begin{cases}x&x\geq 0\\-x& x<0\end{cases}$$
 
 Clearly this is not differentiable at 0 since 
 $$g'(x)=\begin{cases}1 & x>0\\
 -1 & x<0\end{cases}
 \quad \implies \quad\lim_{x\rightarrow 0^+}f'(x)\neq \lim_{x\rightarrow0^-}f'(x)$$
-However, notice that $g'(x)$ is exactly the definition of $\text{sign} (x)$
+However, notice that $g'(x)$ is exactly the definition of $\text{sign} (x)$.
+One might suspect that therefore $f$ might not be differentiable at $x_0=0$
+
+Try to differentiate by applying first the definition of abs value
+$$f(x)=x\sqrt{|x|}=\begin{cases}x\sqrt x&x\geq 0\\
+x\sqrt{-x}&x<0
+\end{cases}=\begin{cases} x^{3/2}&x\geq 0\\
+x\sqrt{-x}&x<0
+\end{cases}$$
+So we can differentiate both parts of the definition and then verify differentiability at $x_0=0$:
 
 
 ## 6.5) Final Taylor Exercise
