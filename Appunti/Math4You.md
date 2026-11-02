@@ -1337,6 +1337,8 @@ $$
 \bigl(g(f(x))\bigr)' &= g'(f(x))f'(x)
 \end{align}
 $$
+When using a substitution the last differentiation rule (chain rule) must be applied
+
 ## 6.4) Exercises on derivatives
 #### c) Piecewise function
 Say where the following maps are differentiable and find the derivatives
@@ -1381,15 +1383,32 @@ $$g'(x)=\begin{cases}1 & x>0\\
 -1 & x<0\end{cases}
 \quad \implies \quad\lim_{x\rightarrow 0^+}f'(x)\neq \lim_{x\rightarrow0^-}f'(x)$$
 However, notice that $g'(x)$ is exactly the definition of $\text{sign} (x)$.
-One might suspect that therefore $f$ might not be differentiable at $x_0=0$
+One might suspect that therefore $f$ might not be differentiable at $x_0=0$. Let's verify it.
 
 Try to differentiate by applying first the definition of abs value
 $$f(x)=x\sqrt{|x|}=\begin{cases}x\sqrt x&x\geq 0\\
 x\sqrt{-x}&x<0
 \end{cases}=\begin{cases} x^{3/2}&x\geq 0\\
-x\sqrt{-x}&x<0
+-(-x)^{3/2}&x<0
 \end{cases}$$
-So we can differentiate both parts of the definition and then verify differentiability at $x_0=0$:
+So we can differentiate both parts of the definition and then verify differentiability at $x_0=0$.
+$$f'(x)=\begin{cases}\frac32x^{1/2}&x\geq 0\\
+\frac32(-x)^{1/2}&x<0
+\end{cases}=\begin{cases}\frac32\sqrt x&x\geq 0\\
+\frac32\sqrt{-x}&x<0
+\end{cases}=\frac32\sqrt {|x|}$$
+Where the second part was done by substitution $u=-x$:
+$$f(x)=-(-x)^{3/2}\rightarrow f(u(x))=-u^{3/2}$$
+And now it is clear why when derivating using a substitution the chain rule must be applied. This is because we are derivating $f(u(x))$. 
+$$[f(u)]'=f'(u)\cdot u'=-\frac32u^{1/2}\cdot(-1)=\frac32u^{1/2}\rightarrow f'(x)=\frac32(-x)^{1/2}$$
+However the $\geq$ sign again must be verified:
+$$\lim_{x\rightarrow 0^+}\frac32\sqrt x=\lim_{x\rightarrow 0^-}\frac32\sqrt{-x}=0$$
+and thus it is differentiable at 0! Our initial intuition was wrong.
+
+---
+
+There is a second way to compute this derivative.
+
 
 
 ## 6.5) Final Taylor Exercise
