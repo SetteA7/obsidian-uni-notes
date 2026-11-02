@@ -1231,7 +1231,20 @@ So the final result is:
 $$\lim_{x \to 0^+} \frac{\sin(x) - \alpha x + \frac{1}{6}\alpha x^3}{\arctan(x^2 + 4x^3)} = \begin{cases} +\infty & \text{if } \alpha < 1 \\ 0 & \text{if } \alpha = 1 \\ -\infty & \text{if } \alpha > 1 \end{cases}$$
 
 In class however (see written notes) we aimed to have same order at numerator and denominator, however the result was the same if not with a bit more algebra.
-# 6) Symbols
+
+# 6) Lesson 6/11/26
+## 6.1) Differentiability
+Let's recap some theory
+
+>[!def|*] Differentiable on right/left
+>Let $f$ be defined in a right/left neighborhood of $x_0\in\R$. We say $f$ is **differentiable on the right/left at $x_0$**  if the right/left limit of the difference quotient $\frac{\Delta f}{\Delta x}$ between $x_0$ and $x$ exists finite for $x\rightarrow x_0$. 
+>The real number
+>$$f_{+/-}'(x_0)=\lim_{x\rightarrow x_0^{+/-}}\frac{f(x)-f(x_0)}{x-x_0}=\lim_{\Delta x\rightarrow 0^{+/-}}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$$
+>is the right/left derivative of $f$ at $x_0$
+
+Moreover we can say that a map is differentiable if
+
+# 7) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
 - $\iff$: necessary + sufficient, if and only if "iff"
@@ -1248,7 +1261,7 @@ In class however (see written notes) we aimed to have same order at numerator an
 
 - $\exists$: there exists
 
-# 7) Taylor Expansions
+# 8) Taylor Expansions
 Here is a list of some of the most frequent expansions
 $$\begin{align}
 e^x &= 1 + x + \frac{x^2}{2} + \cdots + \frac{x^k}{k!}
