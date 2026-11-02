@@ -1242,7 +1242,24 @@ Let's recap some theory
 >$$f_{+/-}'(x_0)=\lim_{x\rightarrow x_0^{+/-}}\frac{f(x)-f(x_0)}{x-x_0}=\lim_{\Delta x\rightarrow 0^{+/-}}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$$
 >is the right/left derivative of $f$ at $x_0$
 
-Moreover we can say that a map is differentiable if
+Moreover we can say that a map is differentiable iff:
+
+>[!thm|*] Differentiability
+>A map $f$ defined around a point $x_0\in\R$ is differentiable at $x_0$ iff it is differentiable on both sides at $x_0$ and the left left and right derivatives coincide, in which case
+>$$f'(x_0)=f_+'(x_0)=f_-'(x_0)$$
+>
+>Alternatively, if $f$ is continuous at $x_0$ and differentiable at all points $x\neq x_0$ in a neighborhood of $x_0$. Then $f$ is differentiable at $x_0$ provided that the limit of $f'(x)$ for $x\rightarrow x_0$ exists finite. If so
+>$$f'(x_0)=\lim_{x\rightarrow x_0}f'(x)$$
+>Where the continuity at $x_0$ must be verified
+
+## 6.2) Exercises
+#### b)
+Discuss differentiability at the point $x_0$ indicated:
+$$f(x)=\sin|x|$$
+
+Using the definition we have
+$$\lim_{x\rightarrow 0^+}\frac{\sin |x|-\sin(0)}{x-0}=\lim_{x\rightarrow 0^+}\frac{\sin x}{x}=1$$
+However
 
 # 7) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
