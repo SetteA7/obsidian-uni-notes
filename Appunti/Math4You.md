@@ -1253,13 +1253,33 @@ Moreover we can say that a map is differentiable iff:
 >Where the continuity at $x_0$ must be verified
 
 ## 6.2) Exercises
-#### b)
-Discuss differentiability at the point $x_0$ indicated:
+#### b) Sin and abs value
+Discuss differentiability at the point $x_0=0$:
 $$f(x)=\sin|x|$$
 
 Using the definition we have
 $$\lim_{x\rightarrow 0^+}\frac{\sin |x|-\sin(0)}{x-0}=\lim_{x\rightarrow 0^+}\frac{\sin x}{x}=1$$
 However
+$$\lim_{x\rightarrow 0^-}\frac{\sin |x|-\sin(0)}{x-0}=\lim_{x\rightarrow 0^-}\frac{\sin -x}{x}=\lim_{x\rightarrow 0^-}\frac{-\sin x}{x}=-1$$
+Since the limit is not the same, the function is not differentiable at $x_0=0$
+
+#### c) 
+#### d) Sqrt
+Discuss differentiability at the point $x_0=-1$:
+$$f(x)=\sqrt{1+x^3}$$
+Notice that the domain is $x\geq -1$ so we can guess that it won't be differentiable. Let's check
+
+Using the definition we have
+$$\begin{align}
+\lim_{x\rightarrow-1^+}\frac{\sqrt{1+x^3}-\sqrt{1-1}}{x-(-1)}&=\lim_{x\rightarrow-1^+}\frac{\sqrt{1+x^3}}{x+1}\\
+&=\lim_{x\rightarrow-1^+}\frac{\sqrt{1+x^3}}{x+1}\frac{\sqrt{1+x^3}}{\sqrt{1+x^3}}\\
+&=\lim_{x\rightarrow-1^+}\frac{{1+x^3}}{(x+1)\sqrt{1+x^3}}\\
+&=\lim_{x\rightarrow-1^+}\frac{{(x+1)(1-x+x^2)}}{(x+1)\sqrt{1+x^3}}\\
+&=\frac{1-(-1)+(-1)^2}{0^+}=+\infty
+\end{align}$$
+Since the limit is not a finite real number, the function is not differentiable at $x_0=-1$.
+
+
 
 # 7) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
