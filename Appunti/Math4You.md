@@ -1252,15 +1252,15 @@ Moreover we can say that a map is differentiable iff:
 >$$f'(x_0)=\lim_{x\rightarrow x_0}f'(x)$$
 >Where the continuity at $x_0$ must be verified
 
-## 6.2) Exercises
+## 6.2) Exercises on Differentiability
 #### b) Sin and abs value
 Discuss differentiability at the point $x_0=0$:
 $$f(x)=\sin|x|$$
 
 Using the definition we have
-$$f_+'(\lim_{x\rightarrow 0^+}\frac{\sin |x|-\sin(0)}{x-0}=\lim_{x\rightarrow 0^+}\frac{\sin x}{x}=1$$
+$$f_+'(0)=\lim_{x\rightarrow 0^+}\frac{\sin |x|-\sin(0)}{x-0}=\lim_{x\rightarrow 0^+}\frac{\sin x}{x}=1$$
 However
-$$\lim_{x\rightarrow 0^-}\frac{\sin |x|-\sin(0)}{x-0}=\lim_{x\rightarrow 0^-}\frac{\sin -x}{x}=\lim_{x\rightarrow 0^-}\frac{-\sin x}{x}=-1$$
+$$f_-'(0)=\lim_{x\rightarrow 0^-}\frac{\sin |x|-\sin(0)}{x-0}=\lim_{x\rightarrow 0^-}\frac{\sin -x}{x}=\lim_{x\rightarrow 0^-}\frac{-\sin x}{x}=-1$$
 Since the limit is not the same, the function is not differentiable at $x_0=0$
 
 #### c) Piecewise function
@@ -1272,23 +1272,23 @@ e^{-1/x^2} & x\neq 0\\
 Recall
 $$\text{differentiable at }x_0\implies \text{continuous at }x_0$$
 which is equivalent to
-$$\text{not continuous at }x_0\implies \text{not differemtiable at }x_0$$
+$$\text{not continuous at }x_0\implies \text{not differentiable at }x_0$$
 A piecewise function is not necessarily continuous, let's check the continuity at $x_0$ first:
 $$\lim_{x\rightarrow 0^+}e^{-1/{x^2}}=\lim_{x\rightarrow 0^-}e^{-1/x^2}=0=f(0)$$
 
 Since it is continuous we must check the differentiability using the definition:
-$$\lim_{x\rightarrow 0^+}\frac{e^{-1/x^2}-0}{x-0}=\lim_{x\rightarrow 0^+}\frac{e^{-1/x^2}}{x}$$
+$$f_+'(0)=\lim_{x\rightarrow 0^+}\frac{e^{-1/x^2}-0}{x-0}=\lim_{x\rightarrow 0^+}\frac{e^{-1/x^2}}{x}$$
 via substitution $t=\frac 1x$ as $x\rightarrow 0^+$ and since exponential growth dominates linear growth
-$$\lim_{t\rightarrow\infty}\frac{t}{e^{t^2}}=0^+$$
+$$f_+'(0)=\lim_{t\rightarrow\infty}\frac{t}{e^{t^2}}=0^+$$
 
 Now the left limit:
-$$\lim_{x\rightarrow 0^-}\frac{e^{-1/x^2}-0}{x-0}=\lim_{x\rightarrow 0^-}\frac{e^{-1/x^2}}{x}=\lim_{t\rightarrow-\infty}\frac t{e^{t^2}}=0^-$$
+$$f_-'(0)=\lim_{x\rightarrow 0^-}\frac{e^{-1/x^2}-0}{x-0}=\lim_{x\rightarrow 0^-}\frac{e^{-1/x^2}}{x}=\lim_{t\rightarrow-\infty}\frac t{e^{t^2}}=0^-$$
 Since both limits are equal the derivative at $x_0$ exists and is equal to $0$.
 
 #### d) Sqrt
 Discuss differentiability at the point $x_0=-1$:
 $$f(x)=\sqrt{1+x^3}$$
-Notice that the domain is $x\geq -1$ so we can guess that it won't be differentiable. Let's check
+Notice that the domain is $x\geq -1$ so we need to check only at $-1^+$
 
 Using the definition we have
 $$\begin{align}
@@ -1296,10 +1296,56 @@ $$\begin{align}
 &=\lim_{x\rightarrow-1^+}\frac{\sqrt{1+x^3}}{x+1}\frac{\sqrt{1+x^3}}{\sqrt{1+x^3}}\\
 &=\lim_{x\rightarrow-1^+}\frac{{1+x^3}}{(x+1)\sqrt{1+x^3}}\\
 &=\lim_{x\rightarrow-1^+}\frac{{(x+1)(1-x+x^2)}}{(x+1)\sqrt{1+x^3}}\\
-&=\frac{1-(-1)+(-1)^2}{0^+}=+\infty
+&=\frac{3}{0^+}=+\infty
 \end{align}$$
 Since the limit is not a finite real number, the function is not differentiable at $x_0=-1$.
 
+## 6.3) Derivatives
+Here is a list of the various derivatives of elementary functions
+
+$$
+\begin{array}{l|l}
+f(x) & f'(x) \\
+\hline
+x^\alpha & \alpha x^{\alpha-1}, \qquad \forall \alpha \in \mathbb{R} \\
+\sin x & \cos x \\
+\cos x & -\sin x \\
+\tan x & 1 + \tan^2 x = \dfrac{1}{\cos^2 x} \\
+\arcsin x & \dfrac{1}{\sqrt{1-x^2}} \\
+\arccos x & -\dfrac{1}{\sqrt{1-x^2}} \\
+\arctan x & \dfrac{1}{1+x^2} \\
+a^x & (\log a)\, a^x \\
+\log_a |x| & \dfrac{1}{(\log a)\, x} \\
+\sinh x & \cosh x \\
+\cosh x & \sinh x
+\end{array}
+$$
+And some differentiation rules 
+$$
+\begin{align}
+\bigl(\alpha f(x) + \beta g(x)\bigr)' &= \alpha f'(x) + \beta g'(x) \\
+\bigl(f(x)g(x)\bigr)' &= f'(x)g(x) + f(x)g'(x) \\
+\left(\frac{f(x)}{g(x)}\right)' &= \frac{f'(x)g(x) - f(x)g'(x)}{\bigl(g(x)\bigr)^2} \\
+\bigl(g(f(x))\bigr)' &= g'(f(x))f'(x)
+\end{align}
+$$
+## 6.4) Exercises on derivatives
+#### c)
+Say where the following maps are differentiable and find the derivatives
+$$f(x)=\begin{cases}
+x^2+1& x\geq 0\\
+e^x-x&x<0
+\end{cases}$$
+
+First verify the continuity:
+Both functions are continuous, so we must just look at $0$
+$$\lim_{x\rightarrow 0^+}x^2+1=\lim_{x\rightarrow 0^-} e^x-x=1=f(0)$$
+Therefore it is continuous
+
+Now compute the derivative for both functions:
+
+
+## 6.5) Final Taylor Exercise
 
 
 # 7) Symbols
