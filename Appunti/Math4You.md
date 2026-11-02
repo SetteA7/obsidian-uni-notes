@@ -1369,61 +1369,205 @@ $$\lim_{x\rightarrow 0^+}2x=\lim_{x\rightarrow 0^-}e^x-1=0$$
 So this function is fully differentiable.
 
 ![[Pasted image 20261102151051.png|Plot|250]]
+#### a) Absolute value
+Discuss where the following function is differentiable and find its derivative:
+$$
+f(x) = x\sqrt{|x|}
+$$
+The function is clearly continuous on all of $\mathbb{R}$, including at $x_0 = 0$. 
+One might suspect that since $|x|$ has a corner point at $0$ (and $\sqrt{|x|}$ has a cusp), $f$ might not be differentiable at $x_0 = 0$. Let's verify this.
 
-#### a) Abs value
-Say where the following maps are differentiable and find the derivatives
-$$f(x)=x\sqrt{|x|}$$
-The function is clearly continuous, even at $x=0$.
+Differentiate the function using the piecewise definition of absolute value:
+First, rewrite $f(x)$ without the absolute value:
+$$
+f(x) = x\sqrt{|x|} = \begin{cases}
+x\sqrt{x} & x \geq 0\\
+x\sqrt{-x} & x < 0
+\end{cases} = \begin{cases}
+x^{3/2} & x \geq 0\\
+-(-x)^{3/2} & x < 0
+\end{cases}
+$$
 
-One might suspect that since absolute values usually generate an angle point, $f$ might not be differentiable at $x_0=0$. Let's verify it.
+Now we differentiate both branches on the open intervals $x > 0$ and $x < 0$:
+$$
+f'(x) = \begin{cases}
+\frac{3}{2}x^{1/2} & x > 0\\
+\frac{3}{2}(-x)^{1/2} & x < 0
+\end{cases} = \begin{cases}
+\frac{3}{2}\sqrt{x} & x > 0\\
+\frac{3}{2}\sqrt{-x} & x < 0
+\end{cases} = \frac{3}{2}\sqrt{|x|} \qquad \forall x \neq 0
+$$
+Here, the second branch ($x < 0$) was differentiated via the substitution $u(x) = -x$. Letting $\phi(u) = -u^{3/2}$, we are differentiating the composite function $\phi(u(x))$, which requires the chain rule:
+$$
+\bigl(\phi(u(x))\bigr)' = \phi'(u(x)) \cdot u'(x) = -\frac{3}{2}u^{1/2} \cdot (-1) = \frac{3}{2}(-x)^{1/2}
+$$
+Now we check differentiability at $x_0 = 0$. Since $f$ is continuous at $0$, we check the limits of $f'(x)$:
+$$
+\lim_{x\rightarrow 0^+}\frac{3}{2}\sqrt{x} = \lim_{x\rightarrow 0^-}\frac{3}{2}\sqrt{-x} = 0
+$$
+Thus $f$ is differentiable at $x_0 = 0$ with $f'(0) = 0$! Our initial intuition was wrong (multiplying by $x$ "smoothed out" the cusp at the origin), and $f'(x) = \frac{3}{2}\sqrt{|x|}$ holds for all $x \in \mathbb{R}$.
 
-Try to differentiate by applying first the definition of abs value
-$$f(x)=x\sqrt{|x|}=\begin{cases}x\sqrt x&x\geq 0\\
-x\sqrt{-x}&x<0
-\end{cases}=\begin{cases} x^{3/2}&x\geq 0\\
--(-x)^{3/2}&x<0
-\end{cases}$$
-So we can differentiate both parts of the definition and then verify differentiability at $x_0=0$.
-$$f'(x)=\begin{cases}\frac32x^{1/2}&x\geq 0\\
-\frac32(-x)^{1/2}&x<0
-\end{cases}=\begin{cases}\frac32\sqrt x&x\geq 0\\
-\frac32\sqrt{-x}&x<0
-\end{cases}=\frac32\sqrt {|x|}$$
-Where the second part was done by substitution $u=-x$:
-$$f(x)=-(-x)^{3/2}\rightarrow f(u(x))=-u^{3/2}$$
-And now it is clear why when derivating using a substitution the chain rule must be applied. This is because we are derivating $f(u(x))$. 
-$$[f(u)]'=f'(u)\cdot u'=-\frac32u^{1/2}\cdot(-1)=\frac32u^{1/2}\rightarrow f'(x)=\frac32(-x)^{1/2}$$
-However the $\geq$ sign again must be verified:
-$$\lim_{x\rightarrow 0^+}\frac32\sqrt x=\lim_{x\rightarrow 0^-}\frac32\sqrt{-x}=0$$
-and thus it is differentiable at 0! Our initial intuition was wrong.
 
-![[Pasted image 20261102154829.png]]
+![[Pasted image 20261102154829.png|Plot|250]]
+
 
 
 ---
 
-There is a second way to compute this derivative.
+There is a second way (besides the definition) to calculate this limit:
 
-Before starting differentiating it is important to compute as an additional exercise only
-$$g(x)=|x|=\begin{cases}x&x\geq 0\\-x& x<0\end{cases}$$
+First, as a preliminary exercise, consider the absolute value function:
+$$
+a(x) = |x| = \begin{cases}
+x & x \geq 0\\
+-x & x < 0
+\end{cases}
+$$
+This is not differentiable at $0$ since:
+$$
+a'(x) = \begin{cases}
+1 & x > 0\\
+-1 & x < 0
+\end{cases} \quad \implies \quad \lim_{x\rightarrow 0^+}a'(x) \neq \lim_{x\rightarrow 0^-}a'(x)
+$$
+Notice that for $x \neq 0$, $a'(x)$ is precisely $\text{sign}(x) = \frac{|x|}{x}$.
 
-Clearly this is not differentiable at 0 since 
-$$g'(x)=\begin{cases}1 & x>0\\
--1 & x<0\end{cases}
-\quad \implies \quad\lim_{x\rightarrow 0^+}f'(x)\neq \lim_{x\rightarrow0^-}f'(x)$$
-However, notice that $g'(x)$ is exactly the definition of $\text{sign} (x)$.
-Notice also that $\text{sign}(x)=\frac{|x|}x$.
+Now we can compute $f'(x)$ for $x \neq 0$ using the product rule $\bigl(h(x)g(x)\bigr)' = h'(x)g(x) + h(x)g'(x)$ with $h(x) = x$ and $g(x) = \sqrt{|x|}$. 
+Since $g(x)$ is a composite function, we apply the chain rule $\bigl(\psi(a(x))\bigr)' = \psi'(a(x))a'(x)$ with $\psi(y) = \sqrt{y}$ and $a(x) = |x|$:
+$$
+g'(x) = \frac{1}{2}|x|^{-1/2} \cdot \text{sign}(x) = \frac{1}{2\sqrt{|x|}}\frac{|x|}{x} = \frac{\sqrt{|x|}}{2x} \qquad \forall x \neq 0
+$$
+Substituting this into the product rule for $x \neq 0$:
+$$
+f'(x) = 1 \cdot \sqrt{|x|} + x \cdot \frac{\sqrt{|x|}}{2x} = \sqrt{|x|} + \frac{1}{2}\sqrt{|x|} = \frac{3}{2}\sqrt{|x|} \qquad \forall x \neq 0
+$$
+Finally, since $f$ is continuous at $0$ and $\lim_{x \to 0} f'(x) = \lim_{x \to 0} \frac{3}{2}\sqrt{|x|} = 0$, we again conclude that $f'(0) = 0$, matching our first result.
 
-Now to the derivative:
-First use $\bigl(h(x)g(x)\bigr)' = h'(x)g(x) + h(x)g'(x)$ with $h(x)=x$ and $g(x)=\sqrt {|x|}$
+#### Nested functions
+Discuss where the following function is differentiable and find its derivative:
+$$
+f(x) = \cos\left(e^{x^2+1}\right)
+$$
+Since $f(x)$ is a double composition, we can break it down by introducing intermediate variables from the innermost function to the outermost:
+* Innermost function: $u(x) = x^2 + 1 \stackrel{(x^\alpha)' = \alpha x^{\alpha-1}}\longrightarrow u'(x) = 2x$
+* Middle function: $v(u) = e^u \stackrel{(a^u)' = (\log a)a^u}\longrightarrow v'(u) = (\log e)e^u = e^u$
+* Outermost function: $g(v) = \cos v \stackrel{(\cos v)' = -\sin v}\longrightarrow g'(v) = -\sin v$
 
-However $g(x)$ is not an elementary function. Notice that this is a composite function, so the chain rule $\bigl(h(i(x))\bigr)' = h'(i(x))h'(x)$ can be applied with $h(i(x))=\sqrt{i(x)}$ and $i(x)=|x|$
-$$g'(x)=\frac12|x|^{-1/2}\cdot\text{sign}(x)=\frac1{2\sqrt {|x|}}\frac{|x|}x=\frac{\sqrt{|x|}}{2x}$$
-Now finally:
-$$f'(x)=1\cdot\sqrt{|x|}+x\cdot\frac{\sqrt{|x|}}{2x}=\frac32\sqrt{|x|}$$
-which is exactly what was computed before.
+Now we apply the chain rule $\bigl(g(v(x))\bigr)' = g'(v(x)) \cdot v'(x)$ twice. First, for the outer layer:
+$$
+f'(x) = g'\bigl(v(u(x))\bigr) \cdot \bigl(v(u(x))\bigr)' = -\sin\left(e^{x^2+1}\right) \cdot \left(e^{x^2+1}\right)'
+$$
+Next, we apply the chain rule a second time to differentiate $v(u(x)) = e^{x^2+1}$:
+$$
+\left(e^{x^2+1}\right)' = v'\bigl(u(x)\bigr) \cdot u'(x) = e^{x^2+1} \cdot (x^2+1)' = e^{x^2+1} \cdot 2x
+$$
+Putting both pieces together, we obtain:
+$$
+f'(x) = -\sin\left(e^{x^2+1}\right) \cdot e^{x^2+1} \cdot 2x = -2x e^{x^2+1} \sin\left(e^{x^2+1}\right) \qquad \forall x \in \mathbb{R}
+$$
 
-## 6.5) Final Taylor Exercise
+
+Additionally one can compute it just in one run using the nested chain rule:
+Once you are comfortable with the mechanism, you can apply the three-function chain rule $\bigl(g(v(u(x)))\bigr)' = g'(v(u(x))) \cdot v'(u(x)) \cdot u'(x)$ in a single line by differentiating from the outermost layer to the innermost:
+$$
+\begin{align}
+f'(x) &= \left(\cos\left(e^{x^2+1}\right)\right)' \\
+&= -\sin\left(e^{x^2+1}\right) \cdot \left(e^{x^2+1}\right)' \\
+&= -\sin\left(e^{x^2+1}\right) \cdot e^{x^2+1} \cdot (x^2+1)' \\
+&= -2x e^{x^2+1} \sin\left(e^{x^2+1}\right) \qquad \forall x \in \mathbb{R}
+\end{align}
+$$
+
+**General case ($n$ nested functions)**
+By induction, let $f_1, f_2, \dots, f_n$ be functions such that the composite function
+$$
+F(x) = (f_n \circ f_{n-1} \circ \dots \circ f_2 \circ f_1)(x) = f_n\Bigl(f_{n-1}\bigl(\dots f_2(f_1(x))\dots\bigr)\Bigr)
+$$
+is well-defined. If $f_1$ is differentiable at $x$, $f_2$ is differentiable at $f_1(x)$, $\dots$, and $f_n$ is differentiable at $f_{n-1}(\dots f_1(x)\dots)$, then $F$ is differentiable at $x$ and its derivative is the product of the derivatives of each layer, evaluated at everything inside it ("peeling the onion" from the outside in):
+$$
+\begin{align}
+F'(x) &= f_n'\Bigl(f_{n-1}\bigl(\dots f_1(x)\dots\bigr)\Bigr) \cdot f_{n-1}'\Bigl(f_{n-2}\bigl(\dots f_1(x)\dots\bigr)\Bigr) \cdots f_2'\bigl(f_1(x)\bigr) \cdot f_1'(x) \\
+&= f_1'(x) \cdot \prod_{k=2}^{n} f_k'\Bigl((f_{k-1} \circ \dots \circ f_1)(x)\Bigr)
+\end{align}
+$$
+
+
+## 6.5) Final Taylor Limit Exercise
+Compute the limit $\forall \alpha > 0$:
+$$
+\lim_{x\rightarrow 0^+}\frac{\arctan(x)-\sin(x)+x^{10/3}\log(x)}{x^\alpha(1-\cos^2(x))}
+$$
+
+First recall the standard expansions (as $x \to 0$) and standard logarithmic limit:
+$$
+\begin{align}
+\sin(x) &= x - \frac{x^3}{6} + \frac{x^5}{120} + o(x^5)\\
+\arctan(x) &= x - \frac{x^3}{3} + \frac{x^5}{5} + o(x^5)\\
+\lim_{x\rightarrow 0^+} x^\beta \log(x) &= 0 \qquad \forall \beta > 0
+\end{align}
+$$
+
+**Numerator:**
+Since the order-1 terms of $\arctan(x)$ and $\sin(x)$ cancel out ($x - x = 0$), we must expand both functions up to order 3 (the first non-zero term):
+$$
+\arctan(x) - \sin(x) = \left(x - \frac{x^3}{3} + o(x^3)\right) - \left(x - \frac{x^3}{6} + o(x^3)\right) = -\frac{1}{6}x^3 + o(x^3)
+$$
+Now let's compare the remaining term $x^{10/3}\log(x)$ with $x^3$. Since $\frac{10}{3} > 3$ and polynomial decay dominates logarithmic growth as $x \to 0^+$, we can verify that $x^{10/3}\log(x) = o(x^3)$ by checking the definition of little-$o$:
+$$
+\lim_{x\rightarrow 0^+}\frac{x^{10/3}\log(x)}{x^3} = \lim_{x\rightarrow 0^+} x^{1/3}\log(x) = 0 \quad \implies \quad x^{10/3}\log(x) = o(x^3)
+$$
+Putting the numerator together:
+$$
+\arctan(x) - \sin(x) + x^{10/3}\log(x) = -\frac{1}{6}x^3 + o(x^3) + o(x^3) = -\frac{1}{6}x^3 + o(x^3)
+$$
+
+**Denominator:**
+Using the trigonometric identity $1 - \cos^2(x) = \sin^2(x)$ and expanding $\sin(x) = x + o(x)$ to order 1:
+$$
+x^\alpha\bigl(1-\cos^2(x)\bigr) = x^\alpha \sin^2(x) = x^\alpha\bigl(x + o(x)\bigr)^2 = x^\alpha\bigl(x^2 + o(x^2)\bigr) = x^{\alpha+2} + o(x^{\alpha+2})
+$$
+*(Note: You get the exact same result by expanding $\cos(x) = 1 - \frac{x^2}{2} + o(x^2)$ and squaring it.)*
+
+**Now rewrite the entire limit:**
+$$
+\lim_{x\rightarrow 0^+}\frac{\arctan(x)-\sin(x)+x^{10/3}\log(x)}{x^\alpha(1-\cos^2(x))} = \lim_{x\rightarrow 0^+}\frac{-\frac{1}{6}x^3 + o(x^3)}{x^{\alpha+2} + o(x^{\alpha+2})}
+$$
+Factoring out the leading powers $x^3$ in the numerator and $x^{\alpha+2}$ in the denominator gives:
+$$
+\lim_{x\rightarrow 0^+}\frac{x^3\left(-\frac{1}{6} + \frac{o(x^3)}{x^3}\right)}{x^{\alpha+2}\left(1 + \frac{o(x^{\alpha+2})}{x^{\alpha+2}}\right)} = \lim_{x\rightarrow 0^+} x^{1-\alpha} \cdot \frac{-\frac{1}{6} + \frac{o(x^3)}{x^3}}{1 + \frac{o(x^{\alpha+2})}{x^{\alpha+2}}}
+$$
+
+Now we split by cases depending on the comparison between the numerator's order ($3$) and the denominator's order ($\alpha+2$):
+
+- **Case $\alpha = 1$** (numerator and denominator have the same order, $\alpha + 2 = 3$):
+  $$
+  \begin{align}
+  \lim_{x\rightarrow 0^+} x^0 \cdot \frac{-\frac{1}{6} + \frac{o(x^3)}{x^3}}{1 + \frac{o(x^3)}{x^3}} &= \frac{-\frac{1}{6} + 0}{1 + 0} = -\frac{1}{6}
+  \end{align}
+  $$
+- **Case $0 < \alpha < 1$** (the denominator has lower order $\alpha + 2 < 3$, so $1 - \alpha > 0$):
+  $$
+  \begin{align}
+  \lim_{x\rightarrow 0^+} x^{1-\alpha} \cdot \frac{-\frac{1}{6} + \frac{o(x^3)}{x^3}}{1 + \frac{o(x^{\alpha+2})}{x^{\alpha+2}}} &= 0^+ \cdot \left(-\frac{1}{6}\right) = 0
+  \end{align}
+  $$
+- **Case $\alpha > 1$** (the denominator has higher order $\alpha + 2 > 3$, so $\alpha - 1 > 0$):
+  $$
+  \begin{align}
+  \lim_{x\rightarrow 0^+} \frac{1}{x^{\alpha-1}} \cdot \frac{-\frac{1}{6} + \frac{o(x^3)}{x^3}}{1 + \frac{o(x^{\alpha+2})}{x^{\alpha+2}}} &= \frac{-\frac{1}{6}}{0^+} = -\infty
+  \end{align}
+  $$
+
+**So the final result is:**
+$$
+\lim_{x \to 0^+} \frac{\arctan(x)-\sin(x)+x^{10/3}\log(x)}{x^\alpha(1-\cos^2(x))} = \begin{cases}
+0 & \text{if } 0 < \alpha < 1 \\
+-\frac{1}{6} & \text{if } \alpha = 1 \\
+-\infty & \text{if } \alpha > 1
+\end{cases}
+$$
 
 
 # 7) Symbols
