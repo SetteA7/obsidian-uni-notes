@@ -1375,15 +1375,7 @@ Say where the following maps are differentiable and find the derivatives
 $$f(x)=x\sqrt{|x|}$$
 The function is clearly continuous, even at $x=0$.
 
-Before starting differentiating it is important to compute as an additional exercise only
-$$g(x)=|x|=\begin{cases}x&x\geq 0\\-x& x<0\end{cases}$$
-
-Clearly this is not differentiable at 0 since 
-$$g'(x)=\begin{cases}1 & x>0\\
--1 & x<0\end{cases}
-\quad \implies \quad\lim_{x\rightarrow 0^+}f'(x)\neq \lim_{x\rightarrow0^-}f'(x)$$
-However, notice that $g'(x)$ is exactly the definition of $\text{sign} (x)$.
-One might suspect that therefore $f$ might not be differentiable at $x_0=0$. Let's verify it.
+One might suspect that since absolute values usually generate an angle point, $f$ might not be differentiable at $x_0=0$. Let's verify it.
 
 Try to differentiate by applying first the definition of abs value
 $$f(x)=x\sqrt{|x|}=\begin{cases}x\sqrt x&x\geq 0\\
@@ -1405,11 +1397,31 @@ However the $\geq$ sign again must be verified:
 $$\lim_{x\rightarrow 0^+}\frac32\sqrt x=\lim_{x\rightarrow 0^-}\frac32\sqrt{-x}=0$$
 and thus it is differentiable at 0! Our initial intuition was wrong.
 
+![[Pasted image 20261102154829.png]]
+
+
 ---
 
 There is a second way to compute this derivative.
 
+Before starting differentiating it is important to compute as an additional exercise only
+$$g(x)=|x|=\begin{cases}x&x\geq 0\\-x& x<0\end{cases}$$
 
+Clearly this is not differentiable at 0 since 
+$$g'(x)=\begin{cases}1 & x>0\\
+-1 & x<0\end{cases}
+\quad \implies \quad\lim_{x\rightarrow 0^+}f'(x)\neq \lim_{x\rightarrow0^-}f'(x)$$
+However, notice that $g'(x)$ is exactly the definition of $\text{sign} (x)$.
+Notice also that $\text{sign}(x)=\frac{|x|}x$.
+
+Now to the derivative:
+First use $\bigl(h(x)g(x)\bigr)' = h'(x)g(x) + h(x)g'(x)$ with $h(x)=x$ and $g(x)=\sqrt {|x|}$
+
+However $g(x)$ is not an elementary function. Notice that this is a composite function, so the chain rule $\bigl(h(i(x))\bigr)' = h'(i(x))h'(x)$ can be applied with $h(i(x))=\sqrt{i(x)}$ and $i(x)=|x|$
+$$g'(x)=\frac12|x|^{-1/2}\cdot\text{sign}(x)=\frac1{2\sqrt {|x|}}\frac{|x|}x=\frac{\sqrt{|x|}}{2x}$$
+Now finally:
+$$f'(x)=1\cdot\sqrt{|x|}+x\cdot\frac{\sqrt{|x|}}{2x}=\frac32\sqrt{|x|}$$
+which is exactly what was computed before.
 
 ## 6.5) Final Taylor Exercise
 
