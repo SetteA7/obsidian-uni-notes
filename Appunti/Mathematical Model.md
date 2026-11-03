@@ -551,3 +551,201 @@ Multiplying by $T$ gives $B_{min}$.
 ---
 Ordering: for $N_\tau\leq N^*-2$, $P_{crash}\geq P_{low}=F(N_\tau+1)>P_{target}$, so $B_{min}\geq T(N^*-1)$. Moreover $S_{high}$ meets the target, so $B_{min}\leq T(N^*+1)$. This gives $S_{low}\leq S_{smart}\leq S_{high}$. The bound on $S'$ follows directly from the budgets.
 $$\endproof$$
+
+# 4) Ci riprovo: Asymmetric Case
+## 4.1) Intro
+
+This work aims to design a model that can predict the crash probability of a bot under unstable network conditions.
+
+The setup is very simple: The bot moves towards an object while sending data to a controller. This controller analyzes the lidar data and when needed sends a stop signal to the bot, which will then brake.
+
+## 4.2) Model and Assumptions
+
+We define TX as bot$\rightarrow$controller and RX as controller$\rightarrow$bot. The two directions of the communication link can behave differently, so each one has its own parameters:
+
+- Packet loss: $p_{tx}$ and $p_{rx}$, with $0\leq p_{tx},p_{rx}<1$, not both zero.
+- Latency: $\tau_{tx}$ and $\tau_{rx}$.
+- Transmission period: $T_{tx}$ for the LiDAR and $T_{rx}$ for the control messages.
+
+The end to end quantities are:
+
+- E2E Packet loss: $p_{e2e}=1-(1-p_{tx})(1-p_{rx})$
+- E2E Latency: $\tau_{e2e}=\tau_{tx}+\tau_{rx}$
+
+Instead of computing $S$, it is first fixed in order to study the crash probability.
+
+Now we define some standard parameters:
+
+- $S$: braking threshold.
+- $L$: offset between the measured distance and the front of the robot.
+- $m$: required safety margin (can be set to 0).
+- $v_\max$: speed of robot while traveling.
+- $d_{brake}$: braking distance.
+
+_(distances are in meters, $v_{max}$ is in $m/s$, and times are in $ms$.)_
+
+Some other parameters can be calculated immediately:
+
+- $d_\max=m+L+d_{brake}$: last measured distance at which braking can start safely.
+- $\Delta d=S-d_\max$: distance the bot can travel before braking must start.
+- $\Delta t=1000\cdot\frac{\Delta d}{v_\max}$: time available for the LiDAR data and the STOP to complete their round trip.
+
+The LiDAR and control streams are transmitted independently. While the measured distance is above $S$, the controller sends GO. Once the threshold crossing has been detected, every following control message is STOP. We assume that:
+
+- Packet losses are independent.
+- Lost LiDAR data is replaced by the next scan, and a lost STOP by the next control message.
+- The bot travels at $v_\max$ until a STOP is received, and then brakes immediately.
+
+## 4.3) Communication Delay (CD)
+
+Let $X\sim\text{Geom.}(1-p_{tx})$ and $Y\sim\text{Geom.}(1-p_{rx})$ be the numbers of failed attempts on the sensor and brake links, starting from 0.
+
+Let $\phi \sim \mathcal{U}(0, T_{tx})$ be the wait from the threshold crossing to the next LiDAR transmission window. Let $\psi\sim\mathcal U(0,T_{rx})$ be the wait from the LiDAR data arriving at the controller to the next control transmission window.
+
+We assume that $X$, $Y$, $\phi$ and $\psi$ are independent. If $T_{tx}\not=T_{rx}$, the windows drift against each other and $\psi$ changes with each stop. If $T_{tx}=T_{rx}$, $\psi$ is constant during a run, so these results describe the average across runs.
+
+The communication delay on each link is: $$t_{tx}=\tau_{tx}+XT_{tx}\qquad \mathbb E[t_{tx}]=\tau_{tx}+\frac{p_{tx}T_{tx}}{1-p_{tx}}$$ $$t_{rx}=\tau_{rx}+YT_{rx}\qquad \mathbb E[t_{rx}]=\tau_{rx}+\frac{p_{rx}T_{rx}}{1-p_{rx}}$$ The end to end communication delay is: $$t_{e2e}=t_{tx}+t_{rx}=\tau_{e2e}+XT_{tx}+YT_{rx}\qquad \mathbb E[t_{e2e}]=\tau_{e2e}+\frac{p_{tx}T_{tx}}{1-p_{tx}}+\frac{p_{rx}T_{rx}}{1-p_{rx}}$$ However, one significant transmission is the crossing of the threshold, which has an added time $\phi$ in bot$\rightarrow$controller transmission and $\psi$ in controller$\rightarrow$bot transmission: $$\begin{gather} t_{tx,thresh}=\tau_{tx}+XT_{tx}+\phi\qquad \mathbb E[t_{tx,thresh}]=\tau_{tx}+T_{tx}\frac{1+p_{tx}}{2(1-p_{tx})}\ \\ t_{rx,thresh}=\tau_{rx}+YT_{rx}+\psi\qquad \mathbb E[t_{rx,thresh}]=\tau_{rx}+T_{rx}\frac{1+p_{rx}}{2(1-p_{rx})}\  \\ t_{e2e,thresh}=t_{e2e}+\phi+\psi\qquad \mathbb E[t_{e2e,thresh}]=\tau_{e2e}+T_{tx}\frac{1+p_{tx}}{2(1-p_{tx})}+T_{rx}\frac{1+p_{rx}}{2(1-p_{rx})} \end{gather}$$ One quick feasibility check can be done on $$\mathbb E[t_{e2e,thresh}]\leq \Delta t$$ This only compares the mean delay with the budget, so it is not a safety guarantee.
+
+##### Proof
+
+We first compute the expected number of failures on a link. Since $X$ counts the failed attempts before the first success, $P(X=n)=p_{tx}^n(1-p_{tx})$ for $n\in{0,1,2,\dots}$. Using $\sum_{n=0}^\infty np^n=\frac{p}{(1-p)^2}$, for $|p|<1$: $$\E[X]=\sum_{n=0}^\infty n,p_{tx}^n(1-p_{tx})=(1-p_{tx})\frac{p_{tx}}{(1-p_{tx})^2}=\frac{p_{tx}}{1-p_{tx}}$$ In the same way, $\E[Y]=\frac{p_{rx}}{1-p_{rx}}$.
+
+Since the latencies and periods are constants, linearity of expectation gives the delay on each link: $$\E[t_{tx}]=\tau_{tx}+T_{tx},\E[X]=\tau_{tx}+\frac{p_{tx}T_{tx}}{1-p_{tx}}\qquad\E[t_{rx}]=\tau_{rx}+T_{rx},\E[Y]=\tau_{rx}+\frac{p_{rx}T_{rx}}{1-p_{rx}}$$ Adding the two links gives $\E[t_{e2e}]$.
+
+Next, for $\phi\sim\mathcal U(0,T_{tx})$: $$\E[\phi]=\int_0^{T_{tx}}\frac{\phi}{T_{tx}},d\phi=\frac1{T_{tx}}\left[\frac{\phi^2}2\right]_0^{T_{tx}}=\frac{T_{tx}}2$$ In the same way, $\E[\psi]=T_{rx}/2$.
+
+For the threshold transmission on each link, we add the corresponding wait: $$\E[t_{tx,thresh}]=\tau_{tx}+\frac{p_{tx}T_{tx}}{1-p_{tx}}+\frac{T_{tx}}2=\tau_{tx}+T_{tx},\frac{2p_{tx}+(1-p_{tx})}{2(1-p_{tx})}=\tau_{tx}+T_{tx}\frac{1+p_{tx}}{2(1-p_{tx})}$$ $$\E[t_{rx,thresh}]=\tau_{rx}+\frac{p_{rx}T_{rx}}{1-p_{rx}}+\frac{T_{rx}}2=\tau_{rx}+T_{rx}\frac{1+p_{rx}}{2(1-p_{rx})}$$ Finally: $$\E[t_{e2e,thresh}]=\E[t_{tx,thresh}]+\E[t_{rx,thresh}]$$ Only linearity of expectation is used, so these results do not require independence.
+
+With $p_{tx}=p_{rx}=p$, $\tau_{tx}=\tau_{rx}=\tau$ and $T_{tx}=T_{rx}=T$, the end to end result reduces to the symmetric case: $$\E[t_{e2e,thresh}]=\tau_{e2e}+T\frac{1+p}{1-p}$$ $$\endproof$$
+
+## 4.4) Minimum Distance (MD)
+
+The delay of the threshold transmission determines how far the bot travels before it starts braking, so it also determines how close the bot gets to the obstacle. This section quantifies that closest distance, in order to show the average safety of a given threshold $S$.
+
+The bot moves at constant speed until the STOP is received. When the threshold is crossed, the measured distance is $S$, which means that the front of the bot is at a distance $S-L$ from the obstacle. From this point, the bot:
+
+- travels at $v_\max$ for the time $t_{e2e,thresh}$ needed by the LiDAR data to reach the controller and by the STOP to reach the bot.
+- covers the braking distance $d_{brake}$ once the STOP is received.
+
+The distance that remains between the bot and the obstacle after it has stopped is the minimum distance $d_\min$. This is a signed quantity, where a negative value means that the bot would overlap with the obstacle: $$d_\min=S-L-d_{brake}-\frac{v_\max}{1000},t_{e2e,thresh}\qquad\mathbb E[d_\min]=S-L-d_{brake}-\frac{\mathbb E[t_{e2e,thresh}],v_\max}{1000}$$
+
+Note that the margin $m$ does not appear, since it is a requirement on $d_\min$ and not part of the motion of the bot. A value of $\mathbb E[d_\min]\geq m$ only means that the safety margin is respected on average, so it does not exclude that some stops will breach it.
+
+##### Proof
+
+When the threshold is crossed, the measured distance is $S$, so the front of the bot is at distance $S-L$ from the obstacle. The bot then travels at $v_\max$ until the STOP arrives, which takes $t_{e2e,thresh}$, and finally covers $d_{brake}$ while braking. Therefore: $$d_\min=S-L-d_{brake}-\frac{v_\max}{1000},t_{e2e,thresh}$$ Since $S$, $L$, $d_{brake}$ and $v_\max$ are constants, linearity of expectation gives: $$\E[d_\min]=S-L-d_{brake}-\frac{\E[t_{e2e,thresh}],v_\max}{1000}$$ $$\endproof$$
+
+## 4.5) Variances of CD and MD
+
+The expected values describe only the average stop. Two stops can behave very differently, because the number of retransmissions and the waits change the delay each time. This section measures that spread, which shows how far a single stop can fall from the expected minimum distance.
+
+The threshold transmission on each link has variance: $$\text{Var}(t_{tx,thresh})=T_{tx}^2\left(\frac{p_{tx}}{(1-p_{tx})^2}+\frac1{12}\right)\qquad\text{Var}(t_{rx,thresh})=T_{rx}^2\left(\frac{p_{rx}}{(1-p_{rx})^2}+\frac1{12}\right)$$ The two links have independent delays, so their variances add. The end to end variance is: $$\text{Var}(t_{e2e,thresh})=T_{tx}^2\left(\frac{p_{tx}}{(1-p_{tx})^2}+\frac1{12}\right)+T_{rx}^2\left(\frac{p_{rx}}{(1-p_{rx})^2}+\frac1{12}\right)$$ Since $d_\min$ depends on the delay through the factor $\frac{v_\max}{1000}$, the minimum distance has variance: $$\text{Var}(d_\min)=\left(\frac{v_\max}{1000}\right)^2\text{Var}(t_{e2e,thresh})$$
+
+##### Proof
+
+Since $X$ counts the failures before the first success, its variance is: $$\text{Var}(X)=\frac{p_{tx}}{(1-p_{tx})^2}$$ In the same way, $\text{Var}(Y)=\frac{p_{rx}}{(1-p_{rx})^2}$. For a uniform distribution $\mathcal U(a,b)$ the variance is $\frac{(b-a)^2}{12}$, therefore: $$\text{Var}(\phi)=\frac{T_{tx}^2}{12}\qquad\text{Var}(\psi)=\frac{T_{rx}^2}{12}$$ Since $\tau_{tx}$ is a constant and $T_{tx}$ is a scaling factor, and using the independence of $X$ and $\phi$: $$\text{Var}(t_{tx,thresh})=\text{Var}(\tau_{tx}+XT_{tx}+\phi)=T_{tx}^2,\text{Var}(X)+\text{Var}(\phi)=T_{tx}^2\left(\frac{p_{tx}}{(1-p_{tx})^2}+\frac1{12}\right)$$ The same steps with $Y$ and $\psi$ give $\text{Var}(t_{rx,thresh})$.
+
+Since $t_{e2e,thresh}=t_{tx,thresh}+t_{rx,thresh}$, and the two terms are independent: $$\text{Var}(t_{e2e,thresh})=\text{Var}(t_{tx,thresh})+\text{Var}(t_{rx,thresh})$$ Finally, since $S$, $L$, $d_{brake}$ and $v_\max$ are constants in $d_\min$, the variance depends entirely on $t_{e2e,thresh}$: $$\text{Var}(d_\min)=\left(\frac{v_\max}{1000}\right)^2\text{Var}(t_{e2e,thresh})$$ $$\endproof$$
+
+## 4.6) Crash Probability (CProb)
+
+A positive expected minimum distance does not mean that every stop is safe, because a long delay can still breach the margin. This section computes the probability of that event, which is the main result of the model. A crash occurs when the threshold transmission takes longer than the time budget: $$t_{e2e,thresh}>\Delta t$$ Let $B$ be the time budget left after the fixed latency: $$B=\Delta t-\tau_{e2e}$$ If $B<0$, a crash is certain. For $B\geq 0$, let $M$ be the number of complete LiDAR periods inside the budget: $$M=\floor{\frac B{T_{tx}}}$$ Let $W=\phi+\psi$ be the total wait, and let $Z=XT_{tx}+YT_{rx}$ be the time lost to retransmissions, so that a crash means $Z+W>B$.
+
+For $v\geq 0$, let $n=\floor{v/T_{rx}}$ and $h=v-nT_{rx}$, and define: $$J(v)=\frac{T_{rx}(1+p_{rx})}2\cdot\frac{1-p_{rx}^n}{1-p_{rx}}+p_{rx}^n\left(h-\frac{(1-p_{rx})h^2}{2T_{rx}}\right)$$ For $v<0$, $J(v)=v$. The exact crash probability is: $$P_{crash}(B)=p_{tx}^{M+1}+(1-p_{tx})\sum_{x=0}^{M}p_{tx}^x,\frac{J(B-xT_{tx})-J(B-(x+1)T_{tx})}{T_{tx}}$$ Three simpler expressions can also be used. They all depend on the probability that the retransmissions alone exceed a budget: $$Q(B)=\mathbb P(Z>B)=\begin{cases} p_{tx}^{M+1}+(1-p_{tx})\sum\limits_{x=0}^{M}p_{tx}^x,p_{rx}^{\floor{(B-xT_{tx})/T_{rx}}+1}&B\geq 0\ 1&B<0 \end{cases}$$ Ignoring both waits gives a lower bound on the crash probability: $$P_{low}(B)=Q(B)$$ Taking the largest possible value of both waits gives an upper bound on the crash probability: $$P_{high}(B)=Q(B-T_{tx}-T_{rx})$$ The exact probability therefore satisfies: $$P_{low}\leq P_{crash}\leq P_{high}$$ Replacing each wait by its mean gives an approximation, which is neither a lower nor an upper bound: $$P'(B)=Q\left(B-\frac{T_{tx}+T_{rx}}2\right)$$
+
+#### Equal periods
+
+If $T_{tx}=T_{rx}=T$, the delay lies on a single grid and the results have a shorter form. Let $A=X+Y$, and let $N_\tau$ be the attempt budget and $R$ the time left over after $N_\tau$ full periods: $$N_\tau=\floor{\frac BT}\qquad R=B-N_\tau T\qquad 0\leq R<T$$ Let $f(k)=\mathbb P(A=k)$ be the probability of exactly $k$ failures, and $F(k)=\mathbb P(A\geq k)$ the probability of at least $k$ failures. For $k\geq 0$ and $p_{tx}\not=p_{rx}$: $$f(k)=(1-p_{tx})(1-p_{rx})\frac{p_{rx}^{k+1}-p_{tx}^{k+1}}{p_{rx}-p_{tx}}\qquad F(k)=\frac{(1-p_{tx})p_{rx}^{k+1}-(1-p_{rx})p_{tx}^{k+1}}{p_{rx}-p_{tx}}$$ For $p_{tx}=p_{rx}=p$: $$f(k)=(k+1)p^k(1-p)^2\qquad F(k)=p^k\left[1+k(1-p)\right]$$ For $k<0$, we set $f(k)=0$ and $F(k)=1$. Then: $$P_{crash}=F(N_\tau+1)+f(N_\tau)\left(1-\frac{R^2}{2T^2}\right)+f(N_\tau-1)\frac{(T-R)^2}{2T^2}$$ $$P_{low}=F(N_\tau+1)\qquad P'=F(N_\tau)\qquad P_{high}=F(N_\tau-1)$$ Since $f$ and $F$ do not change when $p_{tx}$ and $p_{rx}$ swap, the order of the links does not affect the crash probability.
+
+##### Proof
+
+Let $D=YT_{rx}+\psi$ be the delay of the brake link without its latency. For $v\geq 0$, with $n=\floor{v/T_{rx}}$ and $h=v-nT_{rx}$, the event $D>v$ occurs in two ways:
+
+- $Y\geq n+1$, which always gives $D>v$, with probability $p_{rx}^{n+1}$.
+- $Y=n$ and $\psi>h$, with probability $p_{rx}^n(1-p_{rx})\left(1-\frac h{T_{rx}}\right)$.
+
+If $Y<n$, then $D<nT_{rx}\leq v$. Adding the two terms gives the tail of $D$: $$H(v)=\mathbb P(D>v)=p_{rx}^n\left(1-\frac{(1-p_{rx})h}{T_{rx}}\right)$$ For $v<0$, $H(v)=1$. Let $J(v)=\int_0^vH(w),dw$. For $v<0$ this gives $J(v)=v$. For $v\geq 0$, each full period $i<n$ contributes: $$\int_0^{T_{rx}}p_{rx}^i\left(1-\frac{(1-p_{rx})w}{T_{rx}}\right)dw=p_{rx}^i,\frac{T_{rx}(1+p_{rx})}2$$ Summing the geometric series over $i$ and adding the last partial period gives the expression of $J(v)$.
+
+---
+
+A crash means $XT_{tx}+\phi+D>B$. Conditioning on $X=x$ and setting $v=B-xT_{tx}$, then averaging over $\phi$: $$\mathbb P(\text{crash}\mid X=x)=\frac1{T_{tx}}\int_0^{T_{tx}}H(v-u),du=\frac{J(v)-J(v-T_{tx})}{T_{tx}}$$ If $x\geq M+1$, then $v<0$ and a crash is certain. These cases have a total probability of $p_{tx}^{M+1}$. Weighting the remaining cases by $\mathbb P(X=x)=(1-p_{tx})p_{tx}^x$ gives $P_{crash}(B)$.
+
+---
+
+For $Q(B)$, we condition on $X$ in the same way. If $x\geq M+1$, then $xT_{tx}>B$ and $Z>B$ always holds. If $x\leq M$, then $Z>B$ requires $Y\geq\floor{(B-xT_{tx})/T_{rx}}+1$. Summing over $x$ gives $Q(B)$.
+
+Ignoring both waits sets $W=0$, which gives $P_{low}$. Since $W\geq 0$, every event $Z>B$ is a crash, so $P_{low}\leq P_{crash}$.
+
+Taking the largest possible wait sets $W=T_{tx}+T_{rx}$, so a crash requires $Z>B-T_{tx}-T_{rx}$, which gives $P_{high}$. Since $W\leq T_{tx}+T_{rx}$, every crash satisfies this condition, so $P_{crash}\leq P_{high}$.
+
+Replacing each wait by its mean sets $W=(T_{tx}+T_{rx})/2$, which gives $P'$. As $W$ is random, this is not the true probability, and it can fall on either side of $P_{crash}$.
+
+---
+
+Equal periods: convolving the two geometric laws gives: $$f(k)=\sum_{i=0}^k(1-p_{tx})p_{tx}^i(1-p_{rx})p_{rx}^{k-i}=(1-p_{tx})(1-p_{rx})\frac{p_{rx}^{k+1}-p_{tx}^{k+1}}{p_{rx}-p_{tx}}$$ Summing from $k$ upward gives $F(k)$. The case $p_{tx}=p_{rx}=p$ follows from the limit $p_{rx}\to p_{tx}$.
+
+Since $\phi$ and $\psi$ are independent $\mathcal U(0,T)$ variables, $W$ has a triangular distribution on $[0,2T]$, with tail: $$\mathbb P(W>u)=\begin{cases}1-\dfrac{u^2}{2T^2}&0\leq u\leq T\[2mm]\dfrac{(2T-u)^2}{2T^2}&T\leq u\leq 2T\end{cases}$$ Using $Z=AT$ and $B=N_\tau T+R$, the crash condition becomes $AT+W>N_\tau T+R$. Conditioning on $A$, which is independent of $W$: $$P_{crash}=\sum_{k=0}^\infty f(k),\mathbb P\left(W>(N_\tau-k)T+R\right)$$ Each value of $k$ gives one of four cases:
+
+- $k\geq N_\tau+1$: the bound is negative, so the probability is $1$. These terms sum to $F(N_\tau+1)$.
+- $k=N_\tau$: the bound is $R$, so the probability is $1-\frac{R^2}{2T^2}$.
+- $k=N_\tau-1$: the bound is $T+R$, so the probability is $\frac{(T-R)^2}{2T^2}$.
+- $k\leq N_\tau-2$: the bound is at least $2T$, so the probability is $0$.
+
+Summing the terms gives $P_{crash}$. Since $A$ is an integer and $0\leq R<T$, setting $W=0$, $W=T$ and $W=2T$ gives $A\geq N_\tau+1$, $A\geq N_\tau$ and $A\geq N_\tau-1$ respectively, which gives $P_{low}$, $P'$ and $P_{high}$. $$\endproof$$
+
+## 4.7) S.M.A.R.T Algorithm
+
+The previous section computes the crash probability for a fixed threshold $S$. The **S.M.A.R.T. (Safety Margin Automatic Readjust Tool)** algorithm solves the inverse problem: given the current network conditions, it finds the threshold that meets a desired crash probability $P_{target}\in(0,1)$. A small threshold lets the bot travel further before braking, but it leaves less time for the STOP to arrive, so the aim is to choose $S$ as low as the target allows.
+
+Every crash probability model depends on $S$ through the budget $B=\Delta t-\tau_{e2e}$. Inverting the definition of $\Delta t$, a budget $B$ corresponds to the threshold: $$S(B)=\frac{v_\max}{1000}\left(B+\tau_{e2e}\right)+L+m+d_{brake}$$ Let $B_{low}$ be the smallest budget for which the retransmissions alone meet the target: $$B_{low}=\min{B\geq 0:Q(B)\leq P_{target}}$$ $Q$ only changes at the values $iT_{tx}+jT_{rx}$, with $i,j\in{0,1,2,\dots}$, so it is enough to check those values in increasing order. Applying each model of the previous section gives one version of the algorithm:
+
+|Version|Model|Budget $B$|Meets $P_{target}$?|
+|---|---|---|---|
+|$S_{low}$|$P_{low}$|$B_{low}$|No, it ignores both waits|
+|$S'$|$P'$|$B_{low}+\frac{T_{tx}+T_{rx}}2$|Not guaranteed|
+|$S_{high}$|$P_{high}$|$B_{low}+T_{tx}+T_{rx}$|Yes, for any waits|
+|$S_{smart}$|$P_{crash}$|$B_{min}$|Yes, and it is the lowest such threshold|
+
+Explicitly: $$S_{low}=\frac{v_\max}{1000}\left(B_{low}+\tau_{e2e}\right)+L+m+d_{brake}$$ $$S'=\frac{v_\max}{1000}\left(B_{low}+\frac{T_{tx}+T_{rx}}2+\tau_{e2e}\right)+L+m+d_{brake}$$ $$S_{high}=\frac{v_\max}{1000}\left(B_{low}+T_{tx}+T_{rx}+\tau_{e2e}\right)+L+m+d_{brake}$$ $$S_{smart}=\frac{v_\max}{1000}\left(B_{min}+\tau_{e2e}\right)+L+m+d_{brake}$$ $B_{min}$ is the unique solution of $P_{crash}(B)=P_{target}$. In general it has no closed form, but it lies in the interval below, so it can be found by bisection: $$B_{low}\leq B_{min}\leq B_{low}+T_{tx}+T_{rx}$$ The thresholds always satisfy: $$S_{low}\leq S_{smart}\leq S_{high}\qquad S_{low}\leq S'\leq S_{high}$$ $S'$ can fall on either side of $S_{smart}$.
+
+#### Equal periods
+
+If $T_{tx}=T_{rx}=T$, let $N^*$ be the first $N\in\mathbb N^+$ that satisfies $F(N)\leq P_{target}$. Then: $$B_{low}=T(N^-1)$$ So the budgets of $S_{low}$, $S'$ and $S_{high}$ are $T(N^*-1)$, $TN^*$ and $T(N^*+1)$. Moreover, $B_{min}$ has a closed form. Let $P_n=F(n)+\frac{f(n-1)}2$ be the crash probability at the budget $B=nT$, and let $j\geq 1$ be the smallest integer with $P_j\leq P_{target}$. With $n=j-1$, $\gamma=f(n-1)-f(n)$ and $D=P_n-P_{target}$: $$B_{min}=nT+\frac{2DT}{f(n-1)+\sqrt{f(n-1)^2-2\gamma D}}$$
+
+##### Proof
+
+Existence of $B_{low}$: $Q$ is non-increasing, right-continuous, and tends to $0$ as $B\to\infty$. So the set of budgets with $Q(B)\leq P_{target}$ is an interval that starts at its minimum. $Z$ only takes the values $iT_{tx}+jT_{rx}$, so $Q$ only changes there.
+
+---
+
+Discrete versions: by definition, for $B\geq 0$, $Q(B)\leq P_{target}$ exactly when $B\geq B_{low}$. Therefore:
+
+- $P_{low}(B)=Q(B)\leq P_{target}$ requires $B\geq B_{low}$.
+- $P'(B)=Q\left(B-\frac{T_{tx}+T_{rx}}2\right)\leq P_{target}$ requires $B\geq B_{low}+\frac{T_{tx}+T_{rx}}2$.
+- $P_{high}(B)=Q(B-T_{tx}-T_{rx})\leq P_{target}$ requires $B\geq B_{low}+T_{tx}+T_{rx}$.
+
+This gives the three thresholds. Since $P_{crash}\leq P_{high}$, $S_{high}$ meets the target for any waits. As $P_{low}$ and $P'$ are not upper bounds on $P_{crash}$, the other two versions do not guarantee it.
+
+---
+
+Exact version: write $G(u)=\mathbb P(W>u)$, so that: $$P_{crash}(B)=\E[G(B-Z)]$$ $W$ has a density, so $G$ is continuous. Since $0\leq G\leq 1$, dominated convergence shows that $P_{crash}$ is continuous.
+
+Take $0\leq B_1<B_2$. $G$ is non-increasing, so $P_{crash}(B_1)\geq P_{crash}(B_2)$. Let $T_+=T_{tx}$ if $p_{tx}>0$, and $T_+=T_{rx}$ otherwise, and take $k_0=\floor{B_1/T_+}$. Then $Z=k_0T_+$ has positive probability and $B_1-k_0T_+\in[0,T_+)$. $G$ is strictly decreasing on $[0,T_{tx}+T_{rx}]$, so this value of $Z$ gives a strictly positive contribution. Therefore $P_{crash}$ is strictly decreasing.
+
+Since $P_{crash}(0)=1$ and $P_{crash}\leq P_{high}\to 0$, the Intermediate Value Theorem gives a unique $B_{min}$ with $P_{crash}(B_{min})=P_{target}$, and $P_{crash}(B)\leq P_{target}$ exactly when $B\geq B_{min}$. So $S_{smart}=S(B_{min})$ is the lowest threshold that meets the target.
+
+---
+
+Ordering: for $0\leq B<B_{low}$, $P_{crash}(B)\geq P_{low}(B)=Q(B)>P_{target}$, so $B_{min}\geq B_{low}$. Moreover $S_{high}$ meets the target, so $B_{min}\leq B_{low}+T_{tx}+T_{rx}$. This gives $S_{low}\leq S_{smart}\leq S_{high}$. The bound on $S'$ follows directly from the budgets.
+
+---
+
+Equal periods: here $Q(kT)=F(k+1)$, and $F$ is strictly decreasing, so the first budget with $Q\leq P_{target}$ is $B_{low}=T(N^*-1)$.
+
+Setting $R=0$ in $P_{crash}$ and using $F(n+1)+f(n)=F(n)$ gives $P_n=F(n)+f(n-1)/2$. By the choice of $j$, $P_n>P_{target}\geq P_{n+1}$, so $B_{min}=nT+R$ with $0<R\leq T$. Expanding $P_{crash}$ for $N_\tau=n$ gives: $$P_{crash}=P_n-f(n-1)\frac RT+\gamma\frac{R^2}{2T^2}$$ With $x=R/T$, the target is met when $q(x)=\frac\gamma2x^2-f(n-1)x+D=0$, where $q(0)=D>0$ and $q(1)\leq 0$. The root in $(0,1]$ is unique:
+
+- If $\gamma>0$, it is the smaller of two positive roots.
+- If $\gamma<0$, the roots have opposite signs and it is the positive one.
+- If $\gamma=0$, the equation is linear.
+
+In each case, this root equals: $$x=\frac{2D}{f(n-1)+\sqrt{f(n-1)^2-2\gamma D}}$$ Multiplying by $T$ gives $B_{min}$. $$\endproof$$
