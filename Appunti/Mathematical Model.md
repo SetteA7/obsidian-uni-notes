@@ -295,3 +295,35 @@ $$P(N) = \begin{cases}
 p_{tx}^{N} + (1 - p_{tx}) p_{rx} \frac{p_{rx}^{N} - p_{tx}^{N}}{p_{rx} - p_{tx}}\\ \\
 p^N(1+(1-p)N) & \text{if }p_{rx}\approx p_{tx}
 \end{cases}\leq P_{target}$$
+
+
+# 3) Ci riprovo: Symmetric case
+## 3.1) Intro
+This work aims to design a model that can predict the crash probability of a bot under unstable network conditions.
+
+The setup is very simple: The bot moves towards an object 
+
+## 3.2) Model and Assumptions
+Distances are in meters, $v_{max}$ is in $m/s$, and times are in ${ms}$.
+
+- $S$: braking threshold.
+- $L$: offset between the measured distance and the front of the robot.
+- $m$: required safety margin.
+- $d_{brake}$: braking distance.
+- $d_{max}=L+m+d_{brake}$, so that $\Delta d=S-d_{max}=S-L-m-d_{brake}$.
+- $\tau_{e2e}=\tau_{tx}+\tau_{rx}$, with $\tau_{e2e}=2\tau$ on symmetric links.
+- $T$: retransmission period.
+
+The time budget and the normalized budget are:
+
+$$\Delta t = 1000 \cdot \frac{\Delta d}{v_{max}}\qquad r=\frac{\Delta t-\tau_{e2e}}T$$
+
+Let $X,Y$ be the numbers of failed attempts on the sensor and brake links, and let $A=X+Y$. Let $\phi_{tx},\phi_{rx}\sim\mathcal U(0,T)$ be the phase offsets. Assume that $X$, $Y$, $\phi_{tx}$ and $\phi_{rx}$ are all independent, and that $0\leq p_{tx},p_{rx}<1$ with $p_{tx},p_{rx}$ not both zero.
+
+Two independent offsets model unsynchronised loops. Writing $\phi_{tx}=TU_1$, $\phi_{rx}=TU_2$ and $U=U_1+U_2$, the end-to-end delay is:
+
+$$t_{e2e}=\tau_{e2e}+T(A+U)$$
+
+The robot moves at constant velocity $v_{max}$ until braking starts. A crash means that the margin $m$ is breached:
+
+$$\text{crash}\iff t_{e2e}>\Delta t\iff A+U>r$$
