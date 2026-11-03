@@ -325,12 +325,13 @@ Some other parameters can be calculated immediately:
 - $\Delta d=S-d_\max$: space in which the brake must happen 
 - $\Delta t=1000\cdot\frac{\Delta d}{v_\max}$: time budget for the brake
 
-Finally, although the two devices will have a synchronized clock, their transmission windows are not aligned. Two phase offsets therefore add to the delay:
-* $\phi=\phi_{tx}=\phi_{rx} \sim \mathcal{U}(0, T)$: the wait from the threshold crossing to the next transmission window, which varies with each stop.
+Finally, although the two devices will have a synchronized clock, the physical crossing of the threshold happens
+* $\phi \sim \mathcal{U}(0, T)$: the wait from the threshold crossing to the next transmission window.
 ## 3.3) Communication Delay
 Let $X,Y$ be the numbers of failed attempts on the sensor and brake links, and let $A=X+Y$.
 
-In a real-time system with a fixed sampling period T, the crossing of the threshold distance S and the controller reception of the signal are asynchronous with the transmission slots. Let $\phi_{tx}, \phi_{rx} \sim \mathcal{U}(0, T)$ be independent random variables representing the phase offset between each event and the start of the next transmission slot. \phi_{tx} varies with each stop, while \phi_{rx} is set by the phase between the devices at boot and stays constant during a run.
+The communication delay on each link is:
+$$t_{tx/rx}=\tau+Ti\qquad i=\{A,B\}$$
 
 The end to end communication delay is:
-$$t_{e2e}=\tau_{e2e}+T(A+U)$$
+$$t_{e2e}=\tau_{e2e}+TX+U+TY=\tau_{e2e}+TA+U$$
