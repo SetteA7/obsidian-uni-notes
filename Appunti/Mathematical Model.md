@@ -328,7 +328,7 @@ Some other parameters can be calculated immediately:
 Finally suppose a synchronized clock.
 
 We define TX as bot$\rightarrow$controller and RX as controller$\rightarrow$bot.
-## 3.3) Communication Delay
+## 3.3) Communication Delay (CD)
 Let $X,Y\sim\text{Geom.}(1-p)$ be the numbers of failed attempts on the sensor and brake links, and let $A=X+Y$.
 Let $\phi \sim \mathcal{U}(0, T)$ be the wait from the threshold crossing to the next transmission window.
 Let $\psi\sim\mathcal U(0,T)$ be wait given by the phase difference between the two send windows.
@@ -369,7 +369,7 @@ $$\E[t_{e2e,thresh}]=\E[t_{tx,thresh}]+\E[t_{rx,thresh}]=\tau_{e2e}+T\frac{1+p}{
 Only linearity of expectation is used, so this result does not require $X$, $Y$, $\phi$ and $\psi$ to be independent. For the feasibility check, the mean delay fits the time budget exactly when $2\E[t]\leq\Delta t$. This compares only the mean with the budget, so it is not a safety guarantee.
 $$\endproof$$
 
-## 3.4) Minimum Distance
+## 3.4) Minimum Distance (MD)
 The delay of the threshold transmission determines how far the bot travels before it starts braking, so it also determines how close the bot gets to the obstacle. This section quantifies that closest distance, in order to show the average safety of a given threshold $S$.
 
 The bot moves at constant speed until the STOP is received. When the threshold is crossed, the measured distance is $S$, which means that the front of the bot is at a distance $S-L$ from the obstacle. From this point, the bot:
@@ -398,3 +398,90 @@ $$\endproof$$
 
 
 ## 3.5) Variances of CD and MD
+The expected values describe only the average stop. Two stops can behave very differently, because the number of retransmissions and the waits change the delay each time. This section measures that spread, which shows how far a single stop can fall from the expected minimum distance.
+
+We assume that $X$, $Y$, $\phi$ and $\psi$ are independent. The threshold transmission on each link then has variance:
+$$\text{Var}(t_{tx,thresh})=\text{Var}(t_{rx,thresh})=T^2\left(\frac{p}{(1-p)^2}+\frac1{12}\right)$$
+The two links have independent delays, so their variances add. The end to end variance is:
+$$\text{Var}(t_{e2e,thresh})=T^2\left(\frac{2p}{(1-p)^2}+\frac16\right)$$
+Since $d_\min$ depends on the delay through the factor $\frac{v_\max}{1000}$, the minimum distance has variance:
+$$\text{Var}(d_\min)=\left(\frac{v_\max}{1000}\right)^2T^2\left(\frac{2p}{(1-p)^2}+\frac16\right)$$
+Note that $\text{Var}(t_{e2e,thresh})<4\,\text{Var}(t_{tx,thresh})$. The two link delays have the same distribution but are different random variables, so the end to end delay is not twice a single link delay.
+
+##### Proof
+Since $X$ counts the failures before the first success, with $P(X=n)=p^n(1-p)$, its variance is:
+$$\text{Var}(X)=\frac{p}{(1-p)^2}$$
+The same result holds for $Y$. For a uniform distribution $\mathcal U(a,b)$ the variance is $\frac{(b-a)^2}{12}$, therefore:
+$$\text{Var}(\phi)=\text{Var}(\psi)=\frac{T^2}{12}$$
+Since $\tau$ is a constant and $T$ is a scaling factor, and using the independence of $X$ and $\phi$:
+$$\text{Var}(t_{tx,thresh})=\text{Var}(\tau+XT+\phi)=T^2\,\text{Var}(X)+\text{Var}(\phi)=T^2\left(\frac{p}{(1-p)^2}+\frac1{12}\right)$$
+The same steps with $Y$ and $\psi$ give $\text{Var}(t_{rx,thresh})$.
+
+Since $t_{e2e,thresh}=t_{tx,thresh}+t_{rx,thresh}$, and the two terms are independent:
+$$\text{Var}(t_{e2e,thresh})=\text{Var}(t_{tx,thresh})+\text{Var}(t_{rx,thresh})=T^2\left(\frac{2p}{(1-p)^2}+\frac16\right)$$
+Finally, recall that
+$$d_\min=S-L-d_{brake}-\frac{v_\max}{1000}\,t_{e2e,thresh}$$
+Since $S$, $L$, $d_{brake}$ and $v_\max$ are constants, the variance depends entirely on $t_{e2e,thresh}$:
+$$\text{Var}(d_\min)=\left(\frac{v_\max}{1000}\right)^2\text{Var}(t_{e2e,thresh})=\left(\frac{v_\max}{1000}\right)^2T^2\left(\frac{2p}{(1-p)^2}+\frac16\right)$$
+$$\endproof$$
+
+## 3.6) Crash Probability (CProb)
+A positive expected minimum distance does not mean that every stop is safe, because a long delay can still breach the margin. This section computes the probability of that event, which is the main result of the model. A crash occurs when the threshold transmission takes longer than the time budget:
+$$t_{e2e,thresh}>\Delta t$$
+Let $N_\tau$ be the attempt budget, and $R$ the time left over after $N_\tau$ full periods:
+$$N_\tau=\floor{\frac{\Delta t-\tau_{e2e}}T}\qquad R=\Delta t-\tau_{e2e}-N_\tau T\qquad 0\leq R<T$$
+For $k\geq 1$, let $F(k)=\mathbb P(A\geq k)$ and $f(k)=\mathbb P(A=k)$, with $F(k)=1$ for $k\leq 0$ and $f(k)=0$ for $k<0$:
+$$F(k)=p^k\left[1+k(1-p)\right]\qquad f(k)=(k+1)p^k(1-p)^2$$
+For $\Delta t\geq\tau_{e2e}$, the exact crash probability is:
+$$P_{crash}=F(N_\tau+1)+f(N_\tau)\left(1-\frac{R^2}{2T^2}\right)+f(N_\tau-1)\frac{(T-R)^2}{2T^2}$$
+Which can be rewritten as:
+$$P_{crash}=\begin{cases}
+p^{N_\tau-1}\left\{p\left[1+N_\tau(1-p)\right]+\frac{(1-p)^2}{2T^2}\left[N_\tau(T-R)^2-(N_\tau+1)pR^2\right]\right\} & N_\tau\geq1\\
+&N_\tau=0\\
+1 &N_\tau=0
+\end{cases}$$
+
+
+If $\Delta t<\tau_{e2e}$, a crash is certain. 
+
+Two simpler expressions can also be used. 
+Ignoring both waits gives a lower bound on the crash probability:
+$$P_{low}(p,N_\tau)=F(N_\tau+1)=p^{N_\tau+1}\left[1+(N_\tau+1)(1-p)\right]$$
+Replacing each wait by its mean $T/2$ gives an approximation, which is neither a lower nor an upper bound:
+$$P'(p,N_\tau)=F(N_\tau)=p^{N_\tau}\left[1+N_\tau(1-p)\right]$$
+
+##### Proof
+We first compute $F(k)$ for $k\geq 1$. The event $A\geq k$ occurs in two mutually exclusive scenarios:
+- Data Fail: the sensor packet alone reaches $k$ failures, so $X\geq k$.
+- Brake Fail: $X=n$ with $n\in\{0,\dots,k-1\}$, and the brake command fails at least $k-n$ times.
+
+For the first scenario:
+$$P_{\text{data fail}}=\mathbb P(X\geq k)=p^k$$
+For the second scenario, using the independence of $X$ and $Y$:
+$$\begin{align}
+P_{\text{brake fail}}&=\sum_{n=0}^{k-1}\mathbb P(X=n)\,\mathbb P(Y\geq k-n)\\
+&=\sum_{n=0}^{k-1}(1-p)p^n\cdot p^{k-n}\\
+&=k(1-p)p^k
+\end{align}$$
+Adding the two gives $F(k)=p^k\left[1+k(1-p)\right]$. The difference $F(k)-F(k+1)$ then gives $f(k)=(k+1)p^k(1-p)^2$.
+
+---
+Now let $W=\phi+\psi$ be the total wait. Since $\phi$ and $\psi$ are independent $\mathcal U(0,T)$ variables, $W$ has a triangular distribution on $[0,2T]$, with tail:
+$$\mathbb P(W>u)=\begin{cases}1-\dfrac{u^2}{2T^2}&0\leq u\leq T\\[2mm]\dfrac{(2T-u)^2}{2T^2}&T\leq u\leq 2T\end{cases}$$
+Using $t_{e2e,thresh}=\tau_{e2e}+AT+W$ and $\Delta t-\tau_{e2e}=N_\tau T+R$, the crash condition becomes:
+$$AT+W>N_\tau T+R$$
+Conditioning on $A$, which is independent of $W$:
+$$P_{crash}=\sum_{k=0}^\infty f(k)\,\mathbb P\left(W>(N_\tau-k)T+R\right)$$
+Each value of $k$ gives one of four cases:
+- $k\geq N_\tau+1$: the bound is negative, so the probability is $1$. These terms sum to $F(N_\tau+1)$.
+- $k=N_\tau$: the bound is $R$, so the probability is $1-\frac{R^2}{2T^2}$.
+- $k=N_\tau-1$: the bound is $T+R$, so the probability is $\frac{(T-R)^2}{2T^2}$.
+- $k\leq N_\tau-2$: the bound is at least $2T$, so the probability is $0$.
+
+Summing the terms gives $P_{crash}$.
+
+---
+Ignoring both waits sets $W=0$, so a crash requires $AT>N_\tau T+R$. Since $A$ is an integer and $0\leq R<T$, this means $A\geq N_\tau+1$, which gives $P_{low}$. A crash with $A\geq N_\tau+1$ occurs for any value of $W$, so $P_{low}\leq P_{crash}$.
+
+Replacing each wait by its mean sets $W=T$, so a crash requires $(A+1)T>N_\tau T+R$. Since $A$ is an integer and $0\leq R<T$, this means $A\geq N_\tau$, which gives $P'$. As $W$ is random, this is not the true probability, and it can fall on either side of $P_{crash}$.
+$$\endproof$$
