@@ -710,7 +710,7 @@ Explicitly: $$S_{low}=\frac{v_\max}{1000}\left(B_{low}+\tau_{e2e}\right)+L+m+d_{
 
 #### Equal periods
 
-If $T_{tx}=T_{rx}=T$, let $N^*$ be the first $N\in\mathbb N^+$ that satisfies $F(N)\leq P_{target}$. Then: $$B_{low}=T(N^-1)$$ So the budgets of $S_{low}$, $S'$ and $S_{high}$ are $T(N^*-1)$, $TN^*$ and $T(N^*+1)$. Moreover, $B_{min}$ has a closed form. Let $P_n=F(n)+\frac{f(n-1)}2$ be the crash probability at the budget $B=nT$, and let $j\geq 1$ be the smallest integer with $P_j\leq P_{target}$. With $n=j-1$, $\gamma=f(n-1)-f(n)$ and $D=P_n-P_{target}$: $$B_{min}=nT+\frac{2DT}{f(n-1)+\sqrt{f(n-1)^2-2\gamma D}}$$
+If $T_{tx}=T_{rx}=T$, let $N^*$ be the first $N\in\mathbb N^+$ that satisfies $F(N)\leq P_{target}$. Then: $$B_{low}=T(N^*-1)$$ So the budgets of $S_{low}$, $S'$ and $S_{high}$ are $T(N^*-1)$, $TN^*$ and $T(N^*+1)$. Moreover, $B_{min}$ has a closed form. Let $P_n=F(n)+\frac{f(n-1)}2$ be the crash probability at the budget $B=nT$, and let $j\geq 1$ be the smallest integer with $P_j\leq P_{target}$. With $n=j-1$, $\gamma=f(n-1)-f(n)$ and $D=P_n-P_{target}$: $$B_{min}=nT+\frac{2DT}{f(n-1)+\sqrt{f(n-1)^2-2\gamma D}}$$
 
 ##### Proof
 
