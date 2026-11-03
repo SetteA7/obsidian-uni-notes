@@ -437,16 +437,22 @@ $$P_{crash}=F(N_\tau+1)+f(N_\tau)\left(1-\frac{R^2}{2T^2}\right)+f(N_\tau-1)\fra
 Which can be rewritten as:
 $$P_{crash}=\begin{cases}
 p^{N_\tau-1}\left\{p\left[1+N_\tau(1-p)\right]+\frac{(1-p)^2}{2T^2}\left[N_\tau(T-R)^2-(N_\tau+1)pR^2\right]\right\} & N_\tau\geq1\\
-&N_\tau=0\\
-1 &N_\tau=0
+1-\frac{(1-p)^2}{2T^2}R^2&N_\tau=0\\
+1 &N_\tau<0
 \end{cases}$$
 
 
 If $\Delta t<\tau_{e2e}$, a crash is certain. 
 
-Two simpler expressions can also be used. 
+Three simpler expressions can also be used. 
 Ignoring both waits gives a lower bound on the crash probability:
 $$P_{low}(p,N_\tau)=F(N_\tau+1)=p^{N_\tau+1}\left[1+(N_\tau+1)(1-p)\right]$$
+Taking the largest possible value of both waits gives an upper bound on the crash probability:
+$$P_{high}(p,N_\tau)=F(N_\tau-1)=p^{N_\tau-1}\left[1+(N_\tau-1)(1-p)\right]\qquad N_\tau\geq 1$$
+For $N_\tau<1$, $P_{high}=1$. The exact probability therefore satisfies:
+$$P_{low}\leq P_{crash}\leq P_{high}$$
+Taking the largest possible wait sets $W=2T$, so a crash requires $(A+2)T>N_\tau T+R$. Since $A$ is an integer and $0\leq R<T$, this means $A\geq N_\tau-1$, which gives $P_{high}$. Since $W\leq 2T$, every crash satisfies this condition, so $P_{crash}\leq P_{high}$.
+
 Replacing each wait by its mean $T/2$ gives an approximation, which is neither a lower nor an upper bound:
 $$P'(p,N_\tau)=F(N_\tau)=p^{N_\tau}\left[1+N_\tau(1-p)\right]$$
 
@@ -463,7 +469,8 @@ P_{\text{brake fail}}&=\sum_{n=0}^{k-1}\mathbb P(X=n)\,\mathbb P(Y\geq k-n)\\
 &=\sum_{n=0}^{k-1}(1-p)p^n\cdot p^{k-n}\\
 &=k(1-p)p^k
 \end{align}$$
-Adding the two gives $F(k)=p^k\left[1+k(1-p)\right]$. The difference $F(k)-F(k+1)$ then gives $f(k)=(k+1)p^k(1-p)^2$.
+Adding the two gives $F(k)=p^k\left[1+k(1-p)\right]$. 
+The difference $F(k)-F(k+1)$ then gives $f(k)=(k+1)p^k(1-p)^2$.
 
 ---
 Now let $W=\phi+\psi$ be the total wait. Since $\phi$ and $\psi$ are independent $\mathcal U(0,T)$ variables, $W$ has a triangular distribution on $[0,2T]$, with tail:
@@ -484,4 +491,63 @@ Summing the terms gives $P_{crash}$.
 Ignoring both waits sets $W=0$, so a crash requires $AT>N_\tau T+R$. Since $A$ is an integer and $0\leq R<T$, this means $A\geq N_\tau+1$, which gives $P_{low}$. A crash with $A\geq N_\tau+1$ occurs for any value of $W$, so $P_{low}\leq P_{crash}$.
 
 Replacing each wait by its mean sets $W=T$, so a crash requires $(A+1)T>N_\tau T+R$. Since $A$ is an integer and $0\leq R<T$, this means $A\geq N_\tau$, which gives $P'$. As $W$ is random, this is not the true probability, and it can fall on either side of $P_{crash}$.
+$$\endproof$$
+## 3.7) S.M.A.R.T Algorithm
+The previous section computes the crash probability for a fixed threshold $S$. The **S.M.A.R.T. (Safety Margin Automatic Readjust Tool)** algorithm solves the inverse problem: given the current network conditions, it finds the threshold that meets a desired crash probability $P_{target}\in(0,1)$. A small threshold lets the bot travel further before braking, but it leaves less time for the STOP to arrive, so the aim is to choose $S$ as low as the target allows.
+
+Every crash probability model depends on $S$ through the budget $B=\Delta t-\tau_{e2e}$. Inverting the definition of $\Delta t$, a budget $B$ corresponds to the threshold:
+$$S(B)=\frac{v_\max}{1000}\left(B+\tau_{e2e}\right)+L+m+d_{brake}$$
+Let $N^*$ be the first $N\in\mathbb N^+$ that satisfies:
+$$F(N)=p^N\left[1+N(1-p)\right]\leq P_{target}$$
+Applying each model of the previous section gives one version of the algorithm:
+
+| Version | Model | Budget $B$ | Meets $P_{target}$? |
+| --- | --- | --- | --- |
+| $S_{low}$ | $P_{low}$ | $T(N^*-1)$ | No, it ignores both waits |
+| $S'$ | $P'$ | $TN^*$ | Not guaranteed |
+| $S_{high}$ | $P_{high}$ | $T(N^*+1)$ | Yes, for any waits |
+| $S_{smart}$ | $P_{crash}$ | $B_{min}$ | Yes, and it is the lowest such threshold |
+
+Explicitly:
+$$S_{low}=\frac{v_\max}{1000}\left(T(N^*-1)+\tau_{e2e}\right)+L+m+d_{brake}$$
+$$S'=\frac{v_\max}{1000}\left(TN^*+\tau_{e2e}\right)+L+m+d_{brake}$$
+$$S_{high}=\frac{v_\max}{1000}\left(T(N^*+1)+\tau_{e2e}\right)+L+m+d_{brake}$$
+$$S_{smart}=\frac{v_\max}{1000}\left(B_{min}+\tau_{e2e}\right)+L+m+d_{brake}$$
+To compute $B_{min}$, let $P_n=F(n)+\frac{f(n-1)}2$ be the crash probability at the budget $B=nT$, and let $j\geq 1$ be the smallest integer with $P_j\leq P_{target}$. With $n=j-1$, $\gamma=f(n-1)-f(n)$ and $D=P_n-P_{target}$:
+$$B_{min}=nT+\frac{2DT}{f(n-1)+\sqrt{f(n-1)^2-2\gamma D}}$$
+The thresholds always satisfy:
+$$S_{low}\leq S_{smart}\leq S_{high}\qquad S_{low}\leq S'\leq S_{high}$$
+$S'$ can fall on either side of $S_{smart}$.
+
+##### Proof
+Existence of $N^*$: since $F(N)-F(N+1)=f(N)=(N+1)p^N(1-p)^2>0$, $F$ is strictly decreasing. Moreover $F(0)=1$ and $\lim_{N\to\infty}F(N)=0$, so a first $N^*\in\mathbb N^+$ with $F(N^*)\leq P_{target}$ exists.
+
+---
+Discrete versions: we look for the smallest attempt budget $N_\tau$ that meets the target. Since $F$ is decreasing, $F(k)\leq P_{target}$ exactly when $k\geq N^*$. Therefore:
+- $P_{low}=F(N_\tau+1)\leq P_{target}$ requires $N_\tau\geq N^*-1$.
+- $P'=F(N_\tau)\leq P_{target}$ requires $N_\tau\geq N^*$.
+- $P_{high}=F(N_\tau-1)\leq P_{target}$ requires $N_\tau\geq N^*+1$.
+
+The smallest budget with $N_\tau$ attempts is $B=TN_\tau$, which gives the three thresholds. Since $P_{crash}\leq P_{high}$, $S_{high}$ meets the target for any waits. As $P_{low}$ and $P'$ are not upper bounds on $P_{crash}$, the other two versions do not guarantee it.
+
+---
+Exact version: write $G(u)=\mathbb P(W>u)$, so that as a function of the budget:
+$$P_{crash}(B)=\sum_{k=0}^\infty f(k)\,G(B-kT)$$
+$G$ is continuous, and each term is at most $f(k)$ with $\sum_kf(k)=1$, so the series converges uniformly and $P_{crash}$ is continuous.
+
+Take $0\leq B_1<B_2$. Each term is non-increasing in $B$. For $k_0=\floor{B_1/T}$ we have $B_1-k_0T\in[0,T)$, where $G$ is strictly decreasing, and $f(k_0)>0$. Therefore $P_{crash}$ is strictly decreasing in $B$. Since $P_{crash}(0)=1$ and $P_{crash}\leq P_{high}\to 0$, the Intermediate Value Theorem gives a unique $B_{min}$ with $P_{crash}(B_{min})=P_{target}$, and $P_{crash}(B)\leq P_{target}$ exactly when $B\geq B_{min}$. So $S_{smart}=S(B_{min})$ is the lowest threshold that meets the target.
+
+Setting $R=0$ in $P_{crash}$ and using $F(n+1)+f(n)=F(n)$ gives $P_n=F(n)+f(n-1)/2$. By the choice of $j$, $P_n>P_{target}\geq P_{n+1}$, so $B_{min}=nT+R$ with $0<R\leq T$. Expanding $P_{crash}$ for $N_\tau=n$ gives:
+$$P_{crash}=P_n-f(n-1)\frac RT+\gamma\frac{R^2}{2T^2}$$
+With $x=R/T$, the target is met when $q(x)=\frac\gamma2x^2-f(n-1)x+D=0$, where $q(0)=D>0$ and $q(1)\leq 0$. The root in $(0,1]$ is unique:
+- If $\gamma>0$, it is the smaller of two positive roots.
+- If $\gamma<0$, the roots have opposite signs and it is the positive one.
+- If $\gamma=0$, the equation is linear.
+
+In each case, this root equals:
+$$x=\frac{2D}{f(n-1)+\sqrt{f(n-1)^2-2\gamma D}}$$
+Multiplying by $T$ gives $B_{min}$.
+
+---
+Ordering: for $N_\tau\leq N^*-2$, $P_{crash}\geq P_{low}=F(N_\tau+1)>P_{target}$, so $B_{min}\geq T(N^*-1)$. Moreover $S_{high}$ meets the target, so $B_{min}\leq T(N^*+1)$. This gives $S_{low}\leq S_{smart}\leq S_{high}$. The bound on $S'$ follows directly from the budgets.
 $$\endproof$$
