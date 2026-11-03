@@ -146,3 +146,10 @@ sudo tc qdisc add dev eth0 root netem loss 10% limit 10000
 ```
 sudo tc qdisc del dev eth0 root netem
 ```
+
+```
+ros2 run monitor_pkg controller_monitor            # defaults from the top of the file (SMART off, CSV on)
+ros2 run monitor_pkg controller_monitor SMART      # SMART on
+ros2 run monitor_pkg controller_monitor SMART NOCSV
+ros2 run monitor_pkg controller_monitor nosmart csv  # upper or lower case both work
+```
