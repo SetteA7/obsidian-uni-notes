@@ -829,7 +829,7 @@ A positive expected minimum distance does not mean that every stop is safe, beca
 
 For $v\geq 0$, let $n=\floor{v/T_{rx}}$ and $h=v-nT_{rx}$, and define: $$J(v)=\frac{T_{rx}(1+p_{rx})}2\cdot\frac{1-p_{rx}^n}{1-p_{rx}}+p_{rx}^n\left(h-\frac{(1-p_{rx})h^2}{2T_{rx}}\right)$$ For $v<0$, $J(v)=v$. The exact crash probability is: $$P_{crash}(B)=p_{tx}^{M+1}+(1-p_{tx})\sum_{x=0}^{M}p_{tx}^x,\frac{J(B-xT_{tx})-J(B-(x+1)T_{tx})}{T_{tx}}$$ Three simpler expressions can also be used. They all depend on the probability that the retransmissions alone exceed a budget: $$Q(B)=\mathbb P(Z>B)=\begin{cases} p_{tx}^{M+1}+(1-p_{tx})\sum\limits_{x=0}^{M}p_{tx}^x,p_{rx}^{\floor{(B-xT_{tx})/T_{rx}}+1}&B\geq 0\\ 1&B<0 \end{cases}$$ Ignoring both waits gives a lower bound on the crash probability: $$P_{low}(B)=Q(B)$$ Taking the largest possible value of both waits gives an upper bound on the crash probability: $$P_{high}(B)=Q(B-T_{tx}-T_{rx})$$ The exact probability therefore satisfies: $$P_{low}\leq P_{crash}\leq P_{high}$$ Replacing each wait by its mean gives an approximation, which is neither a lower nor an upper bound: $$P'(B)=Q\left(B-\frac{T_{tx}+T_{rx}}2\right)$$
 
-#### Equal periods
+#### Equal periods (Same result as before)
 
 If $T_{tx}=T_{rx}=T$, the delay lies on a single grid and the results have a shorter form. Let $A=X+Y$, and let $N_\tau$ be the attempt budget and $R$ the time left over after $N_\tau$ full periods: $$N_\tau=\floor{\frac BT}\qquad R=B-N_\tau T\qquad 0\leq R<T$$ Let $f(k)=\mathbb P(A=k)$ be the probability of exactly $k$ failures, and $F(k)=\mathbb P(A\geq k)$ the probability of at least $k$ failures. For $k\geq 0$ and $p_{tx}\not=p_{rx}$: $$f(k)=(1-p_{tx})(1-p_{rx})\frac{p_{rx}^{k+1}-p_{tx}^{k+1}}{p_{rx}-p_{tx}}\qquad F(k)=\frac{(1-p_{tx})p_{rx}^{k+1}-(1-p_{rx})p_{tx}^{k+1}}{p_{rx}-p_{tx}}$$ For $p_{tx}=p_{rx}=p$: $$f(k)=(k+1)p^k(1-p)^2\qquad F(k)=p^k\left[1+k(1-p)\right]$$ For $k<0$, we set $f(k)=0$ and $F(k)=1$. Then: $$P_{crash}=F(N_\tau+1)+f(N_\tau)\left(1-\frac{R^2}{2T^2}\right)+f(N_\tau-1)\frac{(T-R)^2}{2T^2}$$ $$P_{low}=F(N_\tau+1)\qquad P'=F(N_\tau)\qquad P_{high}=F(N_\tau-1)$$ Since $f$ and $F$ do not change when $p_{tx}$ and $p_{rx}$ swap, the order of the links does not affect the crash probability.
 
@@ -860,7 +860,7 @@ Replacing each wait by its mean sets $W=(T_{tx}+T_{rx})/2$, which gives $P'$. As
 
 Equal periods: convolving the two geometric laws gives: $$f(k)=\sum_{i=0}^k(1-p_{tx})p_{tx}^i(1-p_{rx})p_{rx}^{k-i}=(1-p_{tx})(1-p_{rx})\frac{p_{rx}^{k+1}-p_{tx}^{k+1}}{p_{rx}-p_{tx}}$$ Summing from $k$ upward gives $F(k)$. The case $p_{tx}=p_{rx}=p$ follows from the limit $p_{rx}\to p_{tx}$.
 
-Since $\phi$ and $\psi$ are independent $\mathcal U(0,T)$ variables, $W$ has a triangular distribution on $[0,2T]$, with tail: $$\mathbb P(W>u)=\begin{cases}1-\dfrac{u^2}{2T^2}&0\leq u\leq T\[2mm]\dfrac{(2T-u)^2}{2T^2}&T\leq u\leq 2T\end{cases}$$ Using $Z=AT$ and $B=N_\tau T+R$, the crash condition becomes $AT+W>N_\tau T+R$. Conditioning on $A$, which is independent of $W$: $$P_{crash}=\sum_{k=0}^\infty f(k),\mathbb P\left(W>(N_\tau-k)T+R\right)$$ Each value of $k$ gives one of four cases:
+Since $\phi$ and $\psi$ are independent $\mathcal U(0,T)$ variables, $W$ has a triangular distribution on $[0,2T]$, with tail: $$\mathbb P(W>u)=\begin{cases}1-\dfrac{u^2}{2T^2}&0\leq u\leq T\\ \dfrac{(2T-u)^2}{2T^2}&T\leq u\leq 2T\end{cases}$$ Using $Z=AT$ and $B=N_\tau T+R$, the crash condition becomes $AT+W>N_\tau T+R$. Conditioning on $A$, which is independent of $W$: $$P_{crash}=\sum_{k=0}^\infty f(k),\mathbb P\left(W>(N_\tau-k)T+R\right)$$ Each value of $k$ gives one of four cases:
 
 - $k\geq N_\tau+1$: the bound is negative, so the probability is $1$. These terms sum to $F(N_\tau+1)$.
 - $k=N_\tau$: the bound is $R$, so the probability is $1-\frac{R^2}{2T^2}$.
@@ -886,7 +886,7 @@ Explicitly: $$S_{low}=\frac{v_\max}{1000}\left(B_{low}+\tau_{e2e}\right)+L+m+d_{
 
 #### Equal periods
 
-If $T_{tx}=T_{rx}=T$, let $N^_$ be the first $N\in\mathbb N^+$ that satisfies $F(N)\leq P_{target}$. Then: $$B_{low}=T(N^_-1)$$ So the budgets of $S_{low}$, $S'$ and $S_{high}$ are $T(N^_-1)$, $TN^_$ and $T(N^*+1)$. Moreover, $B_{min}$ has a closed form. Let $P_n=F(n)+\frac{f(n-1)}2$ be the crash probability at the budget $B=nT$, and let $j\geq 1$ be the smallest integer with $P_j\leq P_{target}$. With $n=j-1$, $\gamma=f(n-1)-f(n)$ and $D=P_n-P_{target}$: $$B_{min}=nT+\frac{2DT}{f(n-1)+\sqrt{f(n-1)^2-2\gamma D}}$$
+If $T_{tx}=T_{rx}=T$, let $N^*$ be the first $N\in\mathbb N^+$ that satisfies $F(N)\leq P_{target}$. Then: $$B_{low}=T(N^*-1)$$ So the budgets of $S_{low}$, $S'$ and $S_{high}$ are $T(N^*-1)$, $TN^*$ and $T(N^*+1)$. Moreover, $B_{min}$ has a closed form. Let $P_n=F(n)+\frac{f(n-1)}2$ be the crash probability at the budget $B=nT$, and let $j\geq 1$ be the smallest integer with $P_j\leq P_{target}$. With $n=j-1$, $\gamma=f(n-1)-f(n)$ and $D=P_n-P_{target}$: $$B_{min}=nT+\frac{2DT}{f(n-1)+\sqrt{f(n-1)^2-2\gamma D}}$$
 
 ##### Proof
 
