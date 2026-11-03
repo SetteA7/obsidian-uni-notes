@@ -301,29 +301,28 @@ p^N(1+(1-p)N) & \text{if }p_{rx}\approx p_{tx}
 ## 3.1) Intro
 This work aims to design a model that can predict the crash probability of a bot under unstable network conditions.
 
-The setup is very simple: The bot moves towards an object 
+The setup is very simple: The bot moves towards an object while sending data to a controller. This controller analyzes the lidar data and when needed sends a stop signal to the bot, which will then brake.
 
 ## 3.2) Model and Assumptions
-Distances are in meters, $v_{max}$ is in $m/s$, and times are in ${ms}$.
+Starting in a simplified case we suppose a symmetric communication link:
+- E2E Packet loss: $p_{e2e}=1-(1-p)^2$ so that $p=p_{tx}=p_{rx}$
+- E2E Latency: $\tau_{e2e}=2\tau$ so that $\tau=\tau_{tx}=\tau_{rx}$
 
+Instead of computing $S$, it is first fixed in order to study the crash probability.
+
+Now we define some standard parameters:
 - $S$: braking threshold.
 - $L$: offset between the measured distance and the front of the robot.
-- $m$: required safety margin.
+- $m$: required safety margin (can be set to 0).
+- $v_\max$: speed of robot while traveling
 - $d_{brake}$: braking distance.
-- $d_{max}=L+m+d_{brake}$, so that $\Delta d=S-d_{max}=S-L-m-d_{brake}$.
-- $\tau_{e2e}=\tau_{tx}+\tau_{rx}$, with $\tau_{e2e}=2\tau$ on symmetric links.
-- $T$: retransmission period.
+- $T$: transmission/sampling period.
 
-The time budget and the normalized budget are:
+_(distances are in meters, $v_{max}$ is in $m/s$, and times are in ${ms}$.)
 
-$$\Delta t = 1000 \cdot \frac{\Delta d}{v_{max}}\qquad r=\frac{\Delta t-\tau_{e2e}}T$$
+Some other parameters can be calculated immediately:
+- $d_\max=m+L+d_{brake}$: minimum measured distance before braking
+- $\Delta d=S-d_\max$: space in which the brake must happen 
+- $\Delta t=1000\cdot\frac{\Delta d}{v_\max}$: time budget for the brake
 
-Let $X,Y$ be the numbers of failed attempts on the sensor and brake links, and let $A=X+Y$. Let $\phi_{tx},\phi_{rx}\sim\mathcal U(0,T)$ be the phase offsets. Assume that $X$, $Y$, $\phi_{tx}$ and $\phi_{rx}$ are all independent, and that $0\leq p_{tx},p_{rx}<1$ with $p_{tx},p_{rx}$ not both zero.
-
-Two independent offsets model unsynchronised loops. Writing $\phi_{tx}=TU_1$, $\phi_{rx}=TU_2$ and $U=U_1+U_2$, the end-to-end delay is:
-
-$$t_{e2e}=\tau_{e2e}+T(A+U)$$
-
-The robot moves at constant velocity $v_{max}$ until braking starts. A crash means that the margin $m$ is breached:
-
-$$\text{crash}\iff t_{e2e}>\Delta t\iff A+U>r$$
+## 3.3) Expected Communication Delay
