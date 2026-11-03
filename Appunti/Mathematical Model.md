@@ -325,13 +325,19 @@ Some other parameters can be calculated immediately:
 - $\Delta d=S-d_\max$: space in which the brake must happen 
 - $\Delta t=1000\cdot\frac{\Delta d}{v_\max}$: time budget for the brake
 
-Finally, although the two devices will have a synchronized clock, the physical crossing of the threshold happens
-* $\phi \sim \mathcal{U}(0, T)$: the wait from the threshold crossing to the next transmission window.
+Finally suppose a synchronized clock.
+
+We define TX as bot$\rightarrow$controller and RX as controller$\rightarrow$bot.
 ## 3.3) Communication Delay
-Let $X,Y$ be the numbers of failed attempts on the sensor and brake links, and let $A=X+Y$.
+Let $X,Y\sim\text{Geom.}(1-p)$ be the numbers of failed attempts on the sensor and brake links, and let $A=X+Y$.
+Let $\phi \sim \mathcal{U}(0, T)$ be the wait from the threshold crossing to the next transmission window.
+Let $\psi\sim\mathcal U(0,T)$ be the phase difference between the two send windows.
 
 The communication delay on each link is:
-$$t_{tx/rx}=\tau+Ti\qquad i=\{A,B\}$$
-
+$$t_{tx/rx}=\tau+Ti\quad \mathbb E[t_{tx/rx}]=\tau+\frac{pT}{1-p}\qquad i=\{A,B\}$$
 The end to end communication delay is:
-$$t_{e2e}=\tau_{e2e}+TX+U+TY=\tau_{e2e}+TA+U$$
+$$t_{e2e}=t_{tx}+t_{rx}=\tau_{e2e}+AT\qquad \mathbb E[t_{e2e}]=\tau_{e2e}+\frac{2pT}{1-p}$$
+However, one significant transmission is the crossing of the threshold, which has an added time $\phi$ in bot$\rightarrow$controller transmission and $\psi$ in controller$\rightarrow$bot transmission:
+$$t_{tx,thresh}=\tau_t+$$
+
+$$t_{e2e,thresh}=t_{e2e}+\phi+\psi\qquad \mathbb E[t_{e2e,thresh}]=\tau_{e2e}+\frac{}{2(1-p)}$$
