@@ -486,6 +486,7 @@ Each value of $k$ gives one of four cases:
 - $k\leq N_\tau-2$: the bound is at least $2T$, so the probability is $0$.
 
 Summing the terms gives $P_{crash}$.
+$$P_{crash} = \underbrace{\sum_{k=0}^{N_\tau - 2} f(k) \cdot 0}_{= \, 0} \;+\; \underbrace{f(N_\tau - 1)\frac{(T-R)^2}{2T^2}}_{k = N_\tau - 1} \;+\; \underbrace{f(N_\tau)\left(1 - \frac{R^2}{2T^2}\right)}_{k = N_\tau} \;+\; \underbrace{\sum_{k=N_\tau + 1}^\infty f(k) \cdot 1}_{= \, F(N_\tau + 1)}$$
 
 ---
 Ignoring both waits sets $W=0$, so a crash requires $AT>N_\tau T+R$. Since $A$ is an integer and $0\leq R<T$, this means $A\geq N_\tau+1$, which gives $P_{low}$. A crash with $A\geq N_\tau+1$ occurs for any value of $W$, so $P_{low}\leq P_{crash}$.
