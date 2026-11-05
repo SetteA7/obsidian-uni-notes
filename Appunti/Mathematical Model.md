@@ -502,12 +502,12 @@ Let $N^*$ be the first $N\in\mathbb N^+$ that satisfies:
 $$F(N)=p^N\left[1+N(1-p)\right]\leq P_{target}$$
 Applying each model of the previous section gives one version of the algorithm:
 
-| Version | Model | Budget $B$ | Meets $P_{target}$? |
-| --- | --- | --- | --- |
-| $S_{low}$ | $P_{low}$ | $T(N^*-1)$ | No, it ignores both waits |
-| $S'$ | $P'$ | $TN^*$ | Not guaranteed |
-| $S_{high}$ | $P_{high}$ | $T(N^*+1)$ | Yes, for any waits |
-| $S_{smart}$ | $P_{crash}$ | $B_{min}$ | Yes, and it is the lowest such threshold |
+| Version     | Model       | Budget $B$ | Meets $P_{target}$?                      |
+| ----------- | ----------- | ---------- | ---------------------------------------- |
+| $S_{low}$   | $P_{low}$   | $T(N^*-1)$ | No, it ignores both waits                |
+| $S'$        | $P'$        | $TN^*$     | Not guaranteed                           |
+| $S_{high}$  | $P_{high}$  | $T(N^*+1)$ | Yes, for any waits                       |
+| $S_{smart}$ | $P_{crash}$ | $B_{min}$  | Yes, and it is the lowest such threshold |
 
 Explicitly:
 $$S_{low}=\frac{v_\max}{1000}\left(T(N^*-1)+\tau_{e2e}\right)+L+m+d_{brake}$$
