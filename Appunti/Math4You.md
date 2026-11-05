@@ -276,10 +276,10 @@ Tell wether this subsets is bounded and the sup/inf and if it allow for maximum/
 $$A=\curly{x\in\mathbb R: x=n\text{ or } x=\frac1{n^2},n\in N\setminus\curly 0}$$
 
 It is immediately clear that $A$ is the union of two sets, mainly
-$$A=S_1\cup S_2\text{ where } \quad \begin{align}
+$$A={S_1}\cup {S_2}\text{ where } \quad \begin{aligned}
 &S_1 = \{n \in \mathbb{N} \setminus \{0\}\} = \{1, 2, 3, 4, \dots\}\\
 &S_2 = \left\{\frac{1}{n^2} \mid n \in \mathbb{N} \setminus \{0\}\right\} = \left\{1, \frac{1}{4}, \frac{1}{9}, \frac{1}{16}, \dots\right\}
-\end{align}$$
+\end{aligned}$$
 
 Find the bounds on both sets individually (not required but the result is clearer).
 
@@ -326,11 +326,11 @@ Now consider the union, so:
 ## 2.1) Domains
 $\newcommand{\dom}{\text{dom }}$
 Recall:
-$$f(x)=\begin{align}
+$$f(x)=\begin{aligned}
 \frac{a(x)}{g(x)}&\qquad\dom f=\curly{g(x)\not=0}\\
 \sqrt{g(x)}&\qquad\dom f=\curly{g(x)\geq 0}\\
 \log(g(x))&\qquad\dom f=\curly{g(x)>0}\\
-\end{align}$$
+\end{aligned}$$
 #### a) Fraction and Sqrt
 Determine the domains of the following function:
 $$f(x)=\frac{\sqrt{x^2-3x-4}}{x+5}$$
