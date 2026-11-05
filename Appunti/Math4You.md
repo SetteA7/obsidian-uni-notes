@@ -1303,7 +1303,79 @@ $$\begin{align}
 &= \frac{1/4}{1/3} = \frac{3}{4}
 \end{align}$$
 
+
 #### Parametric
+Compute the limit $\forall \alpha\in\mathbb{R}$:
+$$\lim_{x\to 0^+}\frac{\cosh(\alpha x)-e^{x^2}+x\log(\cos(x))}{x-\sin(x)+e^{-1/x^2}}$$
+
+Recall the standard expansions:
+$$\begin{align}
+\cosh(t) &= 1 + \frac{t^2}{2} + \frac{t^4}{24} + o(t^4)\\
+e^t &= 1 + t + \frac{t^2}{2} + o(t^2)\\
+\cos(x) &= 1 - \frac{x^2}{2} + o(x^3)\\
+\log(1+t) &= t - \frac{t^2}{2} + o(t^2)\\
+\sin(x) &= x - \frac{x^3}{6} + o(x^3)
+\end{align}$$
+
+**Denominator:**
+First, look at $e^{-1/x^2}$. This does not have a standard Taylor expansion at $0$, so we find which little-$o$ it belongs to. Setting $y = \frac{1}{x^2} \to +\infty$ as $x \to 0^+$, and recalling that the exponential beats any power ($\lim_{y\to +\infty} y^{n/2} e^{-y} = 0$ for all $n > 0$):
+$$\lim_{x\to 0^+}\frac{e^{-1/x^2}}{x^n} = \lim_{y\to +\infty} y^{n/2}e^{-y} = 0 \quad \forall n > 0 \implies e^{-1/x^2} = o(x^n) \quad \forall n > 0$$
+
+First expand $x - \sin(x)$. Since order 1 cancels out ($x - (x + o(x)) = o(x)$), we expand $\sin(x)$ up to order 3:
+$$x - \sin(x) = x - \left(x - \frac{x^3}{6} + o(x^3)\right) = \frac{x^3}{6} + o(x^3)$$
+
+Now notice that $e^{-1/x^2}$ does not have a standard taylor expansion at $0$ and the substitution technique fails since setting $t=1/x^2$ we have that $x\rightarrow 0$ but $t\rightarrow \infty$. Again the definition must be used. For sake of exercises, instead of testing $o(x^3)$ we test the parametric limit ($o(x^n),\ n>0$):
+Rewrite the fraction as a single exponential using $x^n = e^{n\log(x)}$ (for $x \to 0^+$):
+$$\lim_{x\to 0^+}\frac{e^{-1/x^2}}{x^n} = \lim_{x\to 0^+}\frac{e^{-1/x^2}}{e^{n\log(x)}} = \lim_{x\to 0^+} e^{-\frac{1}{x^2} - n\log(x)}$$
+
+Factor out $-\frac{1}{x^2}$ in the exponent:
+$$\lim_{x\to 0^+} e^{-\frac{1}{x^2}\left(1 + n x^2\log(x)\right)} = e^{-\infty \cdot (1 + 0)} = e^{-\infty} = 0$$
+*(since $\lim_{x\to 0^+} x^2\log(x) = 0$ by the standard hierarchy of infinities).*
+
+Therefore we discovered that $e^{-1/x^2}=o(x^n), \ n>0$ and we can freely chose $n=3$ to comply with the previous expansion.
+The 
+
+**Numerator:**
+Since the denominator is of order 3, we aim to expand the numerator up to $o(x^3)$ (or stop earlier if a lower power survives):
+1. For $\cosh(\alpha x)$, use $t = \alpha x$:
+   $$\cosh(\alpha x) = 1 + \frac{(\alpha x)^2}{2} + o(x^3) = 1 + \frac{\alpha^2}{2}x^2 + o(x^3)$$
+   *(since $\cosh$ only has even powers, its order-3 term is $0$).*
+2. For $e^{x^2}$, use $t = x^2$ up to order 1 in $t$ (since the next term is $\frac{t^2}{2} = \frac{x^4}{2} \in o(x^3)$):
+   $$e^{x^2} = 1 + x^2 + o(x^3)$$
+3. For $x\log(\cos(x))$, notice there is already an $x$ in front, so we only need $\log(\cos(x))$ up to $o(x^2)$. Rewrite $\log(\cos(x)) = \log\big(1 + (\cos(x) - 1)\big)$ and use $t = \cos(x) - 1 = -\frac{x^2}{2} + o(x^2)$:
+   $$x\log(\cos(x)) = x\big(t + o(t)\big) = x\left(-\frac{x^2}{2} + o(x^2)\right) = -\frac{x^3}{2} + o(x^3)$$
+
+Combining all three parts in the numerator:
+$$\begin{align}
+\cosh(\alpha x) - e^{x^2} + x\log(\cos(x)) &= \left(1 + \frac{\alpha^2}{2}x^2 + o(x^3)\right) - \left(1 + x^2 + o(x^3)\right) - \frac{x^3}{2} + o(x^3)\\
+&= \left(\frac{\alpha^2}{2} - 1\right)x^2 - \frac{1}{2}x^3 + o(x^3)
+\end{align}$$
+
+**Whole limit:**
+$$\lim_{x\to 0^+}\frac{\cosh(\alpha x)-e^{x^2}+x\log(\cos(x))}{x-\sin(x)+e^{-1/x^2}} = \lim_{x\to 0^+}\frac{\left(\frac{\alpha^2}{2} - 1\right)x^2 - \frac{1}{2}x^3 + o(x^3)}{\frac{1}{6}x^3 + o(x^3)}$$
+
+Now we split by cases depending on whether the order-2 term in the numerator vanishes ($\frac{\alpha^2}{2} - 1 = 0 \iff \alpha = \pm\sqrt{2}$):
+
+- **Case $\alpha = \pm\sqrt{2}$** (the $x^2$ term cancels out, leaving order 3 on both top and bottom):
+$$\begin{align}
+\lim_{x\to 0^+}\frac{-\frac{1}{2}x^3 + o(x^3)}{\frac{1}{6}x^3 + o(x^3)} &= \lim_{x\to 0^+}\frac{x^3\left(-\frac{1}{2} + \frac{o(x^3)}{x^3}\right)}{x^3\left(\frac{1}{6} + \frac{o(x^3)}{x^3}\right)}\\
+&= \frac{-1/2}{1/6} = -3
+\end{align}$$
+
+- **Case $\alpha \neq \pm\sqrt{2}$** (the order-2 term dominates the numerator):
+  Factor out $x^2$ from numerator and denominator:
+$$\begin{align}
+\lim_{x\to 0^+}\frac{x^2\left[\left(\frac{\alpha^2}{2} - 1\right) - \frac{1}{2}x + \frac{o(x^3)}{x^2}\right]}{x^2\left[\frac{1}{6}x + \frac{o(x^3)}{x^2}\right]} &= \lim_{x\to 0^+}\frac{\left(\frac{\alpha^2}{2} - 1\right) - \frac{1}{2}x + o(x)}{\frac{1}{6}x + o(x)}\\
+&= \frac{\frac{\alpha^2}{2} - 1}{0^+} = \begin{cases}
++\infty & \text{if } \alpha < -\sqrt{2} \text{ or } \alpha > \sqrt{2} \quad \left(\frac{\alpha^2}{2} - 1 > 0\right)\\
+-\infty & \text{if } -\sqrt{2} < \alpha < \sqrt{2} \quad \left(\frac{\alpha^2}{2} - 1 < 0\right)
+\end{cases}
+\end{align}$$
+
+So the final result is:
+$$\lim_{x \to 0^+} \frac{\cosh(\alpha x)-e^{x^2}+x\log(\cos(x))}{x-\sin(x)+e^{-1/x^2}} = \begin{cases} +\infty & \text{if } \alpha < -\sqrt{2} \text{ or } \alpha > \sqrt{2} \\ -3 & \text{if } \alpha = \pm\sqrt{2} \\ -\infty & \text{if } -\sqrt{2} < \alpha < \sqrt{2} \end{cases}$$
+
+#### Parametric (again)
 Compute the limit $\forall \alpha > 0$:
 $$
 \lim_{x\rightarrow 0^+}\frac{\arctan(x)-\sin(x)+x^{10/3}\log(x)}{x^\alpha(1-\cos^2(x))}
