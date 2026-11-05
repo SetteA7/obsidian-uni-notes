@@ -783,65 +783,7 @@ $$\lim_{x\rightarrow 0^+}f(x)=\log(1^+-1)=\log (0^+)=-\infty$$
 
 ![[Pasted image 20261022120429.png|Asymptote in Blue|200]]
 
-#### 5) Exponential (Harder)
-Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=e^{\frac{x^2-4}{x-1}}$$**Domain:**
-$$D =\curly{x-1\not = 0}= \mathbb{R}\setminus\{1\} = (-\infty, 1) \cup (1, +\infty)$$**Sign:**
-Since the exponential function satisfies $e^t > 0$ for all $t \in \mathbb{R}$:$$f(x) > 0 \quad \forall x \in D$$We don't have any zeros.
 
-**Limits at infinity:**
-- Positive Infinity: 
-$$\lim_{x\rightarrow+\infty} f(x) = e^{+\infty} = +\infty$$Is there an oblique asymptote?
-Check the slope $m$:$$m = \lim_{x\rightarrow+\infty} \frac{f(x)}{x} = \lim_{x\rightarrow+\infty} \frac{e^{\frac{x^2-4}{x-1}}}{x}$$Notice by polynomial division that $\frac{x^2-4}{x-1} = x + 1 - \frac{3}{x-1}$, so:$$\frac{f(x)}{x} = \frac{e^{x+1} \cdot e^{-\frac{3}{x-1}}}{x} = e  \cdot e^{-\frac{3}{x-1}}\cdot \frac{e^x}{x}$$
-Therefore 
-$$\lim_{x\rightarrow\infty}\frac{f(x)}x=e\cdot e^{0}\cdot\infty=\infty$$There is no horizontal or oblique asymptote as $x \to +\infty$.
-- Negative Infinity:
-$$\lim_{x\rightarrow-\infty} f(x) = e^{-\infty} = 0^+$$We have a horizontal asymptote at $y = 0$ as $x \to -\infty$.
-
-**Limits at accumulation points:**
-- At $1$
-$$\lim_{x\rightarrow 1^+} \frac{x^2-4}{x-1} = \frac{-3}{0^+} = -\infty \implies \lim_{x\rightarrow 1^+} f(x) = e^{-\infty} = 0^+$$$$\lim_{x\rightarrow 1^-} \frac{x^2-4}{x-1} = \frac{-3}{0^-} = +\infty \implies \lim_{x\rightarrow 1^-} f(x) = e^{+\infty} = +\infty$$
-![[Pasted image 20261022124121.png|Graph|250]]
-#### 6) Sqrt (Hardest)
-Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=5x+2-\sqrt{25x^2+12x}$$**Domain:**
-The roots are $x = -\frac{12}{25}$ and $x = 0$. Taking the external intervals:$$D =\curly{25x^2+12x\geq 0}= \left(-\infty, -\frac{12}{25}\right] \cup [0, +\infty)$$**Sign:**$$f(x) > 0 \iff \sqrt{25x^2+12x} < 5x+2$$As seen in first class (case $\sqrt{A(x)}<B(x)$) we have:$$\begin{cases} A(x) \ge 0 \\  B(x) > 0 \\  A(x) < [B(x)]^2 \end{cases} \iff \begin{cases} x \in \left(-\infty, -\frac{12}{25}\right] \cup [0, +\infty) \\  5x+2 > 0 \implies x > -\frac{2}{5} \\  25x^2+12x < 25x^2+20x+4 \implies x > -\frac{1}{2} \end{cases}$$
-Then:
-$$f(x)>0\iff x \in [0, +\infty)$$
-
-**Limits at infinity:**
-- Positive Infinity:$$\lim_{x\rightarrow+\infty} f(x) = (+\infty) - (+\infty) \quad \text{indeterminate form!}$$
-Rationalize the expression:
-To rationalize the idea is as follows:
-$$a\pm\sqrt b=(a\pm\sqrt b)\frac{a\mp\sqrt b}{a\mp\sqrt b}=\frac{a^2-b}{a\mp\sqrt b}$$
-Apply it directly
-$$\begin{align}f(x) &=2+(\underbracket{5x}_a-\sqrt{\underbracket{25x^2+12x}_b})\\
-&= 2 + \frac{(5x - \sqrt{25x^2+12x})(5x + \sqrt{25x^2+12x})}{5x + \sqrt{25x^2+12x}} \\
-&= 2 + \frac{25x^2 - (25x^2+12x)}{5x + \sqrt{25x^2+12x}} \\
-&= 2 - \frac{12x}{5x + \sqrt{25x^2+12x}}\\
-&=2-\frac{12x}{5x+|x|\sqrt{25+\frac{12}x}}
-\end{align}$$For $x > 0$, extract $|x|=x$:
-$$\lim_{x\rightarrow+\infty} f(x) =\lim_{x\rightarrow+\infty}2-\frac{12}{5+\sqrt{25+\frac{12}x}}= 2 - \frac{12}{5 + 5} = \frac{4}{5}$$Since the limit is finite ($c \in \mathbb{R}$), we have a horizontal asymptote.
-- Negative Infinity:$$\lim_{x\rightarrow-\infty} f(x) = 5(-\infty) + 2 - \sqrt{+\infty} = -\infty - \infty = -\infty$$
-This is not indeterminate.
-Is there an oblique asymptote?
-Find the slope $m$ (recall now since $x<0\rightarrow |x|=-x$):
-$$m = \lim_{x\rightarrow-\infty} \frac{f(x)}{x} = \lim_{x\rightarrow-\infty} \left(5 + \frac{2}{x} - \frac{\sqrt{25x^2+12x}}{x}\right)=5+\lim_{x\rightarrow-\infty}\frac{x\sqrt{25+\frac{12}x}}{x}=10$$
-Now find the intercept $q$:$$q = \lim_{x\rightarrow-\infty} [f(x) - 10x] = \lim_{x\rightarrow-\infty} [2 - 5x - \sqrt{25x^2+12x}] = 2 - \lim_{x\rightarrow-\infty} \left(5x + \sqrt{25x^2+12x}\right)$$This is an indeterminate form $(-\infty) + (+\infty)$. 
-Rationalize 
-$$\begin{align}
-5x + \sqrt{25x^2+12x}&=\par{5x + \sqrt{25x^2+12x}}\frac{5x - \sqrt{25x^2+12x}}{5x - \sqrt{25x^2+12x}}\\
-&=\frac{25x^2 - \par{25x^2+12x}}{5x - \sqrt{25x^2+12x}}\\
-&=\frac{-12x}{5x - \sqrt{25x^2+12x}}\\
-&=\frac{-12x}{5x - |x|\sqrt{25+\frac{12}x}}
-\end{align}$$
-Then
-$$q=2+\lim_{x\rightarrow -\infty}\frac{12x}{5x - |x|\sqrt{25+\frac{12}x}}=2+\lim_{x\rightarrow -\infty}\frac{12}{5+ \sqrt{25+\frac{12}x}}=2+\frac{12}{10}=\frac{16}5$$
-
-
-We have an oblique asymptote:$$y = 10x + \frac{16}{5} \quad \text{as } x \to -\infty$$**Limits at accumulation points:**
-- At $0$ (only $0^+$ due to domain):$$\lim_{x\rightarrow 0^+} f(x) = f(0) = 5(0) + 2 - 0 = 2$$
-- At $-\frac{12}{25}$ (only $\left(-\frac{12}{25}\right)^-$ due to domain):$$\lim_{x\rightarrow \left(-\frac{12}{25}\right)^-} f(x) = f\left(-\frac{12}{25}\right) = 5\left(-\frac{12}{25}\right) + 2 - 0 = -\frac{12}{5} + 2 = -\frac{2}{5}$$There are no vertical asymptotes.
-
-![[Pasted image 20261022145406.png|Asymptote in Green|250]]
 
 ## 4.2) Taylor Expansion
 A **Taylor expansion** takes a smooth function $f(x)$ near a specific point $x_0$ and replaces it with a **polynomial clone** $P_n(x)$ of degree $n$, plus a tiny error term (the remainder). This is useful as it transforms complicated functions in a simple polynomial function, which are easier to manipulate
@@ -1233,7 +1175,145 @@ $$\lim_{x \to 0^+} \frac{\sin(x) - \alpha x + \frac{1}{6}\alpha x^3}{\arctan(x^2
 In class however (see written notes) we aimed to have same order at numerator and denominator, however the result was the same if not with a bit more algebra.
 
 # 6) Lesson 6/11/26
-## 6.1) Differentiability
+
+## 6.1) Standard Limit Exercise
+#### 5) Exponential (Harder)
+Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=e^{\frac{x^2-4}{x-1}}$$**Domain:**
+$$D =\curly{x-1\not = 0}= \mathbb{R}\setminus\{1\} = (-\infty, 1) \cup (1, +\infty)$$**Sign:**
+Since the exponential function satisfies $e^t > 0$ for all $t \in \mathbb{R}$:$$f(x) > 0 \quad \forall x \in D$$We don't have any zeros.
+
+**Limits at infinity:**
+- Positive Infinity: 
+$$\lim_{x\rightarrow+\infty} f(x) = e^{+\infty} = +\infty$$Is there an oblique asymptote?
+Check the slope $m$:$$m = \lim_{x\rightarrow+\infty} \frac{f(x)}{x} = \lim_{x\rightarrow+\infty} \frac{e^{\frac{x^2-4}{x-1}}}{x}$$Notice by polynomial division that $\frac{x^2-4}{x-1} = x + 1 - \frac{3}{x-1}$, so:$$\frac{f(x)}{x} = \frac{e^{x+1} \cdot e^{-\frac{3}{x-1}}}{x} = e  \cdot e^{-\frac{3}{x-1}}\cdot \frac{e^x}{x}$$
+Therefore 
+$$\lim_{x\rightarrow\infty}\frac{f(x)}x=e\cdot e^{0}\cdot\infty=\infty$$There is no horizontal or oblique asymptote as $x \to +\infty$.
+- Negative Infinity:
+$$\lim_{x\rightarrow-\infty} f(x) = e^{-\infty} = 0^+$$We have a horizontal asymptote at $y = 0$ as $x \to -\infty$.
+
+**Limits at accumulation points:**
+- At $1$
+$$\lim_{x\rightarrow 1^+} \frac{x^2-4}{x-1} = \frac{-3}{0^+} = -\infty \implies \lim_{x\rightarrow 1^+} f(x) = e^{-\infty} = 0^+$$$$\lim_{x\rightarrow 1^-} \frac{x^2-4}{x-1} = \frac{-3}{0^-} = +\infty \implies \lim_{x\rightarrow 1^-} f(x) = e^{+\infty} = +\infty$$
+![[Pasted image 20261022124121.png|Graph|250]]
+#### 6) Sqrt (Hardest)
+Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=5x+2-\sqrt{25x^2+12x}$$**Domain:**
+The roots are $x = -\frac{12}{25}$ and $x = 0$. Taking the external intervals:$$D =\curly{25x^2+12x\geq 0}= \left(-\infty, -\frac{12}{25}\right] \cup [0, +\infty)$$**Sign:**$$f(x) > 0 \iff \sqrt{25x^2+12x} < 5x+2$$As seen in first class (case $\sqrt{A(x)}<B(x)$) we have:$$\begin{cases} A(x) \ge 0 \\  B(x) > 0 \\  A(x) < [B(x)]^2 \end{cases} \iff \begin{cases} x \in \left(-\infty, -\frac{12}{25}\right] \cup [0, +\infty) \\  5x+2 > 0 \implies x > -\frac{2}{5} \\  25x^2+12x < 25x^2+20x+4 \implies x > -\frac{1}{2} \end{cases}$$
+Then:
+$$f(x)>0\iff x \in [0, +\infty)$$
+
+**Limits at infinity:**
+- Positive Infinity:$$\lim_{x\rightarrow+\infty} f(x) = (+\infty) - (+\infty) \quad \text{indeterminate form!}$$
+Rationalize the expression:
+To rationalize the idea is as follows:
+$$a\pm\sqrt b=(a\pm\sqrt b)\frac{a\mp\sqrt b}{a\mp\sqrt b}=\frac{a^2-b}{a\mp\sqrt b}$$
+Apply it directly
+$$\begin{align}f(x) &=2+(\underbracket{5x}_a-\sqrt{\underbracket{25x^2+12x}_b})\\
+&= 2 + \frac{(5x - \sqrt{25x^2+12x})(5x + \sqrt{25x^2+12x})}{5x + \sqrt{25x^2+12x}} \\
+&= 2 + \frac{25x^2 - (25x^2+12x)}{5x + \sqrt{25x^2+12x}} \\
+&= 2 - \frac{12x}{5x + \sqrt{25x^2+12x}}\\
+&=2-\frac{12x}{5x+|x|\sqrt{25+\frac{12}x}}
+\end{align}$$For $x > 0$, extract $|x|=x$:
+$$\lim_{x\rightarrow+\infty} f(x) =\lim_{x\rightarrow+\infty}2-\frac{12}{5+\sqrt{25+\frac{12}x}}= 2 - \frac{12}{5 + 5} = \frac{4}{5}$$Since the limit is finite ($c \in \mathbb{R}$), we have a horizontal asymptote.
+- Negative Infinity:$$\lim_{x\rightarrow-\infty} f(x) = 5(-\infty) + 2 - \sqrt{+\infty} = -\infty - \infty = -\infty$$
+This is not indeterminate.
+Is there an oblique asymptote?
+Find the slope $m$ (recall now since $x<0\rightarrow |x|=-x$):
+$$m = \lim_{x\rightarrow-\infty} \frac{f(x)}{x} = \lim_{x\rightarrow-\infty} \left(5 + \frac{2}{x} - \frac{\sqrt{25x^2+12x}}{x}\right)=5+\lim_{x\rightarrow-\infty}\frac{x\sqrt{25+\frac{12}x}}{x}=10$$
+Now find the intercept $q$:$$q = \lim_{x\rightarrow-\infty} [f(x) - 10x] = \lim_{x\rightarrow-\infty} [2 - 5x - \sqrt{25x^2+12x}] = 2 - \lim_{x\rightarrow-\infty} \left(5x + \sqrt{25x^2+12x}\right)$$This is an indeterminate form $(-\infty) + (+\infty)$. 
+Rationalize 
+$$\begin{align}
+5x + \sqrt{25x^2+12x}&=\par{5x + \sqrt{25x^2+12x}}\frac{5x - \sqrt{25x^2+12x}}{5x - \sqrt{25x^2+12x}}\\
+&=\frac{25x^2 - \par{25x^2+12x}}{5x - \sqrt{25x^2+12x}}\\
+&=\frac{-12x}{5x - \sqrt{25x^2+12x}}\\
+&=\frac{-12x}{5x - |x|\sqrt{25+\frac{12}x}}
+\end{align}$$
+Then
+$$q=2+\lim_{x\rightarrow -\infty}\frac{12x}{5x - |x|\sqrt{25+\frac{12}x}}=2+\lim_{x\rightarrow -\infty}\frac{12}{5+ \sqrt{25+\frac{12}x}}=2+\frac{12}{10}=\frac{16}5$$
+
+
+We have an oblique asymptote:$$y = 10x + \frac{16}{5} \quad \text{as } x \to -\infty$$**Limits at accumulation points:**
+- At $0$ (only $0^+$ due to domain):$$\lim_{x\rightarrow 0^+} f(x) = f(0) = 5(0) + 2 - 0 = 2$$
+- At $-\frac{12}{25}$ (only $\left(-\frac{12}{25}\right)^-$ due to domain):$$\lim_{x\rightarrow \left(-\frac{12}{25}\right)^-} f(x) = f\left(-\frac{12}{25}\right) = 5\left(-\frac{12}{25}\right) + 2 - 0 = -\frac{12}{5} + 2 = -\frac{2}{5}$$There are no vertical asymptotes.
+
+![[Pasted image 20261022145406.png|Asymptote in Green|250]]
+## 6.2) Final Taylor Limit Exercise
+Compute the limit $\forall \alpha > 0$:
+$$
+\lim_{x\rightarrow 0^+}\frac{\arctan(x)-\sin(x)+x^{10/3}\log(x)}{x^\alpha(1-\cos^2(x))}
+$$
+
+First recall the standard expansions (as $x \to 0$) and standard logarithmic limit:
+$$
+\begin{align}
+\sin(x) &= x - \frac{x^3}{6} + \frac{x^5}{120} + o(x^5)\\
+\arctan(x) &= x - \frac{x^3}{3} + \frac{x^5}{5} + o(x^5)\\
+\lim_{x\rightarrow 0^+} x^\beta \log(x) &= 0 \qquad \forall \beta > 0
+\end{align}
+$$
+
+**Numerator:**
+Since the order-1 terms of $\arctan(x)$ and $\sin(x)$ cancel out ($x - x = 0$), we must expand both functions up to order 3 (the first non-zero term):
+$$
+\arctan(x) - \sin(x) = \left(x - \frac{x^3}{3} + o(x^3)\right) - \left(x - \frac{x^3}{6} + o(x^3)\right) = -\frac{1}{6}x^3 + o(x^3)
+$$
+Now let's compare the remaining term $x^{10/3}\log(x)$ with $x^3$. Since $\frac{10}{3} > 3$ and polynomial decay dominates logarithmic growth as $x \to 0^+$, we can verify that $x^{10/3}\log(x) = o(x^3)$ by checking the definition of little-$o$:
+$$
+\lim_{x\rightarrow 0^+}\frac{x^{10/3}\log(x)}{x^3} = \lim_{x\rightarrow 0^+} x^{1/3}\log(x) = 0 \quad \implies \quad x^{10/3}\log(x) = o(x^3)
+$$
+Putting the numerator together:
+$$
+\arctan(x) - \sin(x) + x^{10/3}\log(x) = -\frac{1}{6}x^3 + o(x^3) + o(x^3) = -\frac{1}{6}x^3 + o(x^3)
+$$
+
+**Denominator:**
+Using the trigonometric identity $1 - \cos^2(x) = \sin^2(x)$ and expanding $\sin(x) = x + o(x)$ to order 1:
+$$
+x^\alpha\bigl(1-\cos^2(x)\bigr) = x^\alpha \sin^2(x) = x^\alpha\bigl(x + o(x)\bigr)^2 = x^\alpha\bigl(x^2 + o(x^2)\bigr) = x^{\alpha+2} + o(x^{\alpha+2})
+$$
+*(Note: You get the exact same result by expanding $\cos(x) = 1 - \frac{x^2}{2} + o(x^2)$ and squaring it.)*
+
+**Now rewrite the entire limit:**
+$$
+\lim_{x\rightarrow 0^+}\frac{\arctan(x)-\sin(x)+x^{10/3}\log(x)}{x^\alpha(1-\cos^2(x))} = \lim_{x\rightarrow 0^+}\frac{-\frac{1}{6}x^3 + o(x^3)}{x^{\alpha+2} + o(x^{\alpha+2})}
+$$
+Factoring out the leading powers $x^3$ in the numerator and $x^{\alpha+2}$ in the denominator gives:
+$$
+\lim_{x\rightarrow 0^+}\frac{x^3\left(-\frac{1}{6} + \frac{o(x^3)}{x^3}\right)}{x^{\alpha+2}\left(1 + \frac{o(x^{\alpha+2})}{x^{\alpha+2}}\right)} = \lim_{x\rightarrow 0^+} x^{1-\alpha} \cdot \frac{-\frac{1}{6} + \frac{o(x^3)}{x^3}}{1 + \frac{o(x^{\alpha+2})}{x^{\alpha+2}}}
+$$
+
+Now we split by cases depending on the comparison between the numerator's order ($3$) and the denominator's order ($\alpha+2$):
+
+- **Case $\alpha = 1$** (numerator and denominator have the same order, $\alpha + 2 = 3$):
+  $$
+  \begin{align}
+  \lim_{x\rightarrow 0^+} x^0 \cdot \frac{-\frac{1}{6} + \frac{o(x^3)}{x^3}}{1 + \frac{o(x^3)}{x^3}} &= \frac{-\frac{1}{6} + 0}{1 + 0} = -\frac{1}{6}
+  \end{align}
+  $$
+- **Case $0 < \alpha < 1$** (the denominator has lower order $\alpha + 2 < 3$, so $1 - \alpha > 0$):
+  $$
+  \begin{align}
+  \lim_{x\rightarrow 0^+} x^{1-\alpha} \cdot \frac{-\frac{1}{6} + \frac{o(x^3)}{x^3}}{1 + \frac{o(x^{\alpha+2})}{x^{\alpha+2}}} &= 0^+ \cdot \left(-\frac{1}{6}\right) = 0
+  \end{align}
+  $$
+- **Case $\alpha > 1$** (the denominator has higher order $\alpha + 2 > 3$, so $\alpha - 1 > 0$):
+  $$
+  \begin{align}
+  \lim_{x\rightarrow 0^+} \frac{1}{x^{\alpha-1}} \cdot \frac{-\frac{1}{6} + \frac{o(x^3)}{x^3}}{1 + \frac{o(x^{\alpha+2})}{x^{\alpha+2}}} &= \frac{-\frac{1}{6}}{0^+} = -\infty
+  \end{align}
+  $$
+
+**So the final result is:**
+$$
+\lim_{x \to 0^+} \frac{\arctan(x)-\sin(x)+x^{10/3}\log(x)}{x^\alpha(1-\cos^2(x))} = \begin{cases}
+0 & \text{if } 0 < \alpha < 1 \\
+-\frac{1}{6} & \text{if } \alpha = 1 \\
+-\infty & \text{if } \alpha > 1
+\end{cases}
+$$
+
+
+# 7) Lesson 13/11/26
+## 7.1) Differentiability
 Let's recap some theory
 
 >[!def|*] Differentiable on right/left
@@ -1252,7 +1332,7 @@ Moreover we can say that a map is differentiable iff:
 >$$f'(x_0)=\lim_{x\rightarrow x_0}f'(x)$$
 >Where the continuity at $x_0$ must be verified
 
-## 6.2) Exercises on Differentiability
+## 7.2) Exercises on Differentiability
 #### b) Sin and abs value
 Discuss differentiability at the point $x_0=0$:
 $$f(x)=\sin|x|$$
@@ -1308,7 +1388,7 @@ Since the limit is not a finite real number, the function is not differentiable 
 ![[Pasted image 20261102150644.png|plot|250]]
 
 
-## 6.3) Derivatives
+## 7.3) Derivatives
 Here is a list of the various derivatives of elementary functions
 
 $$
@@ -1339,7 +1419,7 @@ $$
 $$
 When using a substitution the last differentiation rule (chain rule) must be applied
 
-## 6.4) Exercises on derivatives
+## 7.4) Exercises on derivatives
 #### c) Piecewise function
 Say where the following maps are differentiable and find the derivatives
 $$f(x)=\begin{cases}
@@ -1494,83 +1574,10 @@ F'(x) &= f_n'\Bigl(f_{n-1}\bigl(\dots f_1(x)\dots\bigr)\Bigr) \cdot f_{n-1}'\Big
 $$
 
 
-## 6.5) Final Taylor Limit Exercise
-Compute the limit $\forall \alpha > 0$:
-$$
-\lim_{x\rightarrow 0^+}\frac{\arctan(x)-\sin(x)+x^{10/3}\log(x)}{x^\alpha(1-\cos^2(x))}
-$$
-
-First recall the standard expansions (as $x \to 0$) and standard logarithmic limit:
-$$
-\begin{align}
-\sin(x) &= x - \frac{x^3}{6} + \frac{x^5}{120} + o(x^5)\\
-\arctan(x) &= x - \frac{x^3}{3} + \frac{x^5}{5} + o(x^5)\\
-\lim_{x\rightarrow 0^+} x^\beta \log(x) &= 0 \qquad \forall \beta > 0
-\end{align}
-$$
-
-**Numerator:**
-Since the order-1 terms of $\arctan(x)$ and $\sin(x)$ cancel out ($x - x = 0$), we must expand both functions up to order 3 (the first non-zero term):
-$$
-\arctan(x) - \sin(x) = \left(x - \frac{x^3}{3} + o(x^3)\right) - \left(x - \frac{x^3}{6} + o(x^3)\right) = -\frac{1}{6}x^3 + o(x^3)
-$$
-Now let's compare the remaining term $x^{10/3}\log(x)$ with $x^3$. Since $\frac{10}{3} > 3$ and polynomial decay dominates logarithmic growth as $x \to 0^+$, we can verify that $x^{10/3}\log(x) = o(x^3)$ by checking the definition of little-$o$:
-$$
-\lim_{x\rightarrow 0^+}\frac{x^{10/3}\log(x)}{x^3} = \lim_{x\rightarrow 0^+} x^{1/3}\log(x) = 0 \quad \implies \quad x^{10/3}\log(x) = o(x^3)
-$$
-Putting the numerator together:
-$$
-\arctan(x) - \sin(x) + x^{10/3}\log(x) = -\frac{1}{6}x^3 + o(x^3) + o(x^3) = -\frac{1}{6}x^3 + o(x^3)
-$$
-
-**Denominator:**
-Using the trigonometric identity $1 - \cos^2(x) = \sin^2(x)$ and expanding $\sin(x) = x + o(x)$ to order 1:
-$$
-x^\alpha\bigl(1-\cos^2(x)\bigr) = x^\alpha \sin^2(x) = x^\alpha\bigl(x + o(x)\bigr)^2 = x^\alpha\bigl(x^2 + o(x^2)\bigr) = x^{\alpha+2} + o(x^{\alpha+2})
-$$
-*(Note: You get the exact same result by expanding $\cos(x) = 1 - \frac{x^2}{2} + o(x^2)$ and squaring it.)*
-
-**Now rewrite the entire limit:**
-$$
-\lim_{x\rightarrow 0^+}\frac{\arctan(x)-\sin(x)+x^{10/3}\log(x)}{x^\alpha(1-\cos^2(x))} = \lim_{x\rightarrow 0^+}\frac{-\frac{1}{6}x^3 + o(x^3)}{x^{\alpha+2} + o(x^{\alpha+2})}
-$$
-Factoring out the leading powers $x^3$ in the numerator and $x^{\alpha+2}$ in the denominator gives:
-$$
-\lim_{x\rightarrow 0^+}\frac{x^3\left(-\frac{1}{6} + \frac{o(x^3)}{x^3}\right)}{x^{\alpha+2}\left(1 + \frac{o(x^{\alpha+2})}{x^{\alpha+2}}\right)} = \lim_{x\rightarrow 0^+} x^{1-\alpha} \cdot \frac{-\frac{1}{6} + \frac{o(x^3)}{x^3}}{1 + \frac{o(x^{\alpha+2})}{x^{\alpha+2}}}
-$$
-
-Now we split by cases depending on the comparison between the numerator's order ($3$) and the denominator's order ($\alpha+2$):
-
-- **Case $\alpha = 1$** (numerator and denominator have the same order, $\alpha + 2 = 3$):
-  $$
-  \begin{align}
-  \lim_{x\rightarrow 0^+} x^0 \cdot \frac{-\frac{1}{6} + \frac{o(x^3)}{x^3}}{1 + \frac{o(x^3)}{x^3}} &= \frac{-\frac{1}{6} + 0}{1 + 0} = -\frac{1}{6}
-  \end{align}
-  $$
-- **Case $0 < \alpha < 1$** (the denominator has lower order $\alpha + 2 < 3$, so $1 - \alpha > 0$):
-  $$
-  \begin{align}
-  \lim_{x\rightarrow 0^+} x^{1-\alpha} \cdot \frac{-\frac{1}{6} + \frac{o(x^3)}{x^3}}{1 + \frac{o(x^{\alpha+2})}{x^{\alpha+2}}} &= 0^+ \cdot \left(-\frac{1}{6}\right) = 0
-  \end{align}
-  $$
-- **Case $\alpha > 1$** (the denominator has higher order $\alpha + 2 > 3$, so $\alpha - 1 > 0$):
-  $$
-  \begin{align}
-  \lim_{x\rightarrow 0^+} \frac{1}{x^{\alpha-1}} \cdot \frac{-\frac{1}{6} + \frac{o(x^3)}{x^3}}{1 + \frac{o(x^{\alpha+2})}{x^{\alpha+2}}} &= \frac{-\frac{1}{6}}{0^+} = -\infty
-  \end{align}
-  $$
-
-**So the final result is:**
-$$
-\lim_{x \to 0^+} \frac{\arctan(x)-\sin(x)+x^{10/3}\log(x)}{x^\alpha(1-\cos^2(x))} = \begin{cases}
-0 & \text{if } 0 < \alpha < 1 \\
--\frac{1}{6} & \text{if } \alpha = 1 \\
--\infty & \text{if } \alpha > 1
-\end{cases}
-$$
 
 
-# 7) Symbols
+
+# 8) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
 - $\iff$: necessary + sufficient, if and only if "iff"
@@ -1587,7 +1594,7 @@ $$
 
 - $\exists$: there exists
 
-# 8) Taylor Expansions
+# 9) Taylor Expansions
 Here is a list of some of the most frequent expansions
 $$\begin{align}
 e^x &= 1 + x + \frac{x^2}{2} + \cdots + \frac{x^k}{k!}
