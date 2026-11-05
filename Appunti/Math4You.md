@@ -1205,7 +1205,7 @@ $$\lim_{x\rightarrow+\infty} f(x) =\lim_{x\rightarrow+\infty}2-\frac{12}{5+\sqrt
 This is not indeterminate.
 Is there an oblique asymptote?
 Find the slope $m$ (recall now since $x<0\rightarrow |x|=-x$):
-$$m = \lim_{x\rightarrow-\infty} \frac{f(x)}{x} = \lim_{x\rightarrow-\infty} \left(5 + \frac{2}{x} - \frac{\sqrt{25x^2+12x}}{x}\right)=5+\lim_{x\rightarrow-\infty}\frac{x\sqrt{25+\frac{12}x}}{x}=10$$
+$$m = \lim_{x\rightarrow-\infty} \frac{f(x)}{x} = \lim_{x\rightarrow-\infty} \left(5 + \frac{2}{x} - \frac{\sqrt{25x^2+12x}}{x}\right)=5-\lim_{x\rightarrow-\infty}\frac{-x\sqrt{25+\frac{12}x}}{x}=10$$
 Now find the intercept $q$:$$q = \lim_{x\rightarrow-\infty} [f(x) - 10x] = \lim_{x\rightarrow-\infty} [2 - 5x - \sqrt{25x^2+12x}] = 2 - \lim_{x\rightarrow-\infty} \left(5x + \sqrt{25x^2+12x}\right)$$This is an indeterminate form $(-\infty) + (+\infty)$. 
 Rationalize 
 $$\begin{align}
@@ -1225,32 +1225,25 @@ We have an oblique asymptote:$$y = 10x + \frac{16}{5} \quad \text{as } x \to -\i
 ![[Pasted image 20261022145406.png|Asymptote in Green|250]]
 
 ## 6.2) Taylor Tips and Tricks
-**Substitution**: When doing a substitution, both should go to the same value:
-$$t=f(x)\text{ valid iff }\begin{cases}
-x\stackrel{x\rightarrow x_0}\longrightarrow x_0\\
-t\stackrel{t\rightarrow x_0}\longrightarrow x_0
-\end{cases}$$
+**Substitution:** To plug $t = f(x)$ into a standard Maclaurin expansion (centered at $0$) as $x \to 0$, both $x$ and $t$ must tend to $0$:
+$$t = f(x) \text{ is valid iff } \lim_{x \to 0} f(x) = 0 \quad \text{(i.e., } t \to 0 \text{ as } x \to 0\text{)}$$
 
+**Lower Degree Change:** Let $m, n \in \mathbb{R}$ such that $m < n$. As $x \to 0$:
+$$o(x^n) \subset o(x^m)$$
+Therefore, if needed, you can always absorb a higher-order remainder into a **lower** degree remainder, for example:
+$$o(x^3) \to o(x^2) \quad \text{but NEVER} \quad o(x^2) \to o(x^3)$$
 
-
-
-**Lower Degree Change:** Let $m, n \in \mathbb{R}$ such that $m < n$. As $x \to 0$, then:
-$$o(x^n)\subset o(x^m)$$
-Therefore, if needed you can simplify little o to a higher degree term in an expression, that is, for example:
-$$o(x^3)\rightarrow o(x^{2})\text{ but not }o(x^2)\rightarrow o(x^3)$$
-**Polynomial and little o inside little-o**
-Suppose to have a polynomial (or a little-o) inside a little-o the lower degree always wins
-$$o(\sum_k{a_kx^k})=o(x^{\min_ka^k\not=0})$$
+**Polynomial and little-$o$ inside little-$o$:**
+When you have a polynomial (or additional little-$o$ terms) inside a little-$o$ as $x \to 0$, the **lowest** non-zero degree always wins:
+$$o\left(\sum_k a_k x^k\right) = o\left(x^{\min\{k \,:\, a_k \neq 0\}}\right)$$
 For example:
-$$o(x^2+3x^3+o(x^4))=o(x^2)$$
+$$o(x^2 + 3x^3 + o(x^4)) = o(x^2)$$
 
-**What degree?** In general during the exercises the desired degree to expand to is the smallest one where the terms don't cancel out due to expansion. 
-Let $f,g$ be two functions to be expanded and $h$ the result of the expansion of both, a low order will result only in $o(x^n)$, so with the correct order $m>n$ not all terms cancel out.
-$$\begin{align}
-f(x)+g(x)&\neq o(x^n)\\
-&=h(x)+o(x^m)
-\end{align}$$
-Finally usually numerator and denominator have same degree. Most importantly **numerator must have higher or same order as denominator**
+**What degree?** In general, the desired degree to expand to is the smallest one where the leading terms do not cancel out completely. If expanding $f(x) + g(x)$ to a low order $n$ causes full cancellation:
+$$f(x) + g(x) = o(x^n) \quad \text{(indeterminate if divided by } x^m\text{)}$$
+you must expand to a higher order $m > n$ until a non-zero polynomial part $h(x) \neq 0$ survives:
+$$f(x) + g(x) = h(x) + o(x^m)$$
+In practice, first expand the simpler side (usually the denominator) until you find its first non-zero term $c x^n + o(x^n)$. Then aim to expand the numerator to at least that same order $o(x^n)$ so that, even if all terms in the numerator cancel out, you avoid indeterminate remainders of the form $\frac{o(x^m)}{x^n} = o(x^{m-n})$ with $m < n$.
 
 ## 6.3) Taylor Limit Exercises
 
@@ -1304,78 +1297,8 @@ $$\begin{align}
 \end{align}$$
 
 
-#### Parametric
-Compute the limit $\forall \alpha\in\mathbb{R}$:
-$$\lim_{x\to 0^+}\frac{\cosh(\alpha x)-e^{x^2}+x\log(\cos(x))}{x-\sin(x)+e^{-1/x^2}}$$
 
-Recall the standard expansions:
-$$\begin{align}
-\cosh(t) &= 1 + \frac{t^2}{2} + \frac{t^4}{24} + o(t^4)\\
-e^t &= 1 + t + \frac{t^2}{2} + o(t^2)\\
-\cos(x) &= 1 - \frac{x^2}{2} + o(x^3)\\
-\log(1+t) &= t - \frac{t^2}{2} + o(t^2)\\
-\sin(x) &= x - \frac{x^3}{6} + o(x^3)
-\end{align}$$
-
-**Denominator:**
-First, look at $e^{-1/x^2}$. This does not have a standard Taylor expansion at $0$, so we find which little-$o$ it belongs to. Setting $y = \frac{1}{x^2} \to +\infty$ as $x \to 0^+$, and recalling that the exponential beats any power ($\lim_{y\to +\infty} y^{n/2} e^{-y} = 0$ for all $n > 0$):
-$$\lim_{x\to 0^+}\frac{e^{-1/x^2}}{x^n} = \lim_{y\to +\infty} y^{n/2}e^{-y} = 0 \quad \forall n > 0 \implies e^{-1/x^2} = o(x^n) \quad \forall n > 0$$
-
-First expand $x - \sin(x)$. Since order 1 cancels out ($x - (x + o(x)) = o(x)$), we expand $\sin(x)$ up to order 3:
-$$x - \sin(x) = x - \left(x - \frac{x^3}{6} + o(x^3)\right) = \frac{x^3}{6} + o(x^3)$$
-
-Now notice that $e^{-1/x^2}$ does not have a standard taylor expansion at $0$ and the substitution technique fails since setting $t=1/x^2$ we have that $x\rightarrow 0$ but $t\rightarrow \infty$. Again the definition must be used. For sake of exercises, instead of testing $o(x^3)$ we test the parametric limit ($o(x^n),\ n>0$):
-Rewrite the fraction as a single exponential using $x^n = e^{n\log(x)}$ (for $x \to 0^+$):
-$$\lim_{x\to 0^+}\frac{e^{-1/x^2}}{x^n} = \lim_{x\to 0^+}\frac{e^{-1/x^2}}{e^{n\log(x)}} = \lim_{x\to 0^+} e^{-\frac{1}{x^2} - n\log(x)}$$
-
-Factor out $-\frac{1}{x^2}$ in the exponent:
-$$\lim_{x\to 0^+} e^{-\frac{1}{x^2}\left(1 + n x^2\log(x)\right)} = e^{-\infty \cdot (1 + 0)} = e^{-\infty} = 0$$
-*(since $\lim_{x\to 0^+} x^2\log(x) = 0$ by the standard hierarchy of infinities).*
-
-Therefore we discovered that $e^{-1/x^2}=o(x^n), \ n>0$ and we can freely chose $n=3$ to comply with the previous expansion.
-The 
-
-**Numerator:**
-Since the denominator is of order 3, we aim to expand the numerator up to $o(x^3)$ (or stop earlier if a lower power survives):
-1. For $\cosh(\alpha x)$, use $t = \alpha x$:
-   $$\cosh(\alpha x) = 1 + \frac{(\alpha x)^2}{2} + o(x^3) = 1 + \frac{\alpha^2}{2}x^2 + o(x^3)$$
-   *(since $\cosh$ only has even powers, its order-3 term is $0$).*
-2. For $e^{x^2}$, use $t = x^2$ up to order 1 in $t$ (since the next term is $\frac{t^2}{2} = \frac{x^4}{2} \in o(x^3)$):
-   $$e^{x^2} = 1 + x^2 + o(x^3)$$
-3. For $x\log(\cos(x))$, notice there is already an $x$ in front, so we only need $\log(\cos(x))$ up to $o(x^2)$. Rewrite $\log(\cos(x)) = \log\big(1 + (\cos(x) - 1)\big)$ and use $t = \cos(x) - 1 = -\frac{x^2}{2} + o(x^2)$:
-   $$x\log(\cos(x)) = x\big(t + o(t)\big) = x\left(-\frac{x^2}{2} + o(x^2)\right) = -\frac{x^3}{2} + o(x^3)$$
-
-Combining all three parts in the numerator:
-$$\begin{align}
-\cosh(\alpha x) - e^{x^2} + x\log(\cos(x)) &= \left(1 + \frac{\alpha^2}{2}x^2 + o(x^3)\right) - \left(1 + x^2 + o(x^3)\right) - \frac{x^3}{2} + o(x^3)\\
-&= \left(\frac{\alpha^2}{2} - 1\right)x^2 - \frac{1}{2}x^3 + o(x^3)
-\end{align}$$
-
-**Whole limit:**
-$$\lim_{x\to 0^+}\frac{\cosh(\alpha x)-e^{x^2}+x\log(\cos(x))}{x-\sin(x)+e^{-1/x^2}} = \lim_{x\to 0^+}\frac{\left(\frac{\alpha^2}{2} - 1\right)x^2 - \frac{1}{2}x^3 + o(x^3)}{\frac{1}{6}x^3 + o(x^3)}$$
-
-Now we split by cases depending on whether the order-2 term in the numerator vanishes ($\frac{\alpha^2}{2} - 1 = 0 \iff \alpha = \pm\sqrt{2}$):
-
-- **Case $\alpha = \pm\sqrt{2}$** (the $x^2$ term cancels out, leaving order 3 on both top and bottom):
-$$\begin{align}
-\lim_{x\to 0^+}\frac{-\frac{1}{2}x^3 + o(x^3)}{\frac{1}{6}x^3 + o(x^3)} &= \lim_{x\to 0^+}\frac{x^3\left(-\frac{1}{2} + \frac{o(x^3)}{x^3}\right)}{x^3\left(\frac{1}{6} + \frac{o(x^3)}{x^3}\right)}\\
-&= \frac{-1/2}{1/6} = -3
-\end{align}$$
-
-- **Case $\alpha \neq \pm\sqrt{2}$** (the order-2 term dominates the numerator):
-  Factor out $x^2$ from numerator and denominator:
-$$\begin{align}
-\lim_{x\to 0^+}\frac{x^2\left[\left(\frac{\alpha^2}{2} - 1\right) - \frac{1}{2}x + \frac{o(x^3)}{x^2}\right]}{x^2\left[\frac{1}{6}x + \frac{o(x^3)}{x^2}\right]} &= \lim_{x\to 0^+}\frac{\left(\frac{\alpha^2}{2} - 1\right) - \frac{1}{2}x + o(x)}{\frac{1}{6}x + o(x)}\\
-&= \frac{\frac{\alpha^2}{2} - 1}{0^+} = \begin{cases}
-+\infty & \text{if } \alpha < -\sqrt{2} \text{ or } \alpha > \sqrt{2} \quad \left(\frac{\alpha^2}{2} - 1 > 0\right)\\
--\infty & \text{if } -\sqrt{2} < \alpha < \sqrt{2} \quad \left(\frac{\alpha^2}{2} - 1 < 0\right)
-\end{cases}
-\end{align}$$
-
-So the final result is:
-$$\lim_{x \to 0^+} \frac{\cosh(\alpha x)-e^{x^2}+x\log(\cos(x))}{x-\sin(x)+e^{-1/x^2}} = \begin{cases} +\infty & \text{if } \alpha < -\sqrt{2} \text{ or } \alpha > \sqrt{2} \\ -3 & \text{if } \alpha = \pm\sqrt{2} \\ -\infty & \text{if } -\sqrt{2} < \alpha < \sqrt{2} \end{cases}$$
-
-#### Parametric (again)
+#### Parametric 
 Compute the limit $\forall \alpha > 0$:
 $$
 \lim_{x\rightarrow 0^+}\frac{\arctan(x)-\sin(x)+x^{10/3}\log(x)}{x^\alpha(1-\cos^2(x))}
@@ -1449,6 +1372,75 @@ $$
 -\infty & \text{if } \alpha > 1
 \end{cases}
 $$
+
+#### Parametric (again)
+Compute the limit $\forall \alpha\in\mathbb{R}$:
+$$\lim_{x\to 0^+}\frac{\cosh(\alpha x)-e^{x^2}+x\log(\cos(x))}{x-\sin(x)+e^{-1/x^2}}$$
+
+Recall the standard expansions:
+$$\begin{align}
+\cosh(t) &= 1 + \frac{t^2}{2} + \frac{t^4}{24} + o(t^4)\\
+e^t &= 1 + t + \frac{t^2}{2} + o(t^2)\\
+\cos(x) &= 1 - \frac{x^2}{2} + o(x^3)\\
+\log(1+t) &= t - \frac{t^2}{2} + o(t^2)\\
+\sin(x) &= x - \frac{x^3}{6} + o(x^3)
+\end{align}$$
+
+**Denominator:**
+First expand $x - \sin(x)$. Since order 1 cancels out ($x - (x + o(x)) = o(x)$), we expand $\sin(x)$ up to order 3:
+$$x - \sin(x) = x - \left(x - \frac{x^3}{6} + o(x^3)\right) = \frac{x^3}{6} + o(x^3)$$
+
+Now notice that $e^{-1/x^2}$ does not have a standard taylor expansion at $0$ and the substitution technique fails since setting $t=1/x^2$ we have that $x\rightarrow 0$ but $t\rightarrow \infty$. Again the definition must be used. For sake of exercises, instead of testing $o(x^3)$ we test the parametric limit ($o(x^n),\ n>0$):
+Rewrite the fraction as a single exponential using $x^n = e^{n\log(x)}$ (for $x \to 0^+$):
+$$\lim_{x\to 0^+}\frac{e^{-1/x^2}}{x^n} = \lim_{x\to 0^+}\frac{e^{-1/x^2}}{e^{n\log(x)}} = \lim_{x\to 0^+} e^{-\frac{1}{x^2} - n\log(x)}$$
+
+Factor out $-\frac{1}{x^2}$ in the exponent:
+$$\lim_{x\to 0^+} e^{-\frac{1}{x^2}\left(1 + n x^2\log(x)\right)} = e^{-\infty \cdot (1 + 0)} = e^{-\infty} = 0$$
+*(since $\lim_{x\to 0^+} x^2\log(x) = 0$ by the standard hierarchy of infinities).*
+
+Therefore we discovered that $e^{-1/x^2}=o(x^n), \ n>0$ and we can freely chose $n=3$ to comply with the previous expansion.
+The denominator becomes therefore
+$$\frac{x^3}6+o(x^3)$$
+
+**Numerator:**
+Since the denominator is of order 3, we aim to expand the numerator up to $o(x^3)$ (or stop earlier if a lower power survives):
+1. For $\cosh(\alpha x)$, use $t = \alpha x$:
+   $$\cosh(t)=1+\frac{t^2}2+o(t^3) = 1 + \frac{(\alpha x)^2}{2} + o(\alpha^3x^3) = 1 + \frac{\alpha^2}{2}x^2 + o(x^3)$$
+   *(since $\cosh$ only has even powers, its order-3 term is $0$).*
+2. For $e^{x^2}$, use $t = x^2$ up to order 1 in $t$ (since the next term is $\frac{t^2}{2} = \frac{x^4}{2} \in o(x^3)$):
+   $$e^{t}=1+t+\frac{t^2}2+o(t^2) = 1 + x^2 + \frac{x^4}2+o(x^4)=1+x^2+o(x^3)$$
+3. For $x\log(\cos(x))$, notice there is already an $x$ in front, so we only need $\log(\cos(x))$ up to $o(x^2)$. Rewrite $\log(\cos(x)) = \log\big(1 + (\cos(x) - 1)\big)$ and use $t = \cos(x) - 1 = -\frac{x^2}{2} + o(x^2)$:
+   $$x\log(\cos(x)) = x\big(t + o(t)\big) = x\left(-\frac{x^2}{2} + o(x^2)\right) = -\frac{x^3}{2} + o(x^3)$$
+
+Combining all three parts in the numerator:
+$$\begin{align}
+\cosh(\alpha x) - e^{x^2} + x\log(\cos(x)) &= \left(1 + \frac{\alpha^2}{2}x^2 + o(x^3)\right) - \left(1 + x^2 + o(x^3)\right) - \frac{x^3}{2} + o(x^3)\\
+&= \left(\frac{\alpha^2}{2} - 1\right)x^2 - \frac{1}{2}x^3 + o(x^3)
+\end{align}$$
+
+**Whole limit:**
+$$\lim_{x\to 0^+}\frac{\cosh(\alpha x)-e^{x^2}+x\log(\cos(x))}{x-\sin(x)+e^{-1/x^2}} = \lim_{x\to 0^+}\frac{\left(\frac{\alpha^2}{2} - 1\right)x^2 - \frac{1}{2}x^3 + o(x^3)}{\frac{1}{6}x^3 + o(x^3)}$$
+
+Now we split by cases depending on whether the order-2 term in the numerator vanishes ($\frac{\alpha^2}{2} - 1 = 0 \iff \alpha = \pm\sqrt{2}$):
+
+- **Case $\alpha = \pm\sqrt{2}$** (the $x^2$ term cancels out, leaving order 3 on both top and bottom):
+$$\begin{align}
+\lim_{x\to 0^+}\frac{-\frac{1}{2}x^3 + o(x^3)}{\frac{1}{6}x^3 + o(x^3)} &= \lim_{x\to 0^+}\frac{x^3\left(-\frac{1}{2} + \frac{o(x^3)}{x^3}\right)}{x^3\left(\frac{1}{6} + \frac{o(x^3)}{x^3}\right)}\\
+&= \frac{-1/2}{1/6} = -3
+\end{align}$$
+
+- **Case $\alpha \neq \pm\sqrt{2}$** (the order-2 term dominates the numerator):
+  Factor out $x^2$ from numerator and denominator:
+$$\begin{align}
+\lim_{x\to 0^+}\frac{x^2\left[\left(\frac{\alpha^2}{2} - 1\right) - \frac{1}{2}x + \frac{o(x^3)}{x^2}\right]}{x^2\left[\frac{1}{6}x + \frac{o(x^3)}{x^2}\right]} &= \lim_{x\to 0^+}\frac{\left(\frac{\alpha^2}{2} - 1\right) - \frac{1}{2}x + o(x)}{\frac{1}{6}x + o(x)}\\
+&= \frac{\frac{\alpha^2}{2} - 1}{0^+} = \begin{cases}
++\infty & \text{if } \alpha < -\sqrt{2} \text{ or } \alpha > \sqrt{2} \quad \left(\frac{\alpha^2}{2} - 1 > 0\right)\\
+-\infty & \text{if } -\sqrt{2} < \alpha < \sqrt{2} \quad \left(\frac{\alpha^2}{2} - 1 < 0\right)
+\end{cases}
+\end{align}$$
+
+So the final result is:
+$$\lim_{x \to 0^+} \frac{\cosh(\alpha x)-e^{x^2}+x\log(\cos(x))}{x-\sin(x)+e^{-1/x^2}} = \begin{cases} +\infty & \text{if } \alpha < -\sqrt{2} \text{ or } \alpha > \sqrt{2} \\ -3 & \text{if } \alpha = \pm\sqrt{2} \\ -\infty & \text{if } -\sqrt{2} < \alpha < \sqrt{2} \end{cases}$$
 
 
 # 7) Lesson 13/11/26
