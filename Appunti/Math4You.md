@@ -891,33 +891,6 @@ Thus, $[f(x)]^k \in o(x^{n \cdot k})$.
 
 ---
 
-Some final remarks (tricks for exercises):
-**Substitution**: When doing a substitution, both should go to the same value:
-$$t=f(x)\text{ valid iff }\begin{cases}
-x\stackrel{x\rightarrow x_0}\longrightarrow x_0\\
-t\stackrel{t\rightarrow x_0}\longrightarrow x_0
-\end{cases}$$
-
-
-
-
-**Lower Degree Change:** Let $m, n \in \mathbb{R}$ such that $m < n$. As $x \to 0$, then:
-$$o(x^n)\subset o(x^m)$$
-Therefore, if needed you can simplify little o to a higher degree term in an expression, that is, for example:
-$$o(x^3)\rightarrow o(x^{2})\text{ but not }o(x^2)\rightarrow o(x^3)$$
-**Polynomial and little o inside little-o**
-Suppose to have a polynomial (or a little-o) inside a little-o the lower degree always wins
-$$o(\sum_k{a_kx^k})=o(x^{\min_ka^k\not=0})$$
-For example:
-$$o(x^2+3x^3+o(x^4))=o(x^2)$$
-
-**What degree?** In general during the exercises the desired degree to expand to is the smallest one where the terms don't cancel out due to expansion. 
-Let $f,g$ be two functions to be expanded and $h$ the result of the expansion of both, a low order will result only in $o(x^n)$, so with the correct order $m>n$ not all terms cancel out.
-$$\begin{align}
-f(x)+g(x)&\neq o(x^n)\\
-&=h(x)+o(x^m)
-\end{align}$$
-Finally usually numerator and denominator have same degree.Most importantly **numerator must have higher or same order as denominator**
 
 ## 4.3) Exercises
 #### 1) Little-$o$ Warm Up Exercise:
@@ -1195,9 +1168,23 @@ $$\lim_{x\rightarrow-\infty} f(x) = e^{-\infty} = 0^+$$We have a horizontal asym
 - At $1$
 $$\lim_{x\rightarrow 1^+} \frac{x^2-4}{x-1} = \frac{-3}{0^+} = -\infty \implies \lim_{x\rightarrow 1^+} f(x) = e^{-\infty} = 0^+$$$$\lim_{x\rightarrow 1^-} \frac{x^2-4}{x-1} = \frac{-3}{0^-} = +\infty \implies \lim_{x\rightarrow 1^-} f(x) = e^{+\infty} = +\infty$$
 ![[Pasted image 20261022124121.png|Graph|250]]
+
+---
+Polynomial division:
+**Add and Subtract (Difference of Squares Trick)**
+To make a multiple of the denominator $(x-1)$ appear in the numerator, recall that $x^2 - 1 = (x-1)(x+1)$. We rewrite $-4$ as $-1 - 3$:
+$$\begin{align}
+\frac{x^2 - 4}{x - 1} &= \frac{(x^2 - 1) - 3}{x - 1} \\
+&= \frac{x^2 - 1}{x - 1} - \frac{3}{x - 1} \\
+&= \frac{(x - 1)(x + 1)}{x - 1} - \frac{3}{x - 1} \\
+&= x + 1 - \frac{3}{x - 1}
+\end{align}$$
+
+
+
 #### 6) Sqrt (Hardest)
 Determine the natural domain, the sign, and the limits at infinity (if any) and at the accumulation points of the domain.$$f(x)=5x+2-\sqrt{25x^2+12x}$$**Domain:**
-The roots are $x = -\frac{12}{25}$ and $x = 0$. Taking the external intervals:$$D =\curly{25x^2+12x\geq 0}= \left(-\infty, -\frac{12}{25}\right] \cup [0, +\infty)$$**Sign:**$$f(x) > 0 \iff \sqrt{25x^2+12x} < 5x+2$$As seen in first class (case $\sqrt{A(x)}<B(x)$) we have:$$\begin{cases} A(x) \ge 0 \\  B(x) > 0 \\  A(x) < [B(x)]^2 \end{cases} \iff \begin{cases} x \in \left(-\infty, -\frac{12}{25}\right] \cup [0, +\infty) \\  5x+2 > 0 \implies x > -\frac{2}{5} \\  25x^2+12x < 25x^2+20x+4 \implies x > -\frac{1}{2} \end{cases}$$
+The roots of the argument of the sqrt are $x = -\frac{12}{25}$ and $x = 0$. Taking the external intervals:$$D =\curly{25x^2+12x\geq 0}= \left(-\infty, -\frac{12}{25}\right] \cup [0, +\infty)$$**Sign:**$$f(x) > 0 \iff \sqrt{25x^2+12x} < 5x+2$$As seen in first class (case $\sqrt{A(x)}<B(x)$) we have:$$\begin{cases} A(x) \ge 0 \\  B(x) > 0 \\  A(x) < [B(x)]^2 \end{cases} \iff \begin{cases} x \in \left(-\infty, -\frac{12}{25}\right] \cup [0, +\infty) \\  5x+2 > 0 \implies x > -\frac{2}{5} \\  25x^2+12x < 25x^2+20x+4 \implies x > -\frac{1}{2} \end{cases}$$
 Then:
 $$f(x)>0\iff x \in [0, +\infty)$$
 
@@ -1236,7 +1223,87 @@ We have an oblique asymptote:$$y = 10x + \frac{16}{5} \quad \text{as } x \to -\i
 - At $-\frac{12}{25}$ (only $\left(-\frac{12}{25}\right)^-$ due to domain):$$\lim_{x\rightarrow \left(-\frac{12}{25}\right)^-} f(x) = f\left(-\frac{12}{25}\right) = 5\left(-\frac{12}{25}\right) + 2 - 0 = -\frac{12}{5} + 2 = -\frac{2}{5}$$There are no vertical asymptotes.
 
 ![[Pasted image 20261022145406.png|Asymptote in Green|250]]
-## 6.2) Final Taylor Limit Exercise
+
+## 6.2) Taylor Tips and Tricks
+**Substitution**: When doing a substitution, both should go to the same value:
+$$t=f(x)\text{ valid iff }\begin{cases}
+x\stackrel{x\rightarrow x_0}\longrightarrow x_0\\
+t\stackrel{t\rightarrow x_0}\longrightarrow x_0
+\end{cases}$$
+
+
+
+
+**Lower Degree Change:** Let $m, n \in \mathbb{R}$ such that $m < n$. As $x \to 0$, then:
+$$o(x^n)\subset o(x^m)$$
+Therefore, if needed you can simplify little o to a higher degree term in an expression, that is, for example:
+$$o(x^3)\rightarrow o(x^{2})\text{ but not }o(x^2)\rightarrow o(x^3)$$
+**Polynomial and little o inside little-o**
+Suppose to have a polynomial (or a little-o) inside a little-o the lower degree always wins
+$$o(\sum_k{a_kx^k})=o(x^{\min_ka^k\not=0})$$
+For example:
+$$o(x^2+3x^3+o(x^4))=o(x^2)$$
+
+**What degree?** In general during the exercises the desired degree to expand to is the smallest one where the terms don't cancel out due to expansion. 
+Let $f,g$ be two functions to be expanded and $h$ the result of the expansion of both, a low order will result only in $o(x^n)$, so with the correct order $m>n$ not all terms cancel out.
+$$\begin{align}
+f(x)+g(x)&\neq o(x^n)\\
+&=h(x)+o(x^m)
+\end{align}$$
+Finally usually numerator and denominator have same degree. Most importantly **numerator must have higher or same order as denominator**
+
+## 6.3) Taylor Limit Exercises
+
+#### Exercise
+Compute the limit:
+$$\lim_{x\to 0}\frac{(1-\cosh(x))^2}{\sin(x)(x-\arctan (x))+x^3\sinh^2(x)}$$
+
+Recall the expansions:
+$$\begin{align}
+\cosh(x) &= 1 + \frac{x^2}{2} + \frac{x^4}{24} + o(x^4)\\
+\sin(x) &= x - \frac{x^3}{6} + o(x^3)\\
+\arctan(x) &= x - \frac{x^3}{3} + o(x^3)\\
+\sinh(x) &= x + \frac{x^3}{6} + o(x^3)
+\end{align}$$
+
+**Numerator:**
+The numerator needs to be expanded at least to order two (otherwise the terms would cancel out completely)
+$$1-\cosh(x) = 1 - \left(1 + \frac{x^2}{2} + o(x^2)\right) = -\frac{x^2}{2} + o(x^2)$$
+Now square the expression:
+$$(1-\cosh(x))^2 = \left(-\frac{x^2}{2} + o(x^2)\right)^2 = \frac{x^4}{4} - x^2 o(x^2) + [o(x^2)]^2 = \frac{x^4}{4} + o(x^4)$$
+So the numerator is of order 4, denominator must be 4 or less!
+
+**Denominator:**
+Since the numerator is of order 4, we aim to expand the denominator up to $o(x^4)$.
+
+Look at the first term, $\sin(x)(x-\arctan(x))$. Notice that expanding $\arctan(x)$ only to order 1 or 2 causes a cancellation inside the bracket:
+$$x - \arctan(x) = x - (x + o(x^2)) = o(x^2)$$
+
+So we must expand $\arctan(x)$ to order 3:
+$$x - \arctan(x) = x - \left(x - \frac{x^3}{3} + o(x^3)\right) = \frac{x^3}{3} + o(x^3)$$
+
+Since this bracket already starts at $x^3$, we only need to expand the outer factor $\sin(x)$ to order 1 ($\sin(x) = x + o(x)$) so that their product reaches order 4:
+$$\begin{align}
+\sin(x)(x-\arctan(x)) &= (x + o(x))\left(\frac{x^3}{3} + o(x^3)\right) \\
+&= \frac{x^4}{3} + x\cdot o(x^3) + \frac{x^3}{3}o(x) + o(x)o(x^3)\\
+&= \frac{x^4}{3} + o(x^4)
+\end{align}$$
+
+Now notice that the second term in the denominator, $x^3\sinh^2(x)$, is also $o(x^4)$ since:
+$$\lim_{x\to 0}\frac{x^3\sinh^2(x)}{x^4} = \lim_{x\to 0}\left(\frac{\sinh(x)}{x}\right)^2\cdot x = 1^2 \cdot 0 = 0 \implies x^3\sinh^2(x) = o(x^4)$$
+*(or directly via little-$o$ algebra: $x^3(x+o(x))^2 = x^5 + o(x^5) = o(x^4)$).*
+
+Therefore, the denominator becomes:
+$$\sin(x)(x-\arctan(x)) + x^3\sinh^2(x) = \frac{x^4}{3} + o(x^4) + o(x^4) = \frac{x^4}{3} + o(x^4)$$
+
+**Whole limit:**
+$$\begin{align}
+\lim_{x\to 0}\frac{(1-\cosh(x))^2}{\sin(x)(x-\arctan (x))+x^3\sinh^2(x)} &= \lim_{x\to 0}\frac{\frac{x^4}{4} + o(x^4)}{\frac{x^4}{3} + o(x^4)}\\
+&= \lim_{x\to 0}\frac{x^4\left(\frac{1}{4} + \frac{o(x^4)}{x^4}\right)}{x^4\left(\frac{1}{3} + \frac{o(x^4)}{x^4}\right)}\\
+&= \frac{1/4}{1/3} = \frac{3}{4}
+\end{align}$$
+
+#### Parametric
 Compute the limit $\forall \alpha > 0$:
 $$
 \lim_{x\rightarrow 0^+}\frac{\arctan(x)-\sin(x)+x^{10/3}\log(x)}{x^\alpha(1-\cos^2(x))}
