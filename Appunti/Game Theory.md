@@ -229,46 +229,6 @@ Therefore for a NE:
 Take a possible combination $(s_1',...,s_n')$. If this is not in nash equilibrium then there exists a $s_i'$ that is not a best response to $s_{-i}'$, that is
 $$\exists s_i''\in S_i: u_i(s_{-i}',s_i'')>u_i(s_{-i}',s_i')$$
 and therefore there is an incentive for $i$ to deviate from $s_i'$
-
-
-
->[!example|IESDS]
-Consider this example:
->$$\begin{array}{c|c|c}
-  & L & R \\ \hline
-U & 6,0 & 0,5 \\ \hline
-M & 1,0 & 4,3  \\ \hline
-D & 0,7 & 2,0 & 
-\end{array}$$
-So $S_A=\curly{U,M,D},\ S_B=\curly{L,R}$
-Notice that for player $A$, $D$ is dominated by $M$ since
-$$u_A(M,L)>u_A(D,L)\quad u_A(M,R)>u_A(D,R)$$
-Now
->$$\begin{array}{c|c}
-  & L & R \\ \hline
-U & 6,0 & 0,5 \\ \hline
-M & 1,0 & 4,3  \\ 
-\end{array}$$
-Now for player $B$, $R$ dominates $L$ since
-$$u_B(U,R)>u_A(U,L)\quad u_B(M,R)>u_B(M,L)$$
-So
->$$\begin{array}{c|c}
-  & R \\ \hline
-U & 0,5 \\ \hline
-M & 4,3  \\ 
-\end{array}$$
-Now finally for player $A$, $M$ dominates $U$
->$$
-\begin{array}{c|c}
-  & R \\ \hline
-M & 4,3  \\ 
-\end{array}$$
-rational player play $(M,R)$.
->
->It is also possible to notice that $(M,R)$ is in Nash Equilibrium
-
-
-
 # 4) Static Games of Complete Information
 These types pf games are defined by:
 - **Static:** simultaneous decisions
@@ -277,8 +237,6 @@ These types pf games are defined by:
 Definitions:
 - Set of Players: $P_1,...,P_i$
 - Set of Actions: 
-
-
 #### Notation
 An information $E$ is **common knowledge** if:
 - Everybody knows $E$
@@ -332,8 +290,35 @@ We say that $s_i$ is **dominated** by $s_i'$ if
 $$u_i(s_{-i},s_i')\geq u_i(s_{-i},s_i)\quad\text{ for every } s_{-i}$$
 
 
+
+#### Mixed Games
+A mixed strategy is a mix between pure strategies and randomness, that is, each action is played with probability $p_i$, that is:
+$$\text{each player has }\sum_{k\in S_i}{p_k\cdot s_k}\text{ that is, plays } s_k\in S_i \text{ with probability }p_k$$
+where clearly $\sum_{k\in S_i} p_k=1$
+
+A static game can be seen as a mixed game with degenerate probability distribution.
+
+Utilities are computed by taking the expectation
+
 #### Nash Equilibrium
 A Nash equilibrium is a joint strategy where **all players choose a best response to the others’ move.** 
+
+In a $n$-player game $G=\curly{S_1,...,S_n;u_1,...,u_n}$ strategies $(s_!^*,...,s_n^*)$ are a **Nash Equilibrium** if for any $i$, $s_i^*$ is the best response of player i to $s_{-i}^*$, that is:
+$$\forall s_i\in S_i: u_i(s_{-i}^*,s_i^*)\geq u_i(s_{-i}^*,s_i)\qquad s_i^*=\arg\max_s(u_i(s_{-i}^*,s))$$
+>[!thm]
+>In a finite game, if $s^*$ is 
+>- The only survivor of IESDS
+>- The only rationalizable profile
+>
+>Then $s^*$ is a Nash Equilibrium
+
+This brings two main results:
+- a NE survives IEASDS
+- IESDS is order irrelevant
+
+Therefore for a NE:
+- everyone plays best response to beliefs
+- everyone beliefs are correct
 
 # 5) Examples:
 #### Prisoner Dilemma:
@@ -352,9 +337,11 @@ The best response for $P_1$ are:
 If $P_2$ plays $M$, $C$ is best response ($0>-1$)
 If $P_2$ plays $C$, $C$ is best response ($-6>-9$)
 
-So $C$ is the dominant strategy (this game is symmetric).
+So $C$ is the dominant strategy (for both as this game is symmetric).
 
 $C$ is the only NE
+
+Suppose it is mixed strategy where player $1$ has distribution $(0.9,0.1)$. Then if $P_2$ plays $M$ the utility is $u_2(0.9M+0.1C,M)=0.9\cdot u_2(M,M)+0.1\cdot u_2(C,M)=-1.8$
 
 #### Battle of Sexes
 Normal form 2D matrix:
@@ -410,11 +397,3 @@ M & 4,3  \\
 rational player play $(M,R)$.
 
 It is also possible to notice that $(M,R)$ is in Nash Equilibrium
-$$
-\begin{array}{c|c|c}
-  & L & R \\ \hline
-U & {\color{red}6},0 & {\color{red}4},{\color{green}3} \\ \hline
-M & 1,0 & 0,5  \\ \hline
-D & 0,{\color{green}7} & 2,0 & 
-\end{array}
-$$
