@@ -266,3 +266,43 @@ M & 4,3  \\
 rational player play $(M,R)$.
 >
 >It is also possible to notice that $(M,R)$ is in Nash Equilibrium
+
+
+
+# 4) Static Games of Complete Information
+These types pf games are defined by:
+- **Static:** simultaneous decisions
+- **Complete Information:** all players are aware of each other’s payoff
+
+Definitions:
+- Set of Players: $P_1,...,P_i$
+- Set of Actions: 
+
+
+#### Notation
+An information $E$ is **common knowledge** if:
+- Everybody knows $E$
+- It is known that everybody knows it
+
+Each player $i$ can access to a set of pure strategies:
+- $S_i$ is the set accessible by player i
+- $s_i\in S_i$ is the choice taken by player $i$
+
+We define the **strategy profile** all the actions taken by all players, that is
+$$s=(s_1,...,s_i,...,s_n)$$
+We define the **strategy profile that excludes $i$-th player** choice as
+$$s_{-i} = (s_1, \dots, s_{i-1}, s_{i+1}, \dots, s_n)$$
+
+The normal form of the game is 
+$$G=\curly{S_1,...,S_n;u_1,...,u_n}$$
+
+The combination of the choices determines the outcome of the game $(a_1,...,a_n)$, the utility of $i$-th player is
+$$u_i=u_i(a_1,a_2,...,a_n)$$
+
+If the sets are discrete, this can be written in a $n$ dimensional matrix
+
+#### Best Response
+Strategy $s_i\in S_i$ is the **best response** to $s_{-i}\in S_{-i}$  if $u(s_i,s_{-i})\geq u(s_i',s_{-i})$ $\forall s_i'\in S_i$
+
+It is possible that there are multiple best responses (with identical values of $u_i(s_i,s_{-i})$)
+
