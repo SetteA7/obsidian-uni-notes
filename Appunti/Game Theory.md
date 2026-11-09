@@ -301,10 +301,36 @@ $$u_i=u_i(a_1,a_2,...,a_n)$$
 
 If the sets are discrete, this can be written in a $n$ dimensional matrix
 
-#### Best Response
+#### Best Response, Dominance and IESDS
 Strategy $s_i\in S_i$ is the **best response** to $s_{-i}\in S_{-i}$  if $u(s_i,s_{-i})\geq u(s_i',s_{-i})$ $\forall s_i'\in S_i$
 
 It is possible that there are multiple best responses (with identical values of $u_i(s_i,s_{-i})$)
+
+---
+
+We say that $s_i$ is **strictly dominated** by $s_i'$ if the payoff of $s_i'$ is always greater than $s_i$
+$$u_i(s_{-i},s_i')>u_i(s_{-i},s_i)\quad\text{ for every } s_{-i}$$
+Rational players do not play $s_i$ if it is **strictly dominated** and they can be removed from the table.
+
+This process is called **Iterated Elimination of Strictly Dominated Strategies (IESDS)**
+
+
+A joint strategy $s$ is **Pareto Dominated** by another strategy $s'$ if
+$$\begin{align}
+u_i(s')\geq u_i(s)&\quad\text{for all players }i\\
+u_i(s')>u(s)&\quad\text{for some players }i
+\end{align}$$
+$s'$ is said to be **pareto efficient**
+
+
+We say that $s_i$ is **weakly dominated** by $s_i'$ if 
+$$\begin{align}
+u_i(s_{-i},s_i')\geq u_i(s_{-i},s_i)&\quad\text{ for every } s_{-i}\\
+u_i(s_{-i},s_i')>u_i(s_{-i},s_i)&\quad\text{ for some } s_{-i}
+\end{align}$$
+We say that $s_i$ is **dominated** by $s_i'$ if 
+$$u_i(s_{-i},s_i')\geq u_i(s_{-i},s_i)\quad\text{ for every } s_{-i}$$
+
 
 #### Nash Equilibrium
 A Nash equilibrium is a joint strategy where **all players choose a best response to the others’ move.** 
@@ -319,8 +345,8 @@ In this matrix we have:
 
 $$\begin{array}{c|c|c}
    & M & C  \\ \hline
- M & -1,-1 & -9, 0\\
- C & \color{red}{re, -9 & -6, -6
+ M & -1,-1 & -9, {\color{green}0}\\
+ C & {\color{red}0}, -9 & {\color{red}-6}, {\color{green}-6}
 \end{array}$$
 The best response for $P_1$ are:
 If $P_2$ plays $M$, $C$ is best response ($0>-1$)
@@ -328,14 +354,14 @@ If $P_2$ plays $C$, $C$ is best response ($-6>-9$)
 
 So $C$ is the dominant strategy (this game is symmetric).
 
-C is the only NE
+$C$ is the only NE
 
 #### Battle of Sexes
 Normal form 2D matrix:
 $$\begin{array}{c|c|c}
    & A & B  \\ \hline
- A & 2,1 & 0,0\\
- B & 0, 0 & 1,2
+ A & {\color{red}2},{\color{green}1} & 0,0\\
+ B & 0, 0 & {\color{red}1},{\color{green}2}
 \end{array}$$
 The best response for $P_1$ are:
 If $P_2$ plays $A$, $A$ is best response ($2>0$)
@@ -344,3 +370,51 @@ If $P_2$ plays $B$, $B$ is best response ($1>0$)
 Vice versa:
 If $P_1$ plays $A$, $A$ is best response ($2>0$)
 If $P_1$ plays $B$, $B$ is best response ($1>0$)
+
+So there are 2 NE, $A$ and $B$
+
+#### IESDS Example
+Consider this example:
+$$\begin{array}{c|c|c}
+  & L & R \\ \hline
+U & {\color{red}6},0 & 0,{\color{green}5} \\ \hline
+M & 1,0 & {\color{red}4},{\color{green}3}  \\ \hline
+D & 0,{\color{green}7} & 2,0 & 
+\end{array}$$
+
+
+So $S_A=\curly{U,M,D},\ S_B=\curly{L,R}$
+Notice that for player $A$, $D$ is dominated by $M$ since
+$$u_A(M,L)>u_A(D,L)\quad u_A(M,R)>u_A(D,R)$$
+Now
+$$\begin{array}{c|c}
+  & L & R \\ \hline
+U & 6,0 & 0,5 \\ \hline
+M & 1,0 & 4,3  \\ 
+\end{array}$$
+
+Now for player $B$, $R$ dominates $L$ since
+$$u_B(U,R)>u_A(U,L)\quad u_B(M,R)>u_B(M,L)$$
+So
+$$\begin{array}{c|c}
+  & R \\ \hline
+U & 0,5 \\ \hline
+M & 4,3  \\ 
+\end{array}$$
+Now finally for player $A$, $M$ dominates $U$
+$$
+\begin{array}{c|c}
+  & R \\ \hline
+M & 4,3  \\ 
+\end{array}$$
+rational player play $(M,R)$.
+
+It is also possible to notice that $(M,R)$ is in Nash Equilibrium
+$$
+\begin{array}{c|c|c}
+  & L & R \\ \hline
+U & {\color{red}6},0 & {\color{red}4},{\color{green}3} \\ \hline
+M & 1,0 & 0,5  \\ \hline
+D & 0,{\color{green}7} & 2,0 & 
+\end{array}
+$$
