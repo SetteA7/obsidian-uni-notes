@@ -220,7 +220,7 @@ $$
 ### 3.1.2) Graph Transformations TODO
 
 
-# 4) Shortest Path
+# 4) Shortest Path Problem (SPP)
 LP formulation
 $$\begin{align}
 &\min \sum_{(i,j)\in A} c_{ij} x_{ij} \\
@@ -228,3 +228,9 @@ s.t \qquad &\sum_{j\in \delta^+_s} x_{sj} \ = \ n-1 \\
 &\sum_{i\in \delta^-_k} x_{ik} - \sum_{j\in \delta^+_k} x_{kj} \ = \ 1  &\forall k \in N \setminus \{s\} \\
 &x_{ij} \in \R_+  &\forall (i,j) \in A
 \end{align}$$
+
+Two usual graph forms:
+- One after the other
+- neural network style
+
+# 5) Maximum Flow Problem (MFP)
