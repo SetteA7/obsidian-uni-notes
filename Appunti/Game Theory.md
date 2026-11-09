@@ -233,10 +233,6 @@ and therefore there is an incentive for $i$ to deviate from $s_i'$
 These types pf games are defined by:
 - **Static:** simultaneous decisions
 - **Complete Information:** all players are aware of each other’s payoff
-
-Definitions:
-- Set of Players: $P_1,...,P_i$
-- Set of Actions: 
 #### Notation
 An information $E$ is **common knowledge** if:
 - Everybody knows $E$
@@ -305,7 +301,7 @@ A Nash equilibrium is a joint strategy where **all players choose a best respons
 
 In a $n$-player game $G=\curly{S_1,...,S_n;u_1,...,u_n}$ strategies $(s_!^*,...,s_n^*)$ are a **Nash Equilibrium** if for any $i$, $s_i^*$ is the best response of player i to $s_{-i}^*$, that is:
 $$\forall s_i\in S_i: u_i(s_{-i}^*,s_i^*)\geq u_i(s_{-i}^*,s_i)\qquad s_i^*=\arg\max_s(u_i(s_{-i}^*,s))$$
->[!thm]
+>[!thm|*]
 >In a finite game, if $s^*$ is 
 >- The only survivor of IESDS
 >- The only rationalizable profile
@@ -319,6 +315,8 @@ This brings two main results:
 Therefore for a NE:
 - everyone plays best response to beliefs
 - everyone beliefs are correct
+
+Nash equilibria **in mixed strategies** are found by applying the **indifference principle**. This states that a mixed strategy at the Nash equilibrium should give the same payoff to the other player for all strategies
 
 # 5) Examples:
 #### Prisoner Dilemma:
@@ -397,3 +395,19 @@ M & 4,3  \\
 rational player play $(M,R)$.
 
 It is also possible to notice that $(M,R)$ is in Nash Equilibrium
+
+#### Odd or Even
+Consider this example:
+$$\begin{array}{c|c|c}
+  & O & E \\ \hline
+O & {\color{red}1},-1 & -1,{\color{green}1} \\ 
+E & -1,{\color{green}1} & {\color{red}1},-1  \\
+\end{array}$$
+Clearly no NE or dominated strategies. So $P_1$ decides to randomly choose so to find NE:
+$$\begin{gather}
+u_2(p,O)=u_2(p,E)\\
+p\cdot u_2(O,O)+(1-p)\cdot u_2(E,O)=p\cdot u_2(O,E)+(1-p)\cdot u_2(E,E)\\
+p\cdot(-1)+(1-p)\cdot1=p\cdot1+(1-p)\cdot(-1)\\
+p=\frac12
+\end{gather}$$
+For symmetry also for $P_2$ the mixed strategy has $p=1/2$.
