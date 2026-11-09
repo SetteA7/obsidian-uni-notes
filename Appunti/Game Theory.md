@@ -408,6 +408,9 @@ $$\begin{gather}
 u_2(p,O)=u_2(p,E)\\
 p\cdot u_2(O,O)+(1-p)\cdot u_2(E,O)=p\cdot u_2(O,E)+(1-p)\cdot u_2(E,E)\\
 p\cdot(-1)+(1-p)\cdot1=p\cdot1+(1-p)\cdot(-1)\\
+1=2p\\
 p=\frac12
 \end{gather}$$
 For symmetry also for $P_2$ the mixed strategy has $p=1/2$.
+
+## 5.2) Zero Sum Games
