@@ -306,3 +306,41 @@ Strategy $s_i\in S_i$ is the **best response** to $s_{-i}\in S_{-i}$  if $u(s_i,
 
 It is possible that there are multiple best responses (with identical values of $u_i(s_i,s_{-i})$)
 
+#### Nash Equilibrium
+A Nash equilibrium is a joint strategy where **all players choose a best response to the others’ move.** 
+
+# 5) Examples:
+#### Prisoner Dilemma:
+Normal form 2D matrix:
+In this matrix we have:
+- Left column: set of $P_1$ choices
+- Top row: set of $P_2$ choices
+- Each cell is utility of form $(u_1,u_2)$ based on $(s_1,s_2)$
+
+$$\begin{array}{c|c|c}
+   & M & C  \\ \hline
+ M & -1,-1 & -9, 0\\
+ C & \color{red}{re, -9 & -6, -6
+\end{array}$$
+The best response for $P_1$ are:
+If $P_2$ plays $M$, $C$ is best response ($0>-1$)
+If $P_2$ plays $C$, $C$ is best response ($-6>-9$)
+
+So $C$ is the dominant strategy (this game is symmetric).
+
+C is the only NE
+
+#### Battle of Sexes
+Normal form 2D matrix:
+$$\begin{array}{c|c|c}
+   & A & B  \\ \hline
+ A & 2,1 & 0,0\\
+ B & 0, 0 & 1,2
+\end{array}$$
+The best response for $P_1$ are:
+If $P_2$ plays $A$, $A$ is best response ($2>0$)
+If $P_2$ plays $B$, $B$ is best response ($1>0$)
+
+Vice versa:
+If $P_1$ plays $A$, $A$ is best response ($2>0$)
+If $P_1$ plays $B$, $B$ is best response ($1>0$)
