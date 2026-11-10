@@ -162,3 +162,21 @@ Today is rainy so starlink might perform a bit worse (36ms latency).
 v_max:             44.91 +- 0.20 cm/s  (range 44.69 - 45.21)  vs VMAX 45.20
 Stopping distance: 14.42 +- 0.15 cm    (range 14.20 - 14.60)  from the brake scan
 ```
+
+Threshold S:        46.28 +- 0.16 cm
+Detected at:        43.94 +- 0.61 cm (2.34 +- 0.62 cm past S)
+Expected delay:     143.72 +- 3.45 ms  (E[t_e2e])
+Actual delay:       76.69 +- 15.05 ms
+Expected d_min:     25.41 +- 0.02 cm
+Measured d_min:     28.42 +- 0.66 cm
+Error (meas-exp):   +3.01 +- 0.65 cm  (mean of the 5 per-brake errors)
+Mean |error|:       3.01 cm
+Budget B:           137.72 +- 2.18 ms
+P_crash logged:     0.200000 +- 0.000000
+
+Parameters from: auto_SUPERSMART_20261110_145952/summary.csv
+
+--- Crash probability (mean S, mean network: tau_e2e 42.90 ms, p_tx 0.0020, p_rx 0.0060) ---
+A priori:      0.199476  (exact, S = 46.28 cm)
+A posteriori:  0.003648  (exact, S = 49.29 cm, from the mean measured d_min)
+Per brake:     a priori 0.199720 +- 0.000356, a posteriori 0.004659 +- 0.006196
