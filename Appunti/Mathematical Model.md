@@ -909,4 +909,4 @@ Ordering: $B_{min}\in\left(T(N^*-1),TN^*\right]$, so $S_{low}\leq S_{smart}\leq 
 
 
 
-![[Pasted image 20261110222318.png]]
+![[Pasted image 20261110222318.png]]![[Pasted image 20261110223846.png]]
