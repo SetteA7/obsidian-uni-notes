@@ -158,21 +158,6 @@ ros2 run monitor_pkg controller_monitor nosmart csv  # upper or lower case both 
 #### 10 Nov 2026
 Today is rainy so starlink might perform a bit worse (36ms latency).
 
-```yml
-VMAX: 45.2 # cm/s cruise speed (SMART formula); was 43.84 before the 10 Nov localhost runs
-
-T: 100 # ms control / scan period
-
-D_BRAKE: 12.14 # cm braking distance (SMART formula)
-
-L: 18.75 # cm LiDAR to robot front (BOT_LENGTH)
-
-M: 5 # cm safety margin
-
-V_CMD: 50 # cm/s commanded speed
-```
-
-
 Brakes analysed:   5
 Constant-speed v:  45.02 +- 0.13 cm/s  (range 44.86 - 45.17, 5 brake(s), phase 0.62 s, d >= 70 cm)  vs commanded 50.00, VMAX 45.20
 Pre-brake v:       41.72 +- 0.82 cm/s  (last 1.0 s before the brake: depends on where the brake happens)
@@ -189,3 +174,6 @@ Time to brake:     0.400 +- 0.104 s     (range 0.296 - 0.515)
 Braking distance:  8.66 +- 2.55 cm    (range 6.11 - 11.58)  vs D_BRAKE 12.14 cm
   ... from VMAX:   9.46 +- 2.11 cm    (comparable across sessions; use this for D_BRAKE)
 Mean deceleration: 112.5 +- 25.5 cm/s^2
+
+44.91/44.92
+14.42/15.06
