@@ -762,7 +762,7 @@ Some other parameters can be calculated immediately:
 
 The LiDAR samples on the bot every $T$. The controller answers each scan with a control message: GO while the measured distance is above $S$, and STOP once the threshold crossing has been detected. On the bot, a relay timer with the same period $T$ applies the last received command. The LiDAR and relay windows are not aligned, but their phase difference is constant while the nodes run.
 
-A synchronized clock is needed: $\psi$ is measured on the bot clock alone, and $\tau_{e2e}$ is a round trip that starts and ends on the bot. Only the per-link results of Section 4.3 need $\tau_{tx}$ and $\tau_{rx}$ separately. We assume that:
+A synchronized clock is needed for latency calculations.
 
 - Packet losses are independent.
 - Lost LiDAR data is replaced by the next scan, and a lost STOP by the next control message, one period later.
@@ -776,7 +776,8 @@ Let $X\sim\text{Geom.}(1-p_{tx})$ and $Y\sim\text{Geom.}(1-p_{rx})$ be the numbe
 
 Let $\phi \sim \mathcal{U}(0, T)$ be the wait from the threshold crossing to the next LiDAR sample. The random start offset shifts the crossing uniformly over one sampling period, so $\phi$ is uniform, changes with each stop, and is independent of the network.
 
-Let $\psi\in[0,T)$ be the wait from the STOP arriving at the bot to the next relay tick, at which it is applied. It is set by the phase difference between the LiDAR and the relay, so it is constant while the nodes run. It is measured on the bot and treated as a known constant. A lost STOP is replaced one period later and the relay ticks with the same period, so retransmissions do not change $\psi$.
+Let $\psi\in[0,T)$ be the wait from the LiDaR data arriving at the controller, until the next control message sent. It is set by the phase difference between the LiDAR and the control period, so it is constant while the nodes run. It is measured on the controller and treated as a known constant. A lost LiDaR is replaced one period later and the relay ticks with the same period, so retransmissions do not change $\psi$.
+
 
 The communication delay on each link is: $$t_{tx}=\tau_{tx}+XT\qquad \mathbb E[t_{tx}]=\tau_{tx}+\frac{p_{tx}T}{1-p_{tx}}$$ $$t_{rx}=\tau_{rx}+YT\qquad \mathbb E[t_{rx}]=\tau_{rx}+\frac{p_{rx}T}{1-p_{rx}}$$ The end to end communication delay is: $$t_{e2e}=t_{tx}+t_{rx}=\tau_{e2e}+AT\qquad \mathbb E[t_{e2e}]=\tau_{e2e}+T\left(\frac{p_{tx}}{1-p_{tx}}+\frac{p_{rx}}{1-p_{rx}}\right)$$ However, one significant transmission is the crossing of the threshold, which has an added random time $\phi$ in bot$\rightarrow$controller transmission and the constant $\psi$ in controller$\rightarrow$bot transmission: $$\begin{gather} t_{tx,thresh}=\tau_{tx}+XT+\phi\qquad \mathbb E[t_{tx,thresh}]=\tau_{tx}+T\frac{1+p_{tx}}{2(1-p_{tx})}\\ t_{rx,thresh}=\tau_{rx}+YT+\psi\qquad \mathbb E[t_{rx,thresh}]=\tau_{rx}+\frac{p_{rx}T}{1-p_{rx}}+\psi\\ t_{e2e,thresh}=t_{e2e}+\phi+\psi\qquad \mathbb E[t_{e2e,thresh}]=\mathbb E[t_{e2e}]+\frac T2+\psi=\tau_{e2e}+\psi+T\frac{1+p_{tx}+p_{rx}-3p_{tx}p_{rx}}{2(1-p_{e2e})} \end{gather}$$ The expectations are taken over $X$, $Y$ and $\phi$, for the measured value of $\psi$. One quick feasibility check can be done on $$\mathbb E[t_{e2e,thresh}]\leq \Delta t$$
 
