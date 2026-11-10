@@ -155,25 +155,10 @@ ros2 run monitor_pkg controller_monitor nosmart csv  # upper or lower case both 
 ```
 
 # 4) Tests
+
 #### 10 Nov 2026
 Today is rainy so starlink might perform a bit worse (36ms latency).
-
-Brakes analysed:   5
-Constant-speed v:  45.02 +- 0.13 cm/s  (range 44.86 - 45.17, 5 brake(s), phase 0.62 s, d >= 70 cm)  vs commanded 50.00, VMAX 45.20
-Pre-brake v:       41.72 +- 0.82 cm/s  (last 1.0 s before the brake: depends on where the brake happens)
-Time to brake:     0.321 +- 0.060 s     (range 0.264 - 0.415)
-Braking distance:  6.71 +- 1.38 cm    (range 5.48 - 8.96)  vs D_BRAKE 12.14 cm
-  ... from VMAX:   7.84 +- 1.31 cm    (comparable across sessions; use this for D_BRAKE)
-Mean deceleration: 133.1 +- 21.1 cm/s^2
-
-
-Brakes analysed:   5
-Constant-speed v:  45.03 +- 0.28 cm/s  (range 44.75 - 45.39, 5 brake(s), phase 0.62 s, d >= 70 cm)  vs commanded 50.00, VMAX 45.20
-Pre-brake v:       42.94 +- 1.60 cm/s  (last 1.0 s before the brake: depends on where the brake happens)
-Time to brake:     0.400 +- 0.104 s     (range 0.296 - 0.515)
-Braking distance:  8.66 +- 2.55 cm    (range 6.11 - 11.58)  vs D_BRAKE 12.14 cm
-  ... from VMAX:   9.46 +- 2.11 cm    (comparable across sessions; use this for D_BRAKE)
-Mean deceleration: 112.5 +- 25.5 cm/s^2
-
-44.91/44.92
-14.42/15.06
+```
+v_max:             44.91 +- 0.20 cm/s  (range 44.69 - 45.21)  vs VMAX 45.20
+Stopping distance: 14.42 +- 0.15 cm    (range 14.20 - 14.60)  from the brake scan
+```
