@@ -906,3 +906,6 @@ At the budgets $B=nT$, $P_{crash}=F(n)$. By the choice of $N^*$, with $n=N^*-1$,
 ---
 
 Ordering: $B_{min}\in\left(T(N^*-1),TN^*\right]$, so $S_{low}\leq S_{smart}\leq S_{high}$. The bound on $S'$ follows directly from the budgets. $$\endproof$$
+
+
+
