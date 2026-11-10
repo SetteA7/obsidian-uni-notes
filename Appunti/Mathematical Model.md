@@ -731,15 +731,12 @@ Ordering: for $N_\tau\leq N^*-2$, $P_{crash}\geq P_{low}=F(N_\tau+1)>P_{target}$
 
 # 5) Ci riprovo ancora
 ## 5.1) Intro
-
 This work aims to design a model that can predict the crash probability of a bot under unstable network conditions.
 
 The setup is very simple: The bot moves towards an object while sending data to a controller. This controller analyzes the lidar data and when needed sends a stop signal to the bot, which will then brake.
 
 ## 5.2) Model and Assumptions
-
 We define TX as bot$\rightarrow$controller and RX as controller$\rightarrow$bot. The two directions of the communication link can behave differently, so each one has its own packet loss and latency:
-
 - E2E Packet loss: $p_{e2e}=1-(1-p_{tx})(1-p_{rx})$, with $0\leq p_{tx},p_{rx}<1$, not both zero.
 - E2E Latency: $\tau_{e2e}=\tau_{tx}+\tau_{rx}$
 
@@ -748,7 +745,6 @@ $p_{tx}$ is the loss probability of a whole scan, and $p_{rx}$ the loss probabil
 Instead of computing $S$, it is first fixed in order to study the crash probability.
 
 Now we define some standard parameters:
-
 - $S$: braking threshold.
 - $L$: offset between the measured distance and the front of the robot.
 - $m$: required safety margin (can be set to 0).
@@ -760,14 +756,13 @@ Now we define some standard parameters:
 _(distances are in meters, $v_{max}$ is in $m/s$, and times are in $ms$.)_
 
 Some other parameters can be calculated immediately:
-
 - $d_\max=m+L+d_{brake}$: last measured distance at which braking can start safely.
 - $\Delta d=S-d_\max$: distance the bot can travel before braking must start.
 - $\Delta t=1000\cdot\frac{\Delta d}{v_\max}$: time available for the LiDAR data and the STOP to complete their round trip.
 
 The LiDAR samples on the bot every $T$. The controller answers each scan with a control message: GO while the measured distance is above $S$, and STOP once the threshold crossing has been detected. On the bot, a relay timer with the same period $T$ applies the last received command. The LiDAR and relay windows are not aligned, but their phase difference is constant while the nodes run.
 
-No synchronized clock is needed: $\psi$ is measured on the bot clock alone, and $\tau_{e2e}$ is a round trip that starts and ends on the bot. Only the per-link results of Section 4.3 need $\tau_{tx}$ and $\tau_{rx}$ separately. We assume that:
+A synchronized clock is needed: $\psi$ is measured on the bot clock alone, and $\tau_{e2e}$ is a round trip that starts and ends on the bot. Only the per-link results of Section 4.3 need $\tau_{tx}$ and $\tau_{rx}$ separately. We assume that:
 
 - Packet losses are independent.
 - Lost LiDAR data is replaced by the next scan, and a lost STOP by the next control message, one period later.
