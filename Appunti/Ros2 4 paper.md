@@ -153,3 +153,21 @@ ros2 run monitor_pkg controller_monitor SMART      # SMART on
 ros2 run monitor_pkg controller_monitor SMART NOCSV
 ros2 run monitor_pkg controller_monitor nosmart csv  # upper or lower case both work
 ```
+
+# 4) Tests
+#### 10 Nov 2026
+Today is rainy so starlink might perform a bit worse (36ms latency).
+
+```yml
+VMAX: 45.2 # cm/s cruise speed (SMART formula); was 43.84 before the 10 Nov localhost runs
+
+T: 100 # ms control / scan period
+
+D_BRAKE: 12.14 # cm braking distance (SMART formula)
+
+L: 18.75 # cm LiDAR to robot front (BOT_LENGTH)
+
+M: 5 # cm safety margin
+
+V_CMD: 50 # cm/s commanded speed
+```
