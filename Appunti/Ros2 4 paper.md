@@ -360,3 +360,9 @@ Crashes:       1 / 10 = 0.100  (95% CI 0.003 - 0.445; crash = d_min - L < M), ex
 
 # 5) CHRONY IMPORTANT
 I changed the config of chrony:
+the bot has a new final section to act as a source
+the controller (OAIBOX) has a difference here
+```
+# server 147.162.2.7 iburst prefer minpoll 4 maxpoll 5
+server 100.79.118.80 port 5213 iburst prefer minpoll 4 maxpoll 6
+```
