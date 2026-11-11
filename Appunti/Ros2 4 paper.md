@@ -197,45 +197,6 @@ A posteriori:  P = 0.000000  (P_low 0.000000, P_high 0.000000; S = 75.15 cm, B =
 Crashes:       0 / 10 = 0.000  (95% CI 0.000 - 0.308; crash = d_min - L < M), expected 0.00 (sum of a priori P)
 ```
 
-Now some added packet loss:
-```
---- Averages (mean +- std) ---
-Start distance:     126.13 +- 1.46 cm (span 4.10 cm; random offset range 4.48 cm, expected span 3.67 cm for 10 runs)
-tau_tx from:        scan (scan_delay - scan_time, scan_time 98.39 +- 0.08 ms) [10/10 runs from summary.csv tau_source, the rest from tauSource = scan]
-D_BRAKE from:       this run's d_brake_meas_cm 10.85 +- 0.26 cm (10/10 brakes, the rest the bot's); the bot used 10.72 cm
-Speed:              v_cruise_cm_s 44.83 +- 0.53 cm/s (10/10 brakes, the rest the bot's VMAX); the bot used VMAX 44.60 cm/s
-psi (model input):  57.92 +- 3.10 ms  (psi_ms, the bot's value: a priori P)
-psi (per brake):    54.40 +- 3.99 ms  (the STOP's measured wait: E[delay], split, P-P; minus model input -3.52 +- 3.74 ms)
-Threshold S:        75.00 +- 0.00 cm
-Detected at:        72.50 +- 2.26 cm (2.50 +- 2.26 cm past S)
-
-Expected delay:     157.80 +- 2.17 ms  (E[t_e2e,thresh], model sd 30.24 ms)
-Actual delay:       166.24 +- 51.14 ms
-Verdict:            MODEL FAILED. Spread (min/max): 1.71 (0.50/1.53), Mean/max Difference: +8.45/21.45 ms, (p=0.004<0.025)
-Split (phi from "past S", rest = actual - phi):
-  phi:              55.85 +- 50.39 ms  (model T/2 = 50.00 ms, error +5.85 ms)
-  rest:             110.39 +- 7.03 ms  (model tau+psi+T*E[A] = 107.80 ms, error +2.59 ms)
-  rest - tau_e2e:   57.81 +- 6.88 ms  (should equal psi = 54.40 ms if psi reaches the stop)
-
-Expected d_min:     57.07 +- 0.31 cm  (model sd 1.36 cm)
-Measured d_min:     56.70 +- 2.07 cm
-Error (meas-exp):   -0.37 +- 2.26 cm  (mean of the 10 per-brake errors)
-Mean |error|:       1.59 cm
-Verdict:            MODEL FAILED. Spread (min/max): 1.71 (0.50/1.53), Mean/max Difference: -0.37/0.96 cm, (p=0.004<0.025)
-
-Scan delay:         134.12 +- 5.44 ms   (over 10 runs)
-Peak difference:    18.08 +- 10.55 ms
-tau_tx bot->ctrl:   ping (tau_rx_ms) 20.48 +- 4.87 ms, scan_delay - scan_time 35.73 +- 5.48 ms, ping - scan -15.25 +- 3.26 ms
-
-Parameters from: CSVs/auto_FIXED_20261111_130808/summary.csv
-Note: VMAX/T/D_BRAKE/L/M differ between runs; the pooled values below use their mean.
-
---- Crash probability (mean S, mean network: tau_e2e 52.58 ms, psi 57.92 ms, p_tx 0.0080, p_rx 0.0000) ---
-A priori:      P = 0.000000  (P_low 0.000000, P_high 0.000000; S = 75.00 cm, B = 798.11 ms, tau_e2e 52.63 ms: bot's model for 10/10 brakes)
-A posteriori:  P = 0.000000  (P_low 0.000000, P_high 0.000000; S = 74.63 cm, B = 785.73 ms, from the mean measured d_min)
-Crashes:       0 / 10 = 0.000  (95% CI 0.000 - 0.308; crash = d_min - L < M), expected 0.00 (sum of a priori P)
-```
-
 
 **SMART**
 ```
@@ -317,6 +278,46 @@ A posteriori:  P = 0.000000  (P_low 0.000000, P_high 0.000000; S = 75.24 cm, B =
 Crashes:       0 / 10 = 0.000  (95% CI 0.000 - 0.308; crash = d_min - L < M), expected 0.00 (sum of a priori P)
 ```
 
+Now some added packet loss ($1\%$ controller$\rightarrow$bot):
+```
+--- Averages (mean +- std) ---
+Start distance:     120.83 +- 1.65 cm (span 5.30 cm; random offset range 4.47 cm, expected span 3.66 cm for 10 runs)
+tau_tx from:        scan (scan_delay - scan_time, scan_time 98.37 +- 0.06 ms) [10/10 runs from summary.csv tau_source, the rest from tauSource = scan]
+D_BRAKE from:       this run's d_brake_meas_cm 10.65 +- 0.30 cm (9/10 brakes, the rest the bot's); the bot used 10.08 cm
+Speed:              v_cruise_cm_s 44.71 +- 0.67 cm/s (10/10 brakes, the rest the bot's VMAX); the bot used VMAX 44.68 cm/s
+psi (model input):  77.36 +- 1.89 ms  (psi_ms, the bot's value: a priori P)
+psi (per brake):    71.93 +- 5.13 ms  (the STOP's measured wait: E[delay], split, P-P; minus model input -5.43 +- 4.59 ms)
+p_tx bot->ctrl:     check uses what the bot used 0.1980 +- 0.0301; the bot used 0.1980 +- 0.0301; scan loss from stamp gaps 0.1846
+Threshold S:        75.00 +- 0.00 cm
+Detected at:        72.41 +- 2.01 cm (2.59 +- 2.01 cm past S)
+
+Expected delay:     195.59 +- 4.44 ms  (E[t_e2e,thresh], model sd 62.67 ms)
+Actual delay:       179.97 +- 47.59 ms
+Verdict:            MODEL PASSED. Spread (min/max): 0.80 (0.50/1.53), Mean/max Difference: -15.62/44.58 ms, (p=0.432>=0.025)
+Split (phi from "past S", rest = actual - phi):
+  phi:              58.05 +- 44.96 ms  (model T/2 = 50.00 ms, error +8.05 ms)
+  rest:             121.92 +- 6.60 ms  (model tau+psi+T*E[A] = 145.59 ms, error -23.67 ms)
+  rest - tau_e2e:   73.11 +- 8.23 ms  (should equal psi = 71.93 ms if psi reaches the stop)
+
+Expected d_min:     55.61 +- 0.42 cm  (model sd 2.80 cm)
+Measured d_min:     56.31 +- 1.89 cm
+Error (meas-exp):   +0.70 +- 2.21 cm  (mean of the 10 per-brake errors)
+Mean |error|:       1.82 cm
+Verdict:            MODEL PASSED. Spread (min/max): 0.80 (0.50/1.53), Mean/max Difference: +0.70/1.99 cm, (p=0.429>=0.025)
+
+Scan delay:         137.52 +- 3.70 ms   (over 10 runs)
+Peak difference:    25.32 +- 22.58 ms
+tau_tx bot->ctrl:   ping (tau_rx_ms) 30.83 +- 3.09 ms, scan_delay - scan_time 39.15 +- 3.70 ms, ping - scan -8.32 +- 1.86 ms
+
+Parameters from: CSVs/auto_FIXED_20261111_152427/summary.csv
+Note: VMAX/T/D_BRAKE/L/M differ between runs; the pooled values below use their mean.
+
+--- Crash probability (mean S, mean network: tau_e2e 48.81 ms, psi 77.36 ms, p_tx 0.1980, p_rx 0.0000) ---
+A priori:      P = 0.000003  (P_low 0.000002, P_high 0.000012; S = 75.00 cm, B = 797.80 ms, tau_e2e 46.30 ms: bot's model for 10/10 brakes)
+A posteriori:  P = 0.000002  (P_low 0.000000, P_high 0.000002; S = 75.70 cm, B = 803.13 ms, from the mean measured d_min)
+Crashes:       0 / 10 = 0.000  (95% CI 0.000 - 0.308; crash = d_min - L < M), expected 0.00 (sum of a priori P)
+```
+
 **SMART**
 ```
 --- Averages (mean +- std) ---
@@ -356,3 +357,4 @@ A priori:      0.049591  (exact, S = 44.84 cm, B = 95.61 ms, tau_e2e 53.46 ms: b
 A posteriori:  0.088776  (exact, S = 45.00 cm, B = 91.67 ms, from the mean measured d_min)
 Crashes:       1 / 10 = 0.100  (95% CI 0.003 - 0.445; crash = d_min - L < M), expected 0.50 (sum of a priori P)
 ```
+
