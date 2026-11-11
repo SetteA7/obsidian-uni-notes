@@ -156,27 +156,40 @@ ros2 run monitor_pkg controller_monitor nosmart csv  # upper or lower case both 
 
 # 4) Tests
 
-#### 10 Nov 2026
-Today is rainy so starlink might perform a bit worse (36ms latency).
-```
-v_max:             44.91 +- 0.20 cm/s  (range 44.69 - 45.21)  vs VMAX 45.20
-Stopping distance: 14.42 +- 0.15 cm    (range 14.20 - 14.60)  from the brake scan
-```
+#### 11 Nov 2026
+Some runs in local:
+FIXED --- Averages (mean +- std) ---
+Start distance:     114.68 +- 1.35 cm (span 3.40 cm; random offset range 4.46 cm, expected span 3.65 cm for 10 runs)
+tau_tx from:        scan (scan_delay - scan_time, scan_time 98.56 +- 0.05 ms) [0/10 runs from summary.csv tau_source, the rest from tauSource = scan]
+D_BRAKE from:       this run's d_brake_meas_cm 10.89 +- 0.23 cm (10/10 brakes, the rest the bot's); the bot used 11.00 cm
+Speed:              v_cruise_cm_s 44.58 +- 0.48 cm/s (10/10 brakes, the rest the bot's VMAX); the bot used VMAX 44.13 cm/s
+psi (model input):  24.86 +- 0.41 ms  (psi_ms, the bot's value: a priori P)
+psi (per brake):    24.35 +- 0.84 ms  (the STOP's measured wait: E[delay], split, P-P; minus model input -0.51 +- 0.80 ms)
+Threshold S:        75.00 +- 0.00 cm
+Detected at:        73.16 +- 1.29 cm (1.84 +- 1.29 cm past S)
 
-Threshold S:        46.28 +- 0.16 cm
-Detected at:        43.94 +- 0.61 cm (2.34 +- 0.62 cm past S)
-Expected delay:     143.72 +- 3.45 ms  (E[t_e2e])
-Actual delay:       76.69 +- 15.05 ms
-Expected d_min:     25.41 +- 0.02 cm
-Measured d_min:     28.42 +- 0.66 cm
-Error (meas-exp):   +3.01 +- 0.65 cm  (mean of the 5 per-brake errors)
-Mean |error|:       3.01 cm
-Budget B:           137.72 +- 2.18 ms
-P_crash logged:     0.200000 +- 0.000000
+Expected delay:     76.80 +- 0.74 ms  (E[t_e2e,thresh], model sd 28.87 ms)
+Actual delay:       73.37 +- 27.86 ms
+Verdict:            MODEL PASSED. Spread (min/max): 0.97 (0.50/1.53), Mean/max Difference: -3.42/20.46 ms, (p=0.708>=0.025)
+Split (phi from "past S", rest = actual - phi):
+  phi:              41.32 +- 29.17 ms  (model T/2 = 50.00 ms, error -8.68 ms)
+  rest:             32.06 +- 2.53 ms  (model tau+psi+T*E[A] = 26.80 ms, error +5.26 ms)
+  rest - tau_e2e:   29.61 +- 2.51 ms  (should equal psi = 24.35 ms if psi reaches the stop)
 
-Parameters from: auto_SUPERSMART_20261110_145952/summary.csv
+Expected d_min:     60.69 +- 0.22 cm  (model sd 1.29 cm)
+Measured d_min:     60.84 +- 1.21 cm
+Error (meas-exp):   +0.15 +- 1.25 cm  (mean of the 10 per-brake errors)
+Mean |error|:       1.03 cm
+Verdict:            MODEL PASSED. Spread (min/max): 0.97 (0.50/1.53), Mean/max Difference: +0.15/0.91 cm, (p=0.705>=0.025)
 
---- Crash probability (mean S, mean network: tau_e2e 42.90 ms, p_tx 0.0020, p_rx 0.0060) ---
-A priori:      0.199476  (exact, S = 46.28 cm)
-A posteriori:  0.003648  (exact, S = 49.29 cm, from the mean measured d_min)
-Per brake:     a priori 0.199720 +- 0.000356, a posteriori 0.004659 +- 0.006196
+Scan delay:         100.35 +- 0.03 ms   (over 10 runs)
+Peak difference:    2.02 +- 0.23 ms
+tau_tx bot->ctrl:   ping (tau_rx_ms) 0.78 +- 0.02 ms, scan_delay - scan_time 1.79 +- 0.05 ms, ping - scan -1.01 +- 0.05 ms
+
+Parameters from: CSVs/auto_FIXED_20261111_130621/summary.csv
+Note: VMAX/T/D_BRAKE/L/M differ between runs; the pooled values below use their mean.
+
+--- Crash probability (mean S, mean network: tau_e2e 2.45 ms, psi 24.86 ms, p_tx 0.0000, p_rx 0.0000) ---
+A priori:      P = 0.000000  (P_low 0.000000, P_high 0.000000; S = 75.00 cm, B = 884.71 ms, tau_e2e 2.45 ms: bot's model for 0/10 brakes)
+A posteriori:  P = 0.000000  (P_low 0.000000, P_high 0.000000; S = 75.15 cm, B = 882.04 ms, from the mean measured d_min)
+Crashes:       0 / 10 = 0.000  (95% CI 0.000 - 0.308; crash = d_min - L < M), expected 0.00 (sum of a priori P)
