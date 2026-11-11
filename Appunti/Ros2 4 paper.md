@@ -358,3 +358,5 @@ A posteriori:  0.088776  (exact, S = 45.00 cm, B = 91.67 ms, from the mean measu
 Crashes:       1 / 10 = 0.100  (95% CI 0.003 - 0.445; crash = d_min - L < M), expected 0.50 (sum of a priori P)
 ```
 
+# 5) CHRONY IMPORTANT
+I changed the config of chrony:
