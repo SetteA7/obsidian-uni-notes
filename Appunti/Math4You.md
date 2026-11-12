@@ -1777,12 +1777,37 @@ Thus, there are no horizontal asymptotes. Since the limit is infinite, we check 
 $$m_+ = \lim_{x \to +\infty} \frac{f(x)}{x} = \lim_{x \to +\infty} \frac{x-2}{x} e^{1/(x-2)^2} = 1 \cdot e^0 = 1$$
 
 $$q_+ = \lim_{x \to +\infty} \bigl(f(x) - x\bigr) = \lim_{x \to +\infty} \left[(x-2)e^{1/(x-2)^2} - (x-2) - 2\right] = \lim_{x \to +\infty} (x-2)\left(e^{1/(x-2)^2} - 1\right) - 2$$
+Now do a change of variable $y=x-2$ and $x \to +\infty$, $y \to +\infty$, and $x = y + 2$
+$$\begin{align}
+q_+ &= \lim_{y \to +\infty} \left( y e^{1/y^2} - (y + 2) \right) \\
+&= \lim_{y \to +\infty} \left[ y\left(e^{1/y^2} - 1\right) - 2 \right]\\
+&= \lim_{y \to +\infty} \left[ y \cdot \frac{1}{y^2} \cdot \frac{e^{1/y^2} - 1}{1/y^2} - 2 \right] \\
+&= \lim_{y \to +\infty} \left[ \frac{1}{y} \cdot \frac{e^{1/y^2} - 1}{1/y^2} - 2 \right] = 0 \cdot 1 - 2 = -2
+\end{align}$$
 
-Using the standard limit $e^{\varepsilon(x)} - 1 \sim \varepsilon(x)$ as $\varepsilon(x) = \frac{1}{(x-2)^2} \to 0$:
-
-$$\lim_{x \to +\infty} (x-2) \cdot \frac{1}{(x-2)^2} - 2 = \lim_{x \to +\infty} \frac{1}{x-2} - 2 = -2$$
-
+Where the last step uses the notable limit
+$$\lim_{t \to 0} \frac{e^t - 1}{t} = 1$$
 Thus, $y = x - 2$ is a right oblique asymptote as $x \to +\infty$.
+
+- As $x \to -\infty$, $\vert{}x-2\vert{} = -(x-2) > 0$:
+$$m_- = \lim_{x \to -\infty} \frac{f(x)}{x} = \lim_{x \to -\infty} \frac{-(x-2)}{x} e^{1/(x-2)^2} = -1 \cdot e^0 = -1$$
+$$q_- = \lim_{x \to -\infty} \bigl(f(x) - (-x)\bigr) = \lim_{x \to -\infty} \left[-(x-2)e^{1/(x-2)^2} + x\right]$$
+
+Now do the same change of variable $y=x-2$ with $x \to -\infty$, $y \to -\infty$, and $x = y + 2$:
+$$\begin{align}
+q_- &= \lim_{y \to -\infty} \left( -y e^{1/y^2} + (y + 2) \right) \\
+&= \lim_{y \to -\infty} \left[ -y\left(e^{1/y^2} - 1\right) + 2 \right]\\
+&= \lim_{y \to -\infty} \left[ -y \cdot \frac{1}{y^2} \cdot \frac{e^{1/y^2} - 1}{1/y^2} + 2 \right] \\
+&= \lim_{y \to -\infty} \left[ -\frac{1}{y} \cdot \frac{e^{1/y^2} - 1}{1/y^2} + 2 \right] = 0 \cdot 1 + 2 = 2
+\end{align}$$
+Where the last step uses the notable limit $\lim_{t \to 0} \frac{e^t - 1}{t} = 1$.
+Thus, $y = -x + 2$ is a left oblique asymptote as $x \to -\infty$.
+
+Next, we check the behavior at $x \to 2^\pm$:
+As $x \to 2^\pm$, $\vert{}x-2\vert{} \to 0^+$ and $e^{1/(x-2)^2} \to e^{+\infty} = +\infty$, giving an indeterminate form $0 \cdot \infty$.
+Doing the change of variable $t = \frac{1}{\vert{}x-2\vert{}}$, as $x \to 2^\pm$ we have $t \to +\infty$ and $(x-2)^2 = \vert{}x-2\vert{}^2 = \frac{1}{t^2}$:
+$$\lim_{x \to 2^\pm} \vert{}x-2\vert{}e^{1/(x-2)^2} = \lim_{t \to +\infty} \frac{e^{t^2}}{t} = +\infty$$
+by the standard hierarchy of infinities. Therefore, the line $x = 2$ is a bilateral vertical asymptote.
 
 **ii) Differentiability and first derivative**
 One might suspect that $\vert{}x-2\vert{}$ introduces a corner point at $x_0 = 2$. However, as we already established, $x_0 = 2 \notin \text{Dom}(f)$, so we don't even have to check differentiability at $x_0 = 2$!
@@ -1804,6 +1829,22 @@ $$f'(x) = -e^{1/(x-2)^2} \frac{(x-2)^2 - 2}{(x-2)^2}$$
 Combining both branches into a single expression (or recalling that $\bigl(\vert{}x-2\vert{}\bigr)' = \frac{\vert{}x-2\vert{}}{x-2} = \text{sgn}(x-2)$ for $x \neq 2$), we can write:
 
 $$f'(x) = \begin{cases} e^{1/(x-2)^2} \dfrac{(x-2)^2 - 2}{(x-2)^2} & x > 2\\ -e^{1/(x-2)^2} \dfrac{(x-2)^2 - 2}{(x-2)^2} & x < 2 \end{cases} = \frac{\vert{}x-2\vert{}}{x-2} \cdot \frac{(x-2)^2 - 2}{(x-2)^2} e^{1/(x-2)^2} \qquad \forall x \neq 2$$
+
+![[Pasted image 20261112232310.png|Plot|250]]
+##### Bonus exercise: Compute the limits of the derivative
+Now we compute the limits of $f'(x)$ at $\pm\infty$ and $2^\pm$. First, rewrite the rational factor as:
+$$\frac{(x-2)^2 - 2}{(x-2)^2} = 1 - \frac{2}{(x-2)^2}$$
+
+- At $\pm\infty$: as $x \to \pm\infty$, we have $\frac{1}{(x-2)^2} \to 0$, so $e^{1/(x-2)^2} \to e^0 = 1$ and $1 - \frac{2}{(x-2)^2} \to 1$. Using the respective branches:
+$$\lim_{x \to +\infty} f'(x) = \lim_{x \to +\infty} e^{1/(x-2)^2} \left(1 - \frac{2}{(x-2)^2}\right) = 1 \cdot 1 = 1$$
+$$\lim_{x \to -\infty} f'(x) = \lim_{x \to -\infty} -e^{1/(x-2)^2} \left(1 - \frac{2}{(x-2)^2}\right) = -1 \cdot 1 = -1$$
+(Notice that these coincide with the slopes $m_+ = 1$ and $m_- = -1$ of the oblique asymptotes).
+
+- At $2^\pm$: as $x \to 2^\pm$, we have $(x-2)^2 \to 0^+$, so $1 - \frac{2}{(x-2)^2} \to -\infty$ and $e^{1/(x-2)^2} \to +\infty$ (which is not an indeterminate form!):
+$$\lim_{x \to 2^+} f'(x) = \lim_{x \to 2^+} e^{1/(x-2)^2} \left(1 - \frac{2}{(x-2)^2}\right) = (+\infty) \cdot (-\infty) = -\infty$$
+$$\lim_{x \to 2^-} f'(x) = \lim_{x \to 2^-} -e^{1/(x-2)^2} \left(1 - \frac{2}{(x-2)^2}\right) = -(+\infty) \cdot (-\infty) = +\infty$$
+
+
 # 8) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
