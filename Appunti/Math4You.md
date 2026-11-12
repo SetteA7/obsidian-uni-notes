@@ -1711,7 +1711,8 @@ $$f(x)=\log(|x|-x^2+x)$$
 i) determine the domain, symmetry, sign and compute limits and asymptotes at extremes of domain
 ii) study derivability and find the first derivative
 
-i) First, rewrite the argument of the logarithm without the absolute value using its piecewise definition:$$\vert{}x\vert{} - x^2 + x = \begin{cases} x - x^2 + x & x \geq 0\\ -x - x^2 + x & x < 0 \end{cases} = \begin{cases} 2x - x^2 & x \geq 0\\ -x^2 & x < 0 \end{cases}$$
+i) **Domain**
+First, rewrite the argument of the logarithm without the absolute value using its piecewise definition:$$\vert{}x\vert{} - x^2 + x = \begin{cases} x - x^2 + x & x \geq 0\\ -x - x^2 + x & x < 0 \end{cases} = \begin{cases} 2x - x^2 & x \geq 0\\ -x^2 & x < 0 \end{cases}$$
 
 For $f(x)$ to be well-defined, the argument of the logarithm must be strictly positive. We check both branches:
 - For $x < 0$, we need $-x^2 > 0 \iff x^2 < 0$, which is never satisfied in $\mathbb{R}$.
@@ -1721,11 +1722,32 @@ Thus, the domain is $\text{Dom}(f) = (0, 2)$. Notice that since the entire domai
 $$f(x) = \log(2x - x^2) \qquad \forall x \in (0, 2)$$
 Since $\text{Dom}(f) = (0, 2)$ is not symmetric with respect to the origin, $f$ cannot be even or odd.
 
+**Sign**
 Now we study the sign of $f(x)$ on $(0, 2)$:
 
 $$f(x) \geq 0 \iff \log(2x - x^2) \geq 0 \iff 2x - x^2 \geq 1$$
 
 Rearranging the terms gives $x^2 - 2x + 1 \leq 0 \iff (x - 1)^2 \leq 0$. Since a square is never negative, this holds only when $(x - 1)^2 = 0$, that is at $x = 1$. Thus, $f(x) = 0$ at $x = 1$, is strictly negative for all $x \in (0, 1) \cup (1, 2)$, and is never positive.
+
+**Limits**
+Next, we compute the limits at the extremes of the domain, $0^+$ and $2^-$:
+$$\lim_{x \to 0^+} \log(2x - x^2) = \log(0^+) = -\infty$$
+$$\lim_{x \to 2^-} \log(2x - x^2) = \log(0^+) = -\infty$$
+Therefore, $f$ has two vertical asymptotes: the lines $x = 0$ (as $x \to 0^+$) and $x = 2$ (as $x \to 2^-$). Since the domain is bounded, it makes no sense to take limits as $x \to \pm\infty$, so there are no horizontal or oblique asymptotes.
+
+ii) **Differentiability and first derivative**
+
+One might suspect that since $\vert{}x\vert{}$ has a corner point at $x_0 = 0$, we need to be careful with differentiability at the origin. However, as we just found, $x_0 = 0 \notin \text{Dom}(f)$!
+
+On its entire domain $(0, 2)$, the function reduces to $f(x) = \log(2x - x^2)$, which is the composition of the polynomial $u(x) = 2x - x^2$ (differentiable on all of $\mathbb{R}$ and strictly positive on $(0, 2)$) with $\phi(u) = \log(u)$ (differentiable for $u > 0$). By the chain rule, $f$ is differentiable on all of $(0, 2)$, so $\text{Dom}(f') = (0, 2)$.
+
+Differentiating the composite function $\phi(u(x))$ gives:
+
+$$f'(x) = \bigl(\phi(u(x))\bigr)' = \phi'(u(x)) \cdot u'(x) = \frac{1}{2x - x^2} \cdot (2 - 2x) = \frac{2(1 - x)}{x(2 - x)} \qquad \forall x \in (0, 2)$$
+
+![[Pasted image 20261112162224.png|Plot|250]]
+
+#### Exam
 
 # 8) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
