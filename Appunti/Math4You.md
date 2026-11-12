@@ -1704,9 +1704,28 @@ F'(x) &= f_n'\Bigl(f_{n-1}\bigl(\dots f_1(x)\dots\bigr)\Bigr) \cdot f_{n-1}'\Big
 \end{align}
 $$
 
+## 7.5) Exercises on past exams
+#### Exam 07.02.2022
+Given the function
+$$f(x)=\log(|x|-x^2+x)$$
+i) determine the domain, symmetry, sign and compute limits and asymptotes at extremes of domain
+ii) study derivability and find the first derivative
 
+i) First, rewrite the argument of the logarithm without the absolute value using its piecewise definition:$$\vert{}x\vert{} - x^2 + x = \begin{cases} x - x^2 + x & x \geq 0\\ -x - x^2 + x & x < 0 \end{cases} = \begin{cases} 2x - x^2 & x \geq 0\\ -x^2 & x < 0 \end{cases}$$
 
+For $f(x)$ to be well-defined, the argument of the logarithm must be strictly positive. We check both branches:
+- For $x < 0$, we need $-x^2 > 0 \iff x^2 < 0$, which is never satisfied in $\mathbb{R}$.
+- For $x \geq 0$, we need $2x - x^2 > 0 \iff x(2 - x) > 0$, which holds for $0 < x < 2$.
 
+Thus, the domain is $\text{Dom}(f) = (0, 2)$. Notice that since the entire domain lies in $(0, +\infty)$, the negative branch disappears completely and we can simply write:
+$$f(x) = \log(2x - x^2) \qquad \forall x \in (0, 2)$$
+Since $\text{Dom}(f) = (0, 2)$ is not symmetric with respect to the origin, $f$ cannot be even or odd.
+
+Now we study the sign of $f(x)$ on $(0, 2)$:
+
+$$f(x) \geq 0 \iff \log(2x - x^2) \geq 0 \iff 2x - x^2 \geq 1$$
+
+Rearranging the terms gives $x^2 - 2x + 1 \leq 0 \iff (x - 1)^2 \leq 0$. Since a square is never negative, this holds only when $(x - 1)^2 = 0$, that is at $x = 1$. Thus, $f(x) = 0$ at $x = 1$, is strictly negative for all $x \in (0, 1) \cup (1, 2)$, and is never positive.
 
 # 8) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
