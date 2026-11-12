@@ -137,22 +137,52 @@ Additionally also a ip def route was added
 sudo ip route add default via 192.168.77.1 dev eth0 metric 100
 ```
 
-# 3) Packet Loss (?)
-
+# 3) Netem (?)
+**Bot (eth0): bot → controller**
+Loss only:
 ```
 sudo tc qdisc add dev eth0 root netem loss 10% limit 10000
 ```
+Delay only:
+```
+sudo tc qdisc add dev eth0 root netem delay 50ms limit 10000
+```
+Delay and loss:
+```
+sudo tc qdisc add dev eth0 root netem delay 50ms loss 10% limit 10000
+```
+Bursty loss (each loss makes the next one 25% likely):
+```
+sudo tc qdisc add dev eth0 root netem loss 10% 25% limit 10000
+```
+Bottleneck for iperf3 congestion (keep the rate above the ~2.1 Mbit/s the scans need):
+```
+sudo tc qdisc add dev eth0 root netem rate 5mbit limit 100
+```
+Change values without removing the qdisc:
+```
+sudo tc qdisc change dev eth0 root netem loss 20% limit 10000
+```
+Check it’s active and see the drop count:
+```
+tc -s qdisc show dev eth0
+```
+Remove it:
+```
+sudo tc qdisc del dev eth0 root
+```
 
+
+**Controller (eno1): controller → bot**
+The same commands with eno1 in place of eth0:
 ```
-sudo tc qdisc del dev eth0 root netem
+sudo tc qdisc add dev eno1 root netem loss 10% limit 10000
+sudo tc qdisc change dev eno1 root netem delay 50ms loss 10% limit 10000
+tc -s qdisc show dev eno1
+sudo tc qdisc del dev eno1 root
 ```
 
-```
-ros2 run monitor_pkg controller_monitor            # defaults from the top of the file (SMART off, CSV on)
-ros2 run monitor_pkg controller_monitor SMART      # SMART on
-ros2 run monitor_pkg controller_monitor SMART NOCSV
-ros2 run monitor_pkg controller_monitor nosmart csv  # upper or lower case both work
-```
+
 
 # 4) Tests
 
@@ -363,6 +393,6 @@ I changed the config of chrony:
 the bot has a new final section to act as a source
 the controller (OAIBOX) has a difference here
 ```
-# server 147.162.2.7 iburst prefer minpoll 4 maxpoll 5
+# 4) server 147.162.2.7 iburst prefer minpoll 4 maxpoll 5
 server 100.79.118.80 port 5213 iburst prefer minpoll 4 maxpoll 6
 ```
