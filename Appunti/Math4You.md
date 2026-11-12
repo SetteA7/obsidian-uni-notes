@@ -1748,7 +1748,62 @@ $$f'(x) = \bigl(\phi(u(x))\bigr)' = \phi'(u(x)) \cdot u'(x) = \frac{1}{2x - x^2}
 ![[Pasted image 20261112162224.png|Plot|250]]
 
 #### Exam
+Given the function
+$$f(x)=|x-2|e^{1/(x-2)^2}$$
+i) determine the domain, symmetry, sign and compute limits and asymptotes at extremes of domain
+ii) study derivability and find the first derivative
 
+**i) Domain, symmetry, sign, limits and asymptotes**
+
+**Domain**
+The exponential function and the absolute value are defined everywhere on $\mathbb{R}$, so the only restriction comes from the denominator in the exponent, $(x-2)^2 \neq 0$, which requires $x \neq 2$. Thus, the domain is $\text{Dom}(f) = \mathbb{R} \setminus \{2\} = (-\infty, 2) \cup (2, +\infty)$.
+
+**Symmetries**
+Since $\text{Dom}(f) = \mathbb{R} \setminus \{2\}$ is not symmetric with respect to the origin ($-2 \in \text{Dom}(f)$ while $2 \notin \text{Dom}(f)$), $f$ is neither even nor odd. (However, since every $x$ appears in the form $(x-2)^2$ or $\vert{}x-2\vert{}$, the function is symmetric with respect to the vertical line $x = 2$, i.e., $f(2+t) = f(2-t)$ for all $t \neq 0$).
+
+**Sign**
+Now we study the sign of $f(x)$ on $\mathbb{R} \setminus \{2\}$. Since the exponential $e^{1/(x-2)^2}$ is strictly positive for all $x \neq 2$ and $\vert{}x-2\vert{} > 0$ for all $x \neq 2$, the product of two strictly positive quantities is strictly positive:
+$$f(x) > 0 \qquad \forall x \in \mathbb{R} \setminus \{2\}$$
+In particular, $f$ has no zeros and is never negative.
+
+**Limits**
+Now we check the behavior at $\pm\infty$:
+
+$$\lim_{x \to \pm\infty} \vert{}x-2\vert{}e^{1/(x-2)^2} = (+\infty) \cdot e^0 = +\infty$$
+
+Thus, there are no horizontal asymptotes. Since the limit is infinite, we check for oblique asymptotes $y = mx + q$ as $x \to +\infty$ and $x \to -\infty$:
+- As $x \to +\infty$, $\vert{}x-2\vert{} = x-2 > 0$:
+
+$$m_+ = \lim_{x \to +\infty} \frac{f(x)}{x} = \lim_{x \to +\infty} \frac{x-2}{x} e^{1/(x-2)^2} = 1 \cdot e^0 = 1$$
+
+$$q_+ = \lim_{x \to +\infty} \bigl(f(x) - x\bigr) = \lim_{x \to +\infty} \left[(x-2)e^{1/(x-2)^2} - (x-2) - 2\right] = \lim_{x \to +\infty} (x-2)\left(e^{1/(x-2)^2} - 1\right) - 2$$
+
+Using the standard limit $e^{\varepsilon(x)} - 1 \sim \varepsilon(x)$ as $\varepsilon(x) = \frac{1}{(x-2)^2} \to 0$:
+
+$$\lim_{x \to +\infty} (x-2) \cdot \frac{1}{(x-2)^2} - 2 = \lim_{x \to +\infty} \frac{1}{x-2} - 2 = -2$$
+
+Thus, $y = x - 2$ is a right oblique asymptote as $x \to +\infty$.
+
+**ii) Differentiability and first derivative**
+One might suspect that $\vert{}x-2\vert{}$ introduces a corner point at $x_0 = 2$. However, as we already established, $x_0 = 2 \notin \text{Dom}(f)$, so we don't even have to check differentiability at $x_0 = 2$!
+
+First, rewrite $f(x)$ on $\mathbb{R} \setminus \{2\}$ without the absolute value:
+$$f(x) = \vert{}x-2\vert{}e^{1/(x-2)^2} = \begin{cases} (x-2)e^{(x-2)^{-2}} & x > 2\\ -(x-2)e^{(x-2)^{-2}} & x < 2 \end{cases}$$
+On both open intervals $(-\infty, 2)$ and $(2, +\infty)$, $f$ is the product and composition of differentiable functions, so $f$ is differentiable on its entire domain: $\text{Dom}(f') = \mathbb{R} \setminus \{2\}$.
+
+First, let's differentiate the exponential term $e^{(x-2)^{-2}}$ via the chain rule. Letting $u(x) = (x-2)^{-2}$ and $\phi(u) = e^u$, we have:
+$$\bigl(e^{(x-2)^{-2}}\bigr)' = e^{(x-2)^{-2}} \cdot \bigl((x-2)^{-2}\bigr)' = e^{1/(x-2)^2} \cdot \bigl(-2(x-2)^{-3}\bigr) = -\frac{2}{(x-2)^3}e^{1/(x-2)^2}$$
+
+Now we differentiate the first branch ($x > 2$) using the product rule:
+$$f'(x) = 1 \cdot e^{1/(x-2)^2} + (x-2) \cdot \left(-\frac{2}{(x-2)^3}e^{1/(x-2)^2}\right) = e^{1/(x-2)^2} \left(1 - \frac{2}{(x-2)^2}\right) = e^{1/(x-2)^2} \frac{(x-2)^2 - 2}{(x-2)^2}$$
+
+For the second branch ($x < 2$), since $f(x)$ differs only by a minus sign in front of $(x-2)$, we immediately obtain:
+
+$$f'(x) = -e^{1/(x-2)^2} \frac{(x-2)^2 - 2}{(x-2)^2}$$
+
+Combining both branches into a single expression (or recalling that $\bigl(\vert{}x-2\vert{}\bigr)' = \frac{\vert{}x-2\vert{}}{x-2} = \text{sgn}(x-2)$ for $x \neq 2$), we can write:
+
+$$f'(x) = \begin{cases} e^{1/(x-2)^2} \dfrac{(x-2)^2 - 2}{(x-2)^2} & x > 2\\ -e^{1/(x-2)^2} \dfrac{(x-2)^2 - 2}{(x-2)^2} & x < 2 \end{cases} = \frac{\vert{}x-2\vert{}}{x-2} \cdot \frac{(x-2)^2 - 2}{(x-2)^2} e^{1/(x-2)^2} \qquad \forall x \neq 2$$
 # 8) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
