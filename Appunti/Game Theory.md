@@ -344,4 +344,13 @@ $$u_1=\frac{(a-c^2)}4\quad u_2=0$$
 the monopoly firm has more profit
 
 #### Bertrand Duopoly
-Suppose now people buy $q_i=a-p_i$ items from the firm with lowest price $q_i$ (split evenly same price)
+Suppose now people buy $q_i=a-p_i$ items from the firm with lowest price $q_i$ (split evenly same price). Now the utility becomes 
+$$u_i(p_i, p_j) = \begin{cases} (p_i - c)(a - p_i) & \text{if } p_i < p_j \text{ and } p_i < a \\ (p_i - c)\dfrac{a - p_i}{2} & \text{if } p_i = p_j \text{ and } p_i < a \\ 0 & \text{if } p_i > p_j \text{ or } p_i \ge a \end{cases}$$
+
+When both firms price at marginal cost ($p_1 = p_2 = c$), both earn zero profit:
+$$u_1(c, c) = u_2(c, c) = (c - c)\frac{a - c}{2} = 0$$
+Can firm $i$ improve its payoff by deviating while firm $j$ holds $p_j = c$?
+- **Raise price ($p_i > c$):** Firm $i$ loses all customers to firm $j$ and gets $u_i(p_i, c) = 0$. Not a strict improvement.
+- **Lower price ($p_i < c$):** Firm $i$ captures the entire market ($a - p_i > 0$ since $p_i < c < a$), but sells every unit below cost ($p_i - c < 0$), earning $u_i(p_i, c) < 0$. Worse off.
+
+Thus, $(c, c)$ is a Nash Equilibrium.
