@@ -321,7 +321,7 @@ p=\frac12
 \end{gather}$$
 For symmetry also for $P_2$ the mixed strategy has $p=1/2$.
 
-#### Duopoly
+#### Cournot Duopoly
 Two firms produce goods in quantity $q_1,q_2$ and call $Q=q_1+q_2$ now consider:
 - the cost of production is $C(q)=c\cdot q$
 - the price is $P(q)=a-Q$ (with $a>c$)
@@ -331,4 +331,17 @@ By noticing that $q>a$ is pointless, both firms have a strategy in $S_i=[0,a)$ a
 The NE is given by 
 $$q_i^*=\arg\max_{q_i}u_i(q_i,q_j^*)$$
 Taking derivative wrt $q_i$ and putting it to zero finds the maximum
-$$a-2q_i-q_j-c=0\rightarrow q_i=\frac{a-c-q_j}2,\ i=1,2\quad\rightarrow\begin{cases}q_1=\frac{a-c-q_2}2\\q_2=\frac{a-c-1_1}2\end{cases}\rightarrow q_1^*$$
+$$a-2q_i-q_j-c=0\rightarrow q_i^*=\frac{a-c-q_j}2,\ i=1,2\quad\rightarrow\begin{cases}q_1^*=\frac{a-c-q_2}2\\ q_2^*=\frac{a-c-1_1}2\end{cases}\rightarrow q_1^*=q_2^*=\frac{a-c}3$$
+This is a duopoly
+The profits are:
+$$u_1=u_2=\frac{(a-c)^2}{9}$$
+##### Monopoly
+Suppose we have a monopoly, so set $q_2=0$, then clearly
+$$\begin{cases}q_1=\frac{a-c-q_2}2\\ q_2=0\end{cases}\rightarrow q_1=\frac{a-c}2,q_2=0$$
+notice how the total output is now smaller than the duopoly: $\frac12(a-c)<\frac32(a-c)$
+The profits are:
+$$u_1=\frac{(a-c^2)}4\quad u_2=0$$
+the monopoly firm has more profit
+
+#### Bertrand Duopoly
+Suppose now people buy $q_i=a-p_i$ items from the firm with lowest price $q_i$ (split evenly same price)
