@@ -1518,38 +1518,6 @@ Since the limit is not a finite real number, the function is not differentiable 
 
 ![[Pasted image 20261102150644.png|plot|250]]
 
-
-## 7.3) Derivatives
-Here is a list of the various derivatives of elementary functions
-
-$$
-\begin{array}{l|l}
-f(x) & f'(x) \\
-\hline
-x^\alpha & \alpha x^{\alpha-1}, \qquad \forall \alpha \in \mathbb{R} \\
-\sin x & \cos x \\
-\cos x & -\sin x \\
-\tan x & 1 + \tan^2 x = \dfrac{1}{\cos^2 x} \\
-\arcsin x & \dfrac{1}{\sqrt{1-x^2}} \\
-\arccos x & -\dfrac{1}{\sqrt{1-x^2}} \\
-\arctan x & \dfrac{1}{1+x^2} \\
-a^x & (\log a)\, a^x \\
-\log_a |x| & \dfrac{1}{(\log a)\, x} \\
-\sinh x & \cosh x \\
-\cosh x & \sinh x
-\end{array}
-$$
-And some differentiation rules 
-$$
-\begin{align}
-\bigl(\alpha f(x) + \beta g(x)\bigr)' &= \alpha f'(x) + \beta g'(x) \\
-\bigl(f(x)g(x)\bigr)' &= f'(x)g(x) + f(x)g'(x) \\
-\left(\frac{f(x)}{g(x)}\right)' &= \frac{f'(x)g(x) - f(x)g'(x)}{\bigl(g(x)\bigr)^2} \\
-\bigl(g(f(x))\bigr)' &= g'(f(x))f'(x)
-\end{align}
-$$
-When using a substitution the last differentiation rule (chain rule) must be applied
-
 ## 7.4) Exercises on derivatives
 #### c) Piecewise function
 Say where the following maps are differentiable and find the derivatives
@@ -1861,6 +1829,38 @@ $$\lim_{x \to 2^-} f'(x) = \lim_{x \to 2^-} -e^{1/(x-2)^2} \left(1 - \frac{2}{(x
 - $\cap$: Intersection; and
 
 - $\exists$: there exists
+
+
+## 7.3) Derivatives
+Here is a list of the various derivatives of elementary functions
+
+$$
+\begin{array}{l|l}
+f(x) & f'(x) \\
+\hline
+x^\alpha & \alpha x^{\alpha-1}, \qquad \forall \alpha \in \mathbb{R} \\
+\sin x & \cos x \\
+\cos x & -\sin x \\
+\tan x & 1 + \tan^2 x = \dfrac{1}{\cos^2 x} \\
+\arcsin x & \dfrac{1}{\sqrt{1-x^2}} \\
+\arccos x & -\dfrac{1}{\sqrt{1-x^2}} \\
+\arctan x & \dfrac{1}{1+x^2} \\
+a^x & (\log a)\, a^x \\
+\log_a |x| & \dfrac{1}{(\log a)\, x} \\
+\sinh x & \cosh x \\
+\cosh x & \sinh x
+\end{array}
+$$
+And some differentiation rules 
+$$
+\begin{align}
+\bigl(\alpha f(x) + \beta g(x)\bigr)' &= \alpha f'(x) + \beta g'(x) \\
+\bigl(f(x)g(x)\bigr)' &= f'(x)g(x) + f(x)g'(x) \\
+\left(\frac{f(x)}{g(x)}\right)' &= \frac{f'(x)g(x) - f(x)g'(x)}{\bigl(g(x)\bigr)^2} \\
+\bigl(g(f(x))\bigr)' &= g'(f(x))f'(x)
+\end{align}
+$$
+When using a substitution the last differentiation rule (chain rule) must be applied
 
 # 9) Taylor Expansions
 Here is a list of some of the most frequent expansions
