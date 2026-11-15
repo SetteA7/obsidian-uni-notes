@@ -321,4 +321,14 @@ p=\frac12
 \end{gather}$$
 For symmetry also for $P_2$ the mixed strategy has $p=1/2$.
 
-#### Dopology
+#### Duopoly
+Two firms produce goods in quantity $q_1,q_2$ and call $Q=q_1+q_2$ now consider:
+- the cost of production is $C(q)=c\cdot q$
+- the price is $P(q)=a-Q$ (with $a>c$)
+
+By noticing that $q>a$ is pointless, both firms have a strategy in $S_i=[0,a)$ and the payoff is the profit $u_i(q_i,q_j)=q_i[P(q_i+q_j)-c]=q_i(a-q_i-q_j-c)$
+
+The NE is given by 
+$$q_i^*=\arg\max_{q_i}u_i(q_i,q_j^*)$$
+Taking derivative wrt $q_i$ and putting it to zero finds the maximum
+$$a-2q_i-q_j-c=0\rightarrow q_i=\frac{a-c-q_j}2,\ i=1,2\quad\rightarrow\begin{cases}q_1=\frac{a-c-q_2}2\\q_2=\frac{a-c-1_1}2\end{cases}\rightarrow q_1^*$$
