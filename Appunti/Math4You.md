@@ -1518,7 +1518,7 @@ Since the limit is not a finite real number, the function is not differentiable 
 
 ![[Pasted image 20261102150644.png|plot|250]]
 
-## 7.4) Exercises on derivatives
+## 7.3) Exercises on derivatives
 #### c) Piecewise function
 Say where the following maps are differentiable and find the derivatives
 $$f(x)=\begin{cases}
@@ -1672,7 +1672,7 @@ F'(x) &= f_n'\Bigl(f_{n-1}\bigl(\dots f_1(x)\dots\bigr)\Bigr) \cdot f_{n-1}'\Big
 \end{align}
 $$
 
-## 7.5) Exercises on past exams
+## 7.4) Exercises on past exams
 #### Exam 07.02.2022
 Given the function
 $$f(x)=\log(|x|-x^2+x)$$
@@ -1715,6 +1715,8 @@ $$f'(x) = \bigl(\phi(u(x))\bigr)' = \phi'(u(x)) \cdot u'(x) = \frac{1}{2x - x^2}
 
 ![[Pasted image 20261112162224.png|Plot|250]]
 
+
+# 8) Lesson 20/11/26
 #### Exam
 Given the function
 $$f(x)=|x-2|e^{1/(x-2)^2}$$
@@ -1813,7 +1815,7 @@ $$\lim_{x \to 2^+} f'(x) = \lim_{x \to 2^+} e^{1/(x-2)^2} \left(1 - \frac{2}{(x-
 $$\lim_{x \to 2^-} f'(x) = \lim_{x \to 2^-} -e^{1/(x-2)^2} \left(1 - \frac{2}{(x-2)^2}\right) = -(+\infty) \cdot (-\infty) = +\infty$$
 
 
-# 8) Symbols
+# 9) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
 - $\iff$: necessary + sufficient, if and only if "iff"
@@ -1831,7 +1833,7 @@ $$\lim_{x \to 2^-} f'(x) = \lim_{x \to 2^-} -e^{1/(x-2)^2} \left(1 - \frac{2}{(x
 - $\exists$: there exists
 
 
-## 7.3) Derivatives
+# 10) Derivatives
 Here is a list of the various derivatives of elementary functions
 
 $$
@@ -1860,9 +1862,8 @@ $$
 \bigl(g(f(x))\bigr)' &= g'(f(x))f'(x)
 \end{align}
 $$
-When using a substitution the last differentiation rule (chain rule) must be applied
 
-# 9) Taylor Expansions
+# 11) Taylor Expansions
 Here is a list of some of the most frequent expansions
 $$\begin{align}
 e^x &= 1 + x + \frac{x^2}{2} + \cdots + \frac{x^k}{k!}
