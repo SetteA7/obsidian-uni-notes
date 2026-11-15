@@ -130,100 +130,6 @@ And suppose that now the nature choice is already known, then the optimal utilit
 The value of this information is $k'-k$
 
 # 3) Multi Player Static Games
-With multiple players things change. All players want to maximize their payoff!
-#### Notation
-We consider the following game:
-- **static**: all players move together (simultaneous and independent)
-- **complete information**: anybody's payoff function is known
-
-An information $E$ is **common knowledge** if:
-- Everybody knows $E$
-- It is known that everybody knows it
-
-Each player $i$ can access to a set of pure strategies:
-- $S_i$ is the set accessible by player i
-- $s_i\in S_i$ is the choice taken by player $i$
-
-We define the **strategy profile** all the actions taken by all players, that is
-$$s=(s_1,...,s_i,...,s_n)$$
-We define the **strategy profile that excludes $i$-th player** choice as
-$$s_{-i} = (s_1, \dots, s_{i-1}, s_{i+1}, \dots, s_n)$$
-
-The normal form of the game is 
-$$G=\curly{S_1,...,S_n;u_1,...,u_n}$$
-
-The combination of the choices determines the outcome of the game $(a_1,...,a_n)$, the utility of $i$-th player is
-$$u_i=u_i(a_1,a_2,...,a_n)$$
-
-If the sets are discrete, this can be written in a $n$ dimensional matrix
-#### Dominance and Best Response
-A joint strategy $s$ is **Pareto Dominated** by another strategy $s'$ if
-$$\begin{align}
-u_i(s')\geq u_i(s)&\quad\text{for all players }i\\
-u_i(s')>u(s)&\quad\text{for some players }i
-\end{align}$$
-$s'$ is said to be **pareto efficient**
-
-We say that $s_i$ is **strictly dominated** by $s_i'$ if the payoff of $s_i'$ is always greater than $s_i$
-$$u_i(s_{-i},s_i')>u_i(s_{-i},s_i)\quad\text{ for every } s_{-i}$$
-We say that $s_i$ is **weakly dominated** by $s_i'$ if 
-$$\begin{align}
-u_i(s_{-i},s_i')\geq u_i(s_{-i},s_i)&\quad\text{ for every } s_{-i}\\
-u_i(s_{-i},s_i')>u_i(s_{-i},s_i)&\quad\text{ for some } s_{-i}
-\end{align}$$
-We say that $s_i$ is **dominated** by $s_i'$ if 
-$$u_i(s_{-i},s_i')\geq u_i(s_{-i},s_i)\quad\text{ for every } s_{-i}$$
-
----
-
-Rational players do not play $s_i$ if it is **strictly dominated** and they can be removed from the table.
-
-This process is called **Iterated Elimination of Strictly Dominated Strategies (IESDS)**
-
----
-
-Strategy $s_i\in S_i$ is the **best response** to $s_{-i}\in S_{-i}$  if $u(s_i,s_{-i})\geq u(s_i',s_{-i})$ $\forall s_i'\in S_i$
-
-It is possible that there are multiple best responses (with identical values of $u_i(s_i,s_{-i})$)
-
----
-
->[!claim] 
-A rational player that believes that the opponent will play $s_{-i}\in S_{-i}$ will always chose the best response to $s_{-i}$
-
->[!thm]
->if $s_i\in S_i$ is a strictly dominated strategy, it is no best response to any $s_{-i}\in S_{-i}$
-
----
-
-**Belief**
-Player $i$ cannot see the other players choice, so it must create a conjecture on what will be chosen.
-We define a best-response-correspondence that associates to $s_{-i}\in S_{-i}$a subset of $S_i$ such that each $s_i\in\text{BR}(s_{-i})$ is a best response to $s_{-i}$
-$$\text{BR: }S_{-i}\rightarrow\mathscr p(S_i)$$
-
----
-
-**Nash Equilibrium:**
-Loop of dominant decisions from multiple players: x dominates y, so I play x, my opponent knows I'll do that and if y dominates x he'll play y.
-
-In a $n$-player game $G=\curly{S_1,...,S_n;u_1,...,u_n}$ strategies $(s_!^*,...,s_n^*)$ are a **Nash Equilibrium** if for any $i$, $s_i^*$ is the best response of player i to $s_{-i}^*$, that is:
-$$\forall s_i\in S_i: u_i(s_{-i}^*,s_i^*)\geq u_i(s_{-i}^*,s_i)\qquad s_i^*=\arg\max_s(u_i(s_{-i}^*,s))$$
->[!thm]
->In a finite game, if $s^*$ is 
->- The only survivor of IESDS
->- The only rationalizable profile
->
->Then $s^*$ is a Nash Equilibrium
-
-This brings two main results:
-- a NE survives IEASDS
-- IESDS is order irrelevant
-
-Therefore for a NE:
-- everyone plays best response to beliefs
-- everyone beliefs are correct
-
----
 
 **Motivation:**
 Take a possible combination $(s_1',...,s_n')$. If this is not in nash equilibrium then there exists a $s_i'$ that is not a best response to $s_{-i}'$, that is
@@ -318,7 +224,9 @@ Therefore for a NE:
 
 Nash equilibria **in mixed strategies** are found by applying the **indifference principle**. This states that a mixed strategy at the Nash equilibrium should give the same payoff to the other player for all strategies
 
-# 5) Examples:
+# 5) Zero Sum Games
+
+# 6) Examples:
 #### Prisoner Dilemma:
 Normal form 2D matrix:
 In this matrix we have:
@@ -413,4 +321,4 @@ p=\frac12
 \end{gather}$$
 For symmetry also for $P_2$ the mixed strategy has $p=1/2$.
 
-## 5.2) Zero Sum Games
+#### Dopology
