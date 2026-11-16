@@ -911,3 +911,204 @@ Ordering: $B_{min}\in\left(T(N^*-1),TN^*\right]$, so $S_{low}\leq S_{smart}\leq 
 
 ![[Pasted image 20261110222318.png]]![[Pasted image 20261110223846.png]]
 # 6) Section 6
+
+## 6.1) Recap of the Model
+#### Scenario
+The bot drives straight towards a wall at $v_\max$ while its LiDAR sends one scan every $T$ to a remote controller. The controller takes the closest front reading of each scan and compares it with the threshold $S$. A control timer with the same period $T$ sends GO while the reading is above $S$, and STOP once the crossing has been detected. The STOP is applied as soon as it reaches the bot, which then brakes over $d_{brake}$. There is no relay timer on the bot: the only wait on the grid of control ticks is $\psi$, at the controller.
+
+#### Timeline of a stop
+From the moment the bot crosses $S$ to the moment it starts braking, five things happen in sequence:
+
+| Step | Interval | Model |
+|---|---|---|
+| 1. Wait for the next LiDAR sample | $\phi$ | $\mathcal U(0,T)$, independent of the network |
+| 2. Scan reaches the controller | $\tau_{tx}+XT$ | $X\sim\text{Geom}(1-p_{tx})$ lost scans, each replaced one period later |
+| 3. Wait for the control tick | $\psi$ | constant phase, measured live |
+| 4. STOP reaches the bot | $\tau_{rx}+YT$ | $Y\sim\text{Geom}(1-p_{rx})$ lost STOPs, each replaced one period later |
+| 5. Braking | $d_{brake}$ | constant, measured |
+
+So the delay of the threshold transmission is: $$t_{e2e,thresh}=\tau_{e2e}+\psi+AT+\phi\qquad A=X+Y$$
+
+#### Parameters
+| Symbol | Meaning | Value in the experiments |
+|---|---|---|
+| $T$ | LiDAR period = control period | $100\,ms$ |
+| $v_\max$ | cruise speed | $43.1$ to $44.6\,cm/s$ (commanded $50\,cm/s$), calibrated per session |
+| $d_{brake}$ | braking distance | $10.0$ to $11.6\,cm$, calibrated per session |
+| $L$ | LiDAR to front bumper | $18.75\,cm$ |
+| $m$ | safety margin | $5\,cm$ |
+| $\tau_{tx},\tau_{rx}$ | one-way latencies bot$\rightarrow$controller, controller$\rightarrow$bot | measured live (Section 6.3.3) |
+| $p_{tx},p_{rx}$ | loss of a whole scan, loss of a control message | measured live |
+| $\psi$ | scan arrival $\rightarrow$ control tick | measured live, $25$ to $97\,ms$ depending on the session |
+| $\phi$ | crossing $\rightarrow$ next LiDAR sample | $\mathcal U(0,T)$, made uniform by the random start |
+
+_(In the experiments distances are in $cm$ and speeds in $cm/s$; the formulas are the same.)_
+
+#### Main results
+With $\Delta t=1000\,\frac{S-L-m-d_{brake}}{v_\max}$ and the budget $B=\Delta t-\tau_{e2e}-\psi$:
+
+- **Expected delay** (5.3): $\mathbb E[t_{e2e,thresh}]=\tau_{e2e}+\psi+T\frac{1+p_{tx}+p_{rx}-3p_{tx}p_{rx}}{2(1-p_{e2e})}$
+- **Minimum distance** (5.4): $d_\min=S-L-d_{brake}-\frac{v_\max}{1000}\,t_{e2e,thresh}$, with $\mathbb E[d_\min]$ from the expected delay.
+- **Spread** (5.5): $\text{Var}(d_\min)=\left(\frac{v_\max}{1000}\right)^2T^2\left(\frac{p_{tx}}{(1-p_{tx})^2}+\frac{p_{rx}}{(1-p_{rx})^2}+\frac1{12}\right)$. Without losses the standard deviation is $\frac{v_\max T}{1000\sqrt{12}}\approx1.3\,cm$.
+- **Crash probability** (5.6): with $N_\tau=\lfloor B/T\rfloor$ and $R=B-N_\tau T$, $$P_{crash}=F(N_\tau)-f(N_\tau)\frac RT\qquad F(k)=\mathbb P(A\geq k),\ f(k)=\mathbb P(A=k)$$ and $P_{crash}=1$ for $B<0$. It lies between $P_{low}=F(N_\tau+1)$ and $P_{high}=F(N_\tau)$.
+- **S.M.A.R.T.** (5.7): $P_{crash}$ is continuous and strictly decreasing in $B$, so the lowest threshold that meets $P_{target}$ is $$S_{smart}=\frac{v_\max}{1000}\left(B_\min+\tau_{e2e}+\psi\right)+L+m+d_{brake}\qquad B_\min=nT+T\,\frac{F(n)-P_{target}}{f(n)},\ n=N^*-1$$
+
+#### Threshold policies tested
+Two policies were tested:
+
+- **FIXED**: a constant $S=42.6\,cm$. With the calibrated $v_\max$ and $d_{brake}$ this gives $\Delta t\approx165$ to $180\,ms$, so its crash probability depends entirely on the network.
+- **SMART**: $S=S_{smart}$ of Section 5.7, recomputed at every scan from the live estimates of $\tau_{tx},\tau_{rx},p_{tx},p_{rx},\psi$, with $P_{target}\in\{0.05,\,0.15,\,0.30\}$. (In the code this is the mode `SUPERSMART`.)
+
+_Note:_ an earlier version of the algorithm used $S=\frac{v_\max}{1000}\left(T(N^*+1)+\tau_{e2e}\right)+L+m+d_{brake}$, which is $S_{high}$ with $\psi$ replaced by its worst case $T$. It also meets the target, but it is not the best bound for this model: it ignores the measured $\psi$ and keeps the whole last period, so it places $S$ higher than needed. It was not used in the tests.
+
+## 6.2) Experimental Setup
+### 6.2.1) Hardware and Network
+- **Robot**: Husarion ROSbot with an RPLIDAR (`sllidar_ros2` driver, one rotation every $\approx100\,ms$), ROS 2 Jazzy.
+- **Controller**: a separate PC running the controller node.
+- **Bridge**: the ROS 2 topics cross between the two machines through `zenoh-bridge-ros2dds` (the bot listens on port 7447, the controller connects to it), so DDS discovery stays local to each machine. %% confirm: zenoh transport used in the tests, TCP or UDP %%
+- **Ideal link**: robot and controller on the same local network ($192.168.77.0/24$). The latency is below $1\,ms$ and there is no loss.
+- **Starlink link**: the robot is connected by Ethernet to a MikroTik RouterBOARD, whose uplink is a Starlink terminal. The MikroTik serves DHCP for the robot's network, because DHCP on the ROSbot interfered with the DDS communication of the motor nodes. The controller reaches the robot through a Tailscale VPN, so every message between the two crosses the Starlink link.
+- **Clocks**: synchronized with chrony, with the bot as the controller's time source. One-way latencies depend on the clock offset, but $\tau_{e2e}=\tau_{tx}+\tau_{rx}$ does not, since the offset enters the two directions with opposite signs. $\psi$, $v_\max$ and $d_{brake}$ are each measured on a single clock.
+
+### 6.2.2) Software
+Two nodes from the package `monitor_pkg` run on the two machines:
+
+- **`bot_monitor`** (robot): network heartbeats, the `BrakeMonitor` that measures $d_{brake}$ of every stop, and two iperf3 servers for the link load.
+- **`controller_monitor`** (controller): computes $S$, decides GO/STOP, measures $\psi$, logs everything, and runs the automated test.
+
+| Topic | From $\rightarrow$ to | Content | QoS |
+|---|---|---|---|
+| `/scan` | bot $\rightarrow$ controller | one LiDAR scan every $T$ | best effort |
+| `/cmd_vel` | controller $\rightarrow$ bot | GO ($0.5\,m/s$) or STOP ($0$), every $T$ | see below |
+| `network_downlink` | bot $\rightarrow$ controller | heartbeat every $0.1\,s$, carries the loss and latency the bot measured | best effort |
+| `network_uplink` | controller $\rightarrow$ bot | heartbeat every $0.1\,s$ | best effort |
+| `/brake_distance` | bot $\rightarrow$ controller | measured $d_{brake}$, once per stop | reliable |
+
+The model assumes that a lost scan or command is replaced by the next one, one period later, which is the best-effort behaviour. With reliable QoS, DDS would retransmit by itself and turn loss into extra latency. %% /cmd_vel: the publisher is reliable, the bot's subscribers are best effort, check which one the connection uses %%
+
+### 6.2.3) Measuring the Model Inputs
+Every input of the model is estimated online by the controller, and the threshold is recomputed at every scan. The code names the two directions from the controller's side (uplink = controller$\rightarrow$bot, downlink = bot$\rightarrow$controller), which swaps `tx` and `rx` with respect to the paper.
+
+| Paper | How it is measured | CSV column |
+|---|---|---|
+| $\tau_{rx}$ (controller$\rightarrow$bot) | one-way delay of the uplink heartbeats, median of the last 100 ($10\,s$), measured on the bot and sent back | `tau_tx_ms` |
+| $\tau_{tx}$ (bot$\rightarrow$controller) | on the scans themselves: arrival $-$ stamp $-$ scan duration, median of the last 100 scans (`USEPING=False`). In the Ideal sessions the downlink heartbeat was used instead (`USEPING=True`), which is equivalent on a local network | `tau_rx_scan_ms` (`tau_rx_ms`) |
+| $p_{rx}$ | missing sequence numbers of the uplink heartbeats over 100 heartbeats, measured on the bot | `p_tx` |
+| $p_{tx}$ | missing whole scans, from gaps in the LiDAR stamps longer than one period, over the last 100 scans | `p_scan` |
+| $\psi$ | for every scan, the time from its arrival to the next control tick (monotonic clock). The model uses the 90th percentile of the last 50 samples ($T$ until 10 samples exist), so a wait that jitters around a tick counts as late | `psi_ms` |
+| $v_\max$ | least-squares slope of the front distance over the cruise part of the approach | `VMAX_cm_s` |
+| $d_{brake}$ | measured by the bot: distance at the moment the first STOP arrives (line fitted to the readings of the last $0.35\,s$) minus the distance at standstill | `D_BRAKE_cm` |
+| reading vs $S$ | closest valid ray among the 10 at each end of the scan array (straight ahead) | `min_distance_cm` |
+
+The scans are measured directly, instead of relying only on the heartbeats, because on Starlink they behave differently. A scan is a large message (the LiDAR stream needs about $2.1\,Mbit/s$), so it takes longer to cross the link ($\tau_{tx}\approx33$ to $44\,ms$ from the scans, against $16$ to $25\,ms$ from the heartbeats). A scan is also lost if any of its packets is lost: with netem, $\approx10\%$ of the scans were lost, against $\approx2\%$ of the heartbeats in the same direction. The model needs the delay and loss of the scans, not of a small probe.
+
+The LiDAR driver stores the rays newest first, so ray $k$ of a scan with $n$ rays was measured at `stamp + (n-1-k) * time_increment`, not `stamp + k * time_increment`. The `BrakeMonitor` uses this timing, otherwise $d_{brake}$ comes out about $v_\max\cdot\text{scan time}\approx4.3\,cm$ too small.
+
+### 6.2.4) Test Procedure
+Each test session runs the same braking manoeuvre many times (`controller_monitor <MODE> RUNS=20`). Every run has five phases:
+
+1. **Align**: turn in place until the bot faces the wall ($|\text{yaw}|\leq0.5°$ for $0.6\,s$).
+2. **Wait**: stand still for $2\,s$ (with link load: $10\,s$, so that the $10\,s$ estimation windows see the loaded link).
+3. **Approach**: drive at $0.5\,m/s$ with the normal GO/STOP logic, until the first STOP caused by a reading below $S$.
+4. **Stopping**: send STOP for $2\,s$, then wait for the bot's measured $d_{brake}$.
+5. **Return**: reverse to the start position of the next run.
+
+- **Calibration run 0.** Every session starts with a run that always uses the FIXED threshold. Its measured cruise speed and braking distance become $v_\max$ and $d_{brake}$ for the 20 measured runs, and are kept fixed. Run 0 is excluded from the analysis.
+- **Random start.** Each run starts at a random offset $\mathcal U\left(0,\frac{v_\max T}{1000}\right)\approx\mathcal U(0,4.4\,cm)$ behind a fixed start point. This is one LiDAR period of travel, so the threshold is crossed at a uniform phase of the LiDAR period and $\phi\sim\mathcal U(0,T)$, as the model assumes.
+- **Safety stops.** A session ends early on a collision (a reading $\leq L$), a failed calibration, an alignment or return timeout, or an obstacle behind the bot. All 19 sessions below completed their 20 runs. A stale scan ($>0.5\,s$ old) also triggers a STOP, as an equipment protection that is not part of the model; a run where it fires has to be discarded.
+- **Link load.** iperf3 UDP streams at a fixed rate in each direction. Both clients run on the controller (one in reverse mode), so the load is switched on and off without sending a command over the loaded link. The load is on during the measured runs only, never in run 0.
+
+## 6.3) Test Conditions and Evaluation
+### 6.3.1) Network Conditions
+Five network conditions were tested:
+
+| Condition | Description |
+|---|---|
+| Ideal | local network, no Starlink |
+| Starlink | Starlink link, no added load or impairment |
+| Starlink + iperf | iperf3 UDP load of $40\,Mbit/s$ controller$\rightarrow$bot and $4.5\,Mbit/s$ bot$\rightarrow$controller |
+| Starlink + netem | `tc netem` on both machines, setting "2/5/5/5" %% fill in the exact netem commands (loss and delay on eth0 and eno1) %% |
+| Starlink mixed | iperf load and netem together |
+
+The link as the controller measured it at the brake, averaged over the sessions of each condition:
+
+| Condition | $\tau_{tx}$ (scans) | $\tau_{tx}$ (heartbeat) | $\tau_{rx}$ | $\tau_{e2e}$ used by the model | $p_{tx}$ (scans) | $p_{rx}$ | $\psi$ (per session) |
+|---|---|---|---|---|---|---|---|
+| Ideal | $1.9\,ms$ | $0.7\,ms$ | $0.6\,ms$ | $1.3\,ms$ | $0\%$ | $0\%$ | $34$ to $82\,ms$ |
+| Starlink | $36.8\,ms$ | $17.8\,ms$ | $11.8\,ms$ | $48.6\,ms$ | $0.5\%$ | $0\%$ | $31$ to $45\,ms$ |
+| + iperf | $32.6\,ms$ | $16.4\,ms$ | $14.2\,ms$ | $46.7\,ms$ | $3.9\%$ | $0.0\%$ | $25$ to $50\,ms$ |
+| + netem | $44.3\,ms$ | $24.0\,ms$ | $22.6\,ms$ | $66.8\,ms$ | $10.1\%$ | $4.8\%$ | $28$ to $97\,ms$ |
+| mixed | $41.0\,ms$ | $25.1\,ms$ | $20.3\,ms$ | $61.3\,ms$ | $13.0\%$ | $5.0\%$ | $25$ to $40\,ms$ |
+
+$\psi$ changes from one session to the next because it is set by the phase between the LiDAR and the control timer, which is fixed at every launch of the nodes. Its range ($25$ to $97\,ms$) is comparable to the whole Starlink latency, which is why it is measured and not assumed.
+
+### 6.3.2) Test Matrix
+Every condition was tested with FIXED and with SMART at the three targets, except the mixed condition at $P_{target}=0.30$. That gives 19 sessions of 20 measured runs, so 380 brakes in total. In the loaded FIXED sessions (iperf, netem, mixed) the margin was $m=10\,cm$ with $S=47.6\,cm$. Only $S-m$ enters both the budget and the crash test, so these sessions are equivalent to $S=42.6\,cm$ with $m=5\,cm$.
+
+| Condition | FIXED | SMART 0.05 | SMART 0.15 | SMART 0.30 |
+|---|---|---|---|---|
+| Ideal | `auto_FIXED_20261112_112831` | `auto_SUPERSMART_20261112_110825` | `auto_SUPERSMART_20261112_112213` | `auto_SUPERSMART_20261112_113426` |
+| Starlink | `auto_FIXED_20261112_113311` | `auto_SUPERSMART_20261112_112645` | `auto_SUPERSMART_20261112_140018` | `auto_SUPERSMART_20261112_133556` |
+| + iperf | `auto_FIXED_20261112_144218` | `auto_SUPERSMART_20261112_145543` | `auto_SUPERSMART_20261112_150512` | `auto_SUPERSMART_20261112_151537` |
+| + netem | `auto_FIXED_20261113_155837` | `auto_SUPERSMART_20261113_161303` | `auto_SUPERSMART_20261113_160558` | `auto_SUPERSMART_20261113_164059` |
+| mixed | `auto_FIXED_20261113_165906` | `auto_SUPERSMART_20261113_173058` | `auto_SUPERSMART_20261113_173947` | — |
+
+_(The target of each SMART session is the one the controller logged at the brake.)_
+
+### 6.3.3) Evaluation
+- **Crash.** A run is a crash (a margin breach) when the closest LiDAR reading after the detection, minus $L$, is below $m$. This is the event $d_\min<m$ of the model. No run touched the wall: the closest reading never went below $L$.
+- **Minimum distance check.** For every brake, $\mathbb E[d_\min]$ and its standard deviation are computed from Sections 5.4 and 5.5, using the measured inputs of that run and the measured wait $\psi$ of the STOP itself. The errors (measured $-$ expected) of a session are tested for zero bias (z-test) and for the predicted spread ($\chi^2$ test), each at $\alpha/2=0.025$.
+- **A priori probability.** The $P_{crash}$ the controller computed at the brake, with the inputs it had then. For SMART this is $P_{target}$.
+- **A posteriori probability.** $P_{crash}$ for the same $S$, recomputed with the values measured in that run ($v_\max$, $d_{brake}$, the STOP's own $\psi$) and the $\tau$ and $p$ logged at the brake.
+- **Crash rate.** The observed fraction of crashes, with its 95% Clopper-Pearson interval. It is compared with the a posteriori probabilities by an exact two-sided test (Poisson-binomial: each brake crashes with its own probability).
+
+## 6.4) Results
+#### Per condition and policy
+| Condition | Policy | mean $S$ (cm) | $P$ a priori | $P$ a posteriori | Crashes | 95% CI | $d_\min$ error (cm) |
+|---|---|---|---|---|---|---|---|
+| Ideal | FIXED | 42.60 | 0.000 | 0.000 | 0/20 | 0.00 to 0.17 | $+0.08\pm1.37$ |
+| Ideal | SMART 0.05 | 42.66 | 0.050 | 0.032 | 0/20 | 0.00 to 0.17 | $+0.16\pm1.42$ |
+| Ideal | SMART 0.15 | 41.95 | 0.150 | 0.188 | 2/20 | 0.01 to 0.32 | $+0.16\pm1.06$ |
+| Ideal | SMART 0.30 | 39.76 | 0.300 | 0.216 | 6/20 | 0.12 to 0.54 | $-0.27\pm1.49$ |
+| Starlink | FIXED | 42.60 | 0.201 | 0.116 | 3/20 | 0.03 to 0.38 | $+0.25\pm1.29$ |
+| Starlink | SMART 0.05 | 42.56 | 0.050 | 0.124 | 2/20 | 0.01 to 0.32 | $+0.11\pm1.40$ |
+| Starlink | SMART 0.15 | 42.50 | 0.150 | 0.115 | 4/20 | 0.06 to 0.44 | $-0.14\pm1.68$ |
+| Starlink | SMART 0.30 | 41.74 | 0.300 | 0.282 | 5/20 | 0.09 to 0.49 | $+0.09\pm0.93$ |
+| + iperf | FIXED | 47.60 (m = 10) | 0.276 | 0.197 | 4/20 | 0.06 to 0.44 | $+0.32\pm1.61$ |
+| + iperf | SMART 0.05 | 42.53 | 0.050 | 0.045 | 1/20 | 0.00 to 0.25 | $+0.09\pm1.35$ |
+| + iperf | SMART 0.15 | 42.93 | 0.150 | 0.059 | 1/20 | 0.00 to 0.25 | $-0.19\pm1.53$ |
+| + iperf | SMART 0.30 | 41.66 | 0.300 | 0.225 | 4/20 | 0.06 to 0.44 | $+0.13\pm1.26$ |
+| + netem | FIXED | 47.60 (m = 10) | 0.316 | 0.249 | 7/20 | 0.15 to 0.59 | $-0.34\pm2.15$ |
+| + netem | SMART 0.05 | 46.94 | 0.050 | 0.045 | 0/20 | 0.00 to 0.17 | $-0.50\pm2.21$ |
+| + netem | SMART 0.15 | 47.02 | 0.150 | 0.116 | 3/20 | 0.03 to 0.38 | $0.00\pm2.21$ |
+| + netem | SMART 0.30 | 45.46 | 0.300 | 0.295 | 6/20 | 0.12 to 0.54 | $+0.04\pm2.28$ |
+| mixed | FIXED | 47.60 (m = 10) | 0.420 | 0.340 | 6/20 | 0.12 to 0.54 | $-0.04\pm2.84$ |
+| mixed | SMART 0.05 | 45.67 | 0.050 | 0.071 | 0/20 | 0.00 to 0.17 | $+0.03\pm2.26$ |
+| mixed | SMART 0.15 | 43.44 | 0.150 | 0.134 | 2/20 | 0.01 to 0.32 | $+0.40\pm2.27$ |
+
+_($d_\min$ error: mean $\pm$ standard deviation of measured $-$ expected over the 20 brakes.)_
+
+#### Pooled over the conditions
+| Policy | Crashes | Rate (95% CI) | Expected, a priori | Expected, a posteriori |
+|---|---|---|---|---|
+| FIXED | 20/100 | 0.20 (0.13 to 0.29) | 24.3 | 18.0 |
+| SMART 0.05 | 3/100 | 0.03 (0.01 to 0.09) | 5.0 | 6.3 |
+| SMART 0.15 | 12/100 | 0.12 (0.06 to 0.20) | 15.0 | 12.3 |
+| SMART 0.30 | 21/80 | 0.26 (0.17 to 0.37) | 24.0 | 20.4 |
+| All | 56/380 | 0.15 | 68.3 | 57.0 |
+
+#### Findings
+1. **The minimum distance is predicted correctly.** In every session the mean error of $d_\min$ is within $\pm0.5\,cm$, and its spread ($0.9$ to $2.8\,cm$) matches the spread predicted by Section 5.5, which grows with the losses. The bias and spread checks pass in all 19 sessions (smallest p-value $0.066$).
+2. **The crash counts match the model.** In all 19 cells, the number of crashes is consistent with the a posteriori probabilities (smallest p-value $0.37$). Over all 380 brakes, 56 crashes were observed against 57.0 expected.
+3. **A fixed threshold is safe only on a good link.** The same $S$ gives a crash probability of $0$ on the local network, $0.20$ on Starlink, and up to $0.42$ with load and impairments. The observed crashes go from 0/20 to 6 and 7/20.
+4. **S.M.A.R.T. holds the target across conditions.** It moves the threshold with the network: at $P_{target}=0.05$, $S$ ranges from $42.5\,cm$ (Starlink, iperf) to $46.9\,cm$ (netem). Pooled over the conditions, the observed rate is at or below the target for every target, and the target lies inside the 95% interval in each case.
+5. **$\psi$ matters as much as the network.** The Ideal and Starlink sessions at $P_{target}=0.05$ ended with almost the same threshold ($42.66$ and $42.56\,cm$), although $\tau_{e2e}$ was about $50\,ms$ higher on Starlink. The reason is $\psi$: $82\,ms$ in that Ideal session, against $31\,ms$ in the Starlink one. A threshold that ignored $\psi$, or derived it from $\tau_{e2e}$, would be wrong by a comparable amount.
+6. **A priori and a posteriori differ in some cells**, for example Starlink at $P_{target}=0.05$ ($0.124$ a posteriori) or iperf at $0.15$ ($0.059$). This happens when the values at the brake ($\psi$ of the STOP, $d_{brake}$, $v_\max$ of that run) differ from the ones the controller planned with. The observed crashes follow the a posteriori values. The 90th percentile used for $\psi$ makes the a priori estimate conservative on average (68.3 expected against 56 observed).
+
+Figures 1 to 5 and the table above are produced by `paper_figures.m` (MATLAB folder, `paper_figs/`).
+
+## 6.5) Summary
+- The model of Section 5 describes the delay of a stop as a fixed part ($\tau_{e2e}+\psi$), a random wait $\phi\sim\mathcal U(0,T)$ and a geometric number of lost scans and STOPs, each costing one period $T$. From this it gives the minimum distance, its spread, the exact crash probability for a threshold $S$, and the lowest $S$ that meets a target probability (S.M.A.R.T.).
+- The experiments use a real robot whose scans and commands cross a Starlink link, with all model inputs measured online. 380 brakes were run in 19 sessions, over 5 network conditions, with a fixed threshold and with S.M.A.R.T. at 3 targets.
+- The predicted minimum distance, its spread and the crash counts agree with the measurements in all sessions. A fixed threshold goes from safe to a $\approx40\%$ crash probability as the link degrades, while S.M.A.R.T. keeps the observed crash rate at the chosen target.
+- Limits of the tests: 20 runs per cell give wide confidence intervals, so the agreement is shown mainly by the pooled results. The losses introduced by netem are independent, as the model assumes, so bursty loss was not tested. The latencies were steady during each run, which matches the assumption of constant $\tau$ but leaves fast latency changes untested.
