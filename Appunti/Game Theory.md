@@ -129,13 +129,8 @@ Now suppose a problem is solved with optimal utility $\E[u]=k$.
 And suppose that now the nature choice is already known, then the optimal utility can increase $\E[u|\text{knowledge}]=k'\geq k$ as the uncertainties are removed. 
 The value of this information is $k'-k$
 
-# 3) Multi Player Static Games
 
-**Motivation:**
-Take a possible combination $(s_1',...,s_n')$. If this is not in nash equilibrium then there exists a $s_i'$ that is not a best response to $s_{-i}'$, that is
-$$\exists s_i''\in S_i: u_i(s_{-i}',s_i'')>u_i(s_{-i}',s_i')$$
-and therefore there is an incentive for $i$ to deviate from $s_i'$
-# 4) Static Games of Complete Information
+# 3) Static Games of Complete Information
 These types pf games are defined by:
 - **Static:** simultaneous decisions
 - **Complete Information:** all players are aware of each other’s payoff
@@ -245,9 +240,12 @@ $$\Omega(s_i',s_{-i})-\Omega(s_i,s_{-i})=u_i(s_i',s_{-i})-u_i(s_i,s_{-i})=\Delta
  $$\Omega(s_i',s_{-i})>\Omega(s_i,s_{-i})\iff u_i(s_i',s_{-i})>u_i(s_i,s_{-i})$$
  In these games, players want to maximize the potential
 
-# 5) Zero Sum Games
 
-# 6) Examples:
+# 4) Dynamic Games of Complete Information
+The same as static games but now 
+
+
+# 5) Examples:
 #### Prisoner Dilemma:
 Normal form 2D matrix:
 In this matrix we have:
@@ -273,8 +271,17 @@ Suppose it is mixed strategy where player $1$ has distribution $(0.9,0.1)$. Then
 This can be written as a potential game:
 Define $\Omega(M,M)=0$
 Then we can compute:
-$$\Omega(M,C)=u_1$$
-
+$$\begin{align}
+\Omega(M,C) = \Omega(M,M) + \big[u_2(M,C) - u_2(M,M)\big] = 0 + (0 - (-1)) = 1\\
+\Omega(C,M) = \Omega(M,M) + \big[u_1(C,M) - u_1(M,M)\big] = 0 + (0-(-1)) = 1\\
+\Omega(C,C) = \Omega(M,C) + \big[u_1(C,C) - u_1(M,C)\big] = 1 + (-6-(-9)) = 4\\
+ \Omega(C,M) + \big[u_2(C,C) - u_2(C,M)\big] = 1 + (-6-(-9)) = 4 \end{align}$$
+$$\begin{array}{c|c|c}
+   & M & C  \\ \hline
+ M & 0 & 1\\
+ C & 1 & 4
+\end{array}$$
+This is a exact potential game.
 
 #### Battle of Sexes
 Normal form 2D matrix:
