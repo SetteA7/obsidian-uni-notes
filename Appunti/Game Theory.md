@@ -227,7 +227,12 @@ Nash equilibria **in mixed strategies** are found by applying the **indifference
 >[!thm|*] Nash Existence
 >Every game with finite $S_i$ has at least one Nash equilibrium, possibly given by mixed strategies
 
+TODO Brouwer and Kakatani
 
+A repetition of the game can lead to NE if
+- IESDS Solution
+- Potential game
+- 2xN games
 # 5) Zero Sum Games
 
 # 6) Examples:
@@ -272,8 +277,12 @@ So there are 2 NE, $A$ and $B$
 
 Now consider the NE given by mixed strategies:
 Suppose $P_1$ chooses $A$ wp $q$ and $P_2$ chooses $A$ wp $r$
-$$u_1(A,r)=2r+0\cdot (1-r)=2r\quad u_A(B,r)=0\cdot r+1(1-r)=1-r\rightarrow A\pref B\iff r>\frac13$$
-$$u_1(q,A)=1q+0\cdot (1-q)=q\quad u_A(B,r)=0\cdot q+2(1-q)=2(1-q)\rightarrow A\pref B\iff q>\frac23$$
+$$u_1(A,r)=2r+0\cdot (1-r)=2r\quad u_1(B,r)=0\cdot r+1(1-r)=1-r\rightarrow A\pref B\iff r>\frac13$$
+$$u_2(q,A)=1q+0\cdot (1-q)=q\quad u_2(B,r)=0\cdot q+2(1-q)=2(1-q)\rightarrow A\pref B\iff q>\frac23$$
+
+![[Pasted image 20261116152716.png|Plot|350]]
+
+
 #### IESDS Example
 Consider this example:
 $$\begin{array}{c|c|c}
