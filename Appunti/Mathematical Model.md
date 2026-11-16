@@ -914,50 +914,51 @@ Ordering: $B_{min}\in\left(T(N^*-1),TN^*\right]$, so $S_{low}\leq S_{smart}\leq 
 
 ## 6.1) Recap of the Model
 #### Scenario
-The bot drives straight towards a wall at $v_\max$ while its LiDAR sends one scan every $T$ to a remote controller. The controller takes the closest front reading of each scan and compares it with the threshold $S$. A control timer with the same period $T$ sends GO while the reading is above $S$, and STOP once the crossing has been detected. The STOP is applied as soon as it reaches the bot, which then brakes over $d_{brake}$. There is no relay timer on the bot: the only wait on the grid of control ticks is $\psi$, at the controller.
-
+The bot drives straight towards a wall at $v_\max$ while its LiDAR sends one scan every $T$ to a remote controller. The controller takes the closest front reading of each scan and compares it with the threshold $S$. A control timer with the same period $T$ sends GO while the reading is above $S$, and STOP once the crossing has been detected. The STOP is applied as soon as it reaches the bot, which then brakes over $d_{brake}$. 
 #### Timeline of a stop
 From the moment the bot crosses $S$ to the moment it starts braking, five things happen in sequence:
 
-| Step | Interval | Model |
-|---|---|---|
-| 1. Wait for the next LiDAR sample | $\phi$ | $\mathcal U(0,T)$, independent of the network |
-| 2. Scan reaches the controller | $\tau_{tx}+XT$ | $X\sim\text{Geom}(1-p_{tx})$ lost scans, each replaced one period later |
-| 3. Wait for the control tick | $\psi$ | constant phase, measured live |
-| 4. STOP reaches the bot | $\tau_{rx}+YT$ | $Y\sim\text{Geom}(1-p_{rx})$ lost STOPs, each replaced one period later |
-| 5. Braking | $d_{brake}$ | constant, measured |
+| Step                                         | Interval             | Model                                                                   |
+| -------------------------------------------- | -------------------- | ----------------------------------------------------------------------- |
+| 0. Bot crosses $S$                           |                      | $t=0$                                                                   |
+| 1. Wait for the next LiDAR sample to be sent | $\phi$               | $\mathcal U(0,T)$, independent of the network                           |
+| 2. Scan reaches the controller               | $\tau_{tx}+XT$       | $X\sim\text{Geom}(1-p_{tx})$ lost scans, each replaced one period later |
+| 3. Wait for the control tick                 | $\psi$               | constant phase, measured live                                           |
+| 4. STOP reaches the bot                      | $\tau_{rx}+YT$       | $Y\sim\text{Geom}(1-p_{rx})$ lost STOPs, each replaced one period later |
+| 5. Braking                                   | $d_{brake}/v_{\max}$ | constant, measured                                                      |
 
 So the delay of the threshold transmission is: $$t_{e2e,thresh}=\tau_{e2e}+\psi+AT+\phi\qquad A=X+Y$$
+and the delay to completely halt is
+$$t_{stop}=t_{e2e,thresh}+t_{action}\qquad t_{action}=\frac{d_{brake}}{v_\max}$$
 
 #### Parameters
-| Symbol | Meaning | Value in the experiments |
-|---|---|---|
-| $T$ | LiDAR period = control period | $100\,ms$ |
-| $v_\max$ | cruise speed | $43.1$ to $44.6\,cm/s$ (commanded $50\,cm/s$), calibrated per session |
-| $d_{brake}$ | braking distance | $10.0$ to $11.6\,cm$, calibrated per session |
-| $L$ | LiDAR to front bumper | $18.75\,cm$ |
-| $m$ | safety margin | $5\,cm$ |
-| $\tau_{tx},\tau_{rx}$ | one-way latencies bot$\rightarrow$controller, controller$\rightarrow$bot | measured live (Section 6.3.3) |
-| $p_{tx},p_{rx}$ | loss of a whole scan, loss of a control message | measured live |
-| $\psi$ | scan arrival $\rightarrow$ control tick | measured live, $25$ to $97\,ms$ depending on the session |
-| $\phi$ | crossing $\rightarrow$ next LiDAR sample | $\mathcal U(0,T)$, made uniform by the random start |
+| Symbol                | Meaning                                                                  | **Type of value** | Value in the experiments                                                                               |
+| --------------------- | ------------------------------------------------------------------------ | ----------------- | ------------------------------------------------------------------------------------------------------ |
+| $T$                   | LiDAR period = control period                                            | design constant   | $100\,ms$                                                                                              |
+| $v_\max$              | cruise speed                                                             | scenario constant | $43.1$ to $44.6\,cm/s$ (commanded $50\,cm/s$), calibrated per session, slight changes based on voltage |
+| $d_{brake}$           | braking distance                                                         | scenario constant | $10.0$ to $11.6\,cm$, calibrated per session, changes realtive to $v_\max$                             |
+| $L$                   | LiDAR to front bumper                                                    | design constant   | $18.75\,cm$                                                                                            |
+| $m$                   | safety margin                                                            | design constant   | $5\,cm$                                                                                                |
+| $\tau_{tx},\tau_{rx}$ | one-way latencies bot$\rightarrow$controller, controller$\rightarrow$bot | measured variable | measured live, range $\mathbb R^+$                                                                     |
+| $p_{tx},p_{rx}$       | loss of a whole scan, loss of a control message                          | measured variable | measured live, range $[0,1]$                                                                           |
+| $\psi$                | scan arrival $\rightarrow$ control tick                                  | measured constant | measured live, $25$ to $97\,ms$ depending on the session, range $[0,T)\ ms$                            |
+| $\phi$                | crossing $\rightarrow$ next LiDAR sample                                 | random variable   | $\mathcal U(0,T)$, made uniform by the random start                                                    |
 
-_(In the experiments distances are in $cm$ and speeds in $cm/s$; the formulas are the same.)_
 
 #### Main results
 With $\Delta t=1000\,\frac{S-L-m-d_{brake}}{v_\max}$ and the budget $B=\Delta t-\tau_{e2e}-\psi$:
 
-- **Expected delay** (5.3): $\mathbb E[t_{e2e,thresh}]=\tau_{e2e}+\psi+T\frac{1+p_{tx}+p_{rx}-3p_{tx}p_{rx}}{2(1-p_{e2e})}$
-- **Minimum distance** (5.4): $d_\min=S-L-d_{brake}-\frac{v_\max}{1000}\,t_{e2e,thresh}$, with $\mathbb E[d_\min]$ from the expected delay.
-- **Spread** (5.5): $\text{Var}(d_\min)=\left(\frac{v_\max}{1000}\right)^2T^2\left(\frac{p_{tx}}{(1-p_{tx})^2}+\frac{p_{rx}}{(1-p_{rx})^2}+\frac1{12}\right)$. Without losses the standard deviation is $\frac{v_\max T}{1000\sqrt{12}}\approx1.3\,cm$.
-- **Crash probability** (5.6): with $N_\tau=\lfloor B/T\rfloor$ and $R=B-N_\tau T$, $$P_{crash}=F(N_\tau)-f(N_\tau)\frac RT\qquad F(k)=\mathbb P(A\geq k),\ f(k)=\mathbb P(A=k)$$ and $P_{crash}=1$ for $B<0$. It lies between $P_{low}=F(N_\tau+1)$ and $P_{high}=F(N_\tau)$.
+- **Expected delay**: $\mathbb E[t_{e2e,thresh}]=\tau_{e2e}+\psi+T\frac{1+p_{tx}+p_{rx}-3p_{tx}p_{rx}}{2(1-p_{e2e})}$
+- **Minimum distance**: $d_\min=S-L-d_{brake}-\frac{v_\max}{1000}\,t_{e2e,thresh}$, with $\mathbb E[d_\min]$ from the expected delay.
+- **Spread**: $\text{Var}(d_\min)=\left(\frac{v_\max}{1000}\right)^2T^2\left(\frac{p_{tx}}{(1-p_{tx})^2}+\frac{p_{rx}}{(1-p_{rx})^2}+\frac1{12}\right)$. Without losses the standard deviation is $\frac{v_\max T}{1000\sqrt{12}}\approx1.3\,cm$.
+- **Crash probability**: with $N_\tau=\lfloor B/T\rfloor$ and $R=B-N_\tau T$, $$P_{crash}=F(N_\tau)-f(N_\tau)\frac RT\qquad F(k)=\mathbb P(A\geq k),\ f(k)=\mathbb P(A=k)$$ and $P_{crash}=1$ for $B<0$. It lies between $P_{low}=F(N_\tau+1)$ and $P_{high}=F(N_\tau)$.
 - **S.M.A.R.T.** (5.7): $P_{crash}$ is continuous and strictly decreasing in $B$, so the lowest threshold that meets $P_{target}$ is $$S_{smart}=\frac{v_\max}{1000}\left(B_\min+\tau_{e2e}+\psi\right)+L+m+d_{brake}\qquad B_\min=nT+T\,\frac{F(n)-P_{target}}{f(n)},\ n=N^*-1$$
 
 #### Threshold policies tested
 Two policies were tested:
 
 - **FIXED**: a constant $S=42.6\,cm$. With the calibrated $v_\max$ and $d_{brake}$ this gives $\Delta t\approx165$ to $180\,ms$, so its crash probability depends entirely on the network.
-- **SMART**: $S=S_{smart}$ of Section 5.7, recomputed at every scan from the live estimates of $\tau_{tx},\tau_{rx},p_{tx},p_{rx},\psi$, with $P_{target}\in\{0.05,\,0.15,\,0.30\}$. (In the code this is the mode `SUPERSMART`.)
+- **SMART**: $S=S_{smart}$ , recomputed at every scan from the live estimates of $\tau_{tx},\tau_{rx},p_{tx},p_{rx},\psi$, with $P_{target}\in\{0.05,\,0.15,\,0.30\}$. (In the code this is the mode `SUPERSMART`.)
 
 _Note:_ an earlier version of the algorithm used $S=\frac{v_\max}{1000}\left(T(N^*+1)+\tau_{e2e}\right)+L+m+d_{brake}$, which is $S_{high}$ with $\psi$ replaced by its worst case $T$. It also meets the target, but it is not the best bound for this model: it ignores the measured $\psi$ and keeps the whole last period, so it places $S$ higher than needed. It was not used in the tests.
 
@@ -965,7 +966,7 @@ _Note:_ an earlier version of the algorithm used $S=\frac{v_\max}{1000}\left(T(N
 ### 6.2.1) Hardware and Network
 - **Robot**: Husarion ROSbot with an RPLIDAR (`sllidar_ros2` driver, one rotation every $\approx100\,ms$), ROS 2 Jazzy.
 - **Controller**: a separate PC running the controller node.
-- **Bridge**: the ROS 2 topics cross between the two machines through `zenoh-bridge-ros2dds` (the bot listens on port 7447, the controller connects to it), so DDS discovery stays local to each machine. %% confirm: zenoh transport used in the tests, TCP or UDP %%
+- **Bridge**: the ROS 2 topics cross between the two machines through `zenoh-bridge-ros2dds` (the bot listens on port 7447, the controller connects to it), so DDS discovery stays local to each machine. UDP is used.
 - **Ideal link**: robot and controller on the same local network ($192.168.77.0/24$). The latency is below $1\,ms$ and there is no loss.
 - **Starlink link**: the robot is connected by Ethernet to a MikroTik RouterBOARD, whose uplink is a Starlink terminal. The MikroTik serves DHCP for the robot's network, because DHCP on the ROSbot interfered with the DDS communication of the motor nodes. The controller reaches the robot through a Tailscale VPN, so every message between the two crosses the Starlink link.
 - **Clocks**: synchronized with chrony, with the bot as the controller's time source. One-way latencies depend on the clock offset, but $\tau_{e2e}=\tau_{tx}+\tau_{rx}$ does not, since the offset enters the two directions with opposite signs. $\psi$, $v_\max$ and $d_{brake}$ are each measured on a single clock.
