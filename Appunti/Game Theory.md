@@ -233,6 +233,18 @@ A repetition of the game can lead to NE if
 - IESDS Solution
 - Potential game
 - 2xN games
+
+#### Potential Games
+Take $G=\curly{S_1,...,S_n;u_1,...,u_n}$ and $S=S_1\times...\times S_n$
+Define the function $\Omega:S\rightarrow \mathbb R$ and it is
+- **Exact Potential** for $G$ if:
+$$\Omega(s_i',s_{-i})-\Omega(s_i,s_{-i})=u_i(s_i',s_{-i})-u_i(s_i,s_{-i})=\Delta u_i$$
+- **Weighted Potential** if:
+ $$\Omega(s_i',s_{-i})-\Omega(s_i,s_{-i})=w_i\Delta u_i$$
+ **Ordinal Potential** if:
+ $$\Omega(s_i',s_{-i})>\Omega(s_i,s_{-i})\iff u_i(s_i',s_{-i})>u_i(s_i,s_{-i})$$
+ In these games, players want to maximize the potential
+
 # 5) Zero Sum Games
 
 # 6) Examples:
@@ -257,6 +269,12 @@ So $C$ is the dominant strategy (for both as this game is symmetric).
 $C$ is the only NE
 
 Suppose it is mixed strategy where player $1$ has distribution $(0.9,0.1)$. Then if $P_2$ plays $M$ the utility is $u_2(0.9M+0.1C,M)=0.9\cdot u_2(M,M)+0.1\cdot u_2(C,M)=-1.8$
+
+This can be written as a potential game:
+Define $\Omega(M,M)=0$
+Then we can compute:
+$$\Omega(M,C)=u_1$$
+
 
 #### Battle of Sexes
 Normal form 2D matrix:
