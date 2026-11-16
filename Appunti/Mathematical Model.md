@@ -977,29 +977,29 @@ Two nodes from the package `monitor_pkg` run on the two machines:
 - **`bot_monitor`** (robot): network heartbeats, the `BrakeMonitor` that measures $d_{brake}$ of every stop, and two iperf3 servers for the link load.
 - **`controller_monitor`** (controller): computes $S$, decides GO/STOP, measures $\psi$, logs everything, and runs the automated test.
 
-| Topic | From $\rightarrow$ to | Content | QoS |
-|---|---|---|---|
-| `/scan` | bot $\rightarrow$ controller | one LiDAR scan every $T$ | best effort |
-| `/cmd_vel` | controller $\rightarrow$ bot | GO ($0.5\,m/s$) or STOP ($0$), every $T$ | see below |
-| `network_downlink` | bot $\rightarrow$ controller | heartbeat every $0.1\,s$, carries the loss and latency the bot measured | best effort |
-| `network_uplink` | controller $\rightarrow$ bot | heartbeat every $0.1\,s$ | best effort |
-| `/brake_distance` | bot $\rightarrow$ controller | measured $d_{brake}$, once per stop | reliable |
+| Topic              | From $\rightarrow$ to        | Content                                                                                   | QoS         |
+| ------------------ | ---------------------------- | ----------------------------------------------------------------------------------------- | ----------- |
+| `/scan`            | bot $\rightarrow$ controller | one LiDAR scan every $T$                                                                  | best effort |
+| `/cmd_vel`         | controller $\rightarrow$ bot | GO ($0.5\,m/s$) or STOP ($0$), every $T$                                                  | best effort |
+| `network_downlink` | bot $\rightarrow$ controller | heartbeat every $0.1\,s$, carries the loss and latency the bot measured                   | best effort |
+| `network_uplink`   | controller $\rightarrow$ bot | heartbeat every $0.1\,s$                                                                  | best effort |
+| `/brake_distance`  | bot $\rightarrow$ controller | measured $d_{brake}$, once per stop, nto used during runs, only for parameter calibration | reliable    |
 
-The model assumes that a lost scan or command is replaced by the next one, one period later, which is the best-effort behaviour. With reliable QoS, DDS would retransmit by itself and turn loss into extra latency. %% /cmd_vel: the publisher is reliable, the bot's subscribers are best effort, check which one the connection uses %%
+The model assumes that a lost scan or command is replaced by the next one, one period later, which is the best-effort behaviour. With reliable QoS, DDS would retransmit by itself and turn loss into extra latency. 
 
 ### 6.2.3) Measuring the Model Inputs
-Every input of the model is estimated online by the controller, and the threshold is recomputed at every scan. The code names the two directions from the controller's side (uplink = controller$\rightarrow$bot, downlink = bot$\rightarrow$controller), which swaps `tx` and `rx` with respect to the paper.
+Every input of the model is estimated by the controller, and the threshold is recomputed at every scan. The code names the two directions from the controller's side (uplink = controller$\rightarrow$bot, downlink = bot$\rightarrow$controller), which swaps `tx` and `rx` with respect to the model.
 
-| Paper | How it is measured | CSV column |
-|---|---|---|
-| $\tau_{rx}$ (controller$\rightarrow$bot) | one-way delay of the uplink heartbeats, median of the last 100 ($10\,s$), measured on the bot and sent back | `tau_tx_ms` |
-| $\tau_{tx}$ (bot$\rightarrow$controller) | on the scans themselves: arrival $-$ stamp $-$ scan duration, median of the last 100 scans (`USEPING=False`). In the Ideal sessions the downlink heartbeat was used instead (`USEPING=True`), which is equivalent on a local network | `tau_rx_scan_ms` (`tau_rx_ms`) |
-| $p_{rx}$ | missing sequence numbers of the uplink heartbeats over 100 heartbeats, measured on the bot | `p_tx` |
-| $p_{tx}$ | missing whole scans, from gaps in the LiDAR stamps longer than one period, over the last 100 scans | `p_scan` |
-| $\psi$ | for every scan, the time from its arrival to the next control tick (monotonic clock). The model uses the 90th percentile of the last 50 samples ($T$ until 10 samples exist), so a wait that jitters around a tick counts as late | `psi_ms` |
-| $v_\max$ | least-squares slope of the front distance over the cruise part of the approach | `VMAX_cm_s` |
-| $d_{brake}$ | measured by the bot: distance at the moment the first STOP arrives (line fitted to the readings of the last $0.35\,s$) minus the distance at standstill | `D_BRAKE_cm` |
-| reading vs $S$ | closest valid ray among the 10 at each end of the scan array (straight ahead) | `min_distance_cm` |
+| Paper                                    | How it is measured                                                                                                                                                                                                                                                                   | CSV column                     |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------ |
+| $\tau_{rx}$ (controller$\rightarrow$bot) | one-way delay of the uplink heartbeats, median of the last 100 ($10\,s$), measured on the bot and sent back                                                                                                                                                                          | `tau_tx_ms`                    |
+| $\tau_{tx}$ (bot$\rightarrow$controller) | Either:<br>- the link ping latency, which was used for the ideal sessions (`USEPING=True`)<br>- arrival $-$ stamp $-$ scan duration, median of the last 100 scans (`USEPING=False`).                                                                                                 | `tau_rx_scan_ms` (`tau_rx_ms`) |
+| $p_{rx}$                                 | missing sequence numbers of the uplink heartbeats over 100 heartbeats, measured on the bot                                                                                                                                                                                           | `p_tx`                         |
+| $p_{tx}$                                 | This is not the actual link packet loss, it is $1-(1-p)^n$ with $n$ the amount of fragments of the scan packet and $p$ the actual link packet loss.<br><br>It is calculated from missing whole scans, from gaps in the LiDAR stamps longer than one period, over the last 100 scans. | `p_scan`                       |
+| $\psi$                                   | for every scan, the time from its arrival to the next control tick (monotonic clock). The model uses the 90th percentile of the last 50 samples ($T$ until 10 samples exist), so a wait that jitters around a tick counts as late                                                    | `psi_ms`                       |
+| $v_\max$                                 | least-squares slope of the front distance over the cruise part of the approach                                                                                                                                                                                                       | `VMAX_cm_s`                    |
+| $d_{brake}$                              | measured by the bot: distance at the moment the first STOP arrives (line fitted to the readings of the last $0.35\,s$) minus the distance at standstill                                                                                                                              | `D_BRAKE_cm`                   |
+| reading vs $S$                           | closest valid ray among the 10 at each end of the scan array (straight ahead)                                                                                                                                                                                                        | `min_distance_cm`              |
 
 The scans are measured directly, instead of relying only on the heartbeats, because on Starlink they behave differently. A scan is a large message (the LiDAR stream needs about $2.1\,Mbit/s$), so it takes longer to cross the link ($\tau_{tx}\approx33$ to $44\,ms$ from the scans, against $16$ to $25\,ms$ from the heartbeats). A scan is also lost if any of its packets is lost: with netem, $\approx10\%$ of the scans were lost, against $\approx2\%$ of the heartbeats in the same direction. The model needs the delay and loss of the scans, not of a small probe.
 
@@ -1015,7 +1015,7 @@ Each test session runs the same braking manoeuvre many times (`controller_monito
 5. **Return**: reverse to the start position of the next run.
 
 - **Calibration run 0.** Every session starts with a run that always uses the FIXED threshold. Its measured cruise speed and braking distance become $v_\max$ and $d_{brake}$ for the 20 measured runs, and are kept fixed. Run 0 is excluded from the analysis.
-- **Random start.** Each run starts at a random offset $\mathcal U\left(0,\frac{v_\max T}{1000}\right)\approx\mathcal U(0,4.4\,cm)$ behind a fixed start point. This is one LiDAR period of travel, so the threshold is crossed at a uniform phase of the LiDAR period and $\phi\sim\mathcal U(0,T)$, as the model assumes.
+- **Random start.** Each run starts at a random offset $\mathcal U\left(0,\frac{v_\max T}{1000}\right)\approx\mathcal U(0,4.4\,cm)$ behind a fixed start point. This is one LiDAR period of travel, so the threshold is crossed at a uniform phase of the LiDAR period and $\phi\sim\mathcal U(0,T)$, as the model assumes. Without this the spread of the data would be too narrow.
 - **Safety stops.** A session ends early on a collision (a reading $\leq L$), a failed calibration, an alignment or return timeout, or an obstacle behind the bot. All 19 sessions below completed their 20 runs. A stale scan ($>0.5\,s$ old) also triggers a STOP, as an equipment protection that is not part of the model; a run where it fires has to be discarded.
 - **Link load.** iperf3 UDP streams at a fixed rate in each direction. Both clients run on the controller (one in reverse mode), so the load is switched on and off without sending a command over the loaded link. The load is on during the measured runs only, never in run 0.
 
