@@ -243,7 +243,7 @@ $$\Omega(s_i',s_{-i})-\Omega(s_i,s_{-i})=u_i(s_i',s_{-i})-u_i(s_i,s_{-i})=\Delta
 
 # 4) Dynamic Games of Complete Information
 The same as static games but now the actions are not taken simultaneously:
-The game might not be perfect, it can also be incomplete:
+The game might not be perfect, it can also be imperfect:
 - **perfect information:** everybody takes sequential decision fully aware
 - **imperfect information**: some decisions are not sequential or random (nature)
 
@@ -251,8 +251,9 @@ It can be rewritten as a tree
 ![[Pasted image 20261116180356.png|Tree Example|250]]
 node at the i-th level also describes the **information set** $h_i$. If the node is just one $h_i=\curly{x_i}$ then the node is fully aware of previous moves
 
+Each player $i$ has a collection of information sets $H_i$ such that $h_i(x_j)\in H_i$. associated to a node $x_j$ where it is $i's$ turn to move.
 
-
+A strategy is now a set of elements that specify what to do based on previous plays.
 
 # 5) Examples:
 #### Prisoner Dilemma:
