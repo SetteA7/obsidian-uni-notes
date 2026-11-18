@@ -1797,7 +1797,42 @@ This is indeterminate and hopital cannot be used again.
 **This doesn't state that the limit does not exists**, in fact, notice that 
 $$\lim_{x\rightarrow \infty}\frac{x+\sin(x)}{x}=\lim_{x\rightarrow\infty}1+\frac{\sin(x)}{x}=1$$
 
-## More Differentiability Exercises
+## 8.3) More Differentiability Exercises
+#### Function not continuous at $x_0$
+#### Differentiable at $x_0$ but derivative not continuous at $x_0$
+State whether the following function is differentiable at $x_0=0$:
+$$f(x)=\begin{cases}
+x^2\sin(1/x)&x\neq 0\\
+0&x=0
+\end{cases}$$
+
+Notice that the differentiability theorem is sufficient only!
+$$\text{$f$ continuous at $x_0$ and } \lim_{x \to x_0} f'(x) = L \in \mathbb{R} \implies \text{$f$ differentiable at $x_0$ with } f'(x_0) = L.$$
+
+For $x\neq0$ we have
+$$\begin{aligned} f'(x) &= \frac{d}{dx}\big[x^2\big] \cdot \sin\left(\frac{1}{x}\right) + x^2 \cdot \frac{d}{dx}\left[\sin\left(\frac{1}{x}\right)\right] \\ &= 2x \sin\left(\frac{1}{x}\right) + x^2 \cdot \cos\left(\frac{1}{x}\right) \cdot \left(-\frac{1}{x^2}\right) \\ &= 2x \sin\left(\frac{1}{x}\right) - \cos\left(\frac{1}{x}\right) \end{aligned}$$
+and thus
+$$f'(x)=\begin{cases}
+2x\sin(1/x)-\cos(1/x)&x\neq 0\\
+0&x=0
+\end{cases}$$
+By evaluating the limit we have an indeterminate form, so the derivative is not continuous at $x_0$. 
+$$\lim_{x\rightarrow 0^+}2x\sin(1/x)-\cos(1/x)\stackrel{t=1/x}=\lim_{t\rightarrow \infty}2\frac{\sin(t)}{t}-\cos(t)=\text{oscillates between -1,-1}$$
+$$\lim_{x\rightarrow 0^-}2x\sin(1/x)-\cos(1/x)\stackrel{t=1/x}=\lim_{t\rightarrow -\infty}2\frac{\sin(t)}{t}-\cos(t)=\text{oscillates between -1,-1}$$
+
+One might be tempted to say that therefore the derivative does not exist at $x_0$. However recall that the derivative is defined as the ratio between two points, and it exists if the point is approaching in the same way in both directions. So we don't care if it is continuous! In fact by applying the definition:
+
+$$\begin{align}
+f'(0) &= \lim_{x \to 0} \frac{f(0 + x) - f(0)}{x-0}\\
+&=\lim_{x\rightarrow 0}\frac{x^2\sin(1/x)}{x}\\
+&=\lim_{x\rightarrow 0}x\sin(1/x)\\
+&\stackrel{t=1/x}=
+\begin{cases}
+\lim_{t\rightarrow\infty}\frac{\sin(t)}t=0&x\\\end{cases}
+\end{align}$$
+
+
+
 
 
 
