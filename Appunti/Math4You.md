@@ -1798,44 +1798,50 @@ This is indeterminate and hopital cannot be used again.
 $$\lim_{x\rightarrow \infty}\frac{x+\sin(x)}{x}=\lim_{x\rightarrow\infty}1+\frac{\sin(x)}{x}=1$$
 
 ## 8.3) More Differentiability Exercises
-#### Function not continuous at $x_0$
-#### Differentiable at $x_0$ but derivative not continuous at $x_0$
-State whether the following function is differentiable at $x_0=0$:
-$$f(x)=\begin{cases}
-x^2\sin(1/x)&x\neq 0\\
-0&x=0
+#### Differentiable at $x_0$ with Discontinuous Derivative at $x_0$
+State whether the following function is differentiable at $x_0 = 0$:
+$$f(x) = \begin{cases}
+x^2\sin(1/x) & x \neq 0 \\
+0 & x = 0
 \end{cases}$$
 
-Notice that the differentiability theorem is sufficient only!
+Recall that the Limit of the Derivative Theorem is a **sufficient condition only**:
 $$\text{$f$ continuous at $x_0$ and } \lim_{x \to x_0} f'(x) = L \in \mathbb{R} \implies \text{$f$ differentiable at $x_0$ with } f'(x_0) = L.$$
+Its converse is false: $f'(x_0)$ can exist even if $\lim_{x \to x_0} f'(x)$ does not exist.
 
-For $x\neq0$ we have
-$$\begin{aligned} f'(x) &= \frac{d}{dx}\big[x^2\big] \cdot \sin\left(\frac{1}{x}\right) + x^2 \cdot \frac{d}{dx}\left[\sin\left(\frac{1}{x}\right)\right] \\ &= 2x \sin\left(\frac{1}{x}\right) + x^2 \cdot \cos\left(\frac{1}{x}\right) \cdot \left(-\frac{1}{x^2}\right) \\ &= 2x \sin\left(\frac{1}{x}\right) - \cos\left(\frac{1}{x}\right) \end{aligned}$$
-and thus
-$$f'(x)=\begin{cases}
-2x\sin(1/x)-\cos(1/x)&x\neq 0\\
-0&x=0
+The function is clearly continuous at $0$.
+
+For $x \neq 0$, standard differentiation rules give:
+$$\begin{aligned}
+f'(x) &= \frac{d}{dx}\big[x^2\big] \cdot \sin\left(\frac{1}{x}\right) + x^2 \cdot \frac{d}{dx}\left[\sin\left(\frac{1}{x}\right)\right] \\
+&= 2x \sin\left(\frac{1}{x}\right) + x^2 \cdot \cos\left(\frac{1}{x}\right) \cdot \left(-\frac{1}{x^2}\right) \\
+&= 2x \sin\left(\frac{1}{x}\right) - \cos\left(\frac{1}{x}\right).
+\end{aligned}$$
+
+Checking the behavior of $f'(x)$ as $x \to 0$ via $t = 1/x$:
+$$\lim_{x \to 0^+} \left(2x\sin(1/x) - \cos(1/x)\right) \stackrel{t=1/x}{=} \lim_{t \to +\infty} \left(2\frac{\sin t}{t} - \cos t\right) \quad \text{does not exist (oscillates between $-1$ and $1$)},$$
+$$\lim_{x \to 0^-} \left(2x\sin(1/x) - \cos(1/x)\right) \stackrel{t=1/x}{=} \lim_{t \to -\infty} \left(2\frac{\sin t}{t} - \cos t\right) \quad \text{does not exist (oscillates between $-1$ and $1$)}.$$
+
+Because $\lim_{x \to 0} f'(x)$ does not exist, the theorem is inconclusive. We cannot deduce that $f$ is non-differentiable at $0$. Instead, we must check differentiability directly from the **definition** (the limit of the difference quotient as $x \to 0$):
+$$\begin{aligned}
+f'(0) &= \lim_{x \to 0} \frac{f(x) - f(0)}{x - 0} \\
+&= \lim_{x \to 0} \frac{x^2\sin(1/x)}{x} \\
+&= \lim_{x \to 0} x\sin(1/x) \\
+&\stackrel{t=1/x}{=} \begin{cases}
+\lim_{t \to +\infty} \frac{\sin t}{t} = 0 & (x \to 0^+) \\[4pt]
+\lim_{t \to -\infty} \frac{\sin t}{t} = 0 & (x \to 0^-)
+\end{cases} \\
+&= 0.
+\end{aligned}$$
+
+Therefore, $f$ **is differentiable at $x_0 = 0$** with $f'(0) = 0$, and its derivative is given everywhere by:
+$$f'(x) = \begin{cases}
+2x\sin(1/x) - \cos(1/x) & x \neq 0 \\
+0 & x = 0
 \end{cases}$$
-By evaluating the limit we have an indeterminate form, so the derivative is not continuous at $x_0$. 
-$$\lim_{x\rightarrow 0^+}2x\sin(1/x)-\cos(1/x)\stackrel{t=1/x}=\lim_{t\rightarrow \infty}2\frac{\sin(t)}{t}-\cos(t)=\text{oscillates between -1,-1}$$
-$$\lim_{x\rightarrow 0^-}2x\sin(1/x)-\cos(1/x)\stackrel{t=1/x}=\lim_{t\rightarrow -\infty}2\frac{\sin(t)}{t}-\cos(t)=\text{oscillates between -1,-1}$$
+which is **not continuous** at $x_0 = 0$.
 
-One might be tempted to say that therefore the derivative does not exist at $x_0$. However recall that the derivative is defined as the ratio between two points, and it exists if the point is approaching in the same way in both directions. So we don't care if it is continuous! In fact by applying the definition:
-
-$$\begin{align}
-f'(0) &= \lim_{x \to 0} \frac{f(0 + x) - f(0)}{x-0}\\
-&=\lim_{x\rightarrow 0}\frac{x^2\sin(1/x)}{x}\\
-&=\lim_{x\rightarrow 0}x\sin(1/x)\\
-&\stackrel{t=1/x}=
-\begin{cases}
-\lim_{t\rightarrow\infty}\frac{\sin(t)}t=0&x\\\end{cases}
-\end{align}$$
-
-
-
-
-
-
+## 8.4) A
 #### Exam
 Given the function
 $$f(x)=|x-2|e^{1/(x-2)^2}$$
