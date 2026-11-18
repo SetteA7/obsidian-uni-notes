@@ -1723,7 +1723,7 @@ $$f'(x) = \bigl(\phi(u(x))\bigr)' = \phi'(u(x)) \cdot u'(x) = \frac{1}{2x - x^2}
 Start with the theorem:
 >[!thm|*] Hopital Theorem
 >Let $f,g$ be two maps defined on a neighborhood of $c$ (except, possibly at $c$) such that:
->$$\lim_{x\rightarrow c}f(c)=\lim_{x\rightarrow c}g(x)=L\qquad L\in\curly{0,+\infty,-\infty}$$
+>$$\lim_{x\rightarrow c}f(x)=\lim_{x\rightarrow c}g(x)=L\qquad L\in\curly{0,+\infty,-\infty}$$
 >If $f,g$ are differentiable around $c$ (except, possibly at $c$)  and with $g'\neq0$, then:
 >$$\text{if }\exists \lim_{x\rightarrow c}\frac{f'(x)}{g'(x)}:=l\implies \exists \lim_{x\rightarrow c}\frac{f(x)}{g(x)}=l$$
 
@@ -1776,7 +1776,7 @@ $$ \lim_{x \to 0} \frac{\frac{1}{3}x^4 + o(x^4)}{x^4 + o(x^4)} = \lim_{x \to 0} 
 
 #### Infinite Hopital
 Solve the following limit:
-$$\lim_{x\rightarrow 0}\frac{e^x-e^{-x}}{e^x+e^{-x}}$$
+$$\lim_{x\rightarrow \infty}\frac{e^x-e^{-x}}{e^x+e^{-x}}$$
 Notice that this is a $\infty/\infty$ form and hopital can be applied:
 $$\begin{array}{ccc} \text{Derivative No.} & N & D \\ \hline 0 & e^x - e^{-x} \rightarrow +\infty & e^x + e^{-x} \rightarrow +\infty \\ 1 & e^x + e^{-x} \rightarrow +\infty & e^x - e^{-x} \rightarrow +\infty \\ 2 & e^x - e^{-x} \rightarrow +\infty & e^x + e^{-x} \rightarrow +\infty \\ \end{array}$$
 However this is an infinite loop! So hopital will never be able to solve this problem.
@@ -1841,6 +1841,8 @@ $$f'(x) = \begin{cases}
 \end{cases}$$
 which is **not continuous** at $x_0 = 0$.
 
+
+The derivative at $x_0$ is obtained by pinning one end of a line at $(x_0, f(x_0))$ and letting the other end slide along the graph toward $x_0$ from the left and from the right. The function is differentiable at $x_0$ if and only if those secant slopes settle onto the same finite number from both sides. However, $f'$ does not need to be continuous at $x_0$: if the graph oscillates infinitely often near $x_0$ with a height that shrinks **faster than the horizontal distance to $x_0$**, the pinned secant line still settles onto a single limiting slope, even though the local tangent slopes $f'(x)$ keep oscillating back and forth between positive and negative values.
 
 ## 8.4) Derivative of an inverse function
 This will extend the derivative table:
@@ -1937,7 +1939,7 @@ First, rewrite $f(x)$ on $\mathbb{R} \setminus \{2\}$ without the absolute value
 $$f(x) = \vert{}x-2\vert{}e^{1/(x-2)^2} = \begin{cases} (x-2)e^{(x-2)^{-2}} & x > 2\\ -(x-2)e^{(x-2)^{-2}} & x < 2 \end{cases}$$
 On both open intervals $(-\infty, 2)$ and $(2, +\infty)$, $f$ is the product and composition of differentiable functions, so $f$ is differentiable on its entire domain: $\text{Dom}(f') = \mathbb{R} \setminus \{2\}$.
 
-First, let's differentiate the exponential term $e^{(x-2)^{-2}}$ via the chain rule. Letting $u(x) = (x-2)^{-2}$ and $\phi(u) = e^u$, we have:
+First, let's differentiate the exponential term $e^{(x-2)^{-2}}$ via the product rule. Letting $u(x) = (x-2)^{-2}$ and $\phi(u) = e^u$, we have:
 $$\bigl(e^{(x-2)^{-2}}\bigr)' = e^{(x-2)^{-2}} \cdot \bigl((x-2)^{-2}\bigr)' = e^{1/(x-2)^2} \cdot \bigl(-2(x-2)^{-3}\bigr) = -\frac{2}{(x-2)^3}e^{1/(x-2)^2}$$
 
 Now we differentiate the first branch ($x > 2$) using the product rule:
