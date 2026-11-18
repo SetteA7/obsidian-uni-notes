@@ -1718,8 +1718,28 @@ $$f'(x) = \bigl(\phi(u(x))\bigr)' = \phi'(u(x)) \cdot u'(x) = \frac{1}{2x - x^2}
 
 # 8) Lesson 20/11/26
 
+## 8.1) Hopital
 
+Start with the theorem:
+>[!thm|*] Hopital Theorem
+>Let $f,g$ be two maps defined on a neighborhood of $c$ (except, possibly at $c$) such that:
+>$$\lim_{x\rightarrow c}f(c)=\lim_{x\rightarrow c}g(x)=L\qquad L\in\curly{0,+\infty,-\infty}$$
+>If $f,g$ are differentiable around $c$ (except, possibly at $c$)  and with $g'\neq0$, then:
+>$$\text{if }\exists \lim_{x\rightarrow c}\frac{f'(x)}{g'(x)}:=l\implies \exists \lim_{x\rightarrow c}\frac{f(x)}{g(x)}=l$$
 
+Most importantly, this theorem cannot be used to determine if a function is differentiable at $c$.
+
+## 8.2) Hopital Exercises:
+#### Hopital Limit:
+Solve the following limit:
+$$\lim_{x\rightarrow 0}\par{\frac1{\sin^2x}-\frac1{x^2}}$$
+Notice that direct evaluation of this limit becomes indeterminate ($\infty-\infty$), however this is not in a valid form for hopital.
+
+The function can be rewritten so to be able to apply hopital:
+$$\lim_{x\rightarrow 0}\frac{x^2-\sin^2x}{x^2\sin^2x}=\frac{0}{0}$$
+Find the derivatives to apply hopital:
+$$x^2-\sin^2x\rightarrow 2x-\sin(x)\cos(x)-\sin(x)\cos(x)=2x-\sin(2x)$$
+Where $\sin^2x$ was solved by writing it as $\sin x\sin x$ and using the chain rule. The final form uses the relation $\si
 
 
 #### Exam
