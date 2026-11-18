@@ -1841,7 +1841,33 @@ $$f'(x) = \begin{cases}
 \end{cases}$$
 which is **not continuous** at $x_0 = 0$.
 
-## 8.4) A
+
+## 8.4) Derivative of an inverse function
+This will extend the derivative table:
+
+Let $f: I \to \mathbb{R}$ be a continuous, strictly monotonic (hence invertible) function on an interval $I$, with inverse $f^{-1}: J \to I$ where $J = f(I)$.
+
+Fix $x_0 \in I$ and let $y_0 = f(x_0) \in J$. If $f$ is differentiable at $x_0$ and **$f'(x_0) \neq 0$**, then $f^{-1}$ is differentiable at $y_0$ and:
+$$(f^{-1})'(y_0) = \frac{1}{f'(x_0)} = \frac{1}{f'\big(f^{-1}(y_0)\big)}$$
+#### Derivative of Arctangent
+Differentiate $g(x)=\arctan(x)$
+
+Restrict the tangent function to its principal invertible branch:
+$$f: \left(-\frac{\pi}{2}, \frac{\pi}{2}\right) \to \mathbb{R}, \qquad f(y) = \tan(y)$$
+On this open interval, $f$ is continuous, strictly increasing, and maps onto all of $\mathbb{R}$, so its inverse is $f^{-1}(x) = \arctan(x)$ for $x \in \mathbb{R}$.
+
+For every $y \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$, $f$ is differentiable with:
+$$f'(y) = \frac{d}{dy}\big(\tan y\big) = \frac{1}{\cos^2 y} = 1 + \tan^2 y$$
+The condition $f'(y)\neq0$ holds since $1 + \tan^2 y \ge 1 > 0$
+
+Let $y = \arctan(x)$ (so $\tan y = x$). By the inverse function derivative theorem, $\arctan$ is differentiable at every $x \in \mathbb{R}$ and:
+$$\begin{aligned}
+g'(x) &= (f^{-1})'(x) \\
+&= \frac{1}{f'\big(f^{-1}(x)\big)} \\
+&= \frac{1}{f'(\arctan x)} \\
+&= \frac{1}{1 + \tan^2(\arctan x)} = \frac{1}{1 + x^2}.
+\end{aligned}$$
+## 8.5) Exam Exercise
 #### Exam
 Given the function
 $$f(x)=|x-2|e^{1/(x-2)^2}$$
