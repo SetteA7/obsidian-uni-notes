@@ -1730,7 +1730,13 @@ Start with the theorem:
 Most importantly, this theorem cannot be used to determine if a function is differentiable at $c$.
 
 ## 8.2) Hopital Exercises:
-#### Hopital Limit:
+
+#### Hopital Introduction
+Solve the following limit:
+$$\lim_{x\rightarrow 0}\frac{e^{2x}-e^{-2x}}{\sin(5x)}$$
+This evaluates to $0/0$ so we can directly apply hopital:
+$$\lim_{x\rightarrow 0}\frac{2e^{2x}+2e^{-2x}}{5\cos(5x)}=\frac45$$
+#### Long Hopital Limit:
 Solve the following limit:
 $$\lim_{x\rightarrow 0}\par{\frac1{\sin^2x}-\frac1{x^2}}$$
 Notice that direct evaluation of this limit becomes indeterminate ($\infty-\infty$), however this is not in a valid form for hopital.
@@ -1739,7 +1745,34 @@ The function can be rewritten so to be able to apply hopital:
 $$\lim_{x\rightarrow 0}\frac{x^2-\sin^2x}{x^2\sin^2x}=\frac{0}{0}$$
 Find the derivatives to apply hopital:
 $$x^2-\sin^2x\rightarrow 2x-\sin(x)\cos(x)-\sin(x)\cos(x)=2x-\sin(2x)$$
-Where $\sin^2x$ was solved by writing it as $\sin x\sin x$ and using the chain rule. The final form uses the relation $\si
+Where $\sin^2x$ was solved by writing it as $\sin x\sin x$ and using the chain rule. The final form uses the relation $\sin(2x)=2\sin(x)\cos(x)$
+
+The denominator is much longer to compute. Use the chain rule:
+$$\begin{aligned}a(x)=x^2&\rightarrow a'(x)=2x\\
+b(x)=\sin^2x&\rightarrow b'(x)=\sin2x
+\end{aligned}\rightarrow x^2\sin^2x=2x\sin^2(x)+x^2\sin(2x)$$
+Recompute the limit:
+$$\lim_{x\rightarrow 0}\frac{2x-\sin(2x)}{2x\sin^2(x)+x^2\sin(2x)}=\frac{0}{0}$$
+This didn't work out!
+
+Now notice this table:
+$$\begin{array}{ccc} \text{Derivative No.} & N & D \\ \hline 1 & 2x - \sin(2x) \rightarrow 0 & 2x\sin^2(x) + x^2\sin(2x) \rightarrow 0 \\ 2 & 2 - 2\cos(2x) \rightarrow 0 & 2x^2\cos(2x) + 4x\sin(2x) + 2\sin^2(x) \rightarrow 0 \\ 3 & 4\sin(2x) \rightarrow 0 & -4x^2\sin(2x) + 12x\cos(2x) + 6\sin(2x) \rightarrow 0 \\ 4 & 8\cos(2x) \rightarrow 8 & -8x^2\cos(2x) - 32x\sin(2x) + 24\cos(2x) \rightarrow 24 \\ \end{array}$$
+The result is $N/D=1/3$
+
+So hopital is very slow!
+
+This can be avoided by rewriting the limit so to make a notable limit appear:
+$$\frac{x^2 - \sin^2 x}{x^2 \sin^2 x} = \frac{x^2 - \sin^2 x}{x^4} \cdot \left(\frac{x}{\sin x}\right)^2$$
+Since $\lim_{x \to 0} \left(\frac{x}{\sin x}\right)^2 = 1$, the algebra of limits allows us to reduce the problem to:
+$$\lim_{x \to 0} \frac{x^2 - \sin^2 x}{x^4}$$
+Here 4 derivatives are still required but they are a lot easier:
+$$\begin{array}{ccc} \text{Derivative No.} & N & D \\ \hline 
+1 & 2x - \sin(2x) \rightarrow 0 & 4x^3 \rightarrow 0 \\ 
+2 & 2 - 2\cos(2x) \rightarrow 0 & 12x^2 \rightarrow 0 \\ 
+3 & 4\sin(2x) \rightarrow 0 & 24x\rightarrow 0 \\ 
+4 & 8\cos(2x) \rightarrow 8 & 24\rightarrow 24 \\ \end{array}$$
+Alternatively with taylor:
+$$ \lim_{x \to 0} \frac{\frac{1}{3}x^4 + o(x^4)}{x^4 + o(x^4)} = \lim_{x \to 0} \frac{\frac{1}{3} + o(1)}{1 + o(1)} = \frac{1}{3}$$
 
 
 #### Exam
