@@ -1543,7 +1543,7 @@ e^x-1&x<0
 \end{cases}$$
 Where the "$\geq$" is to be verified, as differentiability at $0$ is not certain.
 Both definitions are continuous, so differentiability needs only to be checked at $x_0=0$
-Instead of using the definition, we use the theorem ($f'(x)=\lim_{x\rightarrow x_0}f'(x)$):
+Instead of using the definition, we use the theorem ($f'(x_0)=\lim_{x\rightarrow x_0}f'(x)$):
 $$\lim_{x\rightarrow 0^+}2x=\lim_{x\rightarrow 0^-}e^x-1=0$$
 So this function is fully differentiable.
 
@@ -1727,7 +1727,7 @@ Start with the theorem:
 >If $f,g$ are differentiable around $c$ (except, possibly at $c$)  and with $g'\neq0$, then:
 >$$\text{if }\exists \lim_{x\rightarrow c}\frac{f'(x)}{g'(x)}:=l\implies \exists \lim_{x\rightarrow c}\frac{f(x)}{g(x)}=l$$
 
-Most importantly, this theorem cannot be used to determine if a function is differentiable at $c$.
+Notice the **sufficient condition:** if hopital limit exists, then the limit exists and is equal to it. If the hopital limit doesn't exist, then we cannot know anything about the original limit.
 
 ## 8.2) Hopital Exercises:
 
@@ -1773,6 +1773,32 @@ $$\begin{array}{ccc} \text{Derivative No.} & N & D \\ \hline
 4 & 8\cos(2x) \rightarrow 8 & 24\rightarrow 24 \\ \end{array}$$
 Alternatively with taylor:
 $$ \lim_{x \to 0} \frac{\frac{1}{3}x^4 + o(x^4)}{x^4 + o(x^4)} = \lim_{x \to 0} \frac{\frac{1}{3} + o(1)}{1 + o(1)} = \frac{1}{3}$$
+
+#### Infinite Hopital
+Solve the following limit:
+$$\lim_{x\rightarrow 0}\frac{e^x-e^{-x}}{e^x+e^{-x}}$$
+Notice that this is a $\infty/\infty$ form and hopital can be applied:
+$$\begin{array}{ccc} \text{Derivative No.} & N & D \\ \hline 0 & e^x - e^{-x} \rightarrow +\infty & e^x + e^{-x} \rightarrow +\infty \\ 1 & e^x + e^{-x} \rightarrow +\infty & e^x - e^{-x} \rightarrow +\infty \\ 2 & e^x - e^{-x} \rightarrow +\infty & e^x + e^{-x} \rightarrow +\infty \\ \end{array}$$
+However this is an infinite loop! So hopital will never be able to solve this problem.
+
+The solution is very easy as it just requires to rewrite the limit:
+$$\lim_{x \to +\infty} \frac{e^x - e^{-x}}{e^x + e^{-x}} \cdot \frac{e^x}{e^x} = \lim_{x \to +\infty} \frac{e^{2x} - 1}{e^{2x} + 1}=\frac{\infty}\infty$$
+And now hopital immediately solves the limit:
+$$\lim_{x \to +\infty} \frac{\frac{d}{dx}(e^{2x} - 1)}{\frac{d}{dx}(e^{2x} + 1)} = \lim_{x \to +\infty} \frac{2e^{2x}}{2e^{2x}} = \lim_{x \to +\infty} 1 = 1$$
+
+
+#### Not solvable with Hopital
+Solve the following limit:
+$$\lim_{x\rightarrow \infty}\frac{x+\sin(x)}{x}$$
+This evaluates to $0/0$ so apply hopital:
+$$\lim_{x\rightarrow \infty}\frac{1+\cos(x)}{1}$$
+This is indeterminate and hopital cannot be used again.
+
+**This doesn't state that the limit does not exists**, in fact, notice that 
+$$\lim_{x\rightarrow \infty}\frac{x+\sin(x)}{x}=\lim_{x\rightarrow\infty}1+\frac{\sin(x)}{x}=1$$
+
+## More Differentiability Exercises
+
 
 
 #### Exam
