@@ -1717,6 +1717,11 @@ $$f'(x) = \bigl(\phi(u(x))\bigr)' = \phi'(u(x)) \cdot u'(x) = \frac{1}{2x - x^2}
 
 
 # 8) Lesson 20/11/26
+
+
+
+
+
 #### Exam
 Given the function
 $$f(x)=|x-2|e^{1/(x-2)^2}$$

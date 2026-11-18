@@ -249,7 +249,7 @@ The game might not be perfect, it can also be imperfect:
 
 It can be rewritten as a tree
 ![[Pasted image 20261116180356.png|Tree Example|250]]
-node at the i-th level also describes the **information set** $h_i$. If the node is just one $h_i=\curly{x_i}$ then the node is fully aware of previous moves
+node at the i-th level also describes the **information set** $h_i$. If the node is just one $h_i=\curly{x_i}$ then the node is fully aware of previous moves. When a information set is not a singleto, the information on what state player $i$ is is missing: $h_i=\curly{x_1,x_2,...}$.
 
 Each player $i$ has a collection of information sets $H_i$ such that $h_i(x_j)\in H_i$. associated to a node $x_j$ where it is $i's$ turn to move.
 
