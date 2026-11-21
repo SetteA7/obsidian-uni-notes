@@ -245,7 +245,11 @@ $$\Omega(s_i',s_{-i})-\Omega(s_i,s_{-i})=u_i(s_i',s_{-i})-u_i(s_i,s_{-i})=\Delta
 The same as static games but now the actions are not taken simultaneously:
 The game might not be perfect, it can also be imperfect:
 - **perfect information:** everybody takes sequential decision fully aware
+	- All information sets are singletons
+	- No choice of nature
 - **imperfect information**: some decisions are not sequential or random (nature)
+	- Endogenous uncertainty: Information sets contain multiple choices
+	- 
 
 It can be rewritten as a tree
 ![[Pasted image 20261116180356.png|Tree Example|250]]
