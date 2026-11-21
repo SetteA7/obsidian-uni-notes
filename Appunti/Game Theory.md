@@ -249,7 +249,7 @@ The game might not be perfect, it can also be imperfect:
 	- No choice of nature
 - **imperfect information**: some decisions are not sequential or random (nature)
 	- Endogenous uncertainty: Information sets contain multiple choices
-	- 
+	- Exogenous uncertainty: single-person decision problems with lotteries
 
 It can be rewritten as a tree
 ![[Pasted image 20261116180356.png|Tree Example|250]]
@@ -257,7 +257,9 @@ node at the i-th level also describes the **information set** $h_i$. If the node
 
 Each player $i$ has a collection of information sets $H_i$ such that $h_i(x_j)\in H_i$. associated to a node $x_j$ where it is $i's$ turn to move.
 
-A strategy is now a set of elements that specify what to do based on previous plays.
+A strategy is now a set of elements that specify what to do based on previous plays. For example, here it is the first move, followed by the answer to the action:
+$$(a_1,a_{2Rr},a_{2Rs},a_{2Sr},a_{2Ss})$$
+Here mixed strategies become conditional probabilities!
 
 # 5) Examples:
 #### Prisoner Dilemma:
