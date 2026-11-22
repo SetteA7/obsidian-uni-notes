@@ -264,7 +264,17 @@ That is, supose an action is called:
 - $X$: only one action, first to play
 - $xy$: If $P_1$ plays $X$ $P_2$ plays $x$, if it plays $Y$, it plays $y$
 
-## 4.1) Nash Equilibria
+## 4.1) Backwards induction
+Lets focus first of perfect information:
+
+>[!thm|*] Zermelo Theorem
+>Any dynamic game of perfect information has a backward induction solution that is sequentially rational; if terminal payoffs are all different, it is unique
+
+if the game is represented as a tree (extensive form), backward induction starts by considering nodes at the end of the tree, such as those who are only followed by leaf nodes. Some branches coming out of these nodes can be removed by exploiting rationality, and subsequently the attention is moved to nodes up in the tree towards the root, which after the removal become closer to the end nodes.
+
+This allows not only to find NE but alse **Subgame Perfect Equilibria** SPE.
+SPE is the optimal decision at move $i<$max move
+
 
 
 # 5) Examples:
@@ -443,3 +453,20 @@ Two players: $P$roposer and $R$esoponder share 10 candies
 
 For simplicity we limit to three possible splits $A_P=\curly{D:(9,1), F:(5,5), G:(2,8)}$
 ![[Pasted image 20261122121808.png|Tree|250]]
+#### Trust Game
+Consider the following game:
+1. $A$ chooses L or R
+	1. L: $u=2,0$
+	2. R: go on
+2. $B$ chooses L or R again
+	1. L: $u=1,1$
+	2. R: go on
+3. $A$ chooses L or R again
+	1. L: $u=5,0$
+	2. R: $u=3,2$
+
+![[Pasted image 20261122123431.png|Tree|350]]
+Backwards induction can be applied:
+- $A$ prefers $L''$ to $R''$ since $u_a(L'')>u_A(R'')$
+- $B$ however now prefers $L'$ rather than $L''$ (only option left)
+- $A$ now prefers $L$ to $L'$. This is not a pareto optimal solution!
