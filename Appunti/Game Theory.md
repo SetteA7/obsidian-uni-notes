@@ -260,6 +260,12 @@ Each player $i$ has a collection of information sets $H_i$ such that $h_i(x_j)\i
 A strategy is now a set of elements that specify what to do based on previous plays. For example, here it is the first move, followed by the answer to the action:
 $$(a_1,a_{2Rr},a_{2Rs},a_{2Sr},a_{2Ss})$$
 Here mixed strategies become conditional probabilities!
+That is, supose an action is called:
+- $X$: only one action, first to play
+- $XX$: 
+
+## 4.1) Nash Equilibria
+
 
 # 5) Examples:
 #### Prisoner Dilemma:
