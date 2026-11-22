@@ -262,7 +262,7 @@ $$(a_1,a_{2Rr},a_{2Rs},a_{2Sr},a_{2Ss})$$
 Here mixed strategies become conditional probabilities!
 That is, supose an action is called:
 - $X$: only one action, first to play
-- $XX$: 
+- $xy$: If $P_1$ plays $X$ $P_2$ plays $x$, if it plays $Y$, it plays $y$
 
 ## 4.1) Nash Equilibria
 
@@ -329,7 +329,23 @@ $$u_2(q,A)=1q+0\cdot (1-q)=q\quad u_2(B,r)=0\cdot q+2(1-q)=2(1-q)\rightarrow A\p
 
 ![[Pasted image 20261116152716.png|Plot|350]]
 
-
+Extend this to a dynamic game:
+$$\begin{array}{c|c|c}
+   & aa & ab & ba & bb  \\ \hline
+ A & {\color{red}2},{\color{green}1} & {\color{red}2},{\color{green}1} & {\color{red}0},0 & 0,0\\
+ B & 0,0 & 0,{\color{green}2} &0, 0 & {\color{red}1},{\color{green}2}
+\end{array}
+$$
+Here three NE are immediately obvious:
+$$(A,aa)\quad(A,ab)\quad (B,bb)$$
+Notice that is $P_1$ plays $B$, it is irrational for $P_2$ to play $a$!
+Most importantly, notice that $B$ is not played in practice:
+- $P_1$ plays $B$: 
+	- $P_2$ plays $ba\implies u_1=0$
+	- $P_2$ plays $bb\implies u_1=1$
+- $P_1$ plays $A$
+	- $P_2$ plays $aa\implies u_1=2>0$
+	- $P_2$ plays $ab\implies u_1=2>0$
 #### IESDS Example
 Consider this example:
 $$\begin{array}{c|c|c}
