@@ -333,19 +333,19 @@ Extend this to a dynamic game:
 $$\begin{array}{c|c|c}
    & aa & ab & ba & bb  \\ \hline
  A & {\color{red}2},{\color{green}1} & {\color{red}2},{\color{green}1} & {\color{red}0},0 & 0,0\\
- B & 0,0 & 0,{\color{green}2} &0, 0 & {\color{red}1},{\color{green}2}
+ B & 0,0 & 1,{\color{green}2} &0, 0 & {\color{red}1},{\color{green}2}
 \end{array}
 $$
 Here three NE are immediately obvious:
 $$(A,aa)\quad(A,ab)\quad (B,bb)$$
-Notice that is $P_1$ plays $B$, it is irrational for $P_2$ to play $a$!
+Notice that is $P_1$ plays $B$, it is irrational for $P_2$ to play $a$ (so it will never play $aa\text{ or }ba$)!
 Most importantly, notice that $B$ is not played in practice:
 - $P_1$ plays $B$: 
-	- $P_2$ plays $ba\implies u_1=0$
+	- $P_2$ plays $ab\implies u_1=1$
 	- $P_2$ plays $bb\implies u_1=1$
 - $P_1$ plays $A$
-	- $P_2$ plays $aa\implies u_1=2>0$
-	- $P_2$ plays $ab\implies u_1=2>0$
+	- $P_2$ plays $ab\implies u_1=2>1$
+	- $P_2$ plays $bb\implies u_1=1$
 #### IESDS Example
 Consider this example:
 $$\begin{array}{c|c|c}
@@ -434,3 +434,12 @@ Can firm $i$ improve its payoff by deviating while firm $j$ holds $p_j = c$?
 - **Lower price ($p_i < c$):** Firm $i$ captures the entire market ($a - p_i > 0$ since $p_i < c < a$), but sells every unit below cost ($p_i - c < 0$), earning $u_i(p_i, c) < 0$. Worse off.
 
 Thus, $(c, c)$ is a Nash Equilibrium.
+
+#### Ultimatum Game
+Two players: $P$roposer and $R$esoponder share 10 candies
+- P presents a split
+- R decides to take it or not
+- If R decides not to take, noone wins
+
+For simplicity we limit to three possible splits $A_P=\curly{D:(9,1), F:(5,5), G:(2,8)}$
+![[Pasted image 20261122121808.png|Tree|250]]
