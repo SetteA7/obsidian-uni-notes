@@ -933,7 +933,7 @@ From the moment the bot crosses $S$ to the moment it starts braking, five things
 So the delay of the threshold transmission is: $$t_{e2e,thresh}=\tau_{e2e}+\psi+AT+\phi\qquad A=X+Y$$
 and the delay to completely halt is
 $$t_{stop}=t_{e2e,thresh}+t_{action}\qquad t_{action}=\frac{d_{brake}}{v_\max}$$
-
+![[Pasted image 20261125160837.png]]
 #### Parameters
 | Symbol                | Meaning                                                                  | **Type of value** | Value in the experiments                                                                               |
 | --------------------- | ------------------------------------------------------------------------ | ----------------- | ------------------------------------------------------------------------------------------------------ |
@@ -987,7 +987,7 @@ Two nodes from the package `monitor_pkg` run on the two machines:
 | `network_downlink` | bot $\rightarrow$ controller | heartbeat every $0.1\,s$, carries the loss and latency the bot measured                   | best effort |
 | `network_uplink`   | controller $\rightarrow$ bot | heartbeat every $0.1\,s$                                                                  | best effort |
 | `/brake_distance`  | bot $\rightarrow$ controller | measured $d_{brake}$, once per stop, nto used during runs, only for parameter calibration | reliable    |
-
+![[Pasted image 20261125160834.png]]
 The model assumes that a lost scan or command is replaced by the next one, one period later, which is the best-effort behaviour. With reliable QoS, DDS would retransmit by itself and turn loss into extra latency. 
 
 ### 6.2.3) Measuring the Model Inputs
