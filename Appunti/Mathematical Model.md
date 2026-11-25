@@ -1292,6 +1292,59 @@ The previous findings compare averages. This one checks whether the model can al
 
 So on the clean links every exception is a borderline case of a few millimetres. On the lossy links, the extra exceptions match the number of lost STOPs the model expects. The model explains not only how often the bot breaches the margin, but also which brakes do it.
 
+#### 8a. Single brakes, recomputed: the lost STOPs are visible in the log
+**Result.** Recomputed with the current analysis, the rule $\text{crash}\iff\phi>B$ holds for 364 of the 380 brakes ($95.8\%$). On the lossy links, every crash the rule misses is a lost STOP that can be measured in the log, not only inferred. That 8 of the 10 lost STOPs ended in a crash is what the model predicts ($81\%$), because the budget $B$ usually leaves less than one period $T=100\,ms$ of slack after $\phi$.
+
+This finding redoes finding 8 with the same pipeline as Section 6.4, on the same 380 brakes, and adds a measurement of the lost STOPs that finding 8 assumed could not be seen.
+
+**The table, recomputed.** The 56 crashes are the same, but the split differs from finding 8:
+
+| Brakes | Finding 8 | Recomputed |
+|---|---|---|
+| No crash, and $\phi\leq B$ | 323 | 321 |
+| Crash, and $\phi>B$ | 39 | 43 |
+| Crash, although $\phi\leq B$ | 17 | 13 |
+| No crash, although $\phi>B$ | 1 | 3 |
+| **Rule correct** | **362** | **364** |
+
+| Condition | Brakes | Rule correct | Crash, $\phi\leq B$ | No crash, $\phi>B$ |
+|---|---|---|---|---|
+| Ideal, Starlink | 160 | 157 | 2 | 1 |
+| + iperf | 80 | 75 | 4 | 1 |
+| + netem, mixed | 140 | 132 | 7 | 1 |
+
+%% The finding 8 table probably comes from an older version of the analysis (before the psi fix or the D_BRAKE source change). Not traced. %%
+
+**A lost STOP can be measured.** After the detecting scan, the model's delay is $\tau_{e2e}+\psi+YT$, with $Y$ the number of lost STOPs. The log gives this delay for every brake as "rest" (the measured delay minus $\phi$). So $$y=\text{rest}-\tau_{e2e}-\psi$$ should be about $0\,ms$ without loss and about $T=100\,ms$ with one lost STOP. $y$ is read from distances, so it carries the LiDAR's noise: $1\,cm$ of distance is about $23\,ms$.
+
+| Condition | Brakes | $y$ without a lost STOP | $y$ with a lost STOP | Lost STOPs, expected ($\sum p_{rx}$) | Lost STOPs, observed |
+|---|---|---|---|---|---|
+| Ideal, Starlink, + iperf | 240 | $-11$ to $47\,ms$ | none | $0.04$ | 0 |
+| + netem, mixed | 140 | up to $25\,ms$ | $78$ to $115\,ms$ | $6.8$ | 10 |
+
+No brake has $y$ between $47$ and $78\,ms$, so the two groups separate cleanly at $y>50\,ms$. The 10 lost STOPs are consistent with the measured $p_{rx}$ (probability of 10 or more: $0.15$).
+
+**Why a lost STOP usually ends in a crash.** With $\phi\leq B$, a single lost STOP adds $T$ and crashes exactly when $$\phi+T>B\iff\phi>B-T$$ So a lost STOP crashes for sure when $B<T$, and with probability $\frac{2T-B}{T}$ when $T\leq B<2T$. In the netem and mixed brakes:
+
+| Policy | Brakes | Mean $B$ | Share with $\phi>B-T$ (model) | Lost STOPs | Crashed |
+|---|---|---|---|---|---|
+| FIXED | 40 | $85.8\,ms$ | $1.00$ | 4 | 4 |
+| SMART 0.05 | 40 | $174.0\,ms$ | $0.45$ | 1 | 0 |
+| SMART 0.15 | 40 | $130.8\,ms$ | $0.88$ | 4 | 3 |
+| SMART 0.30 | 20 | $81.7\,ms$ | $1.00$ | 1 | 1 |
+| **All** | 140 | | $\mathbf{0.81}$ | **10** | **8** |
+
+The two lost STOPs that did not crash had $B-\phi=141$ and $180\,ms$, more than one period of slack. This is by design. At $P_{target}=0.15$ or $0.30$, S.M.A.R.T. does not pay for a loss that happens in about $5\%$ of the stops. Only $P_{target}=0.05$ buys enough budget to absorb a lost STOP in about half of the stops. FIXED's $B$ is below $T$, so on these links every lost STOP is a crash.
+
+**The exceptions, one by one.**
+
+- **netem, mixed (7 crashes with $\phi\leq B$).** All 7 have $y$ between $81$ and $115\,ms$: each one is a measured lost STOP. A brake with $\phi\leq B$ crashes from lost STOPs with probability $p_{rx}^{\floor{(B-\phi)/T}+1}$. Summed over the brakes, this gives $4.6$ expected against 7 observed (probability of 7 or more: $0.18$), which is consistent. In one of them (netem, SMART 0.30), the controller had logged $p_{rx}=0$ at the brake: the heartbeat estimate missed that loss.
+- **Borderline brakes (4 crashes, 2 false alarms).** Ideal SMART 0.30, Starlink SMART 0.05 (two), iperf FIXED (two) and iperf SMART 0.30. Here $B-\phi$ is between $-3$ and $8\,ms$, and $y$ between $-7$ and $10\,ms$: $\phi$ fell within about $0.4\,cm$ of the budget. These are at the level of the LiDAR's noise, as finding 8 says.
+- **iperf, 2 crashes that are not noise.** SMART 0.05 and SMART 0.15, with $B-\phi=46$ and $29\,ms$, and $y=47$ and $32\,ms$. The STOP arrived $30$ to $47\,ms$ later than $\tau_{e2e}+\psi$, which is $1.3$ to $2.1\,cm$, far above the LiDAR's noise. The likely cause is a latency spike on the loaded link. The breach is small ($0.05$ and $0.15\,cm$) only because $y$ happened to exceed $B-\phi$ by a few milliseconds.
+- **mixed, 1 false alarm.** $\phi=406\,ms$ but $y=-273\,ms$: the bot was already braking $273\,ms$ before the detecting scan was taken, so this STOP was not caused by the reading below $S$. The likely cause is the stale-scan STOP ($>0.5\,s$ without scans during the burst of lost scans). By Section 6.2.4, such a run should be discarded rather than counted as an exception. %% TODO confirm the stale-scan STOP in that run's CSV %%
+
+**Conclusion.** On the lossy links the exceptions are not an unexplained remainder: each is a lost STOP visible in the log, their number agrees with the model, and the high share of lost STOPs that crash is the model's own prediction. On the clean links, 4 of the 6 exceptions are borderline, and 2 are latency spikes under iperf that the median $\tau_{e2e}$ does not capture.
+
 
 ## 6.7) Findings that Disagree with the Model or with Expectations
 Section 6.6 lists the predictions that held. This section collects the ones that did not, or only partly: places where the data departs from an assumption of the model, or where the setup did not behave as intended. They are ordered by how much they matter for the model. None of them invalidates the crash prediction, which stays consistent with the observed crashes in every session (Section 6.4). They do show where the model is approximate and where it could be improved.
