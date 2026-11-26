@@ -2085,25 +2085,30 @@ Check at home: on $(0,1)$ instead, the minimum is the same but the maximum does 
 
 ---
 
-#### d) No stationary points (Harder)
-
+#### d) No stationary points
 Find, if they exist, the global maximum and minimum of the following function:
-
 $$f(x)=\arcsin\par{\frac{2x}{1+x^2}}$$
 
 **Domain:** Recall that $\arcsin(t)$ is defined for $t\in[-1,1]$. Notice that
 
-$$\left|\frac{2x}{1+x^2}\right|\leq1\iff2|x|\leq1+x^2\iff(|x|-1)^2\geq0$$
+$$\begin{align}\left|\frac{2x}{1+x^2}\right|\leq1&\iff2|x|\leq1+x^2\\
+&\iff|x|^2-2|x|+1\geq 0\\
+&\iff(|x|-1)^2\geq0\\
+\end{align}$$
 
-which is always true, so $\dom f=\mathbb R$. Moreover $f$ is odd (check at home).
+which is always true, so $\dom f=\mathbb R$. Moreover $f$ is odd.
 
 - **Stationary points:** Recall $(\arcsin t)'=\frac1{\sqrt{1-t^2}}$. Let $g(x)=\frac{2x}{1+x^2}$: $$g'(x)=\frac{2(1+x^2)-2x\cdot2x}{(1+x^2)^2}=\frac{2(1-x^2)}{(1+x^2)^2}$$ $$\sqrt{1-g^2(x)}=\sqrt{\frac{(1+x^2)^2-4x^2}{(1+x^2)^2}}=\frac{\sqrt{(1-x^2)^2}}{1+x^2}=\frac{|1-x^2|}{1+x^2}$$ Notice the absolute value: $\sqrt{a^2}=|a|$, **not** $a$! Then for $x\neq\pm1$: $$f'(x)=\frac{g'(x)}{\sqrt{1-g^2(x)}}=\frac{2(1-x^2)}{(1+x^2)^2}\cdot\frac{1+x^2}{|1-x^2|}=\frac{1-x^2}{|1-x^2|}\cdot\frac2{1+x^2}$$ And since $\frac{a}{|a|}=\text{sign}(a)$: $$f'(x)=\begin{cases}  
-    \dfrac2{1+x^2} & |x|<1\\  
-    -\dfrac2{1+x^2} & |x|>1  
-    \end{cases}$$ $f'$ is **never** zero, so there are **no** stationary points! $$\begin{array}{c|ccc} x & (-\infty,-1) & (-1,1) & (1,+\infty) \\ \hline f'(x) & - & + & - \\ \hline f(x) & \searrow & \nearrow & \searrow \end{array}$$
-- **Non differentiability points:** $f'$ is not defined at $x=\pm1$. Since $f$ is continuous, use the limit of the derivative theorem (see Lesson 7) on each side of $x=1$: $$f_-'(1)=\lim_{x\rightarrow1^-}\frac2{1+x^2}=1\qquad f_+'(1)=\lim_{x\rightarrow1^+}-\frac2{1+x^2}=-1$$ So $x=1$ is a **corner point** (and by symmetry so is $x=-1$). Two candidates appear: $$f(1)=\arcsin(1)=\frac\pi2\qquad f(-1)=\arcsin(-1)=-\frac\pi2$$
+    \dfrac2{1+x^2} & 1-x^2<0\\  
+    -\dfrac2{1+x^2} & 1-x^2>0  
+    \end{cases}
+    \quad =\begin{cases}  
+\dfrac2{1+x^2} & |x|<1\\  
+-\dfrac2{1+x^2} & |x|>1  
+\end{cases}
+    $$ $f'$ is **never** zero, so there are **no** stationary points! $$\begin{array}{c|ccc} x & (-\infty,-1) & (-1,1) & (1,+\infty) \\ \hline f'(x) & - & + & - \\ \hline f(x) & \searrow & \nearrow & \searrow \end{array}$$
+- **Non differentiability points:** $f'$ is not defined at $x=\pm1$. Since $f$ is continuous, use the limit of the derivative theorem on each side of $x=1$: $$f_-'(1)=\lim_{x\rightarrow1^-}\frac2{1+x^2}=1\qquad f_+'(1)=\lim_{x\rightarrow1^+}-\frac2{1+x^2}=-1$$ So $x=1$ is a **corner point** (and by symmetry so is $x=-1$). Two candidates appear: $$f(1)=\arcsin(1)=\frac\pi2\qquad f(-1)=\arcsin(-1)=-\frac\pi2$$
 - **Endpoints:** the domain is $\mathbb R$, so check the limits: $$\lim_{x\rightarrow\pm\infty}\arcsin\par{\frac{2x}{1+x^2}}=\arcsin(0)=0$$
-
 So finally, since $\arcsin(t)\in\sq{-\frac\pi2,\frac\pi2}$, the values $\pm\frac\pi2$ are the largest/smallest possible:
 
 $$\boxed{\max_{\mathbb R}f=\frac\pi2\quad\text{at }x=1\qquad\min_{\mathbb R}f=-\frac\pi2\quad\text{at }x=-1}$$
@@ -2113,7 +2118,6 @@ Notice that **both** global extrema are corner points and the function has no st
 ---
 
 #### e) Global extrema on $\mathbb R$
-
 Find, if they exist, the global maximum and minimum of the following function:
 
 $$f(x)=x^2e^{-x}$$
