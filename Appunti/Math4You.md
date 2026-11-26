@@ -1999,6 +1999,16 @@ One question is left: does a global maximum exist at all? On a closed and bounde
 
 >[!thm|*] Weierstrass 
 >Let f be continuous on a closed and bounded interval [a, b]. Then f has a global maximum and a global minimum on [a, b].
+
+One useful theorem is the following:
+
+>[!thm|*] First Derivative Test
+>Let $f$ be continuous at $x_0$ and differentiable in a neighborhood of $x_0$ (except possibly at $x_0$). Then:
+>- $f'\geq 0$ on the left of $x_0$ and $f'\leq 0$ on the right $\implies x_0$ is a local **maximum**
+>- $f'\leq 0$ on the left of $x_0$ and $f'\geq 0$ on the right $\implies x_0$ is a local **minimum**
+>- $f'$ has the same sign on both sides $\implies x_0$ is **not** an extremum
+
+
 ## 9.2) Max/Min Exercises
 
 #### Extrema at the endpoints
@@ -2115,11 +2125,12 @@ $$\boxed{\max_{\mathbb R}f=\frac\pi2\quad\text{at }x=1\qquad\min_{\mathbb R}f=-\
 
 Notice that **both** global extrema are corner points and the function has no stationary point at all. Only looking for $f'(x)=0$ would find nothing!
 
+![[Pasted image 20261126194637.png|Plot|250]]
+
 ---
 
 #### e) Global extrema on $\mathbb R$
 Find, if they exist, the global maximum and minimum of the following function:
-
 $$f(x)=x^2e^{-x}$$
 
 The domain is $\mathbb R$, which is not bounded, so Weierstrass does not apply. We use the sign of $f'$ and compare with the limits at $\pm\infty$.
@@ -2135,8 +2146,42 @@ So finally:
 
 $$\boxed{\min_{\mathbb R}f=0\quad\text{at }x=0\qquad\nexists\max_{\mathbb R}f\quad(\sup f=+\infty)}$$
 
-Notice that the local max at $x=2$ is global if we restrict to $[0,+\infty)$ (check at home).
+Notice that the local max at $x=2$ is global if we restrict to $[0,+\infty)$ 
+![[Pasted image 20261126194800.png|Plot|250]]
+## 9.3) Concavity/Convexity Theory
 
+Start with understanding what convexity/concavity means:
+
+>[!def|*] Convex/Concave
+>Let $f$ be differentiable at $x_0$ and $t(x)=f(x_0)+f'(x_0)(x-x_0)$ its tangent line. $f$ is **convex** at $x_0$ if there exists $r>0$ such that $f(x)\geq t(x)$ for all $x$ with $|x-x_0|<r$. It is **concave** if $f(x)\leq t(x)$.
+>$f$ is convex on an interval $I$ if it is convex at every point of $I$.
+
+So convex means "the graph lies above its tangents", concave "below".
+
+>[!def|*] Inflection point
+>Let $f$ be differentiable at $x_0$. $x_0$ is an **inflection point** if the graph crosses the tangent at $x_0$: $f(x)\leq t(x)$ on the left and $f(x)\geq t(x)$ on the right of $x_0$ (or vice versa).
+
+In practice: the concavity changes at $x_0$. Notice that $f$ must be differentiable at $x_0$, so $\sqrt[3]x$ at $0$ (vertical tangent) is not an inflection with this definition.
+
+Just like the sign of $f'$ tells us where $f$ increases, the sign of $f''$ tells us where $f$ is convex:
+
+>[!thm|*] Convexity and Derivatives
+>Let $f$ be differentiable on an **interval** $I$. Then:
+>$$f\text{ convex on }I\iff f'\text{ increasing on }I$$
+>If moreover $f$ is twice differentiable on $I$:
+>- $f''(x)\geq0\ \forall x\in I\iff f$ is convex on $I$
+>- $f''(x)>0\ \forall x\in I\implies f$ is strictly convex on $I$
+>
+>Similarly for concave with $\leq$ and $<$.
+
+Notice that this is exactly the monotonicity theorem applied to $f'$ instead of $f$! Again, the last implication cannot be reversed: $x^4$ is strictly convex but $f''(0)=0$.
+
+>[!thm|*] Inflection Points
+>Let $f$ be twice differentiable around $x_0$.
+>- If $x_0$ is an inflection point, then $f''(x_0)=0$
+>- If $f''(x_0)=0$ and $f''$ changes sign at $x_0$, then $x_0$ is an inflection point. If $f''$ does not change sign, it is not.
+
+Same story as Fermat: $f''(x_0)=0$ is only a **necessary** condition ($x^4$ at $0$). Moreover an inflection can exist even where $f''$ does not: $x|x|$ at $0$.
 
 # 10) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
