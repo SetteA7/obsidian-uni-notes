@@ -2225,6 +2225,9 @@ $$\boxed{f\text{ convex on }(-1,1),\quad\text{concave on }(-\infty,-1)\cup(1,+\i
 
 Notice that $f$ is concave on each of the two intervals $(-\infty,-1)$ and $(1,+\infty)$ separately, **not** on their union.
 
+![[Pasted image 20261126202959.png|Plot|250]]
+
+
 ---
 
 #### c) $f''=0$ is not enough
@@ -2242,19 +2245,19 @@ $$f_1(x)=x^4\qquad f_2(x)=x^3$$
 So finally $x^4$ is convex on all of $\mathbb R$ even if $f''(0)=0$, while $x^3$ has an inflection at $0$ with **horizontal** tangent.
 
 Same story as Fermat:
-
 $$x_0\text{ inflection}\implies f''(x_0)=0\qquad\text{but}\qquad f''(x_0)=0\not\implies x_0\text{ inflection}$$
+
+![[Pasted image 20261126203313.png|Plots|250]]
+
 
 ---
 
 #### d) Inflection without $f''$
-
 Study the point $x_0=0$ for the following functions:
 
 $$f_1(x)=x|x|\qquad f_2(x)=\sqrt[3]x$$
 
 **First function:**
-
 - **Second derivative:** Recall the abs value definition: $$f_1(x)=\begin{cases}x^2 & x\geq0\\ -x^2 & x<0\end{cases}\implies f_1'(x)=\begin{cases}2x & x\geq0\\ -2x & x<0\end{cases}=2|x|$$ where $f_1'(0)=0$ by the limit of the derivative theorem ($f_1$ is continuous and $\lim_{x\rightarrow0}2|x|=0$). Then: $$f_1''(x)=\begin{cases}2 & x>0\\ -2 & x<0\end{cases}$$
 - **Candidate inflection points:** $f_1''$ is never $0$, but $f_1''(0)$ does **not** exist ($f_1'=2|x|$ has a corner at $0$). Since $f_1$ is differentiable at $0$, $x_0=0$ is a candidate.
 - **Sign of $f''$:** $$\begin{array}{c|cc}  
@@ -2276,12 +2279,13 @@ $$f_1(x)=x|x|\qquad f_2(x)=\sqrt[3]x$$
 So finally the concavity changes at $0$ in both cases, but:
 
 - $x|x|$: inflection point with horizontal tangent
-- $\sqrt[3]x$: the concavity changes but $f$ is not differentiable at $0$. With our definition (which requires $f$ differentiable at $x_0$) this is **not** an inflection point. Some books call it an "inflection with vertical tangent": check which convention your professor uses!
+- $\sqrt[3]x$: the concavity changes but $f$ is not differentiable at $0$. With our definition (which requires $f$ differentiable at $x_0$) this is **not** an inflection point.
+
+![[Pasted image 20261126203811.png|Plot|250]]
 
 ---
 
-#### e) Strange domain (Harder)
-
+#### e) Strange domain 
 Study the convexity and the inflection points of the following function:
 
 $$f(x)=x^2\log|x|$$
@@ -2304,6 +2308,8 @@ Notice that near $0$ we have $f''(x)\rightarrow-\infty$, so $f$ is concave on bo
 
 Check at home: $\lim_{x\rightarrow0}x^2\log|x|=0$, so $f$ can be extended continuously with $f(0)=0$. Show that the extension is differentiable at $0$ with $f'(0)=0$ and is concave on the whole interval $(-e^{-3/2},e^{-3/2})$ (hint: $f'$ is decreasing on both sides and continuous at $0$).
 
+![[Pasted image 20261126203949.png|Plot|250]]
+
 ---
 
 #### f) Parametric
@@ -2322,15 +2328,13 @@ So finally:
 
 $$\boxed{f\text{ convex on }\mathbb R\iff a\in\sq{-4,4}}$$
 
+![[Pasted image 20261126204320.png|Plots: blue a = 1, red a= -6, green a = 7|250]]
+
 ---
 
 #### g) Inequality from the tangent
-
 Prove that:
-
 $$\log(1+x)\leq x\qquad\forall x>-1$$
-
-In 9.2 this was done as a minimum problem. Now we use convexity.
 
 - **Second derivative:** $$f(x)=\log(1+x)\qquad f'(x)=\frac1{1+x}\qquad f''(x)=-\frac1{(1+x)^2}$$
 - **Sign of $f''$:** $f''(x)<0$ for all $x>-1$, so $f$ is concave on its whole domain $(-1,+\infty)$.
