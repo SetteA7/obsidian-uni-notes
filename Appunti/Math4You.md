@@ -1971,6 +1971,20 @@ $$\lim_{x \to 2^-} f'(x) = \lim_{x \to 2^-} -e^{1/(x-2)^2} \left(1 - \frac{2}{(x
 
 # 9) Lesson 27/11/26
 ## 9.1) Maximum/Minimum Theory
+First of all recall what a mmaximum/minimum is:
+
+>[!def|*] Global Maximum/minimum
+>Let $f:A\rightarrow\mathbb R$ and $x_0\in A$. We say that $x_0$ is a _global_ (or _absolute_) _maximum point_ of $f$ if $f(x) \leq f(x_0)$ for all $x\in A$. The value $f(x_0)$ is called the _maximum_ of $f$. Similarly, $x_0$ is a _global minimum point_ if $f(x) \geq f(x_0)$ for all $x\in A$.
+
+>[!def|*] Local Maximum/minimum
+> We say that £x_0\in A$ is a local maximum point of $f$ if there exists $r>0$ such that $f(x)\leq f(x_0)$ for all $x\in A$ with $|x-x_0|<r$. Similarly for the minimum but with $f(x)\geq f(x_0)$
+
+Every global maximum is also a local maximum. The global maximum value is unique but can be reached at many points.
+
+>[!def|*]  Stationary Point
+>A point $x_0\in A$ is a stationary point of $f$ if $f$ is differentiable at $x_0$ and $f'(x_0)=0$
+
+Then one important theorem is the 
 
 
 # 10) Symbols
