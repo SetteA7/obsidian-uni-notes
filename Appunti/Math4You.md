@@ -1971,7 +1971,7 @@ $$\lim_{x \to 2^-} f'(x) = \lim_{x \to 2^-} -e^{1/(x-2)^2} \left(1 - \frac{2}{(x
 
 # 9) Lesson 27/11/26
 ## 9.1) Maximum/Minimum Theory
-First of all recall what a mmaximum/minimum is:
+First of all recall what a maximum/minimum is:
 
 >[!def|*] Global Maximum/minimum
 >Let $f:A\rightarrow\mathbb R$ and $x_0\in A$. We say that $x_0$ is a _global_ (or _absolute_) _maximum point_ of $f$ if $f(x) \leq f(x_0)$ for all $x\in A$. The value $f(x_0)$ is called the _maximum_ of $f$. Similarly, $x_0$ is a _global minimum point_ if $f(x) \geq f(x_0)$ for all $x\in A$.
@@ -1984,8 +1984,45 @@ Every global maximum is also a local maximum. The global maximum value is unique
 >[!def|*]  Stationary Point
 >A point $x_0\in A$ is a stationary point of $f$ if $f$ is differentiable at $x_0$ and $f'(x_0)=0$
 
-Then one important theorem is the 
+Then one important theorem is the following:
 
+>[!thm|*] Fermat
+>Let $x_0$ be an interior point of $A$ and let $f$ be differentiable at $x_0$. If $x_0$ is a local extremum, then $f'(x_0)=0$
+>
+
+This theorem alone allows to find the three places where we have to check for extrema:
+1. Stationary Points
+2. Interior Points where $f$ is non differentiable: second condition fails
+3. Endpoints of domain: first condition fails
+
+One question is left: does a global maximum exist at all? On a closed and bounded interval the answer is yes.
+
+>[!thm|*] Weierstrass 
+>Let f be continuous on a closed and bounded interval [a, b]. Then f has a global maximum and a global minimum on [a, b].
+## 9.2) Max/Min Exercises
+
+#### Extrema at the endpoints
+Find the global maximum and minimum of the following function on $[-2,3]$:
+$$f(x)=x^3-3x$$
+$f$ is a polynomial, so it is continuous on $[-2,3]$ and Weierstrass guarantees that global max/min exist. We just need to find the candidates.
+- Find the stationary points:
+$$f'(x)=3x^2-3=3(x-1)(x+1)=0\rightarrow x_{1,2}=\pm1$$
+study the sign to understand if max or min:
+$$\begin{array}{c|ccc}  
+x & (-2,-1) & (-1,1) & (1,3) \\ \hline  
+f'(x) & + & - & + \\ \hline  
+f(x) & \nearrow & \searrow & \nearrow  
+\end{array}$$
+One local max and one local min are found:
+$$f(-1)=2\qquad f(1)=-2$$
+- Find the endpoints:
+$$f(-2)=-2\qquad f(3)=18$$
+
+- $x=3$ is the global maximum point with $\max f=18$. Notice it is an **endpoint**, so $f'(3)\neq0$!
+- The global minimum $\min f=-2$ is reached at **two** points, $x=-2$ and $x=1$ (the value is unique, the points are not)
+- $x=-1$ is a local maximum but **not** the global one, since $f(-1)=2<18$
+
+$$\boxed{\max_{[-2,3]}f=18\quad\text{at }x=3\qquad\min_{[-2,3]}f=-2\quad\text{at }x=-2,\ x=1}$$
 
 # 10) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
