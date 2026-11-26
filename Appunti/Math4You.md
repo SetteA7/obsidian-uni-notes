@@ -2024,6 +2024,116 @@ $$f(-2)=-2\qquad f(3)=18$$
 
 $$\boxed{\max_{[-2,3]}f=18\quad\text{at }x=3\qquad\min_{[-2,3]}f=-2\quad\text{at }x=-2,\ x=1}$$
 
+![[Pasted image 20261126191455.png|Plot|250]]
+#### b) Cusp
+Find the global maximum and minimum of the following function on $[-1,8]$:
+$$f(x)=x^{2/3}(x-5)$$
+
+Again $f$ is continuous on a closed and bounded interval, so Weierstrass applies.
+Search for the candidate points:
+- Stationary points:
+Rewrite $f(x)=x^{5/3}-5x^{2/3}$, then for $x\neq0$:
+$$f'(x)=\frac53x^{2/3}-\frac{10}3x^{-1/3}=\frac{5x-10}{3x^{1/3}}$$
+Notice that $f'$ is not defined at $x=0$. Compute the differentiability:
+$$\lim_{x\rightarrow 0^\pm}\frac{f(x)}x=\lim_{x\rightarrow 0^\pm}x^{2/3}-\frac5{x^{1/3}}=\mp\infty$$
+
+
+Stationary point: $5x-10=0\rightarrow x=2$
+
+$$\begin{array}{c|ccc}  
+x & (-1,0) & (0,2) & (2,8) \\ \hline  
+5x-10 & - & - & + \\  
+3x^{1/3} & - & + & + \\ \hline  
+f'(x) & + & - & + \\ \hline  
+f(x) & \nearrow & \searrow & \nearrow  
+\end{array}$$
+Oen candidate appears:
+$$f(2)=-3\cdot2^{2/3}\approx -4.76$$
+- Non derivability points:
+One candidate appears from the previous calculations:
+$$f(0)=0$$
+
+
+- Endpoints:
+$$f(-1)=-6\qquad f(8)=4\cdot3=12$$
+So finally: 
+$$\boxed{\max_{[-1,8]}f=12\quad\text{at }x=8\qquad\min_{[-1,8]}f=-6\quad\text{at }x=-1}$$
+
+Moreover $x=0$ is a local maximum (and $x=2$ a local minimum). Fermat would **never** find $x=0$, since $f$ is not differentiable there!
+
+![[Pasted image 20261126192635.png|Plot|250]]
+#### c) Open endpoint 
+Find, if they exist, the global maximum and minimum of the following function on $(0,1]$:
+$$f(x)=x^x$$
+Notice that the interval is **not closed**, so Weierstrass does not apply: the existence of max/min is not guaranteed and must be checked by hand.
+
+Recall that a power with variable base and exponent must be rewritten with the exponential:
+$$f(x)=x^x=e^{x\log x}$$
+
+- **Stationary points:** Use the chain rule with $u(x)=x\log x$, $u'(x)=\log x+x\cdot\frac1x=\log x+1$: $$f'(x)=e^{x\log x}\par{\log x+1}=x^x\par{\log x+1}$$ Since $x^x>0$, the sign of $f'$ is the sign of $\log x+1$: $$\log x+1=0\rightarrow\log x=-1\rightarrow x=\frac1e$$ $$\begin{array}{c|cc} x & (0,\frac1e) & (\frac1e,1) \\ \hline f'(x) & - & + \\ \hline f(x) & \searrow & \nearrow \end{array}$$ One local min is found: $$f\par{\frac1e}=\par{\frac1e}^{1/e}=e^{-1/e}\approx0.69$$
+- **Non differentiability points:** none, $f$ is differentiable on all of $(0,1]$.
+- **Endpoints:** $x=1$ belongs to the interval: $$f(1)=1^1=1$$ $x=0$ does **not** belong to the interval, so it is not a candidate! We can only compute the limit: $$\lim_{x\rightarrow0^+}x^x=\lim_{x\rightarrow0^+}e^{x\log x}=e^{0}=1$$ where we used $\lim_{x\rightarrow0^+}x\log x=0$ (hierarchy of infinities).
+
+So finally:
+
+- $f$ is decreasing on $(0,\frac1e]$ and increasing on $[\frac1e,1]$, so $x=\frac1e$ is the global minimum point
+- Near $0$ the function gets close to $1$ but never reaches it there. However the value $1$ **is** reached at $x=1$, so the maximum exists!
+
+$$\boxed{\max_{(0,1]}f=1\quad\text{at }x=1\qquad\min_{(0,1]}f=e^{-1/e}\quad\text{at }x=\frac1e}$$
+
+Check at home: on $(0,1)$ instead, the minimum is the same but the maximum does **not** exist ($\sup f=1$ is never reached).
+
+---
+
+#### d) No stationary points (Harder)
+
+Find, if they exist, the global maximum and minimum of the following function:
+
+$$f(x)=\arcsin\par{\frac{2x}{1+x^2}}$$
+
+**Domain:** Recall that $\arcsin(t)$ is defined for $t\in[-1,1]$. Notice that
+
+$$\left|\frac{2x}{1+x^2}\right|\leq1\iff2|x|\leq1+x^2\iff(|x|-1)^2\geq0$$
+
+which is always true, so $\dom f=\mathbb R$. Moreover $f$ is odd (check at home).
+
+- **Stationary points:** Recall $(\arcsin t)'=\frac1{\sqrt{1-t^2}}$. Let $g(x)=\frac{2x}{1+x^2}$: $$g'(x)=\frac{2(1+x^2)-2x\cdot2x}{(1+x^2)^2}=\frac{2(1-x^2)}{(1+x^2)^2}$$ $$\sqrt{1-g^2(x)}=\sqrt{\frac{(1+x^2)^2-4x^2}{(1+x^2)^2}}=\frac{\sqrt{(1-x^2)^2}}{1+x^2}=\frac{|1-x^2|}{1+x^2}$$ Notice the absolute value: $\sqrt{a^2}=|a|$, **not** $a$! Then for $x\neq\pm1$: $$f'(x)=\frac{g'(x)}{\sqrt{1-g^2(x)}}=\frac{2(1-x^2)}{(1+x^2)^2}\cdot\frac{1+x^2}{|1-x^2|}=\frac{1-x^2}{|1-x^2|}\cdot\frac2{1+x^2}$$ And since $\frac{a}{|a|}=\text{sign}(a)$: $$f'(x)=\begin{cases}  
+    \dfrac2{1+x^2} & |x|<1\\  
+    -\dfrac2{1+x^2} & |x|>1  
+    \end{cases}$$ $f'$ is **never** zero, so there are **no** stationary points! $$\begin{array}{c|ccc} x & (-\infty,-1) & (-1,1) & (1,+\infty) \\ \hline f'(x) & - & + & - \\ \hline f(x) & \searrow & \nearrow & \searrow \end{array}$$
+- **Non differentiability points:** $f'$ is not defined at $x=\pm1$. Since $f$ is continuous, use the limit of the derivative theorem (see Lesson 7) on each side of $x=1$: $$f_-'(1)=\lim_{x\rightarrow1^-}\frac2{1+x^2}=1\qquad f_+'(1)=\lim_{x\rightarrow1^+}-\frac2{1+x^2}=-1$$ So $x=1$ is a **corner point** (and by symmetry so is $x=-1$). Two candidates appear: $$f(1)=\arcsin(1)=\frac\pi2\qquad f(-1)=\arcsin(-1)=-\frac\pi2$$
+- **Endpoints:** the domain is $\mathbb R$, so check the limits: $$\lim_{x\rightarrow\pm\infty}\arcsin\par{\frac{2x}{1+x^2}}=\arcsin(0)=0$$
+
+So finally, since $\arcsin(t)\in\sq{-\frac\pi2,\frac\pi2}$, the values $\pm\frac\pi2$ are the largest/smallest possible:
+
+$$\boxed{\max_{\mathbb R}f=\frac\pi2\quad\text{at }x=1\qquad\min_{\mathbb R}f=-\frac\pi2\quad\text{at }x=-1}$$
+
+Notice that **both** global extrema are corner points and the function has no stationary point at all. Only looking for $f'(x)=0$ would find nothing!
+
+---
+
+#### e) Global extrema on $\mathbb R$
+
+Find, if they exist, the global maximum and minimum of the following function:
+
+$$f(x)=x^2e^{-x}$$
+
+The domain is $\mathbb R$, which is not bounded, so Weierstrass does not apply. We use the sign of $f'$ and compare with the limits at $\pm\infty$.
+
+- **Stationary points:** By the product rule: $$f'(x)=2xe^{-x}-x^2e^{-x}=x(2-x)e^{-x}=0\rightarrow x_1=0,\ x_2=2$$ Since $e^{-x}>0$: $$\begin{array}{c|ccc} x & (-\infty,0) & (0,2) & (2,+\infty) \\ \hline x & - & + & + \\ 2-x & + & + & - \\ \hline f'(x) & - & + & - \\ \hline f(x) & \searrow & \nearrow & \searrow \end{array}$$ One local min and one local max are found: $$f(0)=0\qquad f(2)=\frac4{e^2}\approx0.54$$
+- **Non differentiability points:** none.
+- **Endpoints:** the domain is $\mathbb R$, so check the limits: $$\lim_{x\rightarrow-\infty}x^2e^{-x}=(+\infty)\cdot(+\infty)=+\infty$$ $$\lim_{x\rightarrow+\infty}x^2e^{-x}=\lim_{x\rightarrow+\infty}\frac{x^2}{e^x}=0^+$$ by the hierarchy of infinities.
+
+So finally:
+
+- $f(x)\geq0$ for all $x$ and $f(0)=0$, so $x=0$ is the global minimum point
+- $x=2$ is a local maximum but **not** the global one: as $x\rightarrow-\infty$ the function goes to $+\infty$, so it is not bounded from above
+
+$$\boxed{\min_{\mathbb R}f=0\quad\text{at }x=0\qquad\nexists\max_{\mathbb R}f\quad(\sup f=+\infty)}$$
+
+Notice that the local max at $x=2$ is global if we restrict to $[0,+\infty)$ (check at home).
+
+
 # 10) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
