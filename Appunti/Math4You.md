@@ -2332,23 +2332,202 @@ $$\boxed{f\text{ convex on }\mathbb R\iff a\in\sq{-4,4}}$$
 
 ---
 
-#### g) Inequality from the tangent
+#### g) Inequality: two ways
 Prove that:
 $$\log(1+x)\leq x\qquad\forall x>-1$$
+We prove it twice: first with $f'$ only (as a minimum problem), then with $f''$ only (with concavity).
 
-- **Second derivative:** $$f(x)=\log(1+x)\qquad f'(x)=\frac1{1+x}\qquad f''(x)=-\frac1{(1+x)^2}$$
+**Method 1: first derivative**
+Move everything to one side and define
+$$g(x)=x-\log(1+x)\qquad\dom g=(-1,+\infty)$$
+We need to show that $g(x)\geq0$, i.e. that the global minimum of $g$ is $\geq 0$.
+- **Stationary points:**
+$$g'(x)=1-\frac1{1+x}=\frac x{1+x}=0\rightarrow x=0$$
+Since $1+x>0$ on the domain, the sign of $g'$ is the sign of $x$:
+$$\begin{array}{c|cc}
+x & (-1,0) & (0,+\infty) \\ \hline
+g'(x) & - & + \\ \hline
+g(x) & \searrow & \nearrow
+\end{array}$$
+- **Non differentiability points:** none.
+- **Endpoints:** the domain is open, so there are no endpoints to check.
+
+$g$ decreases until $0$ and increases after, so $x=0$ is the **global** minimum point:
+$$g(x)\geq g(0)=0-\log(1)=0\implies\boxed{\log(1+x)\leq x\qquad\forall x>-1}$$
+
+![[Pasted image 20261126204710.png|Plot|250]]
+
+**Method 2: second derivative**
+- **Second derivative:**
+$$f(x)=\log(1+x)\qquad f'(x)=\frac1{1+x}\qquad f''(x)=-\frac1{(1+x)^2}$$
 - **Sign of $f''$:** $f''(x)<0$ for all $x>-1$, so $f$ is concave on its whole domain $(-1,+\infty)$.
 
-Recall the definition: concave means that the graph lies **below** every tangent line. The tangent at $x_0=0$ is:
-
+Recall that if $f$ is concave on an **interval** $I$, its graph lies below **every** tangent line, on the whole $I$. The tangent at $x_0=0$ is:
 $$t(x)=f(0)+f'(0)(x-0)=0+1\cdot x=x$$
-
 And therefore:
-
 $$\boxed{\log(1+x)\leq x\qquad\forall x>-1}$$
 
-Notice: this time only one line was needed! Prove at home in the same way that $e^x\geq1+x$ for all $x\in\mathbb R$ ($e^x$ is convex and $y=1+x$ is its tangent at $0$).
+Notice: the definition of concave at $x_0$ only says "below the tangent **near** $x_0$". To get it on the whole interval we need concavity on all of $I$. 
 
+Prove at home with Lagrange: for $x>0$ there is $\xi\in(0,x)$ with
+$$\log(1+x)-\log(1)=f'(\xi)\,x$$
+and since $f''<0$, $f'$ is decreasing, so $f'(\xi)<f'(0)=1$ and $\log(1+x)<x$ (similarly for $-1<x<0$).
+
+**Comparison:** in Method 1 we built an auxiliary function and studied its minimum. In Method 2 one sign check of $f''$ and one tangent were enough. The two methods are really the same fact seen from two sides: $g=t-f$ is convex ($g''=-f''>0$) with a stationary point at $0$, and for a convex function a stationary point is always a global minimum.
+
+Prove at home both ways that $e^x\geq1+x$ for all $x\in\mathbb R$.
+
+![[Pasted image 20261126204852.png|Plot|250]]
+**Proof (with Lagrange)**
+Let $f(x)=\log(1+x)$ on $(-1,+\infty)$. Recall:
+$$f'(x)=\frac1{1+x}\qquad f''(x)=-\frac1{(1+x)^2}<0$$
+Since $f''<0$ on the **interval** $(-1,+\infty)$, the monotonicity theorem applied to $f'$ gives that $f'$ is strictly decreasing.
+
+Now split by cases:
+- **Case $x=0$:** $\log(1+0)=0=x$, so equality holds.
+- **Case $x>0$:** $f$ is continuous on $[0,x]$ and differentiable on $(0,x)$, so by Lagrange there exists $\xi\in(0,x)$ such that
+$$f(x)-f(0)=f'(\xi)(x-0)\rightarrow\log(1+x)=f'(\xi)\,x$$
+Since $\xi>0$ and $f'$ is strictly decreasing:
+$$f'(\xi)<f'(0)=1$$
+Multiply by $x>0$ (the inequality does not change):
+$$\log(1+x)=f'(\xi)\,x<x$$
+- **Case $-1<x<0$:** now apply Lagrange on $[x,0]$: there exists $\xi\in(x,0)$ such that
+$$f(0)-f(x)=f'(\xi)(0-x)\rightarrow-\log(1+x)=-f'(\xi)\,x\rightarrow\log(1+x)=f'(\xi)\,x$$
+Since $\xi<0$ and $f'$ is strictly decreasing:
+$$f'(\xi)>f'(0)=1$$
+Multiply by $x<0$ (the inequality **flips**!):
+$$\log(1+x)=f'(\xi)\,x<x$$
+
+Putting all cases together:
+$$\boxed{\log(1+x)\leq x\qquad\forall x>-1}$$
+with equality only at $x=0$.
+
+## 9.5) Final Function Study: Exam 18.09.17
+Given the function
+
+$$f(x)=\frac{3x}{\log|2x|}$$
+
+i) determine the domain, symmetries, sign, limits at the extremes of the domain, the continuous extensions and the asymptotes 
+ii) study derivability, compute the derivative and its main limits, study the monotonicity and find the relative and absolute extrema 
+iii) compute $f''$ and study the convexity and concavity 
+iv) draw a qualitative graph of $f$
+
+---
+
+**i) Domain, symmetries, sign, limits and asymptotes**
+
+**Domain** We have two conditions:
+- Argument of the log: $|2x|>0\rightarrow x\neq0$
+- Denominator: $\log|2x|\neq0\rightarrow|2x|\neq1\rightarrow x\neq\pm\frac12$
+$$\dom f=\mathbb R\setminus\curly{0,\pm\frac12}=(-\infty,-\tfrac12)\cup(-\tfrac12,0)\cup(0,\tfrac12)\cup(\tfrac12,+\infty)$$
+
+**Symmetries** The domain is symmetric wrt the origin, so try:
+$$f(-x)=\frac{3(-x)}{\log|-2x|}=-\frac{3x}{\log|2x|}=-f(x)$$
+So $f$ is **odd**! We can study it only for $x>0$ and then mirror the graph wrt the origin. For $x>0$ we have $|2x|=2x$, so:
+$$f(x)=\frac{3x}{\log(2x)}\qquad x>0$$
+
+**Sign** (for $x>0$)
+- Numerator: $3x>0$ always
+- Denominator: $\log(2x)>0\iff2x>1\iff x>\frac12$
+$$f(x)>0\iff x>\frac12\qquad f(x)<0\iff0<x<\frac12$$
+By oddness: $f>0$ on $(-\frac12,0)$ and $f<0$ on $(-\infty,-\frac12)$. There are no zeros ($x=0$ is not in the domain).
+
+**Limits**
+- At $0^+$: $$\lim_{x\rightarrow0^+}\frac{3x}{\log(2x)}=\frac{0^+}{-\infty}=0^-$$ This is not an indeterminate form. By oddness $\lim_{x\rightarrow0^-}f(x)=0^+$, so the two-sided limit exists and $f$ can be **extended with continuity** by setting $f(0)=0$.
+- At $\frac12$: $$\lim_{x\rightarrow\frac12^-}\frac{3x}{\log(2x)}=\frac{\frac32}{0^-}=-\infty\qquad\lim_{x\rightarrow\frac12^+}\frac{3x}{\log(2x)}=\frac{\frac32}{0^+}=+\infty$$ So $x=\frac12$ is a vertical asymptote (and by oddness so is $x=-\frac12$).
+- At $+\infty$: $$\lim_{x\rightarrow+\infty}\frac{3x}{\log(2x)}=\frac{+\infty}{+\infty}\quad\text{indeterminate form!}$$ Recall the hierarchy of infinities: $x$ goes to infinity faster than $\log(2x)$, so the limit is $+\infty$. Is there an oblique asymptote? $$m=\lim_{x\rightarrow+\infty}\frac{f(x)}x=\lim_{x\rightarrow+\infty}\frac3{\log(2x)}=\frac3{+\infty}=0$$ $$q=\lim_{x\rightarrow+\infty}\par{f(x)-0\cdot x}=\lim_{x\rightarrow+\infty}f(x)=+\infty$$ Since $q$ is not finite, there is **no** oblique asymptote. Notice the trap: $m$ is finite, but this is not enough! Both $m$ and $q$ must be finite.
+
+By oddness, at $-\infty$ the limit is $-\infty$ and again there is no asymptote.
+
+---
+
+**ii) Differentiability, monotonicity and extrema**
+
+**Derivative** Recall that $(\log|2x|)'=\frac{2}{2x}=\frac1x$ for all $x\neq0$. By the quotient rule:
+
+$$f'(x)=\frac{3\log|2x|-3x\cdot\frac1x}{\log^2|2x|}=\frac{3\par{\log|2x|-1}}{\log^2|2x|}\qquad\forall x\in\dom f$$
+
+Notice that $f'$ is **even** (as it must be, since $f$ is odd).
+
+**Differentiability at $0$** The extended $f$ is continuous at $0$, so we can use the limit of the derivative theorem:
+
+$$\lim_{x\rightarrow0}f'(x)=\lim_{x\rightarrow0}\par{\frac3{\log|2x|}-\frac3{\log^2|2x|}}=\frac3{-\infty}-\frac3{+\infty}=0$$
+
+So the extension is differentiable at $0$ with $f'(0)=0$: horizontal tangent at the origin!
+
+**Main limits of $f'$**
+- At $\pm\frac12$: the numerator goes to $3(0-1)=-3$ and the denominator to $0^+$: $$\lim_{x\rightarrow\pm\frac12}f'(x)=\frac{-3}{0^+}=-\infty$$
+- At $\pm\infty$: $$\lim_{x\rightarrow\pm\infty}f'(x)=\lim_{x\rightarrow\pm\infty}\par{\frac3{\log|2x|}-\frac3{\log^2|2x|}}=0^+$$ The graph gets flatter and flatter (consistent with $m=0$), even if $f\rightarrow\pm\infty$.
+
+**Monotonicity** Since $\log^2|2x|>0$, the sign of $f'$ is the sign of $\log|2x|-1$:
+
+$$\log|2x|-1>0\iff|2x|>e\iff|x|>\frac e2$$
+
+Study $x\geq0$ (then use the symmetry):
+
+$$\begin{array}{c|cccc}  
+x & (0,\frac12) & (\frac12,\frac e2) & (\frac e2,+\infty) \\ \hline  
+f'(x) & - & - & + \\ \hline  
+f(x) & \searrow & \searrow & \nearrow  
+\end{array}$$
+
+Now search the candidates:
+
+- **Stationary points:** $$f'(x)=0\rightarrow\log(2x)=1\rightarrow x=\frac e2$$ $f$ decreases before and increases after, so $x=\frac e2$ is a strict local **minimum**: $$f\par{\frac e2}=\frac{\frac{3e}2}{\log e}=\frac{3e}2\approx4.08$$ Moreover $x=0$ is a stationary point of the extension. However $f'<0$ on **both** sides of $0$ (recall $f'$ is even), so $x=0$ is **not** an extremum: the function keeps decreasing through the origin.
+- **Non differentiability points:** none, $f$ is differentiable on its whole domain (and the extension also at $0$).
+- **Endpoints:** none are in the domain, and the limits are $\pm\infty$.
+
+By oddness, $x=-\frac e2$ is a strict local **maximum** with $f\par{-\frac e2}=-\frac{3e}2$.
+
+Finally:
+
+$$\boxed{\text{local min at }x=\frac e2,\ f=\frac{3e}2\qquad\text{local max at }x=-\frac e2,\ f=-\frac{3e}2\qquad\text{no global extrema}}$$
+
+There are no global extrema since $f$ is unbounded both from above and from below. Notice the strange fact: the local max $-\frac{3e}2$ is **smaller** than the local min $\frac{3e}2$!
+
+---
+
+**iii) Convexity and concavity**
+
+**Second derivative** For $x>0$, $x\neq\frac12$, let $L=\log(2x)$ with $L'=\frac1x$. By the quotient rule on $f'=\frac{3(L-1)}{L^2}$:
+
+$$\begin{align}  
+f''(x)&=3\,\frac{\frac1x\cdot L^2-(L-1)\cdot2L\cdot\frac1x}{L^4}\\  
+&=\frac3x\cdot\frac{L\par{L-2L+2}}{L^4}\\  
+&=\frac{3\par{2-\log(2x)}}{x\log^3(2x)}  
+\end{align}$$
+
+By oddness $f''$ is odd: $f''(x)=-f''(-x)$.
+
+- **Candidate inflection points:** $$f''(x)=0\rightarrow\log(2x)=2\rightarrow x=\frac{e^2}2$$ Moreover $x=0$ is a candidate for the extension: there $f''$ does not exist, since $$\lim_{x\rightarrow0^+}f''(x)=\lim_{x\rightarrow0^+}\frac{3(2-\log(2x))}{x\log^3(2x)}=-\infty$$ (check at home: use $x\log^2(2x)\rightarrow0^+$).
+- **Sign of $f''$:** $$\begin{array}{c|ccc}  
+    x & (0,\frac12) & (\frac12,\frac{e^2}2) & (\frac{e^2}2,+\infty) \\ \hline  
+    2-\log(2x) & + & + & - \\  
+    x & + & + & + \\  
+    \log^3(2x) & - & + & + \\ \hline  
+    f''(x) & - & + & - \\ \hline  
+    f(x) & \frown & \smile & \frown  
+    \end{array}$$ The concavity changes at $x=\frac{e^2}2$, so it is an inflection point: $$f\par{\frac{e^2}2}=\frac{\frac{3e^2}2}{\log e^2}=\frac{3e^2}4\approx5.54$$
+
+By oddness (the signs flip for $x<0$):
+
+$$\begin{array}{c|ccc}  
+x & (-\infty,-\frac{e^2}2) & (-\frac{e^2}2,-\frac12) & (-\frac12,0) \\ \hline  
+f''(x) & + & - & + \\ \hline  
+f(x) & \smile & \frown & \smile  
+\end{array}$$
+
+So finally:
+
+- $f$ is convex on $(-\infty,-\frac{e^2}2)$, $(-\frac12,0)$ and $(\frac12,\frac{e^2}2)$
+- $f$ is concave on $(-\frac{e^2}2,-\frac12)$, $(0,\frac12)$ and $(\frac{e^2}2,+\infty)$
+- Inflection points at $x=\pm\frac{e^2}2$ with $f=\pm\frac{3e^2}4$
+- The extension also has an inflection at $x=0$: it is differentiable there with horizontal tangent, convex on the left and concave on the right, even if $f''(0)$ does not exist!
+
+Notice: the official solution writes "concave on $[\frac12,+\infty[$", which is a typo. The correct interval is $(\frac{e^2}2,+\infty)$.
+
+---
+![[Pasted image 20261126205900.png|Plot|250]]
 # 10) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
