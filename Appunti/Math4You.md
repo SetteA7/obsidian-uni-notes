@@ -2183,6 +2183,168 @@ Notice that this is exactly the monotonicity theorem applied to $f'$ instead of 
 
 Same story as Fermat: $f''(x_0)=0$ is only a **necessary** condition ($x^4$ at $0$). Moreover an inflection can exist even where $f''$ does not: $x|x|$ at $0$.
 
+## 9.4) Convexity Exercises
+
+The procedure is the same as for max/min, but one level up: instead of the sign of $f'$ we study the sign of $f''$.
+
+- **Second derivative:** compute $f''$ and its domain
+- **Candidate inflection points:** points where $f''=0$ or where $f''$ does not exist (but $f$ is differentiable)
+- **Sign of $f''$:** convex where $f''>0$, concave where $f''<0$. A candidate is an inflection only if the concavity **changes** there
+
+#### a) Basic
+Study the convexity and the inflection points of the following function: $$f(x)=xe^{2x}$$ The domain is $\mathbb R$.
+- **Second derivative:** By the product rule: $$f'(x)=e^{2x}+2xe^{2x}=(2x+1)e^{2x}$$$$f''(x)=2e^{2x}+2(2x+1)e^{2x}=4(x+1)e^{2x}$$
+- **Candidate inflection points:** $$f''(x)=0\rightarrow x=-1$$ $f''$ exists everywhere, so there are no other candidates.
+- **Sign of $f''$:** Since $e^{2x}>0$, the sign of $f''$ is the sign of $x+1$: $$\begin{array}{c|cc}  
+x & (-\infty,-1) & (-1,+\infty) \\ \hline  
+f''(x) & - & + \\ \hline  
+f(x) & \frown & \smile  
+\end{array}$$ The concavity changes at $x=-1$, so it is an inflection point: $$f(-1)=-e^{-2}$$
+
+So finally: $$\boxed{f\text{ concave on }(-\infty,-1),\quad\text{convex on }(-1,+\infty),\quad\text{inflection at }x=-1}$$ Check at home: from $f'$ we also get a global minimum at $x=-\frac12$.
+
+![[Pasted image 20261126202802.png|Plot|250]]
+
+---
+
+#### b) Two inflections
+Study the convexity and the inflection points of the following function:
+$$f(x)=\log(1+x^2)$$
+The domain is $\mathbb R$ since $1+x^2>0$. Moreover $f$ is even, so we expect a symmetric result.
+- **Second derivative:** $$f'(x)=\frac{2x}{1+x^2}$$ By the quotient rule: $$f''(x)=\frac{2(1+x^2)-2x\cdot2x}{(1+x^2)^2}=\frac{2(1-x^2)}{(1+x^2)^2}$$
+- **Candidate inflection points:** $$f''(x)=0\rightarrow1-x^2=0\rightarrow x_{1,2}=\pm1$$
+- **Sign of $f''$:** The denominator is always positive, so the sign of $f''$ is the sign of $1-x^2$: $$\begin{array}{c|ccc}  
+    x & (-\infty,-1) & (-1,1) & (1,+\infty) \\ \hline  
+    f''(x) & - & + & - \\ \hline  
+    f(x) & \frown & \smile & \frown  
+    \end{array}$$ The concavity changes at both points: $$f(\pm1)=\log2$$
+
+So finally:
+
+$$\boxed{f\text{ convex on }(-1,1),\quad\text{concave on }(-\infty,-1)\cup(1,+\infty),\quad\text{inflections at }x=\pm1}$$
+
+Notice that $f$ is concave on each of the two intervals $(-\infty,-1)$ and $(1,+\infty)$ separately, **not** on their union.
+
+---
+
+#### c) $f''=0$ is not enough
+Study the point $x_0=0$ for the following functions:
+$$f_1(x)=x^4\qquad f_2(x)=x^3$$
+
+- **Second derivative:** $$f_1''(x)=12x^2\qquad f_2''(x)=6x$$
+- **Candidate inflection points:** In both cases $f''(0)=0$, so $x_0=0$ is a candidate for both.
+- **Sign of $f''$:** $$\begin{array}{c|c|cc|c}  
+    f & f''(x) & x<0 & x>0 & x_0=0 \\ \hline  
+    x^4 & 12x^2 & + & + & \text{no inflection} \\  
+    x^3 & 6x & - & + & \text{inflection}  
+    \end{array}$$
+
+So finally $x^4$ is convex on all of $\mathbb R$ even if $f''(0)=0$, while $x^3$ has an inflection at $0$ with **horizontal** tangent.
+
+Same story as Fermat:
+
+$$x_0\text{ inflection}\implies f''(x_0)=0\qquad\text{but}\qquad f''(x_0)=0\not\implies x_0\text{ inflection}$$
+
+---
+
+#### d) Inflection without $f''$
+
+Study the point $x_0=0$ for the following functions:
+
+$$f_1(x)=x|x|\qquad f_2(x)=\sqrt[3]x$$
+
+**First function:**
+
+- **Second derivative:** Recall the abs value definition: $$f_1(x)=\begin{cases}x^2 & x\geq0\\ -x^2 & x<0\end{cases}\implies f_1'(x)=\begin{cases}2x & x\geq0\\ -2x & x<0\end{cases}=2|x|$$ where $f_1'(0)=0$ by the limit of the derivative theorem ($f_1$ is continuous and $\lim_{x\rightarrow0}2|x|=0$). Then: $$f_1''(x)=\begin{cases}2 & x>0\\ -2 & x<0\end{cases}$$
+- **Candidate inflection points:** $f_1''$ is never $0$, but $f_1''(0)$ does **not** exist ($f_1'=2|x|$ has a corner at $0$). Since $f_1$ is differentiable at $0$, $x_0=0$ is a candidate.
+- **Sign of $f''$:** $$\begin{array}{c|cc}  
+    x & (-\infty,0) & (0,+\infty) \\ \hline  
+    f_1''(x) & - & + \\ \hline  
+    f_1(x) & \frown & \smile  
+    \end{array}$$ The concavity changes, so $x_0=0$ is an inflection point (the tangent is $y=0$ and the graph crosses it) even if $f''(0)$ does not exist!
+
+**Second function:**
+
+- **Second derivative:** For $x\neq0$: $$f_2'(x)=\frac13x^{-2/3}\qquad f_2''(x)=-\frac29x^{-5/3}$$
+- **Candidate inflection points:** $f_2''$ is never $0$ and does not exist at $0$. However here $f_2$ is **not** differentiable at $0$ either: $$\lim_{x\rightarrow0}\frac{\sqrt[3]x-0}{x-0}=\lim_{x\rightarrow0}\frac1{x^{2/3}}=+\infty$$ so there is a vertical tangent at $0$.
+- **Sign of $f''$:** $$\begin{array}{c|cc}  
+    x & (-\infty,0) & (0,+\infty) \\ \hline  
+    f_2''(x) & + & - \\ \hline  
+    f_2(x) & \smile & \frown  
+    \end{array}$$
+
+So finally the concavity changes at $0$ in both cases, but:
+
+- $x|x|$: inflection point with horizontal tangent
+- $\sqrt[3]x$: the concavity changes but $f$ is not differentiable at $0$. With our definition (which requires $f$ differentiable at $x_0$) this is **not** an inflection point. Some books call it an "inflection with vertical tangent": check which convention your professor uses!
+
+---
+
+#### e) Strange domain (Harder)
+
+Study the convexity and the inflection points of the following function:
+
+$$f(x)=x^2\log|x|$$
+
+**Domain:** The log requires $|x|>0$, so $\dom f=\mathbb R\setminus\curly0$. Moreover $f$ is even.
+
+- **Second derivative:** Recall that $(\log|x|)'=\frac1x$ for all $x\neq0$. By the product rule: $$f'(x)=2x\log|x|+x^2\cdot\frac1x=x\par{2\log|x|+1}$$ $$f''(x)=\par{2\log|x|+1}+x\cdot\frac2x=2\log|x|+3$$
+- **Candidate inflection points:** $$2\log|x|+3=0\rightarrow\log|x|=-\frac32\rightarrow|x|=e^{-3/2}\rightarrow x_{1,2}=\pm e^{-3/2}$$ $f''$ is defined on the whole domain, so there are no other candidates ($x=0$ is not in the domain!).
+- **Sign of $f''$:** $$f''(x)>0\iff\log|x|>-\frac32\iff|x|>e^{-3/2}$$ $$\begin{array}{c|cccc}  
+    x & (-\infty,-e^{-3/2}) & (-e^{-3/2},0) & (0,e^{-3/2}) & (e^{-3/2},+\infty) \\ \hline  
+    f''(x) & + & - & - & + \\ \hline  
+    f(x) & \smile & \frown & \frown & \smile  
+    \end{array}$$ The concavity changes at both candidates: $$f\par{\pm e^{-3/2}}=e^{-3}\cdot\par{-\frac32}=-\frac3{2e^3}$$
+
+So finally:
+
+$$\boxed{f\text{ convex on }(-\infty,-e^{-3/2})\cup(e^{-3/2},+\infty),\quad\text{concave on }(-e^{-3/2},0)\cup(0,e^{-3/2}),\quad\text{inflections at }x=\pm e^{-3/2}}$$
+
+Notice that near $0$ we have $f''(x)\rightarrow-\infty$, so $f$ is concave on both sides of $0$, but $0$ is not in the domain and we cannot say "concave on $(-e^{-3/2},e^{-3/2})$".
+
+Check at home: $\lim_{x\rightarrow0}x^2\log|x|=0$, so $f$ can be extended continuously with $f(0)=0$. Show that the extension is differentiable at $0$ with $f'(0)=0$ and is concave on the whole interval $(-e^{-3/2},e^{-3/2})$ (hint: $f'$ is decreasing on both sides and continuous at $0$).
+
+---
+
+#### f) Parametric
+
+Determine for which $a\in\mathbb R$ the following function is convex on $\mathbb R$:
+
+$$f(x)=x^4+ax^3+6x^2$$
+
+- **Second derivative:** $$f'(x)=4x^3+3ax^2+12x\qquad f''(x)=12x^2+6ax+12$$
+- **Sign of $f''$:** We need $f''(x)\geq0$ for **all** $x\in\mathbb R$. Since $f''$ is a parabola opening upward ($12>0$), this holds iff it has at most one root, i.e. $\Delta\leq0$: $$\Delta=36a^2-4\cdot12\cdot12=36a^2-576\leq0\iff a^2\leq16\iff-4\leq a\leq4$$ Now split by cases:
+- **Case $|a|<4$:** $\Delta<0$, so $f''>0$ everywhere: $f$ is strictly convex, no inflections
+- **Case $|a|=4$:** $\Delta=0$, so $f''(x)=12(x\pm1)^2$ vanishes at one point but does **not** change sign: $f$ is still convex, no inflections
+- **Case $|a|>4$:** $\Delta>0$, so $f''<0$ between its two roots: $f$ is concave there and has two inflection points
+
+So finally:
+
+$$\boxed{f\text{ convex on }\mathbb R\iff a\in\sq{-4,4}}$$
+
+---
+
+#### g) Inequality from the tangent
+
+Prove that:
+
+$$\log(1+x)\leq x\qquad\forall x>-1$$
+
+In 9.2 this was done as a minimum problem. Now we use convexity.
+
+- **Second derivative:** $$f(x)=\log(1+x)\qquad f'(x)=\frac1{1+x}\qquad f''(x)=-\frac1{(1+x)^2}$$
+- **Sign of $f''$:** $f''(x)<0$ for all $x>-1$, so $f$ is concave on its whole domain $(-1,+\infty)$.
+
+Recall the definition: concave means that the graph lies **below** every tangent line. The tangent at $x_0=0$ is:
+
+$$t(x)=f(0)+f'(0)(x-0)=0+1\cdot x=x$$
+
+And therefore:
+
+$$\boxed{\log(1+x)\leq x\qquad\forall x>-1}$$
+
+Notice: this time only one line was needed! Prove at home in the same way that $e^x\geq1+x$ for all $x\in\mathbb R$ ($e^x$ is convex and $y=1+x$ is its tangent at $0$).
+
 # 10) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
