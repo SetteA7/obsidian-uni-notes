@@ -2000,7 +2000,14 @@ One question is left: does a global maximum exist at all? On a closed and bounde
 >[!thm|*] Weierstrass 
 >Let f be continuous on a closed and bounded interval [a, b]. Then f has a global maximum and a global minimum on [a, b].
 
-One useful theorem is the following:
+One useful theorem is the first derivative test, so first introduce monotonicity:
+
+>[!thm|*] Monotonicity
+>Let $f$ be differentiable on an **interval** $I$. Then:
+>- $f'(x)\geq 0\ \forall x\in I\iff f$ is increasing on $I$
+>- $f'(x)>0\ \forall x\in I\implies f$ is strictly increasing on $I$
+
+And now the test
 
 >[!thm|*] First Derivative Test
 >Let $f$ be continuous at $x_0$ and differentiable in a neighborhood of $x_0$ (except possibly at $x_0$). Then:
@@ -2108,10 +2115,10 @@ $$\begin{align}\left|\frac{2x}{1+x^2}\right|\leq1&\iff2|x|\leq1+x^2\\
 
 which is always true, so $\dom f=\mathbb R$. Moreover $f$ is odd.
 
-- **Stationary points:** Recall $(\arcsin t)'=\frac1{\sqrt{1-t^2}}$. Let $g(x)=\frac{2x}{1+x^2}$: $$g'(x)=\frac{2(1+x^2)-2x\cdot2x}{(1+x^2)^2}=\frac{2(1-x^2)}{(1+x^2)^2}$$ $$\sqrt{1-g^2(x)}=\sqrt{\frac{(1+x^2)^2-4x^2}{(1+x^2)^2}}=\frac{\sqrt{(1-x^2)^2}}{1+x^2}=\frac{|1-x^2|}{1+x^2}$$ Notice the absolute value: $\sqrt{a^2}=|a|$, **not** $a$! Then for $x\neq\pm1$: $$f'(x)=\frac{g'(x)}{\sqrt{1-g^2(x)}}=\frac{2(1-x^2)}{(1+x^2)^2}\cdot\frac{1+x^2}{|1-x^2|}=\frac{1-x^2}{|1-x^2|}\cdot\frac2{1+x^2}$$ And since $\frac{a}{|a|}=\text{sign}(a)$: $$f'(x)=\begin{cases}  
-    \dfrac2{1+x^2} & 1-x^2<0\\  
-    -\dfrac2{1+x^2} & 1-x^2>0  
-    \end{cases}
+- **Stationary points:** Recall $(\arcsin t)'=\frac1{\sqrt{1-t^2}}$. Let $g(x)=\frac{2x}{1+x^2}$: $$g'(x)=\frac{2(1+x^2)-2x\cdot2x}{(1+x^2)^2}=\frac{2(1-x^2)}{(1+x^2)^2}$$ $$\sqrt{1-g^2(x)}=\sqrt{\frac{(1+x^2)^2-4x^2}{(1+x^2)^2}}=\frac{\sqrt{(1-x^2)^2}}{1+x^2}=\frac{|1-x^2|}{1+x^2}$$ Notice the absolute value: $\sqrt{a^2}=|a|$, **not** $a$! Then for $x\neq\pm1$: $$f'(x)=\frac{g'(x)}{\sqrt{1-g^2(x)}}=\frac{2(1-x^2)}{(1+x^2)^2}\cdot\frac{1+x^2}{|1-x^2|}=\frac{1-x^2}{|1-x^2|}\cdot\frac2{1+x^2}$$ And since $\frac{a}{|a|}=\text{sign}(a)$: $$f'(x)=\begin{cases}
+\dfrac2{1+x^2} & 1-x^2>0\\
+-\dfrac2{1+x^2} & 1-x^2<0
+\end{cases}
     \quad =\begin{cases}  
 \dfrac2{1+x^2} & |x|<1\\  
 -\dfrac2{1+x^2} & |x|>1  
