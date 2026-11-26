@@ -1968,7 +1968,11 @@ $$\lim_{x \to 2^+} f'(x) = \lim_{x \to 2^+} e^{1/(x-2)^2} \left(1 - \frac{2}{(x-
 $$\lim_{x \to 2^-} f'(x) = \lim_{x \to 2^-} -e^{1/(x-2)^2} \left(1 - \frac{2}{(x-2)^2}\right) = -(+\infty) \cdot (-\infty) = +\infty$$
 
 
-# 9) Symbols
+
+# 9) Lesson 27/11/26
+
+
+# 10) Symbols
 - $\implies$: implies, sufficient condition ($P \implies Q$ means $P$ is sufficient for $Q$, $Q$ is necessary for $P$).
 - $\impliedby$: implied by, necessary condition
 - $\iff$: necessary + sufficient, if and only if "iff"
@@ -1986,7 +1990,7 @@ $$\lim_{x \to 2^-} f'(x) = \lim_{x \to 2^-} -e^{1/(x-2)^2} \left(1 - \frac{2}{(x
 - $\exists$: there exists
 
 
-# 10) Derivatives
+# 11) Derivatives
 Here is a list of the various derivatives of elementary functions
 
 $$
@@ -2016,7 +2020,7 @@ $$
 \end{align}
 $$
 
-# 11) Taylor Expansions
+# 12) Taylor Expansions
 Here is a list of some of the most frequent expansions
 $$\begin{align}
 e^x &= 1 + x + \frac{x^2}{2} + \cdots + \frac{x^k}{k!}
