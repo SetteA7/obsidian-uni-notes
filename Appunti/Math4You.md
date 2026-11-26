@@ -1970,6 +1970,7 @@ $$\lim_{x \to 2^-} f'(x) = \lim_{x \to 2^-} -e^{1/(x-2)^2} \left(1 - \frac{2}{(x
 
 
 # 9) Lesson 27/11/26
+## 9.1) Maximum/Minimum Theory
 
 
 # 10) Symbols
